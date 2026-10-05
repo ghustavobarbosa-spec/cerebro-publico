@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cérebro — Guias de estudo de Engenharia</title>
+<meta name="description" content="Guias de estudo abertos de Engenharia: estatística e processos de fabricação. Resoluções passo a passo, formulários e roteiros de revisão.">
+<meta property="og:title" content="Cérebro — Guias de estudo de Engenharia">
+<meta property="og:description" content="Resoluções passo a passo, formulários e roteiros de revisão. Material aberto e gratuito.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --bg: #F7F7F7;
+  --surface: #FFFFFF;
+  --surface-muted: #EEEEEE;
+
+  --text: #121212;
+  --text-secondary: #4F4F4F;
+  --text-muted: #8F8F8F;
+
+  --accent: #00B131;
+  --accent-dim: rgba(0, 177, 49, 0.12);
+
+  --border: #E0E0E0;
+  --border-strong: #C4C4C4;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05);
+
+  --radius: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --motion-fast: 240ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #272727;
+  --surface-muted: #4F4F4F;
+  --text: #F7F7F7;
+  --text-secondary: #C4C4C4;
+  --text-muted: #8F8F8F;
+  --accent: #1BD60B;
+  --accent-dim: rgba(27, 214, 11, 0.2);
+  --border: #4F4F4F;
+  --border-strong: #616161;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.62;
+  font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: 1040px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ===== Header ===== */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-header .inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.brand:hover { text-decoration: none; }
+.brand .dot {
+  width: 9px; height: 9px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  flex: none;
+}
+.theme-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all var(--motion-fast) var(--ease-out-expo);
+}
+.theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+/* ===== Hero ===== */
+.hero { padding: 64px 0 40px; max-width: 660px; }
+.hero h1 {
+  font-size: clamp(32px, 6vw, 46px);
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+.hero p {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.hero .eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-radius: var(--radius-full);
+  padding: 5px 13px;
+  margin-bottom: 20px;
+}
+
+/* ===== Sections ===== */
+.section { margin-top: 48px; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.section-head h2 { font-size: 21px; letter-spacing: -0.015em; }
+.section-head .count {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ===== Cards ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--motion-fast) var(--ease-out-expo),
+              box-shadow var(--motion-fast) var(--ease-out-expo),
+              border-color var(--motion-fast);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+.card .tag {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.card h3 {
+  font-size: 18px;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  margin-bottom: 9px;
+}
+.card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  flex: 1;
+}
+.card .go {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card .go svg { transition: transform var(--motion-fast) var(--ease-out-expo); }
+.card:hover .go svg { transform: translateX(3px); }
+
+/* ===== Note ===== */
+.note {
+  margin-top: 48px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.note h3 { font-size: 15px; margin-bottom: 8px; }
+.note p { font-size: 14px; color: var(--text-secondary); }
+.note p + p { margin-top: 8px; }
+
+/* ===== Footer ===== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 64px;
+  padding: 28px 0 40px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.site-footer .inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 44px 0 32px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <span class="eyebrow">Material aberto de estudo</span>
+    <h1>Guias de estudo de Engenharia</h1>
+    <p>Resoluções passo a passo, formulários organizados e roteiros de revisão escritos durante o estudo. Cada guia é uma página só, sem cadastro e sem propaganda — abra, use, compartilhe.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Estatística</h2>
+      <span class="count">2 guias</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="estatistica/p1-2025-resolvida.html">
+        <div class="tag">Prova resolvida</div>
+        <h3>P1 2025 resolvida passo a passo</h3>
+        <p>Cada questão aberta do começo ao fim: escolha da distribuição, leitura da tabela, conta e conclusão. Inclui mapa de assuntos e as fórmulas que a prova cobra.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a class="card" href="estatistica/calculadora-cientifica.html">
+        <div class="tag">Guia prático</div>
+        <h3>Calculadora científica do zero</h3>
+        <p>Modo SD, tabelas de frequência, os quatro intervalos de confiança e um teste de teclado de 30 segundos. Com glossário ligando o símbolo do formulário à tecla da máquina.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Processos de fabricação</h2>
+      <span class="count">1 guia</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="fabricacao/p1-pmr3301-guia-exercicios.html">
+        <div class="tag">Roteiro de revisão</div>
+        <h3>PMR-3301 — guia de exercícios para a P1</h3>
+        <p>Formulário completo por bloco: propriedades mecânicas, laminação, corte de chapa, embutimento, forjamento, trefilação, extrusão, processos não convencionais e metalurgia do pó.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Elementos de Máquinas I</h2>
+      <span class="count">1 guia</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html">
+        <div class="tag">Listas resolvidas</div>
+        <h3>PME3350 — P1 por exercícios-pivô</h3>
+        <p>Chavetas, eixos ranhurados, uniões por interferência e fadiga (Marin, Goodman, Morrow, Rainflow, Miner). Guia de uso do formulário e do tabelário, listas 1 a 3 resolvidas passo a passo e resumo de revisão.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Modelagem de Sistemas Dinâmicos</h2>
+      <span class="count">1 guia</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html">
+        <div class="tag">Prova resolvida</div>
+        <h3>PME3380 — P1 por exercícios-pivô</h3>
+        <p>P1 2023, 2024 e 2025 resolvidas passo a passo, mais P1 antigas, mais linearização, tanques, matriz de transição e uma bateria de estabilidade/Routh-Hurwitz. Ensina a usar a folha de tabelas (analogias e Laplace) e fecha com um resumo de uma página.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Mecânica dos Sólidos II</h2>
+      <span class="count">2 guias</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="mecanica-dos-solidos/p1-pme3211-tensoes-e-deformacoes.html">
+        <div class="tag">Listas resolvidas</div>
+        <h3>PME3211 — P1: tensões e deformações</h3>
+        <p>Esforços em estruturas 3D, tensor e Cauchy, principais e Mohr, vasos de pressão, Tresca e von Mises, extensômetros e Hooke. Listas 1–4, exercícios em grupo e 30 questões de provas antigas, com resumo de revisão.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a class="card" href="mecanica-dos-solidos/p2-pme3211-metodos-de-energia.html">
+        <div class="tag">Listas resolvidas</div>
+        <h3>PME3211 — P2: métodos de energia</h3>
+        <p>Trabalho e energia complementar, Crotti-Engesser, carga fictícia e hiperestáticas por energia complementar mínima. Lista 5, exercícios dos slides e provas antigas resolvidos passo a passo, com resumo de revisão.</p>
+        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="note">
+    <h3>Sobre este material</h3>
+    <p>São anotações de estudante, escritas para estudar — não são material oficial de nenhuma disciplina e não substituem o livro-texto nem as aulas. Erro acontece: se encontrar um, abra uma issue no repositório que eu corrijo.</p>
+    <p>Publicado sob licença <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" rel="license">CC BY-NC-SA 4.0</a> — pode copiar, adaptar e compartilhar, desde que cite a fonte e não use comercialmente.</p>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="inner">
+    <span>Cérebro · guias de estudo</span>
+    <span>CC BY-NC-SA 4.0</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
+  var saved = read();
+  var initial = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  root.setAttribute('data-theme', initial);
+  var btn = document.getElementById('themeBtn');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      save(next);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

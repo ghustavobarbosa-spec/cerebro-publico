@@ -1,0 +1,49 @@
+# ==========================================================================
+# Barreira de conteúdo — este repositório é PÚBLICO.
+#
+# Só entra aqui material autoral (guias, resoluções e resumos escritos
+# por mim). Livros, PDFs de aula, provas oficiais e qualquer material de
+# terceiros ficam FORA — publicá-los seria violação de direito autoral.
+#
+# As regras abaixo são a segunda linha de defesa: mesmo um `git add -A`
+# distraído não consegue subir esses formatos.
+# ==========================================================================
+
+# Livros, slides de aula, provas e digitalizações
+*.pdf
+*.epub
+*.mobi
+*.djvu
+
+# Planilhas e documentos de origem institucional
+*.xlsx
+*.xls
+*.doc
+*.docx
+*.ppt
+*.pptx
+
+# Binários e instaladores
+*.exe
+*.msi
+*.dmg
+*.zip
+*.rar
+*.7z
+
+# Texto extraído de livros via OCR
+*_OCR.txt
+*_texto_extraido.txt
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Dependências e build (caso o site cresça)
+node_modules/
+dist/
+.cache/

@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P2 Mecânica dos Sólidos II</title>
+<meta name="description" content="Estudo para a P2 de PME3211: trabalho e energia complementar, energias na tração, torção e flexão, princípio do trabalho e energia, Crotti-Engesser e Castigliano, carga fictícia, estruturas hiperestáticas e energia complementar mínima, ensinados por exercícios-pivô da Lista 5 e por questões de provas antigas da apostila do Prof. Clóvis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9 { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2 { font-size: 15px; } #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · P2</div>
+  <div class="sb-sub">Mecânica dos Sólidos II · prova em 26/out/2026 (aula 21)</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+    <button class="btn-chip" id="btn-print-resumo" type="button">🖨 Imprimir resumo</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#cap1-h">1 · Objetivo e o que cai</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap1-para-que">Para que serve</a></li>
+<li class="nav-ex"><a href="#cap1-conteudo">Conteúdo da P2</a></li>
+<li class="nav-ex"><a href="#cap1-tipos">Tipos de pergunta</a></li>
+<li class="nav-ex"><a href="#cap1-regras">Regras do jogo</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap2-h">2 · Método de resolução</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap2-7passos">Os 7 passos</a></li>
+<li class="nav-ex"><a href="#cap2-algos">Algoritmos do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap3-h">3 · Programa × bibliografia</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap3-fontes">As três fontes</a></li>
+<li class="nav-ex"><a href="#cap3-cross">Crosscheck aula × fontes</a></li>
+<li class="nav-ex"><a href="#cap3-notacao">Ponte de notação</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap4-h">4 · O que memorizar</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap4-defs">Bloco 1 · Definições</a></li>
+<li class="nav-ex"><a href="#cap4-barras">Bloco 2 · Energia por esforço</a></li>
+<li class="nav-ex"><a href="#cap4-teoremas">Bloco 3 · Teoremas</a></li>
+<li class="nav-ex"><a href="#cap4-tubo">Bloco 4 · Tubo de parede fina</a></li>
+<li class="nav-ex"><a href="#cap4-refs">Bloco 5 · Resultados de referência</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap5-h">5 · Lista 5 (energia, parte I)</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#l5-premissas">Premissas da lista</a></li>
+<li class="nav-ex"><a href="#l5-matriz">Matriz de cobertura L5</a></li>
+<li class="nav-ex pivo"><a href="#l5-ex1-h">L5 ex.1 · barra ABC, P e Q<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l5-ex9-h">L5 ex.9 · treliça de 13 barras<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l5-ex6-h">L5 ex.6 · torção com T e t<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l5-ex4-h">L5 ex.4 · três barras com folga<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l5-ex5-h">L5 ex.5 · corda elástica<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#l5-demais">L5 · demais exercícios</a></li>
+<li class="nav-ex"><a href="#l5-ex2-h">L5 ex.2 · treliça de 2 barras</a></li>
+<li class="nav-ex"><a href="#l5-ex3-h">L5 ex.3 · barra rígida em 5 molas</a></li>
+<li class="nav-ex"><a href="#l5-ex7-h">L5 ex.7 · tubo quadrado</a></li>
+<li class="nav-ex"><a href="#l5-ex8-h">L5 ex.8 · tubo afilado</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap6-h">6 · Exercícios dos slides</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#s-matriz">Matriz de cobertura</a></li>
+<li class="nav-ex pivo"><a href="#s14-ex1-h">A14 exerc.1 · viga + cabo<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s14-ex2-h">A14 exerc.2 · estrutura em L<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s15-ex1-h">A15 ex.1 · suporte com 2 cargas<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s15-ex3-h">A15 ex.3 · balanço com q<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#s-demais">Slides · demais exercícios</a></li>
+<li class="nav-ex"><a href="#s14-ex5-h">A14 ex.2 · cortante no balanço</a></li>
+<li class="nav-ex"><a href="#s14-ex3-h">A14 exerc.3 · arco semicircular</a></li>
+<li class="nav-ex"><a href="#s14-ex4-h">A14 exerc.4 · mola de torção</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap7-h">7 · Provas antigas por assunto</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#pa-panorama">O que cai e como cai</a></li>
+<li class="nav-ex pivo"><a href="#pa-ex6-h">Prova ex.6 · barra rígida em hastes<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#pa-ex10-h">Prova ex.10 · barra em L 3D, 3 incógnitas<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#pa-ex12-h">Prova ex.12 · pórtico em L com q<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#pa-ex13-h">Prova ex.13 · hiperestática<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#pa-demais">Provas · demais questões P2</a></li>
+<li class="nav-ex"><a href="#pa-ex1-h">Prova ex.1 · arame 3D (G = E/3)</a></li>
+<li class="nav-ex"><a href="#pa-ex2-h">Prova ex.2 · arame ABCD, força</a></li>
+<li class="nav-ex"><a href="#pa-ex3-h">Prova ex.3 · arame ABCD, binário</a></li>
+<li class="nav-ex"><a href="#pa-ex4-h">Prova ex.4 · viga + cabo (numérico)</a></li>
+<li class="nav-ex"><a href="#pa-ex5-h">Prova ex.5 · viga + tirante</a></li>
+<li class="nav-ex"><a href="#pa-ex7-h">Prova ex.7 · grelha com anéis</a></li>
+<li class="nav-ex"><a href="#pa-ex8-h">Prova ex.8 · rotação dos dois lados da rótula</a></li>
+<li class="nav-ex"><a href="#pa-ex9-h">Prova ex.9 · treliça, δ horizontal</a></li>
+<li class="nav-ex"><a href="#pa-ex11-h">Prova ex.11 · viga com balanço</a></li>
+<li class="nav-ex"><a href="#pa-p3">Provas · questões da P3</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap8-h">8 · Análise exercícios × tópicos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap8-freq">Frequência dos tópicos</a></li>
+<li class="nav-ex"><a href="#cap8-cobra">O que o professor mais cobra</a></li>
+<li class="nav-ex"><a href="#cap8-h2">Linha elástica (roteiro)</a></li>
+<li class="nav-ex"><a href="#cap8-cobertura">Conferência de cobertura</a></li>
+<li class="nav-ex"><a href="#cap8-diverg">Divergências de gabarito</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap9-h">9 · Resumo pré-prova</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><span class="chip">Versão pública (sem recortes de material de terceiros)</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<header class="hero" id="topo">
+  <span class="eyebrow">PME3211 · Mecânica dos Sólidos II · Poli-USP · Prof. Roberto Ramos Jr.</span>
+  <h1>P2: métodos de energia, do trabalho às hiperestáticas</h1>
+  <p class="subtitle">prova em 26/out/2026 (aula 21) · aulas 12 a 21 · sem consulta · guia montado em 30/set, cresce conforme o curso avança</p>
+  <p class="intro">
+    Este guia ensina a P2 por meio de <strong>exercícios-pivô</strong>: soluções completas em que cada conceito é explicado no momento em que aparece pela primeira vez. Os exercícios vêm da Lista 5, dos slides das aulas 14 e 15 e das <strong>questões de provas antigas</strong> resolvidas na apostila do Prof. Clóvis. Não há formulário na prova, então o capítulo 4 diz <strong>o que memorizar</strong> e como reconstruir cada fórmula em duas linhas.
+    Todas as contas foram refeitas em Python (sympy) e conferidas com as respostas do Gere, dos slides e da apostila.
+  </p>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">Exercícios resolvidos</div><div class="kpi-value">29</div><div class="kpi-sub">Lista 5: 9 · slides: 7 · provas antigas: 13</div></div>
+    <div class="kpi-card"><div class="kpi-label">Pivôs (resolução completa)</div><div class="kpi-value">13</div><div class="kpi-sub">cobrem 12 dos 13 tópicos (linha elástica aguarda a aula 17)</div></div>
+    <div class="kpi-card"><div class="kpi-label">Conferência</div><div class="kpi-value">29/29</div><div class="kpi-sub">batem com a resposta oficial · 1 erro de digitação da apostila sinalizado</div></div>
+    <div class="kpi-card"><div class="kpi-label">Como usar</div><div class="kpi-value" style="font-size:18px;line-height:1.3">cap. 2 e 4 → pivôs → cap. 9</div><div class="kpi-sub">método, o que memorizar, pivôs e resumo</div></div>
+  </div>
+  <div class="callout concept" style="margin-top:16px">
+    <span class="co-t">Como ler este guia</span>
+    <p><span class="tag tag-form">📄 Aula N p.X</span> aponta o slide do Prof. Ramos (ou a página da apostila) de onde vem a fórmula. Não há formulário oficial; essa tag substitui o "bloco do formulário".
+    <span class="tag tag-sh">📘 Livro</span> indica leitura opcional no Gere.
+    <span class="tag tag-mem">⚠</span> marca armadilhas e o que precisa estar na cabeça.
+    <span class="badge badge-pivo">Pivô</span> marca os exercícios que ensinam; os demais vêm resolvidos de forma compacta, apontando o pivô de referência.
+    Os blocos <em>"Aprofundamento"</em> abrem recolhidos e podem ser pulados na primeira leitura. As páginas seguem a numeração do PDF.
+    Os códigos de tópico (<span class="chip">W1</span>, <span class="chip">C2</span>…) são explicados no capítulo 8.</p>
+  </div>
+</header>
+
+<section class="chapter" id="cap1">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 1</span>
+    <h2 id="cap1-h" data-nav="1 · Objetivo e o que cai">Objetivo do curso e o que cai na P2</h2>
+    <p class="section-desc">Fontes: cronograma 2026 (<code>01_material_oficial/CronogramaMecanicaDosSolidosII.pdf</code>), slides das aulas 12–15 e a apostila 03 do Prof. Clóvis (<code>01_material_oficial/apostilas/03_…Energias….pdf</code>).</p></div>
+
+  <h3 class="sub" id="cap1-para-que" data-nav="Para que serve">Para que serve a segunda parte do curso</h3>
+  <p>A P1 foi sobre o <strong>ponto</strong>: tensão e deformação num ponto, suas direções principais e quando o material escoa. A P2 muda de escala e passa a olhar para a <strong>estrutura inteira</strong>: quanto ela desloca e gira, e como achar reações que o equilíbrio sozinho não dá. A ferramenta é uma só, a <em>energia</em>. A carga externa trabalha, esse trabalho fica guardado no material como energia de deformação, e derivando essa energia em relação às cargas saem os deslocamentos (Crotti-Engesser / Castigliano). Com o mesmo raciocínio saem as incógnitas hiperestáticas: a energia complementar é mínima na solução correta.</p>
+  <p>O fio condutor das aulas 12 a 21 é:</p>
+  <ol class="method">
+    <li><strong>Definir</strong> trabalho $W$, trabalho complementar $W^*$, energia $U$ e energia complementar $U^*$ (aula 12).</li>
+    <li><strong>Calcular</strong> $U^*$ para cada esforço: normal (aula 12), torção (aula 13), flexão (aula 14), somando por barra.</li>
+    <li><strong>Usar</strong> $W = U^*$ para um deslocamento sob uma carga única (princípio do trabalho e energia) e ver onde ele falha (aula 14).</li>
+    <li><strong>Generalizar</strong> com $\delta_i = \partial U^*/\partial P_i$ (Crotti-Engesser, 2º Castigliano), carga fictícia e o 1º Castigliano (aula 15).</li>
+    <li><strong>Aplicar</strong> a estruturas hiperestáticas e à linha elástica (aula 17) e formalizar o princípio da energia complementar mínima (aula 19).</li>
+  </ol>
+
+  <h3 class="sub" id="cap1-conteudo" data-nav="Conteúdo da P2">Conteúdo cobrado: aulas 12 a 21</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Aula</th><th>Data</th><th>Tópico (cronograma)</th><th>Códigos</th><th>Situação no guia</th></tr></thead><tbody>
+    <tr><td>12</td><td>16/09</td><td>Trabalho e trabalho complementar; energias na tração e compressão; princípio do trabalho e energia</td><td><span class="chip">W1</span><span class="chip">W2</span><span class="chip">W5</span></td><td>slides + Lista 5</td></tr>
+    <tr><td>13</td><td>21/09</td><td>Energias na torção de eixos; tubos de parede fina</td><td><span class="chip">W3</span></td><td>slides + Lista 5</td></tr>
+    <tr><td>14</td><td>23/09</td><td>Energias na flexão pura e simples; expressão geral; limites do princípio</td><td><span class="chip">W4</span><span class="chip">NL</span></td><td>slides + apostila</td></tr>
+    <tr><td>15</td><td>28/09</td><td>Crotti-Engesser; 1º e 2º teoremas de Castigliano</td><td><span class="chip">C1</span><span class="chip">C2</span><span class="chip">C3</span></td><td>slides + apostila</td></tr>
+    <tr><td>16</td><td>30/09</td><td>Exerc. em grupo #05 (aulas 12 a 15)</td><td>—</td><td>acrescentar quando sair</td></tr>
+    <tr><td>17</td><td>05/10</td><td>Teoremas de energia em estruturas hiperestáticas; linha elástica</td><td><span class="chip">H1</span><span class="chip">H2</span></td><td>apostila 03 (antecipado)</td></tr>
+    <tr><td>18</td><td>07/10</td><td>Exerc. #06 (aula 17)</td><td>—</td><td>acrescentar quando sair</td></tr>
+    <tr><td>19</td><td>14/10</td><td>Princípio da energia complementar mínima</td><td><span class="chip">H1</span></td><td>apostila 03 (antecipado)</td></tr>
+    <tr><td>20</td><td>19/10</td><td>Exerc. #07 (aulas 17 e 19)</td><td>—</td><td>acrescentar quando sair</td></tr>
+    <tr><td>21</td><td>21/10</td><td>Exemplos diversos (aulas 12 a 19)</td><td>—</td><td>—</td></tr>
+    <tr class="hit"><td>P2</td><td>26/10</td><td colspan="3"><strong>Prova (P2): aulas 12 a 21, sem consulta</strong></td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><span class="co-t">Este guia cresce com o curso</span>
+    <p>Em 29/09 tinham sido dadas as aulas 12–15 e só existia a Lista 5. Hiperestáticas, linha elástica e energia complementar mínima (aulas 17 e 19) já estão aqui, ensinadas pela apostila 03, que foi escrita com base nas notas de aula do próprio Prof. Ramos. Quando saírem os slides dessas aulas e as listas 6 e 7, eles entram no guia e a notação é conferida.</p></div>
+
+  <h3 class="sub" id="cap1-tipos" data-nav="Tipos de pergunta">Tipos de pergunta e onde aprender</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pergunta típica</th><th>Ferramenta</th><th>Critério (de onde vem o ponto)</th><th>Onde no guia</th></tr></thead><tbody>
+    <tr><td>Energia de deformação/complementar de uma barra, eixo ou viga</td><td>$U^* = \sum\int \frac{N^2}{2EA} + \frac{T^2}{2GI_p} + \frac{M^2}{2EI}$</td><td>esforço certo por trecho, integral certa</td><td>Pivôs 1 e 3 da L5; cap. 4</td></tr>
+    <tr><td>Deslocamento <em>sob</em> uma carga única</td><td>princípio do trabalho e energia $P\delta/2 = U^*$</td><td>só vale para uma carga e no ponto e na direção dela</td><td>Pivô 2 da L5</td></tr>
+    <tr><td>Deslocamento ou rotação em qualquer ponto, várias cargas</td><td>Crotti-Engesser $\delta_i = \partial U^*/\partial P_i$ + carga fictícia</td><td>derivar antes de anular a carga fictícia; sinal = sentido</td><td>cap. 6</td></tr>
+    <tr><td>Reação de estrutura hiperestática</td><td>energia complementar mínima: $\partial U^*/\partial X = 0$ (ou $=$ recalque)</td><td>grau de hiperestaticidade, escolha da incógnita, $U^*$ só em função de $X$</td><td>cap. 6</td></tr>
+    <tr><td>"Explique por que..." (superposição, $U \ne P\delta/2$)</td><td>gráfico $P\times\delta$ e hipóteses de linearidade</td><td>citar a hipótese que falha</td><td>Pivôs 1, 4 e 5 da L5</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="cap1-regras" data-nav="Regras do jogo">Regras do jogo</h3>
+  <ul>
+    <li><strong>Sem consulta:</strong> não há formulário. O capítulo 4 lista o que precisa estar na cabeça, e cada fórmula vem com a dedução curta que permite reconstruí-la se faltar a memória.</li>
+    <li><strong>Hipóteses a declarar</strong> (aula 12 p.19; aula 13 p.11): material homogêneo, isótropo e elástico-linear; linearidade geométrica; carga quase-estática; conicidade suave. Na flexão, o default do curso é <strong>desprezar a energia do cortante</strong> diante da do momento (vigas esbeltas), salvo pedido explícito.</li>
+    <li><strong>Resposta literal</strong>: a maioria das questões da apostila pede o resultado em função de $P, L, EI, GI_p, EA$. Organize a álgebra por trechos e confira as dimensões no fim.</li>
+    <li><strong>Critério de aprovação</strong> (cronograma): $NF = 0{,}8\cdot MGP + 0{,}2\cdot MAE + B$, com $MGP$ = média <em>geométrica</em> das 3 melhores notas entre P1, P2, P3 e PSub, $MAE$ = média dos exercícios em grupo, $B$ = bônus de 0 a 0,5. Na média geométrica, uma nota muito baixa pesa bem mais do que pesaria numa média aritmética.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="cap2">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 2</span>
+    <h2 id="cap2-h" data-nav="2 · Método de resolução">Método de resolução</h2>
+    <p class="section-desc">Os 7 passos, adaptados a métodos de energia, e os algoritmos que o Prof. Ramos ensina nas aulas 12–15 (um card por tema).</p></div>
+
+  <h3 class="sub" id="cap2-7passos" data-nav="Os 7 passos">Os 7 passos, na versão "energia"</h3>
+  <ol class="method">
+    <li><strong>Classificar.</strong> Que esforços existem em cada barra (N, V, M, T)? A estrutura é isostática ou hiperestática (grau $g$)? A pergunta pede deslocamento sob uma carga única, deslocamento em outro lugar, rotação ou reação? O comportamento é linear (material <em>e</em> geometria)?</li>
+    <li><strong>Roteiro de dados.</strong> Rigidezes ($EA$, $GI_p$ ou $GI_t$, $EI$, $k$ de molas e cabos), comprimentos de cada trecho, cargas e sentidos. Vale anotar também o que o enunciado manda desprezar.</li>
+    <li><strong>Incógnita e ferramenta.</strong> Uma carga e o deslocamento dela → <strong>P.T.E.</strong> ($P\delta/2 = U^*$). Qualquer outro caso → <strong>Crotti-Engesser</strong> ($\delta_i = \partial U^*/\partial P_i$), criando a carga fictícia se ela não existir. Reação hiperestática → <strong>$\partial U^*/\partial X = 0$</strong>.</li>
+    <li><strong>Fórmula.</strong> $U^* = \sum\int \frac{N^2}{2EA} + \frac{fV^2}{2GA} + \frac{T^2}{2GI_p} + \frac{M^2}{2EI}$ (aula 14 p.31), só com as parcelas que importam (card A4 abaixo).</li>
+    <li><strong>Esforços internos por trecho</strong> (substitui o passo "tabelas" de outras disciplinas). Escolha a coordenada que deixa a expressão mais simples (em geral a partir da ponta livre, porque aí a reação do engaste não entra). Escreva $N(s)$, $T(s)$, $M(s)$ <em>com as cargas em forma literal</em>, inclusive as fictícias.</li>
+    <li><strong>Cálculo.</strong> Derive <em>sob a integral</em>, $\int \frac{M}{EI}\frac{\partial M}{\partial P}ds$, integre trecho a trecho e só no fim zere as cargas fictícias e substitua os números.</li>
+    <li><strong>Verificação.</strong> Dimensão ($PL^3/EI$ = comprimento, $PL^2/EI$ = rad), sinal (positivo = sentido arbitrado), caso-limite conhecido ($PL^3/3EI$, $qL^4/8EI$, $TL/GI_p$, $PL/EA$) e se a parcela desprezada era mesmo pequena.</li>
+  </ol>
+
+  <h3 class="sub" id="cap2-algos" data-nav="Algoritmos do professor">Algoritmos do professor (um card por tema)</h3>
+  <div class="card-grid">
+    <div class="card accent-left"><h3>A1 · Princípio do trabalho e energia (P.T.E.)</h3>
+      <p><span class="tag tag-form">📄 Aula 12 p.27; Aula 14 p.33</span></p>
+      <ol><li>Conferir as 3 condições: <strong>uma</strong> carga concentrada; deslocamento <strong>correspondente</strong> (mesmo ponto, direção e sentido); sem carga distribuída.</li>
+      <li>$W = W^* = \frac{P\delta}{2}$ (ou $\frac{T\phi}{2}$, $\frac{M\theta}{2}$).</li>
+      <li>Esforços internos por equilíbrio → $U^*$.</li>
+      <li>$\frac{P\delta}{2} = U^*$ ⇒ $\delta$; rigidez $k = P/\delta$.</li></ol></div>
+    <div class="card accent-left"><h3>A2 · Crotti-Engesser com várias cargas</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.3–16</span></p>
+      <ol><li>Cargas <strong>independentes</strong> e literais ($P_1, P_2$). Não substitua $P_2 = 4P_1$ antes de derivar.</li>
+      <li>Esforços em função de todas → $U^*$ do sistema <strong>inteiro</strong>.</li>
+      <li>$\delta_i = \partial U^*/\partial P_i$; depois os números.</li>
+      <li>Sinal + = sentido de $P_i$. Conferir $\sum P_i\delta_i/2 = U^*$.</li></ol></div>
+    <div class="card accent-left"><h3>A3 · Carga fictícia ("criar o esforço")</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.19–24; apostila §9.4</span></p>
+      <ol><li>Translação → criar <strong>força</strong>; rotação → criar <strong>binário</strong>, no ponto e na direção pedidos, sentido arbitrado.</li>
+      <li>Esforços internos com carga original + criada.</li>
+      <li>$\delta = \int \frac{M}{EI}\frac{\partial M}{\partial P}ds$ (regra da cadeia sob a integral).</li>
+      <li><strong>Derivar primeiro, anular depois.</strong> Sinal + = sentido arbitrado.</li></ol></div>
+    <div class="card accent-left"><h3>A4 · O que desprezar</h3>
+      <p><span class="tag tag-form">📄 Aula 14 p.28, p.32, p.38–39</span></p>
+      <ul><li>Vigas e pórticos: N e V ≪ M e T <strong>na mesma barra</strong> (cortante ≈ $0{,}78(h/L)^2$ da flexão, retângulo com ν = 0,3).</li>
+      <li><strong>Nunca</strong> desprezar elemento de esforço único (barra de treliça, cabo, mola axial ou de torção). Desprezar equivale a tratá-lo como rígido.</li>
+      <li><strong>Não</strong> desprezar torção em estrutura espacial: tem a mesma ordem da flexão.</li>
+      <li>Se o enunciado manda desprezar algo, obedeça.</li></ul></div>
+    <div class="card accent-left"><h3>A5 · Tubo de parede fina</h3>
+      <p><span class="tag tag-form">📄 Aula 13 p.19–25, p.36–37</span></p>
+      <ol><li>Linha média: $A_m$, $L_m$, $t(s)$.</li>
+      <li>$f = T/2A_m$; $\tau = f/t$ (máxima onde $t$ é mínima).</li>
+      <li>$I_t = 4A_m^2/\oint ds/t$ (retângulo com $t$ constante: $2(bh)^2t/(b+h)$).</li>
+      <li>$\phi = TL/GI_t$; taxa $d\phi/dx = T/GI_t$.</li></ol></div>
+    <div class="card accent-left"><h3>A6 · Seção variável (cone)</h3>
+      <p><span class="tag tag-form">📄 Aula 12 p.36–37; Aula 13 p.34–35</span></p>
+      <ol><li>$d(x) = d(1 + x/L)$ com $x$ a partir da ponta de diâmetro $d$.</li>
+      <li>$A \propto d^2$, $I_p \propto d^4$.</li>
+      <li>$\eta = 1 + x/L$, $dx = L\,d\eta$, limites 1→2: $\int_1^2\eta^{-2} = \frac12$, $\int_1^2\eta^{-4} = \frac{7}{24}$.</li></ol></div>
+    <div class="card accent-left"><h3>A7 · Hiperestática por energia complementar mínima</h3>
+      <p><span class="tag tag-form">📄 Apostila 03 §10 p.33–36 (aulas 17 e 19)</span></p>
+      <ol><li>$g$ = nº de reações − nº de equações de equilíbrio úteis.</li>
+      <li>Escolher $g$ incógnitas hiperestáticas $X_j$ (reações que <em>podem</em> ser independentes).</li>
+      <li>Escrever as demais reações e os esforços em função das cargas e de $X_j$.</li>
+      <li>$\partial U^*/\partial X_j = 0$ (apoio fixo) → $X_j$. Depois, carga fictícia para os deslocamentos.</li></ol></div>
+    <div class="card accent-left"><h3>A8 · 1º Castigliano (energia em deslocamentos)</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.6–8; apostila, exercício 6</span></p>
+      <ol><li>Útil quando a cinemática é simples (barra rígida com molas ou hastes, 1 grau de liberdade).</li>
+      <li>Escrever os alongamentos de cada elemento em função de um parâmetro (ex.: rotação $\theta$).</li>
+      <li>$U = \sum \frac{k_i\Delta_i^2}{2}$ em função do parâmetro.</li>
+      <li>$P_i = \partial U/\partial\delta_i$ (ou $W = U$ se houver uma só carga).</li></ol></div>
+  </div>
+
+  <div class="callout concept"><span class="co-t">Qual teorema usar: a árvore de decisão</span>
+    <p><strong>Deslocamento sob a única carga?</strong> → P.T.E. (A1). <strong>Outro deslocamento ou várias cargas?</strong> → Crotti-Engesser (A2), criando a carga se preciso (A3). <strong>Reações que o equilíbrio não dá?</strong> → energia complementar mínima (A7). <strong>A estrutura tem 1 grau de liberdade cinemático óbvio</strong> (barra rígida)? → 1º Castigliano ou $W = U$ em deslocamentos (A8). Em todos os casos o trabalho pesado é o mesmo: <em>esforços internos por trecho</em>.</p></div>
+</section>
+
+<section class="chapter" id="cap3">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 3</span>
+    <h2 id="cap3-h" data-nav="3 · Programa × bibliografia">Programa × bibliografia</h2>
+    <p class="section-desc">Onde estudar cada aula: slides do Prof. Ramos (fonte principal), apostila 03 do Prof. Clóvis (base teórica e banco de provas) e Gere &amp; Goodno 7ª ed. (leitura complementar). Páginas do Gere conferidas no sumário renderizado.</p></div>
+
+  <h3 class="sub" id="cap3-fontes" data-nav="As três fontes">As três fontes e como usar cada uma</h3>
+  <div class="card-grid">
+    <div class="card accent-left"><h3>Slides (aulas 12–15)</h3><p><code>01_material_oficial/slides/</code>. Definem a <strong>notação da prova</strong> ($W, W^*, U, U^*, u, u^*, I_p, I_t, f, k_t$). Cada aula segue a mesma sequência: definição → densidade → integral no volume → exemplos de rigidez. A aula 14 só pode ser lida pela imagem (texto do PDF corrompido).</p></div>
+    <div class="card accent-left"><h3>Apostila 03 (Clóvis, 2024)</h3><p><code>01_material_oficial/apostilas/03_…Energias….pdf</code>, 104 p. Baseada nas notas de aula do Prof. Ramos. As p.49–104 trazem <strong>22 questões de provas antigas resolvidas</strong>, que são o banco de provas deste guia (cap. 6). Cobre também as aulas 17–19 (hiperestáticas, energia complementar mínima) e a simetria da P3.</p></div>
+    <div class="card accent-left"><h3>Gere &amp; Goodno, 7ª ed.</h3><p><code>02_livros/MecanicaDosMateriaisGere7Edicao_OCR.pdf</code>. <strong>PDF = impressa + 21.</strong> É a fonte dos exercícios da Lista 5. Não define energia complementar nem Crotti-Engesser: escreve Castigliano com $U$, o que só vale no caso linear.</p></div>
+  </div>
+
+  <h3 class="sub" id="cap3-cross" data-nav="Crosscheck aula × fontes">Crosscheck aula × tópico × fontes</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Aula</th><th>Tópico</th><th>Slides (págs. do PDF)</th><th>Apostila 03 (págs.)</th><th>Gere (impressa → PDF)</th><th>Prioridade</th></tr></thead><tbody>
+    <tr><td>12</td><td>$W$, $W^*$, $U$, $U^*$; densidades; tração/compressão; princípio do trabalho e energia</td><td>Aula12 p.3–27 (teoria), p.28–37 (3 exemplos de rigidez), p.38–39 (exercícios)</td><td>§2 p.3; §3 p.7; §4 p.8–14 (Ex. 1–3)</td><td>§2.7 114–125 → 135–146; §2.11 138 → 159 (não linear)</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>13</td><td>Torção circular: $U^* = \int T^2/2GI_p$; tubos de parede fina: $f$, $T = 2fA_m$, $I_t$</td><td>Aula13 p.3–18 (circular), p.19–25 (parede fina), p.26–37 (3 exemplos + 3.10-3)</td><td>§5 p.15–18 (Ex. 4)</td><td>§3.9 223–229 → 244–250; §3.10 229–237 → 250–258</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>14</td><td>Flexão: $U^* = \int M^2/2EI$; flexão composta; cortante (fator de forma $f$); expressão geral; limites do princípio</td><td>Aula14 p.3–10 (uniforme), p.11–14 (composta), p.15–20 (simples/cortante), depois expressão geral e limitações</td><td>§6 p.19–23 (Ex. 5); §7 p.24–25 (Ex. 6); §8 p.26–27 (Ex. 7)</td><td>§9.8 622–627 → 643–648</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>15</td><td>Crotti-Engesser; 1º e 2º Castigliano; forma modificada; carga fictícia</td><td>Aula15 p.3–25</td><td>§9 p.28–32 (Ex. 8)</td><td>§9.9 627–639 → 648–660 (só o 2º, versão linear)</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>17</td><td>Hiperestáticas por energia; linha elástica</td><td>(ainda não dada em 29/09)</td><td>§10 p.33–36 (Ex. 9); exercícios do §12</td><td>§10.3–10.4 666–683 → 687–704 (por compatibilidade, não por energia)</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>19</td><td>Princípio da energia complementar mínima</td><td>(ainda não dada)</td><td>§10 p.33–36</td><td>—</td><td><span class="badge badge-warn">alta</span></td></tr>
+    <tr><td>(P3)</td><td>Estruturas simétricas</td><td>aulas 23–25</td><td>§11 p.37–48 (Ex. 10)</td><td>—</td><td>só menção</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="cap3-notacao" data-nav="Ponte de notação">Ponte de notação curso ↔ Gere</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Grandeza</th><th>Curso (Ramos / Clóvis)</th><th>Gere</th><th>Diferença que importa na prova</th></tr></thead><tbody>
+    <tr><td>Energia complementar</td><td>$U^*$; trabalho complementar $W^*$</td><td>não define</td><td>o curso deriva $U^*$ (Crotti-Engesser); o Gere deriva $U$ e chama de "Teorema de Castigliano". Só coincidem com material elástico-linear e linearidade geométrica</td></tr>
+    <tr><td>Momento polar</td><td>$I_p$ (slides), $I_P$ (apostila)</td><td>$I_P$</td><td>—</td></tr>
+    <tr><td>Constante de torção do tubo fino</td><td>$I_t = 4A_m^2/\oint ds/t$</td><td>$J$</td><td>o professor escreve $\phi = TL/GI_t$</td></tr>
+    <tr><td>Fluxo de cisalhamento</td><td>$f = \tau t$</td><td>$q$</td><td>na aula 14, $f$ também é o <strong>fator de forma</strong> do cortante; o contexto diz qual é qual</td></tr>
+    <tr><td>Rigidez</td><td>$k$ (axial), $k_t$ (torção)</td><td>$k$, $k_T$</td><td>$k = EA/L$, $k_t = GI_p/L$ ou $GI_t/L$</td></tr>
+    <tr><td>Fator de forma do cortante</td><td>$f$ (aula 14) / $f_c$ (apostila), retangular $= 6/5$</td><td>$f_S$ (§9.8)</td><td>$U_V^* = \int f V^2/2GA$</td></tr>
+    <tr><td>Carga fictícia</td><td>$Q$ ou $\bar M$, "anular depois de derivar"</td><td>"carga fictícia" $Q$</td><td>mesma ideia</td></tr>
+  </tbody></table></div>
+  <p class="tbl-cap">Mapa completo aula → seção do Gere, com os problemas usados nas listas: <code>02_livros/Gere_7ed_VS_PME3211.md</code>.</p>
+</section>
+
+<section class="chapter" id="cap4">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 4</span>
+    <h2 id="cap4-h" data-nav="4 · O que memorizar">O que memorizar (prova sem consulta)</h2>
+    <p class="section-desc">Sem formulário na P2, este capítulo faz o papel do "guia do formulário". Para cada bloco: a fórmula, de onde ela vem em 2–3 linhas (para reconstruir se a memória falhar), quando usar e a armadilha. A fonte é sempre o slide do Prof. Ramos.</p></div>
+
+  <h3 class="sub" id="cap4-defs" data-nav="Bloco 1 · Definições">Bloco 1 · Trabalho, trabalho complementar, energias</h3>
+  <div class="figref"><span class="figref-ico">📄</span><div>Recorte do <strong>Slides da aula 12, p. 4</strong> (curva P×δ: W é a área sob a curva, W* a área entre a curva e o eixo P). Não reproduzido nesta versão pública; consulte o documento oficial.</div></div>
+  <div class="math-box">$$W = \int_0^{\delta} P\,d\delta\qquad W^* = \int_0^{P}\delta\,dP\qquad W + W^* = P\delta\qquad\text{(aula 12 p.4)}$$
+  $$u = \int_0^{\varepsilon}\sigma\,d\varepsilon\qquad u^* = \int_0^{\sigma}\varepsilon\,d\sigma\qquad U = \iiint_V u\,dV\qquad U^* = \iiint_V u^*\,dV\qquad\text{(aula 12 p.11–14)}$$</div>
+  <ul>
+    <li><strong>Sem dissipação:</strong> $W = U$ e $W^* = U^*$ (aula 12 p.7–8). $W$ e $W^*$ vêm das <em>forças externas</em>; $U$ e $U^*$, dos <em>esforços internos</em>.</li>
+    <li><strong>Estrutura linear</strong> (material elástico-linear <em>e</em> linearidade geométrica): $W = W^* = U^* = U$ e, com uma carga, $= P\delta/2$ (aula 12 p.27). Com várias cargas, $W = \sum P_i\delta_i/2$ (aula 15 p.15).</li>
+    <li><span class="tag tag-mem">⚠</span> Em geral $W \neq W^*$: a igualdade é só "numérica" no caso linear (aula 12 p.6). Os pivôs 4 e 5 da Lista 5 mostram $U \ne P\delta/2$.</li>
+  </ul>
+  <div class="figref"><span class="figref-ico">📄</span><div>Recorte do <strong>Slides da aula 12, p. 14</strong> (densidades u e u* na curva σ×ε). Não reproduzido nesta versão pública; consulte o documento oficial.</div></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Densidade (elástico-linear)</th><th>Expressão</th><th>Fonte</th></tr></thead><tbody>
+    <tr><td>uniaxial</td><td>$u = u^* = \frac{\sigma\varepsilon}{2} = \frac{\sigma^2}{2E} = \frac{E\varepsilon^2}{2}$</td><td>aula 12 p.15–16</td></tr>
+    <tr><td>cisalhamento puro</td><td>$u = u^* = \frac{\tau\gamma}{2} = \frac{\tau^2}{2G} = \frac{G\gamma^2}{2}$</td><td>aula 13 p.10</td></tr>
+    <tr><td>triaxial (em tensões)</td><td>$u^* = \frac{1}{2E}\left[\sigma_x^2 + \sigma_y^2 + \sigma_z^2 - 2\nu(\sigma_x\sigma_y + \sigma_y\sigma_z + \sigma_z\sigma_x)\right] + \frac{1}{2G}\left[\tau_{xy}^2 + \tau_{yz}^2 + \tau_{zx}^2\right]$</td><td>aula 12 p.17</td></tr>
+    <tr><td>relação entre módulos</td><td>$G = \frac{E}{2(1+\nu)}$ ⇒ $2 \le E/G \le 3$</td><td>aula 14 p.28</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="cap4-barras" data-nav="Bloco 2 · Energia por esforço">Bloco 2 · Energia complementar por esforço solicitante</h3>
+  <p>O raciocínio é sempre o mesmo, e é ele que vale memorizar: <em>tensão do esforço → $u^* = \sigma^2/2E$ ou $\tau^2/2G$ → integral na seção dá a propriedade geométrica</em>.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Esforço</th><th>Tensão</th><th>Integral na seção</th><th>$U^*$ por barra</th><th>Fonte</th></tr></thead><tbody>
+    <tr><td>Normal $N$</td><td>$\sigma = N/A$</td><td>$\iint dA = A$</td><td>$\int\frac{N^2}{2EA}ds$</td><td>aula 12 p.22</td></tr>
+    <tr><td>Torção $T$ (circular)</td><td>$\tau = T\rho/I_p$</td><td>$\iint\rho^2dA = I_p$</td><td>$\int\frac{T^2}{2GI_p}ds$</td><td>aula 13 p.14</td></tr>
+    <tr><td>Torção (tubo fino)</td><td>$\tau = T/2A_mt$</td><td>$dV = t\,ds\,dx$</td><td>$\frac{T^2L}{8GA_m^2}\oint\frac{ds}{t} = \frac{T^2L}{2GI_t}$</td><td>aula 13 p.24–25</td></tr>
+    <tr><td>Flexão $M_z$</td><td>$\sigma = -M_zy/I_z$</td><td>$\iint y^2dA = I_z$</td><td>$\int\frac{M_z^2}{2EI_z}ds$</td><td>aula 14 p.10</td></tr>
+    <tr><td>Cortante $V_y$</td><td>$\tau = VQ/Ib$</td><td>fator de forma $f$</td><td>$\int\frac{f\,V_y^2}{2GA}ds$; retângulo $f = 6/5$, círculo $10/9$</td><td>aula 14 p.20–21</td></tr>
+    <tr><td>Mola linear / de torção</td><td>—</td><td>—</td><td>$\frac{F^2}{2k}$ / $\frac{M^2}{2k_t}$</td><td>aula 12 p.5; aula 14 p.40</td></tr>
+  </tbody></table></div>
+  <div class="math-box">$$U^* = \sum_{\text{barras}}\int\left(\frac{N^2}{2EA} + \frac{f_yV_y^2}{2GA} + \frac{f_zV_z^2}{2GA} + \frac{M_y^2}{2EI_y} + \frac{M_z^2}{2EI_z} + \frac{T^2}{2GI_t}\right)ds\qquad\text{(aula 14 p.31)}$$</div>
+  <ul>
+    <li><strong>Por que as parcelas se somam sem termo cruzado</strong> (aula 14 p.13–14): ao elevar $\sigma = N/A + M_yz/I_y - M_zy/I_z$ ao quadrado, aparecem $\iint y\,dA$, $\iint z\,dA$ e $\iint yz\,dA$, que são nulos porque os eixos são <strong>centrais e principais</strong>. <span class="tag tag-mem">⚠</span> Energia de <em>esforços diferentes</em> na mesma seção se soma; a de <em>cargas diferentes</em> que geram o mesmo esforço não se soma (pivô 1 da L5).</li>
+    <li>Energia em deslocamentos (para o 1º Castigliano): $U = \int\frac{EA}{2}u'^2$, $\int\frac{GI_p}{2}\phi'^2$, $\int\frac{EI}{2}\kappa^2$ (aula 12 p.25; aula 13 p.17; aula 14 p.10).</li>
+  </ul>
+
+  <h3 class="sub" id="cap4-teoremas" data-nav="Bloco 3 · Teoremas">Bloco 3 · Os teoremas</h3>
+  <div class="figref"><span class="figref-ico">📄</span><div>Recorte do <strong>Slides da aula 15, p. 4</strong> (demonstração de Crotti-Engesser: dW* = δ_i dP_i). Não reproduzido nesta versão pública; consulte o documento oficial.</div></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Teorema</th><th>Fórmula</th><th>Energia</th><th>Validade</th><th>Prova de 2 linhas</th></tr></thead><tbody>
+    <tr class="hit"><td>Crotti-Engesser</td><td>$\delta_i = \dfrac{\partial U^*}{\partial P_i}$</td><td>complementar, em função das cargas</td><td>geral (sem dissipação), inclusive material não linear</td><td>varie só $P_i$: $dW^* = \delta_i\,dP_i$ (faixa horizontal) e $dU^* = \frac{\partial U^*}{\partial P_i}dP_i$; como $dW^* = dU^*$, sai o teorema (aula 15 p.4–5)</td></tr>
+    <tr><td>1º Castigliano</td><td>$P_i = \dfrac{\partial U}{\partial\delta_i}$</td><td>de deformação, em função dos deslocamentos</td><td>geral</td><td>varie só $\delta_i$: $dW = P_i\,d\delta_i$ = $dU$ (aula 15 p.7–8)</td></tr>
+    <tr><td>2º Castigliano</td><td>$\delta_i = \dfrac{\partial U}{\partial P_i}$</td><td>de deformação escrita com as cargas</td><td>só estrutura elástico-linear ($U = U^*$)</td><td>é Crotti-Engesser com $U^* = U$ (aula 15 p.9)</td></tr>
+    <tr><td>Energia complementar mínima</td><td>$\dfrac{\partial U^*}{\partial X_j} = 0$</td><td>complementar</td><td>hiperestáticas com apoio fixo</td><td>$X_j$ é uma "carga" cujo deslocamento correspondente é zero ⇒ Crotti-Engesser com $\delta_j = 0$ (apostila §10 p.33)</td></tr>
+  </tbody></table></div>
+  <div class="math-box">$$\text{Forma operacional (derivar sob a integral):}\quad \delta_i = \sum\int\left(\frac{N}{EA}\frac{\partial N}{\partial P_i} + \frac{T}{GI_p}\frac{\partial T}{\partial P_i} + \frac{M}{EI}\frac{\partial M}{\partial P_i}\right)ds\qquad\text{(aula 15 p.22)}$$</div>
+  <ul>
+    <li><span class="tag tag-mem">⚠</span> $\delta_i$ é o deslocamento <strong>correspondente</strong> a $P_i$: mesmo ponto, mesma direção e sentido; linear se $P_i$ é força, angular se é binário (aula 15 p.3).</li>
+    <li><span class="tag tag-mem">⚠</span> As cargas têm de ser <strong>independentes</strong> (aula 15 p.11). Duas forças iguais "$P$" em pontos diferentes: chame uma de $P_1$ e a outra de $P_2$, derive e só depois iguale. Se derivar $U^*(P)$ com as duas juntas, sai a <em>soma</em> dos dois deslocamentos.</li>
+    <li>$U^*$ é a do <strong>sistema inteiro</strong> (aula 15 p.3), com cabos e molas incluídos.</li>
+  </ul>
+  <div class="figref"><span class="figref-ico">📄</span><div>Recorte do <strong>Slides da aula 15, p. 20</strong> (esforços criados P e M_B em B (carga fictícia)). Não reproduzido nesta versão pública; consulte o documento oficial.</div></div>
+
+  <h3 class="sub" id="cap4-tubo" data-nav="Bloco 4 · Tubo de parede fina">Bloco 4 · Tubo de parede fina</h3>
+  <div class="figref"><span class="figref-ico">📄</span><div>Recorte do <strong>Slides da aula 13, p. 22</strong> (fluxo f·ds, braço r(s) e área dA: T = 2 f A_m). Não reproduzido nesta versão pública; consulte o documento oficial.</div></div>
+  <div class="math-box">$$f = \tau t = \text{cte}\qquad T = 2fA_m\ \Rightarrow\ \tau = \frac{T}{2A_mt}\qquad \phi = \frac{TL}{4GA_m^2}\oint\frac{ds}{t} = \frac{TL}{GI_t},\quad I_t = \frac{4A_m^2}{\oint ds/t}\qquad\text{(aula 13 p.21–25)}$$</div>
+  <p>Reconstrução: (1) equilíbrio longitudinal de um pedaço da parede ⇒ $\tau_bt_b = \tau_ct_c$; (2) o torque do fluxo é $\oint f\,r\,ds$, e $r\,ds = 2\,dA$ ⇒ $T = 2fA_m$; (3) P.T.E.: $T\phi/2 = U^* = \iiint\tau^2/2G\,dV$. <span class="tag tag-mem">⚠</span> "Não confundir $L$ com $L_m$, nem $A_m$ com $A$!!" (p.25).</p>
+
+  <h3 class="sub" id="cap4-refs" data-nav="Bloco 5 · Resultados de referência">Bloco 5 · Resultados de referência (para conferir contas)</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>Resultado</th><th>Onde aparece</th></tr></thead><tbody>
+    <tr><td>Barra, força na ponta</td><td>$\delta = PL/EA$, $k = EA/L$</td><td>aula 12 ex.1</td></tr>
+    <tr><td>Eixo, torque na ponta</td><td>$\phi = TL/GI_p$, $k_t = GI_p/L$</td><td>aula 13 ex.1</td></tr>
+    <tr><td>Balanço, $P$ na ponta</td><td>$\delta = PL^3/3EI$ (+ $fPL/GA$ da cortante), $\theta = PL^2/2EI$</td><td>aula 14 ex.2; apostila ex.8</td></tr>
+    <tr><td>Balanço, $M$ na ponta</td><td>$\theta = ML/EI$, $\delta = ML^2/2EI$</td><td>aula 14 ex.1; aula 15 ex.2</td></tr>
+    <tr><td>Balanço, $q$ uniforme</td><td>$\delta = qL^4/8EI$, $\theta = qL^3/6EI$</td><td>aula 15 ex.3</td></tr>
+    <tr><td>Biapoiada, $P$ no meio</td><td>$\delta = PL^3/48EI$</td><td>apostila ex.5</td></tr>
+    <tr><td>Apoiada-engastada, $q$</td><td>$R_A = 3qL/8$, $M_B = qL^2/8$</td><td>apostila ex.9</td></tr>
+    <tr><td>Integrais que caem sempre</td><td>$\int_0^L x^2dx = L^3/3$; $\int_0^L(L-x)^2dx = L^3/3$; $\int_0^\pi(1-\cos\theta)^2d\theta = 3\pi/2$; $\int_0^\pi\sin^2 = \int_0^\pi\cos^2 = \pi/2$</td><td>aula 14 ex. 3 (arco)</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="cap5">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 5</span>
+    <h2 id="cap5-h" data-nav="5 · Lista 5 (energia, parte I)">Lista 5 resolvida: métodos de energia, parte I</h2>
+    <p class="section-desc">9 exercícios (<code>01_material_oficial/listas/MecanicaDosSolidosIIListaV.pdf</code>, 5 p.): 8 do Gere (seções 2.7, 3.9 e 3.10) e 1 complementar. A lista só traz resposta do complementar. As dos problemas do Gere foram conferidas no apêndice do livro (impressas 829–832, PDF 850–853). As 9 contas batem.</p></div>
+
+  <h3 class="sub" id="l5-premissas" data-nav="Premissas da lista">Premissas que valem para a lista inteira</h3>
+  <ul>
+    <li><strong>Hipóteses da aula 12 (p.19):</strong> material homogêneo, isótropo e elástico-linear em cada trecho; linearidade geométrica (os esforços saem do equilíbrio na configuração não deformada); carga quase-estática; seção variável só com conicidade suave. Os exercícios 4 e 5 existem justamente para mostrar o que acontece quando uma dessas hipóteses cai.</li>
+    <li><strong>Sem dissipação:</strong> $W = U$ e $W^* = U^*$. Com <em>comportamento linear da estrutura</em> (material linear <strong>e</strong> linearidade geométrica) vale a cadeia completa $W = W^* = U^* = U$ (aula 12 p.27).</li>
+    <li><strong>Unidades:</strong> N, mm, MPa (= N/mm²), N·mm. Energia sai em N·mm; 1 J = 1000 N·mm. Rigidez de mola em N/mm (atenção à corda do ex. 5, dada em N/m).</li>
+  </ul>
+
+  <h3 class="sub" id="l5-matriz" data-nav="Matriz de cobertura L5">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">W1</span> energia complementar/de deformação na tração · <span class="chip">W2</span> princípio do trabalho e energia · <span class="chip">W3</span> energia na torção e tubos de parede fina · <span class="chip">W5</span> treliças · <span class="chip">NL</span> não linearidade e falta de superposição</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Ex.</th><th>Gere</th><th>W1</th><th>W2</th><th>W3</th><th>W5</th><th>NL</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>1</td><td>2.7-4</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td class="x">◐</td><td>Pivô 1</td></tr>
+    <tr><td>2</td><td>2.7-6</td><td class="x">●</td><td class="x">●</td><td></td><td class="x">●</td><td></td><td>ver Pivô 2</td></tr>
+    <tr><td>3</td><td>2.7-8</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td>ver Pivô 1</td></tr>
+    <tr class="pv"><td>4</td><td>2.7-10</td><td class="x">●</td><td class="x">◐</td><td></td><td></td><td class="x">●</td><td>Pivô 4</td></tr>
+    <tr class="pv"><td>5</td><td>2.7-12</td><td class="x">●</td><td class="x">◐</td><td></td><td></td><td class="x">●</td><td>Pivô 5</td></tr>
+    <tr class="pv"><td>6</td><td>3.9-5</td><td></td><td></td><td class="x">●</td><td></td><td class="x">◐</td><td>Pivô 3</td></tr>
+    <tr><td>7</td><td>3.10-11</td><td></td><td></td><td class="x">●</td><td></td><td></td><td>ver Pivô 3</td></tr>
+    <tr><td>8</td><td>3.10-13</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td></td><td>ver Pivô 3</td></tr>
+    <tr class="pv"><td>9</td><td>compl. 1</td><td class="x">●</td><td class="x">●</td><td></td><td class="x">●</td><td></td><td>Pivô 2</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que estes pivôs</span>
+    <p><strong>Pivô 1 (ex. 1)</strong> é o exercício-base: calcula $U^*$ por trechos, mostra que <em>energia não se superpõe</em> e mostra o limite do princípio do trabalho e energia (uma carga só). <strong>Pivô 2 (ex. 9)</strong> leva a mesma ideia para uma treliça de 13 barras, que é o formato que mais cai. <strong>Pivô 3 (ex. 6)</strong> repete tudo na torção, com torque distribuído. <strong>Pivôs 4 e 5 (ex. 4 e 5)</strong> são os dois contraexemplos de "comportamento linear": no 4 a estrutura muda de rigidez (folga), no 5 a geometria muda (corda). Eles explicam <em>por que</em> as hipóteses existem. Os ex. 2, 3, 7 e 8 usam o mesmo raciocínio de algum pivô e vêm resolvidos de forma compacta no fim.</p></div>
+
+  <!-- ======================= PIVÔ 1 ======================= -->
+  <article class="ex pivo" id="l5-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 1 (Gere 2.7-4) · Pivô 1</div>
+      <h3 id="l5-ex1-h" data-nav="L5 ex.1 · barra ABC, P e Q" data-pivo>Barra ABC com duas forças: energia não se superpõe</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span><span class="chip">NL</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.1)</span>
+      2.7-4. A barra ABC ilustrada na figura está engastada em A e é carregada por uma força $P$ agindo na extremidade C e por uma força $Q$ agindo em B. A barra tem rigidez axial constante $EA$. Pede-se:
+      <ol type="a"><li>Determine a energia complementar $U_1^*$ da barra quando a força $P$ age sozinha;</li>
+      <li>Determine a energia complementar $U_2^*$ da barra quando a força $Q$ age sozinha;</li>
+      <li>Determine a energia complementar $U_3^*$ quando as forças $P$ e $Q$ agem simultaneamente na barra. Verifique que, no tocante ao cálculo das energias, não é possível aplicar o princípio da superposição ou seja, não é verdade que $U_3^* = U_1^* + U_2^*$, mesmo considerando que a estrutura tenha comportamento elástico-linear. Explique!</li>
+      <li>Em cada um dos itens anteriores veja se é possível determinar os deslocamentos longitudinais dos pontos B e C pelo Princípio do Trabalho e Energia. Em caso positivo, determine-os.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 1):</strong> ver o PDF oficial, Lista 5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4>
+      <p>Barra prismática sob <strong>força normal</strong> (tração), isostática, dois trechos com $N$ diferente. Pergunta-alvo: energia complementar $U^*$ em três cenários e, depois, deslocamentos pelo princípio do trabalho e energia.</p>
+      <div class="callout concept"><span class="co-t">Conceito: trabalho × energia, externo × interno</span>
+        <p>O professor separa duas famílias de grandezas (aula 12 p.4–8):</p>
+        <ul><li><strong>Trabalho</strong> $W=\int_0^\delta P\,d\delta$ e <strong>trabalho complementar</strong> $W^*=\int_0^P \delta\,dP$ são calculados com as <em>forças externas</em> e os <em>deslocamentos dos seus pontos de aplicação</em>. No gráfico $P\times\delta$, $W$ é a área <em>embaixo</em> da curva e $W^*$ a área <em>entre a curva e o eixo P</em>. As duas somam o retângulo $P\delta$.</li>
+        <li><strong>Energia de deformação</strong> $U$ e <strong>energia complementar</strong> $U^*$ são calculadas com os <em>esforços internos</em> (tensões) e as <em>deformações</em>, integrando as densidades $u=\int\sigma\,d\varepsilon$ e $u^*=\int\varepsilon\,d\sigma$ no volume.</li></ul>
+        <p>Sem dissipação, a energia que entra pelas forças externas fica guardada no material: $W=U$ e $W^*=U^*$. Na barra sob força normal isso vira a fórmula que você vai usar em quase toda a P2:</p>
+        <div class="math-box">$$U^* = \int_0^L \frac{N(x)^2}{2\,E\,A(x)}\,dx \qquad\text{(aula 12 p.22)}$$</div>
+        <p>De onde vem: $\sigma_x = N/A$, e com Hooke $u^* = \int_0^{\sigma}\frac{\sigma}{E}d\sigma = \frac{\sigma^2}{2E}$. Integrando na área da seção, $\iint \frac{N^2}{2EA^2}\,dA = \frac{N^2}{2EA}$ por unidade de comprimento. $U^*$ depende só dos <em>esforços</em> ($N$), por isso ela é a energia "natural" quando a estrutura é isostática e os esforços saem do equilíbrio.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Rigidez axial</td><td>$EA$</td><td>constante</td><td>enunciado</td></tr>
+        <tr><td>Trecho AB</td><td>$L_{AB}$</td><td>$L/2$</td><td>figura (cota)</td></tr>
+        <tr><td>Trecho BC</td><td>$L_{BC}$</td><td>$L/2$</td><td>figura (cota)</td></tr>
+        <tr><td>Forças</td><td>$Q$ em B, $P$ em C</td><td>ambas para a direita (tração)</td><td>figura</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$U_1^*,\ U_2^*,\ U_3^*$; comparar $U_3^*$ com $U_1^*+U_2^*$. Em (d), usar $W = U^*$ quando for possível escrever $W$ com uma única incógnita.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.22</span> $U^*=\sum_i \int_0^{L_i} \frac{N_i^2}{2E_iA_i}dx_i$ &nbsp;·&nbsp; <span class="tag tag-form">📄 Aula 12 p.27</span> comportamento linear: $W = W^* = U^* = U$, com $W = P\delta/2$ para <em>uma</em> força.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos por trecho</h4>
+      <p>Corte em cada trecho e olhe para a parte livre (à direita), assim a reação do engaste não entra na conta:</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$N_{AB}$</th><th>$N_{BC}$</th></tr></thead><tbody>
+        <tr><td>(a) só $P$</td><td>$P$</td><td>$P$</td></tr>
+        <tr><td>(b) só $Q$</td><td>$Q$</td><td>$0$</td></tr>
+        <tr><td>(c) $P$ e $Q$</td><td>$P+Q$</td><td>$P$</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) só $P$</div>
+      <div class="math-box">$$U_1^* = \frac{P^2 (L/2)}{2EA} + \frac{P^2 (L/2)}{2EA} = \frac{P^2L}{2EA}$$</div>
+      <div class="step-part">(b) só $Q$ (BC fica descarregado)</div>
+      <div class="math-box">$$U_2^* = \frac{Q^2 (L/2)}{2EA} = \frac{Q^2L}{4EA}$$</div>
+      <div class="step-part">(c) $P$ e $Q$ juntos</div>
+      <div class="math-box">$$U_3^* = \frac{(P+Q)^2 (L/2)}{2EA} + \frac{P^2(L/2)}{2EA} = \frac{P^2L}{2EA} + \frac{PQL}{2EA} + \frac{Q^2L}{4EA}$$</div>
+      <p>$U_3^* - (U_1^* + U_2^*) = \dfrac{PQL}{2EA} \neq 0$. A energia é <strong>quadrática</strong> nos esforços. Os esforços se superpõem ($N_{AB} = P + Q$), mas o quadrado da soma tem o termo cruzado $2PQ$. Fisicamente: quando $Q$ é aplicada depois de $P$, a força $P$ (que já estava lá, com valor cheio) trabalha sobre o deslocamento extra de C causado por $Q$. Esse trabalho "cruzado" não existe em nenhum dos casos isolados.</p>
+      <div class="step-part">(d) Deslocamentos pelo princípio do trabalho e energia</div>
+      <ul>
+        <li><strong>Caso (a):</strong> uma só força. $W = P\delta_C/2 = U_1^*$ ⇒ $\boxed{\delta_C = PL/EA}$. O deslocamento de B <em>não</em> sai: não há força em B, e ele não aparece em $W$.</li>
+        <li><strong>Caso (b):</strong> $Q\delta_B/2 = U_2^*$ ⇒ $\boxed{\delta_B = QL/2EA}$. O de C não sai.</li>
+        <li><strong>Caso (c):</strong> $W = \frac{P\delta_C}{2} + \frac{Q\delta_B}{2} = U_3^*$ é <em>uma</em> equação com <em>duas</em> incógnitas. <strong>Não dá.</strong></li>
+      </ul>
+      <div class="callout warn"><span class="co-t">A limitação que motiva o resto do curso</span>
+        <p>O princípio do trabalho e energia só entrega o deslocamento <strong>do ponto onde está a única carga, na direção dela</strong>. Para qualquer outro deslocamento, ou com mais de uma carga, é preciso Crotti-Engesser / Castigliano (aula 15): $\delta_i = \partial U^*/\partial P_i$. Veja como isso resolve o caso (c) em uma linha: $\delta_C = \partial U_3^*/\partial P = \frac{PL}{EA} + \frac{QL}{2EA}$ e $\delta_B = \partial U_3^*/\partial Q = \frac{PL}{2EA} + \frac{QL}{2EA}$. Confira pela compatibilidade: $\delta_B = N_{AB}(L/2)/EA = (P+Q)L/2EA$ ✓.</p></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $U_1^* = P^2L/2EA$; $U_2^* = Q^2L/4EA$; $U_3^* = P^2L/2EA + PQL/2EA + Q^2L/4EA$; (d) caso a: $\delta_C = PL/EA$; caso b: $\delta_B = QL/2EA$; caso c: impossível só com $W=U^*$. <span class="badge badge-ok">bate com o Gere (2.7-4 c)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Somar energias de casos separados. Superpõe-se <strong>esforço</strong> e <strong>deslocamento</strong>, nunca energia.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $W = P\delta$ (sem o ½). A força cresce de 0 até $P$ junto com o deslocamento; o ½ é a área do triângulo.</li>
+      <li><span class="tag tag-mem">⚠ memorizar</span> Conferência dimensional: $[N^2 L/EA] = \text{N}^2\cdot\text{mm}/\text{N} = \text{N·mm}$ ✓.</li></ul></div>
+    <details class="deep"><summary>Aprofundamento: de onde vem o termo cruzado, pela ordem de carregamento</summary><div class="deep-body">
+      <p>Aplique primeiro $P$ (de 0 a $P$): trabalho $P\cdot\frac{PL}{EA}\cdot\frac12 = \frac{P^2L}{2EA}$. Depois aplique $Q$ (de 0 a $Q$) com $P$ mantida: $Q$ faz $\frac12 Q \cdot \frac{QL}{2EA}$, e $P$, que já está cheia, desloca-se mais $\frac{QL}{2EA}$ (C anda o mesmo que B, porque BC não muda de comprimento com $Q$), fazendo $P\cdot\frac{QL}{2EA}$ <em>sem o ½</em>. Somando: $\frac{P^2L}{2EA} + \frac{Q^2L}{4EA} + \frac{PQL}{2EA} = U_3^*$ ✓. O termo cruzado é esse trabalho "de força constante". Invertendo a ordem, o resultado é o mesmo (a energia é função de estado); é essa independência de caminho que torna possível derivar $U^*$ em relação a cada força.</p></div></details>
+  </article>
+
+  <!-- ======================= PIVÔ 2 ======================= -->
+  <article class="ex pivo" id="l5-ex9">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 9 (complementar 1) · Pivô 2</div>
+      <h3 id="l5-ex9-h" data-nav="L5 ex.9 · treliça de 13 barras" data-pivo>Treliça simétrica: deslocamento sob a carga por $W = U^*$</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W5</span><span class="chip">W2</span><span class="chip">W1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.5, Parte II)</span>
+      1. A estrutura treliçada indicada abaixo é formada por barras de mesmo material (com módulo de elasticidade $E$) e mesma área de seção transversal $A$. Determine o deslocamento vertical do ponto de aplicação da força $P$ utilizando o princípio do trabalho e energia. Indique o resultado em função de $P$, $L$ e $EA$. Sugestão: utilize a simetria da estrutura e do carregamento para calcular as forças nas barras simétricas uma única vez.<br>
+      <em>Importante:</em> o resultado obtido não está considerando a ação do peso próprio da estrutura, mas, em projetos reais, o peso próprio deve ser devidamente considerado.<br>
+      Resp.: $\delta = (2\sqrt2 + 3)(PL/EA) \cong 5{,}83\,(PL/EA)$</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 9):</strong> ver o PDF oficial, Lista 5, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Treliça plana isostática (13 barras, 8 nós: $2\cdot 8 = 16 = 13 + 3$ reações). Barras só com força normal constante, $A$ e $E$ constantes. Uma única carga, e pede-se o deslocamento <em>do ponto e na direção da carga</em>: é exatamente o caso em que o princípio do trabalho e energia basta.</p>
+      <div class="callout concept"><span class="co-t">Conceito: $U^*$ de treliça</span>
+        <p>Em cada barra $N_i$ é constante, então a integral vira produto: $U^* = \sum_i \frac{N_i^2 L_i}{2E_iA_i}$. Com $EA$ igual em todas: $U^* = \frac{1}{2EA}\sum_i N_i^2L_i$. O sinal de $N_i$ não importa, porque aparece ao quadrado. Barras de força zero não armazenam energia.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Vão / altura</td><td>$4L$ / $L$ (4 painéis quadrados)</td><td>figura</td></tr>
+        <tr><td>Apoios</td><td>pino à esquerda, rolete à direita</td><td>figura</td></tr>
+        <tr><td>Carga</td><td>$P$ para baixo no nó inferior central</td><td>figura</td></tr>
+        <tr><td>Diagonais</td><td>comprimento $L\sqrt2$; montantes e banzos: $L$</td><td>geometria</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\delta_V$ do nó carregado, por $\frac{P\delta}{2} = U^*$ (<span class="tag tag-form">📄 Aula 12 p.27</span>).</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{P\,\delta}{2} = U^* = \sum_{i=1}^{13}\frac{N_i^2L_i}{2EA}\quad\Longrightarrow\quad \delta = \frac{1}{P\,EA}\sum_i N_i^2L_i$$</div></div>
+    <div class="step" data-n="5"><h4>Esforços internos (método dos nós, metade da treliça)</h4>
+      <p>Reações: simetria ⇒ $V_A = V_D = P/2$; horizontal no pino $= 0$. Numere os nós de baixo 1 a 5 (esq. → dir.) e os de cima 6, 7, 8. Tração positiva.</p>
+      <ol>
+        <li><strong>Nó 1 (apoio):</strong> só a diagonal 1-6 tem componente vertical: $N_{16}\frac{\sqrt2}{2} + \frac P2 = 0$ ⇒ $N_{16} = -\frac{\sqrt2}{2}P$ (compressão). Horizontal: $N_{12} + N_{16}\frac{\sqrt2}{2} = 0$ ⇒ $N_{12} = +\frac P2$.</li>
+        <li><strong>Nó 2:</strong> montante 2-6 sozinho na vertical ⇒ $N_{26} = 0$; horizontal ⇒ $N_{23} = N_{12} = \frac P2$.</li>
+        <li><strong>Nó 6:</strong> vertical: $-N_{16}\frac{\sqrt2}{2} - N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{63} = +\frac{\sqrt2}{2}P$. Horizontal: $N_{67} - N_{16}\frac{\sqrt2}{2} + N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{67} = -P$.</li>
+        <li><strong>Nó 7:</strong> montante 3-7 sozinho na vertical ⇒ $N_{37} = 0$.</li>
+      </ol>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barras (par simétrico)</th><th>$N$</th><th>$L$</th><th>$N^2L$ (par)</th></tr></thead><tbody>
+        <tr><td>diagonais de apoio 1-6, 8-5</td><td class="num">$-\frac{\sqrt2}{2}P$</td><td class="num">$\sqrt2 L$</td><td class="num">$2\cdot\frac{P^2}{2}\sqrt2L = \sqrt2\,P^2L$</td></tr>
+        <tr><td>banzo inferior 1-2, 2-3, 3-4, 4-5</td><td class="num">$+\frac P2$</td><td class="num">$L$</td><td class="num">$4\cdot\frac{P^2}{4}L = P^2L$</td></tr>
+        <tr><td>diagonais centrais 6-3, 3-8</td><td class="num">$+\frac{\sqrt2}{2}P$</td><td class="num">$\sqrt2 L$</td><td class="num">$\sqrt2\,P^2L$</td></tr>
+        <tr><td>banzo superior 6-7, 7-8</td><td class="num">$-P$</td><td class="num">$L$</td><td class="num">$2P^2L$</td></tr>
+        <tr><td>montantes 2-6, 3-7, 4-8</td><td class="num">$0$</td><td class="num">$L$</td><td class="num">$0$</td></tr>
+        <tr class="hit"><td colspan="3"><strong>Soma</strong></td><td class="num">$(3 + 2\sqrt2)\,P^2L$</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^* = \frac{(3+2\sqrt2)P^2L}{2EA}\qquad\frac{P\delta}{2} = \frac{(3+2\sqrt2)P^2L}{2EA}\ \Longrightarrow\ \delta = (3+2\sqrt2)\frac{PL}{EA}\approx 5{,}83\,\frac{PL}{EA}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $\delta_V = (2\sqrt2 + 3)\,PL/EA \approx 5{,}83\,PL/EA$ (para baixo). <span class="badge badge-ok">bate com a resposta da lista</span> (conferido também resolvendo as 16 equações de nó em Python)</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o comprimento $\sqrt2 L$ das diagonais em $N^2L$.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Montante sozinho na vertical num nó sem carga vertical ⇒ força zero. Olhe isso antes de montar equações: economiza tempo de prova.</li>
+      <li>Sinal: $\delta > 0$ sai <em>no sentido da força</em>, porque $W = P\delta/2$ é positivo. Nesta estrutura a flecha é para baixo.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 3 ======================= -->
+  <article class="ex pivo" id="l5-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 6 (Gere 3.9-5) · Pivô 3</div>
+      <h3 id="l5-ex6-h" data-nav="L5 ex.6 · torção com T e t" data-pivo>Eixo em balanço com torque na ponta e torque distribuído</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span><span class="chip">NL</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.3)</span>
+      3.9-5. Uma barra engastada de seção transversal circular e comprimento $L$ está fixa numa extremidade e livre na outra. A barra está carregada por um torque $T$ na extremidade livre e por um torque distribuído (por unidade de comprimento) de intensidade $t$, constante, ao longo do comprimento da barra. Pede-se:
+      <ol type="a"><li>Determinar a energia complementar $U_1^*$ da barra quando o torque $T$ age sozinho;</li>
+      <li>Determinar a energia complementar $U_2^*$ da barra quando o torque $t$ age sozinho;</li>
+      <li>Determinar a energia complementar $U_3^*$ quando os dois torques agem simultaneamente na barra.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 6):</strong> ver o PDF oficial, Lista 5, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Torção de seção circular, isostática, torque interno variável ao longo do eixo. É o "ex. 1" da torção: mesma estrutura de raciocínio, com $N\to T$, $EA\to GI_p$.</p>
+      <div class="callout concept"><span class="co-t">Conceito: a analogia tração ↔ torção (aula 13)</span>
+        <p>A aula 13 repete a aula 12 trocando $P\to T$, $\delta\to\phi$, $\sigma\to\tau$, $\varepsilon\to\gamma$, $E\to G$, $A\to I_p$. Com $\tau = \frac{T(x)}{I_p(x)}\rho$ e $u^* = \frac{\tau^2}{2G}$, a integral de $\rho^2$ na seção é exatamente $I_p$:</p>
+        <div class="math-box">$$U^* = \int_0^L \frac{T(x)^2}{2\,G\,I_p(x)}\,dx\qquad\text{(aula 13 p.14)}$$</div>
+        <p>Para seção circular cheia $I_p = \pi d^4/32$; para tubo circular $I_p = \pi(d_e^4 - d_i^4)/32$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Comprimento, rigidez à torção</td><td>$L$, $GI_p$ (constantes)</td><td>enunciado</td></tr>
+      <tr><td>Torque na ponta</td><td>$T$</td><td>figura</td></tr>
+      <tr><td>Torque distribuído</td><td>$t$ [N·mm/mm], constante, <strong>mesmo sentido de $T$</strong></td><td>figura (leitura das setas; é o caso do Gere)</td></tr>
+    </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$U_1^*, U_2^*, U_3^*$ e o termo cruzado.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 13 p.14</span> $U^* = \int_0^L \frac{T(x)^2}{2GI_p}dx$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Com $x$ medido a partir do engaste e corte olhando para a parte livre (de $x$ até $L$): o torque interno equilibra $T$ mais o distribuído no trecho de comprimento $L-x$:</p>
+      <div class="math-box">$$T(x) = T + t\,(L - x)$$</div>
+      <p>Máximo no engaste ($T + tL$), igual a $T$ na ponta.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U_1^* = \int_0^L \frac{T^2}{2GI_p}dx = \frac{T^2L}{2GI_p}\qquad U_2^* = \int_0^L\frac{t^2(L-x)^2}{2GI_p}dx = \frac{t^2L^3}{6GI_p}$$
+      $$U_3^* = \int_0^L\frac{[T + t(L-x)]^2}{2GI_p}dx = \frac{T^2L}{2GI_p} + \frac{T\,t\,L^2}{2GI_p} + \frac{t^2L^3}{6GI_p}$$</div>
+      <p>De novo $U_3^* \ne U_1^* + U_2^*$: o termo cruzado é $\frac{TtL^2}{2GI_p}$.</p>
+      <p><strong>Bônus (antecipando a aula 15):</strong> a rotação da ponta é $\phi_{ponta} = \frac{\partial U_3^*}{\partial T} = \frac{TL}{GI_p} + \frac{tL^2}{2GI_p}$. O primeiro termo é o clássico $TL/GI_p$; o segundo equivale a colocar o torque distribuído total $tL$ no meio do vão.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $U_1^* = T^2L/2GI_p$; $U_2^* = t^2L^3/6GI_p$; $U_3^* = T^2L/2GI_p + TtL^2/2GI_p + t^2L^3/6GI_p$. <span class="badge badge-ok">bate com o Gere (3.9-5 c)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Se $t$ girasse no sentido oposto a $T$, o termo cruzado trocaria de sinal ($T(x) = T - t(L-x)$). Leia o sentido das setas.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Unidade de $t$: momento por comprimento (N·mm/mm). Confira: $[t^2L^3/GI_p] = \text{N}^2\text{mm}^3/(\text{N·mm}^2) = $ N·mm ✓.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 4 ======================= -->
+  <article class="ex pivo" id="l5-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 4 (Gere 2.7-10) · Pivô 4</div>
+      <h3 id="l5-ex4-h" data-nav="L5 ex.4 · três barras com folga" data-pivo>Três barras com folga: quando $U \neq P\delta/2$</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">NL</span><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.2)</span>
+      2.7-10. Uma carga de compressão $P$ é transmitida por meio de uma placa rígida para três barras de liga de magnésio idênticas, exceto que, inicialmente, a barra do meio é um pouco mais curta que as outras barras. As dimensões e propriedades do conjunto são: $L = 1{,}0$ m (comprimento), $A = 3000$ mm² (área da seção transversal de cada barra), $E = 45$ GPa (módulo de elasticidade das barras) $s = 1{,}0$ mm (folga existente). Pede-se:
+      <ol type="a"><li>Determinar a carga $P_1$ exigida para eliminar a folga;</li>
+      <li>Determinar o deslocamento vertical $\delta$ da placa rígida quando $P = 400$ kN;</li>
+      <li>Determinar a energia de deformação total $U$ das três barras quando $P = 400$ kN;</li>
+      <li>Explique por que a energia de deformação calculada no item anterior não é igual a $P\delta/2$ (Sugestão: faça um esboço do diagrama $P \times \delta$).</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 4):</strong> ver o PDF oficial, Lista 5, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Barras em paralelo sob compressão, material elástico-linear, mas a <strong>estrutura</strong> muda de rigidez quando a folga fecha. O material é linear e a estrutura não é: o gráfico $P\times\delta$ é bilinear.</p>
+      <div class="callout concept"><span class="co-t">Conceito: "comportamento linear" é da estrutura, não só do material</span>
+        <p>A cadeia $W = W^* = U^* = U$ com $W = P\delta/2$ exige que a curva $P\times\delta$ <em>da estrutura</em> seja uma reta pela origem (aula 12 p.27). Um contato que se fecha, uma folga, um cabo que afrouxa ou uma mudança grande de geometria quebram a reta, mesmo com aço perfeitamente elástico. Nesse caso ainda vale $W = U$, mas $W$ tem de ser calculado como a <em>área real</em> sob a curva, e não como $P\delta/2$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Unidade</th></tr></thead><tbody>
+      <tr><td>Comprimento</td><td>$L$</td><td class="num">1000</td><td>mm</td></tr>
+      <tr><td>Área de cada barra</td><td>$A$</td><td class="num">3000</td><td>mm²</td></tr>
+      <tr><td>Módulo</td><td>$E$</td><td class="num">45 000</td><td>MPa</td></tr>
+      <tr><td>Folga</td><td>$s$</td><td class="num">1,0</td><td>mm</td></tr>
+      <tr><td>Carga final</td><td>$P$</td><td class="num">400 000</td><td>N</td></tr>
+      <tr><td>Rigidez de uma barra</td><td>$k = EA/L$</td><td class="num">135 000</td><td>N/mm</td></tr>
+    </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$P_1$, $\delta$, $U$; comparar $U$ com $P\delta/2$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.30 (ex. 1)</span> rigidez de barra $k = EA/L$; energia de cada barra $U_i = \frac{k\,\delta_i^2}{2} = \frac{N_i^2L}{2EA}$ (<span class="tag tag-form">📄 Aula 12 p.22/p.26</span>).</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Fase 1 ($P \le P_1$): só as 2 barras externas trabalham, rigidez $2k$. Fase 2 ($P &gt; P_1$): as 3 trabalham, rigidez $3k$ para o <em>acréscimo</em> de carga.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) fechar a folga</div>
+      <div class="math-box">$$P_1 = 2k\,s = 2\cdot 135\,000\cdot 1{,}0 = 270\,000\ \text{N} = 270\ \text{kN}$$</div>
+      <div class="step-part">(b) deslocamento com $P = 400$ kN</div>
+      <div class="math-box">$$\delta = s + \frac{P - P_1}{3k} = 1{,}0 + \frac{130\,000}{405\,000} = 1{,}321\ \text{mm}$$</div>
+      <div class="step-part">(c) energia: cada barra guarda $k\delta_i^2/2$ com o <em>seu</em> encurtamento</div>
+      <div class="math-box">$$U = 2\cdot\frac{135\,000\cdot 1{,}321^2}{2} + \frac{135\,000\cdot 0{,}321^2}{2} = 235\,580 + 6\,955 = 242\,500\ \text{N·mm} \approx 243\ \text{J}$$</div>
+      <div class="step-part">(d) por que $U \neq P\delta/2 = 264{,}2$ J</div>
+      <p>O diagrama $P\times\delta$ é uma reta de inclinação $2k$ até $(s, P_1) = (1{,}0;\ 270)$ e depois uma reta mais íngreme ($3k$) até $(1{,}321;\ 400)$. A área embaixo dele é</p>
+      <div class="math-box">$$W = \tfrac12\cdot 270\,000\cdot 1{,}0 + \tfrac12(270\,000 + 400\,000)\cdot 0{,}321 = 242{,}5\ \text{J} = U\ \checkmark$$</div>
+      <p>$P\delta/2$ seria a área do triângulo da origem até (1,321; 400), que fica <em>acima</em> da curva real (a curva é convexa). Por isso $P\delta/2 &gt; U$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $P_1 = 270$ kN; (b) $\delta = 1{,}321$ mm; (c) $U \approx 243$ J; (d) curva $P\times\delta$ bilinear: $W = U$ = área real, não o triângulo. <span class="badge badge-ok">bate com o Gere (2.7-10)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o mesmo $\delta$ para a barra do meio: ela só encurta $\delta - s = 0{,}321$ mm.</li>
+      <li>Ordem de grandeza: $\delta \sim$ 1 mm num metro de barra ⇒ $\varepsilon \sim 10^{-3}$, $\sigma \approx E\varepsilon \approx 59$ MPa nas externas. Plausível para magnésio.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 5 ======================= -->
+  <article class="ex pivo" id="l5-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 5 (Gere 2.7-12) · Pivô 5</div>
+      <h3 id="l5-ex5-h" data-nav="L5 ex.5 · corda elástica" data-pivo>Corda elástica puxada no meio: sem linearidade geométrica</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">NL</span><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.3)</span>
+      2.7-12 Uma corda de <em>bungee jump</em> que se comporta de forma elástica linear tem um comprimento $L_0 = 760$ mm (quando não tensionada) e rigidez $k = 140$ N/m. A corda está fixada a duas estacas, distanciadas por $b = 380$ mm, e puxada pelo seu ponto médio por uma força $P = 80$ N, conforme ilustra a figura. Nestas condições, determine:
+      <ol type="a"><li>a energia de deformação ($U$) e a energia complementar ($U^*$) da corda;</li>
+      <li>o deslocamento $\delta_C$ do ponto de aplicação da carga;</li>
+      <li>Compare as energias $U$ e $U^*$ à quantidade $P\delta_C/2$.</li></ol>
+      Nota: observe que, nas condições dadas, não existe linearidade geométrica.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 5):</strong> ver o PDF oficial, Lista 5, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Cabo elástico-linear ($F = k\,\Delta$), mas com <strong>grande mudança de geometria</strong>: o ângulo dos ramos muda com a carga, então o equilíbrio tem de ser escrito na configuração <em>deformada</em>. É o contraexemplo da hipótese de linearidade geométrica.</p>
+      <div class="callout concept"><span class="co-t">Conceito: duas fontes de não linearidade</span>
+        <p>A estrutura só é "linear" se (i) o material for elástico-linear e (ii) valer linearidade geométrica (aula 12 p.27). No Pivô 4 a quebra era de rigidez (contato). Aqui o material é linear, então $u = u^*$ em cada ponto da corda e <strong>$U = U^*$</strong>. Mas a relação $P\times\delta_C$ não é reta, porque a geometria muda: $W \ne P\delta_C/2$ e $W^* \ne W$. Como $W = U$ continua valendo, $W^* = P\delta_C - W$ fica diferente de $U^*$. O "atalho" $W^* = U^*$ precisa de linearidade geométrica. Esse detalhe é a razão de o curso trabalhar com $U^*$ e com $W^*$ separadamente.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Unidade</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Comprimento livre da corda</td><td>$L_0$</td><td class="num">760</td><td>mm</td><td>enunciado</td></tr>
+      <tr><td>Rigidez da corda inteira</td><td>$k$</td><td class="num">140 N/m = 0,140</td><td>N/mm</td><td>enunciado (converter!)</td></tr>
+      <tr><td>Distância entre estacas</td><td>$b$</td><td class="num">380</td><td>mm</td><td>enunciado/figura</td></tr>
+      <tr><td>Força no meio da corda</td><td>$P$</td><td class="num">80</td><td>N</td><td>enunciado, perpendicular a AB</td></tr>
+    </tbody></table></div>
+    <p>Hipótese de leitura (a mesma do Gere): $\delta_C$ é medido a partir da posição em que a corda fica <em>reta sem tração</em>. Como $L_0 = 760 &gt; b = 380$, a corda começa frouxa; esticada sem tração, cada metade (380 mm) forma com AB um triângulo de cateto $b/2 = 190$ mm, e $x_0 = \sqrt{380^2 - 190^2} = 329{,}1$ mm.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Tração $F$ na corda (incógnita-chave), depois $\delta_C$, $U$, $U^*$ e comparação com $P\delta_C/2$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4>
+      <div class="math-box">$$\text{Constitutiva: } F = k\,\Delta\qquad\text{Geometria: } L_h = \frac{L_0 + \Delta}{2},\ \ x = \sqrt{L_h^2 - (b/2)^2}\qquad\text{Equilíbrio em C (deformada): } P = 2F\,\frac{x}{L_h}$$</div>
+      <p>Energia: $U = U^* = \frac{F^2}{2k}$ (material linear, <span class="tag tag-form">📄 Aula 12 p.15–16</span>).</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Uma única tração $F$ ao longo da corda toda (polia ideal em C, sem atrito). O equilíbrio depende de $x/L_h$, que depende de $F$: equação não linear em $F$, resolvida numericamente (<code>calc_l5.py</code>). Na prova, o professor daria um valor que feche ou pediria só o equacionamento.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$F = 42{,}81\ \text{N}\ \Rightarrow\ \Delta = F/k = 305{,}8\ \text{mm},\ L_h = 532{,}9\ \text{mm},\ x = 497{,}9\ \text{mm}$$
+      $$\delta_C = x - x_0 = 497{,}9 - 329{,}1 = 168{,}8\ \text{mm}$$
+      $$U = U^* = \frac{F^2}{2k} = \frac{42{,}81^2}{2\cdot0{,}140} = 6546\ \text{N·mm} = 6{,}55\ \text{J}$$
+      $$\frac{P\,\delta_C}{2} = \frac{80\cdot168{,}8}{2} = 6752\ \text{N·mm} = 6{,}75\ \text{J}$$</div>
+      <p>Tabela da curva $P\times\delta_C$ (mesmo script): $\delta$ = 20,5 / 40,7 / 80,4 / 119,5 / 168,7 mm para $P$ = 8,8 / 17,8 / 36,3 / 55,2 / 80 N. A razão $P/\delta$ cresce (0,43 → 0,47 N/mm): a estrutura <strong>enrijece</strong> à medida que os ramos se alinham com a força.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $U = U^* = 6{,}55$ J; (b) $\delta_C = 168{,}8$ mm; (c) $P\delta_C/2 = 6{,}75$ J $&gt; U$. A curva $P\times\delta_C$ é côncava para cima, e a área sob ela é menor que o triângulo. <span class="badge badge-ok">bate com o Gere (2.7-12)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> $k$ em N/m: 140 N/m = 0,140 N/mm. Errar isso muda $\Delta$ por 1000.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever o equilíbrio com o ângulo inicial: é exatamente o que a linearidade geométrica permitiria e que aqui não vale.</li>
+      <li>Leitura fina: $W^* = P\delta_C - W = 6{,}96$ J $\neq U^* = 6{,}55$ J. Com não linearidade geométrica, $W^* = U^*$ deixa de valer. Por isso o professor exige linearidade geométrica para Crotti-Engesser.</li></ul></div>
+  </article>
+
+  <h3 class="sub" id="l5-demais" data-nav="L5 · demais exercícios">Demais exercícios (em ordem numérica)</h3>
+
+  <article class="ex" id="l5-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 2 (Gere 2.7-6) · ver Pivô 2</div>
+      <h3 id="l5-ex2-h" data-nav="L5 ex.2 · treliça de 2 barras">Treliça ABC com carga horizontal</h3></div></div>
+    <div class="ex-topics"><span class="chip">W5</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.1)</span>
+      2.7-6. A treliça ABC ilustrada abaixo está submetida a uma carga horizontal $P$ na junta B. As duas barras são idênticas, com rigidez axial $EA$. Considerando que $\beta = 60°$, que existam condições de linearidade geométrica e que o material possua comportamento elástico-linear, determine:
+      a) A energia complementar $U^*$ da treliça; e b) o deslocamento horizontal $\delta_{H,B}$ da junta B.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 2):</strong> ver o PDF oficial, Lista 5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> com $\beta = 60°$ e vão $L$, o triângulo é equilátero e cada barra mede $L$. Nó B: vertical ⇒ $N_{AB} = -N_{BC}$; horizontal ⇒ $-N_{AB}\cos60° + N_{BC}\cos60° + P = 0$ ⇒ $N_{AB} = +P$ (tração), $N_{BC} = -P$ (compressão). Uma força só, e o deslocamento pedido está no ponto e na direção dela: princípio do trabalho e energia (<span class="tag tag-form">📄 Aula 12 p.27</span>).</p>
+    <div class="math-box">$$U^* = 2\cdot\frac{P^2L}{2EA} = \frac{P^2L}{EA}\qquad \frac{P\,\delta_{H,B}}{2} = U^*\ \Rightarrow\ \delta_{H,B} = \frac{2PL}{EA}$$</div>
+    <div class="answer"><strong>Respostas:</strong> (a) $U^* = P^2L/EA$; (b) $\delta_{H,B} = 2PL/EA$ (para a direita). <span class="badge badge-ok">bate com o Gere (2.7-6)</span></div>
+  </article>
+
+  <article class="ex" id="l5-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 3 (Gere 2.7-8) · ver Pivô 1</div>
+      <h3 id="l5-ex3-h" data-nav="L5 ex.3 · barra rígida em 5 molas">Barra rígida sustentada por cinco molas</h3></div></div>
+    <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.2)</span>
+      2.7-8. A estrutura indicada abaixo consiste em uma barra rígida (indeformável) horizontal AB sustentada por cinco molas igualmente espaçadas. As molas 1, 2 e 3 têm rigidez $3k$, $1{,}5k$ e $k$, respectivamente. As extremidades inferiores de todas as cinco molas permanecem numa linha horizontal quando as molas não estão tensionadas. A barra AB, que tem peso $W$, faz as molas se alongarem até um valor $\delta$. Determine o deslocamento sofrido pelas molas e as forças em cada uma delas. Dados: $W = 400$ N, $k = 5$ N/mm.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 3):</strong> ver o PDF oficial, Lista 5, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> estrutura e carga simétricas ⇒ a barra rígida só translada ⇒ todas as molas alongam o mesmo $\delta$. Trabalho do peso = soma das energias das molas (cuidado: aqui $W$ é o <em>peso</em>, não o trabalho):</p>
+    <div class="math-box">$$\frac{W\delta}{2} = \sum_i\frac{k_i\delta^2}{2} = \frac{(2\cdot3k + 2\cdot1{,}5k + k)\,\delta^2}{2} = 5k\delta^2\ \Rightarrow\ \delta = \frac{W}{10k} = \frac{400}{50} = 8{,}0\ \text{mm}$$</div>
+    <p>Forças: $F_1 = 3k\delta = 120$ N, $F_2 = 1{,}5k\delta = 60$ N, $F_3 = k\delta = 40$ N. Confere o equilíbrio: $2(120) + 2(60) + 40 = 400$ N ✓.</p>
+    <div class="answer"><strong>Respostas:</strong> $\delta = 8{,}0$ mm; $F_1 = 120$ N, $F_2 = 60$ N, $F_3 = 40$ N; $U = 1{,}6$ J. <span class="badge badge-ok">bate com o Gere (2.7-8: δ = W/10k, F₁ = 3W/10, F₂ = 3W/20, F₃ = W/10)</span></div>
+  </article>
+
+  <article class="ex" id="l5-ex7">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 7 (Gere 3.10-11) · ver Pivô 3</div>
+      <h3 id="l5-ex7-h" data-nav="L5 ex.7 · tubo quadrado">Tubo quadrado de parede fina: espessura mínima</h3></div></div>
+    <div class="ex-topics"><span class="chip">W3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.4)</span>
+      3.10-11. Uma barra tubular de alumínio ($G = 28$ GPa) de seção transversal quadrada, com dimensões externas 50 mm × 50 mm, deve resistir a um torque $T = 300$ N.m. Calcule a espessura de parede mínima requerida ($t_{mín}$) se a tensão de cisalhamento admissível for 20 MPa e a taxa de torção admissível for 0,025 rad/m.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 7):</strong> ver o PDF oficial, Lista 5, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> tubo fechado unicelular de parede fina, espessura constante (hipóteses da aula 13 p.19). Linha média: quadrado de lado $b_m = 50 - t$, área encerrada $A_m = (50 - t)^2$, perímetro $L_m = 4(50 - t)$. Dois critérios; vale o que exigir a <em>maior</em> espessura.</p>
+    <div class="math-box">$$\tau = \frac{T}{2\,t\,A_m} \le 20\ \text{MPa}\ \Rightarrow\ t \ge 3{,}46\ \text{mm}\qquad \frac{d\phi}{dx} = \frac{T\,L_m}{4\,G\,A_m^2\,t} \le 0{,}025\ \text{rad/m} = 2{,}5\times10^{-5}\ \text{rad/mm}\ \Rightarrow\ t \ge 4{,}57\ \text{mm}$$</div>
+    <p>As duas fórmulas vêm da aula 13 (p.21–25). O equilíbrio de um elemento da parede dá <strong>fluxo de cisalhamento constante</strong> $f = \tau\,t$. O torque que esse fluxo produz é $T = 2fA_m$ (p.22), daí $\tau = T/(2A_m t)$. O ângulo sai do princípio do trabalho e energia: $\frac{T\phi}{2} = U^* = \frac{T^2L}{8GA_m^2}\oint\frac{ds}{t}$ ⇒ $\phi = \frac{TL}{4GA_m^2}\oint\frac{ds}{t}$ (p.25). Na forma do professor, $\phi = \frac{TL}{GI_t}$ com $I_t = \frac{4A_m^2}{\oint ds/t}$ (para $t$ constante, $I_t = 4A_m^2t/L_m$). <span class="tag tag-mem">⚠</span> "Não confundir $L$ com $L_m$, nem $A_m$ com $A$!!" (p.25).</p>
+    <div class="answer"><strong>Resposta:</strong> $t_{mín} = 4{,}57$ mm (governa a taxa de torção). <span class="badge badge-ok">bate com o Gere (3.10-11)</span></div>
+    <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar a dimensão externa (50 mm) em $A_m$: é a linha <strong>média</strong>, $50 - t$. Com 50 mm dá $t$ subestimado.</li>
+    <li><span class="tag tag-mem">⚠ armadilha</span> Taxa em rad/m com $T$ em N·mm: converta para rad/mm.</li></ul>
+  </article>
+
+  <article class="ex" id="l5-ex8">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 8 (Gere 3.10-13) · ver Pivô 3</div>
+      <h3 id="l5-ex8-h" data-nav="L5 ex.8 · tubo afilado">Tubo afilado de parede fina: dedução de $\phi$</h3></div></div>
+    <div class="ex-topics"><span class="chip">W3</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.4)</span>
+      3.10-13. Um longo tubo afilado AB, de paredes finas e seção transversal circular, está submetido a um torque $T$. O tubo tem comprimento $L$ e espessura de parede $t$ (constante). Os diâmetros das linhas médias das seções transversais nas extremidades A e B são $d_A$ e $d_B$ respectivamente. Deduza a fórmula a seguir para o ângulo de torção do tubo:
+      $$\phi = \frac{2TL}{\pi G t}\left(\frac{d_A + d_B}{(d_A d_B)^2}\right)$$</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 8):</strong> ver o PDF oficial, Lista 5, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> torque interno constante $T$, seção variável (conicidade suave, hipótese da aula 13 p.11). Diâmetro médio linear em $x$: $d(x) = d_A + (d_B - d_A)\frac{x}{L}$. Tubo circular de parede fina: $I_p \approx 2\pi r^3 t = \frac{\pi d^3 t}{4}$. Pelo princípio do trabalho e energia (<span class="tag tag-form">📄 Aula 13 p.14</span>):</p>
+    <div class="math-box">$$\frac{T\phi}{2} = U^* = \int_0^L\frac{T^2}{2G\,\frac{\pi d(x)^3t}{4}}dx\ \Rightarrow\ \phi = \frac{4T}{\pi G t}\int_0^L\frac{dx}{d(x)^3} = \frac{4T}{\pi G t}\cdot\frac{L}{d_B - d_A}\cdot\frac12\left(\frac1{d_A^2} - \frac1{d_B^2}\right)$$
+    $$\phi = \frac{2TL}{\pi G t}\cdot\frac{d_B^2 - d_A^2}{(d_B - d_A)\,d_A^2d_B^2} = \frac{2TL}{\pi G t}\cdot\frac{d_A + d_B}{(d_A d_B)^2}\ \checkmark$$</div>
+    <p>A integral usa a mudança $\eta = d(x)$, $dx = \frac{L}{d_B - d_A}d\eta$, igual ao exemplo 3 da aula 12 (pilar tronco-cônico).</p>
+    <div class="answer"><strong>Resultado:</strong> fórmula demonstrada; conferida simbolicamente em sympy (<code>calc_l5.py</code>). Caso-limite: com $d_A = d_B = d$, $\phi = \frac{4TL}{\pi G t d^3} = \frac{TL}{GI_p}$ ✓.</div>
+  </article>
+</section>
+
+<section class="chapter" id="cap6">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 6</span>
+    <h2 id="cap6-h" data-nav="6 · Exercícios dos slides">Exercícios dos slides: flexão, Crotti-Engesser e carga fictícia</h2>
+    <p class="section-desc">A Lista 5 só cobre tração e torção. Flexão, estruturas espaciais, Crotti-Engesser com várias cargas e carga fictícia são ensinados aqui, pelos exercícios com resposta da aula 14 (p.37–40) e pelos exemplos da aula 15 (p.10–24). Todas as respostas foram refeitas em <code>_build_p2/calc_slides.py</code> e batem.</p></div>
+
+  <h3 class="sub" id="s-matriz" data-nav="Matriz de cobertura">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">W4</span> energia na flexão · <span class="chip">W3</span> torção · <span class="chip">E2</span> estrutura espacial · <span class="chip">C1</span> Crotti-Engesser · <span class="chip">C2</span> carga fictícia · <span class="chip">A4</span> o que desprezar</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Exercício</th><th>W4</th><th>W3</th><th>E2</th><th>C1</th><th>C2</th><th>A4</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>Aula 14, exerc. 1 (viga + cabo)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>Pivô 6</td></tr>
+    <tr class="pv"><td>Aula 14, exerc. 2 (estrutura em L)</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td>Pivô 7</td></tr>
+    <tr class="pv"><td>Aula 15, ex. 1 (suporte, 2 cargas)</td><td></td><td></td><td></td><td class="x">●</td><td></td><td></td><td>Pivô 8</td></tr>
+    <tr class="pv"><td>Aula 15, ex. 3 (balanço com $q$)</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td class="x">◐</td><td>Pivô 9</td></tr>
+    <tr><td>Aula 14, ex. 2 (cortante no balanço)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 6</td></tr>
+    <tr><td>Aula 14, exerc. 3 (arco)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 7</td></tr>
+    <tr><td>Aula 14, exerc. 4 (mola de torção)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 6</td></tr>
+  </tbody></table></div>
+
+  <!-- ======================= PIVÔ 6 ======================= -->
+  <article class="ex pivo" id="s14-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 1 (p.37) · Pivô 6</div>
+      <h3 id="s14-ex1-h" data-nav="A14 exerc.1 · viga + cabo" data-pivo>Viga apoiada em A e presa a um cabo em C</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W1</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.37)</span>
+      1) A viga ABC possui rigidez flexional $EI$ e está simplesmente apoiada em A e presa a um cabo de rigidez axial $(EA)_c$ e comprimento $L$ em C. A viga está submetida a uma força concentrada de magnitude P aplicada em B. Determine o deslocamento vertical dos pontos B e C em função dos parâmetros fornecidos.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 1):</strong> ver o PDF oficial, Slides da aula 14, p. 37 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Viga isostática (apoio em A + cabo em C) sob flexão simples; o cabo só tem força normal. Uma carga ($P$ em B), e pede-se o deslocamento de B (correspondente, então P.T.E. serve) e de C (não correspondente, então não serve).</p>
+      <div class="callout concept"><span class="co-t">Conceito: energia na flexão e a regra do "esforço único"</span>
+        <p>Na flexão, $\sigma_x = -M_zy/I_z$ e $u^* = \sigma^2/2E$. Integrando $y^2$ na seção aparece $I_z$ (aula 14 p.10): $U^* = \int\frac{M^2}{2EI}ds$. A cortante também guarda energia, mas numa viga esbelta ela é da ordem de $(h/L)^2$ da de flexão e se despreza. O <strong>cabo</strong> é diferente: ele só tem força normal, é o <em>único</em> esforço dele. Desprezar essa energia significaria tratar o cabo como rígido (aula 14 p.32). Por isso a resposta tem a parcela $L/(EA)_c$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Rigidez da viga</td><td>$EI$</td><td>enunciado/figura</td></tr><tr><td>Rigidez e comprimento do cabo</td><td>$(EA)_c$, $L$</td><td>enunciado/figura</td></tr>
+      <tr><td>Vãos</td><td>$AB = a$, $BC = b$</td><td>figura (cotas)</td></tr><tr><td>Carga</td><td>$P$ ↓ em B</td><td>figura</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{v,B}$ pelo P.T.E. ($P\delta_{v,B}/2 = U^*$). $\delta_{v,C}$ <strong>não</strong> sai do P.T.E. (não há carga em C). Ele sai da compatibilidade (C desce o quanto o cabo alonga) ou de Crotti-Engesser com força fictícia em C.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 14 p.10 e p.31</span> $U^* = \int_{viga}\frac{M^2}{2EI}ds + \frac{N_c^2L}{2(EA)_c}$ (cortante da viga desprezada, aula 14 p.28/p.32).</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4>
+      <p>Reações por momento em A e em C: $N_c = \frac{Pa}{a+b}$ (tração no cabo), $R_A = \frac{Pb}{a+b}$.</p>
+      <ul><li>Trecho AB, $x$ a partir de A: $M = R_Ax$ (de 0 a $\frac{Pab}{a+b}$).</li>
+      <li>Trecho CB, $x'$ a partir de C: $M = N_cx'$ (de 0 a $\frac{Pab}{a+b}$). O diagrama é triangular com pico em B.</li></ul></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^* = \frac{N_c^2L}{2(EA)_c} + \int_0^a\frac{(R_Ax)^2}{2EI}dx + \int_0^b\frac{(N_cx')^2}{2EI}dx' = \frac{P^2a^2L}{2(a+b)^2(EA)_c} + \frac{P^2a^2b^2(a+b)}{6EI(a+b)^2}$$
+      $$\frac{P\,\delta_{v,B}}{2} = U^*\ \Rightarrow\ \delta_{v,B} = \frac{Pa^2}{(a+b)^2}\left[\frac{L}{(EA)_c} + \frac{b^2(a+b)}{3EI}\right]$$
+      $$\delta_{v,C} = \frac{N_cL}{(EA)_c} = \frac{PaL}{(EA)_c(a+b)}\quad\text{(alongamento do cabo)}$$</div>
+      <p>Conferência da parcela de flexão: com $a = b = \ell/2$ e cabo rígido, $\delta_{v,B} = \frac{P\ell^3}{48EI}$, a viga biapoiada clássica ✓.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{v,B} = \frac{Pa^2}{(a+b)^2}\left[\frac{L}{(EA)_c} + \frac{b^2(a+b)}{3EI}\right]$; $\delta_{v,C} = \frac{PaL}{(EA)_c(a+b)}$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o cabo em $U^*$: sai só a parcela de flexão, como se o cabo fosse uma barra rígida.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Tentar tirar $\delta_{v,C}$ de $W = U^*$: $W$ só "enxerga" o deslocamento de B.</li>
+      <li>Leitura física: $\delta_{v,B}$ = parcela de corpo rígido (a viga gira em A porque o cabo cede: $\frac{a}{a+b}\delta_{v,C}$) + flecha de flexão.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 7 ======================= -->
+  <article class="ex pivo" id="s14-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 2 (p.38) · Pivô 7</div>
+      <h3 id="s14-ex2-h" data-nav="A14 exerc.2 · estrutura em L" data-pivo>Estrutura espacial em L: flexão + torção + cortante</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W3</span><span class="chip">E2</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.38)</span>
+      2) A estrutura ABC é formada pelas barras AB e BC, de seção transversal circular cheia e diâmetro $d$. O material das barras é elástico-linear, com módulo de elasticidade $E$ e coeficiente de Poisson ν dados. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em C, determine o deslocamento vertical em C pelo Princípio do Trabalho e da Energia.
+      <br>Resp. (slide): $\delta_{v,C} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA} = \frac{PL^3}{EI}\left[\frac38 + \frac{(1+\nu)}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 2):</strong> ver o PDF oficial, Slides da aula 14, p. 38 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A) no plano horizontal, carga vertical. Em BC há flexão e cortante; em AB há flexão, cortante <strong>e torção</strong>. Carga única, deslocamento correspondente: P.T.E.</p>
+      <div class="callout concept"><span class="co-t">Conceito: como achar $M$ e $T$ numa estrutura 3D</span>
+        <p>Corte a barra, olhe para a parte que vai até a carga e calcule o momento de $P$ em relação ao centro da seção: $\vec M = \vec r\times\vec P$. A componente de $\vec M$ <em>ao longo do eixo da barra</em> é o torque $T$, e a componente <em>perpendicular</em> é o fletor $M$. Em AB, a força em C tem braço $s$ (ao longo de AB) e braço $L/2$ (ao longo de BC, perpendicular a AB). O braço ao longo da própria barra gera flexão ($M = Ps$); o braço perpendicular gera torção ($T = PL/2$, constante). Isso é revisão da aula 2 (Lista 1) aplicada à energia.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>AB (engastada em A)</td><td>comprimento $L$</td><td>figura</td></tr><tr><td>BC ⊥ AB, horizontal</td><td>comprimento $L/2$</td><td>figura</td></tr>
+      <tr><td>Seção circular cheia</td><td>$I = \pi d^4/64$, $I_p = 2I$, $A = \pi d^2/4$, $f_c = 10/9$</td><td>enunciado + geometria</td></tr>
+      <tr><td>Material</td><td>$E$, ν ⇒ $G = E/2(1+\nu)$</td><td>enunciado</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{v,C}$ por $\frac{P\delta}{2} = U^*$, <em>mantendo</em> a cortante para ver quanto ela pesa.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 14 p.31</span> $U^* = \sum\int\left(\frac{M^2}{2EI} + \frac{T^2}{2GI_p} + \frac{f_cV^2}{2GA}\right)ds$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>coordenada</th><th>$M$</th><th>$T$</th><th>$V$</th></tr></thead><tbody>
+      <tr><td>BC</td><td>$s$ a partir de C, $0..L/2$</td><td>$Ps$</td><td>0</td><td>$P$</td></tr>
+      <tr><td>AB</td><td>$s$ a partir de B, $0..L$</td><td>$Ps$</td><td>$PL/2$</td><td>$P$</td></tr></tbody></table></div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^*_M = \frac{P^2(L/2)^3}{6EI} + \frac{P^2L^3}{6EI} = \frac{3P^2L^3}{16EI}\qquad U^*_T = \frac{(PL/2)^2L}{2GI_p} = \frac{P^2L^3}{8GI_p}\qquad U^*_V = \frac{f_cP^2(3L/2)}{2GA}$$
+      $$\delta_{v,C} = \frac{2U^*}{P} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA}$$</div>
+      <p>Adimensionalizando com $I_p = 2I$ e $E/G = 2(1+\nu)$: $\frac{EI}{4GI_p} = \frac{1+\nu}{4}$; com $f_c = 10/9$ e $I/A = d^2/16$: a cortante vale $\frac{5(1+\nu)}{24}\left(\frac dL\right)^2$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,C} = \frac{PL^3}{EI}\left[\frac38 + \frac{1+\nu}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Desprezar a torção "porque é pequena": com ν = 0,3 ela vale 0,325 contra 0,375 da flexão. <strong>Em estrutura espacial a torção sempre entra.</strong></li>
+      <li>Já a cortante, com $d/L = 0{,}05$, vale 0,0007: essa sim é desprezível.</li>
+      <li>Conferência: sem BC ($L/2 \to 0$), sobra $PL^3/3EI$ do balanço ✓.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 8 ======================= -->
+  <article class="ex pivo" id="s15-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 15 · exemplo 1 (p.10–16) · Pivô 8</div>
+      <h3 id="s15-ex1-h" data-nav="A15 ex.1 · suporte com 2 cargas" data-pivo>Suporte ABC com duas cargas: Crotti-Engesser</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (28/09)</span></div></div>
+    <div class="ex-topics"><span class="chip">C1</span><span class="chip">W5</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 15, p.10)</span>
+      O suporte ABC ilustrado na figura sustenta uma carga horizontal $P_1 = 5$ kN e uma carga vertical $P_2 = 20$ kN. Ambas têm área de seção transversal $A$ = 20 cm² e são feitas de aço ($E$ = 200 GPa). a) Determine o deslocamento horizontal e vertical da junta B; b) Verifique que o trabalho complementar é igual à energia complementar.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 15 · ex. 1):</strong> ver o PDF oficial, Slides da aula 15, p. 10 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Treliça de 2 barras, isostática, <strong>duas cargas</strong> no mesmo nó. O P.T.E. daria uma equação com duas incógnitas (limitação 1 da aula 14 p.34). Ferramenta: Crotti-Engesser.</p>
+      <div class="callout concept"><span class="co-t">Conceito: Crotti-Engesser, a derivada da energia complementar</span>
+        <p>Imagine a estrutura já carregada e dê um acréscimo $dP_i$ <em>só</em> a uma carga. O trabalho complementar cresce $dW^* = \delta_i\,dP_i$ (faixa horizontal no gráfico $P_i\times\delta_i$). A energia complementar cresce $dU^* = \frac{\partial U^*}{\partial P_i}dP_i$. Sem dissipação, as duas são iguais ⇒ $\delta_i = \frac{\partial U^*}{\partial P_i}$ (aula 15 p.3–5). A demonstração não usa linearidade do material: por isso o curso trabalha com $U^*$. Com material linear, $U^* = U$ e isso vira o "2º teorema de Castigliano" do Gere.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Barra CB (horizontal)</td><td>$L_2 = L$</td><td>2000 mm</td><td>figura</td></tr>
+      <tr><td>Barra AB (inclinada)</td><td>$L_1 = L/\cos\theta$</td><td>2309 mm</td><td>figura, θ = 30°</td></tr>
+      <tr><td>Área, módulo</td><td>$A$, $E$</td><td>2000 mm², 200 000 MPa</td><td>enunciado</td></tr>
+      <tr><td>Cargas</td><td>$P_1$ →, $P_2$ ↓</td><td>5000 N, 20 000 N</td><td>enunciado</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{H,B} = \partial U^*/\partial P_1$, $\delta_{V,B} = \partial U^*/\partial P_2$, com $P_1$ e $P_2$ <strong>literais e independentes</strong> até o fim.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 15 p.3</span> $\delta_i = \partial U^*/\partial P_i$; <span class="tag tag-form">📄 Aula 12 p.22</span> $U^* = \sum N_i^2L_i/2EA$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos (nó B, tração +)</h4>
+      <div class="math-box">$$N_1\sin\theta = P_2\ \Rightarrow\ N_1 = \frac{P_2}{\sin\theta}\ (\text{AB, tração})\qquad N_2 + N_1\cos\theta = P_1\ \Rightarrow\ N_2 = P_1 - \frac{P_2}{\tan\theta}\ (\text{CB})$$</div>
+      <p>Com os números, $N_2 = 5 - 34{,}6 = -29{,}6$ kN: CB está comprimida.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^* = \frac{N_1^2L_1}{2EA} + \frac{N_2^2L_2}{2EA} = \frac{L}{2EA}\left[\frac{P_2^2}{\sin^2\theta\cos\theta} + \left(P_1 - \frac{P_2}{\tan\theta}\right)^2\right]$$
+      $$\delta_{H,B} = \frac{\partial U^*}{\partial P_1} = \frac{L}{EA}\left(P_1 - \frac{P_2}{\tan\theta}\right) = 5\times10^{-6}(5000 - 34\,641) = -0{,}148\ \text{mm}$$
+      $$\delta_{V,B} = \frac{\partial U^*}{\partial P_2} = \frac{L}{EA}\left[-\frac{P_1}{\tan\theta} + P_2\frac{1 + \cos^3\theta}{\sin^2\theta\cos\theta}\right] = 5\times10^{-6}(-8660 + 152\,376) = 0{,}719\ \text{mm}$$</div>
+      <p>(b) $W^* = \frac{P_1\delta_1}{2} + \frac{P_2\delta_2}{2} = U^*$, identidade conferida simbolicamente. Os coeficientes de $P_j$ em $\delta_i$ formam a <strong>matriz de flexibilidade</strong>, que é simétrica (o efeito de $P_1$ em $\delta_2$ é igual ao de $P_2$ em $\delta_1$: $-\frac{L}{EA}\cot\theta$). A inversa dela é a matriz de rigidez do slide p.16: $k_{11} = \frac{EA}{L}(1 + \cos^3\theta)$, $k_{12} = \frac{EA}{L}\sin\theta\cos^2\theta$, $k_{22} = \frac{EA}{L}\sin^2\theta\cos\theta$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{H,B} \approx -0{,}15$ mm (B vai para a <em>esquerda</em>, contra $P_1$); $\delta_{V,B} \approx 0{,}72$ mm (para baixo); $W^* = U^*$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Substituir os números antes de derivar: $U^*$ vira um número e não há o que derivar. Literal até o fim.</li>
+      <li>Sinal negativo não é erro: a barra CB comprimida encurta e puxa B para a esquerda mais do que $P_1$ empurra para a direita.</li>
+      <li>Ordem de grandeza: $\sigma = N/A \approx 20$ MPa ⇒ $\varepsilon \approx 10^{-4}$ ⇒ décimos de mm em 2 m ✓.</li></ul></div>
+  </article>
+
+  <!-- ======================= PIVÔ 9 ======================= -->
+  <article class="ex pivo" id="s15-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 15 · exemplo 3 (p.19–24) · Pivô 9</div>
+      <h3 id="s15-ex3-h" data-nav="A15 ex.3 · balanço com q" data-pivo>Balanço com carga distribuída: criar a força e o binário</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (28/09)</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 15, p.19)</span>
+      Determine o deslocamento vertical e a rotação da seção B da viga engastada-livre AB indicada na figura. Despreze a parcela da energia complementar devida às forças cortantes no cálculo. São dados: $q, L, EI$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 15 · ex. 3):</strong> ver o PDF oficial, Slides da aula 15, p. 19 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Balanço isostático sob carga distribuída. Duas limitações do P.T.E. ao mesmo tempo: carga distribuída e deslocamentos sem esforço correspondente. Ferramenta: Crotti-Engesser com esforços <strong>criados</strong> em B.</p>
+      <div class="callout concept"><span class="co-t">Conceito: carga fictícia ("é necessário criá-los")</span>
+        <p>Crotti-Engesser só dá deslocamentos que têm uma carga correspondente. Se não há força vertical em B, <em>crie</em> uma ($P$); se não há binário, crie $M_B$ (aula 15 p.20). Escreva $U^*(q, P, M_B)$, derive e, <strong>só depois</strong>, faça $P = M_B = 0$. A derivada guarda a informação "quanto B se move por unidade de carga em B", que é justamente o deslocamento. A apostila compara com a <em>sopa de pedra</em>: sem a pedra não há sopa, mas no fim ela não muda o sabor.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$q$ (uniforme, ↓), $L$, $EI$ constantes; cortante desprezada (mandado pelo enunciado). Criados: $P$ ↓ e $M_B$ horário em B.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{V,B} = \left(\frac{\partial U^*}{\partial P}\right)_{P=M_B=0}$ e $\theta_B = \left(\frac{\partial U^*}{\partial M_B}\right)_{P=M_B=0}$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\delta_{V,B} = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial P}ds\qquad\theta_B = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial M_B}ds\qquad\text{(aula 15 p.22–23)}$$</div>
+      <p>A regra da cadeia sob a integral evita elevar ao quadrado e depois derivar: $\frac{\partial}{\partial P}\frac{M^2}{2EI} = \frac{M}{EI}\frac{\partial M}{\partial P}$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Com $s$ a partir de B (ponta livre):</p>
+      <div class="math-box">$$M_z(s) = -\frac{qs^2}{2} - Ps - M_B\qquad \frac{\partial M_z}{\partial P} = -s\qquad \frac{\partial M_z}{\partial M_B} = -1$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\delta_{V,B} = \frac1{EI}\int_0^L\left(\frac{qs^2}{2} + Ps + M_B\right)s\,ds = \frac1{EI}\left(\frac{qL^4}{8} + \frac{PL^3}{3} + \frac{M_BL^2}{2}\right)\ \xrightarrow{P = M_B = 0}\ \frac{qL^4}{8EI}$$
+      $$\theta_B = \frac1{EI}\int_0^L\left(\frac{qs^2}{2} + Ps + M_B\right)ds = \frac1{EI}\left(\frac{qL^3}{6} + \frac{PL^2}{2} + M_BL\right)\ \xrightarrow{P = M_B = 0}\ \frac{qL^3}{6EI}$$</div>
+      <p>De brinde, as parcelas com $P$ e $M_B$ dão os casos clássicos: $PL^3/3EI$, $PL^2/2EI$, $ML^2/2EI$, $ML/EI$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{V,B} = \frac{qL^4}{8EI}$ (para baixo); $\theta_B = \frac{qL^3}{6EI}$ (horário). Sinais positivos = mesmo sentido arbitrado para $P$ e $M_B$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Zerar $P$ e $M_B$ <em>antes</em> de derivar: a derivada some junto. Pode zerar depois de derivar e antes de integrar, nunca antes de derivar.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o sinal de $\partial M/\partial P$: com a convenção do slide os dois sinais negativos se cancelam; troque a convenção e confira que o resultado final não muda.</li></ul></div>
+  </article>
+
+  <h3 class="sub" id="s-demais" data-nav="Slides · demais exercícios">Demais exercícios dos slides</h3>
+
+  <article class="ex" id="s14-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exemplo 2 (p.25–28) · ver Pivô 6</div>
+      <h3 id="s14-ex5-h" data-nav="A14 ex.2 · cortante no balanço">Balanço com $P$: quanto pesa a cortante</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.25)</span>
+      A barra AB, engastada em A e livre em B, está submetida a uma carga concentrada $P$ na extremidade B. A barra possui seção transversal retangular ($b\times h$). Determine o deslocamento vertical $\delta_{v,B}$ do ponto B pelo Princípio do Trabalho e da Energia. (Dados: $P, L, E, b, h$, $f = 6/5$, $\nu = 0{,}3$.)</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 5):</strong> ver o PDF oficial, Slides da aula 14, p. 25 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> com $s$ a partir de B, $V_y = P$ e $M_z = -Ps$. $U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \int_0^L\frac{fP^2}{2GA}ds = \frac{P^2L^3}{6EI} + \frac{fP^2L}{2GA}$.</p>
+    <div class="math-box">$$\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA} = \frac{PL^3}{3EI}\left[1 + \eta\right],\qquad \eta = \frac{3fEI}{GAL^2} = f(1+\nu)\frac12\left(\frac hL\right)^2 = 0{,}78\left(\frac hL\right)^2$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA}$; com $h/L = 0{,}1$ a cortante acrescenta só 0,78%. <span class="badge badge-ok">bate com o slide</span> É a justificativa do default "desprezar a cortante em vigas".</div>
+  </article>
+
+  <article class="ex" id="s14-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 3 (p.39) · ver Pivô 7</div>
+      <h3 id="s14-ex3-h" data-nav="A14 exerc.3 · arco semicircular">Arco semicircular engastado</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.39)</span>
+      3) O eixo central do arco AB possui raio de curvatura R e sua seção transversal é quadrada de lado $a$. O material das barras é elástico-linear, com módulo de elasticidade $E$. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em B, determine o deslocamento vertical neste ponto em função dos parâmetros fornecidos usando o Princípio do Trabalho e da Energia. <em>Obs</em>: Considere também as parcelas devidas à força normal e à força cortante no cálculo da energia complementar e verifique em quais condições tais parcelas podem ser desprezadas.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 3):</strong> ver o PDF oficial, Slides da aula 14, p. 39 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> coordenada angular $\theta$ medida a partir de B, $ds = R\,d\theta$, $\theta \in [0, \pi]$. Na seção $\theta$, o braço horizontal de $P$ é $R(1 - \cos\theta)$ ⇒ $M = PR(1-\cos\theta)$; decompondo $P$ na tangente e na normal ao arco: $N = P\sin\theta$, $V = P\cos\theta$ (sinais não importam, tudo ao quadrado).</p>
+    <div class="math-box">$$U^* = \frac{P^2R^3}{2EI}\int_0^\pi(1-\cos\theta)^2d\theta + \frac{P^2R}{2EA}\int_0^\pi\sin^2\theta\,d\theta + \frac{f_cP^2R}{2GA}\int_0^\pi\cos^2\theta\,d\theta = \frac{3\pi P^2R^3}{4EI} + \frac{\pi P^2R}{4EA} + \frac{\pi f_cP^2R}{4GA}$$
+    $$\delta_{v,B} = \frac{3\pi PR^3}{2EI}\left[1 + \frac1{36}\left(\frac aR\right)^2 + \frac{1+\nu}{15}\left(\frac aR\right)^2\right]\qquad (I = a^4/12,\ A = a^2,\ f_c = 6/5)$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} \cong \frac{3\pi PR^3}{2EI}$; as parcelas de $N$ e $V$ são de ordem $(a/R)^2$, desprezíveis em arco esbelto ($a \ll R$). <span class="badge badge-ok">bate com o slide</span></div>
+  </article>
+
+  <article class="ex" id="s14-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 4 (p.40) · ver Pivô 6</div>
+      <h3 id="s14-ex4-h" data-nav="A14 exerc.4 · mola de torção">Viga com mola de torção no apoio</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.40)</span>
+      4) A viga AB possui comprimento $L$ e rigidez flexional $EI$ (constante). A extremidade A está conectada a uma mola de torção (de comportamento linear) com constante $k_t$ (dada). Considerando que uma força concentrada de intensidade $P$ seja aplicada na extremidade livre B, determine o deslocamento vertical neste ponto pelo Princípio do Trabalho e da Energia, em função dos parâmetros fornecidos. Considere válida a hipótese de linearidade geométrica.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 4):</strong> ver o PDF oficial, Slides da aula 14, p. 40 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> a mola de torção é um elemento de esforço único, então a energia dela entra (A4): $U^*_{mola} = \frac{M_A^2}{2k_t}$ com $M_A = PL$. Na viga, $M = Ps$ a partir de B.</p>
+    <div class="math-box">$$U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \frac{(PL)^2}{2k_t}\ \Rightarrow\ \delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t} = \frac{PL^3}{3EI}\left(1 + \frac{3EI}{k_tL}\right)$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t}$. <span class="badge badge-ok">bate com o slide</span> Leitura: a mola deixa a viga girar $\theta_A = PL/k_t$ como corpo rígido, e B desce $L\theta_A$ a mais.</div>
+  </article>
+</section>
+
+<section class="chapter" id="cap7">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 7</span>
+    <h2 id="cap7-h" data-nav="7 · Provas antigas por assunto">Provas antigas por assunto (apostila 03, cap. 12)</h2>
+    <p class="section-desc">As 22 questões resolvidas da apostila do Prof. Clóvis (p.49–104) são provas antigas da disciplina, de autoria dele e do Prof. Ramos, sem ano indicado. As questões 1 a 13 são do escopo da P2; as de 14 a 22 usam simetria (aulas 23–25) e ficam para a P3. As 13 da P2 e os exemplos 8 e 9 foram refeitos em <code>_build_p2/calc_ap3.py</code>, e todos batem.</p></div>
+
+  <h3 class="sub" id="pa-panorama" data-nav="O que cai e como cai">O que cai e como cai</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Bloco</th><th>Questões (cap. 12)</th><th>Frequência</th><th>O que pedem</th><th>Onde aprender</th></tr></thead><tbody>
+    <tr><td>A · P.T.E. em arames e pórticos 3D</td><td>1, 2, 3, 7</td><td><span class="bar" style="width:28px"></span> 4</td><td>diagramas N, V, M, T; $U^*$ por parcela; um deslocamento ou giro sob a carga</td><td>Pivô 7</td></tr>
+    <tr><td>B · P.T.E. com cabo ou tirante</td><td>4, 5</td><td><span class="bar" style="width:14px"></span> 2</td><td>viga + elemento de esforço único; às vezes valor numérico</td><td>Pivô 6</td></tr>
+    <tr><td>C · 1º Castigliano / cinemática</td><td>6</td><td><span class="bar" style="width:7px"></span> 1</td><td>barra rígida sobre hastes (hiperestática, $g = 1$)</td><td>Pivô 10</td></tr>
+    <tr><td>D · Crotti-Engesser + carga fictícia</td><td>8, 9, 10, 11, 12</td><td><span class="bar" style="width:35px"></span> 5</td><td>rotações, deslocamentos onde não há carga, deslocamento horizontal, rotação dos dois lados de uma rótula</td><td>Pivôs 9, 11 e 12</td></tr>
+    <tr><td>E · Hiperestática (energia complementar mínima)</td><td>13 (+ exemplo 9)</td><td><span class="bar" style="width:7px"></span> 1</td><td>reação redundante e depois um giro</td><td>Pivô 13</td></tr>
+    <tr><td>(P3) · Simetria + hiperestática</td><td>14 a 22</td><td><span class="bar" style="width:63px"></span> 9</td><td>biengastadas, pórticos, anéis, grelhas</td><td>fica para a P3</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Leitura do panorama</span>
+    <p>(1) <strong>Quase toda questão pede os esforços internos primeiro</strong>, às vezes com os diagramas desenhados (itens "a"). A energia vem depois, e é aí que o ponto se perde se o $M(s)$ estiver errado. (2) <strong>Estruturas espaciais</strong> (arame dobrado, grelha) aparecem em 5 das 13, sempre com flexão + torção e com um valor dado de $GI_P/EI$ ($2/3$, $4/5$, $1/2$). (3) A carga fictícia aparece em 5 das 13; é o assunto mais cobrado. (4) Hiperestáticas "puras" são poucas antes da simetria; as da P3 usam as mesmas ferramentas, então este capítulo já treina metade do trabalho delas.</p></div>
+
+  <!-- ============ PIVÔ 10 ============ -->
+  <article class="ex pivo" id="pa-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 6 (p.58) · Pivô 10</div>
+      <h3 id="pa-ex6-h" data-nav="Prova ex.6 · barra rígida em hastes" data-pivo>Barra rígida apoiada em B e presa a duas hastes: energia em deslocamentos</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
+    <div class="ex-topics"><span class="chip">C3</span><span class="chip">W2</span><span class="chip">H1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.58)</span>
+      A estrutura abaixo é formada por duas hastes verticais, de mesma rigidez axial EA, e uma barra horizontal rígida (indeformável) ABCD. As hastes possuem comprimentos l e 2l, conforme indicado na figura, e estão articuladas à barra horizontal, que se encontra simplesmente apoiada em B. Considerando que uma única força vertical de intensidade P seja aplicada em C, determine o ângulo de rotação ($\theta$) da barra horizontal, utilizando, entre outras relações, o Princípio do Trabalho e Energia. Admita que o material das hastes tenha comportamento elástico-linear e considere a hipótese de linearidade geométrica (pequenas deformações e pequenos deslocamentos).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 6):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 58 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Três forças verticais desconhecidas (haste em A, haste em D, apoio B) e só duas equações úteis (forças verticais e momentos): <strong>hiperestática, $g = 1$</strong>. Mas a <em>cinemática</em> é trivial: a barra rígida só pode girar em torno de B, um único parâmetro $\theta$. Nesse caso, escrever a energia em função do deslocamento é muito mais rápido.</p>
+      <div class="callout concept"><span class="co-t">Conceito: energia de deformação $U$ × energia complementar $U^*$</span>
+        <p>$U^*$ se escreve com os <strong>esforços</strong>, e isso exige equilíbrio (que aqui não basta). $U$ se escreve com os <strong>deslocamentos</strong>, e isso exige compatibilidade (que aqui é imediata). Numa mola ou haste, $U = \frac{k\Delta^2}{2}$ com $k = EA/\ell$. A apostila comenta que este é "um dos raros problemas em que é mais imediato usar a energia de deformação". Formalmente é o <strong>1º teorema de Castigliano</strong> $P_i = \partial U/\partial\delta_i$ (aula 15 p.6).</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Espaçamento A–B–C–D</td><td>$a$ cada</td><td>figura</td></tr>
+      <tr><td>Haste em A / em D</td><td>comprimento $l$ / $2l$, rigidez axial $EA$</td><td>figura</td></tr>
+      <tr><td>Apoio em B; carga $P$ ↓ em C</td><td>—</td><td>figura</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\theta$ via $W = U(\theta)$ (uma carga só, então o P.T.E. vale), ou via 1º Castigliano.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.5, p.27</span> $W = \frac{P\delta_C}{2}$; $U = \sum\frac{k_i\Delta_i^2}{2}$, $k_i = \frac{EA}{\ell_i}$. <span class="tag tag-form">📄 Aula 15 p.6</span> $P = \partial U/\partial\delta_C$.</p></div>
+    <div class="step" data-n="5"><h4>Cinemática (substitui "esforços internos")</h4>
+      <p>Rotação horária $\theta$ em torno de B: $\delta_A = \theta a$ (A <strong>sobe</strong>, haste de A comprimida), $\delta_C = \theta a$ (↓), $\delta_D = 2\theta a$ (↓, haste de D tracionada).</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U = \frac{EA}{l}\frac{(\theta a)^2}{2} + \frac{EA}{2l}\frac{(2\theta a)^2}{2} = \frac{3EA}{2l}\theta^2a^2\qquad W = \frac{P\,\theta a}{2}$$
+      $$W = U\ \Rightarrow\ \theta = \frac13\frac{P}{EA}\frac{l}{a}$$</div>
+      <p>Pelo 1º Castigliano: com $\delta_C = \theta a$, $U = \frac{3EA}{2l}\delta_C^2$ ⇒ $P = \frac{\partial U}{\partial\delta_C} = \frac{3EA}{l}\delta_C$, o mesmo resultado. Forças nas hastes: $\frac{EA}{l}\theta a = \frac P3$ (compressão em A: empurra a barra para baixo) e $\frac{EA}{2l}2\theta a = \frac P3$ (tração em D: puxa para cima). Conferência: momentos em B, $\frac P3a + \frac P3(2a) = Pa$ ✓; forças verticais, $R_B = P$ ✓.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $\theta = \dfrac{Pl}{3EAa}$ (horário). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> A haste de D tem comprimento $2l$ ⇒ rigidez $EA/2l$, metade, mas alonga o dobro. A energia dela é o <em>dobro</em> da de A.</li>
+      <li>Dimensão: $P l/(EA\,a)$ é adimensional (rad) ✓.</li></ul></div>
+  </article>
+
+  <!-- ============ PIVÔ 11 ============ -->
+  <article class="ex pivo" id="pa-ex10">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 10 (p.66) · Pivô 11</div>
+      <h3 id="pa-ex10-h" data-nav="Prova ex.10 · barra em L 3D, 3 incógnitas" data-pivo>Barra dobrada em L no plano horizontal: deslocamento e duas rotações</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">E2</span><span class="chip">W3</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.66)</span>
+      A estrutura ABC da figura está contida em um plano horizontal. Ela é formada por uma barra de seção circular cheia, de raio R, dobrada em ângulo de 90°, e engastada no ponto A. A estrutura está submetida apenas à força vertical P aplicada ao ponto C. É dada a rigidez flexional da viga $EI$. Pedem-se:
+      <ol type="a"><li>o deslocamento vertical do ponto C;</li><li>a rotação do ponto C em torno da direção x;</li><li>a rotação do ponto C em torno da direção y.</li></ol>
+      Notas: 1) Desprezar a contribuição das forças cortantes à energia complementar. 2) Usar $GI_P = \frac45EI$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 10):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 67 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A). AB (ao longo de $y$) e BC (ao longo de $x$), cada um com comprimento $L$. Três perguntas: (a) sai pelo P.T.E. ou por Crotti-Engesser; (b) e (c) são <strong>rotações sem binário correspondente</strong>, então é preciso criar dois binários fictícios.</p>
+      <div class="callout concept"><span class="co-t">Conceito: o binário fictício num problema 3D flete uma barra e torce a outra</span>
+        <p>Um binário $\bar M$ em C com vetor ao longo de $y$ é <em>perpendicular</em> a BC (então flete BC) e <em>paralelo</em> a AB (então torce AB). Um binário $\bar T$ com vetor ao longo de $x$ faz o contrário: torce BC e flete AB. Por isso a tabela de derivadas é o coração da questão: cada esforço interno, em cada trecho, derivado em relação a cada carga.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$L$ em cada trecho; $EI$ dado; $GI_P = \frac45EI$ ⇒ $\frac{1}{GI_P} = \frac{5}{4EI}$; cortante desprezada (nota 1).</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_C = \partial U^*/\partial P$; $\phi_x = (\partial U^*/\partial\bar T)_0$; $\theta_y = (\partial U^*/\partial\bar M)_0$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\delta_i = \sum_{\text{trechos}}\left[\int\frac{M}{EI}\frac{\partial M}{\partial P_i}dx + \int\frac{T}{GI_P}\frac{\partial T}{\partial P_i}dx\right]\qquad\text{(aula 15 p.22; apostila §9.4)}$$</div></div>
+    <div class="step" data-n="5"><h4>Esforços internos (1 = CB, $x$ a partir de C; 2 = BA, $x$ a partir de B)</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Esforço</th><th>$\partial/\partial P$</th><th>$\partial/\partial\bar M$</th><th>$\partial/\partial\bar T$</th></tr></thead><tbody>
+        <tr><td>$M_1 = -(\bar M + Px)$</td><td>$-x$</td><td>$-1$</td><td>$0$</td></tr>
+        <tr><td>$M_2 = \bar T - Px$</td><td>$-x$</td><td>$0$</td><td>$1$</td></tr>
+        <tr><td>$T_1 = \bar T$</td><td>$0$</td><td>$0$</td><td>$1$</td></tr>
+        <tr><td>$T_2 = \bar M + PL$</td><td>$L$</td><td>$1$</td><td>$0$</td></tr></tbody></table></div>
+      <p>Em BA, o braço de $P$ ao longo da própria barra dá flexão ($Px$), e o braço $L$ (comprimento de BC, perpendicular) dá torção ($PL$).</p></div>
+    <div class="step" data-n="6"><h4>Cálculo (fictícios = 0 depois de derivar)</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\int_0^LPx^2dx + \frac1{EI}\int_0^LPx^2dx + \frac{5}{4EI}\int_0^L PL\cdot L\,dx = \left(\frac13 + \frac13 + \frac54\right)\frac{PL^3}{EI} = \frac{23}{12}\frac{PL^3}{EI}$$
+      $$\phi_x = \frac1{EI}\int_0^L(-Px)(1)dx = -\frac{PL^2}{2EI}\qquad \theta_y = \frac1{EI}\int_0^L(-Px)(-1)dx + \frac{5}{4EI}\int_0^LPL\,dx = \left(\frac12 + \frac54\right)\frac{PL^2}{EI} = \frac74\frac{PL^2}{EI}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \frac{23}{12}\frac{PL^3}{EI}$ (↓); (b) $\phi_x = -\frac{PL^2}{2EI}$ (sentido oposto ao $\bar T$ adotado); (c) $\theta_y = \frac74\frac{PL^2}{EI}$. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li>Leitura física de (b): a torção de CB é nula, então o giro em torno de $x$ vem só da flexão de AB: é o $PL^2/2EI$ do balanço, com sinal pela convenção.</li>
+      <li>Em (c), o termo $\frac54$ é a torção de AB girando BC como corpo rígido: domina o resultado.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que $\bar M$ também torce AB (entra em $T_2$): perde-se a maior parcela de $\theta_y$.</li></ul></div>
+  </article>
+
+  <!-- ============ PIVÔ 12 ============ -->
+  <article class="ex pivo" id="pa-ex12">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 12 (p.70) · Pivô 12</div>
+      <h3 id="pa-ex12-h" data-nav="Prova ex.12 · pórtico em L com q" data-pivo>Pórtico em L com carga distribuída: três cargas fictícias</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.70)</span>
+      A estrutura ABC da figura é formada por dois segmentos prismáticos em ângulo reto, cada um com comprimento L e rigidez à flexão EI. Ela está engastada em A e submetida a uma carga distribuída uniforme q em seu trecho BC. Pede-se determinar, considerando apenas o efeito da flexão:
+      <ol type="a"><li>o deslocamento vertical do ponto C;</li><li>o deslocamento horizontal do ponto B;</li><li>a rotação da seção C.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 12):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 70 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico plano isostático (coluna AB engastada em A, viga BC em balanço). Só carga distribuída: <em>nenhum</em> dos três deslocamentos tem carga correspondente. Três cargas fictícias, uma para cada pergunta, sempre com a mesma $M(x)$ de base.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>AB = BC = $L$, $EI$ constante, $q$ ↓ em BC. Só flexão (enunciado).</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>(a) força fictícia vertical em C; (b) força fictícia horizontal em B; (c) binário fictício em C. Crotti-Engesser com derivação sob a integral.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 15 p.22</span> $\delta = \sum\int\frac{M}{EI}\frac{\partial M}{\partial P}dx$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos (1 = BC, $x$ a partir de C; 2 = BA, $x$ a partir de B, descendo)</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$M_1$ (BC)</th><th>$\partial M_1$</th><th>$M_2$ (BA)</th><th>$\partial M_2$</th></tr></thead><tbody>
+        <tr><td>(a) $P$ ↓ em C</td><td>$-Px - \frac{qx^2}{2}$</td><td>$-x$</td><td>$-PL - \frac{qL^2}{2}$ (constante)</td><td>$-L$</td></tr>
+        <tr><td>(b) $P$ → em B</td><td>$-\frac{qx^2}{2}$</td><td>$0$</td><td>$-Px - \frac{qL^2}{2}$</td><td>$-x$</td></tr>
+        <tr><td>(c) $M$ em C</td><td>$-M - \frac{qx^2}{2}$</td><td>$-1$</td><td>$-M - \frac{qL^2}{2}$</td><td>$-1$</td></tr></tbody></table></div>
+      <p>Na coluna, a carga da viga ($qL$ a $L/2$ do eixo) dá momento constante $qL^2/2$: a coluna inteira flete uniformemente.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}x\,dx + \int_0^L\frac{qL^2}{2}L\,dx\right] = \frac{qL^4}{8EI} + \frac{qL^4}{2EI} = \frac{5qL^4}{8EI}$$
+      $$\delta_B = \frac1{EI}\int_0^L\frac{qL^2}{2}x\,dx = \frac{qL^4}{4EI}\qquad \theta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}dx + \int_0^L\frac{qL^2}{2}dx\right] = \frac{qL^3}{6EI} + \frac{qL^3}{2EI} = \frac{2qL^3}{3EI}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \frac{5qL^4}{8EI}$ ↓; (b) $\delta_B = \frac{qL^4}{4EI}$ (no sentido da força fictícia); (c) $\theta_C = \frac{2qL^3}{3EI}$ (horário). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li>Decomposição física de (a): $\frac{qL^4}{8EI}$ é o balanço BC sozinho; $\frac{qL^4}{2EI}$ é a coluna girando o topo ($\theta_B = \frac{qL^2}{2}\frac{L}{EI}$) vezes o braço $L$. A coluna manda!</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Em (b) a força fictícia em B não mexe em BC; esquecer isso não muda o resultado, mas gasta tempo.</li></ul></div>
+  </article>
+
+  <!-- ============ PIVÔ 13 ============ -->
+  <article class="ex pivo" id="pa-ex13">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 13 (p.74) + Exemplo 9 (p.33) · Pivô 13</div>
+      <h3 id="pa-ex13-h" data-nav="Prova ex.13 · hiperestática" data-pivo>Viga engastada e apoiada: incógnita hiperestática por energia complementar mínima</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.74)</span>
+      A viga prismática da figura está engastada na extremidade A e simplesmente apoiada na extremidade B. Ela tem comprimento L e rigidez flexional EI dados.<br>
+      Pede-se determinar a rotação $\theta_B$ que acontece na sua extremidade B quando é aplicada a carga uniformemente distribuída q.
+      <br><em>(O Exemplo 9 da apostila, p.33, é a mesma viga espelhada, pedindo "a) Calcular as reações vinculares; b) Calcular a rotação no ponto A".)</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 13):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 74 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Reações: $R_A$, $M_A$ (engaste) e $R_B$ (apoio) são 3 incógnitas; equações úteis no plano sem forças horizontais: 2 ⇒ <strong>$g = 1$</strong>. Não dá para escrever $M(x)$ sem antes descobrir uma reação. O tópico é das aulas 17 e 19; aqui ele é ensinado pela apostila §10 (p.33–36).</p>
+      <div class="callout concept"><span class="co-t">Conceito: princípio da energia complementar mínima</span>
+        <p>Troque o apoio B pela força que ele exerce, $R_B = X$, e trate $X$ como uma carga externa qualquer. A estrutura vira isostática (a <em>isostática fundamental</em>: um balanço com $q$ e $X$). Crotti-Engesser diz que $\partial U^*/\partial X$ é o deslocamento de B na direção de $X$. Mas o apoio real impede esse deslocamento, então:</p>
+        <div class="math-box">$$\frac{\partial U^*}{\partial X} = 0$$</div>
+        <p>Ou seja, de todas as distribuições de esforços em equilíbrio com as cargas, a verdadeira é a que <strong>minimiza</strong> $U^*$ (a segunda derivada $\int(\partial M/\partial X)^2/EI$ é positiva). Com $g$ incógnitas são $g$ equações. Qualquer reação pode ser a incógnita, desde que as outras possam ser escritas em função dela; o Exemplo 9 escolhe a do apoio. Se o apoio tiver recalque conhecido $\Delta$, a equação vira $\partial U^*/\partial X = \Delta$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$L$, $EI$ constantes; $q$ uniforme em todo o vão; só flexão.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>1º: $R_B$ por $\partial U^*/\partial R_B = 0$. 2º: $\theta_B$ por binário fictício $\bar M$ em B, <em>já com $R_B$ conhecido</em>.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{\partial U^*}{\partial R_B} = \frac1{EI}\int_0^LM\frac{\partial M}{\partial R_B}dx = 0\qquad \theta_B = \left(\frac1{EI}\int_0^LM\frac{\partial M}{\partial\bar M}dx\right)_{\bar M = 0}\qquad\text{(apostila §10 p.33)}$$</div></div>
+    <div class="step" data-n="5"><h4>Esforços internos (isostática fundamental, $x$ a partir de B)</h4>
+      <div class="math-box">$$M(x) = \bar M + R_Bx - \frac{qx^2}{2}\qquad\frac{\partial M}{\partial R_B} = x\qquad\frac{\partial M}{\partial\bar M} = 1$$</div>
+      <p>A reação do engaste não aparece porque a coordenada parte de B. Esse é o truque para ter uma única incógnita no $M(x)$.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\int_0^L\left(R_Bx - \frac{qx^2}{2}\right)x\,dx = \frac{R_BL^3}{3} - \frac{qL^4}{8} = 0\ \Rightarrow\ R_B = \frac38qL$$
+      $$\text{Equilíbrio: } R_A = \frac58qL,\quad M_A = R_BL - \frac{qL^2}{2} = -\frac{qL^2}{8}\ (\text{módulo } qL^2/8)$$
+      $$\theta_B = \frac1{EI}\int_0^L\left(\frac38qLx - \frac{qx^2}{2}\right)dx = \frac1{EI}\left(\frac{3qL^3}{16} - \frac{qL^3}{6}\right) = \frac{qL^3}{48EI}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $R_B = \frac38qL$, $R_A = \frac58qL$, $|M_A| = \frac{qL^2}{8}$; $\theta_B = \frac{qL^3}{48EI}$ (sentido do $\bar M$ adotado, anti-horário na figura da apostila). Exemplo 9: $\theta_A = -\frac{qL^3}{48EI}$ (mesma viga espelhada, $\bar M$ no outro sentido). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li>Conferência pelo caso clássico: $R = 3qL/8$ na apoiada-engastada é resultado de tabela ✓.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Tentar calcular $\theta_B$ antes de achar $R_B$: o $M(x)$ ainda teria uma incógnita. A apostila insiste: <strong>reações primeiro</strong>.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Escolher como incógnita uma reação que o equilíbrio já determina (ex.: $V_A$ quando só há uma força vertical possível): não dá equação nova.</li></ul></div>
+    <details class="deep"><summary>Aprofundamento: e se a incógnita fosse o momento do engaste?</summary><div class="deep-body">
+      <p>Com $X = M_A$ (e $x$ a partir de A), $R_A = \frac{qL}{2} + \frac{X}{L}$ e $M(x) = X + R_Ax - \frac{qx^2}{2}$, $\frac{\partial M}{\partial X} = 1 - \frac xL$. Impondo $\int_0^LM(1 - x/L)dx = 0$ sai $X = -qL^2/8$, a mesma resposta. A escolha só muda o trabalho algébrico. Regra prática: escolha a reação cuja coordenada deixe o $M(x)$ mais curto.</p></div></details>
+  </article>
+
+  <h3 class="sub" id="pa-demais" data-nav="Provas · demais questões P2">Demais questões do escopo da P2 (por bloco)</h3>
+
+  <article class="ex" id="pa-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 1 (p.49) · bloco A · ver Pivô 7</div>
+      <h3 id="pa-ex1-h" data-nav="Prova ex.1 · arame 3D (G = E/3)">Arame dobrado engastado em D, força em A</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.49)</span>
+      A estrutura horizontal da figura é formada por um arame de peso desprezível, dobrado em ângulos de $90°$, e está engastada na sua extremidade $D$. Usando o Princípio do Trabalho e da Energia, pede-se calcular o deslocamento vertical sofrido pela extremidade A quando nela é aplicada uma força P, desprezando a energia devida às forças cortantes. São dados: $E$ e $I$. Fazer: $G = E/3$ e $I_P = 2I$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 1):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 49 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> AB = $L$, BC = $L$ (⊥ AB), CD = $2L$ (∥ AB). Por $\vec M = \vec r\times\vec P$: flexão triangular de 0 a $PL$ em AB e em BC; em CD, flexão linear de $-PL$ a $+PL$ (equivale a dois triângulos de comprimento $L$); torção $PL$ constante em BC e CD (3L no total). Com $GI_P = \frac E3\cdot 2I = \frac23EI$:</p>
+    <div class="math-box">$$U^*_M = 4\cdot\frac{P^2L^3}{6EI} = \frac23\frac{P^2L^3}{EI}\qquad U^*_T = \frac{(PL)^2\cdot 3L}{2GI_P} = \frac94\frac{P^2L^3}{EI}\qquad \frac{P\delta_A}{2} = \frac{35}{12}\frac{P^2L^3}{EI}\ \Rightarrow\ \delta_A = \frac{35}{6}\frac{PL^3}{EI}$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_A = \frac{35}{6}\frac{PL^3}{EI}$ ↓. <span class="badge badge-ok">bate com a apostila</span> A torção responde por 77% do deslocamento.</div>
+  </article>
+
+  <article class="ex" id="pa-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 2 (p.50) · bloco A · ver Pivô 7</div>
+      <h3 id="pa-ex2-h" data-nav="Prova ex.2 · arame ABCD, força">Arame ABCD com trecho vertical, força em D</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W1</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.50)</span>
+      A estrutura da figura é formada pelo arame ABCD, de seção circular e comprimento 3L, dobrado em ângulos retos e engastado no ponto A. Em D está aplicada uma força P vertical. São dadas: a rigidez axial EA, a rigidez à flexão EI e a rigidez à torção $GI_p$ do arame. Pede-se:
+      <ol type="a"><li>desenhe os diagramas de esforços solicitantes;</li><li>calcule a energia complementar devida à força P, desprezando o efeito da força cortante;</li><li>usando o Princípio do Trabalho e da Energia, calcule o deslocamento vertical do ponto D devido à força P;</li><li>justifique a importância da energia complementar devida à força normal no cálculo do deslocamento vertical em D.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 2):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 51 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> AB horizontal, BC vertical, CD horizontal ⊥ AB. Esforços: BC comprimida ($N = -P$) e com $M = PL$ constante; AB e CD com flexão triangular até $PL$; AB com torção $T = PL$; cortante $P$ em AB e CD.</p>
+    <div class="math-box">$$U^* = \frac{P^2L}{2EA} + \frac{5P^2L^3}{6EI} + \frac{P^2L^3}{2GI_P}\qquad \delta_D = \frac{PL}{EA} + \frac{5PL^3}{3EI} + \frac{PL^3}{GI_P}$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima; (d) a parcela normal é da ordem de $(R/L)^2$ da de flexão, desprezível. <span class="badge badge-ok">bate com a apostila</span></div>
+    <div class="callout diverge"><span class="co-t">Erro de digitação na apostila (p.53)</span><p>A apostila imprime $\delta = \frac{P^2L}{EA} + \dots$ com $P^2$. O correto (dimensão de comprimento) é $\frac{PL}{EA}$, como acima.</p></div>
+  </article>
+
+  <article class="ex" id="pa-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 3 (p.53) · bloco A · ver Pivô 7</div>
+      <h3 id="pa-ex3-h" data-nav="Prova ex.3 · arame ABCD, binário">O mesmo arame com binário em D</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.53)</span>
+      A estrutura da figura é formada pelo arame ABCD, de seção circular e comprimento 3L, dobrado em ângulos retos e engastado no ponto A. Em D está aplicado um binário de magnitude $M_0$. São dadas: a rigidez à flexão EI e a rigidez à torção $GI_P$ do arame. Pedem-se: a) os diagramas de esforços solicitantes; b) a energia complementar devida a $M_0$; c) a rotação no ponto D devida a $M_0$, usando o Princípio do Trabalho e da Energia.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 3):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 53 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> binário (vetor ∥ AB): flete CD e BC com $M_0$ constante e torce AB com $M_0$. Binário não gera força, então não há cortante nem normal.</p>
+    <div class="math-box">$$U^* = 2\frac{M_0^2L}{2EI} + \frac{M_0^2L}{2GI_P}\qquad \frac{M_0\theta_D}{2} = U^*\ \Rightarrow\ \theta_D = M_0L\left(\frac{2}{EI} + \frac{1}{GI_P}\right)$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\theta_D = M_0L\left(\frac2{EI} + \frac1{GI_P}\right)$. <span class="badge badge-ok">bate com a apostila</span></div>
+  </article>
+
+  <article class="ex" id="pa-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 4 (p.54) · bloco B · ver Pivô 6</div>
+      <h3 id="pa-ex4-h" data-nav="Prova ex.4 · viga + cabo (numérico)">Viga com engaste deslizante e cabo: valor numérico</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W4</span><span class="chip">W1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.54)</span>
+      A estrutura da figura é formada por uma viga uniforme ABC, de comprimento total 2L, seção transversal retangular (b×h), feita com material de módulo de elasticidade E, e é submetida a um único esforço vertical de intensidade P, aplicado no meio do vão. Considerando que a extremidade C esteja ligada a um cabo de rigidez axial (EA)c e comprimento L, pede-se determinar o deslocamento vertical em B (expressão literal e valor numérico), após a aplicação da carga, utilizando o Princípio do Trabalho e da Energia.<br>
+      Dados: P = 2 kN, L = 1,0 m, b = 5 cm, (h/L) = 0,1, E = 200 GPa, (EA)c = 1000 kN</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 4):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 55 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> A é engaste deslizante (impede rotação e translação horizontal, deixa descer). Equilíbrio: cabo com $V_D = P$; $M_A = PL$. Trecho BC: $M = Ps$ (a partir de C); trecho AB: $M = PL$ constante.</p>
+    <div class="math-box">$$U^* = \frac{P^2L^3}{6EI} + \frac{P^2L^3}{2EI} + \frac{P^2L}{2(EA)_c}\ \Rightarrow\ \delta_{v,B} = \frac{4PL^3}{3EI} + \frac{PL}{(EA)_c} = 16\frac{P}{Eb}\left(\frac Lh\right)^3 + \frac{PL}{(EA)_c}$$
+    $$\delta_{v,B} = 3{,}2\ \text{mm (viga)} + 2{,}0\ \text{mm (cabo)} = 5{,}2\ \text{mm}$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = 5{,}2$ mm. <span class="badge badge-ok">bate com a apostila</span> <span class="tag tag-mem">⚠</span> O cabo responde por 38%: é o exemplo numérico da regra "não desprezar elemento de esforço único".</div>
+  </article>
+
+  <article class="ex" id="pa-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 5 (p.56) · bloco B · ver Pivô 6</div>
+      <h3 id="pa-ex5-h" data-nav="Prova ex.5 · viga + tirante">Viga articulada suportada por tirante</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W4</span><span class="chip">W1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.56)</span>
+      A viga ABC da figura está articulada em A e é suportada por um tirante em B. O comprimento da viga é 2L e a sua rigidez flexional é EI. O comprimento do tirante é L e sua rigidez axial é EA. Pede-se determinar, usando o Princípio do Trabalho e da Energia, o deslocamento vertical $\delta$ que sofre a extremidade livre C da viga quando nela é aplicada uma força vertical P.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 5):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 57 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> momento em A: tirante com $N = 2P$ (braço $L$ contra braço $2L$). Diagrama de $M$ triangular com pico $PL$ em B, simétrico nos dois trechos.</p>
+    <div class="math-box">$$U^* = \frac{(2P)^2L}{2EA} + 2\int_0^L\frac{(Px)^2}{2EI}dx = \frac{2P^2L}{EA} + \frac{P^2L^3}{3EI}\ \Rightarrow\ \delta_C = \frac{2PL^3}{3EI} + \frac{4PL}{EA}$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_C = \frac{2PL^3}{3EI} + \frac{4PL}{EA}$ ↓. <span class="badge badge-ok">bate com a apostila</span></div>
+  </article>
+
+  <article class="ex" id="pa-ex7">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 7 (p.59) · bloco A · ver Pivô 7</div>
+      <h3 id="pa-ex7-h" data-nav="Prova ex.7 · grelha com anéis">Grelha apoiada em anéis, torque na ponta</h3></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">E2</span><span class="chip">W3</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.59)</span>
+      A estrutura indicada na figura é formada por barras de seção transversal circular cheia sendo dados: EI, $GI_P$, GA e seu fator de forma $f_c$. Todas as barras estão dispostas no plano horizontal xz e todas as ligações entre elas são rígidas, sendo seus comprimentos: m(AD) = 3L e m(BE) = m(CF) = L. Os únicos vínculos, nos pontos A, B e C, são constituídos por anéis que podem fornecer duas componentes de força em direções ortogonais ao eixo da barra em que se encontram. O único esforço aplicado à estrutura é um momento de torção de magnitude $T_0$. Pedem-se:
+      <ol type="a"><li>o diagrama de corpo livre final da estrutura com todos os esforços vinculares (em função de $T_0$) indicados e os diagramas de esforços solicitantes (V, M, e T) finais;</li><li>as parcelas de energia complementar devidas às forças cortantes ($U_V^*$), aos momentos fletores ($U_M^*$) e aos momentos de torção ($U_T^*$);</li><li>o ângulo de giro da seção D.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 7):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 59 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> 6 reações (2 por anel), 6 equações de equilíbrio 3D ⇒ isostática. Momentos em A: em torno de $x$, $T_0 + V_BL - V_CL = 0$; em torno de $z$, $V_BL + 2V_CL = 0$; forças verticais somam zero ⇒ $V_A = V_C = \frac{T_0}{3L}$, $V_B = -\frac{2T_0}{3L}$, horizontais nulas. Diagramas: cortantes constantes por trecho, fletores triangulares (AE, EB, FC) e torção $\frac23T_0$ em EF e $T_0$ em FD.</p>
+    <div class="math-box">$$U_V^* = \frac{7}{18}\frac{f_cT_0^2}{GAL}\qquad U_M^* = \frac{7}{54}\frac{T_0^2L}{EI}\qquad U_T^* = \frac{13}{18}\frac{T_0^2L}{GI_P}\qquad \theta_D = \frac{2U^*}{T_0} = \left(\frac79\frac{f_c}{GAL} + \frac{7}{27}\frac{L}{EI} + \frac{13}{9}\frac{L}{GI_P}\right)T_0$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima. <span class="badge badge-ok">bate com a apostila</span></div>
+  </article>
+
+  <article class="ex" id="pa-ex8">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 8 (p.62) · bloco D · ver Pivô 9</div>
+      <h3 id="pa-ex8-h" data-nav="Prova ex.8 · rotação dos dois lados da rótula">Rótula em B: rotação à esquerda e à direita</h3></div></div>
+    <div class="ex-topics"><span class="chip">C1</span><span class="chip">C2</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.62)</span>
+      A estrutura da figura é formada por duas barras iguais, AB e BC, de comprimento L e rigidez flexional EI. A barra AB está engastada em A e articulada em B. A barra BC, por sua vez, está articulada em B e simplesmente apoiada em C. Há uma força vertical P aplicada na articulação B, conforme a figura. Pede-se: a) calcular a rotação da extremidade B da barra AB; b) calcular a rotação da extremidade B da barra BC.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 8):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 63 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> BC é biarticulada sem carga no meio ⇒ só poderia ter força normal, e o apoio simples em C a anula: <strong>BC não tem esforço</strong> e gira como corpo rígido. AB é um balanço com $P$ na ponta.</p>
+    <div class="math-box">$$\theta_B^- = \left(\frac{\partial U^*}{\partial\bar M}\right)_0 = \frac1{EI}\int_0^LPx\,dx = \frac{PL^2}{2EI}\qquad y_B = \frac{\partial U^*}{\partial P} = \frac{PL^3}{3EI}\ \Rightarrow\ \theta_B^+ = \frac{y_B}{L} = \frac{PL^2}{3EI}$$</div>
+    <div class="answer"><strong>Respostas:</strong> (a) $\frac{PL^2}{2EI}$ (horário); (b) $\frac{PL^2}{3EI}$ (anti-horário). <span class="badge badge-ok">bate com a apostila</span> Na rótula a rotação é descontínua: cada lado tem a sua.</div>
+  </article>
+
+  <article class="ex" id="pa-ex9">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 9 (p.64) · bloco D · ver Pivô 8</div>
+      <h3 id="pa-ex9-h" data-nav="Prova ex.9 · treliça, δ horizontal">Treliça: deslocamento vertical e horizontal do nó carregado</h3></div></div>
+    <div class="ex-topics"><span class="chip">W5</span><span class="chip">W2</span><span class="chip">C1</span><span class="chip">C2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.64)</span>
+      A treliça da figura é formada por barras com rigidez axial EA e com rigidez flexional EI dadas e está contida em um plano vertical. Sabendo que ela está submetida a uma força P aplicada ao seu nó A, pede-se: a) determinar as forças que atuam em cada barra; b) calcular a energia complementar armazenada na treliça; c) determinar o deslocamento vertical do nó A; d) determinar o deslocamento horizontal do nó A.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 9):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 65 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> nós: $F_{AC} = \sqrt2P$, $F_{AB} = -P$, $F_{BC} = -\sqrt2P$, $F_{CD} = 2P$. (O $EI$ dado é distrator: barras de treliça só têm $N$.)</p>
+    <div class="math-box">$$U^* = \frac{1}{2EA}\left[P^2(2L) + 2P^2(\sqrt2L) + 2P^2(\sqrt2L) + 4P^2L\right] = \frac{P^2L}{EA}(3 + 2\sqrt2)\qquad\delta_V = \frac{2PL}{EA}(3 + 2\sqrt2)$$
+    $$\text{Força fictícia } H \to \text{ em A: só muda } N_{AB} = -(P + H)\ \Rightarrow\ \delta_H = \left(\frac{\partial U^*}{\partial H}\right)_0 = \frac{2PL}{EA}$$</div>
+    <div class="answer"><strong>Respostas:</strong> (c) $\delta_V \approx 11{,}66\,PL/EA$ ↓; (d) $\delta_H = 2PL/EA$ (→, AB comprimida encurta). <span class="badge badge-ok">bate com a apostila</span></div>
+  </article>
+
+  <article class="ex" id="pa-ex11">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 11 (p.69) · bloco D · ver Pivô 9</div>
+      <h3 id="pa-ex11-h" data-nav="Prova ex.11 · viga com balanço">Viga biapoiada com balanço: deflexão e rotação na ponta</h3></div></div>
+    <div class="ex-topics"><span class="chip">C1</span><span class="chip">C2</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.69)</span>
+      A viga da figura tem rigidez flexional EI e suporta um carregamento distribuído uniforme de intensidade q na extensão AB e uma força concentrada P na extremidade C do trecho em balanço. Determine a deflexão vertical e o ângulo de rotação no ponto C.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 11):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 69 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $AB = L$ com $q$, balanço $BC = L/2$ com $P$. Reação $R_A = \frac{qL}{2} - \frac P2$ (e, com o binário fictício $M_C$ horário em C, $-\frac{M_C}{L}$). $x_1$ a partir de A, $x_2$ a partir de C:</p>
+    <div class="math-box">$$M_{AB} = \frac{qLx_1}{2} - \frac{Px_1}{2} - \frac{qx_1^2}{2} - \frac{M_Cx_1}{L}\qquad M_{BC} = -Px_2 - M_C$$
+    $$\delta_C = \frac{PL^3}{8EI} - \frac{qL^4}{48EI}\qquad \theta_C = \frac{7PL^2}{24EI} - \frac{qL^3}{24EI}$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima (positivo = sentido de $P$ / horário). <span class="badge badge-ok">bate com a apostila</span> O $q$ no vão levanta a ponta do balanço (sinal −): leitura física que vale ponto.</div>
+  </article>
+
+  <h3 class="sub" id="pa-p3" data-nav="Provas · questões da P3">Questões 14 a 22: ficam para a P3 (simetria)</h3>
+  <p>As questões a seguir combinam hiperestática com as propriedades de simetria (aulas 23–25): corta-se no plano de simetria e o vínculo equivalente é um engaste deslizante (carregamento simétrico) ou um apoio simples (antissimétrico). Ficam listadas para quem quiser adiantar; o guia da P3 vai resolvê-las.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ex.</th><th>Estrutura</th><th>Resultado (apostila)</th></tr></thead><tbody>
+    <tr><td>14 (p.75)</td><td>viga biengastada, $q$ em meio vão</td><td>$\theta_C = qL^3/768EI$, $\delta_C = qL^4/768EI$</td></tr>
+    <tr><td>15 (p.79)</td><td>pórtico biengastado, $2q_0$ na coluna</td><td>$\theta_C = q_0L^3/48EI$</td></tr>
+    <tr><td>16 (p.82)</td><td>duas barras biengastadas, binário em B</td><td>$\theta_B = M_0l/8EI$</td></tr>
+    <tr><td>17 (p.84)</td><td>grelha biengastada, $P$ e $T$ em D</td><td>$\delta_D = PL^3/EI$; $\theta_{D,y} = \frac{11}{8}TL/EI$</td></tr>
+    <tr><td>18 (p.90)</td><td>barras soldadas sobre molas</td><td>$\phi_B = \frac{5}{24}\bar TL/EI$</td></tr>
+    <tr><td>19 (p.93)</td><td>anel com forças diametrais</td><td>$\delta = \frac{2PR^3}{EI}\left(\frac\pi8 - \frac1\pi\right)$</td></tr>
+    <tr><td>20 (p.94)</td><td>anel entre batentes</td><td>reação $\approx 0{,}918P$</td></tr>
+    <tr><td>21 (p.98)</td><td>grelha em H, 4 engastes</td><td>$P/4$, $PL/8$, $PL/16$ em cada engaste</td></tr>
+    <tr><td>22 (p.102)</td><td>quatro barras radiais + barra vertical</td><td>$\delta_A = FL^3/48EI$</td></tr>
+  </tbody></table></div>
+</section>
+
+<hr class="page-break-visual">
+<section class="chapter" id="cap8">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 8</span>
+    <h2 id="cap8-h" data-nav="8 · Análise exercícios × tópicos">Análise exercícios × tópicos</h2>
+    <p class="section-desc">Frequência de cada tópico nos 29 exercícios do guia, com peso maior para as 13 questões de provas antigas. Serve para dizer onde o professor mais cobra e para conferir que nenhum tópico da P2 ficou sem pivô.</p></div>
+
+  <h3 class="sub" id="cap8-freq" data-nav="Frequência dos tópicos">Frequência e pivô de cada tópico</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Código</th><th>Tópico</th><th>Em provas (13)</th><th>Total (29)</th><th>Pivô que ensina</th></tr></thead><tbody>
+    <tr class="hit"><td><span class="chip">W4</span></td><td>energia na flexão</td><td class="num"><span class="bar" style="width:77px"></span> 11</td><td class="num">17</td><td>6, 7, 9</td></tr>
+    <tr class="hit"><td><span class="chip">W2</span></td><td>princípio do trabalho e energia</td><td class="num"><span class="bar" style="width:56px"></span> 8</td><td class="num">15</td><td>1, 2</td></tr>
+    <tr class="hit"><td><span class="chip">C1</span></td><td>Crotti-Engesser / 2º Castigliano</td><td class="num"><span class="bar" style="width:42px"></span> 6</td><td class="num">8</td><td>8</td></tr>
+    <tr class="hit"><td><span class="chip">C2</span></td><td>carga fictícia</td><td class="num"><span class="bar" style="width:42px"></span> 6</td><td class="num">7</td><td>9, 11, 12</td></tr>
+    <tr><td><span class="chip">W3</span></td><td>energia na torção (circular e tubo fino)</td><td class="num"><span class="bar" style="width:35px"></span> 5</td><td class="num">9</td><td>3, 7</td></tr>
+    <tr><td><span class="chip">E2</span></td><td>estruturas espaciais (esforços 3D)</td><td class="num"><span class="bar" style="width:35px"></span> 5</td><td class="num">6</td><td>7, 11</td></tr>
+    <tr><td><span class="chip">W1</span></td><td>energia na tração/compressão; definições</td><td class="num"><span class="bar" style="width:21px"></span> 3</td><td class="num">10</td><td>1</td></tr>
+    <tr><td><span class="chip">A4</span></td><td>o que desprezar (cortante, normal, cabo)</td><td class="num"><span class="bar" style="width:14px"></span> 2</td><td class="num">7</td><td>6, 7</td></tr>
+    <tr><td><span class="chip">H1</span></td><td>hiperestáticas (energia complementar mínima)</td><td class="num"><span class="bar" style="width:14px"></span> 2</td><td class="num">2</td><td>13 (e 10)</td></tr>
+    <tr><td><span class="chip">W5</span></td><td>treliças</td><td class="num"><span class="bar" style="width:7px"></span> 1</td><td class="num">4</td><td>2</td></tr>
+    <tr><td><span class="chip">C3</span></td><td>1º Castigliano (energia em deslocamentos)</td><td class="num"><span class="bar" style="width:7px"></span> 1</td><td class="num">1</td><td>10</td></tr>
+    <tr><td><span class="chip">NL</span></td><td>não linearidade; energia não se superpõe</td><td class="num">0</td><td class="num">4</td><td>1, 4, 5</td></tr>
+    <tr><td><span class="chip">H2</span></td><td>linha elástica por energia</td><td class="num">0</td><td class="num">0</td><td><span class="badge badge-roteiro">roteiro apenas</span> (aula 17)</td></tr>
+  </tbody></table></div>
+  <p class="tbl-cap">Barras proporcionais à frequência nas provas antigas. Contagem: cada exercício soma 1 em cada tópico que usa.</p>
+
+  <h3 class="sub" id="cap8-cobra" data-nav="O que o professor mais cobra">O que o professor mais cobra</h3>
+  <ol>
+    <li><strong>Esforços internos corretos em barras dobradas e pórticos</strong>, muitas vezes em 3D (arames, grelhas). É a primeira metade de toda questão: um $M(s)$ errado derruba o resto.</li>
+    <li><strong>Flexão + torção somadas</strong>, com uma razão $GI_P/EI$ dada no enunciado para a resposta sair em função de $EI$ só.</li>
+    <li><strong>Carga ou binário fictício</strong> para rotações e deslocamentos onde não há carga, inclusive deslocamento <em>horizontal</em> de nós e rotações dos dois lados de uma rótula.</li>
+    <li><strong>Elementos de esforço único</strong> (cabo, tirante, mola) somados à viga, às vezes com valor numérico.</li>
+    <li>Itens de <strong>justificativa</strong> ("por que a parcela normal é desprezível", "por que $U_3^* \neq U_1^* + U_2^*$"): resposta com ordem de grandeza $(h/L)^2$, $(R/L)^2$ e termo cruzado.</li>
+  </ol>
+
+  <h3 class="sub" id="cap8-h2" data-nav="Linha elástica (roteiro)">Linha elástica por energia (H2): roteiro até a aula 17</h3>
+  <p>O cronograma põe "obtenção da linha elástica de vigas" na aula 17 (05/10), e nenhum exercício disponível ainda cobra isso. O raciocínio que se espera, pela lógica das aulas 15 e 17: aplique uma <strong>força fictícia $F$ numa posição genérica $\xi$</strong>. Escreva $M(x)$ separando os trechos $x &lt; \xi$ e $x &gt; \xi$ e calcule $v(\xi) = \left(\partial U^*/\partial F\right)_{F=0}$. O resultado, função de $\xi$, <em>é</em> a linha elástica. Exemplo para conferir: balanço com $P$ na ponta, força fictícia em $\xi$ medido do engaste ⇒ $v(\xi) = \frac{P\xi^2(3L - \xi)}{6EI}$, que dá $PL^3/3EI$ em $\xi = L$. Quando saírem os slides da aula 17, este bloco vira pivô.</p>
+
+  <h3 class="sub" id="cap8-cobertura" data-nav="Conferência de cobertura">Conferência de cobertura</h3>
+  <ul>
+    <li>Todos os tópicos das aulas 12–15 têm pelo menos um pivô ✓.</li>
+    <li>Aulas 17 e 19 (hiperestáticas, energia complementar mínima) cobertas pela apostila (pivôs 10 e 13). A linha elástica fica como roteiro.</li>
+    <li>Exercícios em grupo #05 a #07 (30/09, 07/10, 19/10) ainda não existem na pasta; entram aqui quando forem acrescentados em <code>03_provas/P2/</code>.</li>
+  </ul>
+
+  <h3 class="sub" id="cap8-diverg" data-nav="Divergências de gabarito">Divergências de gabarito</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Exercício</th><th>Fonte oficial</th><th>Guia</th><th>Tipo</th></tr></thead><tbody>
+    <tr><td>Apostila 03, ex. 2 (p.53)</td><td>$\delta = \frac{P^2L}{EA} + \frac{5P^2L^3}{3EI} + \frac{P^2L^3}{GJ}$</td><td>$\frac{PL}{EA} + \frac{5PL^3}{3EI} + \frac{PL^3}{GI_P}$</td><td>erro de digitação (dimensão)</td></tr>
+    <tr><td>Apostila 03, ex. 15 (P3)</td><td>sinal trocado numa passagem de $\theta_C$</td><td>resultado final $q_0L^3/48EI$ correto</td><td>digitação intermediária</td></tr>
+    <tr><td>Aula 12 p.6</td><td>integral de $W^*$ com limite superior $\delta$</td><td>limite superior $P$</td><td>digitação no slide</td></tr>
+  </tbody></table></div>
+  <p class="tbl-cap">Nenhuma resposta final das 29 diverge; só erros tipográficos das fontes.</p>
+</section>
+<hr class="page-break-visual">
+
+<section class="chapter" id="cap9">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 9</span>
+    <h2 id="cap9-h" data-nav="9 · Resumo pré-prova">Resumo pré-prova (1–2 páginas A4)</h2>
+    <p class="section-desc">Para reler na véspera e antes de entrar na sala. O botão "🖨 Imprimir resumo" imprime só este capítulo.</p></div>
+  <div class="resumo">
+    <h3>1 · Definições que abrem qualquer questão</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Trabalho × energia.</b> <span class="path">$W=\int P\,d\delta$, $W^*=\int\delta\,dP$ (externos) · $U=\int u\,dV$, $U^*=\int u^*dV$ (internos)</span>. Sem dissipação $W=U$, $W^*=U^*$. Linear (material <em>e</em> geometria): tudo $=P\delta/2$; várias cargas $\sum P_i\delta_i/2$.</div>
+      <div class="r-item"><b>Densidades lineares.</b> <span class="path">$u^*=\sigma^2/2E$ · $\tau^2/2G$</span>; integrar na seção dá $A$, $I_p$, $I$. $G=E/2(1+\nu)$ ⇒ $E/G\in[2;3]$.</div>
+    </div>
+    <h3>2 · Energia complementar por esforço (somar por barra e trecho)</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Fórmula-mãe.</b> <span class="path">$U^*=\sum\int\left(\frac{N^2}{2EA}+\frac{fV^2}{2GA}+\frac{T^2}{2GI_p}+\frac{M^2}{2EI}\right)ds$</span> (aula 14 p.31). Treliça: $\sum N_i^2L_i/2EA$. Mola $F^2/2k$, mola de torção $M^2/2k_t$.</div>
+      <div class="r-item"><b>Tubo de parede fina.</b> <span class="path">$f=\tau t=T/2A_m$ · $\phi=\frac{TL}{4GA_m^2}\oint\frac{ds}{t}=\frac{TL}{GI_t}$</span>. $A_m$ e $L_m$ na <em>linha média</em>. Fator de forma: retângulo 6/5, círculo 10/9.</div>
+    </div>
+    <h3>3 · Qual ferramenta (árvore de decisão)</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Uma carga, deslocamento dela.</b> <span class="path">P.T.E.: $P\delta/2=U^*$</span>. Não vale com 2+ cargas, outro ponto, carga distribuída.</div>
+      <div class="r-item"><b>Qualquer outro deslocamento.</b> <span class="path">Crotti-Engesser $\delta_i=\partial U^*/\partial P_i=\sum\int\frac{M}{EI}\frac{\partial M}{\partial P_i}ds+\dots$</span>. Cargas literais e independentes; derive antes de pôr números.</div>
+      <div class="r-item"><b>Sem carga no ponto.</b> <span class="path">criar força (translação) ou binário (rotação) → derivar → só então zerar</span>. Sinal + = sentido arbitrado.</div>
+      <div class="r-item"><b>Reação que o equilíbrio não dá.</b> <span class="path">$g$ = reações − equações · escolher $X$ · $\partial U^*/\partial X=0$</span>; depois carga fictícia. Reações <em>antes</em> de rotações.</div>
+      <div class="r-item"><b>Barra rígida em molas/hastes.</b> <span class="path">$U(\theta)=\sum k_i\Delta_i^2/2$ · $W=U$ ou $P=\partial U/\partial\delta$</span> (1º Castigliano).</div>
+      <div class="r-item"><b>Teoremas.</b> Crotti-Engesser vale até com material não linear; 2º Castigliano ($\partial U/\partial P$) só elástico-linear; 1º Castigliano $P_i=\partial U/\partial\delta_i$.</div>
+    </div>
+    <h3>4 · Esforços internos (onde se perde ponto)</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Coordenada.</b> Comece na ponta livre: a reação do engaste não entra. Divida em trechos onde muda carga, seção ou barra.</div>
+      <div class="r-item"><b>3D.</b> <span class="path">$\vec M=\vec r\times\vec P$</span>: componente ao longo do eixo = torção; perpendicular = flexão. Binário fictício flete uma barra e torce a outra.</div>
+      <div class="r-item"><b>Desprezar.</b> $N$, $V$ ≪ $M$, $T$ na mesma barra (cortante ≈ $0{,}78(h/L)^2$). <strong>Nunca</strong> cabo, tirante, mola ou barra de treliça. Torção em 3D <strong>nunca</strong>.</div>
+      <div class="r-item"><b>Rótula.</b> Barra biarticulada sem carga intermediária com apoio simples: esforço zero, corpo rígido. Rotação diferente de cada lado.</div>
+    </div>
+    <h3>5 · Resultados de referência (conferir contas)</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Balanço.</b> <span class="path">$P$: $PL^3/3EI$, $PL^2/2EI$ · $M$: $ML^2/2EI$, $ML/EI$ · $q$: $qL^4/8EI$, $qL^3/6EI$</span></div>
+      <div class="r-item"><b>Outros.</b> <span class="path">biapoiada $P$ no meio: $PL^3/48EI$ · apoiada-engastada $q$: $R=3qL/8$, $M=qL^2/8$ · barra $PL/EA$ · eixo $TL/GI_p$</span></div>
+    </div>
+    <h3>Armadilhas que custam ponto</h3>
+    <div class="r-grid">
+      <div class="r-item">Somar energias de casos separados (termo cruzado). $W=P\delta$ sem o ½.</div>
+      <div class="r-item">Zerar a carga fictícia antes de derivar. Números antes de derivar.</div>
+      <div class="r-item">Esquecer a energia do cabo/mola. Esquecer a torção em arame 3D.</div>
+      <div class="r-item">$A_m$ com dimensão externa; $L$ × $L_m$. Rigidez em N/m com mm.</div>
+      <div class="r-item">$P\delta/2$ quando há folga, contato ou grande deslocamento: a curva não é reta.</div>
+      <div class="r-item">Conferir dimensão: $PL^3/EI$ [comprimento], $PL^2/EI$ [rad], $P^2L/EA$ [energia].</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para a P2 de PME3211 (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build_p2/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

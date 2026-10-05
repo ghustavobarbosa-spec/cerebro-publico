@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Uso — Calculadora Científica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace;
+
+  --bg: #F7F7F7;
+  --surface: #FFFFFF;
+  --surface-muted: #EEEEEE;
+
+  --text: #121212;
+  --text-secondary: #4F4F4F;
+  --text-muted: #8F8F8F;
+  --text-inverse: #F7F7F7;
+
+  --accent: #00B131;
+  --accent-dim: rgba(0, 177, 49, 0.12);
+  --accent-text: #FFFFFF;
+
+  --success: #00B131;
+  --success-bg: #E0FFCC;
+  --warning: #EF6800;
+  --warning-bg: #FFDBCB;
+  --error: #FF5449;
+  --error-bg: #FFDAD6;
+  --info: #0063F7;
+  --info-bg: #C2DAFF;
+
+  --border: #E0E0E0;
+  --border-strong: #C4C4C4;
+  --border-subtle: rgba(0, 0, 0, 0.05);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 0px 32px rgba(0, 0, 0, 0.04);
+
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --motion-instant: 120ms;
+  --motion-fast: 240ms;
+  --motion-base: 400ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #272727;
+  --surface-muted: #4F4F4F;
+  --text: #F7F7F7;
+  --text-secondary: #C4C4C4;
+  --text-muted: #8F8F8F;
+  --text-inverse: #121212;
+  --accent: #1BD60B;
+  --accent-dim: rgba(27, 214, 11, 0.2);
+  --success-bg: rgba(0, 177, 49, 0.18);
+  --warning-bg: rgba(239, 104, 0, 0.18);
+  --error-bg: rgba(255, 84, 73, 0.15);
+  --info-bg: rgba(0, 99, 247, 0.15);
+  --border: #4F4F4F;
+  --border-strong: #616161;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0px 2px 4px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0px 4px 8px rgba(0, 0, 0, 0.4), 0px 0px 32px rgba(0, 0, 0, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.62;
+  font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+p { margin-bottom: 12px; }
+strong { font-weight: 600; }
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px 72px; }
+
+/* ===== Header ===== */
+.site-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 24px; max-width: 1080px; margin: 0 auto;
+  position: sticky; top: 0; z-index: 40; background: var(--bg);
+}
+.brand-mark {
+  display: flex; align-items: center; gap: 11px;
+  font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: -.01em;
+}
+.brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.theme-toggle {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full);
+  width: 40px; height: 40px; font-size: 18px; cursor: pointer; color: var(--text);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: transform var(--motion-instant), box-shadow var(--motion-fast);
+}
+.theme-toggle:hover { transform: scale(1.08); box-shadow: var(--shadow-sm); }
+
+.top-nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.top-nav a {
+  font-family: var(--font-body); font-size: 12.5px; font-weight: 600;
+  padding: 8px 14px; border-radius: var(--radius-full); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-secondary); white-space: nowrap;
+  transition: border-color var(--motion-fast), color var(--motion-fast);
+}
+.top-nav a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+@media (max-width: 900px) {
+  .site-header { flex-wrap: wrap; row-gap: 10px; }
+  .top-nav { order: 3; width: 100%; }
+}
+
+/* ===== Hero ===== */
+.hero { margin: 10px 0 44px; }
+.eyebrow {
+  font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase;
+  letter-spacing: 0.08em; font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px;
+}
+.hero h1 { font-size: 2.3rem; letter-spacing: -0.015em; margin-bottom: 10px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); font-family: var(--font-mono); margin-bottom: 18px; }
+.intro { color: var(--text-secondary); font-size: 15.5px; max-width: 730px; }
+
+/* ===== Sections ===== */
+.section { margin-bottom: 54px; scroll-margin-top: 80px; }
+.section-head { margin-bottom: 22px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.section-head h2 { font-size: 1.5rem; margin-bottom: 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14.5px; max-width: 700px; }
+
+h3.sub { font-size: 1.05rem; margin: 26px 0 10px; }
+h4.mini { font-family: var(--font-display); font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--text-muted); margin: 0 0 8px; }
+
+/* ===== Card ===== */
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 16px;
+}
+.card.accentleft { border-left: 5px solid var(--accent); }
+.card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.card > :last-child { margin-bottom: 0; }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+
+/* ===== Q&A cards (as três dúvidas) ===== */
+.qa { border-left: 5px solid var(--info); }
+.qa .qlabel {
+  display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display);
+  font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--info); margin-bottom: 8px;
+}
+html[data-theme="dark"] .qa .qlabel { color: #8FBCFF; }
+.qa h3 { font-size: 1.15rem; margin-bottom: 10px; }
+
+/* ===== Keys ===== */
+.k {
+  display: inline-block; font-family: var(--font-mono); font-size: 12.5px; font-weight: 700;
+  padding: 2px 9px; margin: 1px 1px; border-radius: 6px; white-space: nowrap;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-bottom-width: 3px;
+  box-shadow: var(--shadow-sm);
+}
+.k.dark { background: #121212; color: #fff; border-color: #000; }
+html[data-theme="dark"] .k.dark { background: var(--accent); color: #121212; border-color: #0d8f2a; }
+.k.shift { background: var(--warning-bg); color: #9E4200; border-color: #E5A277; }
+html[data-theme="dark"] .k.shift { color: #FFB68A; border-color: #7a4520; }
+
+.arrow { color: var(--text-muted); font-weight: 700; padding: 0 5px; }
+.disp {
+  display: inline-block; font-family: var(--font-mono); font-size: 12.5px; font-weight: 700;
+  padding: 2px 9px; border-radius: var(--radius-sm); background: #D7E4C9; color: #1d3312;
+  border: 1px solid #A9BE97;
+}
+html[data-theme="dark"] .disp { background: #2f3c26; color: #C8E6B0; border-color: #4b5c3e; }
+
+.seq {
+  font-family: var(--font-mono); font-size: 13px; line-height: 2.35;
+  background: var(--surface-muted); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; margin: 12px 0;
+}
+.seq .lbl {
+  display: inline-block; min-width: 86px; font-weight: 700; font-size: 11.5px;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted);
+}
+.seq.plain { background: none; border: 0; padding: 0; }
+
+/* ===== Formula ===== */
+.f {
+  font-family: 'Cambria', 'Georgia', serif; font-style: italic; font-size: 19px;
+  display: block; text-align: center; padding: 14px 10px; margin: 4px 0 14px;
+  background: var(--accent-dim); border-radius: var(--radius); color: var(--text);
+}
+.finline { font-family: 'Cambria','Georgia',serif; font-style: italic; }
+
+/* ===== Table ===== */
+.table-wrap {
+  overflow-x: auto; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin: 14px 0;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+thead th {
+  text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 11.5px;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--text-secondary);
+  padding: 12px 16px; border-bottom: 2px solid var(--border); background: var(--surface);
+}
+td { padding: 11px 16px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: var(--surface-muted); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ===== Callouts ===== */
+.callout {
+  border-radius: var(--radius-lg); padding: 16px 20px; margin: 16px 0;
+  border: 1px solid transparent; border-left-width: 5px; font-size: 14.5px;
+}
+.callout .ctitle {
+  font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .06em; display: block; margin-bottom: 6px;
+}
+.callout > :last-child { margin-bottom: 0; }
+.c-danger  { background: var(--error-bg);   border-left-color: var(--error);   }
+.c-warn    { background: var(--warning-bg); border-left-color: var(--warning); }
+.c-info    { background: var(--info-bg);    border-left-color: var(--info);    }
+.c-ok      { background: var(--success-bg); border-left-color: var(--success); }
+.c-danger .ctitle { color: #B3261E; } .c-warn .ctitle { color: #9E4200; }
+.c-info .ctitle { color: #003FA8; }   .c-ok .ctitle { color: #006E1B; }
+html[data-theme="dark"] .c-danger .ctitle { color: #FFB4AB; }
+html[data-theme="dark"] .c-warn .ctitle { color: #FFB68A; }
+html[data-theme="dark"] .c-info .ctitle { color: #8FBCFF; }
+html[data-theme="dark"] .c-ok .ctitle { color: #A8F58C; }
+
+.badge {
+  display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: var(--radius-full); white-space: nowrap;
+  text-transform: uppercase; letter-spacing: .03em;
+}
+.badge-success { background: var(--success-bg); color: #006E1B; }
+.badge-error   { background: var(--error-bg);   color: #B3261E; }
+.badge-warn    { background: var(--warning-bg); color: #9E4200; }
+.badge-info    { background: var(--info-bg);    color: #003FA8; }
+.badge-neutral { background: var(--surface-muted); color: var(--text-secondary); }
+html[data-theme="dark"] .badge-success { background: rgba(0,177,49,.25); color: #A8F58C; }
+html[data-theme="dark"] .badge-error   { background: rgba(255,84,73,.2); color: #FFB4AB; }
+html[data-theme="dark"] .badge-warn    { background: rgba(239,104,0,.25); color: #FFB68A; }
+html[data-theme="dark"] .badge-info    { background: rgba(0,99,247,.3);  color: #8FBCFF; }
+
+/* ===== Steps ===== */
+ol.steps { list-style: none; counter-reset: st; padding: 0; margin: 14px 0; }
+ol.steps > li {
+  counter-increment: st; position: relative; padding-left: 44px; margin-bottom: 18px;
+}
+ol.steps > li::before {
+  content: counter(st); position: absolute; left: 0; top: 0;
+  width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-text);
+  font-family: var(--font-display); font-weight: 800; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+ul.plain { list-style: none; padding: 0; }
+ul.plain li { padding-left: 20px; position: relative; margin-bottom: 7px; }
+ul.plain li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.check li::before { content: '✓'; color: var(--success); }
+ul.cross li::before { content: '✕'; color: var(--error); }
+
+.analogy {
+  font-style: italic; color: var(--text-secondary); border-left: 3px solid var(--border-strong);
+  padding-left: 14px; margin: 12px 0; font-size: 14.5px;
+}
+.analogy b { font-style: normal; color: var(--text); }
+
+.mini-note { font-size: 13px; color: var(--text-muted); }
+
+/* ===== Footer ===== */
+.site-footer { border-top: 1px solid var(--border); margin-top: 20px; padding: 24px 0 40px; }
+.footer-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: 12.5px; color: var(--text-muted);
+}
+.footer-inner strong { color: var(--accent); }
+
+/* ===== Print ===== */
+@media print {
+  @page { size: A4 portrait; margin: 12mm 12mm; }
+  html, body { background: #fff !important; color: #000 !important; font-size: 9.6pt; }
+  .site-header, .site-footer, .top-nav, .theme-toggle, .no-print { display: none !important; }
+  .container { max-width: none; padding: 0; }
+  .section { margin-bottom: 16px; break-inside: avoid-page; }
+  .card, .table-wrap, .callout, .seq { box-shadow: none !important; break-inside: avoid; }
+  .card { border: 1pt solid #000; }
+  .k { border: 1pt solid #000; border-bottom-width: 1pt; box-shadow: none; background: #fff !important; color: #000 !important; }
+  .k.dark { background: #000 !important; color: #fff !important; }
+  .k.shift { background: #ddd !important; color: #000 !important; }
+  .disp { background: #e6e6e6 !important; color: #000 !important; border: 1px dashed #000; }
+  .callout { border: 1pt solid #000; background: #f0f0f0 !important; }
+  .f { background: #f0f0f0 !important; }
+  thead th { background: #ddd !important; }
+  .page-break { break-before: page; }
+  a { color: #000 !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header no-print">
+  <div class="brand-mark"><span class="brand-dot"></span> Guia da Calculadora</div>
+  <nav class="top-nav">
+    <a href="#teclado">Teclado</a>
+    <a href="#duvidas">As 3 dúvidas</a>
+    <a href="#teste">Teste 30s</a>
+    <a href="#sd">Modo SD</a>
+    <a href="#ic">Os 4 ICs</a>
+    <a href="#armadilhas">Armadilhas</a>
+  </nav>
+  <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">🌙</button>
+</header>
+
+<div class="container">
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <span class="eyebrow">DEXIN BST KK-82MS-B · PRO3100 / PRO3200</span>
+  <h1>Calculadora científica: guia de uso do zero</h1>
+  <p class="subtitle">P1 — estatística descritiva + intervalos de confiança de uma amostra</p>
+  <p class="intro">
+    Este guia parte do princípio de que você nunca usou o modo estatístico desta calculadora.
+    Cada tecla é explicada <strong>antes</strong> de ser usada, e toda sequência está escrita tecla a tecla,
+    com o que aparece no visor. O objetivo é simples: tirar média, variância e desvio padrão
+    de um conjunto de dados em <strong>segundos</strong>, sem somar nada na mão.
+  </p>
+</div>
+
+<!-- ============ 0. TECLADO ============ -->
+<section class="section" id="teclado">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Primeiro: as teclas que aparecem o tempo todo</h2>
+    <p class="section-desc">Sete teclas resolvem tudo neste guia. Se você entender estas, o resto é receita de bolo.</p>
+  </div>
+
+  <div class="card accentleft">
+    <h3>A tecla <span class="k shift">SHIFT</span> — a "segunda função"</h3>
+    <p>Olhe para o seu teclado. Acima de quase toda tecla existe uma palavrinha escrita em outra cor.
+    Essa palavra é o <strong>segundo emprego</strong> daquela tecla, e o <span class="k shift">SHIFT</span> é quem acorda esse segundo emprego.</p>
+    <p class="analogy"><b>Analogia:</b> é o <i>Shift</i> do teclado do computador. Sozinha, a tecla escreve <code>2</code>. Com Shift, escreve <code>@</code>. Mesma tecla, dois resultados.</p>
+    <p>Por isso, quando este guia escreve <span class="k shift">SHIFT</span> <span class="k">2</span>, isso <strong>não</strong> é "shift vezes dois".
+    É: aperte SHIFT, solte, aperte o 2. Duas teclas, uma depois da outra. A calculadora vai executar o que está escrito <em>acima</em> da tecla 2 — que é <code>S-VAR</code>.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:130px">Tecla</th><th style="width:180px">Nome / o que está escrito</th><th>O que ela faz, em português</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k shift">SHIFT</span></td><td>Shift</td><td>Ativa a função escrita <em>acima</em> da próxima tecla que você apertar.</td></tr>
+        <tr><td><span class="k">MODE</span></td><td>Mode (modo)</td><td>Troca a "personalidade" da calculadora. É ela que liga o modo estatístico.</td></tr>
+        <tr><td><span class="k">AC</span></td><td>All Clear</td><td>Limpa o que está <strong>na tela</strong>. Não apaga os dados estatísticos guardados — é seguro apertar.</td></tr>
+        <tr><td><span class="k">=</span></td><td>Igual</td><td>"Calcule agora e me mostre." Também é o que <strong>confirma</strong> uma escolha de menu.</td></tr>
+        <tr><td><span class="k">Ans</span></td><td>Answer (resposta)</td><td>Guarda o <strong>último resultado</strong> que apareceu depois de um <span class="k">=</span>. Serve para encadear contas sem redigitar.</td></tr>
+        <tr><td><span class="k">x²</span></td><td>Ao quadrado</td><td>Eleva ao quadrado o número que está na tela. Digite <code>5</code>, aperte <span class="k">x²</span>, dá 25.</td></tr>
+        <tr><td><span class="k">√</span></td><td>Raiz quadrada</td><td>Aperta <strong>antes</strong> do número: <span class="k">√</span> <code>9</code> <span class="k">=</span> dá 3.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4 class="mini">O visor de duas linhas</h4>
+    <p>A calculadora tem duas linhas de visor, e elas mostram coisas diferentes:</p>
+    <ul class="plain">
+      <li><strong>Linha de cima (pequena):</strong> o que você está <em>digitando</em> — a conta em andamento.</li>
+      <li><strong>Linha de baixo (grande):</strong> o <em>resultado</em>.</li>
+      <li><strong>Cantinho superior:</strong> indicadores de estado. Quando aparece <span class="disp">SD</span> ali, você está no modo estatístico. Quando aparece <span class="disp">S</span>, o SHIFT está ativado esperando a próxima tecla.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 1. AS 3 DÚVIDAS ============ -->
+<section class="section" id="duvidas">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>As três ideias que fazem tudo funcionar</h2>
+    <p class="section-desc">Modo SD, Scl e M+. Entendendo estes três, o resto do guia vira só digitação.</p>
+  </div>
+
+  <!-- Q1 -->
+  <div class="card qa">
+    <span class="qlabel">Dúvida 1</span>
+    <h3>O que é o "modo SD"?</h3>
+    <p>Sua calculadora tem <strong>três personalidades</strong>, e a tecla <span class="k">MODE</span> é quem troca de uma para outra:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:110px">Modo</th><th style="width:150px">Como entrar</th><th>Ela vira o quê</th></tr></thead>
+        <tbody>
+          <tr><td><strong>COMP</strong></td><td><span class="k">MODE</span> <span class="k">1</span></td><td>Calculadora comum. Faz 2+2=4 e <strong>esquece</strong> tudo em seguida.</td></tr>
+          <tr><td><strong>SD</strong> <span class="badge badge-success">é este</span></td><td><span class="k">MODE</span> <span class="k">2</span></td><td>Calculadora <strong>com caderninho</strong>. Cada número que você entrega fica anotado.</td></tr>
+          <tr><td><strong>REG</strong></td><td><span class="k">MODE</span> <span class="k">3</span></td><td>Modo de pares (x, y) — correlação e regressão. Só o bônus usa.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>SD</strong> vem de <em>Standard Deviation</em> — "desvio padrão" em inglês. É o modo estatístico.</p>
+
+    <p class="analogy"><b>Analogia:</b> imagine que você tem uma caixinha e um ajudante invisível. No modo COMP não existe caixinha: você faz a conta e pronto. No modo SD, cada número que você joga na caixinha é anotado pelo ajudante, que fica somando tudo sozinho nos bastidores.</p>
+
+    <p>Esse ajudante anota exatamente <strong>três coisas</strong>, e atualiza as três a cada número novo:</p>
+    <div class="grid3">
+      <div class="card" style="margin:0"><h4 class="mini">Contador</h4><p class="finline" style="font-size:19px">n</p><p class="mini-note" style="margin:0">Quantos números você já entregou.</p></div>
+      <div class="card" style="margin:0"><h4 class="mini">Soma</h4><p class="finline" style="font-size:19px">Σx</p><p class="mini-note" style="margin:0">Todos somados. Com 2, 4 e 6 → 12.</p></div>
+      <div class="card" style="margin:0"><h4 class="mini">Soma dos quadrados</h4><p class="finline" style="font-size:19px">Σx²</p><p class="mini-note" style="margin:0">Cada um ao quadrado, depois somados: 4+16+36 = 56.</p></div>
+    </div>
+    <p style="margin-top:14px">Por mais estranho que pareça, <strong>só com esses três números</strong> ela consegue devolver a média e o desvio padrão de qualquer conjunto — não importa se são 6 dados ou 600. É por isso que vale a pena usar o modo SD: você para de somar <span class="finline">(Xi − X̄)²</span> na mão.</p>
+    <p class="mini-note"><strong>O símbolo Σ</strong> (sigma, letra grega) significa só isto: "some tudo". <span class="finline">Σx</span> = "some todos os x".</p>
+  </div>
+
+  <!-- Q2 -->
+  <div class="card qa">
+    <span class="qlabel">Dúvida 2</span>
+    <h3>O que significa "Scl"?</h3>
+    <div class="callout c-warn" style="margin-top:0">
+      <span class="ctitle">Atenção à leitura</span>
+      A sigla é <strong>Scl</strong>, não "SLC". As letras são minúsculas e apertadas no visor, e é muito fácil ler na ordem errada.
+    </div>
+    <p><strong>Scl</strong> = <em><strong>S</strong>tatistics <strong>cl</strong>ear</em> → <strong>"apagar a estatística"</strong>.</p>
+    <p>Quando você aperta <span class="k shift">SHIFT</span> <span class="k">MODE</span>, aparece um menu com três opções:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:110px">No visor</th><th style="width:190px">Quer dizer</th><th>Apaga o quê</th></tr></thead>
+        <tbody>
+          <tr><td><span class="disp">Scl</span> → <span class="k">1</span></td><td><em>Statistics clear</em></td><td>Só o caderninho: <span class="finline">n, Σx, Σx²</span>. <span class="badge badge-success">é esta que você usa</span></td></tr>
+          <tr><td><span class="disp">Mcl</span> → <span class="k">2</span></td><td><em>Memory clear</em></td><td>As memórias de letras: A, B, C, D, E, F e M.</td></tr>
+          <tr><td><span class="disp">All</span> → <span class="k">3</span></td><td><em>All</em> (tudo)</td><td>Tudo, <strong>inclusive o modo</strong> — você volta para COMP e perde o SD. Evite.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="analogy"><b>Analogia:</b> o <b>Scl</b> é arrancar a folha do caderninho e começar uma folha limpa. Os dados somem, mas a calculadora continua no modo SD, pronta para a próxima questão.</p>
+
+    <div class="callout c-danger">
+      <span class="ctitle">Por que isso decide nota</span>
+      Sem o Scl, os dados da questão 3 <strong>continuam somados</strong> quando você começa a questão 4.
+      A calculadora não avisa nada — ela simplesmente devolve uma média errada, com cara de certa.
+      Este é o erro mais silencioso da prova.
+    </div>
+
+    <div class="seq">
+      <span class="lbl">Sequência</span> <span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="arrow">→</span> aparece <span class="disp">Scl Mcl All</span> / <span class="disp">1 2 3</span> <span class="arrow">→</span> <span class="k">1</span> <span class="k">=</span> <span class="arrow">→</span> caderninho zerado
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card qa">
+    <span class="qlabel">Dúvida 3</span>
+    <h3>O que cada <span class="k dark">M+</span> faz?</h3>
+    <p>Essa tecla tem <strong>dois empregos</strong>, e qual deles vale depende do modo em que a calculadora está:</p>
+    <ul class="plain">
+      <li><strong>No modo COMP:</strong> <span class="k dark">M+</span> quer dizer "some isto na memória M". É a função escrita na própria tecla. <span class="mini-note">Não usamos.</span></li>
+      <li><strong>No modo SD:</strong> ela muda de emprego e vira <strong>DT</strong> (de <em>Data</em> = dado). Agora ela significa: <strong>"anota este número no caderninho"</strong>.</li>
+    </ul>
+
+    <p class="analogy"><b>Analogia:</b> no modo SD, o <b>M+</b> é um <b>carimbo</b>. Você escreve o número na mesa, aperta o carimbo, e ele entra oficialmente na lista. Um toque = um dado.</p>
+
+    <div class="callout c-info">
+      <span class="ctitle">A regra que pega todo mundo</span>
+      <strong>Digitar o número não anota nada.</strong> O número só entra quando você carimba com <span class="k dark">M+</span>.
+      Se você digitar 2, 4, 6 e apertar <span class="k">=</span>, a calculadora não guardou absolutamente nada.
+    </div>
+
+    <div class="seq">
+      <span class="k">5</span> <span class="k dark">M+</span> <span class="arrow">→</span> anotou um 5 <span class="arrow">·</span> visor: <span class="disp">n= 1</span><br>
+      <span class="k">7</span> <span class="k dark">M+</span> <span class="k dark">M+</span> <span class="k dark">M+</span> <span class="arrow">→</span> anotou <strong>três setes</strong> <span class="arrow">·</span> visor: <span class="disp">n= 4</span>
+    </div>
+    <p>Repare na segunda linha: apertar <span class="k dark">M+</span> de novo, <strong>sem digitar nada</strong>, repete o último número. É um atalho de graça quando o mesmo valor aparece várias vezes.</p>
+    <p class="mini-note">Depois de cada carimbo, o visor pisca rapidamente <span class="disp">n= k</span> mostrando quantos dados já entraram. Esse número é o seu recibo — se ele não bate com a quantidade de dados do enunciado, algo saiu errado.</p>
+  </div>
+</section>
+
+<!-- ============ 2. GLOSSÁRIO ============ -->
+<section class="section" id="glossario">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Glossário: símbolo do formulário ↔ o que é ↔ onde sai na calculadora</h2>
+    <p class="section-desc">A notação aqui é exatamente a do <code>formulario_pro3100.pdf</code>.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:80px">Símbolo</th><th style="width:170px">Nome</th><th>O que é, em português</th><th style="width:150px">De onde vem</th></tr></thead>
+      <tbody>
+        <tr><td class="finline" style="font-size:17px">X̄</td><td>Média amostral</td><td>Some tudo, divide pela quantidade. O "valor típico".</td><td><span class="badge badge-success">calculadora</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">S</td><td>Desvio padrão amostral</td><td>O quanto os dados se espalham em torno da média, na mesma unidade dos dados.</td><td><span class="badge badge-success">calculadora</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">S²</td><td>Variância amostral</td><td>O desvio padrão ao quadrado. Denominador <strong>(n−1)</strong>.</td><td><span class="badge badge-success">calculadora</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">n</td><td>Tamanho da amostra</td><td>Quantos dados você tem.</td><td><span class="badge badge-success">calculadora</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">p̂</td><td>"p chapéu" — proporção amostral</td><td>Fração da amostra que satisfaz alguma condição. Ex.: 87 de 1000 → 0,087.</td><td><span class="badge badge-warn">conta simples</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">μ</td><td>"mi" — média populacional</td><td>A média <strong>verdadeira</strong>, da população inteira. Você nunca sabe; é o que o IC tenta cercar.</td><td><span class="badge badge-neutral">desconhecido</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">σ</td><td>"sigma" — desvio populacional</td><td>Desvio padrão verdadeiro. Se o enunciado der, é dado; senão, você usa S no lugar.</td><td><span class="badge badge-info">enunciado</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">α</td><td>"alfa"</td><td>A fatia de erro aceita. 95% de confiança → α = 0,05 (5%).</td><td><span class="badge badge-info">enunciado</span></td></tr>
+        <tr><td class="finline" style="font-size:17px">z, t, χ²</td><td>Quantis</td><td>Números tabelados que definem o tamanho da margem de erro.</td><td><span class="badge badge-error">tabela impressa</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout c-info">
+    <span class="ctitle">Por que existe "n−1" e não "n"</span>
+    Quando você mede o espalhamento usando a <em>média da própria amostra</em>, a conta sai sempre um pouquinho
+    "apertada demais" — a amostra parece menos espalhada do que a população realmente é.
+    Dividir por <strong>n−1</strong> em vez de <strong>n</strong> compensa esse aperto, deixando o resultado um pouco maior e, na média, certo.
+    O formulário do PRO3100 usa <strong>sempre n−1</strong>. Guarde isso: é a diferença entre as duas teclas da seção seguinte.
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ============ 3. TESTE 30s ============ -->
+<section class="section" id="teste">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Teste de verificação do teclado — 30 segundos</h2>
+    <p class="section-desc">
+      A KK-82MS-B <em>deveria</em> ser um clone funcional da Casio fx-82MS. Isso é uma premissa, não um fato.
+      Faça este teste antes de confiar em qualquer sequência deste guia — de preferência ao sentar na prova.
+    </p>
+  </div>
+
+  <div class="card accentleft">
+    <p>Usei o conjunto <strong>{2, 4, 6}</strong> de propósito: os resultados são redondos e <strong>impossíveis de confundir</strong>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:90px">Resultado</th><th style="width:150px">Valor exato</th><th>Por que este conjunto</th></tr></thead>
+        <tbody>
+          <tr><td class="finline">X̄</td><td class="num"><strong>4</strong></td><td>Média de 2, 4 e 6. Redondo.</td></tr>
+          <tr><td class="finline">σn−1</td><td class="num"><strong>2</strong></td><td>Exatamente 2. Se o visor mostrar 2, é a versão <strong>amostral</strong>.</td></tr>
+          <tr><td class="finline">σn</td><td class="num">1.632993162</td><td>Nada redondo. Se aparecer isso, é a versão populacional — a errada.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <strong>Entre no modo estatístico.</strong><br>
+        <span class="k">MODE</span> <span class="arrow">→</span> o visor lista <span class="disp">COMP SD REG</span> / <span class="disp">1 2 3</span> <span class="arrow">→</span> <span class="k">2</span>
+        <br><span class="mini-note">Confirme: apareceu <span class="disp">SD</span> no cantinho de cima? Se sim, deu certo.</span>
+      </li>
+      <li>
+        <strong>Limpe o caderninho.</strong><br>
+        <span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="arrow">→</span> <span class="disp">Scl Mcl All</span> <span class="arrow">→</span> <span class="k">1</span> <span class="k">=</span>
+      </li>
+      <li>
+        <strong>Carimbe os três dados.</strong><br>
+        <span class="k">2</span> <span class="k dark">M+</span> &nbsp; <span class="k">4</span> <span class="k dark">M+</span> &nbsp; <span class="k">6</span> <span class="k dark">M+</span>
+        <br><span class="mini-note">A cada carimbo o visor pisca <span class="disp">n= 1</span>, <span class="disp">n= 2</span>, <span class="disp">n= 3</span>.</span>
+      </li>
+      <li>
+        <strong>Confira o contador.</strong><br>
+        <span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span> <span class="arrow">→</span> tem que dar <span class="disp">3</span>
+      </li>
+      <li>
+        <strong>Leia a média.</strong><br>
+        <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">1</span> <span class="k">=</span> <span class="arrow">→</span> tem que dar <span class="disp">4</span>
+      </li>
+      <li>
+        <strong>Descubra qual é qual.</strong><br>
+        <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">2</span> &nbsp;&nbsp;<span class="badge badge-success">σn−1 · o certo</span><br>
+        <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">2</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">1.632993162</span> &nbsp;&nbsp;<span class="badge badge-error">σn · o errado</span>
+      </li>
+    </ol>
+
+    <div class="grid2">
+      <div class="callout c-ok" style="margin:0">
+        <span class="ctitle">✓ Passou</span>
+        Saiu <strong>3 / 4 / 2 / 1.6329…</strong>? Sua calculadora é compatível. Siga para o cartão do modo SD.
+      </div>
+      <div class="callout c-danger" style="margin:0">
+        <span class="ctitle">✕ Falhou</span>
+        Qualquer linha deu diferente? <strong>Não perca tempo caçando menu.</strong> Vá direto para o Plano B — ele funciona em qualquer calculadora científica.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4 class="mini">De onde saem esses menus (para você não decorar no vácuo)</h4>
+    <p>Olhe acima das teclas <span class="k">1</span> e <span class="k">2</span> do seu teclado. Você vai ver duas siglas escritas:</p>
+    <ul class="plain">
+      <li><span class="k shift">SHIFT</span> <span class="k">1</span> = <strong>S-SUM</strong> (<em>statistics sum</em>) → o menu das <strong>somas</strong>: <span class="k">1</span>=Σx² · <span class="k">2</span>=Σx · <span class="k">3</span>=n</li>
+      <li><span class="k shift">SHIFT</span> <span class="k">2</span> = <strong>S-VAR</strong> (<em>statistics variables</em>) → o menu dos <strong>resultados</strong>: <span class="k">1</span>=X̄ · <span class="k">2</span>=σn · <span class="k">3</span>=σn−1</li>
+    </ul>
+    <p class="mini-note" style="margin-top:10px">Truque de memória: <strong>S-SUM = matéria-prima</strong> (as somas cruas). <strong>S-VAR = produto pronto</strong> (média e desvio). E dentro do S-VAR, <strong>o 3 é o certo</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ 4. CARTÃO SD ============ -->
+<section class="section" id="sd">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Cartão do modo SD — tudo o que você vai precisar</h2>
+    <p class="section-desc">Entrar, limpar, digitar, corrigir erro e ler os resultados. Esta é a tabela para olhar de relance durante a prova.</p>
+  </div>
+
+  <div class="callout c-danger">
+    <span class="ctitle">O erro mais caro da prova — leia duas vezes</span>
+    <p><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">2</span> e <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> ficam colados no mesmo menu e devolvem números <strong>parecidos</strong>.</p>
+    <ul class="plain cross" style="margin:10px 0 0">
+      <li><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">2</span> → <span class="finline">σn</span>, o desvio <strong>populacional</strong> (divide por n). <strong>Não use.</strong></li>
+    </ul>
+    <ul class="plain check" style="margin:4px 0 0">
+      <li><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> → <span class="finline">σn−1</span>, o desvio <strong>amostral</strong> (divide por n−1). <strong>É este que o formulário chama de S.</strong></li>
+    </ul>
+    <p style="margin-top:10px">Trocar um pelo outro dá um resultado plausível, sem erro na tela, sem aviso nenhum. Você só descobre na correção.
+    <strong>Decore: dentro do S-VAR, o 3 é o certo.</strong> E <span class="finline">σn−1</span> é sempre o <strong>maior</strong> dos dois.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:26%">O que você quer</th><th style="width:34%">Teclas, na ordem</th><th>O que aparece / observação</th></tr></thead>
+      <tbody>
+        <tr><td>Entrar no modo SD</td><td><span class="k">MODE</span> <span class="k">2</span></td><td><span class="disp">SD</span> aparece no topo do visor</td></tr>
+        <tr><td><strong>Limpar o caderninho</strong><br><span class="mini-note">faça sempre, antes de cada questão</span></td><td><span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="k">1</span> <span class="k">=</span></td><td>zera <span class="finline">n, Σx, Σx²</span> — continua no SD</td></tr>
+        <tr><td>Carimbar um dado</td><td><code>valor</code> <span class="k dark">M+</span></td><td><span class="disp">n= k</span> pisca no visor</td></tr>
+        <tr><td>Repetir o mesmo valor</td><td><span class="k dark">M+</span> de novo, sem redigitar</td><td>n sobe de 1 a cada toque</td></tr>
+        <tr><td>Errou e <strong>ainda não</strong> carimbou</td><td><span class="k">AC</span>, depois redigite</td><td>o caderninho nem foi tocado — tranquilo</td></tr>
+        <tr><td>Errou e <strong>já</strong> carimbou</td><td><span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="k">1</span> <span class="k">=</span> e redigite tudo</td><td>método à prova de bala — com n ≤ 12 leva 8 segundos</td></tr>
+        <tr style="background:var(--accent-dim)"><td><strong>Ler X̄</strong> (média)</td><td><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">1</span> <span class="k">=</span></td><td>média amostral</td></tr>
+        <tr style="background:var(--accent-dim)"><td><strong>Ler S</strong> (= σn−1)</td><td><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> <span class="k">=</span></td><td><strong>este é o do formulário</strong></td></tr>
+        <tr><td>Ler σn (populacional)</td><td><span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">2</span> <span class="k">=</span></td><td><span class="badge badge-error">não use nos ICs</span></td></tr>
+        <tr><td><strong>Ler S²</strong> (variância)</td><td>leia S, e então <span class="k">x²</span> <span class="k">=</span></td><td>não existe tecla de S² — você eleva ao quadrado</td></tr>
+        <tr><td>Ler n</td><td><span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span></td><td>quantos dados entraram — <strong>confira sempre</strong></td></tr>
+        <tr><td>Ler Σx</td><td><span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">2</span> <span class="k">=</span></td><td>soma dos dados</td></tr>
+        <tr><td>Ler Σx²</td><td><span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">1</span> <span class="k">=</span></td><td>soma dos quadrados</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout c-warn">
+    <span class="ctitle">Apagar só o último dado — verifique se existe</span>
+    Alguns clones aceitam <span class="k shift">SHIFT</span> <span class="k dark">M+</span> (a função M−) para remover o último valor carimbado.
+    <strong>Não confirmei isso neste modelo.</strong> Teste junto com o teste de 30 s: carimbe <code>2</code>, <code>4</code>, <code>99</code>,
+    aperte <span class="k shift">SHIFT</span> <span class="k dark">M+</span> e leia n com <span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span>.
+    Se voltou para <strong>2</strong>, funciona. Se não, limpe e redigite — é mais rápido do que parece.
+  </div>
+</section>
+
+<!-- ============ 5. FREQUÊNCIAS ============ -->
+<section class="section" id="freq">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Tabela de frequências — valor com repetição</h2>
+    <p class="section-desc">
+      As provas antigas do PRO3100 vivem disso: "# gols 0,1,2,3… / Freq. 29, 71, 82, 89…".
+      Você não vai carimbar o valor 2 oitenta e duas vezes.
+    </p>
+  </div>
+
+  <div class="card accentleft">
+    <h4 class="mini">A sintaxe</h4>
+    <div class="seq">
+      <code>valor</code> <span class="k shift">SHIFT</span> <span class="k">,</span> <code>frequência</code> <span class="k dark">M+</span>
+    </div>
+    <p>O <span class="k shift">SHIFT</span> <span class="k">,</span> imprime um <strong>ponto e vírgula</strong> <span class="disp">;</span> no visor.
+    Leia a linha como uma frase: <em>"o valor 2, repetido 82 vezes — carimba."</em></p>
+
+    <h4 class="mini" style="margin-top:20px">Exemplo real (gols por jogo)</h4>
+    <div class="table-wrap" style="max-width:340px">
+      <table>
+        <thead><tr><th># gols</th><th>0</th><th>1</th><th>2</th></tr></thead>
+        <tbody><tr><td><strong>Freq.</strong></td><td class="num">29</td><td class="num">71</td><td class="num">82</td></tr></tbody>
+      </table>
+    </div>
+    <div class="seq">
+      <span class="k">0</span> <span class="k shift">SHIFT</span> <span class="k">,</span> <span class="k">2</span><span class="k">9</span> <span class="k dark">M+</span>
+      &nbsp;&nbsp; <span class="k">1</span> <span class="k shift">SHIFT</span> <span class="k">,</span> <span class="k">7</span><span class="k">1</span> <span class="k dark">M+</span>
+      &nbsp;&nbsp; <span class="k">2</span> <span class="k shift">SHIFT</span> <span class="k">,</span> <span class="k">8</span><span class="k">2</span> <span class="k dark">M+</span>
+    </div>
+    <p class="mini-note">Três carimbos, 182 dados registrados. Depois é só <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">1</span> <span class="k">=</span> para a média.</p>
+
+    <div class="callout c-warn">
+      <span class="ctitle">Verifique isto no teste de 30 s</span>
+      Digite <code>5</code> <span class="k shift">SHIFT</span> <span class="k">,</span> <code>3</code> <span class="k dark">M+</span> e leia n: tem que dar <strong>3</strong>.
+      Se o visor não mostrar o <span class="disp">;</span>, essa tecla não existe aqui — use um dos dois planos B abaixo.
+    </div>
+
+    <div class="grid2">
+      <div class="card" style="margin:0">
+        <h4 class="mini">Plano B · frequências pequenas</h4>
+        <p style="margin:0">Carimbe repetido: <span class="k">2</span> <span class="k dark">M+</span> <span class="k dark">M+</span> <span class="k dark">M+</span> para três repetições. Funciona sempre, em qualquer modelo.</p>
+      </div>
+      <div class="card" style="margin:0">
+        <h4 class="mini">Plano B · frequências grandes</h4>
+        <p style="margin:0">Vá para o Plano B geral com <span class="finline">Σx = Σfi·xi</span> e <span class="finline">Σx² = Σfi·xi²</span>.</p>
+      </div>
+    </div>
+
+    <div class="callout c-danger">
+      <span class="ctitle">n numa tabela de frequências</span>
+      <strong>n = soma das frequências</strong>, não o número de linhas da tabela.
+      No exemplo dos gols, n = 29+71+82 = 182, e não 3. Confira sempre com <span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span>.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. PLANO B ============ -->
+<section class="section" id="planob">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Plano B — se o modo SD não existir ou o teste falhar</h2>
+    <p class="section-desc">
+      Só teclas básicas, tudo no modo COMP. Mais lento, mas <strong>impossível de dar errado</strong>.
+      Usa a segunda forma da fórmula de S² que está no formulário.
+    </p>
+  </div>
+
+  <div class="card accentleft">
+    <p class="f">S² = ( ΣXi² − n·X̄² ) / (n − 1)</p>
+    <p>Essa é a <strong>fórmula computacional</strong>: em vez de calcular cada desvio <span class="finline">(Xi − X̄)</span> um por um,
+    você precisa só de três números — a soma, a soma dos quadrados e o n. Exatamente o que o caderninho guardaria.
+    A diferença é que aqui <strong>você</strong> é o caderninho.</p>
+
+    <p style="margin-top:16px"><strong>Exemplo: {2, 4, 4, 5, 8, 9}</strong>, n = 6. Entre no modo COMP com <span class="k">MODE</span> <span class="k">1</span>.</p>
+
+    <div class="seq">
+      <span class="lbl">Σx</span> <span class="k">2</span><span class="k">+</span><span class="k">4</span><span class="k">+</span><span class="k">4</span><span class="k">+</span><span class="k">5</span><span class="k">+</span><span class="k">8</span><span class="k">+</span><span class="k">9</span><span class="k">=</span> <span class="arrow">→</span> <span class="disp">32</span><br>
+      <span class="lbl">Σx²</span> <span class="k">2</span><span class="k">x²</span><span class="k">+</span><span class="k">4</span><span class="k">x²</span><span class="k">+</span><span class="k">4</span><span class="k">x²</span><span class="k">+</span><span class="k">5</span><span class="k">x²</span><span class="k">+</span><span class="k">8</span><span class="k">x²</span><span class="k">+</span><span class="k">9</span><span class="k">x²</span><span class="k">=</span> <span class="arrow">→</span> <span class="disp">206</span><br>
+      <span class="lbl">X̄</span> <span class="k">3</span><span class="k">2</span> <span class="k">÷</span> <span class="k">6</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">5.333333333</span><br>
+      <span class="lbl">S²</span> <span class="k">2</span><span class="k">0</span><span class="k">6</span> <span class="k">−</span> <span class="k">6</span> <span class="k">×</span> <span class="k">Ans</span> <span class="k">x²</span> <span class="k">=</span> <span class="k">÷</span> <span class="k">5</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">7.066666667</span><br>
+      <span class="lbl">S</span> <span class="k">√</span> <span class="k">Ans</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">2.658320272</span>
+    </div>
+
+    <div class="callout c-info">
+      <span class="ctitle">Por que o Ans funciona aqui</span>
+      O <span class="k">Ans</span> só é atualizado quando você aperta <span class="k">=</span>.
+      Na linha do S², a média (5,3333…) ainda está guardada nele do passo anterior, então
+      <span class="k">Ans</span> <span class="k">x²</span> vira <span class="finline">X̄²</span> sem você redigitar 5,333333333.
+      Isso evita erro de arredondamento — o Ans guarda mais dígitos do que o visor mostra.
+    </div>
+    <p class="mini-note">Repare no <code>÷ 5</code>: é <strong>n−1</strong> (6−1), não n. Se você dividir por 6 aqui, calculou a versão populacional — o mesmo erro do <span class="finline">σn</span>.</p>
+  </div>
+</section>
+
+<div class="page-break"></div>
+
+<!-- ============ 7. ICs ============ -->
+<section class="section" id="ic">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Os quatro intervalos de confiança</h2>
+    <p class="section-desc">As quatro fórmulas de uma amostra que existem no formulário, com a notação literal dele.</p>
+  </div>
+
+  <div class="callout c-danger">
+    <span class="ctitle">Regra de ouro — a divisão de trabalho</span>
+    <p>A calculadora entrega <strong><span class="finline">X̄</span>, <span class="finline">S</span>, <span class="finline">n</span></strong> e faz a aritmética.
+    O quantil (<span class="finline">z</span>, <span class="finline">t</span>, <span class="finline">χ²</span>) vem <strong>sempre da tabela impressa</strong>.</p>
+    <p style="margin-bottom:0"><strong>Este modelo não tem função de IC pronta.</strong> Não existe menu de intervalo de confiança — procurar por um só queima minutos.</p>
+  </div>
+
+  <h3 class="sub">Como ler cada tabela (isso muda o resultado)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:80px">Tabela</th><th style="width:230px">O que as colunas significam</th><th>Como procurar para 95% de confiança (α = 0,05)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Z</strong></td>
+          <td>É a área <strong>entre 0 e z</strong>: <span class="finline">P(0 &lt; Z &lt; z)</span>. Os valores param em 0,499.</td>
+          <td>Procure <strong>(1−α)/2 = 0,475</strong> <em>dentro do corpo</em> da tabela → a linha+coluna dá <strong>z = 1,96</strong>.
+          <br><span class="badge badge-error">não procure 0,975</span> <span class="mini-note">— ela não existe nesta tabela.</span></td>
+        </tr>
+        <tr>
+          <td><strong>t</strong></td>
+          <td>Colunas <span class="num">0,100 / 0,050 / 0,025 / 0,010</span> = área da <strong>cauda superior</strong>. Linhas = graus de liberdade.</td>
+          <td>Linha <strong>n−1</strong>, coluna <strong>0,025</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>χ²</strong></td>
+          <td>Colunas <span class="num">0,995 … 0,005</span> = área da <strong>cauda superior</strong>. Linhas = graus de liberdade.</td>
+          <td>Linha <strong>n−1</strong>. Coluna <strong>0,025</strong> = <span class="finline">χ²<sub>α/2</sub></span> (o grande);
+          coluna <strong>0,975</strong> = <span class="finline">χ²<sub>1−α/2</sub></span> (o pequeno).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="mini-note">Atalhos do z para decorar: 90% → procure 0,450 → <strong>1,645</strong> · 95% → 0,475 → <strong>1,96</strong> · 99% → 0,495 → <strong>2,575</strong>.</p>
+
+  <!-- IC 1 -->
+  <h3 class="sub" id="ic1">1 · IC para a média μ, com σ <span style="color:var(--accent)">conhecida</span> — usa Z</h3>
+  <div class="card accentleft">
+    <p class="f">[ X̄ ± z<sub>α/2</sub> · σ/√n ]</p>
+    <p class="mini-note" style="margin-bottom:12px"><strong>Quando usar:</strong> o enunciado <em>te dá</em> o desvio padrão populacional σ. Frases como "sabe-se que σ = 3" ou "o desvio padrão do processo é 0,5".</p>
+    <div class="seq">
+      <span class="lbl">Calculadora</span> modo SD → carimbe os dados → <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">1</span> <span class="k">=</span> <span class="arrow">→</span> anote <span class="finline">X̄</span><br>
+      <span class="lbl">Tabela</span> Z: procure <strong>(1−α)/2</strong> no corpo <span class="arrow">→</span> <span class="finline">z<sub>α/2</sub></span><br>
+      <span class="lbl">Margem</span> <span class="k">MODE</span> <span class="k">1</span> &nbsp; <code>z</code> <span class="k">×</span> <code>σ</code> <span class="k">÷</span> <span class="k">√</span> <code>n</code> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">E</span><br>
+      <span class="lbl">Extremos</span> <code>X̄</code> <span class="k">−</span> <code>E</code> <span class="k">=</span> &nbsp;·&nbsp; <code>X̄</code> <span class="k">+</span> <code>E</code> <span class="k">=</span>
+    </div>
+    <p class="mini-note" style="margin:0">O <span class="finline">σ</span> aqui é <strong>dado do enunciado</strong>. Ele não sai da amostra, e a calculadora não sabe dele.</p>
+  </div>
+
+  <!-- IC 2 -->
+  <h3 class="sub" id="ic2">2 · IC para a média μ, com σ <span style="color:var(--warning)">desconhecida</span> — usa t</h3>
+  <div class="card accentleft">
+    <p class="f">[ X̄ ± t<sub>α/2, n−1</sub> · s/√n ]</p>
+    <p class="mini-note" style="margin-bottom:12px"><strong>Quando usar:</strong> o caso normal. O enunciado só te dá os dados, e você tem que estimar o espalhamento a partir deles. Este é o mais comum na prova.</p>
+    <div class="seq">
+      <span class="lbl">Calculadora</span> <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">1</span> <span class="k">=</span> (X̄) &nbsp;·&nbsp; <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> <span class="k">=</span> (<strong>s</strong>) &nbsp;·&nbsp; <span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span> (n)<br>
+      <span class="lbl">Tabela</span> t: linha <strong>n−1</strong>, coluna <strong>α/2</strong> <span class="mini-note">(95%→0,025 · 90%→0,050 · 99%→0,010)</span><br>
+      <span class="lbl">Margem</span> <code>t</code> <span class="k">×</span> <code>s</code> <span class="k">÷</span> <span class="k">√</span> <code>n</code> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">E</span><br>
+      <span class="lbl">Extremos</span> <code>X̄</code> <span class="k">−</span> <code>E</code> <span class="k">=</span> &nbsp;·&nbsp; <code>X̄</code> <span class="k">+</span> <code>E</code> <span class="k">=</span>
+    </div>
+    <p class="mini-note" style="margin:0">O <span class="finline">s</span> desta fórmula é o <strong>menu 3</strong> do S-VAR, nunca o menu 2.</p>
+  </div>
+
+  <!-- IC 3 -->
+  <h3 class="sub" id="ic3">3 · IC para uma proporção p</h3>
+  <div class="card accentleft">
+    <p class="f">[ p̂ ± z<sub>α/2</sub> · √( p̂(1−p̂)/n ) ]</p>
+    <p class="mini-note" style="margin-bottom:12px"><strong>Quando usar:</strong> o dado é "quantos, de quantos" — 87 defeituosos em 1000 peças, 151 operários com mais de 3 faltas em 1000.</p>
+    <div class="seq">
+      <span class="lbl">Calculadora</span> <span class="k">MODE</span> <span class="k">1</span> &nbsp; <code>sucessos</code> <span class="k">÷</span> <code>n</code> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">p̂</span><br>
+      <span class="lbl">Tabela</span> Z: procure <strong>(1−α)/2</strong> no corpo <span class="arrow">→</span> <span class="finline">z<sub>α/2</sub></span><br>
+      <span class="lbl">Margem</span> <code>z</code> <span class="k">×</span> <span class="k">√</span> <span class="k">(</span> <code>p̂</code> <span class="k">×</span> <span class="k">(</span> <span class="k">1</span> <span class="k">−</span> <code>p̂</code> <span class="k">)</span> <span class="k">÷</span> <code>n</code> <span class="k">)</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">E</span><br>
+      <span class="lbl">Extremos</span> <code>p̂</code> <span class="k">−</span> <code>E</code> <span class="k">=</span> &nbsp;·&nbsp; <code>p̂</code> <span class="k">+</span> <code>E</code> <span class="k">=</span>
+    </div>
+    <p class="mini-note" style="margin:0">Não use o modo SD aqui — <span class="finline">p̂</span> não é média de nada que você carimbou.
+    E digite o <span class="finline">p̂</span> por extenso em vez de usar <span class="k">Ans</span>: ele aparece três vezes na mesma conta.</p>
+    <p class="mini-note" style="margin:8px 0 0">Vindo de tabela de frequências: some as frequências que satisfazem o evento, e divida por Σfi.</p>
+  </div>
+
+  <!-- IC 4 -->
+  <h3 class="sub" id="ic4">4 · IC para a variância σ² — usa qui-quadrado</h3>
+  <div class="card accentleft">
+    <p class="f">[ (n−1)S² / χ²<sub>α/2, n−1</sub> &nbsp;;&nbsp; (n−1)S² / χ²<sub>1−α/2, n−1</sub> ]</p>
+    <div class="callout c-danger" style="margin-top:0">
+      <span class="ctitle">Aqui os quantis invertem</span>
+      Repare que este IC <strong>não</strong> tem a forma "centro ± margem". São duas divisões separadas — e o quantil
+      <strong>grande</strong> fica embaixo do limite <strong>inferior</strong>. É contraintuitivo, e é de propósito:
+      dividir por um número maior dá um resultado menor.
+    </div>
+    <div class="seq">
+      <span class="lbl">Calculadora</span> <span class="k shift">SHIFT</span> <span class="k">2</span> <span class="k">3</span> <span class="k">=</span> <span class="k">x²</span> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">S²</span>, então <span class="k">×</span> <code>(n−1)</code> <span class="k">=</span> <span class="arrow">→</span> <span class="disp">NUM</span> (anote)<br>
+      <span class="lbl">Tabela</span> χ², linha <strong>n−1</strong> <span class="arrow">→</span> coluna <strong>0,025</strong> (grande) e coluna <strong>0,975</strong> (pequeno)<br>
+      <span class="lbl">Inferior</span> <code>NUM</code> <span class="k">÷</span> <code>χ²<sub>α/2</sub></code> <span class="k">=</span> <span class="arrow">←</span> divide pelo <strong>MAIOR</strong><br>
+      <span class="lbl">Superior</span> <code>NUM</code> <span class="k">÷</span> <code>χ²<sub>1−α/2</sub></code> <span class="k">=</span> <span class="arrow">←</span> divide pelo <strong>MENOR</strong>
+    </div>
+    <p class="mini-note" style="margin:0"><strong>Teste de sanidade:</strong> se o limite inferior sair maior que o superior, você inverteu os dois quantis.<br>
+    <strong>Se pedirem IC para σ</strong> (desvio, não variância): tire a raiz dos <strong>dois</strong> extremos no final.<br>
+    <strong>Exemplo de leitura</strong> — n=6, α=5%, g.l.=5: <span class="num">χ²<sub>0,025</sub> = 12,83</span> e <span class="num">χ²<sub>0,975</sub> = 0,831</span>.</p>
+  </div>
+</section>
+
+<!-- ============ 8. BÔNUS ============ -->
+<section class="section" id="bonus">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Bônus: correlação e regressão simples (modo REG)
+      <span class="badge badge-warn" style="vertical-align:middle;margin-left:8px">pode não cair na P1</span></h2>
+    <p class="section-desc">Fora do escopo principal. Vale os 30 segundos de leitura só porque, se cair, resolve quase sozinho.</p>
+  </div>
+  <div class="card">
+    <div class="seq">
+      <span class="lbl">Entrar</span> <span class="k">MODE</span> <span class="k">3</span> <span class="k">1</span> <span class="mini-note">(escolha Lin = linear)</span><br>
+      <span class="lbl">Limpar</span> <span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="k">1</span> <span class="k">=</span><br>
+      <span class="lbl">Dados</span> <code>x</code> <span class="k">,</span> <code>y</code> <span class="k dark">M+</span> <span class="mini-note">para cada par</span><br>
+      <span class="lbl">Ler</span> <span class="k shift">SHIFT</span> <span class="k">2</span> e então <span class="k">▶</span> <span class="k">▶</span> até a página <span class="disp">A B r</span> <span class="arrow">→</span> <span class="k">1</span>=A (β̂<sub>0</sub>) · <span class="k">2</span>=B (β̂<sub>1</sub>) · <span class="k">3</span>=r <span class="arrow">→</span> <span class="k">=</span>
+    </div>
+    <div class="callout c-warn">
+      <span class="ctitle">Não confirmado neste clone</span>
+      Se as páginas do S-VAR não tiverem A / B / r, esqueça e faça pela fórmula do formulário:
+      <span class="finline">β̂<sub>1</sub> = (ΣYiXi − n·ȲX̄) / Σ(Xi−X̄)²</span> e <span class="finline">β̂<sub>0</sub> = Ȳ − β̂<sub>1</sub>X̄</span>; <span class="finline">R² = r²</span>.
+    </div>
+    <div class="callout c-danger">
+      <span class="ctitle">Volte para o SD depois</span>
+      <span class="k">MODE</span> <span class="k">2</span> antes da próxima questão de uma amostra. Se você continuar no REG,
+      o menu S-VAR mostra outras coisas e você lê o número errado.
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. ARMADILHAS ============ -->
+<section class="section" id="armadilhas">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Armadilhas — a lista para reler antes de entregar</h2>
+    <p class="section-desc">Todas estas dão um número plausível, sem mensagem de erro. É isso que as torna caras.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:19%">Armadilha</th><th style="width:40%">Como ela te pega</th><th>Antídoto</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>σn × σn−1</strong><br><span class="badge badge-error">a mais cara</span></td>
+          <td>O formulário usa denominador <strong>(n−1)</strong>. O menu <span class="k">2</span> dá σn (errado) e o menu <span class="k">3</span> dá σn−1 (certo). O resultado sai plausível — você não percebe.</td>
+          <td>Decore: <strong>dentro do S-VAR, o 3 é o certo</strong>. E σn−1 é sempre o <strong>maior</strong> dos dois.</td>
+        </tr>
+        <tr>
+          <td><strong>Caderninho não limpo</strong></td>
+          <td>Os dados da questão anterior continuam somados. O n vem maior que o esperado e contamina média, S e tudo o que vem depois.</td>
+          <td><span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="k">1</span> <span class="k">=</span> <strong>antes</strong> de cada questão. E confira n <strong>antes</strong> de ler a média.</td>
+        </tr>
+        <tr>
+          <td><strong>α × α/2</strong></td>
+          <td>IC bilateral divide o erro em <strong>duas</strong> caudas. 95% ⇒ α = 0,05 ⇒ <strong>α/2 = 0,025</strong>. Usar 0,05 dá um intervalo estreito demais.</td>
+          <td>t e χ²: coluna <strong>0,025</strong>. Z: procure <strong>0,475</strong> no corpo (a tabela é P(0&lt;Z&lt;z)).</td>
+        </tr>
+        <tr>
+          <td><strong>Graus de liberdade</strong></td>
+          <td>t e χ² de uma amostra usam <strong>n−1</strong>, não n. Com n = 25, a linha da tabela é a <strong>24</strong>.</td>
+          <td>Leia n na calculadora e subtraia 1 <em>no papel</em> antes de abrir a tabela.</td>
+        </tr>
+        <tr>
+          <td><strong>χ² invertido</strong></td>
+          <td>Dividir pelo quantil pequeno no limite inferior — sai um intervalo absurdo e largo.</td>
+          <td>Limite <strong>inferior</strong> divide pelo <strong>maior</strong> χ². Se inferior &gt; superior, você trocou.</td>
+        </tr>
+        <tr>
+          <td><strong>n de tabela de frequências</strong></td>
+          <td>Usar o número de <em>classes</em> (linhas) em vez de <strong>Σfi</strong>.</td>
+          <td>n = soma das frequências. Confira com <span class="k shift">SHIFT</span> <span class="k">1</span> <span class="k">3</span> <span class="k">=</span>.</td>
+        </tr>
+        <tr>
+          <td><strong>S × S²</strong></td>
+          <td>O menu entrega <strong>S</strong> (desvio). O IC de σ² pede <strong>S²</strong> (variância).</td>
+          <td>Depois de ler S, aperte <span class="k">x²</span> <span class="k">=</span>. IC de μ usa S; IC de σ² usa S².</td>
+        </tr>
+        <tr>
+          <td><strong>Arredondar cedo</strong></td>
+          <td>Anotar X̄ = 5,33 e usar isso na conta seguinte propaga o erro até o terceiro decimal do resultado.</td>
+          <td>Encadeie com <span class="k">Ans</span> sempre que der. Arredonde só no <strong>último</strong> passo.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 10. CONFERÊNCIA ============ -->
+<section class="section" id="conferencia">
+  <div class="section-head">
+    <div class="accent-bar"></div>
+    <h2>Conferência final — refaça isto ao sentar na prova</h2>
+    <p class="section-desc">
+      Conjunto <strong>{2, 4, 4, 5, 8, 9}</strong>, calculado à mão e depois na calculadora.
+      Se os dois lados baterem, você pode confiar no resto do guia.
+    </p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h4 class="mini">À mão — as contas abertas</h4>
+      <p style="font-family:var(--font-mono);font-size:12.5px;line-height:1.85;margin:0">
+        n = 6<br>
+        Σx  = 2+4+4+5+8+9 = <strong>32</strong><br>
+        X̄  = 32 / 6 = <strong>5,333333…</strong><br>
+        Σx² = 4+16+16+25+64+81 = <strong>206</strong><br><br>
+        Σ(Xi−X̄)²:<br>
+        &nbsp;(−3,3333)² = 11,1111<br>
+        &nbsp;(−1,3333)² = &nbsp;1,7778<br>
+        &nbsp;(−1,3333)² = &nbsp;1,7778<br>
+        &nbsp;(−0,3333)² = &nbsp;0,1111<br>
+        &nbsp;(&nbsp;2,6667)² = &nbsp;7,1111<br>
+        &nbsp;(&nbsp;3,6667)² = 13,4444<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;──────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SQ = <strong>35,333333…</strong><br><br>
+        S²  = 35,3333 / <strong>5</strong> = <strong>7,066667</strong><br>
+        S   = √7,066667 = <strong>2,658320</strong><br>
+        σn² = 35,3333 / <strong>6</strong> = 5,888889<br>
+        σn  = √5,888889 = 2,426703
+      </p>
+      <div class="callout c-ok" style="margin-bottom:0">
+        <span class="ctitle">Conferindo pela fórmula computacional</span>
+        (206 − 6 · 5,333333²) / 5 = (206 − 170,6667) / 5 = <strong>7,066667</strong> ✓ &nbsp;<span class="mini-note">— os dois caminhos dão o mesmo número.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 class="mini">Na calculadora — a sequência</h4>
+      <div class="seq" style="margin-top:0">
+        <span class="k">MODE</span> <span class="k">2</span> &nbsp;·&nbsp; <span class="k shift">SHIFT</span> <span class="k">MODE</span> <span class="k">1</span> <span class="k">=</span><br>
+        <span class="k">2</span> <span class="k dark">M+</span> <span class="k">4</span> <span class="k dark">M+</span> <span class="k">4</span> <span class="k dark">M+</span> <span class="k">5</span> <span class="k dark">M+</span> <span class="k">8</span> <span class="k dark">M+</span> <span class="k">9</span> <span class="k dark">M+</span>
+      </div>
+      <div class="table-wrap" style="margin-bottom:0">
+        <table>
+          <thead><tr><th>Teclas</th><th>Visor</th><th>É o quê</th></tr></thead>
+          <tbody>
+            <tr><td><span class="k shift">SHIFT</span><span class="k">2</span><span class="k">1</span><span class="k">=</span></td><td class="num"><strong>5.333333333</strong></td><td>X̄</td></tr>
+            <tr style="background:var(--accent-dim)"><td><span class="k shift">SHIFT</span><span class="k">2</span><span class="k">3</span><span class="k">=</span></td><td class="num"><strong>2.658320272</strong></td><td>S = σn−1 <span class="badge badge-success">usar</span></td></tr>
+            <tr><td><span class="k shift">SHIFT</span><span class="k">2</span><span class="k">2</span><span class="k">=</span></td><td class="num">2.426703296</td><td>σn <span class="badge badge-error">não usar</span></td></tr>
+            <tr><td>…<span class="k">2</span><span class="k">3</span><span class="k">=</span> <span class="k">x²</span><span class="k">=</span></td><td class="num"><strong>7.066666667</strong></td><td>S²</td></tr>
+            <tr><td><span class="k shift">SHIFT</span><span class="k">1</span><span class="k">3</span><span class="k">=</span></td><td class="num">6</td><td>n</td></tr>
+            <tr><td><span class="k shift">SHIFT</span><span class="k">1</span><span class="k">2</span><span class="k">=</span></td><td class="num">32</td><td>Σx</td></tr>
+            <tr><td><span class="k shift">SHIFT</span><span class="k">1</span><span class="k">1</span><span class="k">=</span></td><td class="num">206</td><td>Σx²</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout c-info">
+    <span class="ctitle">Olhe para σn e σn−1 lado a lado</span>
+    <strong>2,4267</strong> contra <strong>2,6583</strong>. São parecidos o bastante para você não desconfiar,
+    e diferentes o bastante para mudar o intervalo de confiança inteiro.
+    Essa é exatamente a razão pela qual o menu <span class="k">3</span> precisa estar no automático.
+  </div>
+</section>
+
+</div>
+
+<footer class="site-footer no-print">
+  <div class="footer-inner">
+    <span>Guia de uso — <strong>DEXIN BST KK-82MS-B</strong> · notação conforme <code>formulario_pro3100.pdf</code></span>
+    <span>PRO3100 / PRO3200 · P1 — aulas 01–10</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.remove('no-js');
+  var btn = document.getElementById('themeToggle');
+  var root = document.documentElement;
+
+  function read() { try { return localStorage.getItem('calc-guia-theme'); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem('calc-guia-theme', v); } catch (e) {} }
+
+  var saved = read();
+  var initial = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  root.setAttribute('data-theme', initial);
+  if (btn) btn.textContent = initial === 'dark' ? '☀️' : '🌙';
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      btn.textContent = next === 'dark' ? '☀️' : '🌙';
+      save(next);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
