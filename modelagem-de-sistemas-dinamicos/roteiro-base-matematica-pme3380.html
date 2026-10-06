@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisão de base: EDOs, Taylor e Laplace</title>
+<meta name="description" content="Roteiro de revisão para Modelagem de Sistemas Dinâmicos: capítulos a ler no Zill, no Ogata e no Garcia e exercícios numerados, na ordem em que a disciplina precisa de EDOs, séries de Taylor (1 e 2 variáveis) e transformada de Laplace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3380-base-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9 { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2 { font-size: 15px; } #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3380 · revisão de base</div>
+  <div class="sb-sub">Modelagem de Sistemas Dinâmicos · prova em 17/nov/2026 (P2), com a revisão feita antes</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+    <button class="btn-chip" id="btn-print-resumo" type="button">🖨 Imprimir resumo</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#cap1-h">1 · O que a disciplina exige</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap2-h">2 · Roteiro de leitura e exercícios</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#blocoA">A · EDO de 1ª ordem</a></li>
+<li class="nav-ex"><a href="#blocoB">B · EDO de 2ª ordem</a></li>
+<li class="nav-ex"><a href="#blocoC">C · Taylor (1 variável)</a></li>
+<li class="nav-ex"><a href="#blocoD">D · Laplace</a></li>
+<li class="nav-ex"><a href="#blocoE">E · Sistemas e e^At</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap3-h">3 · Taylor em 1 e 2 variáveis</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#tay-ler">O que ler</a></li>
+<li class="nav-ex"><a href="#tay-ex">Exercícios</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap9-h">4 · Checklist de 1 página</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><a data-voltar-disciplinas href="../index.html" style="margin-right:auto;display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border-radius:9999px;border:1px solid currentColor;color:inherit;opacity:.85;text-decoration:none;font-weight:600;font-size:13px">← Disciplinas</a><span class="chip">Versão pública (sem recortes de material de terceiros)</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<header class="hero" id="topo">
+  <span class="eyebrow">PME3380 · Modelagem de Sistemas Dinâmicos · Poli-USP</span>
+  <h1>Revisão de base: EDOs, séries de Taylor e Laplace</h1>
+  <p class="subtitle">roteiro de leitura e exercícios · Zill (EDOs) + Ogata + Garcia (linearização) · para fechar a base antes de funções de transferência, blocos e controle</p>
+  <p class="intro">
+    Este documento <strong>não ensina a matéria</strong>: diz <strong>o que ler</strong> (livro, seção, páginas impressas) e <strong>o que resolver</strong> (exercícios numerados), na ordem em que a disciplina usa cada base.
+    Para cada seção há <strong>só os exercícios necessários para exercitar cada tópico uma vez</strong>. Se um tópico ainda não estiver firme depois deles, peça mais e eles entram numa lista extra.
+  </p>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">Bases cobertas</div><div class="kpi-value">5</div><div class="kpi-sub">EDO 1ª ordem · EDO 2ª ordem · Taylor 1 e 2 variáveis · Laplace · sistemas e e<sup>At</sup></div></div>
+    <div class="kpi-card"><div class="kpi-label">Seções do Zill</div><div class="kpi-value">21</div><div class="kpi-sub">11ª ed. (2018), cap. 1 a 8; só o que a disciplina usa</div></div>
+    <div class="kpi-card"><div class="kpi-label">Exercícios</div><div class="kpi-value">65</div><div class="kpi-sub">60 do Zill (todos ímpares, com resposta no fim do livro) + 2 do Ogata + 3 autorais de Taylor em 2 variáveis</div></div>
+    <div class="kpi-card"><div class="kpi-label">Ordem</div><div class="kpi-value" style="font-size:18px;line-height:1.3">cap. 2, na ordem das seções</div><div class="kpi-sub">cada bloco usa o anterior; Taylor entra antes de Laplace</div></div>
+  </div>
+  <div class="callout concept" style="margin-top:16px">
+    <span class="co-t">Como usar</span>
+    <p>Leia a seção indicada, <strong>faça o exercício sem olhar a resposta</strong> e só depois confira no fim do livro (<em>Answers for Selected Odd-Numbered Problems</em>, ANS-1 a ANS-16, ordem dos capítulos). Se errou, releia só o exemplo da seção que o exercício imita. Os números de página são os <strong>impressos</strong> no livro, não os do leitor de PDF (no Zill, página do PDF = impressa + 11).</p>
+    <p>Livros: <strong>Zill</strong>, <em>A First Course in Differential Equations with Modeling Applications</em>, 11ª ed. · <strong>Ogata</strong>, <em>Engenharia de Controle Moderno</em>, 5ª ed. · <strong>Garcia</strong>, <em>Modelagem e Simulação de Processos Industriais e de Sistemas Eletromecânicos</em>. Nenhum trecho dos livros é reproduzido aqui.</p>
+  </div>
+</header>
+
+<section class="chapter" id="cap1">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 1</span>
+    <h2 id="cap1-h" data-nav="1 · O que a disciplina exige">O que a disciplina exige de cada base</h2>
+    <p class="section-desc">A revisão segue as necessidades do cronograma, não a ordem do livro.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Base</th><th>Onde a disciplina usa</th><th>O que precisa saber fazer</th></tr></thead>
+    <tbody>
+      <tr><td><strong>EDO de 1ª ordem</strong></td><td>Tanque, circuito RC/RL, sistema térmico (módulos 3 e 4); resposta livre (módulo 6)</td><td>Separar variáveis, fator integrante, achar equilíbrio e interpretar a constante de tempo</td></tr>
+      <tr><td><strong>EDO de 2ª ordem</strong></td><td>Massa-mola-amortecedor, RLC, resposta livre e forçada, polos (módulos 2, 3 e 6)</td><td>Equação característica, três casos de raízes, solução particular (coeficientes a determinar), condições iniciais</td></tr>
+      <tr><td><strong>Série de Taylor (1 e 2 variáveis)</strong></td><td>Linearização de modelos (módulo 5), perturbação em torno do ponto de operação</td><td>Truncar na 1ª ordem, calcular derivadas parciais no ponto, escrever o modelo em desvios</td></tr>
+      <tr><td><strong>Transformada de Laplace</strong></td><td>Módulo 7; base de função de transferência, diagrama de blocos e malha fechada (módulo 8 em diante)</td><td>Transformar e inverter com a tabela, resolver PVI, degrau e impulso, frações parciais, convolução</td></tr>
+      <tr><td><strong>Sistemas de EDOs e e<sup>At</sup></strong></td><td>Espaço de estados, matriz de transição, estabilidade (módulos 5 e 6)</td><td>Autovalores e autovetores, solução de X' = AX, ligação entre e<sup>At</sup> e Laplace</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn"><span class="co-t">Fora do escopo desta revisão</span>
+    <p>Equações exatas e substituições (2.4, 2.5), métodos numéricos (2.6, cap. 9), Cauchy-Euler (4.7), funções de Green (4.8), solução em série de EDOs (6.2 a 6.4), contorno e vigas (5.2) e modelos não lineares (5.3, 4.10). Nada disso é pré-requisito dos módulos 1 a 10 do cronograma.</p></div>
+</section>
+
+<section class="chapter" id="cap2">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 2</span>
+    <h2 id="cap2-h" data-nav="2 · Roteiro de leitura e exercícios">Roteiro de leitura e exercícios</h2>
+    <p class="section-desc">Cinco blocos, na ordem de dependência. Todos os exercícios do Zill são ímpares, então têm resposta no fim do livro.</p></div>
+
+  <h3 class="sub" id="blocoA" data-nav="A · EDO de 1ª ordem">Bloco A — EDO de 1ª ordem (12 exercícios)</h3>
+  <p>Base dos modelos de tanque, circuito e sistema térmico. O item que mais volta na disciplina é a <strong>constante de tempo</strong>: ela aparece no fator integrante da 2.3 e no problema de resfriamento da 3.1.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção do Zill</th><th>Páginas</th><th>Leia</th><th>Exercícios</th></tr></thead><tbody><tr><td>1.1 Definições e terminologia</td><td>3–14</td><td>Ordem, linearidade, o que é solução, família de soluções</td><td>1 (ordem e linear?), 11 (verificar solução), 31 (testar y = e<sup>mx</sup>)</td></tr><tr><td>1.2 Problemas de valor inicial</td><td>15–21</td><td>PVI, existência e unicidade</td><td>1 (família → PVI)</td></tr><tr><td>2.1 Curvas sem resolver (só 2.1.2)</td><td>39–46</td><td>Autônomas, pontos críticos, estabilidade do equilíbrio</td><td>21 (pontos críticos e retrato de fase)</td></tr><tr><td>2.2 Equações separáveis</td><td>47–54</td><td>Separar, integrar, constante da condição inicial</td><td>1 (geral), 23 (com PVI)</td></tr><tr><td>2.3 Equações lineares</td><td>55–63</td><td>Forma padrão, fator integrante, solução transitória × permanente</td><td>3 (geral), 25 (com PVI)</td></tr><tr><td>3.1 Modelos lineares</td><td>85–95</td><td>Resfriamento, misturas e circuito LR: monte a EDO a partir do texto</td><td>13 (resfriamento), 21 (mistura), 29 (circuito LR)</td></tr></tbody></table></div>
+
+  <h3 class="sub" id="blocoB" data-nav="B · EDO de 2ª ordem">Bloco B — EDO de 2ª ordem (13 exercícios)</h3>
+  <p>Base da resposta livre e forçada. As <strong>três formas de raiz</strong> da 4.3 são a mesma classificação de polos que você usa depois para estabilidade.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção do Zill</th><th>Páginas</th><th>Leia</th><th>Exercícios</th></tr></thead><tbody><tr><td>4.1 Teoria preliminar (4.1.1 a 4.1.3)</td><td>119–131</td><td>PVI de 2ª ordem, independência linear, conjunto fundamental, estrutura homogênea + particular</td><td>1 (família → PVI), 15 (independência), 23 (conjunto fundamental)</td></tr><tr><td>4.3 Coeficientes constantes</td><td>135–141</td><td>Equação auxiliar: raízes reais distintas, repetidas e complexas</td><td>1 (geral), 29 (PVI), 49 (monte a EDO a partir da solução)</td></tr><tr><td>4.4 Coeficientes a determinar (superposição)</td><td>142–151</td><td>Escolha da solução particular para entrada polinomial, exponencial e senoidal</td><td>1 (geral), 27 (PVI)</td></tr><tr><td>4.6 Variação de parâmetros <span class="badge badge-roteiro">opcional</span></td><td>159–165</td><td>Só a ideia: é a origem da integral de convolução do módulo 6</td><td>1</td></tr><tr><td>5.1 Massa-mola e circuito RLC</td><td>197–212</td><td>Livre não amortecido, amortecido (três casos), forçado e analogia com o circuito série</td><td>1 (período), 25 (amortecimento), 33 (forçado), 49 (carga no RLC)</td></tr></tbody></table></div>
+
+  <h3 class="sub" id="blocoC" data-nav="C · Taylor (1 variável)">Bloco C — Taylor em uma variável (4 exercícios; o resto no capítulo 3)</h3>
+  <p>O Zill só cobre séries de uma variável. Para linearização em torno de um ponto de operação e para duas variáveis, siga o capítulo 3.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção do Zill</th><th>Páginas</th><th>Leia</th><th>Exercícios (1 variável)</th></tr></thead><tbody><tr><td>6.1 Revisão de séries de potências</td><td>237–242</td><td>Série de Taylor/Maclaurin de e<sup>x</sup>, sen, cos e 1/(1−x); raio de convergência</td><td>1 (raio), 11 (Maclaurin), 17 (Taylor em torno de a), 19 (produto de séries)</td></tr></tbody></table></div>
+
+  <h3 class="sub" id="blocoD" data-nav="D · Laplace">Bloco D — Transformada de Laplace (23 exercícios)</h3>
+  <p>Maior bloco, porque o que vem depois (função de transferência, diagrama de blocos, malha fechada) usa Laplace como ferramenta. Faça cada seção na ordem. A partir da 7.3, <strong>use a tabela</strong> (Apêndice C) em vez de integrar.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção do Zill</th><th>Páginas</th><th>Leia</th><th>Exercícios</th></tr></thead><tbody><tr><td>7.1 Definição</td><td>279–285</td><td>A integral que define L{f}; existência; linearidade; transformadas básicas</td><td>1 (pela definição), 19 (pelo teorema), 37 (com identidade trigonométrica)</td></tr><tr><td>7.2 Inversas e derivadas (7.2.1 e 7.2.2)</td><td>286–293</td><td>Inversa por tabela, frações parciais, L{f′} e L{f″} e solução de PVI</td><td>Inversas: 1, 13, 21, 25 · PVI: 35 (1ª ordem), 41 (2ª ordem)</td></tr><tr><td>7.3 Propriedades operacionais I</td><td>294–305</td><td>Translação em s (e<sup>at</sup>) e em t (degrau unitário)</td><td>Em s: 1, 21, 23 · degrau: 37, 55, 63</td></tr><tr><td>7.4 Propriedades operacionais II (7.4.1 e 7.4.2)</td><td>306–312</td><td>Multiplicar por t<sup>n</sup>; convolução e L{f * g}. Pule a 7.4.3 (função periódica)</td><td>1, 9 (derivada da transformada) · 19, 23, 41 (convolução)</td></tr><tr><td>7.5 Delta de Dirac</td><td>318–321</td><td>Resposta ao impulso: é a ponte para a função de transferência</td><td>1, 5</td></tr><tr><td>7.6 Sistemas de EDOs</td><td>a partir de 322</td><td>Resolver sistemas por Laplace</td><td>1</td></tr><tr><td>Apêndice C — tabela de Laplace</td><td>APP-29</td><td>Aprender a consultar; a folha da prova traz uma tabela parecida</td><td>Use nos exercícios acima antes de olhar o gabarito</td></tr></tbody></table></div>
+  <div class="callout"><span class="co-t">Complemento no Ogata</span>
+    <p>O Apêndice B do Ogata traz as tabelas de pares e propriedades de Laplace (pp. 782–783), os teoremas do valor inicial e final (p. 784) e a expansão em frações parciais com polos distintos e múltiplos (p. 785 em diante). Útil para conferir a notação que a disciplina usa.</p></div>
+
+  <h3 class="sub" id="blocoE" data-nav="E · Sistemas e e^At">Bloco E — Sistemas de EDOs e exponencial matricial (8 exercícios)</h3>
+  <p>É aqui que a EDO vira <strong>espaço de estados</strong>: X′ = AX é a equação de estado sem entrada, e e<sup>At</sup> é a matriz de transição do módulo 6. Releia o bloco D antes: a transformada inversa de (sI − A)<sup>−1</sup> é e<sup>At</sup>.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção do Zill</th><th>Páginas</th><th>Leia</th><th>Exercícios</th></tr></thead><tbody><tr><td>8.1 Teoria preliminar</td><td>333–339</td><td>Forma matricial X′ = AX, solução como vetor, conjunto fundamental</td><td>1 (forma matricial), 11 (verificar solução)</td></tr><tr><td>8.2 Sistemas homogêneos (8.2.1 a 8.2.3)</td><td>340–354</td><td>Autovalores reais distintos, repetidos e complexos</td><td>1 (reais), 21 (repetidos), 35 (complexos)</td></tr><tr><td>8.4 Exponencial matricial</td><td>362 em diante</td><td>Definição de e<sup>At</sup>, cálculo por diagonalização e solução de X′ = AX</td><td>1 (e<sup>At</sup> de matriz diagonal), 5 (solução com e<sup>At</sup>), 15 (e<sup>At</sup> por outro método)</td></tr></tbody></table></div>
+  <div class="callout warn"><span class="co-t">Cuidado com a notação</span>
+    <p>O Zill escreve y′ e y″ e usa X para o vetor de estado. A disciplina usa x(t) para o estado e u(t) para a entrada. Os métodos são os mesmos; só troque os símbolos ao copiar para a sua folha.</p></div>
+</section>
+
+<section class="chapter" id="cap3">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 3</span>
+    <h2 id="cap3-h" data-nav="3 · Taylor em 1 e 2 variáveis">Série de Taylor em uma e duas variáveis</h2>
+    <p class="section-desc">O Zill cobre só uma variável (bloco C). Para duas variáveis e para o uso em linearização, as fontes são o Ogata e o Garcia.</p></div>
+
+  <h3 class="sub" id="tay-ler" data-nav="O que ler">O que ler</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Fonte</th><th>Páginas</th><th>O que cobre</th></tr></thead>
+    <tbody>
+      <tr><td>Zill, 6.1</td><td>237–242</td><td>Série de Taylor de uma variável: fórmula, séries conhecidas (e<sup>x</sup>, sen, cos), convergência</td></tr>
+      <tr><td><strong>Ogata, seção 2.7</strong> (Linearização de modelos matemáticos não lineares)</td><td>36–38</td><td>Expansão de y = f(x) e de y = f(x₁, x₂) em torno do ponto de operação, truncada na 1ª ordem; coeficientes K = df/dx e K₁, K₂ = derivadas parciais; exemplo 2.5 (z = xy) com cálculo do erro</td></tr>
+      <tr><td>Ogata, exemplo A.2.13</td><td>51</td><td>Mais um exemplo resolvido de duas variáveis; compare com o seu antes de resolver o B.2.13</td></tr>
+      <tr><td><strong>Garcia, seção 12.1</strong> (Métodos de aproximação linear)</td><td>323–331</td><td>Linearização por Taylor, variáveis de perturbação, exemplos em tanques e vasos: é o estilo de problema que a disciplina cobra</td></tr>
+    </tbody></table></div>
+  <div class="callout concept"><span class="co-t">O que realmente precisa ficar</span>
+    <p>Para a disciplina, só importa a <strong>primeira ordem</strong>: f(x, y) ≈ f(x̄, ȳ) + f<sub>x</sub>(x̄, ȳ)(x − x̄) + f<sub>y</sub>(x̄, ȳ)(y − ȳ). Os termos de 2ª ordem aparecem uma vez abaixo (exercício 3) só para você ver <em>o que está sendo jogado fora</em>. O passo que erra é sempre o mesmo: avaliar as derivadas <strong>no ponto de operação</strong>, não em (x, y) genérico.</p></div>
+
+  <h3 class="sub" id="tay-ex" data-nav="Exercícios">Exercícios</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>Enunciado</th><th>Origem</th><th>Resposta (conferida em Python)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Linearize z = x² + 8xy + 3y² na região 2 ≤ x ≤ 4, 10 ≤ y ≤ 12 (ponto médio).</td><td>Ogata B.2.13, p. 55 (sem resposta no livro)</td><td>x̄ = 3, ȳ = 11, z̄ = 636 · <strong>z ≈ 94x + 90y − 636</strong></td></tr>
+      <tr><td>2</td><td>Determine a equação linearizada de y = 0,2x³ em torno de x = 2.</td><td>Ogata B.2.14, p. 55 (sem resposta no livro)</td><td>ȳ = 1,6 · <strong>y ≈ 2,4x − 3,2</strong></td></tr>
+      <tr><td>3 <span class="badge badge-roteiro">autoral</span></td><td>f(x, y) = x²y em (1, 2). Escreva a aproximação de 1ª ordem. Depois acrescente os termos de 2ª ordem e compare ambas com f(1,1; 2,05).</td><td>Autoral</td><td>1ª ordem: <strong>2 + 4(x−1) + (y−2)</strong>. Com 2ª ordem: acrescente 2(x−1)² + 2(x−1)(y−2). Valor exato 2,4805; 1ª ordem dá 2,45; 2ª ordem dá 2,48 (resta só o termo de 3ª ordem, 0,0005)</td></tr>
+      <tr><td>4 <span class="badge badge-roteiro">autoral</span></td><td>f(x, y) = y·√x em (4, 3). Linearize e compare com f(4,1; 3,05).</td><td>Autoral (tipo vazão ∝ √altura × coeficiente)</td><td><strong>6 + 0,75(x−4) + 2(y−3)</strong>. Exato 6.1758; linear 6.1750</td></tr>
+      <tr><td>5 <span class="badge badge-roteiro">autoral</span></td><td>f(x, y) = x / y em (2, 1). Linearize e compare com f(2,1; 1,05).</td><td>Autoral</td><td><strong>2 + (x−2) − 2(y−1)</strong>. Exato 2.0000; linear 2.0000 (coincidem por acaso nesse ponto, não por regra)</td></tr>
+    </tbody></table></div>
+  <p class="tbl-cap">As derivadas parciais dos itens 1, 3, 4 e 5 foram conferidas por diferença finita central; os valores acima vêm do mesmo script (<code>gerar_partes.py</code>).</p>
+</section>
+
+<section class="chapter resumo" id="cap9">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Capítulo 4</span>
+    <h2 id="cap9-h" data-nav="4 · Checklist de 1 página">Checklist de 1 página</h2>
+    <p class="section-desc">Imprima e marque. Cada linha é uma capacidade, não um capítulo.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Bloco</th><th>Consigo, sem consultar…</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A · 1ª ordem</strong></td><td>☐ separar variáveis e aplicar a condição inicial · ☐ resolver y′ + p(x)y = g(x) com fator integrante · ☐ achar o equilíbrio de uma EDO autônoma e dizer se é estável · ☐ montar a EDO de um tanque, de um resfriamento e de um circuito LR a partir do texto</td></tr>
+      <tr><td><strong>B · 2ª ordem</strong></td><td>☐ resolver ay″ + by′ + cy = 0 pelos três casos de raiz · ☐ achar a solução particular (polinômio, exponencial, senoide) e somar à homogênea · ☐ aplicar duas condições iniciais · ☐ relacionar massa-mola-amortecedor e RLC (analogia força–tensão: m↔L, c↔R, 1/k↔C)</td></tr>
+      <tr><td><strong>C · Taylor</strong></td><td>☐ escrever a série de e<sup>x</sup>, sen x, cos x · ☐ linearizar f(x) e f(x, y) em torno de um ponto de operação · ☐ dizer o que foi descartado e quando o erro cresce</td></tr>
+      <tr><td><strong>D · Laplace</strong></td><td>☐ transformar e inverter usando a tabela · ☐ frações parciais com polos reais distintos e repetidos · ☐ resolver PVI de 1ª e 2ª ordem por Laplace · ☐ degrau, impulso e deslocamento · ☐ calcular L{f * g}</td></tr>
+      <tr><td><strong>E · Sistemas</strong></td><td>☐ escrever X′ = AX · ☐ achar autovalores e a solução nos três casos · ☐ calcular e<sup>At</sup> de uma matriz 2×2 · ☐ explicar por que os autovalores de A são os polos</td></tr>
+    </tbody></table></div>
+  <p>Quando o checklist estiver todo marcado, o assunto está pronto para a ligação com a disciplina: <strong>função de transferência = Laplace da EDO com condições iniciais nulas</strong>.</p>
+</section>
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para a revisão de base de PME3380 (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build_roteiro_base/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3380-base-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
