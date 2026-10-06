@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 · Crotti-Engesser e Castigliano · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 12</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t12-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t12-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t12-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t12-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t12-ce">Crotti-Engesser</a></li>
+<li class="nav-ex"><a href="#t12-fict">Carga fictícia</a></li>
+<li class="nav-ex"><a href="#t12-c3">1º Castigliano</a></li>
+<li class="nav-ex"><a href="#t12-algo">Algoritmos do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t12-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t12-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t12-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#s15-ex1-h">A15 ex.1 · suporte com 2 cargas<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s15-ex3-h">A15 ex.3 · balanço com q<span class="nav-pv">PIVÔ</span></a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t12-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>12 · Crotti-Engesser e Castigliano</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t12-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t12-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">C1</span> <span class="chip">C2</span> <span class="chip">C3</span> · aula 15 (28/09)</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Como achar o deslocamento ou a rotação de <strong>qualquer ponto</strong>, com várias cargas ou nenhuma carga ali, sem resolver a linha elástica? Ao fim você deve aplicar
+        Crotti-Engesser com cargas independentes, criar uma carga fictícia (força para translação, binário para rotação) e derivar antes de anulá-la, e reconhecer quando o 1º Castigliano
+        (energia em deslocamentos) é mais curto.</p></div>
+</section>
+<section class="chapter" id="t12-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t12-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="11-energia-na-flexao.html">ficha 11 (Energia na flexão)</a>: escrever $N$, $V$, $M$ e $T$ por trecho (é o grosso do trabalho).</li><li><a href="09-trabalho-e-energia.html">ficha 09 (Trabalho, energia e P.T.E.)</a>: P.T.E. e por que ele não basta.</li><li><a href="../base.html#derivada">Base</a>: derivada parcial e regra da cadeia sob a integral.</li></ul>
+</section>
+<section class="chapter" id="t12-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t12-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 15, p.3–25 (teoremas p.3–9, exemplos p.10–16, carga fictícia p.19–24)</td><td></td></tr><tr><td>Apostila 03 (Clóvis)</td><td>§9 p.28–32 (ex. 8); carga fictícia §9.4</td><td></td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§9.9 (627–639)</td><td>só o 2º teorema, versão linear; não traz Crotti-Engesser nem o 1º teorema</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t12-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t12-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t12-ce" data-nav="Crotti-Engesser">Crotti-Engesser</h3>
+        <p>Varie só a carga $P_i$ por $dP_i$. O trabalho complementar muda de $dW^* = \delta_i\,dP_i$ (faixa horizontal no gráfico) e a energia complementar de
+        $dU^* = \frac{\partial U^*}{\partial P_i}dP_i$. Como $dW^* = dU^*$:
+        $$\boxed{\delta_i = \frac{\partial U^*}{\partial P_i}}$$
+        $\delta_i$ é o deslocamento <strong>correspondente</strong> a $P_i$ (mesmo ponto, direção e sentido; angular se $P_i$ é binário). Vale para material não linear. No caso elástico-linear
+        $U^* = U$ e vira o 2º Castigliano $\delta_i = \partial U/\partial P_i$.</p>
+        <p>Na prática, derive sob a integral: $\delta_i = \sum\int\left(\frac{N}{EA}\frac{\partial N}{\partial P_i} + \frac{T}{GI_t}\frac{\partial T}{\partial P_i} + \frac{M}{EI}\frac{\partial M}{\partial P_i}\right)ds$. Duas
+        regras que custam ponto: as cargas são <strong>independentes</strong> e literais (duas forças "$P$" em pontos diferentes viram $P_1$ e $P_2$ até depois da derivada) e $U^*$ é a do
+        <strong>sistema inteiro</strong>, cabos e molas incluídos.</p>
+        <h3 class="sub" id="t12-fict" data-nav="Carga fictícia">Carga fictícia</h3>
+        <p>Se não há carga no ponto e na direção do deslocamento pedido, <em>crie</em> uma: força para translação, binário para rotação, com sentido arbitrado. Escreva os esforços com a carga original mais
+        a criada, derive em relação à criada e <strong>só depois</strong> anule-a. Sinal positivo = sentido arbitrado.</p>
+        <h3 class="sub" id="t12-c3" data-nav="1º Castigliano">1º teorema de Castigliano</h3>
+        <p>Varie só o deslocamento $\delta_i$: $dW = P_i\,d\delta_i = dU = \frac{\partial U}{\partial\delta_i}d\delta_i$, logo $P_i = \partial U/\partial\delta_i$, com $U$ escrita em deslocamentos
+        ($U = \sum k_i\Delta_i^2/2$). É o caminho curto quando a cinemática é simples: barra rígida apoiada em molas ou hastes, um grau de liberdade.</p>
+        <h3 class="sub" id="t12-algo" data-nav="Algoritmos do professor">Algoritmos do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A2 · Crotti-Engesser com várias cargas</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.3–16</span></p>
+      <ol><li>Cargas <strong>independentes</strong> e literais ($P_1, P_2$). Não substitua $P_2 = 4P_1$ antes de derivar.</li>
+      <li>Esforços em função de todas → $U^*$ do sistema <strong>inteiro</strong>.</li>
+      <li>$\delta_i = \partial U^*/\partial P_i$; depois os números.</li>
+      <li>Sinal + = sentido de $P_i$. Conferir $\sum P_i\delta_i/2 = U^*$.</li></ol></div>
+    
+<div class="card accent-left"><h3>A3 · Carga fictícia ("criar o esforço")</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.19–24; apostila §9.4</span></p>
+      <ol><li>Translação → criar <strong>força</strong>; rotação → criar <strong>binário</strong>, no ponto e na direção pedidos, sentido arbitrado.</li>
+      <li>Esforços internos com carga original + criada.</li>
+      <li>$\delta = \int \frac{M}{EI}\frac{\partial M}{\partial P}ds$ (regra da cadeia sob a integral).</li>
+      <li><strong>Derivar primeiro, anular depois.</strong> Sinal + = sentido arbitrado.</li></ol></div>
+    
+<div class="card accent-left"><h3>A8 · 1º Castigliano (energia em deslocamentos)</h3>
+      <p><span class="tag tag-form">📄 Aula 15 p.6–8; apostila, exercício 6</span></p>
+      <ol><li>Útil quando a cinemática é simples (barra rígida com molas ou hastes, 1 grau de liberdade).</li>
+      <li>Escrever os alongamentos de cada elemento em função de um parâmetro (ex.: rotação $\theta$).</li>
+      <li>$U = \sum \frac{k_i\Delta_i^2}{2}$ em função do parâmetro.</li>
+      <li>$P_i = \partial U/\partial\delta_i$ (ou $W = U$ se houver uma só carga).</li></ol></div>
+  </div><div class="callout concept"><span class="co-t">Qual teorema usar: a árvore de decisão</span><p><strong>Deslocamento sob a única carga?</strong> → P.T.E. (<a href="09-trabalho-e-energia.html">ficha 09 (Trabalho, energia e P.T.E.)</a>). <strong>Outro deslocamento ou várias cargas?</strong> → Crotti-Engesser, criando a carga se preciso. <strong>Reações que o equilíbrio não dá?</strong> → energia complementar mínima (<a href="13-hiperestaticas-energia.html">ficha 13 (Hiperestáticas e linha elástica)</a>). <strong>Um grau de liberdade óbvio</strong> (barra rígida)? → 1º Castigliano. Em todos os casos o trabalho pesado é o mesmo: <em>esforços internos por trecho</em>.</p></div>
+</section>
+<section class="chapter" id="t12-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t12-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li>Crotti-Engesser vale com material não linear, mas ainda exige <strong>sem dissipação</strong> e geometria linear. O 2º Castigliano ($\partial U/\partial P$) só vale para estrutura elástico-linear.</li><li>Derivar antes de anular a carga fictícia: zerar antes apaga a dependência e a derivada sai zero.</li><li>$\delta_i$ responde só ao <strong>correspondente</strong> de $P_i$. Deslocamento horizontal de um nó pede força horizontal fictícia nele; rotação pede binário.</li><li>Binário fictício numa estrutura espacial flete uma barra e torce a perpendicular: esforço por barra, não por estrutura.</li></ul>
+</section>
+
+<section class="chapter" id="t12-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t12-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Exemplos 1 e 3 da aula 15: Crotti-Engesser com duas cargas e criar força e binário. O exemplo 3 é o modelo de carga fictícia.</p></div>
+<h3 class="sub" id="t12-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="s15-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 15 · exemplo 1 (p.10–16) · Pivô 8 da P2</div>
+      <h3 id="s15-ex1-h" data-nav="A15 ex.1 · suporte com 2 cargas" data-pivo>Suporte ABC com duas cargas: Crotti-Engesser</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (28/09)</span></div></div>
+    <div class="ex-topics"><span class="chip">C1</span><span class="chip">W5</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 15, p.10)</span>
+      O suporte ABC ilustrado na figura sustenta uma carga horizontal $P_1 = 5$ kN e uma carga vertical $P_2 = 20$ kN. Ambas têm área de seção transversal $A$ = 20 cm² e são feitas de aço ($E$ = 200 GPa). a) Determine o deslocamento horizontal e vertical da junta B; b) Verifique que o trabalho complementar é igual à energia complementar.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 15 · ex. 1):</strong> ver o PDF oficial, Slides da aula 15, p. 10 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Treliça de 2 barras, isostática, <strong>duas cargas</strong> no mesmo nó. O P.T.E. daria uma equação com duas incógnitas (limitação 1 da aula 14 p.34). Ferramenta: Crotti-Engesser.</p>
+      <div class="callout concept"><span class="co-t">Conceito: Crotti-Engesser, a derivada da energia complementar</span>
+        <p>Imagine a estrutura já carregada e dê um acréscimo $dP_i$ <em>só</em> a uma carga. O trabalho complementar cresce $dW^* = \delta_i\,dP_i$ (faixa horizontal no gráfico $P_i\times\delta_i$). A energia complementar cresce $dU^* = \frac{\partial U^*}{\partial P_i}dP_i$. Sem dissipação, as duas são iguais ⇒ $\delta_i = \frac{\partial U^*}{\partial P_i}$ (aula 15 p.3–5). A demonstração não usa linearidade do material: por isso o curso trabalha com $U^*$. Com material linear, $U^* = U$ e isso vira o "2º teorema de Castigliano" do Gere.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Barra CB (horizontal)</td><td>$L_2 = L$</td><td>2000 mm</td><td>figura</td></tr>
+      <tr><td>Barra AB (inclinada)</td><td>$L_1 = L/\cos\theta$</td><td>2309 mm</td><td>figura, θ = 30°</td></tr>
+      <tr><td>Área, módulo</td><td>$A$, $E$</td><td>2000 mm², 200 000 MPa</td><td>enunciado</td></tr>
+      <tr><td>Cargas</td><td>$P_1$ →, $P_2$ ↓</td><td>5000 N, 20 000 N</td><td>enunciado</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{H,B} = \partial U^*/\partial P_1$, $\delta_{V,B} = \partial U^*/\partial P_2$, com $P_1$ e $P_2$ <strong>literais e independentes</strong> até o fim.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 15 p.3</span> $\delta_i = \partial U^*/\partial P_i$; <span class="tag tag-form">📄 Aula 12 p.22</span> $U^* = \sum N_i^2L_i/2EA$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos (nó B, tração +)</h4>
+      <div class="math-box">$$N_1\sin\theta = P_2\ \Rightarrow\ N_1 = \frac{P_2}{\sin\theta}\ (\text{AB, tração})\qquad N_2 + N_1\cos\theta = P_1\ \Rightarrow\ N_2 = P_1 - \frac{P_2}{\tan\theta}\ (\text{CB})$$</div>
+      <p>Com os números, $N_2 = 5 - 34{,}6 = -29{,}6$ kN: CB está comprimida.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^* = \frac{N_1^2L_1}{2EA} + \frac{N_2^2L_2}{2EA} = \frac{L}{2EA}\left[\frac{P_2^2}{\sin^2\theta\cos\theta} + \left(P_1 - \frac{P_2}{\tan\theta}\right)^2\right]$$
+      $$\delta_{H,B} = \frac{\partial U^*}{\partial P_1} = \frac{L}{EA}\left(P_1 - \frac{P_2}{\tan\theta}\right) = 5\times10^{-6}(5000 - 34\,641) = -0{,}148\ \text{mm}$$
+      $$\delta_{V,B} = \frac{\partial U^*}{\partial P_2} = \frac{L}{EA}\left[-\frac{P_1}{\tan\theta} + P_2\frac{1 + \cos^3\theta}{\sin^2\theta\cos\theta}\right] = 5\times10^{-6}(-8660 + 152\,376) = 0{,}719\ \text{mm}$$</div>
+      <p>(b) $W^* = \frac{P_1\delta_1}{2} + \frac{P_2\delta_2}{2} = U^*$, identidade conferida simbolicamente. Os coeficientes de $P_j$ em $\delta_i$ formam a <strong>matriz de flexibilidade</strong>, que é simétrica (o efeito de $P_1$ em $\delta_2$ é igual ao de $P_2$ em $\delta_1$: $-\frac{L}{EA}\cot\theta$). A inversa dela é a matriz de rigidez do slide p.16: $k_{11} = \frac{EA}{L}(1 + \cos^3\theta)$, $k_{12} = \frac{EA}{L}\sin\theta\cos^2\theta$, $k_{22} = \frac{EA}{L}\sin^2\theta\cos\theta$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{H,B} \approx -0{,}15$ mm (B vai para a <em>esquerda</em>, contra $P_1$); $\delta_{V,B} \approx 0{,}72$ mm (para baixo); $W^* = U^*$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Substituir os números antes de derivar: $U^*$ vira um número e não há o que derivar. Literal até o fim.</li>
+      <li>Sinal negativo não é erro: a barra CB comprimida encurta e puxa B para a esquerda mais do que $P_1$ empurra para a direita.</li>
+      <li>Ordem de grandeza: $\sigma = N/A \approx 20$ MPa ⇒ $\varepsilon \approx 10^{-4}$ ⇒ décimos de mm em 2 m ✓.</li></ul></div>
+  </article>
+<article class="ex pivo" id="s15-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 15 · exemplo 3 (p.19–24) · Pivô 9 da P2</div>
+      <h3 id="s15-ex3-h" data-nav="A15 ex.3 · balanço com q" data-pivo>Balanço com carga distribuída: criar a força e o binário</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (28/09)</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 15, p.19)</span>
+      Determine o deslocamento vertical e a rotação da seção B da viga engastada-livre AB indicada na figura. Despreze a parcela da energia complementar devida às forças cortantes no cálculo. São dados: $q, L, EI$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 15 · ex. 3):</strong> ver o PDF oficial, Slides da aula 15, p. 19 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Balanço isostático sob carga distribuída. Duas limitações do P.T.E. ao mesmo tempo: carga distribuída e deslocamentos sem esforço correspondente. Ferramenta: Crotti-Engesser com esforços <strong>criados</strong> em B.</p>
+      <div class="callout concept"><span class="co-t">Conceito: carga fictícia ("é necessário criá-los")</span>
+        <p>Crotti-Engesser só dá deslocamentos que têm uma carga correspondente. Se não há força vertical em B, <em>crie</em> uma ($P$); se não há binário, crie $M_B$ (aula 15 p.20). Escreva $U^*(q, P, M_B)$, derive e, <strong>só depois</strong>, faça $P = M_B = 0$. A derivada guarda a informação "quanto B se move por unidade de carga em B", que é justamente o deslocamento. A apostila compara com a <em>sopa de pedra</em>: sem a pedra não há sopa, mas no fim ela não muda o sabor.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$q$ (uniforme, ↓), $L$, $EI$ constantes; cortante desprezada (mandado pelo enunciado). Criados: $P$ ↓ e $M_B$ horário em B.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{V,B} = \left(\frac{\partial U^*}{\partial P}\right)_{P=M_B=0}$ e $\theta_B = \left(\frac{\partial U^*}{\partial M_B}\right)_{P=M_B=0}$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\delta_{V,B} = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial P}ds\qquad\theta_B = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial M_B}ds\qquad\text{(aula 15 p.22–23)}$$</div>
+      <p>A regra da cadeia sob a integral evita elevar ao quadrado e depois derivar: $\frac{\partial}{\partial P}\frac{M^2}{2EI} = \frac{M}{EI}\frac{\partial M}{\partial P}$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Com $s$ a partir de B (ponta livre):</p>
+      <div class="math-box">$$M_z(s) = -\frac{qs^2}{2} - Ps - M_B\qquad \frac{\partial M_z}{\partial P} = -s\qquad \frac{\partial M_z}{\partial M_B} = -1$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\delta_{V,B} = \frac1{EI}\int_0^L\left(\frac{qs^2}{2} + Ps + M_B\right)s\,ds = \frac1{EI}\left(\frac{qL^4}{8} + \frac{PL^3}{3} + \frac{M_BL^2}{2}\right)\ \xrightarrow{P = M_B = 0}\ \frac{qL^4}{8EI}$$
+      $$\theta_B = \frac1{EI}\int_0^L\left(\frac{qs^2}{2} + Ps + M_B\right)ds = \frac1{EI}\left(\frac{qL^3}{6} + \frac{PL^2}{2} + M_BL\right)\ \xrightarrow{P = M_B = 0}\ \frac{qL^3}{6EI}$$</div>
+      <p>De brinde, as parcelas com $P$ e $M_B$ dão os casos clássicos: $PL^3/3EI$, $PL^2/2EI$, $ML^2/2EI$, $ML/EI$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{V,B} = \frac{qL^4}{8EI}$ (para baixo); $\theta_B = \frac{qL^3}{6EI}$ (horário). Sinais positivos = mesmo sentido arbitrado para $P$ e $M_B$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Zerar $P$ e $M_B$ <em>antes</em> de derivar: a derivada some junto. Pode zerar depois de derivar e antes de integrar, nunca antes de derivar.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o sinal de $\partial M/\partial P$: com a convenção do slide os dois sinais negativos se cancelam; troque a convenção e confira que o resultado final não muda.</li></ul></div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t12-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t12-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Crotti-Engesser.</b> <span class="path">$\delta_i=\partial U^*/\partial P_i=\sum\int\frac{M}{EI}\frac{\partial M}{\partial P_i}ds+\dots$</span>. Cargas literais e independentes; $U^*$ do sistema inteiro.</div>
+          <div class="r-item"><b>Carga fictícia.</b> <span class="path">força para translação, binário para rotação · derivar → depois zerar</span>. Sinal + = sentido arbitrado.</div>
+          <div class="r-item"><b>1º Castigliano.</b> <span class="path">$P_i=\partial U/\partial\delta_i$</span> com $U=\sum k\Delta^2/2$: barra rígida em molas ou hastes.</div>
+          <div class="r-item"><b>Validade.</b> Crotti-Engesser vale até não linear; 2º Castigliano só linear.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="11-energia-na-flexao.html"><small>← anterior</small>11 · Energia na flexão</a><a class="prox" href="13-hiperestaticas-energia.html"><small>próximo →</small>13 · Hiperestáticas e linha elástica</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 · Esforços solicitantes · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 1</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t01-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t01-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t01-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t01-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t01-corte">Método do corte</a></li>
+<li class="nav-ex"><a href="#t01-3d">Estruturas 3D</a></li>
+<li class="nav-ex"><a href="#t01-algo">Algoritmo do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t01-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t01-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#l1-premissas">Premissas da lista</a></li>
+<li class="nav-ex"><a href="#l1-matriz">Matriz de cobertura L1</a></li>
+<li class="nav-ex"><a href="#t01-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#l1-ex1-h">L1 ex.1 · pórtico plano com peso<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l1-ex2-h">L1 ex.2 · arco vertical com peso<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l1-ex3-h">L1 ex.3 · pórtico horizontal (V, M, T)<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l1-ex7-h">L1 ex.7 · estrutura espacial<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#a1-h">Grupo #01 · pórtico espacial<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t01-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#l1-ex4-h">L1 ex.4 · arco horizontal, F</a></li>
+<li class="nav-ex"><a href="#l1-ex5-h">L1 ex.5 · arco horizontal, binário</a></li>
+<li class="nav-ex"><a href="#l1-ex6-h">L1 ex.6 · arco horizontal, F + peso</a></li>
+<li class="nav-ex"><a href="#l1-ex8-h">L1 ex.8 · arco vertical + barra</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t01-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>01 · Esforços solicitantes</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t01-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t01-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">E1</span> <span class="chip">E2</span> · aula 2 (05/08) · exercício em grupo #01</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Que esforços (normal $N$, cortantes $V_y, V_z$, torção $T$, fletores $M_y, M_z$) agem em cada seção de uma estrutura reticulada isostática, plana, espacial ou em arco? É o primeiro passo de
+        toda questão de tensão e de energia: sem os esforços na seção não há tensão no ponto nem $U^*$. Ao fim você deve montar $N$, $V$, $M$, $T$ por trecho, em forma literal, e conferi-los nos extremos.</p></div>
+</section>
+<section class="chapter" id="t01-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t01-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="../base.html#equilibrio">Base</a>: equilíbrio de corpo rígido em 2D e 3D, reações de apoio.</li><li><a href="../base.html#diagramas">Base</a>: diagramas de $V$ e $M$ em vigas e as relações $dV/ds = -q$, $dM/ds = V$.</li><li><a href="../base.html#vetores">Base</a>: produto vetorial $\vec r\times\vec F$.</li></ul>
+</section>
+<section class="chapter" id="t01-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t01-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 2, p.3–30 (2 exemplos de arco)</td><td>método do lado livre</td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§4.2–4.5 (262–288)</td><td>só vigas planas; estruturas 3D e arcos ficam com os slides e a Lista I</td></tr><tr><td>Lista 1</td><td>ex. 1–8</td><td>sem gabarito numérico; conferir nos extremos</td></tr><tr><td>Exercício em grupo #01</td><td>12/08/2026, com gabarito</td><td>critério de correção do professor</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t01-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t01-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t01-corte" data-nav="Método do corte">Método do corte e lado livre</h3>
+        <p>Imagine cortar a barra na seção de interesse. Os esforços que a parte removida aplicava na parte que ficou são o que se procura, e o equilíbrio da parte que ficou os determina. Escolha a parte que
+        <strong>não contém os engastes</strong> (o lado da ponta livre): então as reações de apoio não entram, e basta somar as cargas aplicadas. Com a coordenada $s$ medida a partir da ponta livre, o
+        resultado é $\vec F(s)$ e $\vec M(s) = \sum\vec r\times\vec F$ (mais os binários). Projete na tangente à barra para obter $N$ e $T$, e no plano da seção para $V$ e $M$.</p>
+        <h3 class="sub" id="t01-3d" data-nav="Estruturas 3D">Estruturas espaciais e arcos</h3>
+        <p>Em 3D o braço da força ao longo do eixo da barra gera <strong>flexão</strong>; o braço perpendicular a ele gera <strong>torção</strong>. Num nó rígido o fletor de uma barra vira o torçor da perpendicular
+        (confira indo e voltando pelos nós). Num arco, a carga distribuída é integrada elemento a elemento: $dF = qR\,d\beta$ com braço dependente de $(\theta - \beta)$, integrando de 0 a $\theta$.</p>
+        <p>Relações diferenciais que verificam o resultado: $dN/ds = -q_t$, $dV/ds = -q$, $dM/ds = V$. Um diagrama que viola alguma delas está errado.</p>
+        <h3 class="sub" id="t01-algo" data-nav="Algoritmo do professor">Algoritmo do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A1 · Esforços em estrutura 3D ou arco</h3><p><span class="tag tag-form">📄 Aula 2</span></p>
+      <ol><li>Coordenada a partir da ponta livre (não precisa de reações).</li><li>Cargas do lado livre: $\vec F$ e $\vec M = \sum\vec r\times\vec F$ (+ binários).</li><li>Projete na tangente: $N$ e $T$; no plano da seção: $V$ e $M$.</li><li>Carga distribuída em arco: elemento $qR\,d\beta$ com braços $a(\theta - \beta)$, $b(\theta - \beta)$; integre de 0 a $\theta$.</li><li>Confira nos extremos e pelos nós (o fletor de uma barra vira torçor da perpendicular).</li></ol></div>
+    </div>
+</section>
+<section class="chapter" id="t01-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t01-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li>Estrutura <strong>isostática</strong> (as reações saem do equilíbrio). Hiperestática pede energia (<a href="13-hiperestaticas-energia.html">ficha 13 (Hiperestáticas e linha elástica)</a>).</li><li>Barras esbeltas, geometria indeformada: os esforços saem do equilíbrio na configuração original.</li><li>Erro típico: tomar as reações do engaste num lado e o lado livre no outro; ou esquecer o peso próprio de uma barra inclinada.</li></ul>
+</section>
+
+<section class="chapter" id="t01-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t01-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 1 (esforços solicitantes, 8 exercícios) e exercício em grupo #01.</p></div>
+<p class="section-desc" style="margin-bottom:10px">8 exercícios (<code>01_material_oficial/listas/MecanicaDosSolidosIIListaI.pdf</code>, 11 p.; respostas nas p.6–11). Todas as respostas foram refeitas por um verificador genérico em <code>_build/calc/calc_l1.py</code>, que soma as cargas do lado livre e decompõe força e momento em N, V, M e T. As 8 batem.</p><h3 class="sub" id="l1-premissas" data-nav="Premissas da lista">Premissas que valem para a lista inteira</h3>
+  <ul>
+    <li><strong>Linearidade geométrica</strong> (texto da lista, p.1): equilíbrio escrito na geometria <em>não deformada</em>.</li>
+    <li><strong>Polo de redução no centroide</strong> de cada seção (seções duplamente simétricas).</li>
+    <li><strong>Peso próprio</strong> como carga distribuída por comprimento: $q = \gamma A = \mu g A$ [N/m]. É uma força vertical, qualquer que seja a orientação da barra.</li>
+    <li>Nas respostas, "os momentos positivos estão desenhados no lado tracionado da barra" (ex. 1).</li>
+  </ul>
+
+  <h3 class="sub" id="l1-matriz" data-nav="Matriz de cobertura L1">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">PL</span> pórtico plano, carga no plano · <span class="chip">AR</span> arco (integração de carga distribuída) · <span class="chip">FP</span> carga fora do plano (V, M, T) · <span class="chip">3D</span> estrutura espacial · <span class="chip">BN</span> binário concentrado</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Ex.</th><th>PL</th><th>AR</th><th>FP</th><th>3D</th><th>BN</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>1</td><td class="x">●</td><td></td><td></td><td></td><td></td><td>Pivô 1</td></tr>
+    <tr class="pv"><td>2</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td>Pivô 2</td></tr>
+    <tr class="pv"><td>3</td><td></td><td></td><td class="x">●</td><td class="x">◐</td><td></td><td>Pivô 3</td></tr>
+    <tr><td>4</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td></td><td>ver Pivôs 2 e 3</td></tr>
+    <tr><td>5</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td class="x">●</td><td>ver Pivô 3</td></tr>
+    <tr><td>6</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td></td><td>ver Pivôs 2 e 3</td></tr>
+    <tr class="pv"><td>7</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td></td><td>Pivô 4</td></tr>
+    <tr><td>8</td><td></td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td>ver Pivôs 2 e 4</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que estes pivôs</span>
+    <p>O ex. 1 fixa o método (cortar, olhar o lado livre, escrever N, V e M). O ex. 2 ensina a única técnica nova, <em>integrar a carga distribuída ao longo de um arco</em>. O ex. 3 é o mesmo pórtico do ex. 1 deitado no plano horizontal: a carga passa a ser perpendicular ao plano e aparece a <strong>torção</strong>. O ex. 7 generaliza para três eixos. Os exercícios 4, 5, 6 e 8 combinam essas quatro ideias. Os mesmos raciocínios voltam na P2, dentro de cada questão de energia.</p></div>
+
+  <!-- PIVÔ 1 -->
+  <div class="callout concept"><span class="co-t">O que os gabaritos ensinam sobre a correção</span>
+    <p>(1) <strong>Cada resultado intermediário vale ponto</strong> (reação, expressão de $V$, de $M$, de $T$, diagrama), não só a resposta final. (2) O professor escreve os esforços com as <strong>relações diferenciais</strong> $dV/ds = -q$, $dM/ds = V$ e as condições de contorno na ponta livre. (3) <strong>Diagramas desenhados</strong> valem de 1,0 a 1,5 ponto por trecho. (4) Nas questões de tensões, há ponto para o tensor, para a equação característica, para cada autovalor e para cada direção principal.</p></div><h3 class="sub" id="t01-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="l1-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 1 · Pivô 1 da P1</div>
+      <h3 id="l1-ex1-h" data-nav="L1 ex.1 · pórtico plano com peso" data-pivo>Pórtico plano engastado com peso próprio e força na ponta</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">PL</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.1–2)</span>
+      1) Considere a estrutura formada pelas barras AB, BC e CD, todas de mesmo material e de mesma seção transversal (seção transversal uniforme). São dados: $F$, força concentrada (em N) aplicada no ponto D da estrutura; $l$, comprimento característico (em m), utilizado para facilitar a análise; $A$, área da seção transversal (em m²) das barras; $\gamma = \mu g$, peso específico (em N/m³) do material das barras; $\mu$, massa específica (em kg/m³) do material das barras; $g$, aceleração da gravidade local (em m/s²).<br>
+      Pede-se determinar os diagramas de esforços solicitantes (N, V e M) para a estrutura dada, em função dos parâmetros fornecidos.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 1):</strong> ver o PDF oficial, Lista 1, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico plano isostático (engaste em A), cargas no próprio plano: só aparecem N, V e M. As cargas são $F$ em D e o peso próprio $q$ em todas as barras.</p>
+      <div class="callout concept"><span class="co-t">Conceito: o esforço interno equilibra o lado livre</span>
+        <p>Corte a barra numa seção e escolha o pedaço que <strong>não</strong> contém o engaste. O esforço interno nessa seção é exatamente o que equilibra as cargas desse pedaço: força $= -\sum\vec F_{livre}$ e momento $= -\sum(\vec r - \vec r_s)\times\vec F_{livre}$. Assim não é preciso calcular as reações. A projeção da força na tangente da barra é $N$; a perpendicular é $V$. No plano, o momento é o fletor $M$. É o algoritmo A1 da aula 2 e o que <code>calc_l1.py</code> faz em 3D.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>AB (horizontal, superior)</td><td>$2l$</td><td>figura: $l + l$</td></tr>
+      <tr><td>BC (vertical)</td><td>$l$</td><td>figura</td></tr>
+      <tr><td>CD (horizontal, inferior, voltada para A)</td><td>$l$; D fica a $l$ de A na horizontal</td><td>figura</td></tr>
+      <tr><td>Peso por comprimento</td><td>$q = \gamma A$</td><td>resposta da lista</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Funções N, V, M em cada barra e valores nos nós; convenção: M desenhado do lado tracionado.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 2 (algoritmo A1)</span> equilíbrio do trecho livre; carga distribuída = resultante $q\cdot$(comprimento) no centro do trecho.</p></div>
+    <div class="step" data-n="5"><h4>Esforços por barra (coordenada a partir da ponta livre)</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barra</th><th>coordenada</th><th>N</th><th>V</th><th>M (módulo, lado tracionado)</th></tr></thead><tbody>
+        <tr><td>CD</td><td>$s$ de D</td><td>0</td><td>$F + qs$</td><td>$Fs + \frac{qs^2}{2}$ (em cima)</td></tr>
+        <tr><td>BC</td><td>$s$ de C (subindo)</td><td>$F + ql + qs$ (tração)</td><td>0</td><td>$Fl + \frac{ql^2}{2}$ constante (lado interno)</td></tr>
+        <tr><td>AB</td><td>$x$ de B (para A)</td><td>0</td><td>$F + 2ql + qx$</td><td>$\frac{qx^2}{2} + (F + 2ql)x - \left(Fl + \frac{ql^2}{2}\right)$</td></tr></tbody></table></div>
+      <p>Em BC o momento é constante porque as cargas abaixo da seção ($F$ e o peso de CD) são verticais e a barra é vertical: o braço horizontal não muda ($l$ para $F$, $l/2$ para o peso de CD). Em AB o sinal troca: em B traciona embaixo, em A traciona em cima.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo dos valores nos nós</h4>
+      <div class="math-box">$$N_C = F + ql,\quad N_B = F + 2ql\qquad V_A = F + 4ql\qquad |M_B| = |M_C| = Fl + \frac{ql^2}{2}$$
+      $$M_A = \frac{q(2l)^2}{2} + (F + 2ql)(2l) - Fl - \frac{ql^2}{2} = Fl + \frac{11}{2}ql^2\ \text{(traciona em cima)}$$</div>
+      <p>Conferência direta de $M_A$ por braços em relação a A: $F\cdot l + ql\cdot\frac{3l}{2} + ql\cdot 2l + 2ql\cdot l = Fl + \frac{11}{2}ql^2$ ✓.</p>
+      <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 1):</strong> ver o PDF oficial, Lista 1, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 1):</strong> ver o PDF oficial, Lista 1, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 1):</strong> ver o PDF oficial, Lista 1, p. 7 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> N só em BC ($F + ql$ → $F + 2ql$, tração); V em CD ($F$ → $F + ql$) e em AB ($F + 2ql$ → $F + 4ql$); $|M_A| = Fl + 11ql^2/2$, $|M_B| = |M_C| = Fl + ql^2/2$. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o peso da barra vertical BC na cortante de AB: ele entra como $ql$ inteiro.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> No nó rígido B o momento passa de uma barra para a outra com o mesmo módulo ($M_B$ de AB = $M_B$ de BC), girando junto com a barra.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l1-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 2 · Pivô 2 da P1</div>
+      <h3 id="l1-ex2-h" data-nav="L1 ex.2 · arco vertical com peso" data-pivo>Arco semicircular no plano vertical: integrar o peso ao longo do arco</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">AR</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.2)</span>
+      2) A estrutura em arco indicada na figura abaixo é feita de um mesmo material e a seção transversal da barra é uniforme. Considerando a ação do peso próprio (distribuído ao longo da barra) do material e de uma única força concentrada de intensidade $F$ aplicada no ponto B, determine os diagramas de esforços solicitantes (N, V e M). Sugestão: determine, inicialmente, as funções N = N($\theta$), V = V($\theta$), e M = M($\theta$) que fornecem os esforços solicitantes em função do ângulo $\theta$, medido a partir da extremidade B da barra, no sentido anti-horário ($0 \le \theta \le \pi$). São dados: $F$, força concentrada (em N) aplicada no ponto B da estrutura; $R$, raio de curvatura (em m) do eixo central da barra; $A$, área da seção transversal (em m²) da barra; $\gamma = \mu g$, peso específico (em N/m³) do material da barra; $\mu$, massa específica (em kg/m³) do material da barra; $g$, aceleração da gravidade local (em m/s²).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 2):</strong> ver o PDF oficial, Lista 1, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Barra curva plana, engaste em A, cargas no plano. É o exemplo 1 da aula 2 (p.13–21). A novidade é que o peso está espalhado ao longo do arco: cada elemento tem braço diferente em relação à seção.</p>
+      <div class="callout concept"><span class="co-t">Conceito: carga distribuída em arco por integração</span>
+        <p>Um elemento do arco no ângulo $\beta$ (entre B e a seção $\theta$) tem comprimento $R\,d\beta$ e peso $qR\,d\beta$. O braço horizontal dele em relação à seção é $R(\cos\beta - \cos\theta)$. Somar esses pesos é integrar em $\beta$ de 0 a $\theta$. A resultante do trecho é $qR\theta$ (comprimento $R\theta$), mas o momento <em>não</em> é "resultante vezes braço de um ponto fixo": o centro de gravidade do arco não fica no meio da corda.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>Raio $R$; $\theta$ a partir de B, anti-horário, de 0 a $\pi$; $F$ ↓ em B; $q = \gamma A$; engaste em A (o traço espesso da figura; a resposta confirma $M(\pi) \ne 0$).</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$N(\theta)$, $V(\theta)$, $M(\theta)$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 2 p.14–21</span> equilíbrio do trecho de B até $\theta$; tangente na seção $\vec t = (-\sin\theta, \cos\theta)$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços</h4>
+      <p>Carga vertical total do trecho livre: $W(\theta) = F + qR\theta$. Projetando na tangente e na normal da seção:</p>
+      <div class="math-box">$$N(\theta) = (F + qR\theta)\cos\theta\qquad V(\theta) = (F + qR\theta)\sin\theta$$
+      $$M(\theta) = FR(1 - \cos\theta) + \int_0^\theta qR\cdot R(\cos\beta - \cos\theta)\,d\beta = FR(1 - \cos\theta) + qR^2(\sin\theta - \theta\cos\theta)$$</div></div>
+    <div class="step" data-n="6"><h4>Leitura dos resultados</h4>
+      <ul><li>$N > 0$ (tração) para $\theta &lt; \pi/2$: a metade perto de B fica "pendurada" no topo. Para $\theta &gt; \pi/2$, $\cos\theta &lt; 0$: a metade do lado de A é uma coluna e trabalha em compressão.</li>
+      <li>No engaste ($\theta = \pi$): $N = -(F + qR\pi)$, $V = 0$, $M = 2FR + \pi qR^2$ (braço $2R$ para $F$ e $\pi R\cdot R$ para o peso do semicírculo, cujo centro de gravidade fica sobre o centro do arco).</li></ul></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $N = (qR\theta + F)\cos\theta$; $V = (qR\theta + F)\sin\theta$; $M = qR^2(\sin\theta - \theta\cos\theta) + FR(1 - \cos\theta)$. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o braço $R(1 - \cos\theta)$ para o peso inteiro: ele vale só para a carga em B.</li>
+      <li>Conferência em $\theta = \pi/2$ (topo): $M = FR + qR^2$. O quarto de arco pesa $q\pi R/2$ e seu centro de gravidade fica a $2R/\pi$ do centro, na horizontal; $\frac{q\pi R}{2}\cdot\frac{2R}{\pi} = qR^2$ ✓.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l1-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 3 · Pivô 3 da P1</div>
+      <h3 id="l1-ex3-h" data-nav="L1 ex.3 · pórtico horizontal (V, M, T)" data-pivo>O mesmo pórtico no plano horizontal: aparece a torção</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">FP</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.3)</span>
+      3) Considere novamente a estrutura formada pelas barras AB, BC e CD, todas de mesmo material e com mesma seção transversal (seção transversal uniforme), apresentada no exercício 1, porém disposta agora em um plano horizontal (conforme ilustra a figura a seguir). São dados: $F$, força concentrada (em N) aplicada no ponto D da estrutura; $l$, comprimento característico (em m), utilizado para facilitar a análise; $A$, área da seção transversal (em m²) das barras; $\gamma = \mu g$, peso específico (em N/m³) do material das barras; $\mu$, massa específica (em kg/m³) do material das barras; $g$, aceleração da gravidade local (em m/s²).<br>
+      Pede-se determinar os diagramas de esforços solicitantes (V, M e T) para a estrutura dada, em função dos parâmetros fornecidos.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 3):</strong> ver o PDF oficial, Lista 1, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Estrutura plana com cargas <strong>perpendiculares ao seu plano</strong>. Nenhuma força tem componente ao longo das barras ⇒ $N = 0$ em todas. Aparecem cortante (vertical), fletor e torçor.</p>
+      <div class="callout concept"><span class="co-t">Conceito: braço ao longo da barra × braço perpendicular</span>
+        <p>Para uma carga vertical $P$ e uma seção de uma barra horizontal, decomponha o vetor posição (da seção até a carga) em duas partes. A parte <strong>ao longo do eixo da barra</strong> ($a$) gera momento perpendicular ao eixo, isto é, <strong>flexão</strong> $M = Pa$. A parte <strong>perpendicular ao eixo</strong> (no plano horizontal, $b$) gera momento ao longo do eixo, isto é, <strong>torção</strong> $T = Pb$. Nada além disso: é $\vec r\times\vec P$ escrito em componentes.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>Mesma geometria do ex. 1 no plano horizontal: AB = $2l$, BC = $l$ ⊥ AB, CD = $l$ ∥ AB voltada para A; $F$ ↓ em D; peso $q$.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>V, M, T por barra.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 2 p.22–29 (arco horizontal)</span> braços $a$ (fletor) e $b$ (torção).</p></div>
+    <div class="step" data-n="5"><h4>Esforços por barra</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barra</th><th>V</th><th>M (braços ao longo da barra)</th><th>T (braços perpendiculares)</th></tr></thead><tbody>
+        <tr><td>CD ($s$ de D)</td><td>$F + qs$</td><td>$Fs + \frac{qs^2}{2}$ → $Fl + \frac{ql^2}{2}$ em C</td><td>0 (tudo está sobre o próprio eixo de CD)</td></tr>
+        <tr><td>BC ($s$ de C)</td><td>$F + ql + qs$</td><td>$(F + ql)s + \frac{qs^2}{2}$ → $Fl + \frac{3ql^2}{2}$ em B</td><td>$Fl + \frac{ql^2}{2}$ constante ($F$ a $l$, peso de CD a $l/2$ do eixo de BC)</td></tr>
+        <tr><td>AB ($x$ de B)</td><td>$F + 2ql + qx$</td><td>como no ex. 1: $Fl + \frac{ql^2}{2}$ em B, $Fl + \frac{11ql^2}{2}$ em A</td><td>$Fl + ql\cdot l + ql\cdot\frac l2 = Fl + \frac{3ql^2}{2}$ constante</td></tr></tbody></table></div>
+      <p>O torçor de AB é o fletor de BC em B: no nó rígido, o momento que <em>flete</em> BC <em>torce</em> AB, porque as barras são perpendiculares. Do mesmo modo, o fletor de CD em C é o torçor de BC.</p></div>
+    <div class="step" data-n="6"><h4>Diagramas da resposta</h4><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 3):</strong> ver o PDF oficial, Lista 1, p. 8 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 3):</strong> ver o PDF oficial, Lista 1, p. 8 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $|M_A| = Fl + 11ql^2/2$; $|M_{B,1}| = Fl + 3ql^2/2$ (em BC); $|M_{B,2}| = Fl + ql^2/2$ (em AB); $|M_C| = Fl + ql^2/2$; $T_{AB} = Fl + 3ql^2/2$; $T_{BC} = Fl + ql^2/2$; $T_{CD} = 0$. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Achar que "estrutura plana ⇒ sem torção". Com carga fora do plano, há torção sempre que o braço tem componente perpendicular à barra.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l1-ex7">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 7 · Pivô 4 da P1</div>
+      <h3 id="l1-ex7-h" data-nav="L1 ex.7 · estrutura espacial" data-pivo>Estrutura espacial com barras nos três eixos, só peso próprio</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">3D</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.5)</span>
+      7) Considere a estrutura formada pelas barras AB, BC e CD, todas de mesmo material, mesma seção transversal (seção transversal uniforme) e com mesmo comprimento $l$, sendo AB // eixo A$y$, BC // eixo A$z$ e CD // eixo A$x$. Admitindo que o único carregamento atuante na estrutura seja devido ao peso próprio das barras, determine os diagramas de esforços solicitantes (N, V, M e T) para a estrutura dada, em função dos parâmetros fornecidos. São dados: $l$, comprimento característico (em m) das barras; $A$, área da seção transversal (em m²) das barras; $\gamma = \mu g$, peso específico (em N/m³) do material das barras; $\mu$, massa específica (em kg/m³) do material das barras; $g$, aceleração da gravidade local (em m/s²).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 7):</strong> ver o PDF oficial, Lista 1, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A, $z$ vertical). Cada barra numa direção: AB horizontal ($y$), BC vertical (desce), CD horizontal ($x$).</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>A = (0, 0, 0), B = (0, $l$, 0), C = (0, $l$, $-l$), D = ($l$, $l$, $-l$). Pesos: $ql$ por barra, no meio de cada uma.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>N, V, M, T por barra.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p>$\vec M = -\sum(\vec r - \vec r_s)\times\vec P$ e decomposição em componente axial (T) e transversal (M).</p></div>
+    <div class="step" data-n="5"><h4>Esforços por barra</h4>
+      <ul><li><strong>CD</strong> ($s$ de D): $V = qs$, $M = qs^2/2$ → $ql^2/2$ em C; sem N e T.</li>
+      <li><strong>BC</strong> (vertical): as cargas são verticais, isto é, <em>paralelas</em> à barra ⇒ viram <strong>N</strong> (tração, $ql$ em C até $2ql$ em B). O peso de CD tem braço horizontal $l/2$ (ao longo de $x$) ⇒ $M = ql^2/2$ constante. Torque em torno de um eixo vertical exigiria força horizontal: $T = 0$.</li>
+      <li><strong>AB</strong> ($x$ de B para A): $V = 2ql + qx$. Braços ao longo de $y$ (a própria barra): $x$ para os pesos de BC e CD e $x/2$ para o trecho de AB ⇒ $M = 2qlx + qx^2/2$ → $5ql^2/2$ em A. Braço ao longo de $x$ (⊥ AB): só o peso de CD, a $l/2$ ⇒ $T = ql^2/2$ constante.</li></ul>
+      <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 7):</strong> ver o PDF oficial, Lista 1, p. 10 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="6"><h4>Resumo</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barra</th><th>N</th><th>V</th><th>M</th><th>T</th></tr></thead><tbody>
+      <tr><td>AB</td><td>0</td><td>$2ql$ → $3ql$</td><td>0 → $5ql^2/2$</td><td>$ql^2/2$</td></tr>
+      <tr><td>BC</td><td>$ql$ → $2ql$</td><td>0</td><td>$ql^2/2$</td><td>0</td></tr>
+      <tr><td>CD</td><td>0</td><td>0 → $ql$</td><td>0 → $ql^2/2$</td><td>0</td></tr></tbody></table></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> como na tabela. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+      <ul><li>Em B, o fletor de BC ($ql^2/2$, vetor ao longo de $y$) é o torçor de AB, e o fletor de AB em B é zero, porque todas as cargas ficam na vertical que passa por B, a menos do deslocamento em $x$.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que numa barra vertical o peso vira força normal, não cortante.</li></ul></div>
+  </article>
+<article class="ex pivo" id="a1">
+    <div class="ex-head"><div><div class="ex-kicker">Exercício em grupo #01 · 12/08/2026 · Pivô 19 da P1</div>
+      <h3 id="a1-h" data-nav="Grupo #01 · pórtico espacial" data-pivo>Pórtico espacial com cargas distribuídas: reações e V, M, T</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (12/08)</span></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">E1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (AtividadeI.pdf)</span>
+      A estrutura indicada na figura é formada por três barras rigidamente ligadas entre si. O vínculo na extremidade O é um engaste e os carregamentos nas barras têm sempre a direção do eixo vertical Y. Seguem informações detalhadas sobre cada trecho:
+      <ul><li>Barra AO: eixo central alinhado com a direção do eixo X, comprimento $2L$, carga distribuída uniforme de intensidade $q$ no sentido +Y;</li>
+      <li>Barra AB: eixo central alinhado com a direção do eixo Z, comprimento $L$, carga distribuída uniforme de intensidade $q$ no sentido −Y;</li>
+      <li>Barra BC: eixo central alinhado com a direção do eixo X, comprimento $L$, carga distribuída com variação linear (nula em B e igual a $4q$ em C), no sentido −Y.</li></ul>
+      Pede-se: a) O diagrama de corpo livre final e as reações vinculares no engaste O; b) Os diagramas de esforços solicitantes e as expressões analíticas de V, M e T em cada uma das barras.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Exercício em grupo #01 · ex. 1):</strong> ver o PDF oficial, Exercício em grupo #01, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático, só cargas verticais ⇒ reações só $Y_O$, $M_{Ox}$, $M_{Oz}$ ($X_O = Z_O = M_{Oy} = 0$). É o Pivô 4 (Lista 1) com carga triangular.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>Carga</th><th>Resultante</th><th>Centroide</th></tr></thead><tbody>
+      <tr><td>C→B</td><td>triangular, 4q em C, −Y</td><td>$R_1 = 2qL$</td><td>$(4L/3, 0, L)$, a $L/3$ de C</td></tr>
+      <tr><td>B→A</td><td>uniforme q, −Y</td><td>$R_2 = qL$</td><td>$(2L, 0, L/2)$</td></tr>
+      <tr><td>A→O</td><td>uniforme q, +Y</td><td>$R_3 = 2qL$</td><td>$(L, 0, 0)$</td></tr></tbody></table></div>
+      <p>Resultantes só servem para as reações ("e somente para isso", gabarito). Para os esforços é preciso a distribuição.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Reações (1,5 pt), DCL (0,5 pt), expressões e diagramas por trecho (8,0 pt).</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p>$\sum\vec F = 0$, $\sum\vec M_O = 0$; $dV/ds = -q$, $dM/ds = V$ (PME3210); no nó rígido, fletor de uma barra vira torçor da seguinte (barras perpendiculares).</p></div>
+    <div class="step" data-n="5"><h4>Reações</h4>
+      <div class="math-box">$$Y_O = R_1 + R_2 - R_3 = qL\qquad M_{Ox} = R_1L + R_2\tfrac L2 = \tfrac52qL^2\ (-X)\qquad M_{Oz} = R_1\tfrac{4L}{3} + R_2(2L) - R_3L = \tfrac83qL^2\ (+Z)$$</div>
+      <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Gabarito #01 · ex. 1):</strong> ver o PDF oficial, Gabarito do exercício #01, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="6"><h4>Esforços por trecho</h4>
+      <div class="math-box">$$\text{CB } (s_1 \text{ de C}):\ V_1 = -4q\left(s_1 - \frac{s_1^2}{2L}\right),\quad M_1 = -4q\left(\frac{s_1^2}{2} - \frac{s_1^3}{6L}\right)\ \to\ V_1(L) = -2qL,\ M_1(L) = -\tfrac43qL^2$$
+      $$\text{BA } (s_2 \text{ de B}):\ T_2 = \tfrac43qL^2,\quad V_2 = -q(s_2 + 2L),\quad M_2 = -q\left(\frac{s_2^2}{2} + 2Ls_2\right)\ \to\ M_2(L) = -\tfrac52qL^2$$
+      $$\text{AO } (s_3 \text{ de A}):\ T_3 = \tfrac52qL^2,\quad V_3 = q(s_3 - 3L),\quad M_3 = q\left(\frac{s_3^2}{2} - 3Ls_3 + \frac43L^2\right)\ \to\ M_3(2L) = -\tfrac83qL^2$$</div>
+      <p>Encadeamento: o fletor no fim de CB ($\tfrac43qL^2$) vira o torçor de BA; o fletor no fim de BA ($\tfrac52qL^2$) vira o torçor de AO; o torçor de BA vira o fletor inicial de AO ($+\tfrac43qL^2$). $M_3$ troca de sinal em $s_3 \approx 0{,}48L$.</p>
+      <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Gabarito #01 · ex. 1):</strong> ver o PDF oficial, Gabarito do exercício #01, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Gabarito #01 · ex. 1):</strong> ver o PDF oficial, Gabarito do exercício #01, p. 7 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div><div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Gabarito #01 · ex. 1):</strong> ver o PDF oficial, Gabarito do exercício #01, p. 9 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $Y_O = qL$, $M_{Ox} = \tfrac52qL^2$, $M_{Oz} = \tfrac83qL^2$; esforços como acima. <span class="badge badge-ok">bate com o gabarito</span> (conferido também pela soma vetorial direta em cada nó)</div>
+      <ul><li>Conferência: nos extremos de AO, $V_3(2L) = -qL$ e $M_3(2L) = -\tfrac83qL^2$ reproduzem as reações do engaste ✓.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Centroide do triângulo a $L/3$ da ponta de maior intensidade (C), não de B.</li></ul></div>
+  </article>
+<h3 class="sub" id="t01-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="l1-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 4 · ver <a href="01-esforcos-solicitantes.html#l1-ex2-h">L1 ex.2</a> e <a href="01-esforcos-solicitantes.html#l1-ex3-h">L1 ex.3</a></div>
+      <h3 id="l1-ex4-h" data-nav="L1 ex.4 · arco horizontal, F">Arco semicircular horizontal com força na ponta</h3></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">AR</span><span class="chip">FP</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.3)</span>
+      4) Considere novamente a estrutura em arco apresentada no exercício 2, porém disposta em um plano horizontal, conforme mostra a figura abaixo. Considerando, por ora, apenas a ação de uma única força concentrada de intensidade $F$ aplicada no ponto B, determine os diagramas de esforços solicitantes (V, M e T). Sugestão: determine, inicialmente, as funções V = V($\theta$), M = M($\theta$), e T = T($\theta$) que fornecem os esforços solicitantes em função do ângulo $\theta$, medido a partir da extremidade B da barra ($0 \le \theta \le \pi$). São dados: $F$, força concentrada (em N) aplicada no ponto B da estrutura; $R$, raio de curvatura (em m) do eixo central da barra;</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 4):</strong> ver o PDF oficial, Lista 1, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> na seção $\theta$, o vetor da seção até B tem componente ao longo da tangente $a = R\sin\theta$ (flexão) e componente perpendicular $b = R(1 - \cos\theta)$ (torção). É o exemplo 2 da aula 2 (p.22–29).</p>
+    <div class="math-box">$$V = F\qquad M = FR\sin\theta\qquad T = FR(1 - \cos\theta)$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima. No engaste: $M = 0$ e $T = 2FR$. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+  </article>
+<article class="ex" id="l1-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 5 · ver <a href="01-esforcos-solicitantes.html#l1-ex3-h">L1 ex.3</a></div>
+      <h3 id="l1-ex5-h" data-nav="L1 ex.5 · arco horizontal, binário">Arco horizontal com binário na ponta</h3></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">BN</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.4)</span>
+      5) Considere novamente a estrutura em arco apresentada no exercício 4, submetida agora apenas à ação de um binário de intensidade $M_0$ aplicado no ponto B, conforme ilustra a figura a seguir (desconsidere, por ora, a ação do peso próprio da barra). Determine os diagramas de esforços solicitantes (M e T). Sugestão: determine, inicialmente, as funções M = M($\theta$), e T = T($\theta$) que fornecem os esforços solicitantes em função do ângulo $\theta$, medido a partir da extremidade B da barra ($0 \le \theta \le \pi$). São dados: $M_0$, intensidade do binário concentrado (em N.m) aplicado no ponto B da estrutura; $R$, raio de curvatura (em m) do eixo central da barra.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 5):</strong> ver o PDF oficial, Lista 1, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> um binário é um vetor livre: não há braço, só projeção. O vetor $M_0$ está ao longo do diâmetro AB. Projetado na tangente da seção $\theta$, dá a torção; na normal no plano, dá a flexão.</p>
+    <div class="math-box">$$M(\theta) = M_0\cos\theta\qquad T(\theta) = M_0\sin\theta$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima (em B, flexão pura $M_0$; no topo, torção pura $M_0$). <span class="badge badge-ok">bate com a resposta da lista</span></div>
+  </article>
+<article class="ex" id="l1-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 6 · ver <a href="01-esforcos-solicitantes.html#l1-ex2-h">L1 ex.2</a> e <a href="01-esforcos-solicitantes.html#l1-ex3-h">L1 ex.3</a></div>
+      <h3 id="l1-ex6-h" data-nav="L1 ex.6 · arco horizontal, F + peso">Arco horizontal com força e peso próprio</h3></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">AR</span><span class="chip">FP</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.4)</span>
+      6) Considere novamente a estrutura em arco apresentada no exercício 4, disposta em um plano horizontal e submetida a ação da força concentrada de intensidade $F$ aplicada no ponto B, já considerada anteriormente, e do peso próprio da barra. Determine os diagramas de esforços solicitantes (V, M e T). Sugestão: determine, inicialmente, as funções V = V($\theta$), M = M($\theta$), e T = T($\theta$) que fornecem os esforços solicitantes em função do ângulo $\theta$, medido a partir da extremidade B da barra ($0 \le \theta \le \pi$). São dados: $F$; $R$; $A$; $\gamma = \mu g$; $\mu$; $g$ (como no ex. 2).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 6):</strong> ver o PDF oficial, Lista 1, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> soma do ex. 4 com a integral do peso. O elemento em $\beta$ tem braços $a = R\sin(\theta - \beta)$ (flexão) e $b = R[1 - \cos(\theta - \beta)]$ (torção) (aula 2 p.23).</p>
+    <div class="math-box">$$V = F + qR\theta\qquad M = FR\sin\theta + \int_0^\theta qR^2\sin(\theta-\beta)d\beta = FR\sin\theta + qR^2(1 - \cos\theta)$$
+    $$T = FR(1 - \cos\theta) + \int_0^\theta qR^2[1 - \cos(\theta-\beta)]d\beta = FR(1 - \cos\theta) + qR^2(\theta - \sin\theta)$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima. <span class="badge badge-ok">bate com a resposta da lista</span></div>
+  </article>
+<article class="ex" id="l1-ex8">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 1 · Exercício 8 · ver <a href="01-esforcos-solicitantes.html#l1-ex2-h">L1 ex.2</a> e <a href="01-esforcos-solicitantes.html#l1-ex7-h">L1 ex.7</a></div>
+      <h3 id="l1-ex8-h" data-nav="L1 ex.8 · arco vertical + barra">Quarto de arco vertical com barra horizontal em balanço</h3></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">AR</span><span class="chip">3D</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 1, p.5–6)</span>
+      8) Considere a estrutura formada pelo arco AB (disposto no plano vertical A$yz$) e pela barra BC, ambos de mesmo material e mesma seção transversal (seção transversal uniforme). O comprimento da barra BC é $l$ e o raio de curvatura do arco AB é $R$. Admitindo que os únicos carregamentos atuantes na estrutura sejam uma força concentrada de intensidade $F$ atuante no ponto C e o peso próprio das barras, determine os diagramas de esforços solicitantes (N, V, M e T) para a estrutura dada, em função dos parâmetros fornecidos. São dados: $F$ = força concentrada (em N) aplicada no ponto C da estrutura; $R$ = raio de curvatura (em m) do eixo central da barra AB; $l$ = comprimento da barra BC (em m); $A$ = área da seção transversal (em m²) das barras; $\gamma = \mu g$; $\mu$; $g$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 8):</strong> ver o PDF oficial, Lista 1, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> BC ($s$ de C): $V = qs - F$, $M = qs^2/2 - Fs$ ($F$ é para cima). No arco, a carga vertical acumulada é $ql - F + qR\theta$. O peso de BC e $F$ têm braço $l/2$ e $l$ <em>fora do plano do arco</em> (ao longo de $x$); esse braço gera um momento $(ql^2/2 - Fl)$ em torno de $y$, que no arco se divide em torção e flexão conforme a tangente gira. Triedro local $(\vec t, \vec n, \vec b)$ da resposta:</p>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 1 · ex. 8):</strong> ver o PDF oficial, Lista 1, p. 11 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="math-box">$$N = [qR\theta + (ql - F)]\cos\theta\qquad V_n = (F - ql - qR\theta)\sin\theta\qquad T = \left(\frac{ql^2}{2} - Fl\right)\sin\theta$$
+    $$M_n = \left(\frac{ql^2}{2} - Fl\right)\cos\theta\qquad M_b = qR^2(\sin\theta - \theta\cos\theta) + (ql - F)R(1 - \cos\theta)$$</div>
+    <div class="answer"><strong>Respostas:</strong> como acima ($0 \le \theta \le \pi/2$). <span class="badge badge-ok">bate com a resposta da lista</span> ($N$ e $T$ conferidos em forma fechada; $\sqrt{M_n^2 + M_b^2}$ conferido numericamente.)</div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t01-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t01-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Método.</b> <span class="path">lado livre → $\vec F$, $\vec M = \sum\vec r\times\vec F$ → projetar na tangente (N, T) e no plano (V, M)</span>. Coordenada a partir da ponta livre.</div>
+          <div class="r-item"><b>3D.</b> Braço ao longo da barra ⇒ flexão; braço ⟂ ⇒ torção. Nó rígido: fletor de uma barra = torçor da perpendicular. Arco: $qR\,d\beta$ com braço em $\theta-\beta$.</div>
+          <div class="r-item"><b>Conferência.</b> $dV/ds=-q$, $dM/ds=V$ e os extremos.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a class="prox" href="02-tensor-e-cauchy.html"><small>próximo →</small>02 · Tensor das tensões e Cauchy</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

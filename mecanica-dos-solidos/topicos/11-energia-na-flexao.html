@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11 · Energia na flexão · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 11</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t11-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t11-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t11-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t11-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t11-flex">Flexão</a></li>
+<li class="nav-ex"><a href="#t11-desp">O que desprezar</a></li>
+<li class="nav-ex"><a href="#t11-algo">Algoritmos do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t11-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t11-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#s-matriz">Matriz de cobertura</a></li>
+<li class="nav-ex"><a href="#t11-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#s14-ex1-h">A14 exerc.1 · viga + cabo<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s14-ex2-h">A14 exerc.2 · estrutura em L<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t11-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#s14-ex5-h">A14 ex.2 · cortante no balanço</a></li>
+<li class="nav-ex"><a href="#s14-ex3-h">A14 exerc.3 · arco semicircular</a></li>
+<li class="nav-ex"><a href="#s14-ex4-h">A14 exerc.4 · mola de torção</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t11-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>11 · Energia na flexão</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t11-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t11-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">W4</span> <span class="chip">NL</span> · aula 14 (23/09)</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Como calcular a energia de uma viga, de um pórtico ou de um arame dobrado, e <strong>o que se pode desprezar</strong> sem errar a resposta? Ao fim você deve escrever
+        $U^*$ de uma estrutura de barras somando os esforços (N, V, M, T) trecho a trecho, decidir quando a normal e a cortante são desprezíveis, e aplicar o P.T.E. onde ele vale.</p></div>
+</section>
+<section class="chapter" id="t11-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t11-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="../base.html#flexao">Base</a>: $\sigma = My/I$, momento de inércia, diagramas de esforço cortante e fletor.</li><li><a href="01-esforcos-solicitantes.html">ficha 01 (Esforços solicitantes)</a>: esforços em estruturas planas e espaciais (a parte mais frequente dos erros).</li><li><a href="09-trabalho-e-energia.html">ficha 09 (Trabalho, energia e P.T.E.)</a> e <a href="10-energia-na-torcao.html">ficha 10 (Energia na torção)</a>: energia de normal e de torção.</li></ul>
+</section>
+<section class="chapter" id="t11-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t11-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 14, p.3–10 (flexão pura), p.11–14 (composta), p.15–20 (cortante, fator de forma), expressão geral p.31, limites do P.T.E. p.32–39</td><td>texto do PDF corrompido: ler pela imagem</td></tr><tr><td>Apostila 03 (Clóvis)</td><td>§6 p.19–23 (ex. 5); §7 p.24–25 (ex. 6); §8 p.26–27 (ex. 7)</td><td></td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§9.8 (622–627)</td><td>energia de deformação na flexão</td></tr><tr><td>Slides, exercícios</td><td>Aula 14 ex. 1–4 (p.37–40), exemplo 2 (p.25–28)</td><td>abaixo</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t11-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t11-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t11-flex" data-nav="Flexão">Energia na flexão</h3>
+        <p>Com $\sigma = -M_zy/I_z$ e $u^* = \sigma^2/2E$, a integral na seção dá $\iint y^2dA = I_z$ e
+        $$U^*_M = \int\frac{M_z^2}{2EI_z}\,ds.$$
+        Na flexão composta, ao elevar $\sigma = N/A + M_yz/I_y - M_zy/I_z$ ao quadrado, os termos cruzados contêm $\iint y\,dA$, $\iint z\,dA$ e $\iint yz\,dA$, que se anulam porque os eixos são
+        <strong>centrais e principais</strong>. Por isso as parcelas de esforços diferentes <em>na mesma seção</em> se somam.</p>
+        <div class="math-box">$$U^* = \sum_{\text{barras}}\int\left(\frac{N^2}{2EA} + \frac{f_yV_y^2}{2GA} + \frac{f_zV_z^2}{2GA} + \frac{M_y^2}{2EI_y} + \frac{M_z^2}{2EI_z} + \frac{T^2}{2GI_t}\right)ds\qquad(\text{aula 14 p.31})$$</div>
+        <p>O fator de forma $f$ da cortante vem de $\tau = VQ/Ib$ integrado na seção: retângulo $6/5$, círculo $10/9$.</p>
+        <h3 class="sub" id="t11-desp" data-nav="O que desprezar">O que desprezar</h3>
+        <p>Numa viga esbelta a cortante contribui com ordem $(h/L)^2$ da flexão (cerca de $0{,}78(h/L)^2$ num retângulo com $\nu = 0{,}3$), e a normal com $(r/L)^2$. Por isso o default é
+        desprezar $N$ e $V$ frente a $M$ e $T$ <em>na mesma barra</em>. Mas <strong>nunca</strong> despreze a energia de um cabo, tirante, mola ou barra de treliça, nem a torção numa estrutura espacial.</p>
+        <h3 class="sub" id="t11-algo" data-nav="Algoritmos do professor">Algoritmos do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A4 · O que desprezar</h3>
+      <p><span class="tag tag-form">📄 Aula 14 p.28, p.32, p.38–39</span></p>
+      <ul><li>Vigas e pórticos: N e V ≪ M e T <strong>na mesma barra</strong> (cortante ≈ $0{,}78(h/L)^2$ da flexão, retângulo com ν = 0,3).</li>
+      <li><strong>Nunca</strong> desprezar elemento de esforço único (barra de treliça, cabo, mola axial ou de torção). Desprezar equivale a tratá-lo como rígido.</li>
+      <li><strong>Não</strong> desprezar torção em estrutura espacial: tem a mesma ordem da flexão.</li>
+      <li>Se o enunciado manda desprezar algo, obedeça.</li></ul></div>
+    </div>
+</section>
+<section class="chapter" id="t11-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t11-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li>Vigas esbeltas ($L \gg h$): se a viga é curta, a cortante pesa e não se pode desprezar. Se o enunciado manda considerar ou desprezar, obedeça.</li><li>$G = E/2(1+\nu)$ ⇒ $E/G \in [2;3]$: a razão $GI_t/EI$ aparece dada no enunciado para a resposta sair só em função de $EI$.</li><li>O P.T.E. só entrega o deslocamento da <strong>única carga</strong>. Para outro ponto, outra direção ou rotações, use <a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>.</li><li>Linearidade geométrica: esforços do equilíbrio na configuração indeformada.</li></ul>
+</section>
+
+<section class="chapter" id="t11-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t11-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Exercícios dos slides da aula 14: flexão, cortante, torção em estrutura espacial e mola de torção.</p></div>
+<p class="section-desc" style="margin-bottom:10px">A Lista 5 só cobre tração e torção. Flexão, estruturas espaciais, Crotti-Engesser com várias cargas e carga fictícia são ensinados aqui, pelos exercícios com resposta da aula 14 (p.37–40) e pelos exemplos da aula 15 (p.10–24). Todas as respostas foram refeitas em <code>_build/calc/calc_slides.py</code> e batem.</p><div class="callout"><span class="co-t">Onde estão os outros exercícios desta lista</span>Os exemplos 1 e 3 da aula 15 (Crotti-Engesser e carga fictícia) estão na ficha <a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>; as questões antigas da apostila, na página <a href="../provas/p2.html">P2</a>.</div><h3 class="sub" id="s-matriz" data-nav="Matriz de cobertura">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">W4</span> energia na flexão · <span class="chip">W3</span> torção · <span class="chip">E2</span> estrutura espacial · <span class="chip">C1</span> Crotti-Engesser · <span class="chip">C2</span> carga fictícia · <span class="chip">A4</span> o que desprezar</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Exercício</th><th>W4</th><th>W3</th><th>E2</th><th>C1</th><th>C2</th><th>A4</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>Aula 14, exerc. 1 (viga + cabo)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>Pivô 6</td></tr>
+    <tr class="pv"><td>Aula 14, exerc. 2 (estrutura em L)</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td>Pivô 7</td></tr>
+    <tr class="pv"><td>Aula 15, ex. 1 (suporte, 2 cargas)</td><td></td><td></td><td></td><td class="x">●</td><td></td><td></td><td>Pivô 8</td></tr>
+    <tr class="pv"><td>Aula 15, ex. 3 (balanço com $q$)</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td class="x">◐</td><td>Pivô 9</td></tr>
+    <tr><td>Aula 14, ex. 2 (cortante no balanço)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 6</td></tr>
+    <tr><td>Aula 14, exerc. 3 (arco)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 7</td></tr>
+    <tr><td>Aula 14, exerc. 4 (mola de torção)</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 6</td></tr>
+  </tbody></table></div>
+
+  <!-- ======================= PIVÔ 6 ======================= -->
+  <h3 class="sub" id="t11-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="s14-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 1 (p.37) · Pivô 6 da P2</div>
+      <h3 id="s14-ex1-h" data-nav="A14 exerc.1 · viga + cabo" data-pivo>Viga apoiada em A e presa a um cabo em C</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W1</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.37)</span>
+      1) A viga ABC possui rigidez flexional $EI$ e está simplesmente apoiada em A e presa a um cabo de rigidez axial $(EA)_c$ e comprimento $L$ em C. A viga está submetida a uma força concentrada de magnitude P aplicada em B. Determine o deslocamento vertical dos pontos B e C em função dos parâmetros fornecidos.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 1):</strong> ver o PDF oficial, Slides da aula 14, p. 37 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Viga isostática (apoio em A + cabo em C) sob flexão simples; o cabo só tem força normal. Uma carga ($P$ em B), e pede-se o deslocamento de B (correspondente, então P.T.E. serve) e de C (não correspondente, então não serve).</p>
+      <div class="callout concept"><span class="co-t">Conceito: energia na flexão e a regra do "esforço único"</span>
+        <p>Na flexão, $\sigma_x = -M_zy/I_z$ e $u^* = \sigma^2/2E$. Integrando $y^2$ na seção aparece $I_z$ (aula 14 p.10): $U^* = \int\frac{M^2}{2EI}ds$. A cortante também guarda energia, mas numa viga esbelta ela é da ordem de $(h/L)^2$ da de flexão e se despreza. O <strong>cabo</strong> é diferente: ele só tem força normal, é o <em>único</em> esforço dele. Desprezar essa energia significaria tratar o cabo como rígido (aula 14 p.32). Por isso a resposta tem a parcela $L/(EA)_c$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>Rigidez da viga</td><td>$EI$</td><td>enunciado/figura</td></tr><tr><td>Rigidez e comprimento do cabo</td><td>$(EA)_c$, $L$</td><td>enunciado/figura</td></tr>
+      <tr><td>Vãos</td><td>$AB = a$, $BC = b$</td><td>figura (cotas)</td></tr><tr><td>Carga</td><td>$P$ ↓ em B</td><td>figura</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{v,B}$ pelo P.T.E. ($P\delta_{v,B}/2 = U^*$). $\delta_{v,C}$ <strong>não</strong> sai do P.T.E. (não há carga em C). Ele sai da compatibilidade (C desce o quanto o cabo alonga) ou de Crotti-Engesser com força fictícia em C.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 14 p.10 e p.31</span> $U^* = \int_{viga}\frac{M^2}{2EI}ds + \frac{N_c^2L}{2(EA)_c}$ (cortante da viga desprezada, aula 14 p.28/p.32).</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4>
+      <p>Reações por momento em A e em C: $N_c = \frac{Pa}{a+b}$ (tração no cabo), $R_A = \frac{Pb}{a+b}$.</p>
+      <ul><li>Trecho AB, $x$ a partir de A: $M = R_Ax$ (de 0 a $\frac{Pab}{a+b}$).</li>
+      <li>Trecho CB, $x'$ a partir de C: $M = N_cx'$ (de 0 a $\frac{Pab}{a+b}$). O diagrama é triangular com pico em B.</li></ul></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^* = \frac{N_c^2L}{2(EA)_c} + \int_0^a\frac{(R_Ax)^2}{2EI}dx + \int_0^b\frac{(N_cx')^2}{2EI}dx' = \frac{P^2a^2L}{2(a+b)^2(EA)_c} + \frac{P^2a^2b^2(a+b)}{6EI(a+b)^2}$$
+      $$\frac{P\,\delta_{v,B}}{2} = U^*\ \Rightarrow\ \delta_{v,B} = \frac{Pa^2}{(a+b)^2}\left[\frac{L}{(EA)_c} + \frac{b^2(a+b)}{3EI}\right]$$
+      $$\delta_{v,C} = \frac{N_cL}{(EA)_c} = \frac{PaL}{(EA)_c(a+b)}\quad\text{(alongamento do cabo)}$$</div>
+      <p>Conferência da parcela de flexão: com $a = b = \ell/2$ e cabo rígido, $\delta_{v,B} = \frac{P\ell^3}{48EI}$, a viga biapoiada clássica ✓.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\delta_{v,B} = \frac{Pa^2}{(a+b)^2}\left[\frac{L}{(EA)_c} + \frac{b^2(a+b)}{3EI}\right]$; $\delta_{v,C} = \frac{PaL}{(EA)_c(a+b)}$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o cabo em $U^*$: sai só a parcela de flexão, como se o cabo fosse uma barra rígida.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Tentar tirar $\delta_{v,C}$ de $W = U^*$: $W$ só "enxerga" o deslocamento de B.</li>
+      <li>Leitura física: $\delta_{v,B}$ = parcela de corpo rígido (a viga gira em A porque o cabo cede: $\frac{a}{a+b}\delta_{v,C}$) + flecha de flexão.</li></ul></div>
+  </article>
+<article class="ex pivo" id="s14-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 2 (p.38) · Pivô 7 da P2</div>
+      <h3 id="s14-ex2-h" data-nav="A14 exerc.2 · estrutura em L" data-pivo>Estrutura espacial em L: flexão + torção + cortante</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W3</span><span class="chip">E2</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.38)</span>
+      2) A estrutura ABC é formada pelas barras AB e BC, de seção transversal circular cheia e diâmetro $d$. O material das barras é elástico-linear, com módulo de elasticidade $E$ e coeficiente de Poisson ν dados. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em C, determine o deslocamento vertical em C pelo Princípio do Trabalho e da Energia.
+      <br>Resp. (slide): $\delta_{v,C} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA} = \frac{PL^3}{EI}\left[\frac38 + \frac{(1+\nu)}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 2):</strong> ver o PDF oficial, Slides da aula 14, p. 38 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A) no plano horizontal, carga vertical. Em BC há flexão e cortante; em AB há flexão, cortante <strong>e torção</strong>. Carga única, deslocamento correspondente: P.T.E.</p>
+      <div class="callout concept"><span class="co-t">Conceito: como achar $M$ e $T$ numa estrutura 3D</span>
+        <p>Corte a barra, olhe para a parte que vai até a carga e calcule o momento de $P$ em relação ao centro da seção: $\vec M = \vec r\times\vec P$. A componente de $\vec M$ <em>ao longo do eixo da barra</em> é o torque $T$, e a componente <em>perpendicular</em> é o fletor $M$. Em AB, a força em C tem braço $s$ (ao longo de AB) e braço $L/2$ (ao longo de BC, perpendicular a AB). O braço ao longo da própria barra gera flexão ($M = Ps$); o braço perpendicular gera torção ($T = PL/2$, constante). Isso é revisão da aula 2 (Lista 1) aplicada à energia.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+      <tr><td>AB (engastada em A)</td><td>comprimento $L$</td><td>figura</td></tr><tr><td>BC ⊥ AB, horizontal</td><td>comprimento $L/2$</td><td>figura</td></tr>
+      <tr><td>Seção circular cheia</td><td>$I = \pi d^4/64$, $I_p = 2I$, $A = \pi d^2/4$, $f_c = 10/9$</td><td>enunciado + geometria</td></tr>
+      <tr><td>Material</td><td>$E$, ν ⇒ $G = E/2(1+\nu)$</td><td>enunciado</td></tr></tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{v,C}$ por $\frac{P\delta}{2} = U^*$, <em>mantendo</em> a cortante para ver quanto ela pesa.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 14 p.31</span> $U^* = \sum\int\left(\frac{M^2}{2EI} + \frac{T^2}{2GI_p} + \frac{f_cV^2}{2GA}\right)ds$.</p></div>
+    <div class="step" data-n="5"><h4>Esforços internos</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>coordenada</th><th>$M$</th><th>$T$</th><th>$V$</th></tr></thead><tbody>
+      <tr><td>BC</td><td>$s$ a partir de C, $0..L/2$</td><td>$Ps$</td><td>0</td><td>$P$</td></tr>
+      <tr><td>AB</td><td>$s$ a partir de B, $0..L$</td><td>$Ps$</td><td>$PL/2$</td><td>$P$</td></tr></tbody></table></div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$U^*_M = \frac{P^2(L/2)^3}{6EI} + \frac{P^2L^3}{6EI} = \frac{3P^2L^3}{16EI}\qquad U^*_T = \frac{(PL/2)^2L}{2GI_p} = \frac{P^2L^3}{8GI_p}\qquad U^*_V = \frac{f_cP^2(3L/2)}{2GA}$$
+      $$\delta_{v,C} = \frac{2U^*}{P} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA}$$</div>
+      <p>Adimensionalizando com $I_p = 2I$ e $E/G = 2(1+\nu)$: $\frac{EI}{4GI_p} = \frac{1+\nu}{4}$; com $f_c = 10/9$ e $I/A = d^2/16$: a cortante vale $\frac{5(1+\nu)}{24}\left(\frac dL\right)^2$.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,C} = \frac{PL^3}{EI}\left[\frac38 + \frac{1+\nu}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Desprezar a torção "porque é pequena": com ν = 0,3 ela vale 0,325 contra 0,375 da flexão. <strong>Em estrutura espacial a torção sempre entra.</strong></li>
+      <li>Já a cortante, com $d/L = 0{,}05$, vale 0,0007: essa sim é desprezível.</li>
+      <li>Conferência: sem BC ($L/2 \to 0$), sobra $PL^3/3EI$ do balanço ✓.</li></ul></div>
+  </article>
+<h3 class="sub" id="t11-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="s14-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exemplo 2 (p.25–28) · ver <a href="11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
+      <h3 id="s14-ex5-h" data-nav="A14 ex.2 · cortante no balanço">Balanço com $P$: quanto pesa a cortante</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.25)</span>
+      A barra AB, engastada em A e livre em B, está submetida a uma carga concentrada $P$ na extremidade B. A barra possui seção transversal retangular ($b\times h$). Determine o deslocamento vertical $\delta_{v,B}$ do ponto B pelo Princípio do Trabalho e da Energia. (Dados: $P, L, E, b, h$, $f = 6/5$, $\nu = 0{,}3$.)</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 5):</strong> ver o PDF oficial, Slides da aula 14, p. 25 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> com $s$ a partir de B, $V_y = P$ e $M_z = -Ps$. $U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \int_0^L\frac{fP^2}{2GA}ds = \frac{P^2L^3}{6EI} + \frac{fP^2L}{2GA}$.</p>
+    <div class="math-box">$$\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA} = \frac{PL^3}{3EI}\left[1 + \eta\right],\qquad \eta = \frac{3fEI}{GAL^2} = f(1+\nu)\frac12\left(\frac hL\right)^2 = 0{,}78\left(\frac hL\right)^2$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA}$; com $h/L = 0{,}1$ a cortante acrescenta só 0,78%. <span class="badge badge-ok">bate com o slide</span> É a justificativa do default "desprezar a cortante em vigas".</div>
+  </article>
+<article class="ex" id="s14-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 3 (p.39) · ver <a href="11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
+      <h3 id="s14-ex3-h" data-nav="A14 exerc.3 · arco semicircular">Arco semicircular engastado</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.39)</span>
+      3) O eixo central do arco AB possui raio de curvatura R e sua seção transversal é quadrada de lado $a$. O material das barras é elástico-linear, com módulo de elasticidade $E$. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em B, determine o deslocamento vertical neste ponto em função dos parâmetros fornecidos usando o Princípio do Trabalho e da Energia. <em>Obs</em>: Considere também as parcelas devidas à força normal e à força cortante no cálculo da energia complementar e verifique em quais condições tais parcelas podem ser desprezadas.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 3):</strong> ver o PDF oficial, Slides da aula 14, p. 39 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> coordenada angular $\theta$ medida a partir de B, $ds = R\,d\theta$, $\theta \in [0, \pi]$. Na seção $\theta$, o braço horizontal de $P$ é $R(1 - \cos\theta)$ ⇒ $M = PR(1-\cos\theta)$; decompondo $P$ na tangente e na normal ao arco: $N = P\sin\theta$, $V = P\cos\theta$ (sinais não importam, tudo ao quadrado).</p>
+    <div class="math-box">$$U^* = \frac{P^2R^3}{2EI}\int_0^\pi(1-\cos\theta)^2d\theta + \frac{P^2R}{2EA}\int_0^\pi\sin^2\theta\,d\theta + \frac{f_cP^2R}{2GA}\int_0^\pi\cos^2\theta\,d\theta = \frac{3\pi P^2R^3}{4EI} + \frac{\pi P^2R}{4EA} + \frac{\pi f_cP^2R}{4GA}$$
+    $$\delta_{v,B} = \frac{3\pi PR^3}{2EI}\left[1 + \frac1{36}\left(\frac aR\right)^2 + \frac{1+\nu}{15}\left(\frac aR\right)^2\right]\qquad (I = a^4/12,\ A = a^2,\ f_c = 6/5)$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} \cong \frac{3\pi PR^3}{2EI}$; as parcelas de $N$ e $V$ são de ordem $(a/R)^2$, desprezíveis em arco esbelto ($a \ll R$). <span class="badge badge-ok">bate com o slide</span></div>
+  </article>
+<article class="ex" id="s14-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 4 (p.40) · ver <a href="11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
+      <h3 id="s14-ex4-h" data-nav="A14 exerc.4 · mola de torção">Viga com mola de torção no apoio</h3></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.40)</span>
+      4) A viga AB possui comprimento $L$ e rigidez flexional $EI$ (constante). A extremidade A está conectada a uma mola de torção (de comportamento linear) com constante $k_t$ (dada). Considerando que uma força concentrada de intensidade $P$ seja aplicada na extremidade livre B, determine o deslocamento vertical neste ponto pelo Princípio do Trabalho e da Energia, em função dos parâmetros fornecidos. Considere válida a hipótese de linearidade geométrica.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 4):</strong> ver o PDF oficial, Slides da aula 14, p. 40 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> a mola de torção é um elemento de esforço único, então a energia dela entra (A4): $U^*_{mola} = \frac{M_A^2}{2k_t}$ com $M_A = PL$. Na viga, $M = Ps$ a partir de B.</p>
+    <div class="math-box">$$U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \frac{(PL)^2}{2k_t}\ \Rightarrow\ \delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t} = \frac{PL^3}{3EI}\left(1 + \frac{3EI}{k_tL}\right)$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t}$. <span class="badge badge-ok">bate com o slide</span> Leitura: a mola deixa a viga girar $\theta_A = PL/k_t$ como corpo rígido, e B desce $L\theta_A$ a mais.</div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t11-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t11-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Flexão.</b> <span class="path">$U^*=\int M^2/2EI\,ds$</span>; cortante $\int fV^2/2GA$ ($f=6/5$ retângulo, $10/9$ círculo); normal $\int N^2/2EA$; torção $\int T^2/2GI_t$.</div>
+          <div class="r-item"><b>Soma sem termo cruzado</b> porque os eixos são centrais e principais; cargas diferentes que geram o mesmo esforço <em>não</em> se somam.</div>
+          <div class="r-item"><b>Desprezar.</b> $N$, $V\ll M$, $T$ na mesma barra; <strong>nunca</strong> cabo, mola, barra de treliça, torção em 3D.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="10-energia-na-torcao.html"><small>← anterior</small>10 · Energia na torção</a><a class="prox" href="12-teoremas-de-castigliano.html"><small>próximo →</small>12 · Crotti-Engesser e Castigliano</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

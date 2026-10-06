@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 · Deformações num ponto · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 7</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t07-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t07-E">O tensor das deformações</a></li>
+<li class="nav-ex"><a href="#t07-algo">Algoritmo do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t07-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#l4-conv">Convenções da lista</a></li>
+<li class="nav-ex"><a href="#l4-matriz">Matriz de cobertura L4</a></li>
+<li class="nav-ex"><a href="#t07-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#l4-ex8-h">L4 compl.1 · tensor [E] completo<span class="nav-pv">PIVÔ</span></a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t07-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>07 · Deformações num ponto</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t07-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t07-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">D1</span> <span class="chip">D2</span> · aulas 9 (31/08) e 10 (02/09)</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Como descrever a deformação num ponto e achar o alongamento de uma fibra ou a distorção entre duas fibras em qualquer direção? Ao fim você deve montar o <strong>tensor das deformações</strong>
+        $[E]$ a partir dos deslocamentos, obter $\varepsilon(\vec n)$ e $\gamma(\vec n,\vec m)$, as deformações principais e a distorção máxima.</p></div>
+</section>
+<section class="chapter" id="t07-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t07-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="03-tensoes-principais.html">ficha 03 (Tensões e direções principais)</a>: autovalores (mesma conta, agora para $[E]$).</li><li><a href="../base.html#derivada">Base</a>: derivadas parciais do campo de deslocamentos.</li></ul>
+</section>
+<section class="chapter" id="t07-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t07-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 9, p.3–47; Aula 10, p.4–23</td><td></td></tr><tr><td>Apostila 02 (Clóvis)</td><td>§2–5, p.3–14</td><td>D1: sem exercício de lista, reler</td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§7.7 (501–514)</td><td>só estado plano de deformações</td></tr><tr><td>Lista 4</td><td>compl. 1 e 2</td><td></td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t07-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t07-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t07-E" data-nav="O tensor das deformações">Do campo de deslocamentos ao tensor $[E]$</h3>
+        <p>Dado o campo de deslocamentos $\vec u(x,y,z)$, o gradiente $[L] = \partial u_i/\partial x_j$ mistura deformação e rotação de corpo rígido. A parte simétrica é a deformação (pequenas deformações,
+        linearidade geométrica):
+        $$[E] = \tfrac12\big([L] + [L]^t\big),\qquad E_{ii} = \varepsilon_i,\quad E_{ij} = \tfrac12\gamma_{ij}.$$
+        O alongamento relativo de uma fibra de direção $\vec n$ é $\varepsilon(\vec n) = \vec n^{\,t}[E]\vec n$ e a distorção entre duas fibras ortogonais $\vec n,\vec m$ é $\gamma(\vec n,\vec m) = 2\vec n^{\,t}[E]\vec m$.
+        Principais e $\gamma_{máx} = \varepsilon_1-\varepsilon_3$ saem como em <a href="03-tensoes-principais.html">ficha 03 (Tensões e direções principais)</a>.</p>
+        <h3 class="sub" id="t07-algo" data-nav="Algoritmo do professor">Algoritmo do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A7 · Deformações a partir de deslocamentos ou de [E]</h3><p><span class="tag tag-form">📄 Aula 9; aula 10 p.4–23</span></p>
+      <ol><li>$[E] = ([L] + [L]^t)/2$ (linearidade geométrica).</li><li>$\varepsilon(\vec n) = \vec n^{\,t}[E]\vec n$; $\gamma(\vec n, \vec m) = 2\vec n^{\,t}[E]\vec m$.</li><li>Principais e $\gamma_{máx} = \varepsilon_1 - \varepsilon_3$ (como A3).</li><li>Máxima distorção de uma fibra: $\gamma/2 = |[E]\vec n - \varepsilon\vec n|$.</li></ol></div>
+    </div>
+</section>
+<section class="chapter" id="t07-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t07-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li><strong>Pequenas deformações e rotações:</strong> $[E]$ vem só do gradiente linearizado.</li><li>O curso usa $\gamma/2$ fora da diagonal no tensor; a engenharia usa $\gamma$ inteiro nos vetores: não misturar.</li><li>$[E]$ descreve a geometria; a ligação com as tensões é Hooke (<a href="08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>).</li></ul>
+</section>
+
+<section class="chapter" id="t07-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t07-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 4, complementar 1: do tensor $[E]$ às fibras de máxima distorção. As provas antigas do bloco "deformações" estão em <a href="../provas/p1.html">P1</a>.</p></div>
+<p class="section-desc" style="margin-bottom:10px">11 exercícios (<code>01_material_oficial/listas/MecanicaDosSolidosIIListaIV.pdf</code>, 7 p.): 7 do Gere (caps. 7 e 8) e 4 complementares, com respostas dos complementares 1 e 3. Contas em <code>_build/calc/calc_l4.py</code>. Duas observações sobre dados: G implícito no 7.7-17 e E ausente no 8.2-6.</p><div class="callout"><span class="co-t">Onde estão os outros exercícios desta lista</span>Os exercícios desta lista se distribuem entre as fichas <a href="05-vasos-de-pressao.html">ficha 05 (Vasos de pressão de parede fina)</a>, <a href="07-deformacoes.html">ficha 07 (Deformações num ponto)</a> e <a href="08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>.</div><h3 class="sub" id="l4-conv" data-nav="Convenções da lista">O que é preciso ter na cabeça</h3>
+  <ul>
+    <li><strong>Tensor das deformações</strong> (aula 9 p.38–40): $[E] = \begin{bmatrix}\varepsilon_x&\gamma_{xy}/2&\gamma_{xz}/2\\\cdot&\varepsilon_y&\gamma_{yz}/2\\\cdot&\cdot&\varepsilon_z\end{bmatrix}$. Fora da diagonal entra <strong>metade</strong> da distorção de engenharia.</li>
+    <li><strong>Alongamento numa direção</strong> $\vec n$: $\varepsilon = \vec n^{\,t}[E]\vec n$. Num plano, com $\vec n = (\cos\theta, \sin\theta)$: $\varepsilon_\theta = \varepsilon_x\cos^2\theta + \varepsilon_y\sin^2\theta + \gamma_{xy}\sin\theta\cos\theta$ (aula 10 p.49). É a equação de todo extensômetro.</li>
+    <li><strong>Distorção entre fibras ortogonais</strong> $\vec n$, $\vec m$: $\gamma = 2\vec n^{\,t}[E]\vec m$ (positiva se o ângulo reto diminui). $\gamma_{máx} = \varepsilon_1 - \varepsilon_3$.</li>
+    <li><strong>Hooke (isótropo)</strong>: $\varepsilon_x = \frac1E[\sigma_x - \nu(\sigma_y + \sigma_z)]$, $\gamma = \tau/G$, $G = \frac{E}{2(1+\nu)}$. Em superfície livre, EPT: $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y)$ e $\varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x + \varepsilon_y) \neq 0$.</li>
+  </ul>
+
+  <h3 class="sub" id="l4-matriz" data-nav="Matriz de cobertura L4">Matriz de cobertura e escolha dos pivôs</h3>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Ex.</th><th>id</th><th>D1/D2 tensor [E]</th><th>D3 extensômetros</th><th>D4 Hooke</th><th>T4/T5</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>1</td><td>7.7-17</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td>Pivô 15</td></tr>
+    <tr><td>2</td><td>7.7-18</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td>ver Pivô 15</td></tr>
+    <tr><td>3</td><td>7.7-22</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td>ver Pivô 18</td></tr>
+    <tr><td>4</td><td>8.2-6</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>ver Pivô 15</td></tr>
+    <tr><td>5</td><td>8.2-9</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>ver Pivô 15</td></tr>
+    <tr><td>6</td><td>8.3-6</td><td></td><td class="x">◐</td><td class="x">●</td><td class="x">●</td><td>ver Pivô 15</td></tr>
+    <tr><td>7</td><td>8.3-12</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>ver Pivô 15</td></tr>
+    <tr class="pv"><td>8</td><td>compl. 1</td><td class="x">●</td><td></td><td></td><td></td><td>Pivô 16</td></tr>
+    <tr><td>9</td><td>compl. 2</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td>ver Pivô 17</td></tr>
+    <tr class="pv"><td>10</td><td>compl. 3</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td>Pivô 17</td></tr>
+    <tr class="pv"><td>11</td><td>compl. 4</td><td class="x">◐</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td>Pivô 18</td></tr>
+  </tbody></table></div>
+
+  <!-- PIVÔ 15 -->
+  <h3 class="sub" id="t07-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="l4-ex8">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · Complementar 1 · Pivô 16 da P1</div>
+      <h3 id="l4-ex8-h" data-nav="L4 compl.1 · tensor [E] completo" data-pivo>Do tensor das deformações às fibras de máxima distorção</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">D1</span><span class="chip">D2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.4)</span>
+      1) Seja o tensor das deformações em um dado ponto de um sólido e escrito com relação a uma base de versores $b = (\vec{e}_x, \vec{e}_y, \vec{e}_z)$ dado por: $[E]_b = \begin{bmatrix} 200 & -50 & 0 \\ -50 & 40 & 0 \\ 0 & 0 & -100 \end{bmatrix}$ ($\mu$), determine: a) as deformações principais neste ponto e os círculos de Mohr das deformações; b) as direções principais de deformação; c) a máxima distorção entre duas fibras que passam por este ponto; d) as direções das fibras que têm entre si a máxima distorção; e) o alongamento de uma fibra que passa pelo ponto e que forma ângulos iguais com os eixos $x$, $y$, $z$; f) a máxima distorção que a fibra mencionada em (e) pode ter com outra fibra ortogonal a ela; g) a direção da fibra encontrada em (f).</div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Tudo o que se fez com $[T]$ na P1 vale para $[E]$, com uma troca: fora da diagonal está $\gamma/2$. Então $\gamma$ faz o papel de $2\tau$ (Mohr em $(\varepsilon, \gamma/2)$).</p>
+      <div class="callout concept"><span class="co-t">Conceito: vetor deformação</span>
+        <p>$\vec\epsilon = [E]\vec n$ é o análogo do vetor tensão (aula 10 p.4–8). A componente ao longo de $\vec n$ é o alongamento da fibra $\vec n$; a componente perpendicular vale $\gamma/2$, onde $\gamma$ é a <strong>maior</strong> distorção que a fibra $\vec n$ sofre com alguma fibra ortogonal a ela, que está justamente na direção dessa componente.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$\varepsilon_x = 200$, $\varepsilon_y = 40$, $\varepsilon_z = -100$, $\gamma_{xy}/2 = -50$ (µ). A direção $z$ está desacoplada ⇒ $-100\mu$ é principal, com $\vec n = \vec e_z$.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Itens a–g.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p>$\det([E] - \varepsilon I) = 0$; $\gamma_{máx} = \varepsilon_1 - \varepsilon_3$; $\varepsilon = \vec n^{\,t}[E]\vec n$; $\gamma/2 = |\vec\epsilon - \varepsilon\vec n|$.</p></div>
+    <div class="step" data-n="5"><h4>Principais (a, b)</h4>
+      <div class="math-box">$$\text{plano } xy:\ \frac{200 + 40}{2}\pm\sqrt{80^2 + 50^2} = 120\pm94{,}34\ \Rightarrow\ \varepsilon_1 = 214{,}34,\ \varepsilon_2 = 25{,}66,\ \varepsilon_3 = -100\ \mu$$
+      $$\vec n_1 = \pm(0{,}961;\ -0{,}276;\ 0),\quad \vec n_2 = \pm(0{,}276;\ 0{,}961;\ 0),\quad \vec n_3 = (0;\ 0;\ 1)$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo (c–g)</h4>
+      <div class="math-box">$$\gamma_{máx} = 214{,}34 + 100 = 314{,}34\mu\quad\text{entre}\quad \vec\xi, \vec\eta = \frac{\vec n_1 \pm \vec n_3}{\sqrt2} = \pm(0{,}680;\ -0{,}195;\ \pm0{,}707)$$
+      $$\vec n = \frac{(1,1,1)}{\sqrt3}:\ \vec\epsilon = [E]\vec n = \frac{(150;\ -10;\ -100)}{\sqrt3}\ \Rightarrow\ \varepsilon = \vec\epsilon\cdot\vec n = \frac{40}{3} = 13{,}33\mu$$
+      $$\frac{\gamma}{2} = |\vec\epsilon - \varepsilon\vec n| = 103{,}39\ \Rightarrow\ \gamma = 206{,}77\mu,\quad \vec m = \frac{\vec\epsilon - \varepsilon\vec n}{|\cdot|} = (0{,}763;\ -0{,}130;\ -0{,}633)$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) 214,34 / 25,66 / −100 µ; (b) como acima; (c) 314,34 µ; (d) $\vec\xi$, $\vec\eta$; (e) 13,33 µ; (f) 206,77 µ; (g) (0,76319; −0,130302; −0,632894). <span class="badge badge-ok">bate com a lista</span> (a lista escreve "$\varepsilon_1 = -100$" onde é $\varepsilon_3$.)</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Montar $[E]$ com $\gamma$ inteiro fora da diagonal: os autovalores saem errados.</li>
+      <li>Conferência: traço $= 140 = 214{,}34 + 25{,}66 - 100$ ✓ (é a variação de volume por unidade de volume).</li></ul></div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t07-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t07-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Tensor.</b> <span class="path">$[E]$: ε na diagonal, <strong>γ/2</strong> fora</span>; $\varepsilon(\vec n)=\vec n^t[E]\vec n$; $\gamma=2\vec n^t[E]\vec m$; $\gamma_{máx}=\varepsilon_1-\varepsilon_3$.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="06-criterios-de-resistencia.html"><small>← anterior</small>06 · Critérios de resistência</a><a class="prox" href="08-extensometros-e-hooke.html"><small>próximo →</small>08 · Extensômetros e Hooke generalizada</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

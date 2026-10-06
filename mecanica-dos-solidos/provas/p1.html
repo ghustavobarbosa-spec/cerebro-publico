@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P1 · 14/set · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · P1</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+    <button class="btn-chip" id="btn-print-resumo" type="button">🖨 Imprimir resumo</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#p1-trilha-h">1 · Trilha de pivôs</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap1-h">2 · Objetivo e o que cai</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap1-para-que">Para que serve</a></li>
+<li class="nav-ex"><a href="#cap1-conteudo">Conteúdo e códigos</a></li>
+<li class="nav-ex"><a href="#cap1-regras">Regras do jogo</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#p1-metodo-h">3 · Método de resolução: os 7 passos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#p1-7passos">Os 7 passos</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap4-h">4 · O que memorizar</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cap4-tensor">Bloco 1 · Tensor e Cauchy</a></li>
+<li class="nav-ex"><a href="#cap4-princ">Bloco 2 · Principais e Mohr</a></li>
+<li class="nav-ex"><a href="#cap4-vasos">Bloco 3 · Vasos</a></li>
+<li class="nav-ex"><a href="#cap4-crit">Bloco 4 · Critérios</a></li>
+<li class="nav-ex"><a href="#cap4-def">Bloco 5 · Deformações e Hooke</a></li>
+<li class="nav-ex"><a href="#cap4-secoes">Bloco 6 · Tensões de fórmula</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#capB-h">5 · Provas antigas por assunto</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#pb-panorama">O que cai e como cai</a></li>
+<li class="nav-ex"><a href="#pb-A">Bloco A · estrutura → ponto</a></li>
+<li class="nav-ex"><a href="#p1a-ex1-h">AP1 ex.1 · arame com peso</a></li>
+<li class="nav-ex"><a href="#p1a-ex2-h">AP1 ex.2 · viga em L, P1 e P2</a></li>
+<li class="nav-ex"><a href="#p1a-ex3-h">AP1 ex.3 · barra dobrada 3D, 4 pontos</a></li>
+<li class="nav-ex"><a href="#p1a-ex8-h">AP1 ex.8 · estrutura plana, F e 10F</a></li>
+<li class="nav-ex"><a href="#p2a-ex1-h">AP2 ex.1 · [E] num arame</a></li>
+<li class="nav-ex"><a href="#pb-B">Bloco B · tensor e critérios</a></li>
+<li class="nav-ex"><a href="#p1a-ex4-h">AP1 ex.4/6 · cubo completo</a></li>
+<li class="nav-ex"><a href="#p1a-ex5-h">AP1 ex.5 · FS com três resistências</a></li>
+<li class="nav-ex"><a href="#p1a-ex7-h">AP1 ex.7 · eixo F + T literal</a></li>
+<li class="nav-ex"><a href="#p1a-ex12-h">AP1 ex.12 · Tresca × von Mises</a></li>
+<li class="nav-ex"><a href="#p1a-ex15-h">AP1 ex.15 · eixo dúctil + frágil</a></li>
+<li class="nav-ex"><a href="#p2a-ex2-h">AP2 ex.2 · de ε para σ e FS</a></li>
+<li class="nav-ex"><a href="#pb-C">Bloco C · vasos e soldas</a></li>
+<li class="nav-ex"><a href="#p1a-ex9-h">AP1 ex.9 · espessura do tanque</a></li>
+<li class="nav-ex"><a href="#p1a-ex10-h">AP1 ex.10 · pistão (literal)</a></li>
+<li class="nav-ex"><a href="#p1a-ex11-h">AP1 ex.11 · solda a 45°</a></li>
+<li class="nav-ex"><a href="#p1a-ex13-h">AP1 ex.13 · vaso + T + M</a></li>
+<li class="nav-ex"><a href="#p1a-ex14-h">AP1 ex.14 · tanque + T + F</a></li>
+<li class="nav-ex"><a href="#p1a-ex16-h">AP1 ex.16 · ângulo admissível da solda</a></li>
+<li class="nav-ex"><a href="#p2a-ex3-h">AP2 ex.3 · verniz na esfera</a></li>
+<li class="nav-ex"><a href="#p2a-ex11-h">AP2 ex.11 · lata de refrigerante</a></li>
+<li class="nav-ex"><a href="#pb-D">Bloco D · deformações</a></li>
+<li class="nav-ex"><a href="#p2a-ex4-h">AP2 ex.4 · onde colar 3 extensômetros</a></li>
+<li class="nav-ex"><a href="#p2a-ex5-h">AP2 ex.5 · ε(θ) e seus extremos</a></li>
+<li class="nav-ex"><a href="#p2a-ex6-h">AP2 ex.6 · medir E e ν com roseta</a></li>
+<li class="nav-ex"><a href="#p2a-ex7-h">AP2 ex.7 · ν a partir de γ e τ</a></li>
+<li class="nav-ex"><a href="#p2a-ex8-h">AP2 ex.8 · roseta e FS</a></li>
+<li class="nav-ex"><a href="#p2a-ex9-h">AP2 ex.9 · [T] → [E] 3D</a></li>
+<li class="nav-ex"><a href="#p2a-ex10-h">AP2 ex.10 · N, M, T por duas rosetas</a></li>
+<li class="nav-ex"><a href="#p2a-ex12-h">AP2 ex.12 · melhor orientação</a></li>
+<li class="nav-ex"><a href="#p2a-ex13-h">AP2 ex.13 · roseta completa até FS</a></li>
+<li class="nav-ex"><a href="#p2a-ex14-h">AP2 ex.14 · dinamômetro</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#capC-h">6 · Análise exercícios × tópicos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#capC-freq">Frequência dos tópicos</a></li>
+<li class="nav-ex"><a href="#capC-cobra">O que o professor mais cobra</a></li>
+<li class="nav-ex"><a href="#capC-cobertura">Conferência de cobertura</a></li>
+<li class="nav-ex"><a href="#capC-diverg">Divergências de gabarito</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#p1-resumo-h">7 · Resumo pré-prova</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <a href="index.html">Provas</a> <span class="sep">›</span> <span>P1 · 14/set</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<header class="hero" id="topo">
+  <span class="eyebrow">PME3211 · P1</span>
+  <h1>P1: esforços, tensões e deformações num ponto</h1>
+  <p class="subtitle">Aplicada em 14/set/2026 (aulas 1–10) · revisão para a PSub (07/dez) e base da P2 · sem consulta e sem formulário</p>
+  <p class="intro">Esta página junta o que é <em>da prova</em>: a trilha de exercícios-pivô (que moram nas fichas), o que memorizar, as 30 questões antigas por assunto, as divergências de gabarito e o resumo para a véspera.</p>
+</header>
+<section class="chapter" id="p1-trilha">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="p1-trilha-h" data-nav="1 · Trilha de pivôs">Trilha de pivôs</h2><p class="section-desc">Do básico ao integrado. Cada pivô ensina o conceito na primeira vez que ele aparece.</p></div>
+<ol class="method"><li><a href="../topicos/01-esforcos-solicitantes.html#l1-ex1-h">L1 ex.1</a> <small>(ficha 01)</small>: esforços numa estrutura plana: o método do lado livre.</li><li><a href="../topicos/01-esforcos-solicitantes.html#l1-ex2-h">L1 ex.2</a> <small>(ficha 01)</small>: arco vertical: integrar o peso ao longo do arco.</li><li><a href="../topicos/01-esforcos-solicitantes.html#l1-ex3-h">L1 ex.3</a> <small>(ficha 01)</small>: pórtico no plano horizontal: aparece a torção.</li><li><a href="../topicos/01-esforcos-solicitantes.html#l1-ex7-h">L1 ex.7</a> <small>(ficha 01)</small>: estrutura espacial com barras nos três eixos.</li><li><a href="../topicos/02-tensor-e-cauchy.html#l2-ex5-h">L2 compl.1</a> <small>(ficha 02)</small>: ler o tensor num cubo com triedros diferentes.</li><li><a href="../topicos/04-circulos-de-mohr.html#l2-ex6-h">L2 compl.2</a> <small>(ficha 04)</small>: Mohr num elemento girado de 60°.</li><li><a href="../topicos/03-tensoes-principais.html#l2-ex11-h">L2 compl.7</a> <small>(ficha 03)</small>: recuperar o tensor a partir de dois planos.</li><li><a href="../topicos/03-tensoes-principais.html#l2-ex7-h">L2 compl.3+5</a> <small>(ficha 03)</small>: tubo 3D: dos esforços ao tensor e às tensões principais.</li><li><a href="../topicos/05-vasos-de-pressao.html#l3-ex1-h">L3 8.2-1</a> <small>(ficha 05)</small>: tanque esférico: espessura por Tresca e por von Mises.</li><li><a href="../topicos/05-vasos-de-pressao.html#l3-ex7-h">L3 8.5-19</a> <small>(ficha 05)</small>: vaso cilíndrico com pressão, flexão e torção.</li><li><a href="../topicos/04-circulos-de-mohr.html#l3-ex5-h">L3 8.4-1</a> <small>(ficha 04)</small>: ponto interno de uma viga: flexão + cisalhamento da cortante.</li><li><a href="../topicos/04-circulos-de-mohr.html#l3-ex8-h">L3 compl.1+2</a> <small>(ficha 04)</small>: três círculos de Mohr e planos de $\tau_{máx}$ em 3D.</li><li><a href="../topicos/04-circulos-de-mohr.html#l3-ex13-h">L3 compl.6</a> <small>(ficha 04)</small>: dois carregamentos no mesmo ponto: $\tau_{máx}$ não se superpõe.</li><li><a href="../topicos/06-criterios-de-resistencia.html#l3-ex15-h">L3 compl.8</a> <small>(ficha 06)</small>: eixo com polia: flexão composta, torção e fator de segurança.</li><li><a href="../topicos/08-extensometros-e-hooke.html#l4-ex1-h">L4 7.7-17</a> <small>(ficha 08)</small>: força axial e torque medidos por dois extensômetros.</li><li><a href="../topicos/07-deformacoes.html#l4-ex8-h">L4 compl.1</a> <small>(ficha 07)</small>: do tensor das deformações às fibras de máxima distorção.</li><li><a href="../topicos/08-extensometros-e-hooke.html#l4-ex10-h">L4 compl.3</a> <small>(ficha 08)</small>: extensômetro num pórtico tubular: descobrir a força e a melhor orientação.</li><li><a href="../topicos/08-extensometros-e-hooke.html#l4-ex11-h">L4 compl.4</a> <small>(ficha 08)</small>: roseta a 60°: das leituras ao fator de segurança.</li><li><a href="../topicos/01-esforcos-solicitantes.html#a1-h">Grupo #01</a> <small>(ficha 01)</small>: exercício em grupo #01: pórtico espacial, reações e $V$, $M$, $T$.</li><li><a href="../topicos/03-tensoes-principais.html#a2-h">Grupo #02</a> <small>(ficha 03)</small>: exercício em grupo #02: cisalhamento puro triaxial.</li><li><a href="../topicos/05-vasos-de-pressao.html#a3-h">Grupo #03</a> <small>(ficha 05)</small>: exercício em grupo #03: vaso com solda helicoidal.</li><li><a href="../topicos/06-criterios-de-resistencia.html#a4-h">Grupo #04</a> <small>(ficha 06)</small>: exercício em grupo #04: fator de segurança literal por Tresca e von Mises.</li></ol><p>Cada link leva ao exercício resolvido na ficha do tópico; o número é o do pivô ("Pivô N da P1" no cabeçalho). Para integração, as questões das apostilas 01 e 02 estão na seção 5, que encadeiam estrutura → esforços → ponto → tensor → critério. Os exercícios que não são pivôs estão nas mesmas fichas, em "Demais exercícios".
+</section>
+<section class="chapter" id="cap1">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Seção 2</span>
+    <h2 id="cap1-h" data-nav="2 · Objetivo e o que cai">Objetivo do curso e o que cai na P1</h2>
+    <p class="section-desc">Fontes: cronograma 2026 (<code>01_material_oficial/CronogramaMecanicaDosSolidosII.pdf</code>) e slides da aula 1.</p></div>
+
+  <h3 class="sub" id="cap1-para-que" data-nav="Para que serve">Para que serve</h3>
+  <p>PME3210 tratou de barras sob um esforço de cada vez, com tensões "de fórmula" ($P/A$, $Mc/I$, $Tr/I_p$). PME3211 começa por generalizar isso: num ponto qualquer de uma peça real agem várias tensões ao mesmo tempo, em direções diferentes, e a pergunta de engenharia é <strong>se o material aguenta</strong>. Para responder é preciso:</p>
+  <ol class="method">
+    <li>achar os <strong>esforços solicitantes</strong> em estruturas reais (3D, arcos) (aula 2, Lista 1);</li>
+    <li>descrever o estado de tensão do ponto pelo <strong>tensor</strong> e achar a tensão em qualquer plano (Cauchy) (aula 3, Lista 2);</li>
+    <li>achar as <strong>tensões principais</strong> e o maior cisalhamento, com os <strong>círculos de Mohr</strong> (aulas 4 e 5);</li>
+    <li>aplicar a um caso clássico: <strong>vasos de pressão</strong> (aula 6);</li>
+    <li>decidir se escoa ou rompe: <strong>critérios de Tresca, von Mises e Rankine</strong> (aula 8, Lista 3);</li>
+    <li>fazer o mesmo com <strong>deformações</strong> (tensor, extensômetros, Hooke), que é o que se mede no laboratório (aulas 9 e 10, Lista 4).</li>
+  </ol>
+  <p>O professor destaca na aula 1 o que espera do egresso: <em>usar corretamente as unidades, reconhecer de imediato se uma fórmula é dimensionalmente correta, interpretar ordens de grandeza e conhecer as limitações das fórmulas</em>.</p>
+
+  <h3 class="sub" id="cap1-conteudo" data-nav="Conteúdo e códigos">Conteúdo (aulas 1–10) e códigos de tópico</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Aula</th><th>Data</th><th>Tópico</th><th>Código</th><th>Lista</th></tr></thead><tbody>
+    <tr><td>1</td><td>03/08</td><td>Apresentação, revisão de PME3210</td><td>—</td><td>—</td></tr>
+    <tr><td>2</td><td>05/08</td><td>Esforços solicitantes em estruturas reticuladas isostáticas (planas, espaciais, arcos)</td><td><span class="chip">E1</span><span class="chip">E2</span></td><td>L1</td></tr>
+    <tr><td>3</td><td>10/08</td><td>Vetor tensão, tensor, plano inclinado, simetria</td><td><span class="chip">T1</span></td><td>L2</td></tr>
+    <tr><td>4</td><td>12/08</td><td>Tensões e direções principais</td><td><span class="chip">T2</span></td><td>L2</td></tr>
+    <tr><td>5</td><td>17/08</td><td>Círculos de Mohr; transformação de tensões</td><td><span class="chip">T3</span></td><td>L2, L3</td></tr>
+    <tr><td>6</td><td>19/08</td><td>Vasos de pressão de parede fina</td><td><span class="chip">T4</span></td><td>L3</td></tr>
+    <tr><td>7</td><td>24/08</td><td>Exercício em grupo #03</td><td>—</td><td>—</td></tr>
+    <tr><td>8</td><td>26/08</td><td>Critérios de resistência (Tresca, von Mises, Rankine)</td><td><span class="chip">T5</span></td><td>L3</td></tr>
+    <tr><td>9</td><td>31/08</td><td>Estado triplo de deformações; alongamento de fibra</td><td><span class="chip">D1</span></td><td>L4</td></tr>
+    <tr><td>10</td><td>02/09</td><td>Distorção entre fibras; extensômetros; Hooke generalizada</td><td><span class="chip">D2</span><span class="chip">D3</span><span class="chip">D4</span></td><td>L4</td></tr>
+    <tr class="hit"><td>11</td><td>14/09</td><td colspan="3"><strong>P1 (aulas 1–10)</strong>; os mesmos tópicos voltam na PSub (07/12)</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="cap1-regras" data-nav="Regras do jogo">Regras do jogo</h3>
+  <ul>
+    <li><strong>Sem consulta.</strong> A seção 4 diz o que memorizar e como reconstruir.</li>
+    <li><strong>Média:</strong> $A = 0{,}8\cdot MGP + 0{,}2\cdot MAE + B \ge 5{,}0$ e frequência ≥ 70%. MGP = média <em>geométrica</em> das 3 melhores entre P1, P2, P3 e PSub; MAE = média dos exercícios em grupo; B = bônus de 0 a 0,5. <strong>Não há recuperação</strong> (aula 1 p.8).</li>
+    <li><strong>Convenções do professor:</strong> tensão de tração positiva; $\tau_{ij}$ na face $i$, direção $j$, positiva se face e sentido concordam; no Mohr, τ positivo quando gira o elemento no sentido horário e eixo τ para cima (aula 5 p.34–35); tensor das deformações com $\gamma/2$ fora da diagonal.</li>
+    <li><strong>Defaults:</strong> parede fina ⇒ despreza a radial; material dúctil ⇒ Tresca/von Mises com $\sigma_e$; frágil ⇒ Rankine com $\sigma_r$; superfície livre ⇒ estado plano de tensões, mas $\varepsilon_z \ne 0$.</li>
+  </ul>
+</section>
+<section class="chapter" id="p1-metodo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="p1-metodo-h" data-nav="3 · Método de resolução: os 7 passos">Método de resolução: os 7 passos</h2><p class="section-desc">Os algoritmos do professor para cada tema estão nas fichas, na seção "Pontos-chave".</p></div>
+<h3 class="sub" id="p1-7passos" data-nav="Os 7 passos">Os 7 passos, na versão "tensões e deformações"</h3>
+  <ol class="method">
+    <li><strong>Classificar.</strong> Estrutura plana ou 3D? Carga no plano ou fora dele? Que esforços existem na seção de interesse? O ponto é de superfície livre (EPT)? Material dúctil ou frágil? A pergunta é tensão num plano, principais, τmáx, FS, espessura, leitura de extensômetro?</li>
+    <li><strong>Roteiro de dados.</strong> Geometria, propriedades de seção ($A$, $I$, $I_p$, $Q$), $E$, $\nu$, $G$ (e se são consistentes), $\sigma_e$, $\sigma_r$, FS; e o que só existe na figura: sentidos de setas, triedro, ângulos.</li>
+    <li><strong>Incógnita e critério.</strong> O que se compara com o quê: $\sigma_1 - \sigma_3$ com $\sigma_e/FS$, $\sigma_{vM}$ com $\sigma_e/FS$, $|\tau_w|$ com o admissível na solda etc.</li>
+    <li><strong>Fórmula.</strong> O slide de origem (seção 4 desta página). Cauchy e as fórmulas de transformação servem para <em>qualquer</em> plano; as de Mohr, para planos que contêm uma direção principal conhecida.</li>
+    <li><strong>Tensor no ponto.</strong> Substitui o passo "tabelas": escreva $[T]$ (ou $[E]$) na base dada, com sinais tensoriais. É aqui que mais se erra.</li>
+    <li><strong>Cálculo.</strong> Autovalores (fatore a direção desacoplada primeiro), $\tau_{máx} = (\sigma_1 - \sigma_3)/2$ <em>incluindo a principal nula</em>, critérios.</li>
+    <li><strong>Verificação.</strong> Traço ($I_1 = \sum\sigma_i$), ordem de grandeza (aço: $\sigma$ em dezenas a centenas de MPa, $\varepsilon$ em centenas de µ), sinais físicos (tração onde a flexão estica), Tresca ≤ von Mises.</li>
+  </ol>
+
+  
+</section>
+
+<section class="chapter" id="cap4">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Seção 4</span>
+    <h2 id="cap4-h" data-nav="4 · O que memorizar">O que memorizar (prova sem consulta)</h2>
+    <p class="section-desc">Cada bloco traz a fórmula, a dedução curta que permite reconstruí-la e a armadilha. Fonte: slides do Prof. Ramos (entre parênteses).</p></div>
+
+  <h3 class="sub" id="cap4-tensor" data-nav="Bloco 1 · Tensor e Cauchy">Bloco 1 · Tensor, Cauchy e simetria</h3>
+  <div class="math-box">$$\{\vec\rho\} = [T]\{\vec n\},\qquad [T] = \begin{bmatrix}\sigma_x&\tau_{yx}&\tau_{zx}\\\tau_{xy}&\sigma_y&\tau_{zy}\\\tau_{xz}&\tau_{yz}&\sigma_z\end{bmatrix},\qquad \sigma = \vec\rho\cdot\vec n,\quad |\tau| = \sqrt{\rho^2 - \sigma^2}\qquad\text{(aula 3)}$$</div>
+  <ul><li>Reconstrução: equilíbrio de um tetraedro com três faces nos planos coordenados e a quarta de normal $\vec n$ ⇒ cada coluna de $[T]$ é o vetor tensão num plano coordenado. Equilíbrio de momentos no cubo ⇒ $\tau_{xy} = \tau_{yx}$.</li>
+  <li><span class="tag tag-mem">⚠</span> $\vec n$ e $[T]$ na <strong>mesma base</strong>; $\vec n$ unitário.</li></ul>
+
+  <h3 class="sub" id="cap4-princ" data-nav="Bloco 2 · Principais e Mohr">Bloco 2 · Principais, invariantes, Mohr</h3>
+  <div class="math-box">$$\sigma^3 - I_1\sigma^2 + I_2\sigma - I_3 = 0,\quad I_1 = \mathrm{tr}[T],\ I_2 = \sigma_x\sigma_y + \sigma_y\sigma_z + \sigma_z\sigma_x - \tau_{xy}^2 - \tau_{yz}^2 - \tau_{zx}^2,\ I_3 = \det[T]\qquad\text{(aula 4)}$$
+  $$\text{EPT: } \sigma', \sigma'' = \frac{\sigma_x + \sigma_y}{2}\pm\sqrt{\left(\frac{\sigma_x - \sigma_y}{2}\right)^2 + \tau_{xy}^2},\qquad \tan2\theta_p = \frac{2\tau_{xy}}{\sigma_x - \sigma_y}\qquad \tau_{máx} = \frac{\sigma_1 - \sigma_3}{2}\qquad\text{(aula 5)}$$
+  $$\sigma_{x'} = \frac{\sigma_x+\sigma_y}{2} + \frac{\sigma_x-\sigma_y}{2}\cos2\theta + \tau_{xy}\sin2\theta\qquad \tau_{x'y'} = -\frac{\sigma_x-\sigma_y}{2}\sin2\theta + \tau_{xy}\cos2\theta$$</div>
+  <ul><li>Reconstrução do EPT: $\vec n = (\cos\theta, \sin\theta)$, Cauchy e identidades de ângulo duplo.</li>
+  <li>Planos de $\tau_{máx}$: normal $(\vec n_1 \pm \vec n_3)/\sqrt2$, com $\sigma = (\sigma_1 + \sigma_3)/2$.</li>
+  <li><span class="tag tag-mem">⚠</span> No EPT, a principal $\sigma_z = 0$ entra na ordenação. Se as duas do plano têm o mesmo sinal, $\tau_{máx}$ vem do círculo que envolve o zero.</li></ul>
+
+  <h3 class="sub" id="cap4-vasos" data-nav="Bloco 3 · Vasos">Bloco 3 · Vasos de parede fina</h3>
+  <div class="math-box">$$\text{esfera: } \sigma = \frac{pR}{2t}\qquad \text{cilindro: } \sigma_c = \frac{pr}{t},\ \sigma_L = \frac{pr}{2t}\qquad \text{radial: } -p \text{ (dentro)} \to 0 \text{ (fora)}\qquad\text{(aula 6)}$$</div>
+  <p>Reconstrução: corte → pressão × área projetada = tensão × área da parede cortada ($p\cdot2rL = \sigma_c\cdot2tL$; $p\pi r^2 = \sigma_L 2\pi rt$).</p>
+
+  <h3 class="sub" id="cap4-crit" data-nav="Bloco 4 · Critérios">Bloco 4 · Critérios de resistência</h3>
+  <div class="math-box">$$FS_{Tresca} = \frac{\sigma_e}{\sigma_1 - \sigma_3}\qquad \sigma_{vM} = \sqrt{\tfrac12[(\sigma_1 - \sigma_2)^2 + (\sigma_2 - \sigma_3)^2 + (\sigma_1 - \sigma_3)^2]} = \sqrt{3J_2}\qquad FS_{Rankine} = \frac{\sigma_r}{\max(|\sigma_1|, |\sigma_3|)}\qquad\text{(aula 8)}$$
+  $$\text{em componentes: } \sigma_{vM} = \sqrt{\tfrac12[(\sigma_x-\sigma_y)^2 + (\sigma_y-\sigma_z)^2 + (\sigma_z-\sigma_x)^2] + 3(\tau_{xy}^2 + \tau_{yz}^2 + \tau_{zx}^2)}$$</div>
+  <ul><li>Ideia: escoamento depende só da parte desviadora ($[T] = \sigma_m[I] + [T]_a$, $\sigma_m = I_1/3$). Tresca = maior cisalhamento; von Mises = energia de distorção $u_d = J_2/2G$.</li>
+  <li>Cisalhamento puro: Tresca prevê $\tau_e = \sigma_e/2$, von Mises $\tau_e = \sigma_e/\sqrt3$.</li></ul>
+
+  <h3 class="sub" id="cap4-def" data-nav="Bloco 5 · Deformações e Hooke">Bloco 5 · Deformações, extensômetros e Hooke</h3>
+  <div class="math-box">$$[E] = \frac{[L] + [L]^t}{2}\ (\text{L.G.}),\quad \varepsilon(\vec n) = \vec n^{\,t}[E]\vec n,\quad \gamma(\vec n, \vec m) = 2\vec n^{\,t}[E]\vec m,\quad \gamma_{máx} = \varepsilon_1 - \varepsilon_3\qquad\text{(aulas 9 e 10)}$$
+  $$\varepsilon_\theta = \varepsilon_x\cos^2\theta + \varepsilon_y\sin^2\theta + \gamma_{xy}\sin\theta\cos\theta\qquad\text{(aula 10 p.49)}$$
+  $$\varepsilon_x = \frac1E[\sigma_x - \nu(\sigma_y + \sigma_z)],\quad \gamma = \frac\tau G,\quad G = \frac{E}{2(1+\nu)}\qquad \text{EPT: } \sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y),\quad \varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x + \varepsilon_y)\qquad\text{(aula 10 p.41–48)}$$</div>
+  <ul><li><span class="tag tag-mem">⚠</span> $[E]$ leva $\gamma/2$ fora da diagonal; Mohr das deformações em $(\varepsilon, \gamma/2)$.</li>
+  <li><span class="tag tag-mem">⚠</span> Estado uniaxial de tensão não é uniaxial de deformação: $\varepsilon_y = \varepsilon_z = -\nu\varepsilon_x$.</li>
+  <li>Traço de $[E]$ = variação de volume por unidade de volume ($\nu = 0{,}5$ ⇒ incompressível).</li></ul>
+
+  <h3 class="sub" id="cap4-secoes" data-nav="Bloco 6 · Tensões de fórmula">Bloco 6 · Tensões "de fórmula" (PME3210) que alimentam tudo</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Esforço</th><th>Tensão</th><th>Onde é máxima</th></tr></thead><tbody>
+    <tr><td>$N$</td><td>$N/A$</td><td>uniforme</td></tr>
+    <tr><td>$M$</td><td>$My/I$; círculo $32M/\pi d^3$</td><td>fibra extrema; zero na LN</td></tr>
+    <tr><td>$T$</td><td>$T\rho/I_p$; círculo $16T/\pi d^3$; tubo fino $T/2\pi r^2t$</td><td>contorno externo</td></tr>
+    <tr><td>$V$</td><td>$VQ/Ib$; retângulo $1{,}5V/A$; tubo fino $2V/A$</td><td>linha neutra; zero nas fibras extremas</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="capB">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Seção 5</span>
+    <h2 id="capB-h" data-nav="5 · Provas antigas por assunto">Provas antigas por assunto (apostilas 01 e 02)</h2>
+    <p class="section-desc">As apostilas do Prof. Clóvis trazem 30 questões resolvidas, tiradas de "provas aplicadas" na disciplina, sem ano: 16 em tensões (AP1, p.42–66) e 14 em deformações (AP2, p.41–69). Aqui estão agrupadas por assunto, cada uma com roteiro curto e o pivô que ensina o raciocínio. As que têm todos os dados no texto foram refeitas em <code>_build/calc/calc_apostilas.py</code> (selo "conferido"); as demais trazem o resultado da apostila.</p></div>
+
+  <h3 class="sub" id="pb-panorama" data-nav="O que cai e como cai">O que cai e como cai</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Bloco</th><th>Questões</th><th>Nº</th><th>O que pedem</th><th>Pivôs</th></tr></thead><tbody>
+    <tr><td>A · Estrutura 3D → tensões num ponto</td><td>AP1-1, 2, 3, 8; AP2-1</td><td class="num"><span class="bar" style="width:35px"></span> 5</td><td>diagramas; cubo de tensões num ponto da seção do engaste; às vezes [E]</td><td>4, 8, 19</td></tr>
+    <tr><td>B · Tensor, principais, Mohr, critérios</td><td>AP1-4 (= 6), 5, 7, 12, 15; AP2-2</td><td class="num"><span class="bar" style="width:42px"></span> 6</td><td>matriz [T], autovalores, direções, $\tau_{máx}$ e planos, FS por Tresca/von Mises/Rankine</td><td>5, 12, 14, 20, 22</td></tr>
+    <tr><td>C · Vasos, soldas, combinados</td><td>AP1-9, 10, 11, 13, 14, 16; AP2-3, 11</td><td class="num"><span class="bar" style="width:56px"></span> 8</td><td>espessura por critério; tensões na solda; vaso + T + M ou F; verniz e extensômetro em vaso</td><td>9, 10, 21</td></tr>
+    <tr><td>D · Deformações, Hooke, extensômetros</td><td>AP2-4 a 10, 12 a 14</td><td class="num"><span class="bar" style="width:70px"></span> 10</td><td>[E] a partir de [T] e vice-versa; rosetas; melhor orientação; descobrir esforços (N, M, T) por leituras</td><td>15–18</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Leitura do panorama</span>
+    <p>(1) O formato típico de prova é <strong>estrutura → esforços → ponto → tensor → principais → critério</strong>, tudo numa questão. (2) Números "redondos" ($\pi = 3$, $I_P = 2\pi R^3t$ dado) indicam prova sem calculadora poderosa: organize a conta literal e substitua no fim. (3) Deformações/extensômetros aparecem tanto quanto tensões: é o assunto do fim da P1 e costuma pesar.</p></div>
+
+  <h3 class="sub" id="pb-A" data-nav="Bloco A · estrutura → ponto">Bloco A · Estrutura 3D → tensões num ponto</h3>
+
+  <article class="ex" id="p1a-ex1"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 1 (p.42) · ver Pivô 3</div><h3 id="p1a-ex1-h" data-nav="AP1 ex.1 · arame com peso">Arame dobrado sob peso próprio</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A viga ABCD da figura está contida em um plano horizontal. Ela é formada por um arame com seção circular de raio R, dobrado em ângulos de 90°, e está engastada no ponto A. A viga está submetida apenas ao seu peso próprio q por unidade de comprimento. Pedem-se: a) os diagramas de esforços solicitantes na viga; b) o estado de tensões no ponto de coordenadas (0, 0, R) representado em um elemento cúbico orientado segundo os eixos xyz.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 1):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 42 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> é o pórtico do Pivô 3 (Lista 1, ex. 3) só com peso. $V$: $4qL$ (A), $2qL$ (B), $qL$ (C); $T_{AB} = 3qL^2/2$, $T_{BC} = qL^2/2$; $M_A = 11qL^2/2$. No ponto (0, 0, R) do engaste: flexão $\sigma = M_AR/I$ e torção $\tau = T_{AB}R/I_p$ (a apostila não resolve o item b).</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> diagramas como acima (os mesmos valores do Pivô 3 com $F = 0$) <span class="badge badge-ok">coerente com calc_l1.py</span></div></article>
+
+  <article class="ex" id="p1a-ex2"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 2 (p.44) · ver Pivô 8</div><h3 id="p1a-ex2-h" data-nav="AP1 ex.2 · viga em L, P1 e P2">Tensões em dois pontos do engaste de uma viga em L</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A viga ABC da figura é horizontal. O trecho BC forma um ângulo de 90° com o trecho AB. A viga é prismática, tem seção circular com 2cm de raio e tem as dimensões indicadas na figura. Na sua extremidade C estão aplicadas duas forças com os sentidos indicados: uma força vertical de magnitude 300N e outra, horizontal, paralela ao trecho AB e de magnitude 600N. Pede-se determinar o estado de tensão nos pontos $P_1$ e $P_2$ da seção A cujas posições estão indicadas na figura. As tensões devidas à força normal e à força cortante podem ser desprezadas, por serem pequenas. Adotar a aproximação $\pi=3$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 2):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 44 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\vec M = \vec r\times\vec F$ em A com as duas forças; separar torção (componente ao longo de AB) e flexão nos dois planos; em cada ponto, somar só as parcelas que não são nulas ali (ponto na linha neutra de um dos fletores).</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $P_1$: $\sigma_y = 200$ MPa, $|\tau_{xy}| = 75$ MPa; $P_2$: $\sigma_y = 300$ MPa, $|\tau_{yz}| = 75$ MPa.</div></article>
+
+  <article class="ex" id="p1a-ex3"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 3 (p.45) · ver Pivô 8</div><h3 id="p1a-ex3-h" data-nav="AP1 ex.3 · barra dobrada 3D, 4 pontos">Barra dobrada em 3D: estado de tensões em quatro pontos</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A estrutura da figura é formada por uma barra dobrada de seção circular e peso desprezível. Os comprimentos indicados são medidos ao longo do eixo do arame. Pede-se: a) montar os diagramas de esforços solicitantes; b) representar o estado de tensão, por meio de um cubo orientado pelo mesmo sistema de eixos indicado, para cada um dos pontos abaixo: $P_1=(-L/2,L,L+r)$; $P_2=(0,L+r,L/2)$; $P_3=(0,L/2,r)$; $P_4=(r,L/2,0)$. São dados: raio r do arame: 2cm; área da seção transversal do arame: 12cm²; momento polar de inércia: 24cm⁴; força P: 600N; comprimento L=2m.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 3):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 45 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> note que os dados usam $\pi = 3$ ($A = 3r^2$, $I_p = 1{,}5r^4$). Em cada ponto: qual barra, que esforços ali, e se o ponto está na fibra extrema ou na linha neutra de cada fletor.</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $P_1$: $\sigma_x = 100$, $\tau_{xy} = -0{,}67$; $P_2$: $\sigma_z = 99{,}5$, $|\tau_{xz}| = 100$; $P_3$: $|\sigma_y| = 100{,}5$, $\tau_{xy} = -100$; $P_4$: $\sigma_y = 199{,}5$, $\tau_{yz} = 99{,}33$ MPa. <span class="badge badge-warn">a apostila tem dois sinais trocados (P3, P2)</span></div></article>
+
+  <article class="ex" id="p1a-ex8"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 8 (p.55) · ver Pivôs 8 e 12</div><h3 id="p1a-ex8-h" data-nav="AP1 ex.8 · estrutura plana, F e 10F">Estrutura plana com força fora do plano e força no plano</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A estrutura plana da figura é formada por barras de diferentes comprimentos, mas de mesma seção transversal (seção circular cheia com diâmetro d = 2r). A seção D encontra-se engastada e sobre a seção A atua uma força vertical (perpendicular ao plano da estrutura) de intensidade F. Na seção C atua uma força horizontal, de intensidade 10F, na mesma direção e sentido do eixo y. Pede-se: a) obter os diagramas de esforços solicitantes da estrutura (M, T, V e N); b) indicar num elemento infinitesimal 3D, com lados paralelos aos eixos xyz, o estado de tensões no ponto P de coordenadas P = (0, 0, r) que se encontra na seção D. Pede-se indicar os eixos xyz junto ao elemento e, no elemento, os sentidos corretos das tensões e a magnitude das mesmas; c) com base no estado de tensões obtido construa, graficamente, os círculos de Mohr das tensões; d) determine os valores da máxima tensão de compressão, da máxima tensão de tração e da máxima tensão de cisalhamento que atuam no ponto P, e os planos sobre os quais estas tensões atuam. Dados: F = 500 N, l = 400 mm, d = 2r = 25 mm.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 8):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 55 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\sigma_y = 108{,}0$, $\tau_{xy} = 32{,}6$ MPa; $\sigma_1 = 117{,}1$, $\sigma_2 = 0$, $\sigma_3 = -9{,}1$ MPa; $\tau_{máx} = 63{,}1$ MPa; $\vec n_1 = \pm(-0{,}27;\ 0{,}96;\ 0)$.</div></article>
+
+  <article class="ex" id="p2a-ex1"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 1 (p.41) · ver Pivô 17</div><h3 id="p2a-ex1-h" data-nav="AP2 ex.1 · [E] num arame">Tensor das deformações num ponto de um arame em L</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A viga ABC da figura está contida em um plano horizontal. Ela é formada por um arame com seção circular de raio R, dobrado em ângulo de 90°, e está engastada no ponto A. A viga está submetida apenas à força vertical P aplicada ao ponto C. Pede-se determinar a matriz [E] que representa o tensor das pequenas deformações no ponto de coordenadas (0, L/2, R) orientada pelo sistema de eixos indicado. São dados o módulo de elasticidade E, o módulo de cisalhamento G e o coeficiente de Poisson $\nu$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 1):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 41 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> em AB, a meio vão: flexão $M = P\cdot$(braço ao longo de AB) e torção $T = PL$; $\sigma_y = MR/I$, $\tau_{xy} = TR/I_p$; Hooke: $\varepsilon_y = \sigma/E$, $\varepsilon_x = \varepsilon_z = -\nu\sigma/E$, $\gamma = \tau/G$.</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $[E] = \frac{PL}{\pi R^3}\begin{bmatrix}-2\nu/E&1/G&0\\1/G&2/E&0\\0&0&-2\nu/E\end{bmatrix}$.</div></article>
+
+  <h3 class="sub" id="pb-B" data-nav="Bloco B · tensor e critérios">Bloco B · Tensor, principais, Mohr e critérios</h3>
+
+  <article class="ex" id="p1a-ex4"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercícios 4 e 6 (p.48 e 51) · ver Pivô 12</div><h3 id="p1a-ex4-h" data-nav="AP1 ex.4/6 · cubo completo">Cubo: tensor, principais, Mohr e um plano dado por (σ, τ)</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>O cubo elementar da figura representa o estado de tensões em um ponto P de um corpo. Pede-se, para esse ponto: a) montar a matriz T que representa o tensor das tensões na base $(\vec i,\vec j,\vec k)$; b) calcular as tensões principais $\sigma_1$, $\sigma_2$ e $\sigma_3$; c) calcular as direções principais $\vec n_1$, $\vec n_2$ e $\vec n_3$; d) calcular a máxima tensão de cisalhamento; e) montar os círculos de Mohr; f) sendo $\vec n$ a normal a um plano em que a tensão normal é $\sigma=-10MPa$ e a tensão de cisalhamento é, em módulo, $\tau=30MPa$, obtenha a relação entre $\vec n$ e as direções principais $\vec n_1$, $\vec n_2$ e $\vec n_3$, usando os círculos de Mohr. <em>(O exercício 6 é idêntico.)</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 4):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 48 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> com as principais da apostila, o tensor reconstruído é $[T] = \begin{bmatrix}24&-48&0\\-48&-4&0\\0&0&20\end{bmatrix}$ MPa ($z$ desacoplado ⇒ 20 é principal; no plano $xy$: $10 \pm 50$). Item (f): o círculo $\sigma_2$–$\sigma_3$ tem centro $(20 - 40)/2 = -10$ e raio 30, então o ponto $(-10;\ 30)$ é o <strong>topo</strong> desse círculo. Planos desse círculo contêm $\vec n_1$ (normal ⟂ $\vec n_1$), e o topo corresponde a 45° entre $\vec n_2$ e $\vec n_3$.</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\sigma_1 = 60$, $\sigma_2 = 20$, $\sigma_3 = -40$ MPa; $\vec n_1 = (-0{,}8;\ 0{,}6;\ 0)$, $\vec n_2 = (0;\ 0;\ 1)$, $\vec n_3 = (0{,}6;\ 0{,}8;\ 0)$; $\tau_{máx} = 50$ MPa; $\vec n = \pm\frac{\sqrt2}{2}\vec n_2 + \frac{\sqrt2}{2}\vec n_3$. <span class="badge badge-ok">coerente (traço e autovalores conferidos)</span></div></article>
+
+  <article class="ex" id="p1a-ex5"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 5 (p.50) · ver Pivô 14</div><h3 id="p1a-ex5-h" data-nav="AP1 ex.5 · FS com três resistências">Fator de segurança com três limites (tração, cisalhamento, compressão)</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>O cubo elementar da figura representa o estado de tensões em um ponto P de uma estrutura. A tensão de escoamento do material dessa estrutura é de 150MPa em tração e de 50MPa em cisalhamento. Seu limite de resistência à compressão é de 100MPa. Pede-se: a) determinar qual é o fator de segurança nesse ponto; b) calcular as direções normais aos planos em que ocorre o valor máximo da tensão de cisalhamento.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 5):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 50 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> principais todas de tração (50, 30, 25) ⇒ compressão não governa. Tração: 150/50 = 3; cisalhamento: $\tau_{máx} = 12{,}5$ ⇒ 50/12,5 = 4. Vale o menor.</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\sigma = 50;\ 30;\ 25$ MPa; $FS = 3$ (tração); normais dos planos de $\tau_{máx} = 12{,}5$ MPa: $\pm\frac{\sqrt2}{10}(7, -1, 0)$ e $\pm\frac{\sqrt2}{10}(1, 7, 0)$.</div></article>
+
+  <article class="ex" id="p1a-ex7"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 7 (p.53) · ver Pivô 15</div><h3 id="p1a-ex7-h" data-nav="AP1 ex.7 · eixo F + T literal">Eixo com força axial e torque (literal)</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>O eixo homogêneo da figura tem diâmetro d e está submetido a uma força axial F e a um momento de torção T. Pedem-se: a) as tensões em um ponto da superfície do eixo representadas em um elemento orientado segundo os eixos indicados; b) o tensor das tensões no mesmo ponto; c) as tensões principais; d) a máxima tensão normal de tração; e) a máxima tensão normal de compressão; f) a máxima tensão de cisalhamento.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 7):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 53 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\sigma_y = -\frac{4F}{\pi d^2}$ (compressão), $\tau_{xy} = \frac{16T}{\pi d^3}$; $\sigma_{1,3} = \frac{2}{\pi d^2}\left(-F \pm\sqrt{F^2 + 64T^2/d^2}\right)$, $\sigma_2 = 0$; $\tau_{máx} = \frac{2}{\pi d^2}\sqrt{F^2 + 64T^2/d^2}$.</div></article>
+
+  <article class="ex" id="p1a-ex12"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 12 (p.61) · ver Pivô 14</div><h3 id="p1a-ex12-h" data-nav="AP1 ex.12 · Tresca × von Mises">Tresca e von Mises num cubo</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A figura representa o estado de tensões em um ponto P de um sólido. Sabendo que a tensão de escoamento do material de que é feito esse sólido é $\sigma_e=400MPa$, pede-se: a) determinar o fator de segurança usando o critério de Tresca (Máxima tensão de cisalhamento) para o ponto P; b) determinar o fator de segurança usando o critério de Von Mises (Máxima Energia de Distorção) para o ponto P.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 12):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 61 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $FS_{Tresca} = 2{,}86$; $FS_{vM} = 3{,}30$.</div></article>
+
+  <article class="ex" id="p1a-ex15"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 15 (p.63) · ver Pivô 22</div><h3 id="p1a-ex15-h" data-nav="AP1 ex.15 · eixo dúctil + frágil">Eixo de dois materiais: dúctil (Tresca) e frágil (Rankine)</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>O eixo da figura é formado por dois materiais. Nas extremidades o material é dúctil, com tensão de escoamento $\sigma_y=300MPa$. Na parte central o material é frágil, com tensão de ruptura $\sigma_r=200MPa$. O eixo tem diâmetro $d=2cm$ e momento polar $I_P=1{,}6cm^4$. Sabendo que está aplicado ao eixo um torque $T=160Nm$, determine qual é o fator de segurança.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 15):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 63 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\tau = TR/I_P = 100$ MPa, cisalhamento puro ($\sigma_1 = 100$, $\sigma_3 = -100$). Dúctil: $FS = 300/200 = 1{,}5$. Frágil (Rankine): $FS = 200/100 = 2$. O FS do eixo é o menor.</p>
+    <div class="answer"><strong>Resposta:</strong> $FS = 1{,}5$ (extremidades dúcteis). <span class="badge badge-ok">conferido</span> <span class="tag tag-mem">⚠</span> Critério pelo tipo de material: dúctil → Tresca/von Mises; frágil → Rankine (aula 8).</div></article>
+
+  <article class="ex" id="p2a-ex2"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 2 (p.42) · ver Pivô 18</div><h3 id="p2a-ex2-h" data-nav="AP2 ex.2 · de ε para σ e FS">Das deformações ao fator de segurança</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Em um determinado ponto de uma peça em estado plano de tensão, são conhecidos os alongamentos $\varepsilon_x=\varepsilon_y=195\mu$ e a distorção $\gamma_{xy}=200\mu$. São dados o módulo de elasticidade E=200 GPa, o módulo de cisalhamento G=75 GPa e o coeficiente de Poisson $\nu=0{,}40$ do material. É dada, também, a tensão de escoamento do material $\sigma_e=280MPa$. Pedem-se, para este ponto: a) a matriz que representa o tensor das tensões; b) as tensões principais; c) o fator de segurança em relação ao escoamento, usando o critério de Tresca; d) o fator de segurança em relação ao escoamento, usando o critério de Von Mises.</div>
+    <p><strong>Roteiro:</strong> $\sigma_x = \sigma_y = \frac{E}{1-\nu^2}(1 + \nu)195\mu = 65$ MPa; $\tau = G\gamma = 15$ MPa ⇒ 80, 50, 0.</p>
+    <div class="answer"><strong>Respostas:</strong> $FS_{Tresca} = 3{,}5$; $FS_{vM} = 4$. <span class="badge badge-ok">conferido</span> <span class="tag tag-mem">⚠</span> Os dados E, G, ν são inconsistentes entre si ($E/2(1+\nu) = 71{,}4 \ne 75$ GPa); a apostila usa cada um onde aparece.</div></article>
+
+  <h3 class="sub" id="pb-C" data-nav="Bloco C · vasos e soldas">Bloco C · Vasos de pressão, soldas e carregamentos combinados</h3>
+
+  <article class="ex" id="p1a-ex9"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 9 (p.58) · ver Pivô 9</div><h3 id="p1a-ex9-h" data-nav="AP1 ex.9 · espessura do tanque">Espessura de tanque cilíndrico</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um tanque cilíndrico está sendo projetado para uma pressão interna de 12MPa, com um fator de segurança 2,0 em relação ao escoamento. A tensão de escoamento do seu material é de 300MPa em tração e 180MPa em cisalhamento. Se o diâmetro do tanque for 150mm, qual será a espessura de parede exigida?</div>
+    <p><strong>Roteiro:</strong> $\sigma_c = pr/t \le 150$ ⇒ $t \ge 6$; $\tau_{máx} = \sigma_c/2 \le 90$ ⇒ $t \ge 5$.</p>
+    <div class="answer"><strong>Resposta:</strong> $t = 6$ mm (governa a tração). <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p1a-ex10"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 10 (p.59) · ver Lista 3, 8.3-7</div><h3 id="p1a-ex10-h" data-nav="AP1 ex.10 · pistão (literal)">Cilindro com pistão, versão literal</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um cilindro cheio de óleo é pressionado por um pistão de diâmetro d, ao qual está aplicada uma força F, como mostrado na figura. A máxima tensão de cisalhamento admissível na parede do cilindro é $\tau_{adm}$. Determine a espessura mínima que deve ter a parede do cilindro.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 10):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 59 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resposta:</strong> $p = 4F/\pi d^2$, $\tau_{máx} = pr/2t$ ⇒ $t_{mín} = \dfrac{F}{\pi d\,\tau_{adm}}$. (Com os números do 8.3-7: 2,53 mm ✓.)</div></article>
+
+  <article class="ex" id="p1a-ex11"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 11 (p.60) · ver Pivô 21</div><h3 id="p1a-ex11-h" data-nav="AP1 ex.11 · solda a 45°">Vaso com solda helicoidal a 45°</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um vaso de pressão cilíndrico é construído a partir de uma placa de aço longa e fina, enrolando-se a placa de aço em torno de um mandril e então se soldando ao longo das bordas da placa para fazer uma junção helicoidal, conforme a figura. A solda helicoidal faz um ângulo $\alpha$ = 45º com o eixo longitudinal. O vaso tem raio interno r = 1,8 m e espessura da parede t = 20mm. A pressão interna p é 800 kPa. Pede-se calcular: a) a tensão circunferencial na parede cilíndrica do vaso; b) a tensão longitudinal na parede cilíndrica do vaso; c) a tensão de cisalhamento máxima na parede cilíndrica do vaso; d) a tensão normal que age perpendicularmente à solda; e) a tensão de cisalhamento que age paralelamente à solda.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 11):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 60 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Respostas:</strong> $\sigma_c = 72$, $\sigma_L = 36$, $\tau_{máx} = 36$ (fora do plano), $\sigma_w = 54$, $\tau_w = 18$ MPa. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p1a-ex13"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 13 (p.61) · ver Pivô 10</div><h3 id="p1a-ex13-h" data-nav="AP1 ex.13 · vaso + T + M">Vaso com pressão, torque e flexão</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um vaso de pressão cilíndrico de parede fina com extremidades planas está submetido a uma pressão interna $p$, a um torque $T$ e a um momento fletor $M$ conforme a figura. O raio externo do cilindro é $R$ e a espessura de sua parede é $t$. É dado o momento polar em relação ao centro da seção transversal do vaso: $I_P=2\pi R^3t$. Dados: $p=4\,MPa$; $R=40\,cm$; $T=128\pi\,kN.m$; $t=1\,cm$; $M=32\pi\,kN.m$; $\sigma_e=270MPa$. Pede-se determinar o fator de segurança em um ponto P situado na parte mais inferior da superfície externa do vaso (y =-R), distante das tampas.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 13):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 61 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\sigma_L = 80$ + flexão 20 = 100; $\sigma_c = 160$; $\tau = TR/I_P = 40$ MPa ⇒ $130 \pm 50$ ⇒ 180, 80, 0.</p>
+    <div class="answer"><strong>Resposta:</strong> $FS_{Tresca} = 270/180 = 1{,}5$. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p1a-ex14"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 14 (p.63) · ver Pivô 10</div><h3 id="p1a-ex14-h" data-nav="AP1 ex.14 · tanque + T + F">Tanque com pressão, torque e tração</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um tanque cilíndrico pressurizado com extremidades esféricas é carregado por torques $T=128\pi Nm$ e forças de tração $F=4{,}8\pi kN$ conforme a figura. O tanque tem raio médio $r=40mm$ e espessura de parede $t=2mm$. A pressão interna é $p=3MPa$. Sabendo que a tensão de escoamento do material do tanque é $\sigma_e=200MPa$, pede-se determinar o fator de segurança em um ponto da parede lateral do tanque. Nota: usar a fórmula do momento polar de inércia para um tubo de parede fina ($I_P=2\pi r^3t$).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 14):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 63 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\sigma_L = pr/2t + F/2\pi rt = 30 + 30 = 60$; $\sigma_c = 60$; $\tau = T/2\pi r^2t = 20$ ⇒ 80, 40, 0.</p>
+    <div class="answer"><strong>Respostas:</strong> $FS_{Tresca} = 2{,}5$; $FS_{vM} = 2{,}89$. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p1a-ex16"><div class="ex-head"><div><div class="ex-kicker">Apostila 01 · Exercício 16 (p.65) · ver Pivô 21</div><h3 id="p1a-ex16-h" data-nav="AP1 ex.16 · ângulo admissível da solda">Faixa de ângulo da solda num tubo sob torção</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um tubo de raio $R$ é construído a partir de uma chapa de aço longa e fina, de espessura $t\ll R$, enrolando-se a chapa de aço em torno de um mandril e soldando-se ao longo das bordas da chapa para fazer uma junção helicoidal, conforme a figura. A solda helicoidal faz um ângulo $\alpha$ com o eixo longitudinal e é feita com um material dúctil, com tensão de escoamento $\sigma_y$. Determinar a faixa de valores de $\alpha$ para que o fator de segurança na solda seja no mínimo igual a $FS$, quando o eixo está submetido a um momento de torção $T$. Dados: $\pi=3$, $t=1mm$, $R=4cm$, $FS=2$, $T=2{,}4\,kNm$, $\sigma_y=500MPa$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 01 · ex. 16):</strong> ver o PDF oficial, Apostila 01 (questões de prova), p. 65 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\tau = T/2\pi R^2t = 250$ MPa (cisalhamento puro). No plano da solda, $\sigma_w = \tau\sin2\alpha$, $\tau_w = \tau\cos2\alpha$. Critério adotado pela apostila: cisalhamento ao longo da solda, $|\tau_w| \le \sigma_y/2FS = 125$ ⇒ $|\cos2\alpha| \le 1/2$.</p>
+    <div class="answer"><strong>Resposta:</strong> $30° \le \alpha \le 60°$. <span class="badge badge-ok">conferido</span> (a apostila ressalva que outros critérios poderiam ser usados)</div></article>
+
+  <article class="ex" id="p2a-ex3"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 3 (p.43) · ver Lista 4, 8.2-6</div><h3 id="p2a-ex3-h" data-nav="AP2 ex.3 · verniz na esfera">Esfera com verniz, com fator de segurança</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um vaso de pressão esférico de metal, com 800 mm de diâmetro e 10 mm de espessura, é coberto com um verniz frágil, que trinca quando a deformação excede $300\times10^{-6}$, conforme a figura. Sabendo que o metal de que o vaso é formado tem módulo de elasticidade 200 GPa e coeficiente de Poisson 0,25, determinar a máxima pressão admissível para o verniz não trincar, adotando um fator de segurança 2.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 3):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 43 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resposta:</strong> $\sigma = E\varepsilon/(1-\nu) = 80$ MPa ⇒ $p = 2t\sigma/r = 4$ MPa ⇒ $p_{adm} = 2$ MPa. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p2a-ex11"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 11 (p.57) · ver Pivô 15</div><h3 id="p2a-ex11-h" data-nav="AP2 ex.11 · lata de refrigerante">Lata de refrigerante: pressão pela leitura ao abrir</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Em uma lata de refrigerante fechada são colados dois extensômetros: um na direção circunferencial e outro na direção longitudinal. Nessa situação a leitura dos extensômetros é zerada. A lata tem diâmetro externo de 60mm, espessura de 0,2mm e é feita de alumínio com módulo de elasticidade $E=75GPa$ e coeficiente de Poisson $\nu=1/3$. Quando a lata é aberta a leitura do extensômetro circunferencial é $\varepsilon_C=-100\mu$. Pergunta-se: a) qual é a leitura do extensômetro longitudinal quando a lata é aberta? b) qual é a pressão interna do refrigerante na lata fechada?</div>
+    <p><strong>Roteiro:</strong> abrir = retirar a pressão ⇒ as leituras são o negativo das deformações sob pressão: $\varepsilon_C = \frac{pr}{tE}(1 - \nu/2) = 100\mu$ ⇒ $\frac{pr}{tE} = 120\mu$; $\varepsilon_L = \frac{pr}{2tE}(1 - 2\nu) = 20\mu$.</p>
+    <div class="answer"><strong>Respostas:</strong> $\varepsilon_L = -20\mu$; $p = 60$ kPa. <span class="badge badge-ok">conferido</span></div></article>
+
+  <h3 class="sub" id="pb-D" data-nav="Bloco D · deformações">Bloco D · Deformações, Hooke e extensômetros</h3>
+
+  <article class="ex" id="p2a-ex4"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 4 (p.44) · ver Pivô 17</div><h3 id="p2a-ex4-h" data-nav="AP2 ex.4 · onde colar 3 extensômetros">Mínimo de extensômetros para N, M e T</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>O eixo da figura tem raio R e está submetido, simultaneamente, a um momento fletor M, um momento de torção T e a uma força de tração N de valores desconhecidos. Para obter esses valores serão colocados extensômetros no plano x=0. Pedem-se: a) o número mínimo de extensômetros necessários para obter os valores dos três esforços aplicados; b) as posições para possível colocação desses extensômetros (coordenadas e inclinação); c) a justificativa da escolha das posições.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 4):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 45 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resposta:</strong> 3 extensômetros; por exemplo: em $(0, 0, R)$ ao longo de $x$ (N + M); em $(0, 0, R)$ a 45° (T); em $(0, -R, 0)$ ao longo de $x$, na linha neutra de M (só N). Três incógnitas, três equações independentes.</div></article>
+
+  <article class="ex" id="p2a-ex5"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 5 (p.45) · ver Pivô 17</div><h3 id="p2a-ex5-h" data-nav="AP2 ex.5 · ε(θ) e seus extremos">Leitura de um extensômetro em função do ângulo</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A chapa indicada na figura encontra-se sob um estado plano e uniforme de tensões (sendo $\sigma_x=\sigma_o&gt;0$ e $\tau_{xy}=\tau_{yx}=\eta\,\sigma_o$, sendo $\eta$ um adimensional qualquer). No centro da chapa, um extensômetro é colado (antes da aplicação dos esforços) de modo a formar um ângulo $\theta$ com o eixo horizontal Ox (ver figura). Considerando que as hipóteses de homogeneidade, de elasticidade linear e de isotropia do material da chapa sejam válidas (constantes elásticas do material E e $\nu$ dadas), pede-se: a) obter o tensor das deformações completo para um ponto da chapa; b) obter o alongamento medido pelo extensômetro em função de $\theta$; c) obter a fórmula que permite obter os valores de $\theta$ para os quais o alongamento medido pelo extensômetro tenha um valor máximo ou mínimo; d) Para o caso particular em que $\eta=1/2$ e $\nu=0{,}2$, determine numericamente o valor dos ângulos calculados no item anterior. Responda: Neste caso, para qual valor do ângulo teremos o maior alongamento medido em valor absoluto?</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 5):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 46 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\varepsilon(\theta) = \frac{\sigma_o}{E}[\cos^2\theta - \nu\sin^2\theta + (1+\nu)\eta\sin2\theta]$; extremos em $\tan2\theta = 2\eta$; para $\eta = 1/2$: $\theta = \pi/8$ (máximo, maior em módulo) e $5\pi/8$. <span class="badge badge-warn">a apostila tem um valor intermediário inconsistente; a conclusão não muda</span></div></article>
+
+  <article class="ex" id="p2a-ex6"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 6 (p.48) · ver Pivô 16</div><h3 id="p2a-ex6-h" data-nav="AP2 ex.6 · medir E e ν com roseta">Medir E e ν com uma roseta</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A placa quadrada da figura tem lado $a=200mm$ e espessura $t=10mm$. Sobre ela foi colada uma roseta com extensômetros a $45°$. Esta placa foi, então, submetida a um estado biaxial de tensão, com $\sigma_x=40MPa$ e $\sigma_y=20MPa$, conforme a figura. Com a aplicação desse carregamento, as leituras obtidas dos extensômetros $a$ e $c$ foram, respectivamente, $\varepsilon_a=300\mu$ e $\varepsilon_c=0$. Pede-se: a) determinar o módulo de elasticidade $E$ e o coeficiente de Poisson $\nu$ do material da placa; b) obter as deformações principais; c) calcular a máxima distorção; d) desenhar os círculos de Mohr das deformações; e) calcular a variação que houve na espessura da placa com a aplicação do carregamento; f) calcular a variação que houve no volume da placa com a aplicação do carregamento; g) calcular qual é a leitura $\varepsilon_b$ obtida do extensômetro $b$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 6):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 49 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\varepsilon_y = 0 = (20 - 40\nu)/E$ ⇒ $\nu = 0{,}5$; $\varepsilon_x = (40 - 10)/E = 300\mu$ ⇒ $E = 100$ GPa. $\varepsilon_z = -\nu(40 + 20)/E = -300\mu$; traço nulo ⇒ volume constante ($\nu = 0{,}5$ é material incompressível).</p>
+    <div class="answer"><strong>Respostas:</strong> $E = 100$ GPa, $\nu = 0{,}5$; $\varepsilon = 300;\ 0;\ -300\mu$; $\gamma_{máx} = 600\mu$; $\Delta t = -0{,}003$ mm; $\Delta V = 0$; $\varepsilon_b = 150\mu$. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p2a-ex7"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 7 (p.50) · ver Pivô 16</div><h3 id="p2a-ex7-h" data-nav="AP2 ex.7 · ν a partir de γ e τ">Descobrir ν e decidir se o estado é plano</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Foram medidos os alongamentos e distorções em um ponto da superfície externa de uma estrutura, segundo eixos cartesianos $(x,y,z)$. Foram encontrados os seguintes valores: $\varepsilon_x=\varepsilon_y=1\times10^{-3}$, $\varepsilon_z=-1\times10^{-3}$, $\gamma_{xy}=4\times10^{-3}$, $\gamma_{yz}=\gamma_{xz}=0$. Sabe-se, também, que a tensão de cisalhamento no plano (x,y) é $\tau_{xy}=300$MPa. O módulo de elasticidade do material é $E=200$GPa. Pede-se: a) Determinar o coeficiente de Poisson $\nu$; b) Calcular as tensões $\sigma_x,\sigma_y,\sigma_z,\tau_{xz},\tau_{yz}$. O estado de tensões é plano ou triplo? Justifique.</div>
+    <p><strong>Roteiro:</strong> $G = \tau/\gamma = 75$ GPa ⇒ $\nu = E/2G - 1 = 1/3$; Hooke inversa: $\lambda = 150$ GPa, $\sigma_i = \lambda\,\mathrm{tr}(E) + 2G\varepsilon_i$ ⇒ $\sigma_x = \sigma_y = 300$, $\sigma_z = 0$.</p>
+    <div class="answer"><strong>Respostas:</strong> $\nu = 1/3$; $\sigma_x = \sigma_y = 300$ MPa, $\sigma_z = \tau_{xz} = \tau_{yz} = 0$: estado <strong>plano</strong> (coerente com superfície livre). <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p2a-ex8"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 8 (p.52) · ver Pivô 18</div><h3 id="p2a-ex8-h" data-nav="AP2 ex.8 · roseta e FS">Roseta a 45° e fator de segurança</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A roseta da figura está colada a um ponto P da superfície de um corpo submetido a um certo carregamento. As leituras dos seus extensômetros são $\varepsilon_a=150\mu$, $\varepsilon_b=100\mu$ e $\varepsilon_c=150\mu$. Sabendo que o corpo é feito de um material dúctil, pede-se determinar qual é o fator de segurança no ponto em que está colada a roseta, para o carregamento aplicado. São dados, para o material do corpo: módulo de elasticidade: $E=300GPa$; coeficiente de Poisson: $\nu=0{,}5$; tensão de escoamento: $\sigma_e=200MPa$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 8):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 52 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $\varepsilon_x = 100$, $\varepsilon_y = 200\mu$, $\gamma_{xy} = 0$ (a e c simétricos em torno de $x$); $\sigma_x = 80$, $\sigma_y = 100$ MPa; $FS_{Tresca} = 2$.</div></article>
+
+  <article class="ex" id="p2a-ex9"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 9 (p.53) · ver Pivô 16</div><h3 id="p2a-ex9-h" data-nav="AP2 ex.9 · [T] → [E] 3D">Do tensor das tensões 3D ao das deformações</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Na figura ao lado está representado o estado de tensões em um dado ponto de um sólido deformável. Admitindo que o material seja isótropo e possua comportamento elástico-linear, determine: a) o tensor das pequenas deformações no ponto; b) a máxima distorção e o máximo alongamento possíveis de serem obtidos neste ponto; c) se existe uma fibra passando pelo ponto dado que tenha um alongamento $\varepsilon$ = 120 $\mu$ e que não possua distorção com nenhuma outra direção inicialmente ortogonal à sua. Se existir tal fibra, indique sua direção, justificando a resposta. São dados: $E=200\,GPa$; $\nu=0{,}25$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 9):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 53 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> "Não possuir distorção com nenhuma ortogonal" = ser <strong>direção principal</strong>. Então a pergunta (c) é: 120 µ é autovalor de [E]? Não é (135, 90, −35).</p>
+    <div class="answer"><strong>Resultado da apostila:</strong> $[E] = \begin{bmatrix}10&60&45\\60&90&0\\45&0&90\end{bmatrix}\mu$; $\varepsilon_1 = 135$, $\varepsilon_2 = 90$, $\varepsilon_3 = -35\mu$; $\gamma_{máx} = 170\mu$; não existe tal fibra.</div></article>
+
+  <article class="ex" id="p2a-ex10"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 10 (p.55) · ver Pivô 17</div><h3 id="p2a-ex10-h" data-nav="AP2 ex.10 · N, M, T por duas rosetas">Descobrir N, M e T com duas rosetas</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A barra cilíndrica da figura tem comprimento L e diâmetro d. Nos pontos A(L/2, 0, d/2) e B(L/2, d/2, 0) foram coladas rosetas com extensômetros a 45° como a da figura, com o extensômetro a paralelo ao eixo x. Com a aplicação simultânea de um momento fletor M, um momento de torção T e uma força normal N, de valores desconhecidos, as leituras dos extensômetros no ponto A são: $\varepsilon_a=500\mu$, $\varepsilon_b=438\mu$, $\varepsilon_c=-124\mu$ e as leituras dos extensômetros no ponto B são: $\varepsilon_a=-500\mu$, $\varepsilon_b=62\mu$, $\varepsilon_c=124\mu$. Pede-se determinar os valores de M, T e N. São dados: diâmetro da barra: d = 4cm; módulo de elasticidade: E = 200GPa; coeficiente de Poisson: ν = 0,25; usar π = 3.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 10):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 55 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> A está na linha neutra de M ⇒ $\varepsilon_a(A) = N/EA$ ⇒ $N = 120$ kN ($A = 1200$ mm² com $\pi = 3$). Em B, $\varepsilon_a = (N/A - Mr/I)/E$ ⇒ $M = 1200$ N·m. O extensômetro b em A dá $\gamma$ ⇒ $\tau$ ⇒ $T$.</p>
+    <div class="answer"><strong>Respostas:</strong> $N = 120$ kN, $M = 1200$ N·m, $T = 480$ N·m. <span class="badge badge-ok">conferido</span></div></article>
+
+  <article class="ex" id="p2a-ex12"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 12 (p.58) · ver Pivô 17</div><h3 id="p2a-ex12-h" data-nav="AP2 ex.12 · melhor orientação">Melhor orientação de um extensômetro numa barra com N, M e T</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>A figura ilustra um segmento de uma barra de seção transversal circular cheia (diâmetro d) sobre a qual atuam os seguintes esforços (todos referidos ao sistema de eixos Oxyz indicado): uma força normal $N=10P$; um momento fletor $M_y=2{,}5Pd$; um momento torçor $T=5Pd$. O material da barra possui módulo de elasticidade E e coeficiente de Poisson $\nu=0{,}25$. Se um único extensômetro for colado sobre a superfície da barra no ponto A = (0, 0, d/2) antes da aplicação dos esforços indicados, determine: a) o tensor das tensões e o tensor das deformações no ponto A após a aplicação dos esforços; b) os alongamentos principais no ponto A; c) a melhor orientação do extensômetro para que a leitura (em valor absoluto) seja a maior possível.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 12):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 58 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resultado da apostila:</strong> $[T] = \frac{40P}{\pi d^2}\begin{bmatrix}3&-2&0\\-2&0&0\\0&0&0\end{bmatrix}$; $[E] = \frac{10P}{E\pi d^2}\begin{bmatrix}12&-10&0\\-10&-3&0\\0&0&-3\end{bmatrix}$; $\varepsilon = 17\beta,\ -3\beta,\ -8\beta$ ($\beta = \frac{10P}{E\pi d^2}$); melhor direção $\vec n_1 = \frac{1}{\sqrt5}(2, -1, 0)$, a cerca de −26,6° de $x$.</div></article>
+
+  <article class="ex" id="p2a-ex13"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 13 (p.61) · ver Pivô 18</div><h3 id="p2a-ex13-h" data-nav="AP2 ex.13 · roseta completa até FS">Roseta a 45°: extremos de leitura, distorção, τmáx e FS</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Uma roseta com 3 extensômetros a 45° (nomeados A, B e C) é utilizada para determinar as deformações em um ponto da superfície de uma dada estrutura, conforme indicado na figura, sendo obtidos os valores: $\varepsilon_A=\varepsilon_C=210\mu$, $\varepsilon_B=420\mu$. Admita condições de linearidade geométrica e que o material seja homogêneo, isótropo e tenha comportamento elástico-linear com constantes elásticas E = 280 GPa e $\nu=0{,}4$. Pedem-se: a) o maior e o menor alongamento que pode ser medido neste ponto com auxílio de extensômetros e as direções em que eles ocorrem (indique estas direções em relação aos extensômetros A, B e C através de desenhos); b) a maior distorção entre as fibras que passam pelo ponto e cujos versores (tangentes às fibras) são paralelos à superfície da estrutura. Indique estas direções em relação aos extensômetros A, B e C em um desenho; c) o valor da maior tensão de cisalhamento no ponto (considerando todos os planos possíveis que passam pelo ponto) e as normais aos planos em que ela atua; d) considerando que o material tenha comportamento dúctil com tensão de escoamento 350 MPa, o fator de segurança com relação ao início de escoamento no ponto utilizando um critério apropriado. Justifique a escolha do critério adotado!</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 13):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 62 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\varepsilon_x = \varepsilon_y = 210$, $\gamma = 2\varepsilon_B - \varepsilon_A - \varepsilon_C = 420\mu$ ⇒ no plano: 420 (direção B) e 0 (⟂ B); $\varepsilon_z = -280\mu$. Tensões: $\sigma_x = \sigma_y = 98$, $\tau = 42$ ⇒ 140, 56, 0 MPa.</p>
+    <div class="answer"><strong>Respostas:</strong> máx 420 µ (direção B), mín 0; $\gamma_{máx,plano} = 420\mu$; $\tau_{máx} = 70$ MPa; $FS_{Tresca} = 2{,}5$. <span class="badge badge-ok">conferido</span> <span class="tag tag-mem">⚠</span> "Menor alongamento medível com extensômetro" é no plano da superfície (0), não $\varepsilon_z$ (−280), que não dá para medir colando.</div></article>
+
+  <article class="ex" id="p2a-ex14"><div class="ex-head"><div><div class="ex-kicker">Apostila 02 · Exercício 14 (p.67) · ver Pivô 15</div><h3 id="p2a-ex14-h" data-nav="AP2 ex.14 · dinamômetro">Dinamômetro de amarração (literal)</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado</span>Um dinamômetro de alta capacidade, projetado para medir cargas de tração de até 2000kN em sistemas de amarração de navios, é construído a partir da usinagem de uma peça de aço carbono, liga SAE4340 (ABNT4340), de alta resistência. O dinamômetro é inserido na linha através de duas manilhas ligadas a dois tornéis (distorcedores). Os pinos das manilhas, inseridos nos olhais, transmitem ao dinamômetro a carga de tração F, a ser medida. Os tornéis dão liberdade de giro ao conjunto, de forma a minimizar a aplicação de torção. O sensoriamento da carga de tração é feito indiretamente, através da medida de deformações, utilizando-se rosetas de extensômetros elétricos, que são coladas à superfície do "pescoço" da peça, em sua seção intermediária. São 4 conjuntos de rosetas, instalados a 90° entre si e ligadas eletricamente de forma a compensar deformações decorrentes de esforços outros que não os de tração. A calibração do dinamômetro é realizada em aparato de ensaio de tração. Na fase de dimensionamento do dinamômetro, uma das preocupações do projetista é a definição do diâmetro D. Por um lado, deseja-se grande sensibilidade. Por outro, requer-se a resistência necessária. Admitindo que não haja qualquer imposição de flexão e que o material seja isotrópico e linear-elástico. a) a tensão normal à seção, $\sigma_x$, associada à tração F; b) a tensão de cisalhamento, $\tau_{xy}$, associada a um torque residual, de magnitude T; c) o tensor das tensões [T], segundo os eixos locais (x,y,z); d) as tensões principais; e) a máxima tensão de cisalhamento correspondente; f) as deformações principais.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 02 · ex. 14):</strong> ver o PDF oficial, Apostila 02 (questões de prova), p. 67 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="answer"><strong>Resposta:</strong> $\sigma_x = 4F/\pi D^2$; $\tau_{xy} = 16T/\pi D^3$; $\sigma_{1,3} = \frac{2F}{\pi D^2}\left[1 \pm\sqrt{1 + \frac{64T^2}{F^2D^2}}\right]$, $\sigma_2 = 0$; $\tau_{máx} = \frac{2F}{\pi D^2}\sqrt{1 + \frac{64T^2}{F^2D^2}}$. <span class="badge badge-warn">a apostila imprime $\tau_{máx}$ errado</span></div></article>
+</section>
+
+<hr class="page-break-visual">
+<section class="chapter" id="capC">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Seção 6</span>
+    <h2 id="capC-h" data-nav="6 · Análise exercícios × tópicos">Análise exercícios × tópicos</h2>
+    <p class="section-desc">Frequência de cada tópico nos 79 exercícios distintos dos guias de origem. Pesa mais a coluna das 33 questões de avaliação (exercícios em grupo + provas antigas das apostilas).</p></div>
+
+  <h3 class="sub" id="capC-freq" data-nav="Frequência dos tópicos">Frequência e pivô de cada tópico</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Código</th><th>Tópico</th><th>Em avaliações (33)</th><th>Total (79)</th><th>Pivôs</th></tr></thead><tbody>
+    <tr class="hit"><td><span class="chip">T1</span></td><td>tensor, Cauchy, leitura do cubo</td><td class="num"><span class="bar" style="width:98px"></span> 14</td><td class="num">27</td><td>5, 7, 8, 20</td></tr>
+    <tr class="hit"><td><span class="chip">D4</span></td><td>Hooke generalizada</td><td class="num"><span class="bar" style="width:98px"></span> 14</td><td class="num">24</td><td>15, 17, 18</td></tr>
+    <tr class="hit"><td><span class="chip">T2</span></td><td>tensões e direções principais</td><td class="num"><span class="bar" style="width:84px"></span> 12</td><td class="num">25</td><td>6, 12, 20</td></tr>
+    <tr class="hit"><td><span class="chip">T5</span></td><td>critérios de resistência</td><td class="num"><span class="bar" style="width:84px"></span> 12</td><td class="num">17</td><td>9, 14, 18, 22</td></tr>
+    <tr><td><span class="chip">T3</span></td><td>Mohr e transformação</td><td class="num"><span class="bar" style="width:63px"></span> 9</td><td class="num">30</td><td>6, 12, 13, 21</td></tr>
+    <tr><td><span class="chip">D3</span></td><td>extensômetros e rosetas</td><td class="num"><span class="bar" style="width:63px"></span> 9</td><td class="num">15</td><td>15, 17, 18</td></tr>
+    <tr><td><span class="chip">E2</span></td><td>esforços em estruturas 3D</td><td class="num"><span class="bar" style="width:56px"></span> 8</td><td class="num">22</td><td>3, 4, 8, 19</td></tr>
+    <tr><td><span class="chip">T4</span></td><td>vasos de pressão</td><td class="num"><span class="bar" style="width:56px"></span> 8</td><td class="num">18</td><td>9, 10, 21</td></tr>
+    <tr><td><span class="chip">D2</span></td><td>distorção, [E], principais de deformação</td><td class="num"><span class="bar" style="width:35px"></span> 5</td><td class="num">8</td><td>16</td></tr>
+    <tr><td><span class="chip">E1</span></td><td>esforços em estruturas planas</td><td class="num"><span class="bar" style="width:14px"></span> 2</td><td class="num">6</td><td>1, 2</td></tr>
+    <tr><td><span class="chip">D1</span></td><td>deformação a partir de deslocamentos</td><td class="num"><span class="bar" style="width:7px"></span> 1</td><td class="num">2</td><td>16 (e slides da aula 9)</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="capC-cobra" data-nav="O que o professor mais cobra">O que o professor mais cobra</h3>
+  <ol>
+    <li><strong>Encadeamento completo</strong> numa só questão: estrutura 3D → esforços → ponto crítico → cubo de tensões → tensor → principais → critério. Treine os Pivôs 8 e 17 até sair sem olhar.</li>
+    <li><strong>Leitura correta do cubo</strong> (sinal tensorial com triedros não padrão): os exercícios em grupo #02 e os cubos das listas mostram o peso disso.</li>
+    <li><strong>Deformações ↔ tensões</strong> por Hooke, com rosetas: metade das provas antigas é de extensômetros (apostila 02).</li>
+    <li><strong>Critério certo para o material</strong> e a principal nula na conta do $\tau_{máx}$.</li>
+    <li>Contas literais com $\pi = 3$ e dados "redondos": organize a álgebra antes dos números.</li>
+  </ol>
+
+  <h3 class="sub" id="capC-cobertura" data-nav="Conferência de cobertura">Conferência de cobertura</h3>
+  <p>Todos os tópicos das aulas 1–10 têm pivô ✓. O ponto mais fraco é <span class="chip">D1</span> (deformações a partir de um campo de deslocamentos): só aparece na teoria da aula 9 e da apostila 02, sem exercício de lista. Vale reler os slides da aula 9 (p.20–40) e a apostila 02 §2–5.</p>
+
+  <h3 class="sub" id="capC-diverg" data-nav="Divergências de gabarito">Divergências de gabarito</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Exercício</th><th>Oficial</th><th>Guia</th><th>Provável causa</th></tr></thead><tbody>
+    <tr><td>L3 · 8.3-11</td><td>enunciado: τ<sub>adm</sub> 60, σ<sub>adm</sub> 24 MPa; resposta 6,25 / 3,125 mm</td><td>resposta só sai com σ<sub>adm</sub> 60, τ<sub>adm</sub> 24 (Gere)</td><td>valores trocados no texto da lista</td></tr>
+    <tr><td>L3 · compl. 8</td><td>FS<sub>vM</sub> = 4,45; FS<sub>Tresca</sub> = 4,0</td><td>4,36 e 3,93</td><td>não reproduzível; principais batem (80,6 / −27,3)</td></tr>
+    <tr><td>L4 · 7.7-17</td><td>τ<sub>máx</sub> = 17,78 MPa</td><td>17,23 MPa</td><td>gabarito usa G = 80 GPa (inconsistente com E = 200, ν = 0,29)</td></tr>
+    <tr><td>L4 · 8.2-6</td><td>p = 2,93 MPa</td><td>2,93 com E = 205 GPa</td><td>a lista não dá E e ν (dado ausente)</td></tr>
+    <tr><td>L2 · compl. 3 (P5)</td><td>3,37 MPa</td><td>3,36 MPa</td><td>arredondamento intermediário</td></tr>
+    <tr><td>Apostila 02 · ex. 14</td><td>$\tau_{máx}$ impresso $\frac{F}{\pi D^2}[1 + \sqrt\cdot]$</td><td>$\frac{2F}{\pi D^2}\sqrt\cdot$</td><td>erro de digitação</td></tr>
+  </tbody></table></div>
+</section>
+<hr class="page-break-visual">
+
+<section class="chapter cap-resumo" id="p1-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Seção 7</span>
+    <h2 id="p1-resumo-h" data-nav="7 · Resumo pré-prova">Resumo pré-prova (1–2 páginas A4)</h2>
+    <p class="section-desc">Para reler antes da PSub (e da P2, que usa tudo isto). O botão "🖨 Imprimir resumo" imprime só este capítulo.</p></div>
+  <div class="resumo">
+    <h3>1 · Esforços (estrutura → seção)</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Método.</b> <span class="path">lado livre → $\vec F$, $\vec M = \sum\vec r\times\vec F$ → projetar na tangente (N, T) e no plano (V, M)</span>. Coordenada a partir da ponta livre.</div>
+      <div class="r-item"><b>3D.</b> Braço ao longo da barra ⇒ flexão; braço ⟂ ⇒ torção. Nó rígido: fletor de uma barra = torçor da perpendicular. Arco: integre $qR\,d\beta$ com braço dependente de $\theta - \beta$.</div>
+    </div>
+    <h3>2 · Tensões num ponto</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Leitura.</b> <span class="path">face (sinal do eixo) × sentido da seta</span>; seta sem número = recíproca. Frontal pode ser face negativa.</div>
+      <div class="r-item"><b>Cauchy.</b> <span class="path">$\vec\rho = [T]\vec n$; $\sigma = \vec\rho\cdot\vec n$; $|\tau| = \sqrt{\rho^2 - \sigma^2}$</span>. Normal externa da parte isolada.</div>
+      <div class="r-item"><b>De fórmula.</b> <span class="path">$N/A$ · $My/I$ ($32M/\pi d^3$) · $Tr/I_p$ ($16T/\pi d^3$) · $VQ/Ib$ ($1{,}5V/A$)</span>. Flexão zero na LN; cortante zero na fibra extrema.</div>
+      <div class="r-item"><b>Principais.</b> <span class="path">desacoplar → $\sigma_m \pm R$ → ordenar com o zero</span>; $\tau_{máx} = (\sigma_1 - \sigma_3)/2$ em $(\vec n_1 \pm \vec n_3)/\sqrt2$. Traço confere.</div>
+      <div class="r-item"><b>Mohr (professor).</b> τ horário ⇒ para cima; θ no elemento = 2θ no círculo, mesmo sentido. <strong>Três círculos.</strong></div>
+      <div class="r-item"><b>Transformação.</b> <span class="path">$\sigma_{x'} = \sigma_m + d\cos2\theta + \tau\sin2\theta$; $\tau_{x'y'} = -d\sin2\theta + \tau\cos2\theta$</span>; $\sigma_{y'}$ pelo traço.</div>
+    </div>
+    <h3>3 · Vasos e critérios</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Vasos.</b> <span class="path">esfera $pR/2t$ · cilindro $\sigma_c = pr/t$, $\sigma_L = pr/2t$ · radial 0 (fora) a $-p$ (dentro)</span>. $\tau_{máx}$ fora do plano $= \sigma_c/2$. Solda: $\vec n$ ⟂ solda.</div>
+      <div class="r-item"><b>Combinado.</b> Some <em>componentes</em> na mesma base (pressão + M + T + F), depois principais. $\tau_{máx}$ não se superpõe.</div>
+      <div class="r-item"><b>Dúctil.</b> <span class="path">Tresca $\sigma_e/(\sigma_1 - \sigma_3)$ · vM $\sigma_e/\sqrt{\tfrac12\sum(\sigma_i - \sigma_j)^2}$</span>; eixos: $\sqrt{\sigma^2 + 4\tau^2}$ e $\sqrt{\sigma^2 + 3\tau^2}$.</div>
+      <div class="r-item"><b>Frágil.</b> <span class="path">Rankine $\sigma_r/\max(|\sigma_1|, |\sigma_3|)$</span>. Material misto: cada trecho com o seu critério; vale o menor FS.</div>
+    </div>
+    <h3>4 · Deformações e extensômetros</h3>
+    <div class="r-grid">
+      <div class="r-item"><b>Tensor.</b> <span class="path">$[E]$: ε na diagonal, <strong>γ/2</strong> fora</span>; $\varepsilon(\vec n) = \vec n^t[E]\vec n$; $\gamma = 2\vec n^t[E]\vec m$; $\gamma_{máx} = \varepsilon_1 - \varepsilon_3$.</div>
+      <div class="r-item"><b>Extensômetro.</b> <span class="path">$\varepsilon_\theta = \varepsilon_x\cos^2\theta + \varepsilon_y\sin^2\theta + \gamma\sin\theta\cos\theta$</span>. 0/45/90: $\gamma = 2\varepsilon_{45} - \varepsilon_0 - \varepsilon_{90}$. Melhor posição = principal de maior |ε|.</div>
+      <div class="r-item"><b>Hooke.</b> <span class="path">$\varepsilon_x = [\sigma_x - \nu(\sigma_y + \sigma_z)]/E$; $\gamma = \tau/G$; $G = E/2(1+\nu)$</span>. EPT: $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y)$.</div>
+      <div class="r-item"><b>Superfície livre.</b> $\sigma_z = 0$, mas $\varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x + \varepsilon_y) \ne 0$. Uniaxial: $\varepsilon_y = -\nu\varepsilon_x$.</div>
+    </div>
+    <h3>Armadilhas que custam ponto</h3>
+    <div class="r-grid">
+      <div class="r-item">Esquecer a principal nula no Tresca / $\tau_{máx}$.</div>
+      <div class="r-item">$y$ da flexão medido da borda, não da linha neutra.</div>
+      <div class="r-item">γ inteiro no tensor [E]; esquecer Poisson na leitura inclinada.</div>
+      <div class="r-item">Normal da parte errada no corte (troca todos os sinais).</div>
+      <div class="r-item">Ângulo sem o fator 2; Mohr com convenção misturada.</div>
+      <div class="r-item">Somar τ de torção e de cortante com o mesmo sinal nos dois lados.</div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

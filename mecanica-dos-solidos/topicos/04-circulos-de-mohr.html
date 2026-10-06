@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 · Círculos de Mohr · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 4</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t04-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t04-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t04-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t04-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t04-mohr">O círculo</a></li>
+<li class="nav-ex"><a href="#t04-3">Três círculos</a></li>
+<li class="nav-ex"><a href="#t04-algo">Algoritmo do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t04-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t04-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t04-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#l2-ex6-h">L2 compl.2 · elemento girado 60°<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l3-ex5-h">L3 8.4-1 · ponto A da viga<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l3-ex8-h">L3 compl.1+2 · Mohr 3D e planos de τmáx<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l3-ex13-h">L3 compl.6 · superposição e τmáx<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t04-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#l2-ex1-h">L2 7.2-9 · costura a 30°</a></li>
+<li class="nav-ex"><a href="#l2-ex2-h">L2 7.2-12 · chapa soldada</a></li>
+<li class="nav-ex"><a href="#l2-ex3-h">L2 7.3-10 · eixo propulsor</a></li>
+<li class="nav-ex"><a href="#l3-ex10-h">L3 compl.3 · EPT, três círculos</a></li>
+<li class="nav-ex"><a href="#l3-ex11-h">L3 compl.4 · tubo P1…P6: τmáx</a></li>
+<li class="nav-ex"><a href="#l3-ex12-h">L3 compl.5 · condição sobre σx e τ</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t04-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>04 · Círculos de Mohr</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t04-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t04-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">T3</span> · aula 5 (17/08)</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Como visualizar e calcular a tensão em todos os planos de um ponto, e achar o cisalhamento máximo, sem repetir Cauchy? Ao fim você deve construir os <strong>três círculos de Mohr</strong>
+        com a convenção do professor, transformar tensões no plano ($\theta$ no elemento = $2\theta$ no círculo) e identificar os planos de cisalhamento máximo em 3D.</p></div>
+</section>
+<section class="chapter" id="t04-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t04-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="03-tensoes-principais.html">ficha 03 (Tensões e direções principais)</a>: tensões e direções principais.</li><li><a href="../base.html#trigonometria">Base</a>: ângulo duplo.</li></ul>
+</section>
+<section class="chapter" id="t04-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t04-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 5, p.3–52 (convenção do Mohr: p.34–42; ler pela imagem)</td><td>τ horário para cima</td></tr><tr><td>Apostila 01 (Clóvis)</td><td>§7–8, p.21–29</td><td></td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§7.4 (480–493), §7.6 (497)</td><td>convenção de sinal oposta à do curso</td></tr><tr><td>Listas</td><td>Lista 2 (7.2-9, 7.2-12, 7.3-10, compl. 2) e Lista 3 (compl. 1–6)</td><td></td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t04-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t04-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t04-mohr" data-nav="O círculo">O círculo de Mohr</h3>
+        <p>Para um estado plano, o par $(\sigma, \tau)$ de todos os planos que contêm o eixo $z$ descreve um círculo de centro $\sigma_m = (\sigma_x + \sigma_y)/2$ e raio $R = \sqrt{d^2 + \tau_{xy}^2}$. A
+        <strong>convenção do professor</strong>: $\tau$ que gira o elemento no sentido horário é plotado <em>para cima</em>; os pontos X ($\sigma_x$, $\tau$ da face x) e Y são diametralmente opostos; um giro $\theta$ no
+        elemento é $2\theta$ no círculo, no mesmo sentido.</p>
+        <p>Transformação: $\sigma_{x'} = \sigma_m + d\cos2\theta + \tau\sin2\theta$, $\tau_{x'y'} = -d\sin2\theta + \tau\cos2\theta$, $\sigma_{y'}$ pelo traço.</p>
+        <h3 class="sub" id="t04-3" data-nav="Três círculos">Três círculos e o cisalhamento máximo</h3>
+        <p>Um estado tridimensional com principais $\sigma_1 \ge \sigma_2 \ge \sigma_3$ ocupa a região entre três círculos (um para cada par); o <strong>maior círculo</strong> é o de $\sigma_1$ e $\sigma_3$ e
+        $\tau_{máx} = (\sigma_1 - \sigma_3)/2$. Num estado plano a terceira principal é zero e <strong>entra</strong>.</p>
+        <h3 class="sub" id="t04-algo" data-nav="Algoritmo do professor">Algoritmo do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A4 · Mohr no EPT (convenção do professor)</h3><p><span class="tag tag-form">📄 Aula 5 p.34–42</span></p>
+      <ol><li>τ que gira o elemento no sentido <strong>horário</strong> é plotado <strong>para cima</strong>.</li><li>X = ($\sigma_x$, τ da face x) e Y diametralmente opostos; centro $\sigma_m$; raio R.</li><li>Giro θ no elemento = 2θ no círculo, mesmo sentido.</li><li><strong>Trace os três círculos</strong>; $\tau_{máx}$ no maior.</li></ol></div>
+    </div>
+</section>
+<section class="chapter" id="t04-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t04-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li>Mohr com convenção misturada (livro × professor) troca o sinal de $\tau$ e o sentido do giro.</li><li>O círculo único só descreve planos que contêm o eixo de uma principal; os planos de $\tau_{máx}$ podem estar fora do plano do problema.</li><li>$\tau_{máx}$ não se superpõe; Mohr não é aditivo.</li></ul>
+</section>
+
+<section class="chapter" id="t04-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t04-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Elementos girados, planos de solda e três círculos (Listas 2 e 3).</p></div>
+<h3 class="sub" id="t04-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="l2-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 2 · Complementar 2 · Pivô 6 da P1</div>
+      <h3 id="l2-ex6-h" data-nav="L2 compl.2 · elemento girado 60°" data-pivo>Estado plano de tensões num elemento girado de 60°</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">T3</span><span class="chip">T2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 2, p.3)</span>
+      2) Um elemento em estado plano de tensões está submetido às tensões $\sigma_x = 50$ MPa, $\sigma_y = 30$ MPa e $\tau_{xy} = 20$ MPa, como ilustrado na figura à esquerda. Determine as tensões agindo nas faces de um elemento orientado segundo um ângulo $\theta = 60°$ a partir do eixo $x$, como indicado na figura à direita.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 2 · ex. 6):</strong> ver o PDF oficial, Lista 2, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>EPT ($\sigma_z = \tau_{xz} = \tau_{yz} = 0$), transformação de coordenadas por rotação em torno de $z$. São os mesmos dados do exemplo 7.3-1 dos slides da aula 5 (p.43).</p>
+      <div class="callout concept"><span class="co-t">Conceito: de onde vêm as equações de transformação</span>
+        <p>A face girada tem normal $\vec n = (\cos\theta, \sin\theta)$. Por Cauchy, $\vec\rho = [T]\vec n$. A tensão normal nessa face é $\sigma_{x'} = \vec\rho\cdot\vec n$, e o cisalhamento é $\tau_{x'y'} = \vec\rho\cdot\vec t$ com $\vec t = (-\sin\theta, \cos\theta)$. Expandindo e usando identidades de ângulo duplo, saem as fórmulas da aula 5 p.28–31. <strong>O ângulo aparece dobrado</strong>, e por isso no círculo de Mohr tudo gira $2\theta$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$\sigma_x = 50$, $\sigma_y = 30$, $\tau_{xy} = +20$ MPa (na face da direita aponta para cima); $\theta = +60°$ (anti-horário a partir de $x$).</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\sigma_{x'}$, $\sigma_{y'}$, $\tau_{x'y'}$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\sigma_{x'} = \frac{\sigma_x+\sigma_y}{2} + \frac{\sigma_x-\sigma_y}{2}\cos2\theta + \tau_{xy}\sin2\theta\qquad \tau_{x'y'} = -\frac{\sigma_x-\sigma_y}{2}\sin2\theta + \tau_{xy}\cos2\theta\qquad\text{(aula 5 p.36)}$$</div>
+      <p>$\sigma_{y'}$ sai do invariante: $\sigma_{x'} + \sigma_{y'} = \sigma_x + \sigma_y$.</p></div>
+    <div class="step" data-n="5"><h4>Círculo de Mohr (convenção do professor)</h4>
+      <p>Centro $\sigma_m = 40$ MPa; raio $R = \sqrt{10^2 + 20^2} = 22{,}36$ MPa. Na face $x$, $\tau_{xy} = +20$ gira o elemento no sentido anti-horário ⇒ ponto X = (50; −20), abaixo do eixo; Y = (30; +20), acima. Girar o elemento 60° anti-horário = percorrer 120° anti-horário a partir de X: X está a −63,43° do centro, e −63,43° + 120° = 56,57° ⇒ ponto X' = (40 + 22,36 cos 56,57°; 22,36 sin 56,57°) = (52,32; 18,66). Acima do eixo = cisalhamento horário na face $x'$, isto é, $\tau_{x'y'} = -18{,}66$.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\sigma_{x'} = 40 + 10\cos120° + 20\sin120° = 40 - 5 + 17{,}32 = 52{,}32\ \text{MPa}$$
+      $$\tau_{x'y'} = -10\sin120° + 20\cos120° = -8{,}66 - 10 = -18{,}66\ \text{MPa}\qquad \sigma_{y'} = 80 - 52{,}32 = 27{,}68\ \text{MPa}$$</div>
+      <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 2 · ex. 6):</strong> ver o PDF oficial, Lista 2, p. 7 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\sigma_{x'} = 52{,}32$ MPa, $\sigma_{y'} = 27{,}68$ MPa, $|\tau_{x'y'}| = 18{,}66$ MPa (na face $x'$, aponta para baixo e para a direita). <span class="badge badge-ok">bate com a resposta da lista</span></div>
+      <ul><li>De brinde (aula 5): $\sigma_1 = 62{,}36$, $\sigma_2 = 17{,}64$, $\sigma_3 = 0$ MPa. $\tau_{máx} = (\sigma_1 - \sigma_3)/2 = 31{,}18$ MPa, maior que o raio do círculo do plano (22,36). <strong>Desenhe os três círculos.</strong></li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o fator 2 no ângulo. Conferência rápida: $\sigma_{x'} + \sigma_{y'} = \sigma_x + \sigma_y$.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l3-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Exercício 8.4-1 · Pivô 11 da P1</div>
+      <h3 id="l3-ex5-h" data-nav="L3 8.4-1 · ponto A da viga" data-pivo>Ponto interno de uma viga: flexão + cisalhamento da cortante</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">T3</span><span class="chip">T2</span><span class="chip">E1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.2)</span>
+      8.4-1. Uma viga engastada de seção transversal retangular está submetida a uma carga concentrada $P$ = 70 kN agindo na extremidade livre (vide figura). A viga tem largura $b$ = 100 mm e altura $h$ = 250 mm. O ponto A está localizado a uma distância $c$ = 600 mm a partir da extremidade livre e a uma distância $d$ = 75 mm da base da viga. Determine as tensões principais e a máxima tensão de cisalhamento no ponto A e mostre essas tensões em esboços de elementos orientados adequadamente.<br>Resp: $\sigma_1$ = 0,739 MPa, $\sigma_2$ = 0 MPa, $\sigma_3$ = -16,9 MPa, $\tau_{máx}$ = 8,8 MPa</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 3 · ex. 5):</strong> ver o PDF oficial, Lista 3, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Ponto interior de uma viga em flexão simples: $\sigma_x$ (de $M$) e $\tau_{xy}$ (de $V$), EPT.</p>
+      <div class="callout concept"><span class="co-t">Conceito: $\tau = VQ/Ib$</span>
+        <p>O cisalhamento da cortante não é uniforme: vale zero nas faces superior e inferior e é máximo na linha neutra ($1{,}5V/A$ no retângulo). $Q$ é o momento estático, em relação à linha neutra, da área entre o ponto e a borda. Para o ponto A, é a faixa de 75 mm abaixo dele.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$M = Pc = 70\cdot0{,}6 = 42$ kN·m (traciona em cima, porque a carga é para baixo na ponta); $V = 70$ kN; $I = bh^3/12 = 1{,}302\times10^8$ mm⁴; A está 50 mm abaixo da linha neutra.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\sigma_1, \sigma_2, \sigma_3$ e $\tau_{máx}$ em A.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p>$\sigma_x = My/I$; $\tau = VQ/Ib$; $\sigma' , \sigma'' = \sigma_x/2 \pm \sqrt{(\sigma_x/2)^2 + \tau^2}$.</p></div>
+    <div class="step" data-n="5"><h4>Tensões em A</h4>
+      <div class="math-box">$$\sigma_x = -\frac{42\times10^6\cdot50}{1{,}302\times10^8} = -16{,}13\ \text{MPa}\qquad Q = 100\cdot75\cdot87{,}5 = 656\,250\ \text{mm}^3\qquad \tau = \frac{70\,000\cdot656\,250}{1{,}302\times10^8\cdot100} = 3{,}53\ \text{MPa}$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\sigma', \sigma'' = -8{,}06 \pm\sqrt{8{,}06^2 + 3{,}53^2} = -8{,}06 \pm 8{,}80\ \Rightarrow\ \sigma_1 = 0{,}74,\ \sigma_2 = 0,\ \sigma_3 = -16{,}87\ \text{MPa};\quad \tau_{máx} = 8{,}80\ \text{MPa}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\sigma_1 = 0{,}739$, $\sigma_2 = 0$, $\sigma_3 = -16{,}9$ MPa, $\tau_{máx} = 8{,}8$ MPa. <span class="badge badge-ok">bate com a lista e com o Gere</span></div>
+      <ul><li>Mesmo num ponto "de compressão" aparece uma tração pequena ($\sigma_1 &gt; 0$), por causa do cisalhamento. Isso importa em materiais frágeis (Rankine).</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Usar $d = 75$ mm como $y$: $y$ é medido da linha neutra ($75 - 125 = -50$ mm).</li></ul></div>
+  </article>
+<article class="ex pivo" id="l3-ex8">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Complementares 1 e 2 · Pivô 12 da P1</div>
+      <h3 id="l3-ex8-h" data-nav="L3 compl.1+2 · Mohr 3D e planos de τmáx" data-pivo>Três círculos de Mohr e os planos de cisalhamento máximo em 3D</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">T2</span><span class="chip">T3</span><span class="chip">T1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.4)</span>
+      1) Os estados de tensão indicados abaixo são os mesmos presentes no exercício complementar nº 1 da 3ª Lista de Exercícios de PME-3211. Determine, em cada caso, as tensões principais, os círculos de Mohr das tensões e a máxima tensão de cisalhamento. Notas: 1) as tensões indicadas estão em valores absolutos e expressas em MPa, 2) as tensões nas faces não visíveis não estão indicadas, apesar de existirem, para não sobrecarregar a figura.<br>
+      2) Utilizando a base canônica $b = (\vec{e}_x, \vec{e}_y, \vec{e}_z)$ associada aos sistemas de coordenadas indicados junto aos estados de tensão do exercício 1 acima, determine os versores normais aos planos de máxima tensão de cisalhamento em cada caso. Em seguida, verifique que as tensões de cisalhamento atuantes nestes planos são, de fato, as tensões máximas indicadas nos respectivos círculos de Mohr das tensões.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 3 · ex. 8):</strong> ver o PDF oficial, Lista 3, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Estados 3D já transformados em tensor no Pivô 5 (Lista 2, compl. 1). Agora: autovalores, três círculos e os planos de $\tau_{máx}$.</p>
+      <div class="callout concept"><span class="co-t">Conceito: os três círculos e onde está o $\tau_{máx}$</span>
+        <p>Com $\sigma_1 \ge \sigma_2 \ge \sigma_3$, os pares $(\sigma, \tau)$ de <em>qualquer</em> plano ficam na região entre o círculo maior ($\sigma_1$–$\sigma_3$) e os dois menores (aula 5 p.3–11). O ponto mais alto é o topo do círculo maior: $\tau_{máx} = (\sigma_1 - \sigma_3)/2$, num plano que contém $\vec n_2$ e faz 45° com $\vec n_1$ e $\vec n_3$, isto é, de normal $(\vec n_1 \pm \vec n_3)/\sqrt2$. Nesse plano, $\sigma = (\sigma_1 + \sigma_3)/2$.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados (caso a)</h4><p>$[T] = \begin{bmatrix}20&-25&0\\-25&-10&0\\0&0&8\end{bmatrix}$ MPa. A linha e a coluna de $z$ estão desacopladas ⇒ $\sigma = 8$ é principal, com $\vec n = \vec e_z$.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\sigma_{1,2,3}$, $\tau_{máx}$, normais $\vec\eta$, $\vec\xi$ e conferência por Cauchy.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p><span class="tag tag-form">📄 Aula 4</span> $\det([T] - \sigma I) = 0$; <span class="tag tag-form">📄 Aula 5 p.12–18</span> $\tau_{máx}$ e seus planos.</p></div>
+    <div class="step" data-n="5"><h4>Principais (caso a)</h4>
+      <div class="math-box">$$\text{no plano } xy:\ \sigma_m = 5,\ R = \sqrt{15^2 + 25^2} = 29{,}155\ \Rightarrow\ 34{,}155\ \text{e}\ -24{,}155\qquad \sigma_1 = 34{,}155,\ \sigma_2 = 8,\ \sigma_3 = -24{,}155$$
+      $$(\sigma_x - \sigma_1)n_x + \tau_{xy}n_y = 0\ \Rightarrow\ \vec n_1 = (0{,}870;\ -0{,}493;\ 0),\quad \vec n_3 = (0{,}493;\ 0{,}870;\ 0)$$</div></div>
+    <div class="step" data-n="6"><h4>Planos de $\tau_{máx}$ e conferência</h4>
+      <div class="math-box">$$\vec\eta = \frac{\vec n_1 + \vec n_3}{\sqrt2} = \pm(0{,}964;\ 0{,}267;\ 0)\qquad \vec\rho = [T]\vec\eta\ \Rightarrow\ \sigma = \vec\rho\cdot\vec\eta = 5{,}0,\ \ |\vec\tau| = \sqrt{\rho^2 - \sigma^2} = 29{,}155 = \tau_{máx}\ \checkmark$$</div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$\sigma_1$</th><th>$\sigma_2$</th><th>$\sigma_3$</th><th>$\tau_{máx}$</th><th>normal $\vec\eta$</th></tr></thead><tbody>
+        <tr><td>a</td><td class="num">34,155</td><td class="num">8</td><td class="num">−24,155</td><td class="num">29,155</td><td>±(0,964; 0,267; 0)</td></tr>
+        <tr><td>b</td><td class="num">49,231</td><td class="num">11</td><td class="num">−59,231</td><td class="num">54,231</td><td>±(0; 0,999; 0,046)</td></tr>
+        <tr><td>c</td><td class="num">22,593</td><td class="num">5</td><td class="num">−1,593</td><td class="num">12,093</td><td>±(0,865; −0,502; 0)</td></tr>
+        <tr><td>d</td><td class="num">17,634</td><td class="num">10,281</td><td class="num">−15,415</td><td class="num">16,524</td><td>±(0,604; −0,726; 0,330)</td></tr></tbody></table></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> tabela acima (sem gabarito na lista). Conferência: a tensão de cisalhamento calculada por Cauchy no plano $\vec\eta$ é igual a $(\sigma_1 - \sigma_3)/2$ em todos os casos <span class="badge badge-ok">verificado em Python</span></div>
+      <ul><li>Traço conferido: $I_1 = \sigma_1 + \sigma_2 + \sigma_3$ (a: $20 - 10 + 8 = 18 = 34{,}155 + 8 - 24{,}155$ ✓).</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> No caso c, a principal "desacoplada" (5) fica entre as outras duas: $\tau_{máx}$ vem do par 22,59 / −1,59.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l3-ex13">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Complementar 6 · Pivô 13 da P1</div>
+      <h3 id="l3-ex13-h" data-nav="L3 compl.6 · superposição e τmáx" data-pivo>Dois carregamentos no mesmo ponto: $\tau_{máx}$ não se superpõe</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">T3</span><span class="chip">T1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.5–6)</span>
+      6) Os estados de tensão representados a seguir referem-se a estados de tensão em um mesmo ponto de uma estrutura submetida a dois carregamentos distintos: o estado de tensão (I) está associado a um carregamento A, enquanto o estado de tensão (II) está associado a um carregamento B. O estado de tensão (III), para o mesmo ponto estudado, está associado à superposição dos carregamentos A e B, aplicados simultaneamente à estrutura. Determine: a) os valores das tensões $\sigma_x$, $\sigma_y$ e $\tau_{xy}$ devidas à superposição dos estados (I) e (II); b) os valores das máximas tensões de cisalhamento para cada um dos estados de tensão indicados; c) com base no resultado obtido em (b), responda: vale o princípio da superposição na determinação da máxima tensão de cisalhamento? Isto é, podemos dizer que $\tau_{máx,I} + \tau_{máx,II} = \tau_{máx,III}$? Justifique.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 3 · ex. 13):</strong> ver o PDF oficial, Lista 3, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Dois EPT dados em bases diferentes (giradas). Para somar, é preciso levar os dois à mesma base $xy$.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>(I): principais +200 MPa na direção a 75° de $x$ e −60 MPa a −15°. (II): cisalhamento puro de 40 MPa num sistema girado −30°.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$[T]_{III} = [T]_I + [T]_{II}$ na base $xy$; $\tau_{máx}$ de cada um.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><p>Tensor a partir das principais: $[T] = \sum\sigma_i\vec n_i\vec n_i^{\,t}$; mudança de base $[T]_b = [M][T]_{b'}[M]^t$ (aula 5 p.19–24).</p></div>
+    <div class="step" data-n="5"><h4>Tensores na base $xy$</h4>
+      <div class="math-box">$$[T]_I = \begin{bmatrix}-42{,}58&65{,}00\\65{,}00&182{,}58\end{bmatrix}\qquad [T]_{II} = \begin{bmatrix}34{,}64&20{,}00\\20{,}00&-34{,}64\end{bmatrix}\qquad [T]_{III} = \begin{bmatrix}-7{,}94&85\\85&147{,}94\end{bmatrix}\ \text{MPa}$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo de $\tau_{máx}$</h4>
+      <p>(I): principais 200, 0, −60 ⇒ 130 MPa. (II): 40, 0, −40 ⇒ 40 MPa. (III): $\sigma_m = 70$, $R = \sqrt{77{,}94^2 + 85^2} = 115{,}33$ ⇒ 185,33; 0; −45,33 ⇒ $\tau_{máx} = 115{,}33$ MPa.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $\sigma_x = -7{,}942$, $\sigma_y = 147{,}942$, $\tau_{xy} = 85$ MPa; (b) 130, 40 e 115,33 MPa; (c) $130 + 40 \ne 115{,}33$: não vale superposição. <span class="badge badge-ok">bate com a lista</span></div>
+      <div class="callout concept"><span class="co-t">Por que não vale</span><p>O tensor é linear nas cargas; $\tau_{máx}$ é uma função <em>não linear</em> do tensor (diferença de autovalores). Os planos de $\tau_{máx}$ de I e de II são diferentes. Somar os máximos seria somar cisalhamentos em planos distintos. Só se os dois estados tivessem as mesmas direções principais (e a mesma ordem) a soma valeria.</p></div>
+  </article>
+<h3 class="sub" id="t04-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="l2-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 2 · Exercício 7.2-9 · ver <a href="04-circulos-de-mohr.html#l2-ex6-h">L2 compl.2</a></div>
+      <h3 id="l2-ex1-h" data-nav="L2 7.2-9 · costura a 30°">Costura a 30° num revestimento</h3></div></div>
+    <div class="ex-topics"><span class="chip">T3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 2, p.1)</span>
+      7.2-9. O revestimento de polietileno de um reservatório de recalque está submetido às tensões $\sigma_x = 6$ MPa, $\sigma_y = 3$ MPa e $\tau_{xy} = -1{,}5$ MPa, como ilustrado no elemento de estado plano de tensões na figura à esquerda. Determine as tensões normal e de cisalhamento que agem em uma costura orientada a 30° em relação ao eixo vertical $y$, como indicado na figura à direita. Mostre essas tensões em um esboço de um elemento de tensão tendo seus lados paralelos e perpendiculares à costura.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 2 · ex. 1):</strong> ver o PDF oficial, Lista 2, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> a costura está a 30° da vertical ⇒ a <em>normal</em> dela está a $\theta = 30°$ de $x$.</p>
+    <div class="math-box">$$\sigma_n = 4{,}5 + 1{,}5\cos60° - 1{,}5\sin60° = 3{,}95\ \text{MPa}\qquad \tau = -1{,}5\sin60° - 1{,}5\cos60° = -2{,}05\ \text{MPa}\qquad \sigma_{\parallel} = 9 - 3{,}95 = 5{,}05\ \text{MPa}$$</div>
+    <div class="answer"><strong>Respostas:</strong> $\sigma = 3{,}95$ MPa (tração), $\tau = -2{,}05$ MPa. <span class="badge badge-ok">bate com o Gere (4,0 / −2,0 / 5,0, com 2 algarismos)</span></div>
+  </article>
+<article class="ex" id="l2-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 2 · Exercício 7.2-12 · ver <a href="04-circulos-de-mohr.html#l2-ex6-h">L2 compl.2</a></div>
+      <h3 id="l2-ex2-h" data-nav="L2 7.2-12 · chapa soldada">Chapa com solda diagonal</h3></div></div>
+    <div class="ex-topics"><span class="chip">T3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 2, p.1)</span>
+      7.2-12. Uma chapa retangular de dimensões 250 mm × 100 mm é fabricada soldando-se duas chapas triangulares. A chapa retangular assim formada está submetida a tensões de compressão de 2,5 MPa aplicadas sobre os lados verticais e a tensões de tração de 12 MPa aplicadas sobre os lados horizontais. Determine a tensão normal agindo perpendicularmente à linha de solda e a tensão de cisalhamento agindo paralelamente à linha de solda. Esboce estas tensões em um elemento tendo seus lados paralelos e perpendiculares à linha de solda.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 2 · ex. 2):</strong> ver o PDF oficial, Lista 2, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\sigma_x = -2{,}5$, $\sigma_y = 12$, $\tau_{xy} = 0$. A solda faz $\arctan(100/250) = 21{,}8°$ com $x$; a normal dela está a $111{,}8°$.</p>
+    <div class="math-box">$$\sigma_w = 4{,}75 - 7{,}25\cos223{,}6° = 10{,}0\ \text{MPa}\qquad \tau_w = 7{,}25\sin223{,}6° = -5{,}0\ \text{MPa}$$</div>
+    <div class="answer"><strong>Respostas:</strong> $\sigma_w = 10{,}0$ MPa, $\tau_w = -5{,}0$ MPa. <span class="badge badge-ok">bate com o Gere</span></div>
+  </article>
+<article class="ex" id="l2-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 2 · Exercício 7.3-10 · ver <a href="04-circulos-de-mohr.html#l2-ex6-h">L2 compl.2</a></div>
+      <h3 id="l2-ex3-h" data-nav="L2 7.3-10 · eixo propulsor">Eixo propulsor: torção + compressão</h3></div></div>
+    <div class="ex-topics"><span class="chip">T2</span><span class="chip">T3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 2, p.2)</span>
+      7.3-10. Um eixo propulsor, submetido à torção combinada com um carregamento axial de compressão, é projetado para resistir a uma tensão de cisalhamento de 56 MPa e a uma tensão de compressão de 85 MPa (conforme a figura). a) Determine as tensões principais e mostre-as em um elemento orientado adequadamente (em relação aos planos horizontal e vertical indicados na figura); b) Determine as tensões de cisalhamento máximas e as tensões normais que ocorrem nos planos de máxima tensão cisalhante. Mostre tais tensões em um elemento orientado adequadamente (em relação aos planos horizontal e vertical indicados na figura).<br>Resp. parciais: a) $\sigma_1 = 27{,}8$ MPa, $\sigma_2 = 0$, $\sigma_3 = -112{,}8$ MPa; b) $\tau_{máx} = 70{,}3$ MPa, $\sigma = -42{,}5$ MPa</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 2 · ex. 3):</strong> ver o PDF oficial, Lista 2, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> leitura das setas: $\sigma_x = -85$, $\sigma_y = 0$, $\tau_{xy} = -56$ MPa. $\sigma_m = -42{,}5$, $R = \sqrt{42{,}5^2 + 56^2} = 70{,}3$ ⇒ $\sigma' = 27{,}8$, $\sigma'' = -112{,}8$. Como $\sigma_z = 0$ fica entre elas, $\tau_{máx} = R$. $\tan2\theta_p = 2\tau_{xy}/(\sigma_x - \sigma_y)$ ⇒ $\sigma_1$ a $\theta_{p1} = 116{,}4°$; planos de $\tau_{máx}$ a 45° deles ($71{,}4°$).</p>
+    <div class="answer"><strong>Respostas:</strong> $\sigma_1 = 27{,}8$, $\sigma_2 = 0$, $\sigma_3 = -112{,}8$ MPa ($\theta_{p1} = 116{,}4°$); $\tau_{máx} = 70{,}3$ MPa com $\sigma = -42{,}5$ MPa ($\theta_s = 71{,}4°$). <span class="badge badge-ok">bate com a lista e com o Gere</span></div>
+  </article>
+<article class="ex" id="l3-ex10">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Complementar 3 · ver <a href="04-circulos-de-mohr.html#l3-ex8-h">L3 compl.1+2</a></div><h3 id="l3-ex10-h" data-nav="L3 compl.3 · EPT, três círculos">EPT: principais, os três círculos e $\tau_{máx}$</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.4–5)</span>3) Um elemento em estado plano de tensões está submetido às tensões indicadas na figura a seguir. Determine as tensões principais, os círculos de Mohr das tensões e a máxima tensão de cisalhamento no ponto. Em seguida, indique o estado de tensões, segundo os planos principais de tensão, em um elemento adequadamente orientado utilizando o sistema de eixos $Oxy$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 3 · ex. 10):</strong> ver o PDF oficial, Lista 3, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\sigma_x = 50$, $\sigma_y = 30$, $\tau_{xy} = 20$ (mesmo estado do Pivô 6). $\sigma_1 = 62{,}36$ a $\theta_{p1} = 31{,}72°$; $\sigma_2 = 17{,}64$; $\sigma_3 = 0$. Três círculos: C(40; 22,36), C(8,82; 8,82), C(31,18; 31,18).</p>
+    <div class="answer"><strong>Resposta:</strong> $\tau_{máx} = 31{,}18$ MPa (círculo $\sigma_1$–$\sigma_3$, planos contendo $\vec n_2$ a 45° de $\vec n_1$ e $\vec e_z$). Sem gabarito na lista; igual ao exemplo 7.3-1 da aula 5 <span class="badge badge-ok">bate com o slide</span></div>
+  </article>
+<article class="ex" id="l3-ex11">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Complementar 4 · ver <a href="04-circulos-de-mohr.html#l3-ex8-h">L3 compl.1+2</a></div><h3 id="l3-ex11-h" data-nav="L3 compl.4 · tubo P1…P6: τmáx">Tubo da Lista 2: qual ponto é mais solicitado</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.5)</span>4) Determine os círculos de Mohr e o valor da máxima tensão de cisalhamento para cada um dos pontos indicados no exercício complementar nº 3 da 3ª Lista de Exercícios de PME-3211. Com relação aos valores calculados de máxima tensão cisalhante, responda: a) quais são os pontos mais solicitados (dentre os indicados)? b) qual é o ponto menos solicitado (dentre os indicados)?</div>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ponto</th><th>$\sigma_1$</th><th>$\sigma_3$</th><th>$\tau_{máx}$</th></tr></thead><tbody>
+      <tr><td>P1</td><td class="num">2,00</td><td class="num">0</td><td class="num">1,00</td></tr><tr><td>P2</td><td class="num">5,71</td><td class="num">−1,19</td><td class="num">3,45</td></tr><tr><td>P3</td><td class="num">1,19</td><td class="num">−5,71</td><td class="num">3,45</td></tr>
+      <tr class="hit"><td>P4</td><td class="num">14,37</td><td class="num">−0,47</td><td class="num">7,42</td></tr><tr><td>P5</td><td class="num">3,37</td><td class="num">−3,37</td><td class="num">3,37</td></tr><tr><td>P6</td><td class="num">1,85</td><td class="num">−1,85</td><td class="num">1,85</td></tr></tbody></table></div>
+    <div class="answer"><strong>Resposta:</strong> mais solicitado P4 (e o simétrico no fundo da seção C); menos solicitado P1. <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+<article class="ex" id="l3-ex12">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 3 · Complementar 5 · ver <a href="04-circulos-de-mohr.html#l3-ex8-h">L3 compl.1+2</a></div><h3 id="l3-ex12-h" data-nav="L3 compl.5 · condição sobre σx e τ">Condição de projeto sobre $\sigma_x$ e $\tau_{xy}$</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 3, p.5)</span>5) A figura a seguir mostra o estado de tensão no ponto mais solicitado de uma estrutura. Determine: a) a relação que deve existir entre a tensão normal $\sigma_x$ e a tensão de cisalhamento $\tau_{xy}$ para que a máxima tensão de cisalhamento neste mesmo ponto não exceda um dado valor admissível ($\tau_{ad}$); b) as orientações dos planos de máxima tensão cisalhante, segundo o sistema de eixos $Oxyz$ indicado na figura, para o caso particular em que $\tau_{xy} = \sigma_x\sqrt{2}$, com $\sigma_x &gt; 0$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 3 · ex. 12):</strong> ver o PDF oficial, Lista 3, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\sigma_{1,3} = \frac{\sigma_x}{2}\pm\sqrt{\frac{\sigma_x^2}{4} + \tau^2}$, sempre com sinais opostos ⇒ $\sigma_2 = 0$ é a intermediária e $\tau_{máx} = \frac12\sqrt{\sigma_x^2 + 4\tau^2} \le \tau_{ad}$. Com $\tau = \sigma_x\sqrt2$: $\tau_{máx} = \frac12\sqrt{9\sigma_x^2} = \frac32\sigma_x$; normais $(\vec n_1 \pm \vec n_3)/\sqrt2$.</p>
+    <div class="answer"><strong>Respostas:</strong> $\sqrt{\sigma_x^2 + 4\tau_{xy}^2} \le 2\tau_{ad}$; $\vec\eta = \pm(0{,}985599;\ -0{,}169102;\ 0)$, $\vec\xi = \pm(0{,}169102;\ 0{,}985599;\ 0)$; $\tau_{máx} = 3\sigma_x/2$. <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t04-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t04-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Mohr (professor).</b> τ horário ⇒ para cima; θ no elemento = 2θ no círculo, mesmo sentido. <strong>Três círculos.</strong></div>
+          <div class="r-item"><b>Transformação.</b> <span class="path">$\sigma_{x'}=\sigma_m+d\cos2\theta+\tau\sin2\theta$; $\tau_{x'y'}=-d\sin2\theta+\tau\cos2\theta$</span>; $\sigma_{y'}$ pelo traço.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="03-tensoes-principais.html"><small>← anterior</small>03 · Tensões e direções principais</a><a class="prox" href="05-vasos-de-pressao.html"><small>próximo →</small>05 · Vasos de pressão de parede fina</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

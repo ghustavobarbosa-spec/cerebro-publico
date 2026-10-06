@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 · Extensômetros e Hooke generalizada · PME3211</title>
+<meta name="description" content="Mecânica dos Sólidos II (PME3211, Poli-USP): fichas por tópico com exercícios resolvidos e trilhas de pivôs para P1, P2 e P3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3211-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3211 · Tópico 8</div>
+  <div class="sb-sub">Mecânica dos Sólidos II</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t08-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t08-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t08-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t08-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t08-ext">Extensômetros e rosetas</a></li>
+<li class="nav-ex"><a href="#t08-hooke">Lei de Hooke generalizada</a></li>
+<li class="nav-ex"><a href="#t08-algo">Algoritmo do professor</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t08-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t08-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t08-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#l4-ex1-h">L4 7.7-17 · P e T por dois extensômetros<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l4-ex10-h">L4 compl.3 · extensômetro no tubo 3D<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#l4-ex11-h">L4 compl.4 · roseta a 60° + critérios<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t08-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#l4-ex2-h">L4 7.7-18 · força inclinada na viga</a></li>
+<li class="nav-ex"><a href="#l4-ex3-h">L4 7.7-22 · roseta 0/40/140</a></li>
+<li class="nav-ex"><a href="#l4-ex4-h">L4 8.2-6 · verniz frágil</a></li>
+<li class="nav-ex"><a href="#l4-ex6-h">L4 8.3-6 · alarme por extensômetro</a></li>
+<li class="nav-ex"><a href="#l4-ex9-h">L4 compl.2 · orientação do extensômetro</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t08-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Sólidos II</a> <span class="sep">›</span> <span>08 · Extensômetros e Hooke generalizada</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t08-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t08-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">D3</span> <span class="chip">D4</span> · aula 10 (02/09) e 10 Extra</p></div>
+<div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>O que se mede no laboratório é deformação; o que se precisa é tensão. Como ir de leituras de <strong>extensômetros e rosetas</strong> às tensões e ao fator de segurança, usando a lei de Hooke
+        generalizada? Ao fim você deve resolver $\varepsilon_x, \varepsilon_y, \gamma$ a partir de três leituras, aplicar Hooke (3D e estado plano) e escolher a melhor orientação de um extensômetro.</p></div>
+</section>
+<section class="chapter" id="t08-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t08-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul><li><a href="07-deformacoes.html">ficha 07 (Deformações num ponto)</a>: tensor $[E]$.</li><li><a href="06-criterios-de-resistencia.html">ficha 06 (Critérios de resistência)</a>: critérios, para fechar o FS.</li><li><a href="../base.html#hooke">Base</a>: lei de Hooke uniaxial, $E$, $\nu$, $G$.</li></ul>
+</section>
+<section class="chapter" id="t08-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t08-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 10, p.44–49 e Aula 10 Extra</td><td></td></tr><tr><td>Apostila 02 (Clóvis)</td><td>§6–13, p.15–40</td><td></td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§7.5 (493–497) e §7.7 (501–514)</td><td>boa para rosetas</td></tr><tr><td>Lista 4</td><td>7.7-17, 7.7-18, 7.7-22, 8.2-6, 8.3-6, compl. 2–4</td><td></td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="t08-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t08-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+        <h3 class="sub" id="t08-ext" data-nav="Extensômetros e rosetas">Extensômetros e rosetas</h3>
+        <p>Um extensômetro (strain gauge) mede o alongamento relativo na direção do seu fio. Na superfície livre, com o plano $xy$ tangente a ela, a leitura numa direção a $\theta$ do eixo $x$ é
+        $\varepsilon_\theta = \varepsilon_x\cos^2\theta + \varepsilon_y\sin^2\theta + \gamma_{xy}\sin\theta\cos\theta$. Três leituras (roseta) determinam $\varepsilon_x, \varepsilon_y, \gamma_{xy}$. Na roseta 0°/45°/90°:
+        $\gamma_{xy} = 2\varepsilon_{45} - \varepsilon_0 - \varepsilon_{90}$.</p>
+        <h3 class="sub" id="t08-hooke" data-nav="Lei de Hooke generalizada">Hooke generalizada</h3>
+        <p>$\varepsilon_x = [\sigma_x - \nu(\sigma_y+\sigma_z)]/E$ (e cíclicas), $\gamma_{xy} = \tau_{xy}/G$, $G = E/2(1+\nu)$. Em estado plano de tensões ($\sigma_z=0$):
+        $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y)$ e $\varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x+\varepsilon_y) \neq 0$. A partir das tensões, volta-se a <a href="03-tensoes-principais.html">ficha 03 (Tensões e direções principais)</a> e <a href="06-criterios-de-resistencia.html">ficha 06 (Critérios de resistência)</a>.
+        A melhor orientação de um extensômetro para medir uma carga é a direção principal de maior $|\varepsilon|$; as piores são aquelas onde $\varepsilon_\theta = 0$.</p>
+        <h3 class="sub" id="t08-algo" data-nav="Algoritmo do professor">Algoritmo do professor</h3><div class="card-grid"><div class="card accent-left"><h3>A8 · Extensômetros e rosetas</h3><p><span class="tag tag-form">📄 Aula 10 p.44–49; aula 10 Extra</span></p>
+      <ol><li>Superfície livre: $xy$ na superfície, EPT em tensões.</li><li>Cada leitura: $\varepsilon_\theta = \varepsilon_x\cos^2\theta + \varepsilon_y\sin^2\theta + \gamma\sin\theta\cos\theta$.</li><li>3 leituras ⇒ $\varepsilon_x, \varepsilon_y, \gamma$; $\varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x + \varepsilon_y)$.</li><li>Hooke do EPT ⇒ tensões ⇒ A3/A6.</li><li>Melhor orientação = principal de maior |ε| no plano; piores = onde $\varepsilon_\theta = 0$.</li></ol></div>
+  </div>
+</section>
+<section class="chapter" id="t08-limites">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t08-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li>Extensômetro só mede deformação média na <strong>direção do fio</strong> e na superfície; a deformação fora do plano ($\varepsilon_z$) vem por Poisson.</li><li>Hooke linear, isótropo; não vale além do escoamento.</li><li>Divergência registrada: L4 7.7-17 (gabarito usa $G=80$ GPa, inconsistente com $E$ e $\nu$) e 8.2-6 (a lista não dá $E$ e $\nu$); ver <a href="../provas/p1.html">P1</a>.</li></ul>
+</section>
+
+<section class="chapter" id="t08-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t08-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Extensômetros e rosetas em barras, vigas, pórticos e esferas (Lista 4).</p></div>
+<h3 class="sub" id="t08-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="l4-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · 7.7-17 · Pivô 15 da P1</div>
+      <h3 id="l4-ex1-h" data-nav="L4 7.7-17 · P e T por dois extensômetros" data-pivo>Barra com força axial e torque medidos por dois extensômetros</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">D3</span><span class="chip">D4</span><span class="chip">T3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.1)</span>
+      7.7-17. Uma barra circular sólida de diâmetro $d$ = 40 mm está submetida a uma força axial $P$ e a um torque $T$ (vide figura). Os extensômetros A e B montados na superfície da barra fornecem as leituras $\varepsilon_a = 100 \times 10^{-6}$ e $\varepsilon_b = -55 \times 10^{-6}$. A barra é feita de aço tendo $E$ = 200 GPa e ν = 0,29. Pede-se: a) Determine a força axial $P$ e o torque $T$; b) Determine a distorção máxima e a tensão de cisalhamento máxima na barra.<br>Resp.: a) $P$ = 25,133 kN, $T$ = 176,327 N.m, b) $\gamma_{máx} = 222 \times 10^{-6}$, $\tau_{máx}$ = 17,78 MPa</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 1):</strong> ver o PDF oficial, Lista 4, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Problema inverso: medir deformações para descobrir cargas. Na superfície da barra o estado é EPT, com $\sigma_x = P/A$ e $\tau_{xy} = 16T/\pi d^3$. Duas leituras ⇒ duas incógnitas.</p>
+      <div class="callout concept"><span class="co-t">Conceito: o que um extensômetro "vê"</span>
+        <p>Um extensômetro mede só o alongamento na direção dele, $\varepsilon_\theta = \vec n^{\,t}[E]\vec n$. Alinhado com o eixo ($\theta = 0$), mede $\varepsilon_x$, e a torção não aparece (cisalhamento puro não alonga as fibras do eixo). A 45°, mede $\frac{\varepsilon_x + \varepsilon_y}{2} + \frac{\gamma}{2}$, e aí a torção aparece. Mesmo sem tensão em $y$, $\varepsilon_y = -\nu\varepsilon_x \ne 0$ (Poisson): esquecer isso é o erro clássico.</p></div></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$d = 40$ mm, $A = 1256{,}6$ mm², $E = 200$ GPa, $\nu = 0{,}29$ ⇒ $G = E/2(1+\nu) = 77{,}5$ GPa; A a 0°, B a 45°.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$P$, $T$, $\gamma_{máx}$, $\tau_{máx}$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p><span class="tag tag-form">📄 Aula 10 p.49</span> $\varepsilon_\theta$; <span class="tag tag-form">📄 Aula 10 p.41</span> Hooke.</p></div>
+    <div class="step" data-n="5"><h4>Deformações</h4>
+      <div class="math-box">$$\varepsilon_x = \varepsilon_a = 100\mu\qquad \varepsilon_y = -\nu\varepsilon_x = -29\mu\qquad \varepsilon_b = \frac{100 - 29}{2} + \frac{\gamma_{xy}}{2} = -55\ \Rightarrow\ \gamma_{xy} = -181\mu$$</div></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\sigma_x = E\varepsilon_x = 20\ \text{MPa} \Rightarrow P = 20\cdot1256{,}6 = 25{,}13\ \text{kN}\qquad \tau = G\gamma = 77{,}5\times10^3\cdot181\times10^{-6} = 14{,}03\ \text{MPa} \Rightarrow T = \frac{\tau\pi d^3}{16} = 176{,}3\ \text{N·m}$$
+      $$\gamma_{máx} = 2\sqrt{\left(\frac{\varepsilon_x - \varepsilon_y}{2}\right)^2 + \left(\frac{\gamma}{2}\right)^2} = 222\mu\qquad \tau_{máx} = G\gamma_{máx} = \sqrt{10^2 + 14{,}03^2} = 17{,}2\ \text{MPa}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $P = 25{,}13$ kN, $T = 176{,}3$ N·m, $\gamma_{máx} = 222\mu$ <span class="badge badge-ok">bate com a lista</span>; $\tau_{máx} = 17{,}2$ MPa (lista: 17,78).</div>
+      <div class="callout diverge"><span class="co-t">Divergência pequena: τmáx</span><p>Com $G = E/2(1+\nu) = 77{,}5$ GPa, $\tau_{máx} = 17{,}23$ MPa, coerente com $\sigma = 20$ e $\tau = 14{,}03$. O valor da lista (17,78) é $80\text{ GPa}\times222\mu$: usa G = 80 GPa, que não é consistente com E e ν dados.</p></div>
+      <ul><li>Na barra, $\varepsilon_z$ (radial) $= -29\mu$ também: é a principal intermediária, e $\gamma_{máx}$ continua sendo o do plano.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l4-ex10">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · Complementar 3 · Pivô 17 da P1</div>
+      <h3 id="l4-ex10-h" data-nav="L4 compl.3 · extensômetro no tubo 3D" data-pivo>Extensômetro num pórtico tubular: descobrir F e a melhor orientação</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">D3</span><span class="chip">D4</span><span class="chip">D2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.5–6)</span>
+      3) A estrutura indicada abaixo é formada por tubos (com $d_i$ = 50 mm e $d_o$ = 60 mm). Um único extensômetro colado sobre a superfície externa do tubo $AB$ será utilizado para a determinação da força $F$ aplicada sobre a extremidade $C$ do tubo $BC$. Sabe-se que para o sistema de coordenadas $Axyz$, associado à base $b = (\vec{e}_x, \vec{e}_y, \vec{e}_z)$, temos $\vec{F} = -F\,sen\beta\,\vec{e}_y + F\cos\beta\,\vec{e}_z$ (onde $\beta$ = 60º é o ângulo que a linha de ação de $\vec{F}$ forma com o plano horizontal). As posições dos pontos $A$, $B$ e $C$ são: $A = (0,\ 0,\ 0)$, $B = (1{,}2L,\ 0,\ 0)$ e $C = (1{,}2L,\ 0,\ 0{,}5L)$. O extensômetro está colado sobre o ponto $P = (0{,}2L, 0,\ 0{,}5d_o)$ e forma um ângulo $\theta$ = 30º com relação ao plano horizontal $xz$. A leitura obtida é $\varepsilon$ = -263 $\mu$. Pede-se: a) Indicar os esforços solicitantes na seção transversal passando pelo ponto $P$, em função dos parâmetros $F$, $L$ e $\beta$ (indicar magnitude, direção e sentido dos esforços solicitantes existentes); b) Indicar em um elemento infinitesimal 3D, com lados paralelos aos eixos $xyz$, o estado de tensões existente no ponto $P$; c) Determinar o tensor das tensões e o tensor das deformações para o ponto $P$, escritos na base $b$; d) Determinar o valor da força $F$; e) O extensômetro utilizado poderia ser colado de forma a permitir uma melhor leitura (ou seja, de forma a proporcionar um valor maior do alongamento)? Se sim, qual seria o valor do ângulo $\theta$, medido com relação ao plano horizontal, capaz de proporcionar tal leitura? E qual seria o valor da leitura neste caso para o mesmo valor da força $F$ obtido no item anterior? Dados adicionais: $L$ = 1000 mm, $E$ = 210 GPa, ν = 0,3. <em>(O original escreve "A = (1,2L, 0, 0,5L)" para o terceiro ponto; pelo contexto é C.)</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 10):</strong> ver o PDF oficial, Lista 4, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Encadeamento completo da P1: <strong>esforços</strong> (Lista 1) → <strong>tensões no ponto</strong> (Lista 2) → <strong>deformações por Hooke</strong> → <strong>leitura do extensômetro</strong>. Como tudo é linear em $F$, faz-se a conta para $F = 1$ kN e escala-se.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$I = \frac{\pi}{64}(60^4 - 50^4) = 329\,376$ mm⁴, $I_p = 2I$; $R = 27{,}5$ mm, $t = 5$ mm (parede); $G = 80{,}8$ GPa. P está na face $+z$ do tubo AB, a 0,2L do engaste.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$F$ a partir de $\varepsilon(30°) = -263\mu$; melhor $\theta$ = direção principal de maior |ε| no plano da superfície.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p>$\vec M = \vec r\times\vec F$ com $\vec r = C - P_{seção} = (L;\ 0;\ 0{,}5L)$; $\sigma = M_yz/I$; $\tau_T = TR_e/I_p$; $\tau_V \approx V/\pi Rt$ (2V/A, tubo fino); $\varepsilon_\theta$ (aula 10 p.49).</p></div>
+    <div class="step" data-n="5"><h4>Esforços e tensões (por kN)</h4>
+      <div class="math-box">$$\vec M = \left(\tfrac{FL\sin\beta}{2};\ -FL\cos\beta;\ -FL\sin\beta\right),\quad \vec V = (0;\ -F\sin\beta;\ F\cos\beta)$$
+      $$\sigma_x = -\frac{FL\cos\beta\cdot30}{I} = -45{,}54\qquad \tau_{xy} = -\left(\frac{FL\sin\beta}{2}\cdot\frac{30}{I_p} + \frac{F\sin\beta}{\pi Rt}\right) = -(19{,}72 + 2{,}00) = -21{,}72\ \text{MPa}$$</div>
+      <p>Em P (face $+z$), $M_z$ não gera tensão (P está na linha neutra dele) e $V_z$ não gera cisalhamento no plano $xy$. Só $M_y$ (flexão), $M_x$ (torção) e $V_y$ (cortante) contam.</p></div>
+    <div class="step" data-n="6"><h4>Deformações e leitura</h4>
+      <div class="math-box">$$\varepsilon_x = -216{,}86\mu,\quad \varepsilon_y = \varepsilon_z = +65{,}06\mu,\quad \frac{\gamma_{xy}}{2} = -134{,}46\mu\quad(\text{por kN})$$
+      $$\varepsilon(30°) = -216{,}86\cdot0{,}75 + 65{,}06\cdot0{,}25 - 268{,}9\cdot0{,}433 = -262{,}8\mu/\text{kN}\ \Rightarrow\ F = \frac{-263}{-262{,}8} = 1{,}00\ \text{kN}$$
+      $$\text{principais no plano: } -75{,}9 \pm 194{,}8\ \Rightarrow\ \varepsilon_{mín} = -270{,}7\mu\ \text{a}\ \theta = 21{,}8°$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> esforços e tensores como acima; $F \approx 1{,}00$ kN; melhor orientação $\theta \approx 21{,}8°$, com leitura $\approx -271\mu$. <span class="badge badge-ok">bate com a lista</span></div>
+      <ul><li>"Melhor" = maior |leitura| = mais sensibilidade para o mesmo $F$. É a direção principal de maior módulo no plano da superfície (algoritmo A6, aula 10 Extra).</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> $\varepsilon_y = -\nu\varepsilon_x$ entra na leitura inclinada: sem ela, o resultado muda cerca de 6%.</li></ul></div>
+  </article>
+<article class="ex pivo" id="l4-ex11">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · Complementar 4 · Pivô 18 da P1</div>
+      <h3 id="l4-ex11-h" data-nav="L4 compl.4 · roseta a 60° + critérios" data-pivo>Roseta a 60°: das leituras ao fator de segurança</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">D3</span><span class="chip">D4</span><span class="chip">T2</span><span class="chip">T5</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.6)</span>
+      4) Para se determinar o estado de tensão em um dado ponto de um elemento de máquina foi utilizada uma roseta a 60º, conforme ilustra a figura a seguir. Após a aplicação do carregamento, as leituras obtidas pelos extensômetros $a$, $b$ e $c$ foram, respectivamente: $\varepsilon_a = 60\mu$, $\varepsilon_b = 135\mu$, $\varepsilon_c = 264\mu$. Sabendo-se que tal elemento de máquina é feito de aço e admitindo-se que o material tenha comportamento elástico-linear com constantes elásticas dadas por $E$ = 200 GPa e ν = 0,3, determine: a) o tensor das deformações e o tensor das tensões no ponto estudado (utilize o sistema de eixos $Oxyz$ indicado na figura); b) as tensões principais neste ponto (apresente os resultados em MPa); c) o coeficiente de segurança com relação ao início de escoamento no ponto utilizando: i) o critério de Tresca; ii) o critério de von Mises. Obs: A tensão de escoamento do aço utilizado é $\sigma_e$ = 250MPa.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 11):</strong> ver o PDF oficial, Lista 4, p. 6 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Superfície livre (EPT em tensões), três leituras ⇒ $\varepsilon_x$, $\varepsilon_y$, $\gamma_{xy}$. Depois, Hooke → tensões → principais → critérios (algoritmo A5 da aula 10).</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>a a 0°, b a 60°, c a 120°; $E = 200$ GPa, $\nu = 0{,}3$, $G = 76{,}9$ GPa; $\sigma_e = 250$ MPa.</p></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$[E]$, $[T]$, principais, $FS$ por Tresca e von Mises.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><p>$\varepsilon_\theta$ (aula 10 p.49); EPT: $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y)$, $\tau = G\gamma$; $\varepsilon_z = -\frac{\nu}{1-\nu}(\varepsilon_x + \varepsilon_y)$.</p></div>
+    <div class="step" data-n="5"><h4>Deformações</h4>
+      <div class="math-box">$$\varepsilon_x = 60\qquad \varepsilon_b + \varepsilon_c = \frac{\varepsilon_x}{2} + \frac32\varepsilon_y = 399\ \Rightarrow\ \varepsilon_y = 246\qquad \varepsilon_b - \varepsilon_c = \frac{\sqrt3}{2}\gamma_{xy} = -129\ \Rightarrow\ \gamma_{xy} = -148{,}96\ \mu$$
+      $$\varepsilon_z = -\frac{0{,}3}{0{,}7}(60 + 246) = -131{,}1\mu\qquad [E] = \begin{bmatrix}60&-74{,}48&0\\-74{,}48&246&0\\0&0&-131{,}1\end{bmatrix}\mu$$</div></div>
+    <div class="step" data-n="6"><h4>Tensões e critérios</h4>
+      <div class="math-box">$$\sigma_x = 29{,}41,\quad \sigma_y = 58{,}02,\quad \tau_{xy} = -11{,}46\ \text{MPa}\qquad \sigma_{1,2} = 43{,}72\pm18{,}33 = 62{,}04;\ 25{,}38,\quad \sigma_3 = 0$$
+      $$FS_{Tresca} = \frac{250}{62{,}04 - 0} = 4{,}03\qquad \sigma_{vM} = \sqrt{62{,}04^2 - 62{,}04\cdot25{,}38 + 25{,}38^2} = 54{,}0\ \Rightarrow\ FS_{vM} = 4{,}63$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> principais 62,0 / 25,4 / 0 MPa; $FS_{Tresca} = 4{,}03$; $FS_{vM} = 4{,}63$. Sem gabarito na lista (conferido em Python).</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $\sigma = E\varepsilon$ direto: em estado biaxial, é preciso a Hooke do EPT (com $1 - \nu^2$).</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer $\sigma_3 = 0$ no Tresca: aqui as duas principais do plano são positivas, e $\tau_{máx} = \sigma_1/2$.</li></ul></div>
+  </article>
+<h3 class="sub" id="t08-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="l4-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · 7.7-18 · ver <a href="08-extensometros-e-hooke.html#l4-ex1-h">L4 7.7-17</a></div><h3 id="l4-ex2-h" data-nav="L4 7.7-18 · força inclinada na viga">Força inclinada numa viga medida por extensômetros na LN</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.1)</span>7.7-18. Uma viga engastada, de seção transversal retangular (largura $b$ = 25mm, altura $h$ = 100 mm), é carregada por uma força $P$ que age à meia altura da viga e está inclinada em um ângulo $\alpha$ em relação à vertical (vide figura). Dois extensômetros são colados no ponto C, que também está à meia altura da viga. O extensômetro A mede a deformação na direção horizontal e o extensômetro B mede a deformação em um ângulo $\beta = 60°$ em relação à horizontal. As deformações medidas são $\varepsilon_a = 125 \times 10^{-6}$ e $\varepsilon_b = -375 \times 10^{-6}$. Determine a força $P$ e o ângulo $\alpha$ admitindo que o material da viga é um aço com $E$ = 200 GPa e ν = 1/3.<br>Resp.: $P$ = 125 kN, $\alpha = 30°$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 2):</strong> ver o PDF oficial, Lista 4, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> C está na linha neutra: a flexão não gera $\sigma$ ali. Só $N = P\sin\alpha$ (tração) e $\tau = 1{,}5V/A$ com $V = P\cos\alpha$. $\sigma_x = E\varepsilon_a = 25$ MPa ⇒ $P\sin\alpha = 62{,}5$ kN. $\varepsilon_b = 0{,}25\cdot125 + 0{,}75(-41{,}7) + 0{,}433\gamma = -375$ ⇒ $\gamma = -866\mu$, $\tau = G\gamma = -64{,}95$ MPa ⇒ $P\cos\alpha = 108{,}3$ kN.</p>
+    <div class="answer"><strong>Resposta:</strong> $P = 125$ kN, $\alpha = 30°$. <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+<article class="ex" id="l4-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · 7.7-22 · ver <a href="08-extensometros-e-hooke.html#l4-ex11-h">L4 compl.4</a></div><h3 id="l4-ex3-h" data-nav="L4 7.7-22 · roseta 0/40/140">Roseta com ramos a 40°</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.2)</span>7.7-22. As deformações na superfície de um dispositivo experimental feito em alumínio ($E$ = 70 GPa, ν = 0,33) e testado em um ônibus espacial foram medidas por meio de extensômetros orientados conforme a figura. As deformações medidas foram $\varepsilon_a = 1100 \times 10^{-6}$, $\varepsilon_b = 1496 \times 10^{-6}$ e $\varepsilon_c = -39{,}44 \times 10^{-6}$. Qual o valor da tensão $\sigma_x$?<br>Resp.: $\sigma_x$ = 91,6 MPa.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 3):</strong> ver o PDF oficial, Lista 4, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> B a 40° e C a 140°: somando as duas leituras o termo de $\gamma$ cancela ⇒ $\varepsilon_y = \frac{(\varepsilon_b + \varepsilon_c)/2 - \varepsilon_x\cos^240°}{\sin^240°} = 200{,}3\mu$. $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_y) = 91{,}6$ MPa.</p>
+    <div class="answer"><strong>Resposta:</strong> $\sigma_x = 91{,}6$ MPa. <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+<article class="ex" id="l4-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · 8.2-6 · ver <a href="08-extensometros-e-hooke.html#l4-ex1-h">L4 7.7-17</a></div><h3 id="l4-ex4-h" data-nav="L4 8.2-6 · verniz frágil">Esfera com verniz frágil</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.2)</span>8.2-6. Um vaso de pressão esférico de aço, com diâmetro de 480 mm e espessura de 8,0 mm, é coberto com um verniz frágil que trinca quando a deformação excede $150 \times 10^{-6}$. Qual o valor da pressão interna que faz o verniz desenvolver trincas?<br>Resp.: 2,93 MPa</div>
+    <p><strong>Roteiro:</strong> estado biaxial igual, $\sigma_1 = \sigma_2 = \sigma$ ⇒ $\varepsilon = \frac{\sigma(1 - \nu)}{E}$. Com $\varepsilon = 150\mu$: $\sigma = \frac{E\varepsilon}{1 - \nu}$ e $p = \frac{2t\sigma}{r}$ ($r = 240$ mm).</p>
+    <div class="callout warn"><span class="co-t">Dado ausente</span><p>A lista não informa $E$ e $\nu$. Com $E = 205$ GPa e $\nu = 0{,}30$ (dados do Gere), $p = 2{,}93$ MPa ✓. Com $E = 200$ GPa, sairia 2,86 MPa.</p></div>
+    <div class="answer"><strong>Resposta:</strong> $p = 2{,}93$ MPa (E = 205 GPa, ν = 0,30). <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+<article class="ex" id="l4-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · 8.3-6 · ver <a href="08-extensometros-e-hooke.html#l4-ex1-h">L4 7.7-17</a></div><h3 id="l4-ex6-h" data-nav="L4 8.3-6 · alarme por extensômetro">Alarme de pressão por extensômetro longitudinal</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.2)</span>8.3-6. Um tanque cilíndrico circular de aço contém um combustível volátil sob pressão. Um extensômetro no ponto A registra a deformação longitudinal no tanque e transmite essa informação à sala de controle. A tensão de cisalhamento admissível na parede do tanque é de 84 MPa e um fator de segurança de 2,5 é exigido. Para qual valor de deformação os operadores devem tomar medidas para reduzir a pressão no tanque? São dados: $E$ = 205 GPa e ν = 0,30.<br>Resp.: $65{,}56 \times 10^{-6}$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 6):</strong> ver o PDF oficial, Lista 4, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $\tau_{máx} = \sigma_c/2 = 84/2{,}5 = 33{,}6$ ⇒ $\sigma_c = 67{,}2$, $\sigma_L = 33{,}6$ MPa. $\varepsilon_L = \frac{\sigma_L - \nu\sigma_c}{E} = \frac{33{,}6 - 20{,}16}{205\,000} = 65{,}56\mu$. Raio e espessura não são necessários: se cancelam.</p>
+    <div class="answer"><strong>Resposta:</strong> $\varepsilon_L = 65{,}56\times10^{-6}$. <span class="badge badge-ok">bate com a lista</span></div>
+  </article>
+<article class="ex" id="l4-ex9">
+    <div class="ex-head"><div><div class="ex-kicker">Lista 4 · Complementar 2 · ver <a href="08-extensometros-e-hooke.html#l4-ex10-h">L4 compl.3</a></div><h3 id="l4-ex9-h" data-nav="L4 compl.2 · orientação do extensômetro">Melhor e piores orientações de um extensômetro num eixo</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.4–5)</span>2) A figura a seguir mostra a seção de um eixo circular maciço de raio $r$ que é parte integrante de uma estrutura que recebe a ação de vários esforços, todos em função de uma força $P$, cujo valor não é conhecido a priori. Para a determinação desta força $P$ será utilizado um extensômetro colado sobre a superfície lateral do eixo exatamente sobre o ponto A de coordenadas A = (0, 0, $r$), segundo os eixos $Oxyz$ indicados. Sabe-se que na seção transversal a que pertence o ponto A atuam vários esforços solicitantes, a saber: $M_x = 4PL$, $M_y = 2PL$, $M_z = -3PL$, $N = 200P$, $V_z = 50P$, onde o sinal positivo indica que o esforço considerado (força ou momento) tem o mesmo sentido do respectivo eixo, e, se o sinal for negativo, o sentido do esforço é oposto ao do eixo (considerando sempre a face de orientação positiva). Determine: a) o tensor das tensões no ponto A, expresso na base $b = (\vec{e}_x, \vec{e}_y, \vec{e}_z)$; b) o tensor das deformações no mesmo ponto A, expresso na base $b = (\vec{e}_x, \vec{e}_y, \vec{e}_z)$; c) as deformações principais que ocorrem no ponto A; d) o valor do ângulo θ, medido com relação à geratriz do eixo, para o qual teremos a melhor orientação que pode ser dada ao extensômetro colado em A para a determinação da força $P$ (faça um desenho, como ilustra a figura 2 abaixo, indicando o posicionamento do extensômetro neste caso). Obs: considerar $-90° \le \theta &lt; 90°$; e) as duas piores orientações que poderiam ser dadas ao extensômetro colado em A (faça um desenho, como na figura 2, indicando o posicionamento do extensômetro nestes casos). Dados: $E$, $l$, $r$, $\nu$ = 0,30, $L/r$ = 100. <em>(O "$l$" minúsculo é, pelo contexto, o $L$ dos esforços.)</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 9):</strong> ver o PDF oficial, Lista 4, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> em A = (0, 0, r): $M_z$ não gera tensão (A está na linha neutra dele), $V_z$ não gera cisalhamento (A é fibra extrema em $z$). Ficam $\sigma_x = \frac{N}{\pi r^2} + \frac{M_yr}{\pi r^4/4} = (200 + 8L/r)\frac{P}{\pi r^2} = 1000\frac{P}{\pi r^2}$ e a torção $\tau_{xy} = -\frac{M_xr}{\pi r^4/2} = -800\frac{P}{\pi r^2}$ (sinal: torque em $+x$, ponto em $+z$ ⇒ cisalhamento no sentido $-y$).</p>
+    <div class="math-box">$$[E]\cdot\frac{\pi r^2E}{P} = \begin{bmatrix}1000&-1040&0\\-1040&-300&0\\0&0&-300\end{bmatrix}\ \Rightarrow\ \varepsilon = 1576{,}4;\ -300;\ -876{,}4\ \left(\times\frac{P}{\pi r^2E}\right)$$</div>
+    <div class="answer"><strong>Respostas:</strong> melhor orientação $\theta \approx -29{,}0°$ (direção de $\varepsilon_1$); piores ($\varepsilon = 0$, leitura nula) $\theta \approx -82{,}3°$ e $\theta \approx +24{,}3°$. Sem gabarito na lista (conferido em Python; o sinal do ângulo depende do sentido do torque lido na figura).</div>
+  </article>
+
+</section>
+
+<section class="chapter" id="t08-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t08-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo"><div class="r-grid">
+          <div class="r-item"><b>Extensômetro.</b> <span class="path">$\varepsilon_\theta=\varepsilon_x\cos^2\theta+\varepsilon_y\sin^2\theta+\gamma\sin\theta\cos\theta$</span>. 0/45/90: $\gamma=2\varepsilon_{45}-\varepsilon_0-\varepsilon_{90}$.</div>
+          <div class="r-item"><b>Hooke.</b> <span class="path">$\varepsilon_x=[\sigma_x-\nu(\sigma_y+\sigma_z)]/E$; $\gamma=\tau/G$; $G=E/2(1+\nu)$</span>. EPT: $\sigma_x=\frac{E}{1-\nu^2}(\varepsilon_x+\nu\varepsilon_y)$.</div>
+          <div class="r-item"><b>Superfície livre.</b> $\sigma_z=0$, mas $\varepsilon_z=-\frac{\nu}{1-\nu}(\varepsilon_x+\varepsilon_y)\ne0$.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="07-deformacoes.html"><small>← anterior</small>07 · Deformações num ponto</a><a class="prox" href="09-trabalho-e-energia.html"><small>próximo →</small>09 · Trabalho, energia e P.T.E.</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3211 · Mecânica dos Sólidos II (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3211-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
