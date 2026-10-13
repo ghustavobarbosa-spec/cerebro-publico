@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notas e frequência — Cérebro</title>
+<meta name="description" content="Acompanhamento de notas e frequência do 2º semestre de 2026: nota mínima no que falta, situação de cada disciplina e diário de faltas. Os dados ficam só no seu navegador.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #6B6B6B;
+  --accent: #00B131; --accent-text: #007A22; --accent-dim: rgba(0, 177, 49, 0.12);
+  --warn: #92400E; --warn-dim: rgba(245, 158, 11, 0.18); --warn-line: #D97706;
+  --risk: #B91C1C; --risk-dim: rgba(220, 38, 38, 0.12);
+  --border: #E0E0E0; --border-strong: #C4C4C4;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05);
+  --c-fab: #D97706; --c-sol: #2563EB; --c-est: #00B131; --c-flu: #0891B2; --c-mod: #9333EA; --c-ele: #DB2777; --c-lab: #6B6B6B;
+  --radius: 8px; --radius-lg: 16px; --radius-full: 9999px;
+  --motion-fast: 240ms;
+}
+html[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-muted: #3A3A3A;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #9A9A9A;
+  --accent: #1BD60B; --accent-text: #1BD60B; --accent-dim: rgba(27, 214, 11, 0.2);
+  --warn: #FBBF24; --warn-dim: rgba(251, 191, 36, 0.18); --warn-line: #FBBF24;
+  --risk: #F87171; --risk-dim: rgba(248, 113, 113, 0.16);
+  --border: #4F4F4F; --border-strong: #616161;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+  --c-fab: #F59E0B; --c-sol: #60A5FA; --c-est: #1BD60B; --c-flu: #22D3EE; --c-mod: #C084FC; --c-ele: #F472B6; --c-lab: #A3A3A3;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-body); background: var(--bg); color: var(--text);
+  line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, input, select { font-family: inherit; font-size: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.container { max-width: 1040px; margin: 0 auto; padding: 0 24px 96px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ===== Cabeçalho (igual às outras páginas) ===== */
+.site-header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 20; }
+.site-header .inner { max-width: 1040px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 9px; }
+.brand:hover { text-decoration: none; }
+.brand .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
+.nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.nav a:hover { color: var(--text); text-decoration: none; }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+.theme-btn { font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 16px; min-height: 40px; cursor: pointer; }
+.theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+/* ===== Botões e pílulas ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 0 16px; border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); font-size: 13.5px; font-weight: 600; cursor: pointer; color: var(--text); text-decoration: none; }
+.btn:hover { border-color: var(--border-strong); text-decoration: none; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #0B0B0B; }
+.btn.primary:hover { filter: brightness(1.05); }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--risk); }
+.btn.sm { min-height: 34px; padding: 0 12px; font-size: 12.5px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: var(--radius-full); white-space: nowrap; background: var(--surface-muted); color: var(--text-secondary); }
+.pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.risco { background: var(--risk-dim); color: var(--risk); }
+.pill.emdia { background: var(--accent-dim); color: var(--accent-text); }
+.pill.aprovado { background: var(--accent); color: #0B0B0B; }
+.pill.atencao { background: var(--warn-dim); color: var(--warn); }
+.pill.semtotal { background: var(--surface-muted); color: var(--text-muted); }
+button.conf { cursor: pointer; }
+button.conf:hover { filter: brightness(1.1); }
+.conf { border: 0; cursor: default; font-family: inherit; display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: var(--radius-full); background: var(--warn-dim); color: var(--warn); white-space: nowrap; }
+.badge { font-size: 12px; font-weight: 600; white-space: nowrap; padding: 3px 10px; border-radius: var(--radius-full); background: var(--surface-muted); color: var(--text-secondary); }
+.badge.soon { background: var(--warn-dim); color: var(--warn); }
+.badge.today { background: var(--accent); color: #0B0B0B; }
+
+/* ===== Topo da página ===== */
+.hero { padding: 40px 0 20px; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: end; }
+.eyebrow { display: inline-block; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-text); background: var(--accent-dim); border-radius: var(--radius-full); padding: 5px 13px; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -0.025em; margin-bottom: 10px; }
+.hero p { font-size: 15.5px; color: var(--text-secondary); max-width: 560px; }
+
+.data-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.data-card .k { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
+.data-card .k svg { flex: none; color: var(--accent-text); }
+.data-card .sub { font-size: 12.5px; color: var(--text-muted); margin: 4px 0 12px; }
+.data-card .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.menu { position: relative; }
+.menu > summary { list-style: none; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu-list { position: absolute; right: 0; top: calc(100% + 6px); z-index: 15; min-width: 250px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-md); padding: 6px; }
+.menu-list button { display: block; width: 100%; text-align: left; background: none; border: 0; border-radius: 6px; padding: 9px 12px; font-size: 13.5px; cursor: pointer; }
+.menu-list button:hover { background: var(--surface-muted); }
+.menu-list button small { display: block; color: var(--text-muted); font-size: 12px; }
+.menu-list hr { border: 0; border-top: 1px solid var(--border); margin: 6px 0; }
+
+/* ===== Resumo + abas ===== */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 2fr); gap: 10px; margin: 8px 0 18px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+.stat b { display: block; font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.stat span { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+.stat.risco b { color: var(--risk); }
+.stat.next { display: flex; flex-direction: column; justify-content: center; border-top: 3px solid var(--c, var(--accent)); }
+.stat.next .t { font-weight: 600; font-size: 14px; }
+
+.bar-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; position: sticky; top: var(--hdr, 57px); z-index: 10; background: var(--bg); padding: 10px 0; }
+.seg { display: inline-flex; background: var(--surface-muted); border-radius: var(--radius-full); padding: 4px; gap: 2px; }
+.seg a, .seg button { border: 0; background: none; border-radius: var(--radius-full); padding: 0 16px; min-height: 36px; display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--text-secondary); cursor: pointer; }
+.seg a:hover, .seg button:hover { color: var(--text); text-decoration: none; }
+.seg [aria-current="page"], .seg [aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+.seg .n { font-size: 11px; font-weight: 700; background: var(--warn-dim); color: var(--warn); border-radius: var(--radius-full); padding: 0 7px; }
+.seg.small a, .seg.small button { min-height: 30px; padding: 0 12px; font-size: 12.5px; }
+.sort { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); }
+
+/* ===== Banner de primeiro uso ===== */
+.empty-banner { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--surface); border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 16px; }
+.empty-banner p { font-size: 14px; color: var(--text-secondary); max-width: 620px; }
+.empty-banner b { color: var(--text); }
+
+/* ===== Cartões das disciplinas ===== */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.card { position: relative; background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--c); border-radius: var(--radius-lg); padding: 16px 18px 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; transition: border-color var(--motion-fast), transform var(--motion-fast); }
+.card:hover { border-color: var(--border-strong); border-top-color: var(--c); transform: translateY(-1px); }
+.card.risco { box-shadow: inset 0 0 0 1px var(--risk-dim), var(--shadow-sm); }
+.card .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.card .cod { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.04em; display: flex; align-items: center; gap: 7px; }
+.card .cod i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.card h3 { font-size: 18px; letter-spacing: -0.01em; }
+.card h3 a { color: var(--text); }
+.card h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.card h3 a:hover { text-decoration: none; }
+.big { display: flex; align-items: baseline; gap: 10px; }
+.big b { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+.big span { font-size: 12.5px; color: var(--text-secondary); line-height: 1.35; }
+.big.risco b { color: var(--risk); }
+.big.ok b { color: var(--accent-text); }
+.mini { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+.mini dt { font-size: 11.5px; color: var(--text-muted); }
+.mini dd { font-weight: 600; font-size: 14px; }
+.mini dd small { font-weight: 500; color: var(--text-muted); font-size: 12px; }
+.track { height: 6px; background: var(--surface-muted); border-radius: var(--radius-full); overflow: hidden; margin-top: 5px; position: relative; }
+.track i { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+.track.warn i { background: var(--warn-line); }
+.track.risk i { background: var(--risk); }
+.card .foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--text-secondary); }
+.card .foot .addf { position: relative; z-index: 2; }
+
+/* ===== Detalhe da disciplina ===== */
+.crumb { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13.5px; padding: 6px 0 4px; }
+.crumb .pn { display: flex; gap: 6px; }
+.dhead { padding: 14px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+.dhead .cod { font-size: 12.5px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+.dhead .cod i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.dhead h2 { font-size: clamp(24px, 4.5vw, 32px); letter-spacing: -0.02em; margin: 6px 0 10px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; }
+.regra { display: inline-block; font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 13.5px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--c); border-radius: var(--radius); padding: 7px 12px; margin-bottom: 8px; }
+.dhead p { font-size: 13.5px; color: var(--text-secondary); max-width: 700px; }
+.dhead .links { margin-top: 8px; font-size: 13.5px; font-weight: 600; }
+
+.dgrid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: start; }
+.blk { margin-bottom: 26px; }
+.blk > h3 { font-size: 16px; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+.blk > .hint { font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px; }
+.frow { display: grid; grid-template-columns: minmax(0, 1fr) auto 96px; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.frow:first-of-type { border-top: 1px solid var(--border); }
+.frow label { display: flex; flex-direction: column; cursor: pointer; }
+.frow label b { font-weight: 600; font-size: 14.5px; }
+.frow label small { font-size: 12px; color: var(--text-muted); }
+.estado { font-size: 11.5px; font-weight: 600; white-space: nowrap; color: var(--text-muted); }
+.estado.aguard { color: var(--warn); background: var(--warn-dim); padding: 2px 9px; border-radius: var(--radius-full); }
+.estado.via { color: var(--accent-text); background: var(--accent-dim); padding: 2px 9px; border-radius: var(--radius-full); }
+.nota { width: 100%; min-height: 44px; text-align: center; font-family: var(--font-display); font-size: 20px; font-weight: 700; background: var(--surface); border: 1.5px dashed var(--border-strong); border-radius: var(--radius); padding: 4px 8px; }
+.nota::placeholder { color: var(--text-muted); font-weight: 500; }
+.nota:not(:placeholder-shown) { border-style: solid; border-color: var(--border); }
+.nota:focus { border-color: var(--accent); border-style: solid; outline: none; box-shadow: 0 0 0 3px var(--accent-dim); }
+.nota.bad { border-color: var(--risk); box-shadow: 0 0 0 3px var(--risk-dim); }
+.nota.small { min-height: 40px; font-size: 17px; }
+.subbox { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1fr) 120px 96px; gap: 12px; align-items: center; }
+.subbox .t b { font-weight: 600; font-size: 14.5px; display: block; }
+.subbox .t small { font-size: 12px; color: var(--text-muted); }
+.subbox select, .sel { min-height: 44px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 0 10px; font-size: 13.5px; width: 100%; }
+details.rec { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 0 16px; }
+details.rec summary { cursor: pointer; padding: 13px 0; font-weight: 600; font-size: 14px; }
+details.rec .in { display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: 12px; align-items: center; padding-bottom: 14px; }
+details.rec .in small { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; }
+.gridn { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.gridn label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); font-weight: 600; text-align: center; }
+
+.painel { position: sticky; top: calc(var(--hdr, 57px) + 12px); display: flex; flex-direction: column; gap: 12px; }
+.pcard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.pcard h4 { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.pcard.res { border-top: 3px solid var(--c); }
+.pcard .big b { font-size: 48px; }
+.motivos { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.motivos li { font-size: 13px; color: var(--text-secondary); padding-left: 16px; position: relative; }
+.motivos li::before { content: '→'; position: absolute; left: 0; color: var(--text-muted); }
+.kv { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; padding: 6px 0; border-top: 1px solid var(--border); }
+.kv:first-of-type { border-top: 0; }
+.kv span { color: var(--text-secondary); }
+.kv b { font-weight: 600; }
+.ese label { display: block; font-size: 13.5px; color: var(--text-secondary); }
+.ese output { font-family: var(--font-display); font-weight: 800; color: var(--text); font-size: 16px; }
+.ese input[type=range] { width: 100%; accent-color: var(--accent); margin: 10px 0 6px; height: 28px; }
+.ese .out { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.ese .out b { font-family: var(--font-display); font-size: 28px; font-weight: 800; }
+.ese .out b.ok { color: var(--accent-text); }
+.ese .out b.no { color: var(--risk); }
+.conf-box { background: var(--warn-dim); border-radius: var(--radius-lg); padding: 14px 16px; }
+.conf-box h4 { color: var(--warn); }
+.conf-box ul { padding-left: 18px; font-size: 13px; color: var(--text-secondary); }
+.conf-box li + li { margin-top: 4px; }
+
+.mbar { display: none; }
+body.det .hero, body.det .stats { display: none; }
+body.det .bar-nav { padding-top: 16px; }
+
+/* ===== Presença ===== */
+.pintro { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 14px; max-width: 760px; }
+.plist { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.prow { display: grid; grid-template-columns: minmax(150px, 1.3fr) 150px minmax(150px, 1.6fr) 130px auto; gap: 14px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--border); }
+.prow:first-child { border-top: 0; }
+.prow.head { font-size: 11.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 10px; padding-bottom: 10px; background: var(--surface-muted); }
+.pname { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14px; min-width: 0; }
+.pname i { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.pname a { color: var(--text); }
+.pname small { display: block; font-weight: 400; font-size: 11.5px; color: var(--text-muted); }
+.ptot { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ptot input { width: 64px; min-height: 38px; text-align: center; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-weight: 600; }
+.ptot input:placeholder-shown { border-style: dashed; border-color: var(--warn-line); }
+.pbar .txt { font-size: 13px; }
+.pbar .txt b { font-weight: 600; }
+.diario { margin-top: 30px; }
+.diario h3 { font-size: 18px; margin-bottom: 4px; }
+.fform { display: grid; grid-template-columns: 150px minmax(150px, 1fr) 110px auto minmax(140px, 1.2fr) auto; gap: 10px; align-items: end; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; margin: 12px 0 14px; }
+.fform label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.fform input[type=date], .fform input[type=text], .fform select { min-height: 42px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 0 10px; font-size: 13.5px; font-weight: 400; color: var(--text); }
+.fform .chk { flex-direction: row; align-items: center; gap: 8px; min-height: 42px; color: var(--text-secondary); font-weight: 500; font-size: 13px; }
+.fform .chk input { width: 18px; height: 18px; accent-color: var(--accent); }
+.flog { list-style: none; }
+.flog li { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+.flog .dt { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.flog .dt small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 11.5px; color: var(--text-muted); }
+.flog .what { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.flog .what i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.flog .what small { color: var(--text-muted); }
+.flog .rm { background: none; border: 0; color: var(--text-muted); cursor: pointer; min-width: 40px; min-height: 40px; border-radius: 50%; font-size: 18px; }
+.flog .rm:hover { background: var(--risk-dim); color: var(--risk); }
+.vazio { color: var(--text-muted); font-size: 13.5px; padding: 14px 0; }
+
+.note { margin-top: 40px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 16px 20px; }
+.note h3 { font-size: 15px; margin-bottom: 6px; }
+.note p { font-size: 13.5px; color: var(--text-secondary); }
+.note p + p { margin-top: 6px; }
+
+/* ===== Diálogo e aviso ===== */
+dialog { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); color: var(--text); padding: 0; width: min(560px, calc(100vw - 32px)); box-shadow: var(--shadow-md); margin: auto; }
+dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
+dialog .dc { padding: 20px 22px; max-height: 70vh; overflow: auto; }
+dialog h3 { font-size: 20px; margin-bottom: 8px; }
+dialog p { font-size: 14px; color: var(--text-secondary); }
+dialog p + p { margin-top: 8px; }
+dialog .da { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; padding: 14px 22px; border-top: 1px solid var(--border); }
+dialog table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+dialog td, dialog th { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--border); vertical-align: top; }
+dialog th { font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+dialog input.link { width: 100%; min-height: 40px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-muted); padding: 0 10px; font-size: 12.5px; margin-top: 12px; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 40; background: var(--text); color: var(--bg); border-radius: var(--radius-full); padding: 8px 8px 8px 18px; display: flex; align-items: center; gap: 12px; font-size: 13.5px; font-weight: 500; box-shadow: var(--shadow-md); transition: opacity 200ms, transform 200ms; max-width: calc(100vw - 32px); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast button { background: none; border: 0; color: var(--bg); font-weight: 700; text-decoration: underline; cursor: pointer; padding: 6px 10px; min-height: 34px; }
+.toast button:empty { display: none; }
+
+.site-footer { border-top: 1px solid var(--border); margin-top: 56px; padding: 26px 0 40px; font-size: 13px; color: var(--text-muted); }
+.site-footer .inner { max-width: 1040px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+/* ===== Telas menores ===== */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; align-items: start; }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stat.next { grid-column: 1 / -1; }
+  .dgrid { grid-template-columns: 1fr; }
+  .painel { position: static; }
+  .prow { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; }
+  .prow.head { display: none; }
+  .prow .ptot { grid-column: 1; grid-row: 2; }
+  .prow .pbar { grid-column: 1 / -1; grid-row: 3; }
+  .prow .psit { grid-column: 2; grid-row: 1; justify-self: end; }
+  .prow .padd { grid-column: 2; grid-row: 2; justify-self: end; }
+  .fform { grid-template-columns: 1fr 1fr; }
+  .fform .full { grid-column: 1 / -1; }
+  .mbar { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 30; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface); border: 1px solid var(--border-strong); border-left: 4px solid var(--c); border-radius: var(--radius-lg); padding: 10px 14px; box-shadow: var(--shadow-md); }
+  .mbar b { font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+  .mbar span { font-size: 12px; color: var(--text-muted); display: block; line-height: 1.2; }
+  body.det .container { padding-bottom: 120px; }
+  body.det .toast { bottom: 88px; }
+}
+@media (max-width: 560px) {
+  .container { padding: 0 16px 80px; }
+  .site-header .inner { padding: 8px 16px; }
+  .nav { order: 3; width: 100%; gap: 18px; overflow-x: auto; scrollbar-width: none; }
+  .hero { padding-top: 22px; gap: 14px; }
+  .hero h1 { margin-bottom: 0; }
+  .hero p, .data-card .sub { display: none; }
+  .data-card { padding: 12px 14px; }
+  .data-card .k { margin-bottom: 10px; font-size: 13px; }
+  .stat { padding: 12px 12px; }
+  .stat b { font-size: 26px; }
+  .cards { grid-template-columns: 1fr; }
+  .frow { grid-template-columns: minmax(0, 1fr) 88px; }
+  .frow .estado { grid-column: 1; grid-row: 2; justify-self: start; margin-top: -6px; }
+  .frow .nota { grid-row: 1 / span 2; grid-column: 2; }
+  .subbox { grid-template-columns: 1fr 1fr; }
+  .subbox .t { grid-column: 1 / -1; }
+  .gridn { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .fform { grid-template-columns: 1fr; }
+  .flog li { grid-template-columns: 70px minmax(0, 1fr) auto; }
+}
+@media print {
+  .site-header, .bar-nav, .data-card, .mbar, .toast, .addf, .site-footer { display: none !important; }
+  body { background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="hdr">
+  <div class="inner">
+    <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./">Disciplinas</a>
+      <a href="trajetoria.html">Trajetória</a>
+      <a href="cronograma.html">Cronograma</a>
+      <a href="notas.html" aria-current="page">Notas</a>
+      <a href="estrutura.html">Estrutura</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">2º semestre de 2026</span>
+      <h1>Notas e frequência</h1>
+      <p>Quanto falta para fechar 5,0 em cada disciplina, quantas aulas ainda dá para perder e o que vem a seguir. Lance uma nota ou uma falta e tudo se recalcula na hora.</p>
+    </div>
+    <div class="data-card">
+      <div class="k">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Seus dados ficam só neste navegador
+      </div>
+      <div class="sub" id="salvo">Nada é enviado ao site.</div>
+      <div class="acts">
+        <button class="btn primary sm" type="button" data-acao="importar-planilha">Importar planilha</button>
+        <details class="menu" id="menuDados">
+          <summary class="btn sm" role="button">Backup e aparelhos</summary>
+          <div class="menu-list">
+            <button type="button" data-acao="exportar">Baixar backup<small>arquivo .json com notas e faltas</small></button>
+            <button type="button" data-acao="restaurar">Restaurar backup<small>de um arquivo .json</small></button>
+            <button type="button" data-acao="link">Levar para outro aparelho<small>gera um link com seus dados</small></button>
+            <hr>
+            <button type="button" data-acao="apagar" class="danger">Apagar meus dados<small>deste navegador</small></button>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <div class="sr" id="live" aria-live="polite"></div>
+
+  <div class="bar-nav" id="barNav">
+    <nav class="seg" aria-label="Seções">
+      <a href="#/" id="tabDisc">Disciplinas</a>
+      <a href="#/presenca" id="tabPres">Presença</a>
+    </nav>
+    <div class="sort" id="sortBox">
+      <span>Ordenar</span>
+      <div class="seg small" role="group" aria-label="Ordenar disciplinas">
+        <button type="button" data-ord="prioridade">Prioridade</button>
+        <button type="button" data-ord="data">Próxima avaliação</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="view"></main>
+
+  <noscript><p class="vazio">Esta página precisa de JavaScript: o cálculo e o armazenamento das notas acontecem no seu navegador.</p></noscript>
+
+  <div class="note">
+    <h3>Como a página calcula</h3>
+    <p><b>Nota mínima</b> é a mesma nota em tudo o que ainda falta (provas, trabalhos, relatórios) para a média fechar 5,0, arredondada para cima. <b>Em risco</b> quer dizer que essa nota passa de 5,0, que a média final ficou abaixo do mínimo ou que as faltas passaram do limite. Nota em branco é nota que ainda não existe: nunca vira zero.</p>
+    <p>As regras vêm dos planos de ensino de cada disciplina. O que ainda não está confirmado aparece em amarelo, com a suposição usada. As notas e as faltas ficam guardadas no armazenamento deste navegador e não saem dele; use o backup para não perdê-las.</p>
+  </div>
+
+</div>
+
+<div class="mbar" id="mbar" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastBtn"></button></div>
+<dialog id="dlg"><div class="dc" id="dlgBody"></div><div class="da" id="dlgAcoes"></div></dialog>
+<input type="file" id="arqPlanilha" accept=".xlsx" hidden>
+<input type="file" id="arqBackup" accept=".json,application/json" hidden>
+
+<footer class="site-footer">
+  <div class="inner">
+    <span>Cérebro · guias de estudo</span>
+    <span>CC BY-NC-SA 4.0</span>
+  </div>
+</footer>
+
+<script src="notas-regras.js"></script>
+<script>
+(function () {
+  'use strict';
+  var N = window.NOTAS, DS = N.DISCIPLINAS, fmt = N.fmt;
+  var CHAVE = 'cerebro-notas-2026-2';
+  var STATUS_TXT = { risco: 'Em risco', emdia: 'Em dia', aprovado: 'Aprovado' };
+  var SIT_TXT = { ok: 'OK', atencao: 'Atenção', reprovado: 'Passou do limite', semtotal: 'Falta o total' };
+  var DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function cor(d) { return 'var(--c-' + d.id + ')'; }
+  function dataCurta(iso) { var p = iso.split('-'), dt = new Date(+p[0], +p[1] - 1, +p[2]); return DIAS[dt.getDay()] + ', ' + p[2] + '/' + p[1]; }
+  function rel(n) { return n === 0 ? 'hoje' : n === 1 ? 'amanhã' : n > 1 ? 'em ' + n + ' dias' : 'há ' + (-n) + (n === -1 ? ' dia' : ' dias'); }
+  function lista(xs) { return xs.length <= 1 ? (xs[0] || '') : xs.slice(0, -1).join(', ') + ' e ' + xs[xs.length - 1]; }
+  function notaTxt(v) { return N.num(v) ? String(Math.round(v * 100) / 100).replace('.', ',') : ''; }
+
+  // ------------------------------------------------------------ armazenamento local
+  function vazio() { return { v: 1, notas: {}, aulas: {}, faltas: [], atualizado: null }; }
+  function carregar() {
+    try { var s = localStorage.getItem(CHAVE); if (s) return normalizar(JSON.parse(s)); } catch (e) {}
+    return vazio();
+  }
+  function normalizar(o) {
+    var d = vazio();
+    if (!o || typeof o !== 'object') return d;
+    if (o.notas && typeof o.notas === 'object') d.notas = o.notas;
+    if (o.aulas && typeof o.aulas === 'object') d.aulas = o.aulas;
+    if (Array.isArray(o.faltas)) d.faltas = o.faltas.filter(function (f) { return f && N.POR_ID[f.disc]; });
+    d.atualizado = o.atualizado || null;
+    return d;
+  }
+  var dados = carregar();
+  var podeSalvar = true;
+  function salvar() {
+    dados.atualizado = new Date().toISOString();
+    try { localStorage.setItem(CHAVE, JSON.stringify(dados)); podeSalvar = true; } catch (e) { podeSalvar = false; }
+    mostrarSalvo();
+  }
+  function mostrarSalvo() {
+    var el = $('salvo');
+    if (!podeSalvar) { el.textContent = 'Este navegador não deixou salvar (janela anônima?). Baixe um backup antes de sair.'; return; }
+    if (!dados.atualizado) { el.textContent = 'Nada é enviado ao site. Nenhum dado lançado ainda.'; return; }
+    var t = new Date(dados.atualizado), hoje = new Date();
+    var quando = t.toDateString() === hoje.toDateString() ? 'hoje às ' + t.toTimeString().slice(0, 5)
+      : t.toLocaleDateString('pt-BR') + ' às ' + t.toTimeString().slice(0, 5);
+    el.textContent = 'Nada é enviado ao site. Última alteração: ' + quando + '.';
+  }
+  function notasDe(id) { if (!dados.notas[id]) dados.notas[id] = {}; return dados.notas[id]; }
+  function temDados() {
+    return dados.faltas.length > 0 || Object.keys(dados.notas).some(function (k) {
+      return Object.keys(dados.notas[k] || {}).some(function (c) { return N.num(dados.notas[k][c]); });
+    });
+  }
+
+  // ------------------------------------------------------------ aviso com "desfazer"
+  var toastT;
+  function avisar(msg, acao, fn) {
+    $('toastMsg').textContent = msg;
+    var b = $('toastBtn'); b.textContent = acao || ''; b.onclick = fn ? function () { fn(); $('toast').classList.remove('on'); } : null;
+    $('toast').classList.add('on');
+    clearTimeout(toastT); toastT = setTimeout(function () { $('toast').classList.remove('on'); }, 6000);
+  }
+
+  // ------------------------------------------------------------ diálogo
+  function dialogo(html, acoes) {
+    $('dlgBody').innerHTML = html;
+    var box = $('dlgAcoes'); box.innerHTML = '';
+    acoes.forEach(function (a) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + (a.cls || ''); b.textContent = a.txt;
+      b.addEventListener('click', function () { if (a.fn && a.fn() === false) return; $('dlg').close(); });
+      box.appendChild(b);
+    });
+    $('dlg').showModal();
+  }
+
+  // ------------------------------------------------------------ faltas
+  function registrarFalta(id, iso, n, just, obs) {
+    var f = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), d: iso || N.hojeISO(), disc: id, n: n || 1, just: !!just, obs: obs || '' };
+    dados.faltas.push(f); salvar();
+    avisar('Falta registrada em ' + N.POR_ID[id].curto + (f.d === N.hojeISO() ? ' hoje' : ' em ' + dataCurta(f.d)) + '.', 'Desfazer', function () { removerFalta(f.id, true); });
+    render();
+  }
+  function removerFalta(fid, quieto) {
+    var i = dados.faltas.findIndex(function (f) { return f.id === fid; });
+    if (i < 0) return;
+    var f = dados.faltas.splice(i, 1)[0]; salvar(); render();
+    if (!quieto) avisar('Falta removida.', 'Desfazer', function () { dados.faltas.push(f); salvar(); render(); });
+  }
+
+  // ------------------------------------------------------------ resumo do topo
+  function avaliarTodas() { return DS.map(function (d) { return N.avaliar(d, dados); }); }
+  function renderStats(rs) {
+    var c = { risco: 0, emdia: 0, aprovado: 0 };
+    rs.forEach(function (r) { c[r.status]++; });
+    var prox = rs.filter(function (r) { return r.prox; }).sort(function (a, b) { return a.prox.data < b.prox.data ? -1 : 1; })[0];
+    $('stats').innerHTML =
+      '<div class="stat risco"><b>' + c.risco + '</b><span>em risco</span></div>' +
+      '<div class="stat"><b>' + c.emdia + '</b><span>em dia</span></div>' +
+      '<div class="stat"><b>' + c.aprovado + '</b><span>' + (c.aprovado === 1 ? 'aprovada' : 'aprovadas') + '</span></div>' +
+      (prox ? '<a class="stat next" href="#/d/' + prox.d.id + '" style="--c:' + cor(prox.d) + ';color:inherit;text-decoration:none">' +
+        '<span>Próxima avaliação</span><div class="t">' + esc(prox.prox.nome) + ' · ' + esc(prox.d.curto) + '</div>' +
+        '<span>' + dataCurta(prox.prox.data) + ' · ' + rel(prox.prox.dias) + '</span></a>' : '<div class="stat next"><span>Sem avaliações pela frente</span></div>');
+  }
+
+  // ------------------------------------------------------------ visão geral
+  var ordem = 'prioridade';
+  try { ordem = localStorage.getItem('cerebro-notas-ordem') || 'prioridade'; } catch (e) {}
+  var PESO_ST = { risco: 0, emdia: 1, aprovado: 2 };
+
+  function blocoNota(r) {
+    var d = r.d;
+    if (r.completo) {
+      var fin = N.num(r.finalRec) ? r.finalRec : r.final;
+      return '<div class="big ' + (r.status === 'aprovado' ? 'ok' : 'risco') + '"><b>' + fmt(fin) + '</b><span>' +
+        (N.num(r.finalRec) ? 'média com ' + esc(d.rec.nome) : 'média final') + '</span></div>';
+    }
+    if (r.x === 0) return '<div class="big ok"><b>✓</b><span>5,0 garantido: qualquer nota no que falta fecha a média</span></div>';
+    return '<div class="big ' + (r.status === 'risco' ? 'risco' : '') + '"><b>' + N.fmtMin(r.x) + '</b><span>nota mínima ' +
+      esc(lista(r.faltamNomes.map(function (k) { return /^(nos|nas)/.test(k) ? k : 'em ' + k; })).replace(/ e em /g, ' e ').replace(/, em /g, ', ')) + '</span></div>';
+  }
+  function freqResumo(f) {
+    if (f.sit === 'semtotal') return { txt: 'total de aulas a definir', cls: '', pct: 0 };
+    var usado = f.permitidas > 0 ? Math.min(1, f.faltas / f.permitidas) : (f.faltas > 0 ? 1 : 0);
+    return {
+      txt: f.faltas + ' de ' + f.permitidas + (f.permitidas === 1 ? ' falta' : ' faltas'),
+      cls: f.sit === 'reprovado' ? 'risk' : f.sit === 'atencao' ? 'warn' : '', pct: usado * 100
+    };
+  }
+  function card(r) {
+    var d = r.d, f = freqResumo(r.freq);
+    var media = N.num(r.atual) ? fmt(r.atual) : '—';
+    var prox = r.prox ? esc(r.prox.nome) + ' · ' + dataCurta(r.prox.data) : 'Sem avaliações pela frente';
+    var bcls = r.prox ? (r.prox.dias === 0 ? 'today' : r.prox.dias <= 7 ? 'soon' : '') : '';
+    return '<article class="card ' + r.status + '" style="--c:' + cor(d) + '">' +
+      '<div class="top"><span class="cod"><i></i>' + d.cod + '</span><span class="pill ' + r.status + '">' + STATUS_TXT[r.status] + '</span></div>' +
+      '<h3><a href="#/d/' + d.id + '">' + esc(d.nome) + '</a></h3>' +
+      blocoNota(r) +
+      '<dl class="mini"><div><dt>' + (r.completo ? 'Situação' : 'Média até agora') + '</dt><dd>' + (r.completo ? esc(STATUS_TXT[r.status]) : media) + '</dd></div>' +
+      '<div><dt>Faltas</dt><dd>' + esc(f.txt) + '</dd>' + (r.freq.sit !== 'semtotal' ? '<div class="track ' + f.cls + '"><i style="width:' + f.pct + '%"></i></div>' : '') + '</div></dl>' +
+      '<div class="foot"><span>' + prox + (r.prox ? ' <span class="badge ' + bcls + '">' + rel(r.prox.dias) + '</span>' : '') + '</span>' +
+      '<button class="btn sm ghost addf" type="button" data-falta="' + d.id + '" title="Registrar uma falta hoje em ' + esc(d.curto) + '">+ falta</button></div>' +
+      '</article>';
+  }
+  function renderVisao(rs) {
+    var ord = rs.slice().sort(function (a, b) {
+      if (ordem === 'data') {
+        var da = a.prox ? a.prox.data : '9999', db = b.prox ? b.prox.data : '9999';
+        return da < db ? -1 : da > db ? 1 : 0;
+      }
+      if (PESO_ST[a.status] !== PESO_ST[b.status]) return PESO_ST[a.status] - PESO_ST[b.status];
+      var xa = a.completo ? -1 : a.x, xb = b.completo ? -1 : b.x;
+      return xb - xa;
+    });
+    var banner = temDados() ? '' :
+      '<div class="empty-banner"><p><b>Ainda não há notas aqui.</b> Importe a planilha de controle ou abra uma disciplina e digite as notas que já saíram. Até lá, cada disciplina mostra 5,0 como nota mínima.</p>' +
+      '<button class="btn primary" type="button" data-acao="importar-planilha">Importar planilha</button></div>';
+    $('view').innerHTML = banner + '<div class="cards">' + ord.map(card).join('') + '</div>';
+  }
+
+  // ------------------------------------------------------------ detalhe
+  function estadoCampo(d, r, c) {
+    var v = (dados.notas[d.id] || {})[c.k];
+    if (c.foraDoCalculo) return { cls: '', txt: N.num(v) ? 'fora do cálculo' : '' };
+    if (N.num(v)) return { cls: '', txt: '' };
+    if (r.subEm === c.k) return { cls: 'via', txt: 'via ' + d.sub.nome + ': ' + notaTxt(r.v[c.k]) };
+    if (!c.data) return { cls: '', txt: c.opcional ? 'opcional' : '' };
+    var n = N.diasAte(c.data);
+    if (n < 0) return { cls: 'aguard', txt: c.opcional ? 'opcional' : 'aguardando nota' };
+    return { cls: '', txt: rel(n) };
+  }
+  function pesoTxt(d, c) {
+    if (!c.peso) return '';
+    var tot = d.campos.reduce(function (s, x) { return s + (x.peso || 0); }, 0);
+    return ' · peso ' + String(Math.round(c.peso / tot * 1000) / 10).replace('.', ',') + '%';
+  }
+  function campoNota(id, k, valor, extra) {
+    return '<input class="nota' + (extra || '') + '" id="in-' + k + '" data-k="' + k + '" inputmode="decimal" autocomplete="off" placeholder="—" value="' + esc(notaTxt(valor)) + '" aria-describedby="st-' + k + '">';
+  }
+
+  function renderDetalhe(id) {
+    var d = N.POR_ID[id]; if (!d) { location.hash = '#/'; return; }
+    var r = N.avaliar(d, dados), notas = dados.notas[id] || {};
+    var i = DS.indexOf(d), ant = DS[(i + DS.length - 1) % DS.length], prox = DS[(i + 1) % DS.length];
+    var h = '<nav class="crumb" aria-label="Navegação"><a href="#/">← Todas as disciplinas</a>' +
+      '<span class="pn"><a class="btn sm ghost" href="#/d/' + ant.id + '" aria-label="Anterior: ' + esc(ant.curto) + '">‹ ' + esc(ant.curto) + '</a>' +
+      '<a class="btn sm ghost" href="#/d/' + prox.id + '" aria-label="Próxima: ' + esc(prox.curto) + '">' + esc(prox.curto) + ' ›</a></span></nav>';
+    h += '<header class="dhead" style="--c:' + cor(d) + '"><div class="cod"><i></i>' + d.cod + '</div>' +
+      '<h2>' + esc(d.nome) + ' <span class="pill ' + r.status + '" id="dPill">' + STATUS_TXT[r.status] + '</span></h2>' +
+      '<div class="regra">' + esc(d.regra) + '</div><p>' + esc(d.regraTexto) + '</p>' +
+      (d.material ? '<div class="links"><a href="' + d.material + '">Abrir material de estudo →</a></div>' : '') + '</header>';
+
+    h += '<div class="dgrid" style="--c:' + cor(d) + '"><div class="form" id="form">';
+    // notas principais
+    h += '<section class="blk"><h3>Notas</h3><p class="hint">Digite só as notas que já saíram. Vírgula ou ponto, de 0 a 10.</p>';
+    d.campos.forEach(function (c) {
+      var st = estadoCampo(d, r, c);
+      h += '<div class="frow"><label for="in-' + c.k + '"><b>' + esc(c.nome) + '</b><small>' +
+        (c.data ? dataCurta(c.data) : 'sem data') + pesoTxt(d, c) + (c.dica ? ' · ' + esc(c.dica) : '') + '</small></label>' +
+        '<span class="estado ' + st.cls + '" id="st-' + c.k + '">' + esc(st.txt) + '</span>' + campoNota(id, c.k, notas[c.k]) + '</div>';
+    });
+    h += '</section>';
+    // grade (exercícios) e lista (atividades)
+    if (d.grade) {
+      h += '<section class="blk"><h3>' + esc(d.grade.titulo) + '</h3><p class="hint">Vazio = ainda não saiu. No cálculo, os que faltam recebem a nota mínima.</p><div class="gridn">';
+      d.grade.chaves.forEach(function (k, j) {
+        h += '<label for="in-' + k + '">' + d.grade.rotulo(j) + campoNota(id, k, notas[k], ' small') + '</label>';
+      });
+      h += '</div></section>';
+    }
+    if (d.bonus) {
+      h += '<section class="blk"><div class="frow"><label for="in-' + d.bonus.k + '"><b>' + esc(d.bonus.nome) + '</b><small>vazio = calcula sem bônus</small></label><span class="estado" id="st-' + d.bonus.k + '"></span>' + campoNota(id, d.bonus.k, notas[d.bonus.k]) + '</div></section>';
+    }
+    if (d.lista) {
+      h += '<section class="blk"><h3>' + esc(d.lista.titulo) + '</h3><p class="hint">A é a média das que você lançar. Sem nenhuma, A entra com a nota mínima.</p><div class="gridn" id="listaBox">' + listaHTML(d, notas) + '</div></section>';
+    }
+    // substitutiva
+    if (d.sub) {
+      var alvo = notas[d.sub.k + '_alvo'] || '';
+      h += '<section class="blk"><h3>Substitutiva</h3><div class="subbox"><div class="t"><b>' + esc(d.sub.nome) + '</b><small>' + dataCurta(d.sub.data) + ' · ' + esc(d.sub.nota) + '</small></div>' +
+        '<label><span class="sr">Substitui</span><select class="sel" id="sel-sub" aria-label="Prova que a ' + esc(d.sub.nome) + ' substitui"><option value="">Substitui…</option>' +
+        d.sub.alvos.map(function (a) { return '<option' + (a === alvo ? ' selected' : '') + '>' + a + '</option>'; }).join('') + '</select></label>' +
+        campoNota(id, d.sub.k, notas[d.sub.k]) + '</div></section>';
+    }
+    // recuperação
+    if (d.rec) {
+      var abrir = N.num(notas[d.rec.k]) || N.num(r.recNecessaria);
+      h += '<section class="blk"><details class="rec"' + (abrir ? ' open' : '') + '><summary>' + esc(d.rec.nome) + (d.rec.data ? ' · ' + dataCurta(d.rec.data) : '') + '</summary>' +
+        '<div class="in"><label for="in-' + d.rec.k + '">' + esc(d.rec.nota) + '<small id="st-' + d.rec.k + '">' + (N.num(r.recNecessaria) ? 'Você precisa de ' + fmt(r.recNecessaria, 1) + '.' : 'Só entra se a média ficar abaixo de 5,0.') + '</small></label>' +
+        campoNota(id, d.rec.k, notas[d.rec.k]) + '</div></details></section>';
+    }
+    h += '</div><aside class="painel" id="painel" aria-label="Resultado"></aside></div>';
+    $('view').innerHTML = h;
+    renderPainel(d);
+  }
+  function listaHTML(d, notas) {
+    var ks = d.lista.chaves, ultimo = -1;
+    ks.forEach(function (k, j) { if (N.num(notas[k])) ultimo = j; });
+    var mostrar = Math.min(ks.length, Math.max(ultimo + 2, 5));
+    var h = '';
+    for (var j = 0; j < mostrar; j++) h += '<label for="in-' + ks[j] + '">' + d.lista.rotulo(j).replace('Atividade ', 'Ativ. ') + campoNota(d.id, ks[j], notas[ks[j]], ' small') + '</label>';
+    return h;
+  }
+
+  function renderPainel(d) {
+    var r = N.avaliar(d, dados);
+    var h = '<div class="pcard res"><h4>' + (r.completo ? 'Resultado' : 'Para fechar 5,0') + '</h4>' + blocoNota(r).replace('class="big', 'class="big lg') +
+      (r.motivos.length ? '<ul class="motivos">' + r.motivos.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>' : '') + '</div>';
+    h += '<div class="pcard"><div class="kv"><span>' + esc(d.atualRotulo) + '</span><b>' + (N.num(r.atual) ? fmt(r.atual) : '—') + '</b></div>';
+    if (N.num(r.pesoFeito)) h += '<div class="kv"><span>Nota já definida</span><b>' + Math.round(r.pesoFeito * 100) + '%</b></div><div class="track"><i style="width:' + (r.pesoFeito * 100) + '%"></i></div>';
+    h += '</div>';
+    if (!r.completo) {
+      var x0 = r.x === Infinity ? 10 : Math.min(10, Math.max(0, Math.ceil(r.x * 2) / 2 || 5));
+      h += '<div class="pcard ese"><h4>E se…</h4><label for="ese">Se eu tirar <output id="eseX">' + fmt(x0, 1) + '</output> em tudo o que falta</label>' +
+        '<input type="range" id="ese" min="0" max="10" step="0.1" value="' + x0 + '">' +
+        '<div class="out"><span>a média final fica</span><b id="eseY"></b></div></div>';
+    }
+    var f = r.freq, fr = freqResumo(f);
+    h += '<div class="pcard"><h4>Frequência</h4>';
+    if (f.sit === 'semtotal') h += '<p style="font-size:13px;color:var(--text-secondary)">Falta definir o total de aulas (' + esc(d.aulasComo) + '). <a href="#/presenca">Definir na Presença →</a></p>';
+    else h += '<div class="kv"><span>Faltas</span><b>' + esc(fr.txt) + '</b></div><div class="track ' + fr.cls + '"><i style="width:' + fr.pct + '%"></i></div>' +
+      '<div class="kv"><span>Ainda pode faltar</span><b>' + Math.max(0, f.restam) + (Math.max(0, f.restam) === 1 ? ' aula' : ' aulas') + '</b></div>' +
+      '<div class="kv"><span>Frequência se não faltar mais</span><b>' + fmt(f.proj * 100, 1) + '%</b></div>';
+    h += '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn sm" type="button" data-falta="' + d.id + '">+ Registrar falta hoje</button><a class="btn sm ghost" href="#/presenca">Diário</a></div></div>';
+    if (r.prox) h += '<div class="pcard"><h4>Próxima avaliação</h4><div class="kv"><span>' + esc(r.prox.nome) + ' · ' + dataCurta(r.prox.data) + '</span><b>' + rel(r.prox.dias) + '</b></div></div>';
+    if (d.confirmar.length || (r.freq.total && !r.freq.totalProprio)) {
+      var cs = d.confirmar.slice();
+      if (r.freq.total && !r.freq.totalProprio) cs.push('Total de ' + r.freq.total + ' aulas, contado no cronograma (' + d.aulasComo + ').');
+      h += '<div class="conf-box"><h4>A confirmar</h4><ul>' + cs.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul></div>';
+    }
+    $('painel').innerHTML = h;
+    // pílula do topo, estados e barra móvel
+    var pill = $('dPill'); if (pill) { pill.className = 'pill ' + r.status; pill.textContent = STATUS_TXT[r.status]; }
+    d.campos.forEach(function (c) { var el = $('st-' + c.k); if (el) { var st = estadoCampo(d, r, c); el.className = 'estado ' + st.cls; el.textContent = st.txt; } });
+    if (d.rec) { var rs = $('st-' + d.rec.k); if (rs) rs.textContent = N.num(r.recNecessaria) ? 'Você precisa de ' + fmt(r.recNecessaria, 1) + '.' : 'Só entra se a média ficar abaixo de 5,0.'; }
+    var mb = $('mbar');
+    var val = r.completo ? fmt(N.num(r.finalRec) ? r.finalRec : r.final) : (r.x === 0 ? '✓' : N.fmtMin(r.x));
+    mb.style.setProperty('--c', cor(d));
+    mb.innerHTML = '<div><span>' + (r.completo ? 'Média final' : 'Nota mínima no que falta') + '</span><b>' + val + '</b></div><span class="pill ' + r.status + '">' + STATUS_TXT[r.status] + '</span>';
+    mb.hidden = false;
+    $('live').textContent = d.curto + ': ' + (r.completo ? 'média final ' : 'nota mínima ') + val + ', ' + STATUS_TXT[r.status] + '.';
+    atualizarEse(d);
+  }
+  function atualizarEse(d) {
+    var s = $('ese'); if (!s) return;
+    var x = +s.value, y = N.simular(d, dados, x);
+    $('eseX').textContent = fmt(x, 1);
+    var b = $('eseY'); b.textContent = fmt(y); b.className = y >= d.aprov - 1e-9 ? 'ok' : 'no';
+  }
+
+  function lerNota(txt, max) {
+    txt = String(txt).trim().replace(',', '.');
+    if (txt === '') return { vazio: true };
+    if (!/^\d{1,2}(\.\d{0,2})?$/.test(txt)) return { erro: true };
+    var v = parseFloat(txt);
+    return v >= 0 && v <= (max || 10) ? { v: v } : { erro: true };
+  }
+
+  // ------------------------------------------------------------ presença
+  function renderPresenca() {
+    var rs = avaliarTodas();
+    var h = '<p class="pintro">Cada falta conta uma aula, ou quantas você marcar. A frequência considera que você não falta mais daqui em diante. Totais em amarelo foram contados no cronograma: confira e ajuste se precisar.</p>';
+    h += '<div class="plist"><div class="prow head"><span>Disciplina</span><span>Aulas no semestre</span><span>Faltas usadas</span><span>Situação</span><span></span></div>';
+    rs.forEach(function (r) {
+      var d = r.d, f = r.freq, fr = freqResumo(f);
+      var conf = !f.totalProprio;
+      h += '<div class="prow" style="--c:' + cor(d) + '">' +
+        '<div class="pname"><i></i><div><a href="#/d/' + d.id + '">' + esc(d.curto) + '</a><small>mínimo ' + (d.estrita ? 'acima de ' : '') + Math.round(d.freqMin * 100) + '%</small></div></div>' +
+        '<label class="ptot"><span class="sr">Total de aulas em ' + esc(d.curto) + '</span><input type="number" min="1" max="200" inputmode="numeric" data-aulas="' + d.id + '" placeholder="?" value="' + (f.total || '') + '" title="' + esc(d.aulasComo) + '">' +
+        (conf ? (f.total ? '<button type="button" class="conf" data-confirma="' + d.id + '" title="Contado no cronograma: ' + esc(d.aulasComo) + '. Clique para confirmar ' + f.total + ' aulas.">a confirmar ✓</button>'
+          : '<span class="conf" title="' + esc(d.aulasComo) + '">definir</span>') : '') + '</label>' +
+        '<div class="pbar">' + (f.sit === 'semtotal' ? '<div class="txt" style="color:var(--text-muted)">' + f.faltas + (f.faltas === 1 ? ' falta registrada' : ' faltas registradas') + '</div>' :
+          '<div class="txt"><b>' + fr.txt + '</b> · pode faltar mais ' + Math.max(0, f.restam) + '</div><div class="track ' + fr.cls + '"><i style="width:' + fr.pct + '%"></i></div>') + '</div>' +
+        '<span class="psit"><span class="pill ' + (f.sit === 'ok' ? 'emdia' : f.sit === 'reprovado' ? 'risco' : f.sit) + '">' + SIT_TXT[f.sit] + '</span></span>' +
+        '<span class="padd"><button class="btn sm ghost" type="button" data-falta="' + d.id + '" aria-label="Registrar falta hoje em ' + esc(d.curto) + '">+ falta</button></span></div>';
+    });
+    h += '</div>';
+    // diário
+    var hoje = N.hojeISO();
+    h += '<section class="diario"><h3>Diário de faltas</h3><p class="pintro">Registre faltas de outros dias ou de mais de uma aula. Falta justificada continua contando; a marca é só para você lembrar.</p>' +
+      '<form class="fform" id="fform"><label>Data<input type="date" name="d" value="' + hoje + '" required></label>' +
+      '<label>Disciplina<select name="disc" required>' + DS.map(function (d) { return '<option value="' + d.id + '">' + esc(d.curto) + '</option>'; }).join('') + '</select></label>' +
+      '<label>Aulas<select name="n"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>' +
+      '<label class="chk"><input type="checkbox" name="just"> Justificada</label>' +
+      '<label class="full">Observação<input type="text" name="obs" maxlength="120" placeholder="opcional"></label>' +
+      '<button class="btn primary full" type="submit">Registrar falta</button></form>';
+    var fs = dados.faltas.slice().sort(function (a, b) { return a.d < b.d ? 1 : a.d > b.d ? -1 : 0; });
+    if (!fs.length) h += '<p class="vazio">Nenhuma falta registrada. Bom sinal.</p>';
+    else h += '<ul class="flog">' + fs.map(function (f) {
+      var d = N.POR_ID[f.disc];
+      return '<li style="--c:' + cor(d) + '"><span class="dt">' + (f.d ? f.d.slice(8, 10) + '/' + f.d.slice(5, 7) + '<small>' + dataCurta(f.d).slice(0, 3) + '</small>' : '—') + '</span>' +
+        '<span class="what"><i></i>' + esc(d.curto) + ' <small>· ' + (f.n || 1) + (f.n > 1 ? ' aulas' : ' aula') + (f.just ? ' · justificada' : '') + (f.obs ? ' · ' + esc(f.obs) : '') + '</small></span>' +
+        '<button class="rm" type="button" data-rm="' + esc(f.id) + '" aria-label="Remover falta de ' + esc(d.curto) + '">×</button></li>';
+    }).join('') + '</ul>';
+    h += '</section>';
+    $('view').innerHTML = h;
+  }
+
+  // ------------------------------------------------------------ rotas
+  function rota() {
+    var h = location.hash || '#/';
+    if (h.indexOf('#importar=') === 0) return { nome: 'importar', arg: h.slice(10) };
+    if (h === '#/presenca') return { nome: 'presenca' };
+    var m = h.match(/^#\/d\/(\w+)/); if (m) return { nome: 'detalhe', arg: m[1] };
+    return { nome: 'visao' };
+  }
+  var rotaAtual = null;
+  function render() {
+    var r = rota();
+    var rs = avaliarTodas();
+    renderStats(rs);
+    var nAt = rs.filter(function (x) { return x.freq.sit === 'atencao' || x.freq.sit === 'reprovado'; }).length;
+    $('tabDisc').removeAttribute('aria-current'); $('tabPres').removeAttribute('aria-current');
+    $(r.nome === 'presenca' ? 'tabPres' : 'tabDisc').setAttribute('aria-current', 'page');
+    $('tabPres').innerHTML = 'Presença' + (nAt ? ' <span class="n" title="disciplinas no limite de faltas">' + nAt + '</span>' : '');
+    $('sortBox').hidden = r.nome !== 'visao';
+    document.querySelectorAll('[data-ord]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-ord') === ordem)); });
+    document.body.classList.toggle('det', r.nome === 'detalhe');
+    $('mbar').hidden = true;
+    var foco = document.activeElement && document.activeElement.id;
+    if (r.nome === 'detalhe') renderDetalhe(r.arg);
+    else if (r.nome === 'presenca') renderPresenca();
+    else renderVisao(rs);
+    if (foco && $(foco) && rotaAtual === location.hash) $(foco).focus();
+    if (rotaAtual !== location.hash) {
+      if (rotaAtual !== null && (r.nome === 'detalhe' || rotaAtual.indexOf('#/d/') === 0)) window.scrollTo(0, Math.min(window.scrollY, $('barNav').offsetTop - 70));
+      rotaAtual = location.hash;
+    }
+  }
+  window.addEventListener('hashchange', function () {
+    var r = rota();
+    if (r.nome === 'importar') { importarLink(r.arg); return; }
+    render();
+  });
+
+  // ------------------------------------------------------------ eventos
+  document.addEventListener('input', function (ev) {
+    var t = ev.target;
+    if (t.matches('.nota')) {
+      var r = rota(); if (r.nome !== 'detalhe') return;
+      var d = N.POR_ID[r.arg], k = t.getAttribute('data-k');
+      var max = d.bonus && k === d.bonus.k ? d.bonus.max : 10;
+      var p = lerNota(t.value, max);
+      t.classList.toggle('bad', !!p.erro);
+      t.title = p.erro ? 'Nota de 0 a ' + fmt(max, 1) : '';
+      if (p.erro) return;
+      var notas = notasDe(d.id);
+      if (p.vazio) delete notas[k]; else notas[k] = p.v;
+      salvar(); renderPainel(d); renderStats(avaliarTodas());
+    } else if (t.id === 'ese') {
+      var rr = rota(); atualizarEse(N.POR_ID[rr.arg]);
+    }
+  });
+  document.addEventListener('change', function (ev) {
+    var t = ev.target, r = rota();
+    if (t.id === 'sel-sub' && r.nome === 'detalhe') {
+      var d = N.POR_ID[r.arg], notas = notasDe(d.id);
+      if (t.value) notas[d.sub.k + '_alvo'] = t.value; else delete notas[d.sub.k + '_alvo'];
+      salvar(); renderPainel(d); renderStats(avaliarTodas());
+    } else if (t.matches('.nota') && r.nome === 'detalhe') {
+      var dd = N.POR_ID[r.arg];
+      if (t.value && !t.classList.contains('bad')) t.value = notaTxt((dados.notas[dd.id] || {})[t.getAttribute('data-k')]);
+      if (dd.lista && $('listaBox') && dd.lista.chaves.indexOf(t.getAttribute('data-k')) >= 0) {
+        // acrescenta campos vazios sem recriar os existentes (preserva o foco do Tab)
+        var box = $('listaBox'), tem = box.querySelectorAll('label').length;
+        var tmp = document.createElement('div'); tmp.innerHTML = listaHTML(dd, dados.notas[dd.id] || {});
+        var novos = tmp.querySelectorAll('label');
+        for (var j = tem; j < novos.length; j++) box.appendChild(novos[j]);
+      }
+    } else if (t.hasAttribute('data-aulas')) {
+      var id = t.getAttribute('data-aulas'), n = parseInt(t.value, 10);
+      if (n > 0 && n <= 200) dados.aulas[id] = n; else delete dados.aulas[id];
+      salvar(); render();
+    }
+  });
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button, [data-acao]'); if (!b) return;
+    if (b.hasAttribute('data-falta')) { registrarFalta(b.getAttribute('data-falta')); return; }
+    if (b.hasAttribute('data-rm')) { removerFalta(b.getAttribute('data-rm')); return; }
+    if (b.hasAttribute('data-confirma')) {
+      var cid = b.getAttribute('data-confirma'); dados.aulas[cid] = N.POR_ID[cid].aulas; salvar(); render();
+      avisar('Total de aulas de ' + N.POR_ID[cid].curto + ' confirmado.', 'Desfazer', function () { delete dados.aulas[cid]; salvar(); render(); });
+      return;
+    }
+    if (b.hasAttribute('data-ord')) {
+      ordem = b.getAttribute('data-ord'); try { localStorage.setItem('cerebro-notas-ordem', ordem); } catch (e) {}
+      render(); return;
+    }
+    var a = b.getAttribute('data-acao'); if (!a) return;
+    $('menuDados').open = false;
+    if (a === 'importar-planilha') $('arqPlanilha').click();
+    else if (a === 'exportar') exportar();
+    else if (a === 'restaurar') $('arqBackup').click();
+    else if (a === 'link') gerarLink();
+    else if (a === 'apagar') apagar();
+  });
+  document.addEventListener('submit', function (ev) {
+    if (ev.target.id !== 'fform') return;
+    ev.preventDefault();
+    var f = ev.target;
+    registrarFalta(f.disc.value, f.d.value, +f.n.value, f.just.checked, f.obs.value.trim());
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && $('menuDados').open) $('menuDados').open = false;
+  });
+  document.addEventListener('click', function (ev) {
+    if ($('menuDados').open && !ev.target.closest('#menuDados')) $('menuDados').open = false;
+  }, true);
+
+  // ------------------------------------------------------------ backup, link e apagar
+  function exportar() {
+    var blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'notas-2026-2-' + N.hojeISO() + '.json'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    avisar('Backup baixado.');
+  }
+  function resumoDados(o) {
+    var linhas = DS.map(function (d) {
+      var ns = o.notas[d.id] || {};
+      var ks = Object.keys(ns).filter(function (k) { return N.num(ns[k]); });
+      var fs = o.faltas.filter(function (f) { return f.disc === d.id; }).length;
+      return '<tr><td>' + esc(d.curto) + '</td><td>' + (ks.length ? ks.map(function (k) { return esc(k) + ' ' + notaTxt(ns[k]); }).join(', ') : '<span style="color:var(--text-muted)">—</span>') + '</td><td>' + (fs || '—') + '</td></tr>';
+    }).join('');
+    return '<table><thead><tr><th>Disciplina</th><th>Notas</th><th>Faltas</th></tr></thead><tbody>' + linhas + '</tbody></table>';
+  }
+  function confirmarSubstituir(novo, origem) {
+    dialogo('<h3>Importar ' + esc(origem) + '?</h3><p>Os dados abaixo vão <b>substituir</b> o que está neste navegador.' +
+      (temDados() ? ' Se quiser guardar o que existe hoje, baixe um backup antes.' : '') + '</p>' + resumoDados(novo), [
+      { txt: 'Cancelar', cls: 'ghost' },
+      { txt: 'Substituir', cls: 'primary', fn: function () { dados = novo; salvar(); location.hash = '#/'; render(); avisar('Dados importados.'); } }
+    ]);
+  }
+  $('arqBackup').addEventListener('change', function () {
+    var f = this.files[0]; this.value = ''; if (!f) return;
+    f.text().then(function (s) { confirmarSubstituir(normalizar(JSON.parse(s)), 'o backup'); })
+      .catch(function () { avisar('Não consegui ler esse arquivo de backup.'); });
+  });
+  function b64enc(s) { var b = new TextEncoder().encode(s), t = ''; b.forEach(function (x) { t += String.fromCharCode(x); }); return btoa(t).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+  function b64dec(s) { var t = atob(s.replace(/-/g, '+').replace(/_/g, '/')); return new TextDecoder().decode(Uint8Array.from(t, function (c) { return c.charCodeAt(0); })); }
+  function gerarLink() {
+    var url = location.href.split('#')[0] + '#importar=' + b64enc(JSON.stringify(dados));
+    dialogo('<h3>Levar para outro aparelho</h3><p>Abra este link no outro aparelho e confirme. Os dados vão depois do <b>#</b>, que o navegador não envia ao servidor.</p>' +
+      '<p>Quem tiver o link vê suas notas: mande só para você mesmo.</p><input class="link" id="linkTxt" readonly value="' + esc(url) + '">', [
+      { txt: 'Fechar', cls: 'ghost' },
+      { txt: 'Copiar link', cls: 'primary', fn: function () {
+        var el = $('linkTxt'); el.select();
+        (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { avisar('Link copiado.'); }, function () { document.execCommand('copy'); avisar('Link copiado.'); });
+      } }
+    ]);
+  }
+  function importarLink(arg) {
+    history.replaceState(null, '', location.pathname + location.search + '#/');
+    render();
+    try { confirmarSubstituir(normalizar(JSON.parse(b64dec(arg))), 'os dados do link'); }
+    catch (e) { avisar('Esse link de importação está incompleto.'); }
+  }
+  function apagar() {
+    dialogo('<h3>Apagar seus dados deste navegador?</h3><p>Notas, totais de aulas e faltas somem daqui. As regras das disciplinas continuam.</p>', [
+      { txt: 'Cancelar', cls: 'ghost' },
+      { txt: 'Baixar backup e apagar', fn: function () { exportar(); limpar(); } },
+      { txt: 'Apagar', cls: 'danger', fn: limpar }
+    ]);
+    function limpar() { dados = vazio(); try { localStorage.removeItem(CHAVE); } catch (e) {} mostrarSalvo(); render(); avisar('Dados apagados.'); }
+  }
+
+  // ------------------------------------------------------------ importar a planilha de controle (.xlsx)
+  // Endereços das células de entrada na planilha gerada por _gerador/gera_planilha.py
+  function faixa(pref, col, l0, n) { var o = {}; for (var j = 0; j < n; j++) o[pref + (j + 1)] = col + (l0 + j); return o; }
+  function junta() { var o = {}; for (var i = 0; i < arguments.length; i++) for (var k in arguments[i]) o[k] = arguments[i][k]; return o; }
+  var MAPA = {
+    fab: { aba: 'Fabricação', ck: ['A17', 'P1'], cel: { P1: 'D17', P2: 'D18', P3: 'D19', S: 'D20', A: 'D21', PSub: 'B11', PSub_alvo: 'B12', REC: 'B13' } },
+    sol: { aba: 'Sólidos II', ck: ['A15', 'P1'], cel: junta({ P1: 'B15', P2: 'B16', P3: 'B17', PSub: 'B18', B: 'B32' }, faixa('E', 'B', 21, 10)) },
+    est: { aba: 'Estatística', ck: ['A16', 'P1'], cel: { P1: 'D16', P2: 'D17', P3: 'D18', SUB: 'B11', SUB_alvo: 'B12' } },
+    flu: { aba: 'Fluidos I', ck: ['A18', 'P1'], cel: { P1: 'D18', P2: 'D19', P3: 'D20', RQ: 'D21', PEL: 'D22', PSUB: 'B13', PSUB_alvo: 'B14' } },
+    mod: { aba: 'Modelagem', ck: ['A18', 'P1'], cel: { P1: 'B18', P2: 'B19', PSUB: 'B20', T: 'B21' } },
+    ele: { aba: 'Elementos I', ck: ['A16', 'P1'], cel: junta({ P1: 'B16', P2: 'B17', Psub: 'B18', Psub_alvo: 'B19', Prec: 'B20' }, faixa('A', 'B', 25, 15)) },
+    lab: { aba: 'Lab Eletricidade', ck: ['A14', 'Exp1'], cel: faixa('R', 'D', 14, 6) }
+  };
+  var NOME_ABA = { 'Fabricação': 'fab', 'Sólidos II': 'sol', 'Estatística': 'est', 'Fluidos I': 'flu', 'Modelagem': 'mod', 'Elementos I': 'ele', 'Lab Eletricidade': 'lab' };
+  var ORDEM_PRES = ['fab', 'sol', 'est', 'flu', 'mod', 'ele', 'lab'];
+  function serialISO(v) {
+    if (v instanceof Date) return N.hojeISO(v);
+    if (typeof v !== 'number') return null;
+    var t = new Date(Math.round((v - 25569) * 864e5));
+    return t.getUTCFullYear() + '-' + String(t.getUTCMonth() + 1).padStart(2, '0') + '-' + String(t.getUTCDate()).padStart(2, '0');
+  }
+  function lerPlanilha(wb) {
+    var novo = vazio(), avisos = [];
+    function cel(ws, a) { var c = ws[a]; return c ? c.v : undefined; }
+    Object.keys(MAPA).forEach(function (id) {
+      var m = MAPA[id], ws = wb.Sheets[m.aba];
+      if (!ws) { avisos.push('Aba "' + m.aba + '" não encontrada.'); return; }
+      if (String(cel(ws, m.ck[0]) || '').indexOf(m.ck[1]) !== 0) { avisos.push('A aba "' + m.aba + '" mudou de formato; pulei.'); return; }
+      var ns = {};
+      Object.keys(m.cel).forEach(function (k) {
+        var v = cel(ws, m.cel[k]);
+        if (/_alvo$/.test(k)) { if (typeof v === 'string' && v) ns[k] = v.trim(); }
+        else if (typeof v === 'number' && v >= 0 && v <= 10) ns[k] = Math.round(v * 100) / 100;
+      });
+      novo.notas[id] = ns;
+    });
+    var pr = wb.Sheets['Presença'];
+    if (pr && String(cel(pr, 'A6') || '') === 'Fabricação') {
+      ORDEM_PRES.forEach(function (id, j) {
+        var t = cel(pr, 'B' + (6 + j)), pad = N.POR_ID[id].aulas;
+        if (typeof t === 'number' && t > 0 && t !== pad) novo.aulas[id] = t;
+      });
+      for (var l = 18; l <= 117; l++) {
+        var nome = cel(pr, 'B' + l); if (!nome || !NOME_ABA[nome]) continue;
+        var n = cel(pr, 'C' + l);
+        novo.faltas.push({ id: 'x' + l + Math.random().toString(36).slice(2, 6), d: serialISO(cel(pr, 'A' + l)) || N.hojeISO(), disc: NOME_ABA[nome],
+          n: typeof n === 'number' && n > 0 ? n : 1, just: String(cel(pr, 'D' + l) || '') === 'Sim', obs: String(cel(pr, 'E' + l) || '') });
+      }
+    } else avisos.push('Aba "Presença" não encontrada: faltas e totais não vieram.');
+    return { dados: novo, avisos: avisos };
+  }
+  var xlsxPronto = null;
+  function carregarXLSX() {
+    if (window.XLSX) return Promise.resolve();
+    if (xlsxPronto) return xlsxPronto;
+    xlsxPronto = new Promise(function (ok, erro) {
+      var s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload = ok; s.onerror = function () { xlsxPronto = null; erro(); };
+      document.head.appendChild(s);
+    });
+    return xlsxPronto;
+  }
+  $('arqPlanilha').addEventListener('change', function () {
+    var f = this.files[0]; this.value = ''; if (!f) return;
+    avisar('Lendo a planilha…');
+    Promise.all([carregarXLSX(), f.arrayBuffer()]).then(function (res) {
+      var r = lerPlanilha(window.XLSX.read(res[1], { type: 'array' }));
+      $('toast').classList.remove('on');
+      confirmarSubstituir(r.dados, 'a planilha');
+      if (r.avisos.length) $('dlgBody').insertAdjacentHTML('beforeend', '<p style="margin-top:12px;color:var(--warn)">' + r.avisos.map(esc).join('<br>') + '</p>');
+    }).catch(function () { avisar('Não consegui ler a planilha. É o arquivo controle_de_notas_2026-2.xlsx?'); });
+  });
+
+  // ------------------------------------------------------------ início
+  var hdr = $('hdr');
+  function medir() { document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px'); }
+  medir(); window.addEventListener('resize', medir);
+
+  var root = document.documentElement;
+  function lerTema() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
+  root.setAttribute('data-theme', lerTema() || 'dark');
+  $('themeBtn').addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); try { localStorage.setItem('cerebro-theme', next); } catch (e) {}
+  });
+
+  mostrarSalvo();
+  var r0 = rota();
+  if (r0.nome === 'importar') importarLink(r0.arg); else render();
+})();
+</script>
+
+</body>
+</html>

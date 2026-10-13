@@ -11,6 +11,7 @@ organizados e roteiros de revisão escritos durante o estudo das disciplinas.
 |---|---|---|
 | [Trajetória do curso](trajetoria.html) | Todas | Os semestres do curso em colunas: o que foi cursado, o que está em andamento e o plano até a formatura. Os dados vêm de `curso-dados.js`, gerado só com sigla, nome, créditos e status |
 | [Cronograma de provas](cronograma.html) | Todas | Provas, entregas e seminários do semestre em ordem de data, com contagem regressiva e filtro por disciplina |
+| [Notas e frequência](notas.html) | Todas | Nota mínima no que falta para fechar 5,0, situação de cada disciplina e diário de faltas. As regras vêm dos planos de ensino (`notas-regras.js`); as notas e faltas ficam só no navegador de quem usa (localStorage), nunca neste repositório |
 | [Estrutura do site](estrutura.html) | Todas | Árvore de todas as páginas, por disciplina: hub, fichas de tópico e provas |
 | [Estatística — site da disciplina](estatistica/index.html) | PRO3200 | Mapa de conceitos com fichas por tópico; para a P2, fichas 06–12 (IC com duas amostras, testes de hipóteses, aderência e associação) com exercícios resolvidos, trilha de 14 pivôs, 38 questões antigas e resumo de revisão |
 | [P1 2025 resolvida](estatistica/p1-2025-resolvida.html) | Estatística | Cada questão aberta do começo ao fim, com mapa de assuntos e fórmulas |

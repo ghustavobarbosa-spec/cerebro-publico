@@ -50,7 +50,7 @@ a:hover { text-decoration: underline; }
 .brand:hover { text-decoration: none; }
 .brand .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
 .nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
-.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
 .nav a:hover { color: var(--text); text-decoration: none; }
 .nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
 .theme-btn { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 16px; min-height: 40px; cursor: pointer; }
@@ -107,7 +107,7 @@ a:hover { text-decoration: underline; }
 @media (max-width: 560px) {
   .container { padding: 0 16px 64px; }
   .site-header .inner { padding: 8px 16px; }
-  .nav { order: 3; width: 100%; gap: 20px; }
+  .nav { order: 3; width: 100%; gap: 18px; overflow-x: auto; scrollbar-width: none; }
   .controls { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 10px 16px; scrollbar-width: none; }
   .chip { flex: none; white-space: nowrap; }
   .controls .sep { display: none; }
@@ -126,6 +126,7 @@ a:hover { text-decoration: underline; }
       <a href="./">Disciplinas</a>
       <a href="trajetoria.html">Trajetória</a>
       <a href="cronograma.html" aria-current="page">Cronograma</a>
+      <a href="notas.html">Notas</a>
       <a href="estrutura.html">Estrutura</a>
     </nav>
     <button class="theme-btn" id="themeBtn" type="button">Tema</button>

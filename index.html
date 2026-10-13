@@ -124,7 +124,7 @@ a:hover { text-decoration: underline; }
 }
 .theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
 .nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
-.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
 .nav a:hover { color: var(--text); text-decoration: none; }
 .nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
 
@@ -311,7 +311,7 @@ html[data-theme="dark"] { --c-sol:#60A5FA; --c-est:#1BD60B; --c-fab:#FBBF24; --c
 
 @media (max-width: 600px) {
   .site-header .inner { flex-wrap: wrap; padding: 8px 16px; }
-  .nav { order: 3; width: 100%; gap: 20px; }
+  .nav { order: 3; width: 100%; gap: 18px; overflow-x: auto; scrollbar-width: none; }
   .hero { padding: 44px 0 32px; }
   .grid { grid-template-columns: 1fr; }
 }
@@ -326,6 +326,7 @@ html[data-theme="dark"] { --c-sol:#60A5FA; --c-est:#1BD60B; --c-fab:#FBBF24; --c
       <a href="./" aria-current="page">Disciplinas</a>
       <a href="trajetoria.html">Trajetória</a>
       <a href="cronograma.html">Cronograma</a>
+      <a href="notas.html">Notas</a>
       <a href="estrutura.html">Estrutura</a>
     </nav>
     <button class="theme-btn" id="themeBtn" type="button">Tema</button>
@@ -361,7 +362,7 @@ html[data-theme="dark"] { --c-sol:#60A5FA; --c-est:#1BD60B; --c-fab:#FBBF24; --c
       <li><a href="fabricacao/p1-pmr3301-guia-exercicios.html">Processos de fabricação: guia da P1</a></li>
       <li><a href="elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html">Elementos de Máquinas I: P1</a></li>
       <li><a href="modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html">Modelagem: P1</a> · <a href="modelagem-de-sistemas-dinamicos/roteiro-base-matematica-pme3380.html">revisão de base</a></li>
-      <li><a href="cronograma.html">Cronograma</a> · <a href="trajetoria.html">Trajetória</a> · <a href="estrutura.html">Estrutura</a></li>
+      <li><a href="cronograma.html">Cronograma</a> · <a href="notas.html">Notas</a> · <a href="trajetoria.html">Trajetória</a> · <a href="estrutura.html">Estrutura</a></li>
     </ul></section>
   </noscript>
 
