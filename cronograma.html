@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma de provas — Cérebro</title>
+<meta name="description" content="Calendário das provas, entregas e seminários do 2º semestre de 2026, com contagem regressiva e filtro por disciplina.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #6B6B6B;
+  --accent: #00B131; --accent-text: #007A22; --accent-dim: rgba(0, 177, 49, 0.12);
+  --warn: #92400E; --warn-dim: rgba(245, 158, 11, 0.18);
+  --border: #E0E0E0; --border-strong: #C4C4C4;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --c-fab: #D97706; --c-sol: #2563EB; --c-est: #00B131; --c-flu: #0891B2; --c-mod: #9333EA;
+  --radius: 8px; --radius-lg: 16px; --radius-full: 9999px;
+  --motion-fast: 240ms;
+}
+html[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-muted: #3A3A3A;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #9A9A9A;
+  --accent: #1BD60B; --accent-text: #1BD60B; --accent-dim: rgba(27, 214, 11, 0.2);
+  --warn: #FBBF24; --warn-dim: rgba(251, 191, 36, 0.18);
+  --border: #4F4F4F; --border-strong: #616161;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --c-fab: #F59E0B; --c-sol: #60A5FA; --c-est: #1BD60B; --c-flu: #22D3EE; --c-mod: #C084FC;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-body); background: var(--bg); color: var(--text);
+  line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+a { color: var(--accent-text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+.site-header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+.site-header .inner { max-width: 1040px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; color: var(--text); display: flex; align-items: center; gap: 9px; }
+.brand:hover { text-decoration: none; }
+.brand .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
+.nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--text); text-decoration: none; }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+.theme-btn { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 16px; min-height: 40px; cursor: pointer; }
+.theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+.hero { padding: 48px 0 24px; }
+.eyebrow { display: inline-block; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-text); background: var(--accent-dim); border-radius: var(--radius-full); padding: 5px 13px; margin-bottom: 18px; }
+.hero h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -0.025em; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); max-width: 620px; }
+
+.next { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 8px 0 20px; }
+.next-card { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--c); border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.next-card .when { font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -0.02em; }
+.next-card .when small { font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: 0; margin-left: 4px; }
+.next-card .what { font-weight: 600; font-size: 14px; margin-top: 8px; }
+.next-card .sub { font-size: 12.5px; color: var(--text-muted); }
+
+/* Filtros: ficam fixos abaixo do cabeçalho ao rolar */
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: var(--hdr, 57px); z-index: 5; background: var(--bg); padding: 10px 0; border-bottom: 1px solid transparent; }
+.chip { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 14px; min-height: 40px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.chip i { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--c, var(--text-muted)); }
+.chip:hover { border-color: var(--border-strong); }
+.chip[aria-pressed="true"] { background: var(--accent-dim); border-color: var(--accent); }
+.controls .sep { flex: 1; }
+
+.month { margin-top: 28px; }
+.month h2 { font-size: 20px; letter-spacing: -0.015em; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin-bottom: 4px; text-transform: capitalize; }
+.row { display: grid; grid-template-columns: 74px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.date { font-family: var(--font-display); }
+.date b { display: block; font-size: 28px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.date span { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.info h3 { font-size: 17px; letter-spacing: -0.01em; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 9px; border-radius: var(--radius-full); color: var(--text); background: var(--surface-muted); }
+.tag.hora { color: var(--text-muted); background: transparent; padding: 0; letter-spacing: 0; text-transform: none; font-size: 12px; }
+.disc { font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.disc i { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--c); }
+.scope { font-size: 13.5px; color: var(--text-secondary); margin-top: 6px; }
+.badge { font-size: 12px; font-weight: 600; white-space: nowrap; padding: 4px 11px; border-radius: var(--radius-full); background: var(--surface-muted); color: var(--text-secondary); }
+.badge.soon { background: var(--warn-dim); color: var(--warn); }
+.badge.today { background: var(--accent); color: #0B0B0B; }
+.row.past { opacity: 0.55; }
+.row.past .date b { text-decoration: line-through; text-decoration-thickness: 2px; }
+.row .link { font-size: 13px; font-weight: 600; display: inline-block; margin-top: 6px; }
+.empty { padding: 28px 0; color: var(--text-muted); }
+
+.note { margin-top: 44px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 18px 22px; }
+.note h3 { font-size: 15px; margin-bottom: 6px; }
+.note p { font-size: 13.5px; color: var(--text-secondary); }
+.note p + p { margin-top: 6px; }
+
+.site-footer { border-top: 1px solid var(--border); margin-top: 56px; padding: 26px 0 40px; font-size: 13px; color: var(--text-muted); }
+.site-footer .inner { max-width: 1040px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+@media (max-width: 560px) {
+  .container { padding: 0 16px 64px; }
+  .site-header .inner { padding: 8px 16px; }
+  .nav { order: 3; width: 100%; gap: 20px; }
+  .controls { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 10px 16px; scrollbar-width: none; }
+  .chip { flex: none; white-space: nowrap; }
+  .controls .sep { display: none; }
+  .row { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; }
+  .row .badge { grid-column: 2; justify-self: start; }
+  .date b { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="hdr">
+  <div class="inner">
+    <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./">Disciplinas</a>
+      <a href="cronograma.html" aria-current="page">Cronograma</a>
+      <a href="estrutura.html">Estrutura</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <span class="eyebrow">2º semestre de 2026</span>
+    <h1>Cronograma de provas</h1>
+    <p>Provas, entregas e seminários em ordem de data, com contagem regressiva. Filtre por disciplina para ver só o que importa agora.</p>
+  </section>
+
+  <div class="next" id="next" aria-label="Próximas provas"></div>
+
+  <div class="controls" id="controls" role="group" aria-label="Filtros"></div>
+
+  <div id="timeline"></div>
+
+  <div class="note">
+    <h3>De onde vêm as datas</h3>
+    <p>Datas anotadas a partir dos planos de ensino e avisos de cada disciplina. Podem mudar: confira no e-Disciplinas antes de planejar.</p>
+    <p>Elementos de Máquinas I e Laboratório de Eletricidade ainda não têm datas registradas.</p>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="inner">
+    <span>Cérebro · guias de estudo</span>
+    <span>CC BY-NC-SA 4.0</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DISC = {
+    fab: { nome: 'Fabricação',              cor: 'var(--c-fab)' },
+    sol: { nome: 'Mecânica dos Sólidos II', cor: 'var(--c-sol)' },
+    est: { nome: 'Estatística',             cor: 'var(--c-est)' },
+    flu: { nome: 'Fluidos I',               cor: 'var(--c-flu)' },
+    mod: { nome: 'Modelagem',               cor: 'var(--c-mod)' }
+  };
+  var TIPOS = { P: 'Prova', SUB: 'Sub', REC: 'Rec.', ENT: 'Entrega', SEM: 'Seminário' };
+
+  // [data, fim, disciplina, tipo, título, escopo, hora, link]
+  var E = [
+    ['2026-09-14', null, 'sol', 'P', 'P1', 'Tensões e deformações. Sem consulta.', '', 'mecanica-dos-solidos/provas/p1.html'],
+    ['2026-09-16', null, 'est', 'P', 'P1', 'Fichas 01 a 05 (amostragem a intervalos de confiança).', '', 'estatistica/provas/p1.html'],
+    ['2026-09-17', null, 'flu', 'P', 'P1', 'T1, T2, T3, L1, L2.', '8h', null],
+    ['2026-09-23', null, 'fab', 'P', 'P1', 'Aulas 1–9.', '', null],
+    ['2026-10-02', null, 'mod', 'P', 'P1', 'Com 1 folha manuscrita, frente e verso.', '13h10', null],
+
+    ['2026-10-23', null, 'fab', 'P', 'P2', 'Aulas 12–21: polímeros, peças plásticas, compósitos, prototipagem rápida, manufatura aditiva e junção.', '', null],
+    ['2026-10-26', null, 'sol', 'P', 'P2', 'Aulas 12–21 (métodos de energia). Sem consulta.', '', 'mecanica-dos-solidos/provas/p2.html'],
+    ['2026-10-26', null, 'est', 'P', 'P2', 'Aulas 11–20: fichas 06 a 12 (testes de hipóteses, aderência, associação).', '', 'estatistica/provas/p2.html'],
+    ['2026-10-27', null, 'flu', 'P', 'P2', 'T4, T5, L3, L4. Sem consulta; calculadora obrigatória.', '8h', null],
+    ['2026-11-17', null, 'mod', 'P', 'P2', 'Cumulativa: todos os módulos.', '', null],
+    ['2026-11-22', null, 'mod', 'ENT', 'Trabalho final', 'Entrega do trabalho.', '', null],
+    ['2026-11-24', '2026-12-08', 'mod', 'SEM', 'Apresentações do trabalho', 'Apresentações de 24/11 a 08/12.', '', null],
+    ['2026-11-25', null, 'fab', 'SEM', 'Seminário', '', '', null],
+    ['2026-11-27', null, 'fab', 'SEM', 'Seminário', '', '', null],
+    ['2026-11-30', null, 'sol', 'P', 'P3', 'Aulas 23–29: estruturas simétricas e flambagem.', '', 'mecanica-dos-solidos/provas/p3.html'],
+    ['2026-12-02', null, 'est', 'P', 'P3', 'Aulas 21–28: ANOVA e regressão.', '', 'estatistica/provas/p3.html'],
+    ['2026-12-02', null, 'fab', 'SEM', 'Seminário', '', '', null],
+    ['2026-12-03', null, 'flu', 'P', 'P3 + PEL', 'T6, T7, L5, L6, L7 e prova das experiências.', '7h30', null],
+    ['2026-12-04', null, 'fab', 'P', 'P3', 'Aulas 23–28.', '', null],
+    ['2026-12-07', null, 'sol', 'SUB', 'PSub', 'Toda a matéria (aulas 1–29).', '', null],
+    ['2026-12-09', null, 'est', 'SUB', 'Sub', 'Substitutiva.', '', null],
+    ['2026-12-09', null, 'fab', 'SUB', 'PSub', 'Substitutiva.', '', null],
+    ['2026-12-10', null, 'flu', 'SUB', 'PSub', 'Toda a matéria.', '8h', null],
+    ['2026-12-11', null, 'mod', 'SUB', 'PSub', 'Substitutiva.', '', null],
+    ['2026-12-16', null, 'fab', 'REC', 'Recuperação', '', '', null]
+  ].map(function (r) {
+    return { d: r[0], fim: r[1], disc: r[2], tipo: r[3], t: r[4], esc: r[5], h: r[6], link: r[7] };
+  });
+
+  var MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var DIAS = ['dom','seg','ter','qua','qui','sex','sáb'];
+  function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function hoje() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  function diff(d) { return Math.round((parse(d) - hoje()) / 86400000); }
+  function rel(n) {
+    if (n === 0) return 'hoje';
+    if (n === 1) return 'amanhã';
+    if (n > 1) return 'em ' + n + ' dias';
+    return 'há ' + (-n) + (n === -1 ? ' dia' : ' dias');
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function fimEvento(e) { return e.fim || e.d; }
+  function passado(e) { return diff(fimEvento(e)) < 0; }
+
+  var filtro = 'all', mostrarPassadas = false;
+  function lerFiltro() { try { return localStorage.getItem('cerebro-cron-filtro'); } catch (e) { return null; } }
+  function salvarFiltro(v) { try { localStorage.setItem('cerebro-cron-filtro', v); } catch (e) {} }
+  var f0 = lerFiltro(); if (f0 && DISC[f0]) filtro = f0;
+
+  function renderNext() {
+    var box = document.getElementById('next');
+    var prox = E.filter(function (e) { return !passado(e) && e.tipo === 'P'; })
+      .sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; }).slice(0, 4);
+    box.innerHTML = prox.map(function (e) {
+      var n = diff(e.d), dt = parse(e.d);
+      return '<div class="next-card" style="--c:' + DISC[e.disc].cor + '">' +
+        '<div class="when">' + (n <= 0 ? 'Hoje' : n + '<small>' + (n === 1 ? 'dia' : 'dias') + '</small>') + '</div>' +
+        '<div class="what">' + esc(e.t) + ' · ' + esc(DISC[e.disc].nome) + '</div>' +
+        '<div class="sub">' + DIAS[dt.getDay()] + ', ' + dt.getDate() + '/' + (dt.getMonth() + 1) + (e.h ? ' · ' + e.h : '') + '</div></div>';
+    }).join('');
+  }
+
+  function renderControls() {
+    var h = '<button class="chip" type="button" data-f="all" aria-pressed="' + (filtro === 'all') + '"><i></i>Todas</button>';
+    Object.keys(DISC).forEach(function (k) {
+      h += '<button class="chip" type="button" data-f="' + k + '" aria-pressed="' + (filtro === k) + '" style="--c:' + DISC[k].cor + '"><i></i>' + esc(DISC[k].nome) + '</button>';
+    });
+    h += '<span class="sep"></span><button class="chip" type="button" id="togPast" aria-pressed="' + mostrarPassadas + '">Mostrar já realizadas</button>';
+    document.getElementById('controls').innerHTML = h;
+  }
+
+  function renderTimeline() {
+    var lista = E.filter(function (e) {
+      return (filtro === 'all' || e.disc === filtro) && (mostrarPassadas || !passado(e));
+    }).sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : (a.disc < b.disc ? -1 : 1); });
+
+    var el = document.getElementById('timeline');
+    if (!lista.length) { el.innerHTML = '<p class="empty">Nada por aqui. Experimente outra disciplina ou mostre as já realizadas.</p>'; return; }
+
+    var html = '', mes = '';
+    lista.forEach(function (e) {
+      var dt = parse(e.d), chave = dt.getFullYear() + '-' + dt.getMonth();
+      if (chave !== mes) {
+        if (mes) html += '</section>';
+        html += '<section class="month"><h2>' + MESES[dt.getMonth()] + ' ' + dt.getFullYear() + '</h2>';
+        mes = chave;
+      }
+      var n = diff(e.d), past = passado(e);
+      var bcls = past ? '' : n === 0 ? 'today' : n <= 7 ? 'soon' : '';
+      var sem = DIAS[dt.getDay()];
+      html += '<div class="row' + (past ? ' past' : '') + '" style="--c:' + DISC[e.disc].cor + '">' +
+        '<div class="date"><b>' + dt.getDate() + '</b><span>' + sem + '</span></div>' +
+        '<div class="info"><h3>' + esc(e.t) + ' <span class="tag">' + TIPOS[e.tipo] + '</span>' + (e.h ? ' <span class="tag hora">' + esc(e.h) + '</span>' : '') + '</h3>' +
+        '<div class="disc"><i></i>' + esc(DISC[e.disc].nome) + '</div>' +
+        (e.esc ? '<div class="scope">' + esc(e.esc) + '</div>' : '') +
+        (e.link ? '<a class="link" href="' + e.link + '">Abrir material →</a>' : '') +
+        '</div>' +
+        '<span class="badge ' + bcls + '">' + rel(n) + '</span></div>';
+    });
+    el.innerHTML = html + '</section>';
+  }
+
+  document.getElementById('controls').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    if (b.id === 'togPast') { mostrarPassadas = !mostrarPassadas; }
+    else { filtro = b.getAttribute('data-f'); salvarFiltro(filtro); }
+    renderControls(); renderTimeline();
+  });
+  renderNext(); renderControls(); renderTimeline();
+
+  // altura real do cabeçalho, para os filtros fixarem logo abaixo dele
+  var hdr = document.getElementById('hdr');
+  function medir() { document.documentElement.style.setProperty('--hdr', hdr.offsetHeight + 'px'); }
+  medir(); window.addEventListener('resize', medir);
+
+  // tema: escuro por padrão
+  var root = document.documentElement;
+  function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
+  root.setAttribute('data-theme', read() || 'dark');
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); save(next);
+  });
+})();
+</script>
+
+</body>
+</html>

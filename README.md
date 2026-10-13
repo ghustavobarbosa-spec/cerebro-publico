@@ -9,6 +9,8 @@ organizados e roteiros de revisão escritos durante o estudo das disciplinas.
 
 | Guia | Disciplina | O que é |
 |---|---|---|
+| [Cronograma de provas](cronograma.html) | Todas | Provas, entregas e seminários do semestre em ordem de data, com contagem regressiva e filtro por disciplina |
+| [Estrutura do site](estrutura.html) | Todas | Árvore de todas as páginas, por disciplina: hub, fichas de tópico e provas |
 | [P1 2025 resolvida](estatistica/p1-2025-resolvida.html) | Estatística | Cada questão aberta do começo ao fim, com mapa de assuntos e fórmulas |
 | [Calculadora científica do zero](estatistica/calculadora-cientifica.html) | Estatística | Modo SD, tabelas de frequência, intervalos de confiança e teste de teclado |
 | [PMR-3301 — guia de exercícios P1](fabricacao/p1-pmr3301-guia-exercicios.html) | Processos de fabricação | Formulário completo por bloco, de propriedades mecânicas a metalurgia do pó |

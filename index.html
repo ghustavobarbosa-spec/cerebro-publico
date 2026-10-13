@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,6 +123,10 @@ a:hover { text-decoration: underline; }
   transition: all var(--motion-fast) var(--ease-out-expo);
 }
 .theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+.nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--text); text-decoration: none; }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
 
 /* ===== Hero ===== */
 .hero { padding: 64px 0 40px; max-width: 660px; }
@@ -256,6 +260,8 @@ a:hover { text-decoration: underline; }
 }
 
 @media (max-width: 600px) {
+  .site-header .inner { flex-wrap: wrap; padding: 8px 16px; }
+  .nav { order: 3; width: 100%; gap: 20px; }
   .hero { padding: 44px 0 32px; }
   .grid { grid-template-columns: 1fr; }
 }
@@ -266,6 +272,11 @@ a:hover { text-decoration: underline; }
 <header class="site-header">
   <div class="inner">
     <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./" aria-current="page">Disciplinas</a>
+      <a href="cronograma.html">Cronograma</a>
+      <a href="estrutura.html">Estrutura</a>
+    </nav>
     <button class="theme-btn" id="themeBtn" type="button">Tema</button>
   </div>
 </header>
@@ -276,6 +287,30 @@ a:hover { text-decoration: underline; }
     <span class="eyebrow">Material aberto de estudo</span>
     <h1>Guias de estudo de Engenharia</h1>
     <p>Resoluções passo a passo, formulários organizados e roteiros de revisão escritos durante o estudo. Cada guia é uma página só, sem cadastro e sem propaganda — abra, use, compartilhe.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Planejamento</h2>
+      <span class="count">2 páginas</span>
+    </div>
+    <div class="grid">
+
+      <a class="card" href="cronograma.html">
+        <div class="tag">Calendário</div>
+        <h3>Cronograma de provas</h3>
+        <p>Provas, entregas e seminários do semestre em ordem de data, com contagem regressiva e filtro por disciplina.</p>
+        <span class="go">Abrir cronograma <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a class="card" href="estrutura.html">
+        <div class="tag">Mapa do site</div>
+        <h3>Estrutura do site</h3>
+        <p>Todas as páginas em árvore, por disciplina: hub, fichas de tópico e páginas de prova. Bom para achar onde está cada coisa.</p>
+        <span class="go">Abrir mapa <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
   </section>
 
   <section class="section">
@@ -398,7 +433,7 @@ a:hover { text-decoration: underline; }
   function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
   function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
   var saved = read();
-  var initial = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  var initial = saved || 'dark';
   root.setAttribute('data-theme', initial);
   var btn = document.getElementById('themeBtn');
   if (btn) {

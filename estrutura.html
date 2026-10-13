@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrutura do site — Cérebro</title>
+<meta name="description" content="Diagrama em árvore das páginas do site: hub, fichas de tópico e páginas de prova de cada disciplina.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #6B6B6B;
+  --accent: #00B131; --accent-text: #007A22; --accent-dim: rgba(0, 177, 49, 0.12);
+  --ctx: #00B131; --know: #2563EB; --eval: #D97706; --old: #8F8F8F;
+  --border: #E0E0E0; --border-strong: #C4C4C4;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --radius: 8px; --radius-lg: 16px; --radius-full: 9999px;
+  --motion-fast: 240ms;
+}
+html[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-muted: #3A3A3A;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #9A9A9A;
+  --accent: #1BD60B; --accent-text: #1BD60B; --accent-dim: rgba(27, 214, 11, 0.2);
+  --ctx: #1BD60B; --know: #60A5FA; --eval: #FBBF24; --old: #8F8F8F;
+  --border: #4F4F4F; --border-strong: #616161;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; transition: background var(--motion-fast), color var(--motion-fast); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+.site-header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+.site-header .inner { max-width: 1040px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 9px; }
+.brand .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
+.nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--text); }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+.theme-btn { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 16px; min-height: 40px; cursor: pointer; }
+.theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+.hero { padding: 48px 0 20px; }
+.eyebrow { display: inline-block; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-text); background: var(--accent-dim); border-radius: var(--radius-full); padding: 5px 13px; margin-bottom: 18px; }
+.hero h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -0.025em; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); max-width: 640px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 18px 0 14px; font-size: 13px; color: var(--text-secondary); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+.tools { display: flex; gap: 8px; margin-bottom: 12px; }
+.chip { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 14px; min-height: 40px; cursor: pointer; }
+.chip:hover { border-color: var(--border-strong); color: var(--text); }
+
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); overflow-x: auto; }
+.root-label { font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.root-label .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
+
+.tree, .tree ul { list-style: none; }
+.tree ul { margin-left: 11px; padding-left: 20px; border-left: 1.5px solid var(--border-strong); }
+.tree li { position: relative; padding: 2px 0; }
+.tree ul > li::before { content: ""; position: absolute; left: -20px; top: 17px; width: 14px; border-top: 1.5px solid var(--border-strong); }
+.tree summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 5px 8px; margin-left: -8px; border-radius: var(--radius); }
+.tree summary::-webkit-details-marker { display: none; }
+.tree summary::before { content: "▸"; font-size: 11px; color: var(--text-muted); width: 10px; transition: transform var(--motion-fast); }
+.tree details[open] > summary::before { transform: rotate(90deg); }
+.tree summary:hover, .tree a:hover { background: var(--surface-muted); }
+.tree summary:focus-visible, .tree a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.fname { font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; }
+.note { font-size: 12.5px; color: var(--text-muted); }
+.dir.disc > details > summary .fname { color: var(--accent-text); }
+.dir.know > details > summary .fname { color: var(--know); }
+.dir.eval > details > summary .fname { color: var(--eval); }
+.leaf a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; padding: 5px 8px 5px 10px; margin-left: -8px; border-radius: 0 var(--radius) var(--radius) 0; border-left: 3px solid var(--c, var(--old)); }
+.leaf.ctx { --c: var(--ctx); } .leaf.know { --c: var(--know); } .leaf.eval { --c: var(--eval); } .leaf.old { --c: var(--old); }
+.leaf .file { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-secondary); }
+.leaf .lbl { font-size: 13.5px; font-weight: 500; }
+.leaf.old .lbl { color: var(--text-secondary); }
+
+.how { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.how div { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--c); border-radius: var(--radius-lg); padding: 16px 18px; }
+.how h3 { font-size: 15px; margin-bottom: 4px; }
+.how p { font-size: 13.5px; color: var(--text-secondary); }
+.how code { font-family: var(--font-mono); font-size: 12.5px; }
+.site-footer { border-top: 1px solid var(--border); margin-top: 56px; padding: 26px 0 40px; font-size: 13px; color: var(--text-muted); }
+.site-footer .inner { max-width: 1040px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+@media (max-width: 560px) {
+  .container { padding: 0 16px 64px; }
+  .site-header .inner { padding: 8px 16px; }
+  .nav { order: 3; width: 100%; gap: 20px; }
+  .panel { padding: 14px; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./">Disciplinas</a>
+      <a href="cronograma.html">Cronograma</a>
+      <a href="estrutura.html" aria-current="page">Estrutura</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+<div class="container">
+  <section class="hero">
+    <span class="eyebrow">Mapa do site</span>
+    <h1>Estrutura do site</h1>
+    <p>Todas as páginas, por disciplina. Abra uma pasta para ver o que há dentro e clique em qualquer arquivo para ir direto à página. A cor da borda mostra a camada dela.</p>
+  </section>
+
+  <div class="legend">
+    <span style="--c:var(--ctx)"><i></i>Contexto (hub, home)</span>
+    <span style="--c:var(--know)"><i></i>Conhecimento (base, fichas)</span>
+    <span style="--c:var(--eval)"><i></i>Avaliação (provas)</span>
+    <span style="--c:var(--old)"><i></i>Guia avulso (formato antigo)</span>
+  </div>
+  <div class="tools">
+    <button class="chip" id="openAll" type="button">Expandir tudo</button>
+    <button class="chip" id="closeAll" type="button">Recolher tudo</button>
+  </div>
+
+  <div class="panel">
+    <div class="root-label"><span class="dot"></span>cerebro-publico/</div>
+    <ul class="tree" id="tree">
+<li class="leaf ctx"><a href="index.html"><span class="file">index.html</span><span class="lbl">Home: menu de disciplinas</span></a></li><li class="leaf ctx"><a href="cronograma.html"><span class="file">cronograma.html</span><span class="lbl">Cronograma de provas</span></a></li><li class="leaf ctx"><a href="estrutura.html"><span class="file">estrutura.html</span><span class="lbl">Esta página</span></a></li><li class="dir disc"><details open><summary><span class="fname">mecanica-dos-solidos/</span><span class="note">PME3211 · apostila + trilhas</span></summary><ul><li class="leaf ctx"><a href="mecanica-dos-solidos/index.html"><span class="file">index.html</span><span class="lbl">Hub: motivação, programa, bibliografia</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/base.html"><span class="file">base.html</span><span class="lbl">Base: revisão de conceitos anteriores</span></a></li><li class="dir know"><details><summary><span class="fname">topicos/</span><span class="note">16 fichas</span></summary><ul><li class="leaf know"><a href="mecanica-dos-solidos/topicos/01-esforcos-solicitantes.html"><span class="file">01-esforcos-solicitantes.html</span><span class="lbl">01 · Esforços solicitantes</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/02-tensor-e-cauchy.html"><span class="file">02-tensor-e-cauchy.html</span><span class="lbl">02 · Tensor das tensões e Cauchy</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/03-tensoes-principais.html"><span class="file">03-tensoes-principais.html</span><span class="lbl">03 · Tensões e direções principais</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/04-circulos-de-mohr.html"><span class="file">04-circulos-de-mohr.html</span><span class="lbl">04 · Círculos de Mohr</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/05-vasos-de-pressao.html"><span class="file">05-vasos-de-pressao.html</span><span class="lbl">05 · Vasos de pressão de parede fina</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/06-criterios-de-resistencia.html"><span class="file">06-criterios-de-resistencia.html</span><span class="lbl">06 · Critérios de resistência</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/07-deformacoes.html"><span class="file">07-deformacoes.html</span><span class="lbl">07 · Deformações num ponto</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/08-extensometros-e-hooke.html"><span class="file">08-extensometros-e-hooke.html</span><span class="lbl">08 · Extensômetros e Hooke generalizada</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/09-trabalho-e-energia.html"><span class="file">09-trabalho-e-energia.html</span><span class="lbl">09 · Trabalho, energia e P.T.E.</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/10-energia-na-torcao.html"><span class="file">10-energia-na-torcao.html</span><span class="lbl">10 · Energia na torção</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/11-energia-na-flexao.html"><span class="file">11-energia-na-flexao.html</span><span class="lbl">11 · Energia na flexão</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/12-teoremas-de-castigliano.html"><span class="file">12-teoremas-de-castigliano.html</span><span class="lbl">12 · Crotti-Engesser e Castigliano</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/13-hiperestaticas-energia.html"><span class="file">13-hiperestaticas-energia.html</span><span class="lbl">13 · Hiperestáticas e linha elástica</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/14-estruturas-simetricas.html"><span class="file">14-estruturas-simetricas.html</span><span class="lbl">14 · Estruturas simétricas</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/15-estabilidade.html"><span class="file">15-estabilidade.html</span><span class="lbl">15 · Estabilidade do equilíbrio</span></a></li><li class="leaf know"><a href="mecanica-dos-solidos/topicos/16-flambagem-de-euler.html"><span class="file">16-flambagem-de-euler.html</span><span class="lbl">16 · Flambagem de Euler</span></a></li></ul></details></li><li class="dir eval"><details><summary><span class="fname">provas/</span><span class="note">4 páginas</span></summary><ul><li class="leaf eval"><a href="mecanica-dos-solidos/provas/index.html"><span class="file">index.html</span><span class="lbl">O que cai em cada prova</span></a></li><li class="leaf eval"><a href="mecanica-dos-solidos/provas/p1.html"><span class="file">p1.html</span><span class="lbl">P1 · 14/set</span></a></li><li class="leaf eval"><a href="mecanica-dos-solidos/provas/p2.html"><span class="file">p2.html</span><span class="lbl">P2 · 26/out</span></a></li><li class="leaf eval"><a href="mecanica-dos-solidos/provas/p3.html"><span class="file">p3.html</span><span class="lbl">P3 · 30/nov</span></a></li></ul></details></li><li class="leaf old"><a href="mecanica-dos-solidos/p1-pme3211-tensoes-e-deformacoes.html"><span class="file">p1-pme3211-tensoes-e-deformacoes.html</span><span class="lbl">Redireciona para provas/p1.html</span></a></li><li class="leaf old"><a href="mecanica-dos-solidos/p2-pme3211-metodos-de-energia.html"><span class="file">p2-pme3211-metodos-de-energia.html</span><span class="lbl">Redireciona para provas/p2.html</span></a></li></ul></details></li><li class="dir disc"><details><summary><span class="fname">estatistica/</span><span class="note">PRO3200 · mapa de conceitos</span></summary><ul><li class="leaf ctx"><a href="estatistica/index.html"><span class="file">index.html</span><span class="lbl">Hub: motivação, programa, bibliografia</span></a></li><li class="leaf know"><a href="estatistica/base.html"><span class="file">base.html</span><span class="lbl">Base: revisão de conceitos anteriores</span></a></li><li class="dir know"><details><summary><span class="fname">topicos/</span><span class="note">16 fichas</span></summary><ul><li class="leaf know"><a href="estatistica/topicos/01-introducao-e-amostragem.html"><span class="file">01-introducao-e-amostragem.html</span><span class="lbl">01 · Introdução e amostragem</span></a></li><li class="leaf know"><a href="estatistica/topicos/02-estatistica-descritiva.html"><span class="file">02-estatistica-descritiva.html</span><span class="lbl">02 · Estatística descritiva</span></a></li><li class="leaf know"><a href="estatistica/topicos/03-distribuicoes-amostrais.html"><span class="file">03-distribuicoes-amostrais.html</span><span class="lbl">03 · Distribuições amostrais e TLC</span></a></li><li class="leaf know"><a href="estatistica/topicos/04-estimacao-pontual.html"><span class="file">04-estimacao-pontual.html</span><span class="lbl">04 · Estimação pontual</span></a></li><li class="leaf know"><a href="estatistica/topicos/05-intervalos-de-confianca.html"><span class="file">05-intervalos-de-confianca.html</span><span class="lbl">05 · Intervalos de confiança (uma amostra)</span></a></li><li class="leaf know"><a href="estatistica/topicos/06-ic-duas-amostras.html"><span class="file">06-ic-duas-amostras.html</span><span class="lbl">06 · Intervalos de confiança (duas amostras)</span></a></li><li class="leaf know"><a href="estatistica/topicos/07-fundamentos-do-teste.html"><span class="file">07-fundamentos-do-teste.html</span><span class="lbl">07 · Fundamentos do teste de hipóteses</span></a></li><li class="leaf know"><a href="estatistica/topicos/08-testes-uma-amostra.html"><span class="file">08-testes-uma-amostra.html</span><span class="lbl">08 · Testes com uma amostra</span></a></li><li class="leaf know"><a href="estatistica/topicos/09-duas-medias.html"><span class="file">09-duas-medias.html</span><span class="lbl">09 · Duas médias: independentes e emparelhadas</span></a></li><li class="leaf know"><a href="estatistica/topicos/10-duas-proporcoes-e-variancias.html"><span class="file">10-duas-proporcoes-e-variancias.html</span><span class="lbl">10 · Duas proporções e razão de variâncias</span></a></li><li class="leaf know"><a href="estatistica/topicos/11-aderencia.html"><span class="file">11-aderencia.html</span><span class="lbl">11 · Testes de aderência</span></a></li><li class="leaf know"><a href="estatistica/topicos/12-associacao.html"><span class="file">12-associacao.html</span><span class="lbl">12 · Teste de associação</span></a></li><li class="leaf know"><a href="estatistica/topicos/13-anova-um-fator.html"><span class="file">13-anova-um-fator.html</span><span class="lbl">13 · ANOVA com um fator</span></a></li><li class="leaf know"><a href="estatistica/topicos/14-anova-dois-fatores.html"><span class="file">14-anova-dois-fatores.html</span><span class="lbl">14 · ANOVA com dois fatores</span></a></li><li class="leaf know"><a href="estatistica/topicos/15-regressao-simples.html"><span class="file">15-regressao-simples.html</span><span class="lbl">15 · Regressão linear simples</span></a></li><li class="leaf know"><a href="estatistica/topicos/16-regressao-multipla.html"><span class="file">16-regressao-multipla.html</span><span class="lbl">16 · Regressão linear múltipla</span></a></li></ul></details></li><li class="dir eval"><details><summary><span class="fname">provas/</span><span class="note">4 páginas</span></summary><ul><li class="leaf eval"><a href="estatistica/provas/index.html"><span class="file">index.html</span><span class="lbl">O que cai em cada prova</span></a></li><li class="leaf eval"><a href="estatistica/provas/p1.html"><span class="file">p1.html</span><span class="lbl">P1 · 16/set</span></a></li><li class="leaf eval"><a href="estatistica/provas/p2.html"><span class="file">p2.html</span><span class="lbl">P2 · 26/out</span></a></li><li class="leaf eval"><a href="estatistica/provas/p3.html"><span class="file">p3.html</span><span class="lbl">P3 · 02/dez</span></a></li></ul></details></li><li class="leaf old"><a href="estatistica/calculadora-cientifica.html"><span class="file">calculadora-cientifica.html</span><span class="lbl">Guia de Uso — Calculadora Científica</span></a></li><li class="leaf old"><a href="estatistica/calculadora.html"><span class="file">calculadora.html</span><span class="lbl">Calculadora científica</span></a></li><li class="leaf old"><a href="estatistica/p1-2025-resolvida.html"><span class="file">p1-2025-resolvida.html</span><span class="lbl">P1 Estatística 2025 Resolvida</span></a></li></ul></details></li><li class="dir disc"><details><summary><span class="fname">modelagem-de-sistemas-dinamicos/</span><span class="note">PME3380 · guias avulsos</span></summary><ul><li class="leaf old"><a href="modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html"><span class="file">p1-pme3380-modelagem-de-sistemas-dinamicos.html</span><span class="lbl">P1 Modelagem de Sistemas Dinâmicos</span></a></li><li class="leaf old"><a href="modelagem-de-sistemas-dinamicos/roteiro-base-matematica-pme3380.html"><span class="file">roteiro-base-matematica-pme3380.html</span><span class="lbl">Revisão de base: EDOs, Taylor e Laplace</span></a></li></ul></details></li><li class="dir disc"><details><summary><span class="fname">elementos-de-maquinas/</span><span class="note">PME3350 · guias avulsos</span></summary><ul><li class="leaf old"><a href="elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html"><span class="file">p1-pme3350-elementos-de-maquinas.html</span><span class="lbl">P1 Elementos de Máquinas I</span></a></li></ul></details></li><li class="dir disc"><details><summary><span class="fname">fabricacao/</span><span class="note">PMR3301 · guias avulsos</span></summary><ul><li class="leaf old"><a href="fabricacao/p1-pmr3301-guia-exercicios.html"><span class="file">p1-pmr3301-guia-exercicios.html</span><span class="lbl">PMR-3301 · Guia de Exercícios para a P1</span></a></li></ul></details></li>
+    </ul>
+  </div>
+
+  <div class="how">
+    <div style="--c:var(--ctx)"><h3>Contexto</h3><p>O <code>index.html</code> de cada disciplina: por que estudar, programa e bibliografia, com links para o resto.</p></div>
+    <div style="--c:var(--know)"><h3>Conhecimento</h3><p>A <code>base.html</code> revisa o que vem antes; cada ficha em <code>topicos/</code> trata um tópico, com exercícios resolvidos.</p></div>
+    <div style="--c:var(--eval)"><h3>Avaliação</h3><p>Em <code>provas/</code>, a tabela tópico × prova e uma trilha de exercícios para cada prova.</p></div>
+  </div>
+</div>
+<footer class="site-footer"><div class="inner"><span>Cérebro · guias de estudo</span><span>CC BY-NC-SA 4.0</span></div></footer>
+<script>
+(function () {
+  function all() { return document.querySelectorAll('#tree details'); }
+  document.getElementById('openAll').addEventListener('click', function () { all().forEach(function (d) { d.open = true; }); });
+  document.getElementById('closeAll').addEventListener('click', function () { all().forEach(function (d) { d.open = false; }); });
+  var root = document.documentElement;
+  function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
+  root.setAttribute('data-theme', read() || 'dark');
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var n = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', n); save(n);
+  });
+})();
+</script>
+</body>
+</html>
