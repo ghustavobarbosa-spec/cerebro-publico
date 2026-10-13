@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trajetória do curso — Cérebro</title>
+<meta name="description" content="O curso de Engenharia Mecânica semestre a semestre: o que já foi cursado, o que está em andamento e o plano até a formatura.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #6B6B6B;
+  --accent: #00B131; --accent-text: #007A22; --accent-dim: rgba(0, 177, 49, 0.12);
+  --ok: #00B131; --cur: #2563EB; --plan: #8F8F8F; --mod: #D97706;
+  --border: #E0E0E0; --border-strong: #C4C4C4;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --radius: 8px; --radius-lg: 16px; --radius-full: 9999px;
+  --motion-fast: 240ms;
+}
+html[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-muted: #3A3A3A;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #9A9A9A;
+  --accent: #1BD60B; --accent-text: #1BD60B; --accent-dim: rgba(27, 214, 11, 0.2);
+  --ok: #1BD60B; --cur: #60A5FA; --plan: #616161; --mod: #FBBF24;
+  --border: #4F4F4F; --border-strong: #616161;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; transition: background var(--motion-fast), color var(--motion-fast); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px 80px; }
+
+.site-header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+.site-header .inner { max-width: 1160px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 9px; }
+.brand .dot { width: 9px; height: 9px; border-radius: var(--radius-full); background: var(--accent); }
+.nav { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+.nav a { color: var(--text-secondary); padding: 10px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--text); }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+.theme-btn { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 16px; min-height: 40px; cursor: pointer; }
+.theme-btn:hover { border-color: var(--border-strong); color: var(--text); }
+
+.hero { padding: 44px 0 22px; max-width: 700px; }
+.eyebrow { display: inline-block; font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent-text); background: var(--accent-dim); border-radius: var(--radius-full); padding: 5px 13px; margin-bottom: 18px; }
+.hero h1 { font-size: clamp(30px, 6vw, 42px); letter-spacing: -0.025em; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--c, var(--border-strong)); border-radius: var(--radius-lg); padding: 14px 16px; }
+.stat b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.1; }
+.stat span { font-size: 13px; color: var(--text-secondary); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; font-size: 13px; color: var(--text-secondary); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+
+.scroller { overflow-x: auto; padding-bottom: 12px; }
+.cols { display: flex; gap: 12px; align-items: flex-start; min-width: max-content; }
+.col { width: 184px; flex: none; }
+.col-h { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 8px 12px; margin-bottom: 8px; }
+.col-h:hover { border-color: var(--accent); }
+.col.cur .col-h { background: rgba(37, 99, 235, 0.14); border-color: var(--cur); }
+.col-h b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+.col-h span { font-size: 12px; color: var(--text-secondary); }
+.it { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--c); border-radius: var(--radius); padding: 6px 9px; margin-bottom: 6px; font-size: 12.5px; line-height: 1.35; }
+.it.ok { opacity: 0.85; }
+.col:focus-within .col-h { border-color: var(--accent); }
+.col-h:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.how { margin-top: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.how div { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--c); border-radius: var(--radius-lg); padding: 16px 18px; }
+.how h3 { font-size: 16px; margin-bottom: 4px; }
+.how p { font-size: 13.5px; color: var(--text-secondary); }
+.aviso { margin-top: 18px; font-size: 13px; color: var(--text-muted); }
+.site-footer { border-top: 1px solid var(--border); margin-top: 56px; padding: 26px 0 40px; font-size: 13px; color: var(--text-muted); }
+.site-footer .inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+@media (max-width: 560px) {
+  .container { padding: 0 16px 64px; }
+  .site-header .inner { padding: 8px 16px; }
+  .nav { order: 3; width: 100%; gap: 20px; }
+  .hero { padding: 28px 0 16px; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./">Disciplinas</a>
+      <a href="trajetoria.html" aria-current="page">Trajetória</a>
+      <a href="cronograma.html">Cronograma</a>
+      <a href="estrutura.html">Estrutura</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+  </div>
+</header>
+<div class="container">
+  <section class="hero">
+    <span class="eyebrow">Engenharia Mecânica · Poli-USP</span>
+    <h1>Trajetória do curso</h1>
+    <p>Cada coluna é um semestre. Verde já foi cursado, azul é o semestre atual e cinza é o plano. Clique no título de um semestre para ver as disciplinas dele na página inicial.</p>
+  </section>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="legend">
+    <span style="--c:var(--ok)"><i></i>Concluída</span>
+    <span style="--c:var(--cur)"><i></i>Cursando</span>
+    <span style="--c:var(--plan)"><i></i>Planejada</span>
+    <span style="--c:var(--mod)"><i></i>Módulo de formação</span>
+  </div>
+
+  <div class="scroller"><div class="cols" id="cols"></div></div>
+
+  <div class="how">
+    <div style="--c:var(--mod)"><h3>Módulo de formação</h3><p>Os 24 créditos finais do curso, nos dois últimos semestres do plano.</p></div>
+    <div style="--c:var(--cur)"><h3>Estágio e AAC</h3><p>Aparecem como itens no semestre em que estão planejados, junto das disciplinas.</p></div>
+    <div style="--c:var(--ok)"><h3>O plano pode mudar</h3><p>Semestres futuros são previsão. Se algo mudar, só as colunas futuras se movem.</p></div>
+  </div>
+  <p class="aviso">Anotações de estudante, não material oficial. A grade vale a do Júpiter.</p>
+</div>
+<footer class="site-footer"><div class="inner"><span>Cérebro · guias de estudo</span><span>CC BY-NC-SA 4.0</span></div></footer>
+<noscript><p style="padding:16px">Esta página usa JavaScript para montar a grade dos semestres.</p></noscript>
+<script src="curso-dados.js"></script>
+<script>
+(function () {
+  var root = document.documentElement;
+  function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
+  root.setAttribute('data-theme', read() || 'dark');
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var n = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', n); save(n);
+  });
+
+  var D = window.CURSO || [];
+  if (!D.length) return;
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  var conc = 0, plan = 0, cur = 0, atualIdx = 0;
+  D.forEach(function (r, k) {
+    if (r.st === 'ok') conc += r.its.length;
+    else if (r.st === 'cur') { cur = r.its.length; atualIdx = k; }
+    else plan += r.its.length;
+  });
+  var fim = D[D.length - 1].id;
+  var stats = [
+    [(atualIdx + 1) + ' de ' + D.length, 'semestres do plano', 'var(--ok)'],
+    [String(conc), 'disciplinas concluídas', 'var(--ok)'],
+    [String(cur), 'cursando agora', 'var(--cur)'],
+    [String(plan), 'itens planejados', 'var(--plan)'],
+    ['dez/' + fim.slice(0, 4), 'formatura prevista', 'var(--mod)']
+  ];
+  var sb = document.getElementById('stats');
+  stats.forEach(function (s) { var d = el('div', 'stat'); d.style.setProperty('--c', s[2]); d.appendChild(el('b', null, s[0])); d.appendChild(el('span', null, s[1])); sb.appendChild(d); });
+
+  var box = document.getElementById('cols'), curCol = null;
+  D.forEach(function (r) {
+    var mod = r.id.slice(0, 4) === '2029';
+    var cor = mod ? 'var(--mod)' : r.st === 'ok' ? 'var(--ok)' : r.st === 'cur' ? 'var(--cur)' : 'var(--plan)';
+    var col = el('div', 'col ' + r.st);
+    var h = el('a', 'col-h'); h.href = './#' + r.id; h.title = 'Ver as disciplinas de ' + r.id.slice(0, 4) + ' · ' + r.id.slice(5) + 'º semestre';
+    h.appendChild(el('b', null, r.id.slice(0, 4) + '·' + r.id.slice(5)));
+    var cr = r.its.reduce(function (n, i) { return n + (i.c || 0); }, 0);
+    h.appendChild(el('span', null, r.st === 'ok' ? 'concluído' : r.st === 'cur' ? 'semestre atual · ' + cr + ' cr' : (mod ? 'módulo · ' : 'planejado · ') + cr + ' cr'));
+    col.appendChild(h);
+    r.its.forEach(function (i) { var d = el('div', 'it ' + r.st, i.n); d.style.setProperty('--c', cor); col.appendChild(d); });
+    box.appendChild(col);
+    if (r.st === 'cur') curCol = col;
+  });
+  if (curCol) { var sc = box.parentNode; sc.scrollLeft = Math.max(0, curCol.offsetLeft - box.offsetLeft - 24); }
+})();
+</script>
+</body>
+</html>

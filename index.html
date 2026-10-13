@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cérebro — Guias de estudo de Engenharia</title>
-<meta name="description" content="Guias de estudo abertos de Engenharia: estatística e processos de fabricação. Resoluções passo a passo, formulários e roteiros de revisão.">
+<meta name="description" content="Guias de estudo abertos de Engenharia Mecânica, organizados por semestre: resoluções passo a passo, formulários e roteiros de revisão.">
 <meta property="og:title" content="Cérebro — Guias de estudo de Engenharia">
 <meta property="og:description" content="Resoluções passo a passo, formulários e roteiros de revisão. Material aberto e gratuito.">
 <meta property="og:type" content="website">
@@ -259,6 +259,56 @@ a:hover { text-decoration: underline; }
   justify-content: space-between;
 }
 
+
+/* ===== Disciplinas por semestre ===== */
+:root { --c-sol:#2563EB; --c-est:#00B131; --c-fab:#D97706; --c-flu:#0891B2; --c-mod:#9333EA; --c-ele:#DB2777; --c-lab:#6B6B6B; --blue:#2563EB; }
+html[data-theme="dark"] { --c-sol:#60A5FA; --c-est:#1BD60B; --c-fab:#FBBF24; --c-flu:#22D3EE; --c-mod:#C084FC; --c-ele:#F472B6; --c-lab:#A3A3A3; --blue:#60A5FA; }
+.hero { max-width: none; padding: 48px 0 20px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.hero .lead { max-width: 640px; }
+.hero h1 { font-size: clamp(30px, 6vw, 42px); margin-bottom: 12px; }
+.hero p { font-size: 16px; }
+.traj-card { display: block; min-width: 250px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 18px; color: var(--text); }
+.traj-card:hover { text-decoration: none; border-color: var(--accent); }
+.traj-card .k { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.traj-card .v { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+.traj-card .bar { height: 6px; border-radius: var(--radius-full); background: var(--surface-muted); margin: 8px 0 6px; overflow: hidden; }
+.traj-card .bar i { display: block; height: 100%; background: var(--accent); }
+.traj-card .go2 { font-size: 12.5px; color: var(--text-secondary); }
+.tabs { position: sticky; top: 61px; z-index: 5; background: var(--bg); padding: 10px 0; display: flex; gap: 8px; overflow-x: auto; align-items: center; scrollbar-width: thin; }
+.tab { flex: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); padding: 0 15px; min-height: 44px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.tab:hover { border-color: var(--border-strong); color: var(--text); }
+.tab[aria-pressed="true"] { color: var(--text); border-color: var(--accent); background: var(--accent-dim); }
+.tab .t { font-size: 11px; opacity: 0.85; }
+.tab.past-toggle { border-style: dashed; }
+.tab:focus-visible, .dcard a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sem-resumo { font-size: 13px; color: var(--text-muted); margin: 10px 0 14px; }
+.dgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.dcard { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--c, var(--border-strong)); border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+.dcard .top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.dcard .sig { font-size: 12px; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.badge { font-size: 11.5px; font-weight: 600; padding: 2px 10px; border-radius: var(--radius-full); background: var(--surface-muted); color: var(--text-secondary); }
+.badge.cur { background: var(--accent-dim); color: var(--accent); }
+.badge.plan { background: rgba(37,99,235,0.14); color: var(--blue); }
+.dcard h3 { font-size: 20px; line-height: 1.25; margin: 4px 0 10px; color: var(--text); }
+.dcard .prova { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.dcard .prova b { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1; }
+.dcard .prova b small { font-size: 12px; color: var(--text-muted); margin-left: 3px; font-weight: 600; }
+.dcard .prova span { font-size: 13px; color: var(--text-secondary); }
+.camadas { display: flex; flex-wrap: wrap; gap: 6px; }
+.camadas span { font-size: 11.5px; padding: 2px 9px; border-radius: var(--radius-full); border: 1px solid var(--border); color: var(--text-muted); }
+.camadas span.on { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+.dcard .rodape { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; }
+.dcard .links { margin-top: 12px; display: flex; flex-direction: column; gap: 4px; }
+.dcard .links a { font-size: 14px; font-weight: 600; }
+.sem-nota { margin-top: 28px; background: var(--surface); border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); padding: 14px 18px; color: var(--text-secondary); font-size: 14px; }
+.plist { list-style: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.plist li { display: flex; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.plist li:last-child { border-bottom: 0; }
+.plist .sig { font-size: 12px; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; min-width: 70px; padding-top: 2px; }
+.plist .ok { color: var(--accent); margin-left: auto; font-size: 12px; }
+@media (max-width: 760px) { .dgrid { grid-template-columns: 1fr; } .traj-card { width: 100%; } }
+@media (max-width: 600px) { .tabs { top: 96px; } .hero { padding: 28px 0 16px; } }
+
 @media (max-width: 600px) {
   .site-header .inner { flex-wrap: wrap; padding: 8px 16px; }
   .nav { order: 3; width: 100%; gap: 20px; }
@@ -274,6 +324,7 @@ a:hover { text-decoration: underline; }
     <a class="brand" href="./"><span class="dot"></span>Cérebro</a>
     <nav class="nav" aria-label="Principal">
       <a href="./" aria-current="page">Disciplinas</a>
+      <a href="trajetoria.html">Trajetória</a>
       <a href="cronograma.html">Cronograma</a>
       <a href="estrutura.html">Estrutura</a>
     </nav>
@@ -284,133 +335,35 @@ a:hover { text-decoration: underline; }
 <div class="container">
 
   <section class="hero">
-    <span class="eyebrow">Material aberto de estudo</span>
-    <h1>Guias de estudo de Engenharia</h1>
-    <p>Resoluções passo a passo, formulários organizados e roteiros de revisão escritos durante o estudo. Cada guia é uma página só, sem cadastro e sem propaganda — abra, use, compartilhe.</p>
+    <div class="lead">
+      <span class="eyebrow" id="eyebrow">Engenharia Mecânica · Poli-USP</span>
+      <h1>Disciplinas</h1>
+      <p>Escolha o semestre. O atual abre por padrão, com a próxima prova e o material já pronto para estudar.</p>
+    </div>
+    <a class="traj-card" href="trajetoria.html">
+      <div class="k">Trajetória</div>
+      <div class="v" id="trajV">…</div>
+      <div class="bar"><i id="trajBar" style="width:0%"></i></div>
+      <div class="go2">Ver o curso inteiro →</div>
+    </a>
   </section>
 
-  <section class="section">
-    <div class="section-head">
-      <h2>Planejamento</h2>
-      <span class="count">2 páginas</span>
-    </div>
-    <div class="grid">
+  <div class="tabs" id="tabs" role="group" aria-label="Semestre"></div>
+  <div class="sem-resumo" id="resumo" aria-live="polite"></div>
+  <div id="conteudo"></div>
+  <div class="sem-nota" id="nota"></div>
 
-      <a class="card" href="cronograma.html">
-        <div class="tag">Calendário</div>
-        <h3>Cronograma de provas</h3>
-        <p>Provas, entregas e seminários do semestre em ordem de data, com contagem regressiva e filtro por disciplina.</p>
-        <span class="go">Abrir cronograma <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a class="card" href="estrutura.html">
-        <div class="tag">Mapa do site</div>
-        <h3>Estrutura do site</h3>
-        <p>Todas as páginas em árvore, por disciplina: hub, fichas de tópico e páginas de prova. Bom para achar onde está cada coisa.</p>
-        <span class="go">Abrir mapa <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Estatística</h2>
-      <span class="count">2 guias</span>
-    </div>
-    <div class="grid">
-
-      <a class="card" href="estatistica/p1-2025-resolvida.html">
-        <div class="tag">Prova resolvida</div>
-        <h3>P1 2025 resolvida passo a passo</h3>
-        <p>Cada questão aberta do começo ao fim: escolha da distribuição, leitura da tabela, conta e conclusão. Inclui mapa de assuntos e as fórmulas que a prova cobra.</p>
-        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a class="card" href="estatistica/calculadora-cientifica.html">
-        <div class="tag">Guia prático</div>
-        <h3>Calculadora científica do zero</h3>
-        <p>Modo SD, tabelas de frequência, os quatro intervalos de confiança e um teste de teclado de 30 segundos. Com glossário ligando o símbolo do formulário à tecla da máquina.</p>
-        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Processos de fabricação</h2>
-      <span class="count">1 guia</span>
-    </div>
-    <div class="grid">
-
-      <a class="card" href="fabricacao/p1-pmr3301-guia-exercicios.html">
-        <div class="tag">Roteiro de revisão</div>
-        <h3>PMR-3301 — guia de exercícios para a P1</h3>
-        <p>Formulário completo por bloco: propriedades mecânicas, laminação, corte de chapa, embutimento, forjamento, trefilação, extrusão, processos não convencionais e metalurgia do pó.</p>
-        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Elementos de Máquinas I</h2>
-      <span class="count">1 guia</span>
-    </div>
-    <div class="grid">
-
-      <a class="card" href="elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html">
-        <div class="tag">Listas resolvidas</div>
-        <h3>PME3350 — P1 por exercícios-pivô</h3>
-        <p>Chavetas, eixos ranhurados, uniões por interferência e fadiga (Marin, Goodman, Morrow, Rainflow, Miner). Guia de uso do formulário e do tabelário, listas 1 a 3 resolvidas passo a passo e resumo de revisão.</p>
-        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Modelagem de Sistemas Dinâmicos</h2>
-      <span class="count">2 guias</span>
-    </div>
-    <div class="grid">
-
-      <a class="card" href="modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html">
-        <div class="tag">Prova resolvida</div>
-        <h3>PME3380 — P1 por exercícios-pivô</h3>
-        <p>P1 2023, 2024 e 2025 resolvidas passo a passo, mais P1 antigas, mais linearização, tanques, matriz de transição e uma bateria de estabilidade/Routh-Hurwitz. Ensina a usar a folha de tabelas (analogias e Laplace) e fecha com um resumo de uma página.</p>
-        <span class="go">Abrir guia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-      <a class="card" href="modelagem-de-sistemas-dinamicos/roteiro-base-matematica-pme3380.html">
-        <div class="tag">Roteiro de revisão</div>
-        <h3>PME3380 — revisão de base: EDOs, Taylor e Laplace</h3>
-        <p>O que ler no Zill, no Ogata e no Garcia e quais exercícios resolver, na ordem em que a disciplina usa EDOs de 1ª e 2ª ordem, séries de Taylor em uma e duas variáveis, Laplace e a exponencial matricial. Fecha com um checklist de uma página.</p>
-        <span class="go">Abrir roteiro <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>Mecânica dos Sólidos II</h2>
-      <span class="count">1 site</span>
-    </div>
-    <div class="grid">
-
-      <a class="card" href="mecanica-dos-solidos/index.html">
-        <div class="tag">Site da disciplina</div>
-        <h3>PME3211 — Mecânica dos Sólidos II</h3>
-        <p>Uma ficha por tópico, de esforços e tensões a energia, Castigliano e hiperestáticas, com exercícios resolvidos. Trilha de pivôs, questões antigas e resumo de revisão para a P1 e a P2.</p>
-        <span class="go">Abrir site <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-
-    </div>
-  </section>
+  <noscript>
+    <section class="section"><p>Esta página usa JavaScript para listar as disciplinas por semestre. Atalhos:</p>
+    <ul>
+      <li><a href="mecanica-dos-solidos/index.html">Mecânica dos Sólidos II</a></li>
+      <li><a href="estatistica/p1-2025-resolvida.html">Estatística: P1 2025 resolvida</a> · <a href="estatistica/calculadora-cientifica.html">calculadora científica</a></li>
+      <li><a href="fabricacao/p1-pmr3301-guia-exercicios.html">Processos de fabricação: guia da P1</a></li>
+      <li><a href="elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html">Elementos de Máquinas I: P1</a></li>
+      <li><a href="modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html">Modelagem: P1</a> · <a href="modelagem-de-sistemas-dinamicos/roteiro-base-matematica-pme3380.html">revisão de base</a></li>
+      <li><a href="cronograma.html">Cronograma</a> · <a href="trajetoria.html">Trajetória</a> · <a href="estrutura.html">Estrutura</a></li>
+    </ul></section>
+  </noscript>
 
   <div class="note">
     <h3>Sobre este material</h3>
@@ -427,24 +380,137 @@ a:hover { text-decoration: underline; }
   </div>
 </footer>
 
+<script src="curso-dados.js"></script>
 <script>
 (function () {
   var root = document.documentElement;
   function read() { try { return localStorage.getItem('cerebro-theme'); } catch (e) { return null; } }
   function save(v) { try { localStorage.setItem('cerebro-theme', v); } catch (e) {} }
-  var saved = read();
-  var initial = saved || 'dark';
-  root.setAttribute('data-theme', initial);
+  root.setAttribute('data-theme', read() || 'dark');
   var btn = document.getElementById('themeBtn');
-  if (btn) {
-    btn.addEventListener('click', function () {
-      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      save(next);
-    });
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); save(next);
+  });
+
+  var D = window.CURSO || [];
+  if (!D.length) return;
+  // Material publicado por disciplina. cor = variavel CSS; camadas = [contexto, conhecimento, avaliacao]; prova = [rotulo, data ISO]
+  var M = {
+    PME3211: { cor: 'sol', camadas: [1, 1, 1], links: [['Abrir site da disciplina', 'mecanica-dos-solidos/index.html']], prova: ['P2', '2026-10-26'] },
+    PRO3200: { cor: 'est', links: [['P1 2025 resolvida', 'estatistica/p1-2025-resolvida.html'], ['Calculadora científica do zero', 'estatistica/calculadora-cientifica.html']], prova: ['P2', '2026-10-26'] },
+    PMR3301: { cor: 'fab', links: [['Guia de exercícios para a P1', 'fabricacao/p1-pmr3301-guia-exercicios.html']], prova: ['P2', '2026-10-23'] },
+    PME3350: { cor: 'ele', links: [['P1 por exercícios-pivô', 'elementos-de-maquinas/p1-pme3350-elementos-de-maquinas.html']] },
+    PME3380: { cor: 'mod', links: [['P1 por exercícios-pivô', 'modelagem-de-sistemas-dinamicos/p1-pme3380-modelagem-de-sistemas-dinamicos.html'], ['Revisão de base: EDOs, Taylor e Laplace', 'modelagem-de-sistemas-dinamicos/roteiro-base-matematica-pme3380.html']], prova: ['P2', '2026-11-17'] },
+    PME3230: { cor: 'flu', prova: ['P2', '2026-10-27'] },
+    PEA3389: { cor: 'lab' }
+  };
+  var MES = { '1': '1º semestre', '2': '2º semestre' };
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function rotulo(id) { return id.slice(0, 4) + ' · ' + MES[id.slice(5)]; }
+  function dias(iso) {
+    var p = iso.split('-'), t = new Date(+p[0], +p[1] - 1, +p[2]), h = new Date(); h.setHours(0, 0, 0, 0);
+    return Math.round((t - h) / 864e5);
   }
+  function dm(iso) { var p = iso.split('-'); return p[2] + '/' + p[1]; }
+  function achar(id) { return D.filter(function (r) { return r.id === id; })[0]; }
+
+  var atual = D.filter(function (r) { return r.st === 'cur'; })[0];
+  var sel = (location.hash || '').slice(1);
+  if (!achar(sel)) sel = atual.id;
+  var mostraPassados = achar(sel).st === 'ok';
+
+  var conc = 0, total = 0;
+  D.forEach(function (r) { total += r.its.length; if (r.st === 'ok') conc += r.its.length; });
+  $('trajV').textContent = conc + ' concluídas · ' + atual.its.length + ' em curso';
+  $('trajBar').style.width = Math.round(100 * conc / total) + '%';
+
+  function renderTabs() {
+    var box = $('tabs'); box.textContent = '';
+    var nPass = D.filter(function (r) { return r.st === 'ok'; }).length;
+    var tg = el('button', 'tab past-toggle'); tg.type = 'button';
+    tg.setAttribute('aria-expanded', String(mostraPassados));
+    tg.textContent = (mostraPassados ? '◂ ' : '▸ ') + 'Concluídos (' + nPass + ')';
+    tg.addEventListener('click', function () { mostraPassados = !mostraPassados; renderTabs(); });
+    box.appendChild(tg);
+    D.forEach(function (r) {
+      if (r.st === 'ok' && !mostraPassados) return;
+      var b = el('button', 'tab'); b.type = 'button';
+      b.setAttribute('aria-pressed', String(r.id === sel));
+      b.appendChild(document.createTextNode(r.id.slice(0, 4) + '·' + r.id.slice(5)));
+      if (r.st === 'cur') b.appendChild(el('span', 't', 'atual'));
+      b.addEventListener('click', function () {
+        sel = r.id;
+        try { history.replaceState(null, '', r.id === atual.id ? location.pathname : '#' + r.id); } catch (e) {}
+        render();
+      });
+      box.appendChild(b);
+    });
+    var on = box.querySelector('[aria-pressed="true"]');
+    if (on) box.scrollLeft = Math.max(0, on.offsetLeft - 60);
+  }
+
+  function card(i, st) {
+    var m = M[i.s] || {};
+    var c = el('div', 'dcard ' + st);
+    if (m.cor) c.style.setProperty('--c', 'var(--c-' + m.cor + ')');
+    var top = el('div', 'top'); top.appendChild(el('span', 'sig', i.s));
+    top.appendChild(el('span', 'badge ' + st, st === 'cur' ? 'Cursando' : 'Planejada'));
+    c.appendChild(top); c.appendChild(el('h3', null, i.n));
+    if (st === 'cur') {
+      if (m.prova) {
+        var d = dias(m.prova[1]);
+        if (d >= 0) {
+          var p = el('div', 'prova'), b = el('b', null, String(d)); b.appendChild(el('small', null, d === 1 ? 'dia' : 'dias'));
+          p.appendChild(b); p.appendChild(el('span', null, m.prova[0] + ' · ' + dm(m.prova[1]))); c.appendChild(p);
+        }
+      }
+      if (m.camadas) {
+        var cm = el('div', 'camadas');
+        ['Contexto', 'Conhecimento', 'Avaliação'].forEach(function (n, k) { cm.appendChild(el('span', m.camadas[k] ? 'on' : '', n)); });
+        c.appendChild(cm);
+      }
+      c.appendChild(el('div', 'rodape', m.camadas ? 'Site completo da disciplina' : m.links ? 'Guias avulsos' : 'Sem material publicado ainda'));
+      if (m.links) {
+        var l = el('div', 'links');
+        m.links.forEach(function (x) { var a = el('a', null, x[0] + ' →'); a.href = x[1]; l.appendChild(a); });
+        c.appendChild(l);
+      }
+    } else {
+      c.appendChild(el('div', 'rodape', i.c ? i.c + (i.c === 1 ? ' crédito' : ' créditos') + ' · ainda não cursada' : 'Ainda não cursada'));
+    }
+    return c;
+  }
+
+  function render() {
+    renderTabs();
+    var r = achar(sel);
+    $('eyebrow').textContent = rotulo(r.id) + (r.st === 'cur' ? ' · semestre atual' : '');
+    var cont = $('conteudo'); cont.textContent = '';
+    var cr = r.its.reduce(function (n, i) { return n + (i.c || 0); }, 0);
+    if (r.st === 'ok') {
+      $('resumo').textContent = 'Semestre concluído · ' + r.its.length + ' disciplinas aprovadas';
+      var ul = el('ul', 'plist');
+      r.its.forEach(function (i) { var li = el('li'); li.appendChild(el('span', 'sig', i.s)); li.appendChild(el('span', null, i.n)); li.appendChild(el('span', 'ok', '✓ concluída')); ul.appendChild(li); });
+      cont.appendChild(ul);
+      $('nota').textContent = 'Semestres concluídos ficam recolhidos para não competir com o que importa agora. Use “Concluídos” para reabrir.';
+    } else {
+      $('resumo').textContent = (r.st === 'cur' ? 'Em andamento · ' : 'Planejado · ') + r.its.length + ' itens · ' + cr + ' créditos';
+      var g = el('div', 'dgrid');
+      r.its.forEach(function (i) { g.appendChild(card(i, r.st)); });
+      cont.appendChild(g);
+      $('nota').textContent = r.st === 'cur'
+        ? 'Disciplinas sem material aparecem mesmo assim: o cartão ganha camadas conforme o material é publicado.'
+        : 'Semestre futuro: é um plano e pode mudar. Quando o semestre começar, os cartões viram disciplinas de verdade.';
+    }
+  }
+  window.addEventListener('hashchange', function () {
+    var h = (location.hash || '').slice(1), r = achar(h);
+    if (r) { sel = h; if (r.st === 'ok') mostraPassados = true; render(); }
+  });
+  render();
 })();
 </script>
-
 </body>
 </html>
