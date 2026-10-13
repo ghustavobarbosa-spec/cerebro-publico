@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 · Fundamentos do teste de hipóteses · PRO3200</title>
+<meta name="description" content="Ficha do tópico 7: Fundamentos do teste de hipóteses (P2)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pro3200-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PRO3200 · Tópico 7</div>
+  <div class="sb-sub">Estatística</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · Antes de começar</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#onde-ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#hipoteses">H₀ e H₁</a></li>
+<li class="nav-ex"><a href="#erros">Erros tipo I e II</a></li>
+<li class="nav-ex"><a href="#valor-p">Valor-p</a></li>
+<li class="nav-ex"><a href="#arvore">Árvore: qual teste usar</a></li>
+<li class="nav-ex"><a href="#ic-teste">IC e teste</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#m12-e1-h">Parafusos do país A ou B: α, β e a regra<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#m12-e7-h">Nova rota de ônibus: valor-p bilateral<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#provas-antigas">Provas antigas deste tópico</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Estatística</a> <span class="sep">›</span> <span>07 · Fundamentos do teste de hipóteses</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 07 · P2</span><h2 id="obj" data-nav="1 · Objetivo">Fundamentos do teste de hipóteses</h2></div><div class="callout concept"><span class="co-t">Objetivo</span><p>Entender a lógica comum a todos os testes: formular $H_0$ e $H_1$, construir a regra de decisão supondo $H_0$ verdadeira, e medir os dois riscos de errar (α e β) ou a força da evidência (valor-p). Pergunta de engenharia: "esse desvio na amostra é acaso ou o processo mudou?". Tudo nas fichas 08–12 é esta ficha com outra estatística.</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · Antes de começar">O que dominar antes</h2></div>
+<ul><li><a href="03-distribuicoes-amostrais.html">Ficha 03 · Distribuições amostrais</a>: $\bar X\sim N(\mu,\sigma^2/n)$.</li><li><a href="05-intervalos-de-confianca.html">Ficha 05 · IC com uma amostra</a>: leitura da tabela z e o crítico de cada nível.</li><li><a href="../base.html#b-probabilidade">Base · probabilidade condicional</a>: α e β são probabilidades condicionais a $H_0$ e a $H_1$.</li></ul>
+</section>
+
+<section class="chapter" id="sec-onde-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="onde-ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Seção</th><th>Páginas</th><th>O que ler</th></tr></thead><tbody><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.1–12.4</td><td>PDF 278–286</td><td>exemplo dos parafusos, procedimento geral, os cinco passos</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.7 Poder de um teste</td><td>PDF 289–293</td><td>função poder, efeito de $n$</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.8 Valor-p</td><td>PDF 293–295</td><td>definição, uni × bilateral, escala de Fisher</td></tr><tr><td>Devore, 6ª ed.</td><td>§8.1 Hipóteses e procedimentos de teste</td><td>p. 275</td><td>erros tipo I/II, região de rejeição</td></tr><tr><td>Devore, 6ª ed.</td><td>§8.4 Valores P</td><td>p. 300</td><td>valor-p para z e t</td></tr></tbody></table></div><p class="tbl-cap">Morettin 9ª é e-book sem página impressa: as páginas são as do PDF. Devore: página impressa (PDF = impressa + 15).</p><div class="callout"><span class="co-t">Slides e listas do curso</span><p>A completar quando o material da aula (slides, listas) for incorporado.</p></div>
+</section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+<div class="callout warn" id="habito-h0"><span class="co-t">Hábito de prova (professora, aula de 13/10)</span>
+<p><strong>Escreva sempre $H_0$ e $H_1$, mesmo quando a questão não pedir.</strong> É a primeira linha de qualquer teste. Ela decide
+três coisas antes de qualquer conta: o lado da cauda (bilateral, à esquerda, à direita), qual valor entra no denominador
+(o $p_0$ de $H_0$, não o $\hat p$) e o que significam $\alpha$ e $\beta$ naquele problema. Nas P2 antigas, a maioria das
+alternativas erradas tem o número certo e a hipótese, ou a conclusão, trocada.</p></div>
+
+<h3 class="sub" id="hipoteses" data-nav="H₀ e H₁">Como escolher $H_0$ e $H_1$</h3>
+<ul>
+<li><strong>$H_0$ tem o sinal de igual</strong> e um valor definido: $\mu=500$, $p=0{,}60$, $\mu_1=\mu_2$. É o cenário em que a
+estatística do teste tem distribuição conhecida, e por isso a região crítica é sempre construída <em>supondo $H_0$ verdadeira</em>.</li>
+<li><strong>$H_1$ vem da pergunta, não dos dados.</strong> "Mudou / é diferente" → bilateral. "Aumentou, excede, é maior" → $>$.
+"Diminuiu, é minoria, é menor" → $<$. O livro insiste: decida a alternativa antes de ver a amostra (Ex. 12.3).</li>
+<li><strong>Quem é $H_0$ quando há duas afirmações?</strong> A que, rejeitada por engano, produz o erro mais grave: o erro tipo I é o
+que se controla (Morettin, fim da §12.4, exemplo do produto cancerígeno). Na prática das provas: a afirmação que está sendo
+contestada (a do fabricante, a da emissora, o "está sob controle").</li>
+<li>Afirmação com "no máximo / não mais que 30" vira $H_0:\mu=30$ (o caso de fronteira) contra $H_1:\mu>30$.</li>
+</ul>
+
+<h3 class="sub" id="erros" data-nav="Erros tipo I e II">Os dois erros, α, β e poder</h3>
+<div class="callout">
+      <h4>O esqueleto que resolve as 7</h4>
+      <p>
+        Todas seguem o mesmo roteiro. <strong>(1)</strong> O critério de decisão é uma faixa de valores de $\bar{X}$
+        (ou de contagem). <strong>(2)</strong> Você escolhe sob qual cenário quer calcular a probabilidade — H₀
+        verdadeira, ou um valor alternativo específico. <strong>(3)</strong> Padroniza o limite da faixa com a média
+        <em>daquele</em> cenário e lê a tabela z.
+      </p>
+      <p>
+        O que muda de questão para questão é só qual das quatro caixas abaixo está sendo pedida:
+      </p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th></th><th>H₀ é verdadeira</th><th>H₀ é falsa</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Não rejeito H₀</strong></td><td>Decisão correta · $1-\alpha$</td><td>Erro tipo II · $\beta$</td></tr>
+            <tr><td><strong>Rejeito H₀</strong></td><td>Erro tipo I · $\alpha$</td><td>Decisão correta · poder = $1-\beta$</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Some na horizontal: $\alpha + (1-\alpha) = 1$ e $\beta + (1-\beta) = 1$. <strong>$\alpha$ e $\beta$ não somam 1</strong>,
+        porque vivem em colunas diferentes — são probabilidades condicionais a cenários distintos. Essa é
+        exatamente a pegadinha do 2024 T2.
+      </p>
+    </div>
+<ul>
+<li>$\alpha=P(\text{rejeitar }H_0\mid H_0\text{ verdadeira})$: fixado por você antes do teste (nível de significância).</li>
+<li>$\beta=P(\text{não rejeitar }H_0\mid H_1\text{ verdadeira})$: só tem número quando se escolhe <strong>um</strong> valor
+alternativo ($\mu=\mu_1$). Por isso o formulário não traz $\beta$: é sempre a mesma conta em duas etapas
+(<a href="../provas/p2.html#f-15">nº 15</a>): (1) achar a região de aceitação em unidades de $\bar x$, sob $H_0$; (2) calcular a
+probabilidade dessa região sob $\mu_1$.</li>
+<li><strong>Poder</strong> $=1-\beta$: chance de detectar que $H_0$ é falsa. Cresce quando $\mu_1$ se afasta de $\mu_0$, quando
+$n$ aumenta e quando $\alpha$ aumenta.</li>
+<li><strong>Troca α ↔ β:</strong> com $n$ fixo, apertar $\alpha$ (região crítica menor) aumenta $\beta$. Só aumentar $n$ reduz os
+dois ao mesmo tempo (curvas de poder para $n=16$ e $n=100$, Morettin Fig. 12.9).</li>
+</ul>
+
+<h3 class="sub" id="valor-p" data-nav="Valor-p">Valor-p</h3>
+<p>É a probabilidade, <em>supondo $H_0$ verdadeira</em>, de obter uma estatística tão ou mais extrema que a observada, no sentido
+de $H_1$ (<a href="../provas/p2.html#f-16">nº 16</a>, não está no formulário). Regra: <strong>rejeite $H_0$ quando valor-p $<\alpha$</strong>.</p>
+<ul>
+<li>Unilateral: a cauda além do observado. Bilateral: o dobro da cauda (vale para z e t, que são simétricas).</li>
+<li>Na tabela z do curso, o miolo dá $P(0<Z<z)$. Logo a cauda é <strong>0,5 menos o valor lido</strong>, nunca o valor lido.</li>
+<li>O valor-p dispensa escolher $\alpha$ antes: ele diz a partir de que nível se rejeitaria. Escala de Fisher (Morettin Tab. 12.2):
+0,10 marginal · 0,05 moderada · 0,01 forte · 0,001 fortíssima.</li>
+<li>Valor-p <strong>não</strong> é a probabilidade de $H_0$ ser verdadeira.</li>
+</ul>
+
+<h3 class="sub" id="arvore" data-nav="Árvore: qual teste usar">Escolha do teste: a árvore de decisão</h3>
+<p>Três perguntas escolhem a linha do formulário. O guia completo do formulário (estatísticas, graus de liberdade, valores de
+tabela) está na <a href="../provas/p2.html#p2-formulario">página da P2</a>.</p>
+
+
+    <div class="card">
+      <h4 style="font-size:15px; margin-bottom:8px;">Pergunta 1 — quantas amostras?</h4>
+      <p style="font-size:14.5px;">Uma amostra comparada a um valor fixo ($\mu_0$, $p_0$, $\sigma_0^2$) → blocos 2, 3 e 7. Dois grupos comparados entre si → blocos 4, 5, 6 e 7.</p>
+      <h4 style="font-size:15px; margin-block:16px 8px;">Pergunta 2 — os dois grupos são independentes ou emparelhados?</h4>
+      <p style="font-size:14.5px;">
+        <strong>Emparelhado</strong> quando cada observação de um grupo tem uma parceira natural no outro: a mesma
+        pessoa antes e depois, a mesma peça medida por dois instrumentos, o mesmo jogador com dois tênis.
+        A pista no enunciado é a tabela com <strong>duas linhas e a mesma coluna de identificação</strong>
+        (vendedora 1, 2, 3…). Nesse caso você trabalha com <strong>uma única amostra de diferenças</strong>.
+      </p>
+      <h4 style="font-size:15px; margin-block:16px 8px;">Pergunta 3 — a variância é conhecida?</h4>
+      <p style="font-size:14.5px;">
+        Se o enunciado <strong>entrega</strong> $\sigma$ ou $\sigma^2$ (populacional), use <strong>z</strong>. Se você teve que
+        calcular $S^2$ a partir dos dados, use <strong>t</strong>. Em duas amostras com variâncias desconhecidas
+        mas supostas iguais, entra o $S_p^2$ e os graus de liberdade viram $n_1+n_2-2$.
+      </p>
+    </div>
+
+    
+<h3 class="sub" id="ic-teste" data-nav="IC e teste">IC e teste são a mesma informação</h3>
+<p>O teste bilateral de nível $\alpha$ rejeita $H_0:\theta=\theta_0$ exatamente quando $\theta_0$ fica fora do IC de
+confiança $1-\alpha$ (ficha <a href="05-intervalos-de-confianca.html">05</a> e <a href="06-ic-duas-amostras.html">06</a>). Quando o teste rejeita, o IC mede o tamanho do efeito;
+"não rejeitar" não prova $H_0$, só diz que os dados são compatíveis com ela.</p>
+
+</section>
+
+<section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li><strong>α é escolhido antes de olhar os dados.</strong> Trocar α depois de ver o valor-p, para chegar à conclusão desejada, invalida o teste.</li><li><strong>β exige um valor alternativo específico</strong> e, no curso, $\sigma$ conhecido (ou dado). Com $H_1:\mu\neq\mu_0$ há uma curva inteira de β, não um número.</li><li><strong>"Não rejeitar" não é "aceitar com certeza".</strong> Com $n$ pequeno, o poder é baixo e quase nada é rejeitado.</li><li><strong>Dobrar o valor-p só vale para distribuições simétricas</strong> (z, t). Em χ² e F, o teste usual é de uma cauda.</li><li><strong>Variáveis discretas</strong> (binomial, Poisson): a região crítica não dá α exato. O α real é a probabilidade da região escolhida (2019 T6 explora isso).</li><li><strong>Aproximação normal</strong> de $\bar X$ pelo TLC: se a população é muito assimétrica e $n$ é pequeno, α e β calculados são só aproximados.</li></ul>
+</section>
+
+<section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>
+<article class="ex pivo" id="m12-e1"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 12.1 · Pivô 1</div><h3 id="m12-e1-h" data-nav="Parafusos do país A ou B: α, β e a regra" data-pivo>Parafusos do país A ou B: α, β e a regra de decisão</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.2, Exemplo 12.1, PDF p. 278–283</span><p>Uma indústria usa, como um dos componentes das máquinas que produz, um parafuso importado, que deve satisfazer a algumas exigências. Uma dessas é a resistência à tração. Esses parafusos são fabricados por alguns países, e as especificações técnicas variam de país para país. Por exemplo, o catálogo do país A afirma que a resistência média à tração de seus parafusos é de 145 kg, com desvio padrão de 12 kg. Já para o país B, a média é de 155 kg e desvio padrão 20 kg.</p><p>Um lote desses parafusos, de origem desconhecida, será leiloado a um preço muito convidativo. Para que a indústria saiba se faz ou não uma oferta, ela necessita saber qual país produziu tais parafusos. O edital do leiloeiro afirma que, pouco antes do leilão, será divulgada a resistência média $\bar x$ de uma amostra de 25 parafusos do lote. Qual regra de decisão deve ser usada pela indústria para dizer se os parafusos são do país A ou B?</p><p>(O livro desenvolve: (a) com a regra "$\bar x\le150$ → A", calcular α e β; (b) achar o ponto em que α = β; (c) fixar α = 5% e achar a regra e o β; (d) regra bilateral para $H_1:\mu\neq155$.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Teste sobre <strong>uma média</strong>, σ dado em cada cenário, $n=25$. É o problema-modelo dos erros tipo I e II: há só dois cenários possíveis, então β tem valor numérico.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu=155\ (\text{país B},\ \sigma=20) \qquad H_1:\ \mu=145\ (\text{país A},\ \sigma=12)$$</div><p>O livro põe B em $H_0$. Assim, o <strong>erro tipo I</strong> é dizer "A" quando é B, e o <strong>tipo II</strong> é dizer "B" quando é A. Sem escrever $H_0$, não dá para saber qual dos dois números é α.</p></div></div><div class="step" data-n="3"><h4>Dados e distribuições</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde está</th></tr></thead><tbody><tr><td>cenário B</td><td>$\mu,\ \sigma$</td><td>155 kg, 20 kg</td><td>catálogo B</td></tr><tr><td>cenário A</td><td>$\mu,\ \sigma$</td><td>145 kg, 12 kg</td><td>catálogo A</td></tr><tr><td>amostra</td><td>$n$</td><td>25 parafusos</td><td>edital</td></tr><tr><td>região crítica (a)</td><td>RC</td><td>$\bar x\le150$</td><td>ponto médio</td></tr></tbody></table></div><div class="math-box">$$\text{sob }H_0:\ \bar X\sim N\!\left(155,\ \tfrac{20^2}{25}\right)=N(155;\,4^2)\qquad\text{sob }H_1:\ \bar X\sim N\!\left(145,\ \tfrac{12^2}{25}\right)=N(145;\,2{,}4^2)$$</div><p>Cada cenário tem o seu erro padrão: $20/5=4$ e $12/5=2{,}4$. Usar o mesmo σ nos dois é o erro clássico. <a class="tag tag-form" href="../provas/p2.html#f-1">📄 nº 1</a></p></div><div class="step" data-n="4"><h4>(a) α e β da regra $\bar x\le150$</h4><div class="math-box">$$\alpha=P(\bar X\le150\mid\mu=155)=P\!\left(Z\le\tfrac{150-155}{4}\right)=P(Z\le-1{,}25)$$</div><p><span class="tag tag-tab">📊 Tabela z · linha 1,2, coluna 0,05 → 0,3944</span> ⇒ $\alpha=0{,}5-0{,}3944=0{,}1056$ (10,56%).</p><div class="math-box">$$\beta=P(\bar X>150\mid\mu=145)=P\!\left(Z>\tfrac{150-145}{2{,}4}\right)=P(Z>2{,}08)$$</div><p><span class="tag tag-tab">📊 Tabela z · linha 2,0, coluna 0,08 → 0,4812</span> ⇒ $\beta=0{,}5-0{,}4812=0{,}0188$ (exato: 0,0186).</p></div><div class="step" data-n="5"><h4>(b) α = β</h4><div class="math-box">$$\frac{155-x_c}{4}=\frac{x_c-145}{2{,}4}\ \Rightarrow\ x_c=\frac{155\cdot2{,}4+145\cdot4}{6{,}4}=148{,}75$$</div><p>$z=(155-148{,}75)/4=1{,}56$ → <span class="tag tag-tab">📊 Tabela z · linha 1,5, coluna 0,06 → 0,4406</span> ⇒ $\alpha=\beta=0{,}0594$.</p></div><div class="step" data-n="6"><h4>(c) Fixar α = 5%</h4><p>Agora a regra sai de α: <span class="tag tag-tab">📊 Tabela z · procure 0,45 → 1,645</span>, cauda esquerda.</p><div class="math-box">$$x_c=155-1{,}645\times4=148{,}42,\qquad \beta=P(\bar X>148{,}42\mid\mu=145)=P(Z>1{,}43)=0{,}077$$</div><p>Diminuir α de 10,6% para 5% fez β subir de 1,9% para 7,7%: é a troca α ↔ β com $n$ fixo.</p></div><div class="step" data-n="7"><h4>(d) Alternativa bilateral</h4><p>Se a alternativa for só "não é B" ($\mu\neq155$), não há um $\mu_1$ e β deixa de ter número. A regra de 5% fica simétrica: <span class="tag tag-tab">📊 Tabela z · 0,475 → 1,96</span>.</p><div class="math-box">$$RC=\{\bar x\le155-1{,}96\cdot4=147{,}16\}\cup\{\bar x\ge162{,}84\}$$</div></div><div class="step" data-n="8"><h4>Conclusão</h4><p>A regra intuitiva (ponto médio) erra mais contra B (α = 10,6%) do que contra A (β = 1,9%). Se a indústria quer controlar o erro de dizer "A" quando é B, fixa α = 5% e usa $\bar x\le148{,}42$.</p><ul><li><span class="tag tag-mem">⚠ α + β ≠ 1</span> São probabilidades condicionais a cenários diferentes (colunas diferentes da tabela de decisão). Pegadinha de 2024 T2.</li></ul></div><div class="answer"><strong>Resposta:</strong> α = 10,56% e β = 1,86% para $\bar x\le150$; α = β = 5,94% em $x_c=148{,}75$; com α = 5%, $x_c=148{,}42$ e β = 7,7%; bilateral: $[147{,}16;\ 162{,}84]$ é a região de aceitação. <span class="badge badge-ok">bate com o livro</span></div></article><article class="ex pivo" id="m12-e7"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 12.7 · Pivô 2</div><h3 id="m12-e7-h" data-nav="Nova rota de ônibus: valor-p bilateral" data-pivo>Nova rota de ônibus: valor-p bilateral</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.8, Exemplo 12.7, PDF p. 294–295</span><p>Uma companhia de serviços de ônibus intermunicipais planejou uma nova rota para servir vários locais situados entre duas cidades importantes. Um estudo preliminar afirma que a duração das viagens pode ser considerada uma v.a. normal, com média igual a 300 minutos e desvio padrão 30 minutos. As dez primeiras viagens realizadas nessa nova rota apresentaram média igual a 314 minutos. Esse resultado comprova ou não o tempo médio determinado nos estudos preliminares?</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Uma média, σ conhecido (30 min), população normal: z vale mesmo com $n=10$. A pergunta não fixa α: resposta pelo <strong>valor-p</strong>.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu=300\ \text{min} \qquad H_1:\ \mu\neq300\ \text{min}$$</div><p>"Comprova ou não o tempo médio" não aponta direção: a viagem pode ser mais longa ou mais curta que o previsto. Bilateral, então o valor-p soma as duas caudas.</p></div></div><div class="step" data-n="3"><h4>Estatística</h4><p><a class="tag tag-form" href="../provas/p2.html#f-1">📄 nº 1 · média, σ conhecido</a></p><div class="math-box">$$z_{obs}=\frac{\bar x-\mu_0}{\sigma/\sqrt n}=\frac{314-300}{30/\sqrt{10}}=\frac{14}{9{,}487}=1{,}48$$</div></div><div class="step" data-n="4"><h4>Tabela e valor-p</h4><p><span class="tag tag-tab">📊 Tabela z · linha 1,4, coluna 0,08 → 0,4306</span></p><div class="math-box">$$P(Z>1{,}48)=0{,}5-0{,}4306=0{,}069,\qquad \text{valor-p bilateral}=2\times0{,}069\approx0{,}14$$</div></div><div class="step" data-n="5"><h4>Conclusão</h4><p>Se a média fosse mesmo 300 min, médias tão afastadas quanto 314 (para cima ou para baixo) apareceriam em 14% das amostras de 10 viagens. Não é raro: <strong>não se rejeita $H_0$</strong> a 5% nem a 10%. Os dados são compatíveis com o estudo preliminar.</p><ul><li><span class="tag tag-mem">⚠ dobrar ou não</span> Se a pergunta fosse "as viagens demoram mais que o previsto?" ($H_1:\mu>300$), o valor-p seria 0,07 e o teste rejeitaria a 10%. A escrita de $H_1$ muda a conclusão.</li></ul></div><div class="answer"><strong>Resposta:</strong> valor-p ≈ 0,14 (bilateral); não se rejeita $H_0:\mu=300$ min. <span class="badge badge-ok">bate com o livro</span></div></article><h3 class="sub" id="provas-antigas" data-nav="Provas antigas deste tópico">Provas antigas deste tópico</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Questão (resolvida na página da prova)</th><th>O que treina</th></tr></thead><tbody><tr><td><a href="../provas/p2.html#q-2024T2">2024 · Teste 2 · Conceito de erro tipo I e II</a></td><td>α + β ≠ 1; tabela de decisão</td></tr><tr><td><a href="../provas/p2.html#q-2024T1">2024 · Teste 1 · α, poder e β na mesma questão</a></td><td>β em duas etapas</td></tr><tr><td><a href="../provas/p2.html#q-2019T3">2019 · Teste 3 · Erro tipo II em teste bilateral</a></td><td>β com região de aceitação de dois lados</td></tr><tr><td><a href="../provas/p2.html#q-2023T4">2023 · Teste 4 · Os dois erros, sem a palavra "hipótese"</a></td><td>identificar $H_0$ no texto</td></tr><tr><td><a href="../provas/p2.html#q-2018T9">2018 · Teste 9 · Classificar lote: os dois erros</a></td><td>mesmo raciocínio do Ex. 12.1</td></tr><tr><td><a href="../provas/p2.html#q-2019T8">2019 · Teste 8 · Erros com proporção</a></td><td>α e β via aproximação normal da binomial</td></tr><tr><td><a href="../provas/p2.html#q-2019T7">2019 · Teste 7 · Combinação linear + α + IC</a></td><td>α de uma regra dada</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-07"><h3>Fundamentos do teste</h3><div class="r-grid"><div class="r-item"><b>Primeiro passo, sempre.</b> Escrever $H_0$ (com =) e $H_1$ (da pergunta). Hábito pedido pela professora.</div><div class="r-item"><b>α.</b> <span class="path">tabela z: 0,5 − valor lido</span> P(rejeitar | $H_0$). Região crítica construída sob $H_0$.</div><div class="r-item"><b>β e poder.</b> <span class="path">nº 15 (não está no formulário)</span> Região de aceitação em $\bar x$ sob $H_0$; probabilidade dela sob $\mu_1$, com o σ de $\mu_1$.</div><div class="r-item"><b>Valor-p.</b> <span class="path">nº 16</span> Cauda além do observado (dobrada se bilateral). Rejeita se valor-p < α.</div><div class="r-item"><b>Troca.</b> n fixo: α↓ ⇒ β↑. Só n↑ reduz os dois.</div><div class="r-item"><b>Limites.</b> α fixado antes; β só com μ₁ específico; dobrar valor-p só em z e t; não rejeitar ≠ provar H₀.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="06-ic-duas-amostras.html"><small>← anterior</small>06 · Intervalos de confiança (duas amostras)</a><a class="prox" href="08-testes-uma-amostra.html"><small>próximo →</small>08 · Testes com uma amostra</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PRO3200 · Estatística (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pro3200-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

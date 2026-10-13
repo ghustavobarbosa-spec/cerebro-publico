@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 · Duas proporções e razão de variâncias · PRO3200</title>
+<meta name="description" content="Ficha do tópico 10: Duas proporções e razão de variâncias (P2)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pro3200-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PRO3200 · Tópico 10</div>
+  <div class="sb-sub">Estatística</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · Antes de começar</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#onde-ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#duas-proporcoes">Duas proporções</a></li>
+<li class="nav-ex"><a href="#duas-variancias">Duas variâncias (F)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#m13-e12-h">Embalagens de sabonete: duas proporções,<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#m13-e2-h">Duas máquinas: mesma homogeneidade? (tes<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#provas-antigas">Provas antigas deste tópico</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Estatística</a> <span class="sep">›</span> <span>10 · Duas proporções e razão de variâncias</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 10 · P2</span><h2 id="obj" data-nav="1 · Objetivo">Duas proporções e razão de variâncias</h2></div><div class="callout concept"><span class="co-t">Objetivo</span><p>Comparar duas populações por <strong>proporções</strong> (z, com proporção combinada no teste) e por <strong>variâncias</strong> (F). Pergunta de engenharia: "o defeito é mais frequente na linha 2?", "a máquina nova é mais regular?". O F também decide se o teste de médias da ficha 09 pode usar $S_p$.</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · Antes de começar">O que dominar antes</h2></div>
+<ul><li><a href="08-testes-uma-amostra.html">Ficha 08 · Testes com uma amostra</a>: teste de proporção e teste χ² da variância.</li><li><a href="09-duas-medias.html">Ficha 09 · Duas médias</a>: onde o F é usado como teste preliminar.</li><li><a href="03-distribuicoes-amostrais.html">Ficha 03 · Distribuições amostrais</a>: a distribuição F como razão de χ².</li></ul>
+</section>
+
+<section class="chapter" id="sec-onde-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="onde-ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Seção</th><th>Páginas</th><th>O que ler</th></tr></thead><tbody><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.2 Variâncias de duas normais</td><td>PDF 307–309</td><td>Ex. 13.2 e IC da razão (Ex. 13.3)</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.5 Proporções em duas populações</td><td>PDF 325–327</td><td>Ex. 13.12</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§7.7 (distribuição F)</td><td>cap. 7</td><td>de onde vem a F</td></tr><tr><td>Devore, 6ª ed.</td><td>§9.4 Proporções · §9.5 Variâncias</td><td>p. 341 · 347</td><td>mesmos testes e IC</td></tr></tbody></table></div><p class="tbl-cap">Morettin 9ª é e-book sem página impressa: as páginas são as do PDF. Devore: página impressa (PDF = impressa + 15).</p><div class="callout"><span class="co-t">Slides e listas do curso</span><p>A completar quando o material da aula (slides, listas) for incorporado.</p></div>
+</section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+<h3 class="sub" id="duas-proporcoes" data-nav="Duas proporções">Duas proporções: combinada no teste, separadas no IC</h3>
+<p>Sob $H_0:p_1=p_2$ existe <strong>uma</strong> proporção comum, e a melhor estimativa dela junta as duas amostras:</p>
+<div class="math-box">$$\hat p=\frac{x_1+x_2}{n_1+n_2}=\frac{n_1\hat p_1+n_2\hat p_2}{n_1+n_2},\qquad
+Z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac1{n_1}+\frac1{n_2}\right)}}$$</div>
+<p>(<a class="tag tag-form" href="../provas/p2.html#f-9">📄 nº 9</a>). No <strong>intervalo</strong> não se supõe $p_1=p_2$, e cada amostra entra com a sua proporção (<a class="tag tag-form" href="../provas/p2.html#f-10">📄 nº 10</a>).
+É o mesmo raciocínio do $p_0$ no teste de uma proporção (ficha <a href="08-testes-uma-amostra.html">08</a>).</p>
+<p><strong>Ligação com a ficha 12:</strong> o teste bilateral de duas proporções é idêntico ao χ² de uma tabela 2×2: $z^2=\chi^2$
+(no Ex. 13.12, $3{,}90^2=15{,}2$).</p>
+
+<h3 class="sub" id="duas-variancias" data-nav="Duas variâncias (F)">Duas variâncias: a estatística F</h3>
+<p>Se as duas populações são normais e $\sigma_1^2=\sigma_2^2$, a razão $S_1^2/S_2^2$ tem distribuição $F$ com $(n_1-1,\ n_2-1)$ g.l.
+(<a class="tag tag-form" href="../provas/p2.html#f-11">📄 nº 11</a>). Serve para duas coisas: responder perguntas sobre <strong>uniformidade</strong> (qual máquina é mais regular) e
+<strong>autorizar o $S_p$</strong> do teste de duas médias (ficha <a href="09-duas-medias.html">09</a>).</p>
+<ul>
+<li><strong>Maior variância no numerador.</strong> Assim $F\ge1$ e só se precisa da cauda direita, a única tabelada.</li>
+<li><strong>Bilateral:</strong> com a maior em cima, compare com a coluna $\alpha/2$. Como a tabela do curso só traz 5% e 1%,
+os bilaterais possíveis são de 10% e 2%.</li>
+<li><strong>Crítico de baixo</strong>, se precisar: $F_{1-\alpha;\,\nu_1,\nu_2}=1/F_{\alpha;\,\nu_2,\nu_1}$ (g.l. trocados).</li>
+<li>Os g.l. têm ordem: numerador primeiro. Na tabela, o numerador costuma estar nas colunas e o denominador nas linhas: confira o
+cabeçalho da tabela da prova.</li>
+</ul>
+
+</section>
+
+<section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li><strong>F exige normalidade</strong> das duas populações, e é muito sensível a ela (não melhora com $n$ grande).</li><li><strong>Tabela F só com 5% e 1%</strong>: questões de F nas provas são unilaterais, ou bilaterais com folga suficiente para a coluna não importar (2024 T8).</li><li><strong>Duas proporções:</strong> amostras independentes e grandes ($n_i\hat p_i$ e $n_i(1-\hat p_i)$ &gt; 5).</li><li><strong>Rejeitar $\sigma_1^2=\sigma_2^2$ muda o teste de médias</strong>: o $S_p$ deixa de valer.</li></ul>
+</section>
+
+<section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>
+<article class="ex pivo" id="m13-e12"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 13.12 · Pivô 1</div><h3 id="m13-e12-h" data-nav="Embalagens de sabonete: duas proporções," data-pivo>Embalagens de sabonete: duas proporções, teste e IC</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §13.5, Exemplo 13.12, PDF p. 326–327</span><p>Para lançamento da nova embalagem do sabonete X a divisão de criação estuda duas propostas, A e B. Em cada um de dois supermercados similares, foram colocados sabonetes com cada tipo de embalagem, e a clientes selecionados aleatoriamente foi perguntado se tinham notado o sabonete e que descrevessem o tipo de embalagem. Abaixo estão os resultados:</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Proposta</th><th>Notaram: sim</th><th>Não</th><th>Total</th></tr></thead><tbody><tr><td>A</td><td>168</td><td>232</td><td>400</td></tr><tr><td>B</td><td>180</td><td>420</td><td>600</td></tr><tr><td>Total</td><td>348</td><td>652</td><td>1000</td></tr></tbody></table></div><p>Queremos testar a hipótese que os dois tipos de embalagem são igualmente atraentes. (O livro também dá o IC de 95% para $p_A-p_B$.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Duas amostras independentes de clientes, resposta sim/não: <strong>duas proporções</strong>, z.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ p_A=p_B \qquad H_1:\ p_A\neq p_B$$</div><p>"Igualmente atraentes" é a igualdade; nada indica qual seria melhor: bilateral.</p></div></div><div class="step" data-n="3"><h4>Proporções</h4><div class="math-box">$$\hat p_A=\frac{168}{400}=0{,}42,\quad \hat p_B=\frac{180}{600}=0{,}30,\quad \hat p=\frac{348}{1000}=0{,}348$$</div></div><div class="step" data-n="4"><h4>Estatística</h4><p><a class="tag tag-form" href="../provas/p2.html#f-9">📄 nº 9 · teste: proporção combinada</a></p><div class="math-box">$$EP_0=\sqrt{0{,}348\times0{,}652\left(\tfrac1{400}+\tfrac1{600}\right)}=0{,}0307,\qquad z=\frac{0{,}42-0{,}30}{0{,}0307}=3{,}90$$</div><p><span class="tag tag-tab">📊 Tabela z · 0,475 → 1,96</span>: $|z|=3{,}90>1{,}96$. Na tabela, 3,90 está além da última linha (miolo ≈ 0,5000): valor-p ≈ 0.</p></div><div class="step" data-n="5"><h4>IC 95% para $p_A-p_B$</h4><p><a class="tag tag-form" href="../provas/p2.html#f-10">📄 nº 10 · IC: proporções separadas</a></p><div class="math-box">$$EP=\sqrt{\tfrac{0{,}42\times0{,}58}{400}+\tfrac{0{,}30\times0{,}70}{600}}=0{,}0310,\qquad 0{,}12\pm1{,}96\times0{,}0310=[0{,}059;\ 0{,}181]$$</div></div><div class="step" data-n="6"><h4>Conclusão</h4><p>Rejeita-se $H_0$: as embalagens não são igualmente atraentes; a A é notada por 6 a 18 pontos percentuais a mais de clientes.</p><ul><li><span class="tag tag-mem">⚠ dois EPs</span> 0,0307 no teste, 0,0310 no IC. A diferença é pequena aqui, mas é exatamente o que separa alternativas (2018 T5, 2024 T9).</li><li>Mesma tabela como χ² 2×2 (ficha <a href="12-associacao.html">12</a>): $\chi^2=15{,}23=3{,}90^2$.</li></ul></div><div class="answer"><strong>Resposta:</strong> $z=3{,}90$, valor-p ≈ 0,0001: rejeita $H_0$; IC 95% para $p_A-p_B$: $[0{,}059;\ 0{,}181]$. <span class="badge badge-ok">bate com o livro</span></div></article><article class="ex pivo" id="m13-e2"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 13.2 · Pivô 2</div><h3 id="m13-e2-h" data-nav="Duas máquinas: mesma homogeneidade? (tes" data-pivo>Duas máquinas: mesma homogeneidade? (teste F bilateral)</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §13.2, Exemplo 13.2, PDF p. 308</span><p>Queremos verificar se duas máquinas produzem peças com a mesma homogeneidade quanto à resistência à tensão. Para isso, sorteamos duas amostras de seis peças de cada máquina, e obtivemos as seguintes resistências:</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Máquina</th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td>A</td><td>145</td><td>127</td><td>136</td><td>142</td><td>141</td><td>137</td></tr><tr><td>B</td><td>143</td><td>128</td><td>132</td><td>138</td><td>142</td><td>132</td></tr></tbody></table></div><p>(Nível de 10%, como no livro.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>"Mesma homogeneidade" = mesma <strong>variância</strong>; duas amostras independentes: teste F, supondo resistências normais.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \sigma_A^2=\sigma_B^2 \qquad H_1:\ \sigma_A^2\neq\sigma_B^2$$</div><p>Sem direção no enunciado: bilateral. Com α = 10%, cada cauda tem 5%, que é a coluna que a tabela tem.</p></div></div><div class="step" data-n="3"><h4>Variâncias amostrais</h4><div class="math-box">$$\bar x_A=138,\ S_A^2=\frac{\sum(x_i-\bar x_A)^2}{5}=40;\qquad \bar x_B=135{,}83,\ S_B^2=36{,}97\approx37$$</div></div><div class="step" data-n="4"><h4>Estatística e região crítica</h4><p><a class="tag tag-form" href="../provas/p2.html#f-11">📄 nº 11</a> Maior em cima: $w_0=40/36{,}97=1{,}08$. <span class="tag tag-tab">📊 Tabela F · $\nu_1=5$, $\nu_2=5$, coluna 5% → 5,05</span>.</p><div class="math-box">$$RC=\left]0;\ \tfrac1{5{,}05}=0{,}198\right[\ \cup\ ]5{,}05;\ +\infty[$$</div></div><div class="step" data-n="5"><h4>Conclusão</h4><p>$w_0=1{,}08$ não está na RC: não se rejeita $H_0$; as máquinas produzem com a mesma homogeneidade. Com a maior variância no numerador, basta comparar com 5,05; o limite de baixo nunca é atingido.</p><ul><li><span class="tag tag-mem">⚠ n pequeno</span> Com 6 peças por máquina, o F só detecta razões de variância acima de 5. Variâncias até 5 vezes diferentes passam como "iguais": não rejeitar não prova homogeneidade.</li></ul></div><div class="answer"><strong>Resposta:</strong> $S_A^2=40$, $S_B^2=37$, $w_0=1{,}08<5{,}05$: não rejeita $H_0$. <span class="badge badge-ok">bate com o livro</span></div></article><h3 class="sub" id="provas-antigas" data-nav="Provas antigas deste tópico">Provas antigas deste tópico</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Questão (resolvida na página da prova)</th><th>O que treina</th></tr></thead><tbody><tr><td><a href="../provas/p2.html#q-2019T2">2019 · Teste 2 · Bilateral + valor-p</a></td><td>duas proporções, valor-p dobrado</td></tr><tr><td><a href="../provas/p2.html#q-2023T2">2023 · Teste 2 · Um z, dois valores-p</a></td><td>uni × bilateral</td></tr><tr><td><a href="../provas/p2.html#q-2024T10">2024 · Teste 10 · F e χ² juntos</a></td><td>F(20, 30) e χ² de uma variância</td></tr><tr><td><a href="../provas/p2.html#q-2024T8">2024 · Teste 8 · Decidir sem número exato</a></td><td>F bilateral com folga</td></tr><tr><td><a href="../provas/p2.html#q-2023T3">2023 · Teste 3 · Seis assertivas sobre variância</a></td><td>qual teste: χ² ou F</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-10"><h3>Duas proporções e duas variâncias</h3><div class="r-grid"><div class="r-item"><b>Teste de duas proporções.</b> <span class="path">form. nº 9 → tabela z</span> Proporção combinada $\hat p=(x_1+x_2)/(n_1+n_2)$ no EP.</div><div class="r-item"><b>IC de duas proporções.</b> <span class="path">form. nº 10 → tabela z</span> $\hat p_1$ e $\hat p_2$ separados.</div><div class="r-item"><b>Teste F.</b> <span class="path">form. nº 11 → tabela F (só 5% e 1%)</span> Maior variância em cima; g.l. (n−1 do numerador, n−1 do denominador).</div><div class="r-item"><b>Bilateral em F.</b> α = 10% → coluna 5%; α = 2% → coluna 1%.</div><div class="r-item"><b>Ponte.</b> 2×2: $z^2=\chi^2$ da ficha 12.</div><div class="r-item"><b>Limites.</b> F exige normalidade; proporções pedem n grande; rejeitar σ₁²=σ₂² invalida o $S_p$.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="09-duas-medias.html"><small>← anterior</small>09 · Duas médias: independentes e emparelhadas</a><a class="prox" href="11-aderencia.html"><small>próximo →</small>11 · Testes de aderência</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PRO3200 · Estatística (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pro3200-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

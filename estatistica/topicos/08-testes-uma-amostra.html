@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 · Testes com uma amostra · PRO3200</title>
+<meta name="description" content="Ficha do tópico 8: Testes com uma amostra (P2)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pro3200-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PRO3200 · Tópico 8</div>
+  <div class="sb-sub">Estatística</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · Antes de começar</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#onde-ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#cinco-passos">Os cinco passos</a></li>
+<li class="nav-ex"><a href="#quatro-testes">Os quatro testes</a></li>
+<li class="nav-ex"><a href="#variancia">Teste da variância (χ²)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#m12-e2-h">Máquina de café: teste z bilateral e pod<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#m12-e10-h">Nicotina: teste t unilateral e IC<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#m12-e3-h">Audiência de TV: teste de proporção e va<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#m12-e8-h">Variabilidade do café: teste χ² bilatera<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#provas-antigas">Provas antigas deste tópico</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Estatística</a> <span class="sep">›</span> <span>08 · Testes com uma amostra</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 08 · P2</span><h2 id="obj" data-nav="1 · Objetivo">Testes com uma amostra</h2></div><div class="callout concept"><span class="co-t">Objetivo</span><p>Aplicar a lógica da ficha 07 a um parâmetro de <strong>uma</strong> população contra um valor de referência: média (z ou t), proporção (z) e variância (χ²). Pergunta de engenharia: "o lote atende à especificação?", "o processo está regulado?".</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · Antes de começar">O que dominar antes</h2></div>
+<ul><li><a href="07-fundamentos-do-teste.html">Ficha 07 · Fundamentos do teste</a>: $H_0$/$H_1$, região crítica, valor-p.</li><li><a href="05-intervalos-de-confianca.html">Ficha 05 · IC com uma amostra</a>: as tabelas t e χ² e os mesmos erros padrão.</li><li><a href="03-distribuicoes-amostrais.html">Ficha 03 · Distribuições amostrais</a>: t de Student e χ² como distribuições de estatísticas.</li></ul>
+</section>
+
+<section class="chapter" id="sec-onde-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="onde-ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Seção</th><th>Páginas</th><th>O que ler</th></tr></thead><tbody><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.5 Média, variância conhecida</td><td>PDF 286–287</td><td>Ex. 12.2</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.6 Proporção</td><td>PDF 287–289</td><td>Ex. 12.3</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.9 Variância de uma normal</td><td>PDF 295–298</td><td>Ex. 12.8 e IC para σ² (Ex. 12.9)</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§12.10 Média, variância desconhecida</td><td>PDF 298–300</td><td>Ex. 12.10 (t)</td></tr><tr><td>Devore, 6ª ed.</td><td>§8.2 Média · §8.3 Proporção</td><td>p. 285 · 295</td><td>mesmos testes; tabela-resumo de regiões de rejeição</td></tr><tr><td>Devore, 6ª ed.</td><td>§7.4 IC para variância</td><td>p. 269</td><td>IC χ² (o teste χ² da variância está só no Morettin)</td></tr></tbody></table></div><p class="tbl-cap">Morettin 9ª é e-book sem página impressa: as páginas são as do PDF. Devore: página impressa (PDF = impressa + 15).</p><div class="callout"><span class="co-t">Slides e listas do curso</span><p>A completar quando o material da aula (slides, listas) for incorporado.</p></div>
+</section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+<h3 class="sub" id="cinco-passos" data-nav="Os cinco passos">Os cinco passos, sempre os mesmos</h3>
+<ol class="method">
+<li><strong>Hipóteses.</strong> $H_0$ com igualdade; $H_1$ lida da pergunta (ficha <a href="07-fundamentos-do-teste.html">07</a>).</li>
+<li><strong>Estatística.</strong> Escolhida pelo parâmetro e pelo que se sabe de σ (tabela abaixo).</li>
+<li><strong>Região crítica</strong> para o α dado, construída supondo $H_0$: lado(s) da cauda conforme $H_1$.</li>
+<li><strong>Valor observado</strong> da estatística, com os dados.</li>
+<li><strong>Decisão e conclusão no contexto</strong> ("há evidência de que…"), ou valor-p comparado a α.</li>
+</ol>
+
+<h3 class="sub" id="quatro-testes" data-nav="Os quatro testes">Os quatro testes de uma amostra</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parâmetro</th><th>Estatística sob $H_0$</th><th>Distribuição</th><th>Formulário</th></tr></thead><tbody><tr><td>média, σ conhecido</td><td>$Z=\dfrac{\bar X-\mu_0}{\sigma/\sqrt n}$</td><td>$N(0,1)$</td><td><a class="tag tag-form" href="../provas/p2.html#f-1">📄 nº 1</a></td></tr><tr><td>média, σ desconhecido</td><td>$T=\dfrac{\bar X-\mu_0}{S/\sqrt n}$</td><td>$t_{n-1}$</td><td><a class="tag tag-form" href="../provas/p2.html#f-2">📄 nº 2</a></td></tr><tr><td>proporção</td><td>$Z=\dfrac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$</td><td>$N(0,1)$ aprox.</td><td><a class="tag tag-form" href="../provas/p2.html#f-3">📄 nº 3</a></td></tr><tr><td>variância (pop. normal)</td><td>$\chi^2=\dfrac{(n-1)S^2}{\sigma_0^2}$</td><td>$\chi^2_{n-1}$</td><td><a class="tag tag-form" href="../provas/p2.html#f-4">📄 nº 4</a></td></tr></tbody></table></div>
+<ul>
+<li><strong>z ou t?</strong> Se o enunciado <em>entrega</em> σ (ou σ²) da população, z. Se você só tem $S$ calculado da amostra, t com
+$n-1$ g.l. A t tem caudas mais pesadas: o crítico de t é sempre maior que o de z para o mesmo α (1,711 contra 1,645 com 24 g.l.).</li>
+<li><strong>Proporção usa $p_0$ no denominador</strong>, não $\hat p$: a estatística é calculada supondo $H_0$ verdadeira.
+No IC é o contrário (ficha <a href="05-intervalos-de-confianca.html">05</a>).</li>
+</ul>
+<div class="callout">
+      <h4>O denominador do teste de proporção</h4>
+      <p>
+        No <strong>teste</strong>, a estatística usa $\sqrt{p_0(1-p_0)/n}$ — com o valor da hipótese nula, não com o
+        observado. Faz sentido: a estatística é calculada <em>supondo H₀ verdadeira</em>. No <strong>intervalo de
+        confiança</strong> é o contrário, usa-se $\hat{p}$, porque ali não há hipótese nenhuma suposta.
+      </p>
+    </div>
+<h3 class="sub" id="variancia" data-nav="Teste da variância (χ²)">O teste da variância e a tabela χ²</h3>
+<p>Se a população é normal, $(n-1)S^2/\sigma^2$ tem distribuição $\chi^2_{n-1}$ (Morettin, Corolário 12.1). A χ² só tem valores
+positivos e é <strong>assimétrica</strong>: os dois críticos de um teste bilateral não são simétricos e saem de duas colunas diferentes.</p>
+<div class="callout warn">
+      <h4>A regra de ouro do teste de variância unilateral</h4>
+      <p>
+        A χ² e a F são <strong>assimétricas</strong>, e a tabela só traz as caudas em pontos específicos. Por isso:
+      </p>
+      <ul>
+        <li>Para <strong>"σ² é maior que"</strong> use a cauda direita: rejeite se $\chi^2_{obs} > \chi^2_{\alpha}$.</li>
+        <li>Para <strong>"σ² é menor que"</strong> use a cauda esquerda: rejeite se $\chi^2_{obs} < \chi^2_{1-\alpha}$ — e lembre que, na convenção desta tabela, $\chi^2_{1-\alpha}$ é o número <strong>pequeno</strong>.</li>
+        <li>No teste F, <strong>coloque a maior variância no numerador</strong> e você só precisa da cauda direita, que é a única tabelada.</li>
+      </ul>
+    </div>
+<p>O mesmo pivô dá o IC para σ²: $\left[\dfrac{(n-1)S^2}{\chi^2_{\alpha/2}};\ \dfrac{(n-1)S^2}{\chi^2_{1-\alpha/2}}\right]$, com o crítico
+<em>grande</em> no denominador do limite inferior.</p>
+
+</section>
+
+<section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li><strong>σ conhecido é raro na prática</strong> (o próprio Morettin comenta). Nas provas, o enunciado diz explicitamente "desvio padrão populacional", "variância do processo é".</li><li><strong>t exige população normal</strong> quando $n$ é pequeno; com $n$ grande o TLC cobre e t ≈ z.</li><li><strong>Proporção:</strong> aproximação normal pede $np_0>5$ e $n(1-p_0)>5$. Com $n$ pequeno, use a binomial exata (Problema 10 do livro).</li><li><strong>χ² da variância é muito sensível à não normalidade</strong>, mesmo com $n$ grande: não há TLC que salve. Se o enunciado não disser que a variável é normal, a hipótese deve ser declarada.</li><li><strong>Conclusão em linguagem do problema:</strong> "rejeito $H_0$" sozinho não basta. Diga o que isso significa (a máquina está desregulada; há evidência de mais de 30 mg).</li></ul>
+</section>
+
+<section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>
+<article class="ex pivo" id="m12-e2"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 12.2 · Pivô 1</div><h3 id="m12-e2-h" data-nav="Máquina de café: teste z bilateral e pod" data-pivo>Máquina de café: teste z bilateral e poder</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.5 e §12.7, Exemplo 12.2, PDF p. 286–291</span><p>Uma máquina automática para encher pacotes de café enche-os segundo uma distribuição normal, com média $\mu$ e variância sempre igual a 400 g². A máquina foi regulada para $\mu=500$ g. Desejamos, periodicamente, colher uma amostra de 16 pacotes e verificar se a produção está sob controle, isto é, se $\mu=500$ g ou não. Se uma dessas amostras apresentasse uma média $\bar x=492$ g, você pararia ou não a produção para regular a máquina?</p><p>(Continuação, §12.7: qual o poder do teste se a máquina se desregular para $\mu=505$ g? E para 510 g?)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Uma média, <strong>variância conhecida</strong> (400 g², "sempre"), população normal: teste z. Nível: o livro usa α = 1%.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu=500\ \text{g} \qquad H_1:\ \mu\neq500\ \text{g}$$</div><p>A máquina pode desregular para mais ou para menos: bilateral. $H_0$ é "está sob controle".</p></div></div><div class="step" data-n="3"><h4>Estatística e região crítica</h4><p><a class="tag tag-form" href="../provas/p2.html#f-1">📄 nº 1</a> Sob $H_0$, $\bar X\sim N(500;\ 400/16)$, erro padrão $\sigma/\sqrt n=20/4=5$ g.</p><p><span class="tag tag-tab">📊 Tabela z · procure 0,495 no miolo → entre 2,57 e 2,58</span>: $z_{0{,}005}=2{,}576$.</p><div class="math-box">$$RC=\{\bar x\le500-2{,}576\times5=487{,}1\}\ \cup\ \{\bar x\ge512{,}9\}$$</div></div><div class="step" data-n="4"><h4>Valor observado</h4><div class="math-box">$$z_{obs}=\frac{492-500}{5}=-1{,}60\qquad(\bar x_0=492\notin RC)$$</div><p>Valor-p: <span class="tag tag-tab">📊 Tabela z · linha 1,6, coluna 0,00 → 0,4452</span> ⇒ $2(0{,}5-0{,}4452)=0{,}11$.</p></div><div class="step" data-n="5"><h4>Poder em μ = 505 e 510</h4><p>A região de aceitação é $487{,}1<\bar x<512{,}9$, fixa. Recalcula-se a sua probabilidade com a média verdadeira (σ continua 20):</p><div class="math-box">$$\beta(505)=P\!\left(\tfrac{487{,}1-505}{5}<Z<\tfrac{512{,}9-505}{5}\right)=P(-3{,}58<Z<1{,}58)=0{,}942$$</div><div class="math-box">$$\beta(510)=P(-4{,}58<Z<0{,}58)=0{,}718\qquad \pi(505)=5{,}8\%,\ \ \pi(510)=28{,}2\%$$</div></div><div class="step" data-n="6"><h4>Conclusão</h4><p>Não se rejeita $H_0$ a 1%: a diferença de 8 g é compatível com o acaso de sortear 16 pacotes. <strong>Não pare a máquina.</strong> Mas o poder é baixo: uma desregulagem de 10 g só seria detectada em 28% das amostras. Com $n=100$ (Ex. 12.4), o erro padrão cai para 2 g e o poder sobe muito.</p><ul><li><span class="tag tag-mem">⚠ β bilateral</span> Na conta de β entram os <strong>dois</strong> limites da região de aceitação. Esquecer o limite de baixo dá quase o mesmo número aqui, mas não quando $\mu_1$ está perto de $\mu_0$ (2019 T3).</li></ul></div><div class="answer"><strong>Resposta:</strong> $z_{obs}=-1{,}60$, fora da RC $\{\bar x\le487{,}1\}\cup\{\bar x\ge512{,}9\}$: não rejeita; poder 5,8% em 505 g e 28,2% em 510 g. <span class="badge badge-ok">bate com o livro</span> <span class="badge">poder: Tabela 12.1 do livro (5,7% e 28,1%, arredondamento)</span></div></article><article class="ex pivo" id="m12-e10"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 12.10 · Pivô 2</div><h3 id="m12-e10-h" data-nav="Nicotina: teste t unilateral e IC" data-pivo>Nicotina: teste t unilateral e IC</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.10, Exemplo 12.10, PDF p. 300</span><p>Um fabricante afirma que seus cigarros contêm não mais que 30 mg de nicotina. Uma amostra de 25 cigarros fornece média de 31,5 mg e desvio padrão de 3 mg. No nível de 5%, os dados refutam ou não a afirmação do fabricante?</p><p>(O livro também constrói o IC de 95% para μ.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Uma média, desvio padrão <strong>amostral</strong> (3 mg de 25 cigarros): σ desconhecido ⇒ teste t com $n-1=24$ g.l. Supõe-se a nicotina normal.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu=30\ \text{mg} \qquad H_1:\ \mu>30\ \text{mg}$$</div><p>"Não mais que 30" é a afirmação contestada: o caso de fronteira $\mu=30$ vai para $H_0$. Só um teor <em>maior</em> refuta o fabricante, então a alternativa é unilateral à direita.</p></div></div><div class="step" data-n="3"><h4>Estatística e região crítica</h4><p><a class="tag tag-form" href="../provas/p2.html#f-2">📄 nº 2</a> <span class="tag tag-tab">📊 Tabela t · linha 24, coluna 0,05 → 1,711</span>.</p><div class="math-box">$$RC=\{t\ge1{,}711\}$$</div></div><div class="step" data-n="4"><h4>Valor observado</h4><div class="math-box">$$t_0=\frac{31{,}5-30}{3/\sqrt{25}}=\frac{1{,}5}{0{,}6}=2{,}50\in RC$$</div><p>Valor-p: na linha 24 da tabela t, 2,50 fica entre 2,492 (coluna 0,01) e 2,797 (coluna 0,005) ⇒ valor-p ≈ 0,01 (exato 0,0098).</p></div><div class="step" data-n="5"><h4>IC 95% para μ</h4><p><span class="tag tag-tab">📊 Tabela t · linha 24, coluna 0,025 → 2,064</span></p><div class="math-box">$$31{,}5\pm2{,}064\times0{,}6=[30{,}26;\ 32{,}74]\ \text{mg}$$</div></div><div class="step" data-n="6"><h4>Conclusão</h4><p>Rejeita-se $H_0$ a 5%: há evidência de que o teor médio passa de 30 mg; o fabricante está errado. O IC diz quanto: entre 30,3 e 32,7 mg.</p><ul><li><span class="tag tag-mem">⚠ coluna da tabela t</span> Unilateral de 5% → coluna 0,05; o IC de 95% usa a coluna 0,025. São duas colunas na mesma linha.</li><li><span class="tag tag-mem">⚠ unidade</span> O livro escreve "30 g" na conclusão; é 30 mg.</li></ul></div><div class="answer"><strong>Resposta:</strong> $t_0=2{,}50>1{,}711$: rejeita $H_0$ (valor-p ≈ 0,01); IC 95% $[30{,}26;\ 32{,}74]$ mg. <span class="badge badge-ok">bate com o livro</span></div></article><article class="ex pivo" id="m12-e3"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplos 12.3 e 12.5 · Pivô 3</div><h3 id="m12-e3-h" data-nav="Audiência de TV: teste de proporção e va" data-pivo>Audiência de TV: teste de proporção e valor-p</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.6 e §12.8, Exemplos 12.3 e 12.5, PDF p. 288–289 e 293</span><p>Uma estação de televisão afirma que 60% dos televisores estavam ligados no seu programa especial da última segunda-feira. Uma rede competidora deseja contestar essa afirmação e decide usar uma amostra de 200 famílias para um teste. Qual deve ser o procedimento adotado para avaliar a veracidade da afirmação da estação? […] Admitamos que, da pesquisa feita com as 200 famílias, obtivemos 104 pessoas que estavam assistindo ao programa.</p><p>(Ex. 12.5: calcule o valor-p do mesmo teste.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Uma proporção, $n=200$ grande: z pela aproximação normal da binomial ($np_0=120$ e $n(1-p_0)=80$, ambos &gt; 5).</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ p=0{,}60 \qquad H_1:\ p<0{,}60$$</div><p>A emissora divulgaria o máximo possível; se a afirmação for falsa, a audiência real é <em>menor</em>. O livro faz questão: a alternativa é escolhida antes de ver o resultado da amostra.</p></div></div><div class="step" data-n="3"><h4>Estatística e região crítica</h4><p><a class="tag tag-form" href="../provas/p2.html#f-3">📄 nº 3</a> Sob $H_0$, $\hat p\sim N(0{,}60;\ 0{,}24/200)$, erro padrão $\sqrt{0{,}6\cdot0{,}4/200}=0{,}0346$, com $p_0$, não $\hat p$.</p><p><span class="tag tag-tab">📊 Tabela z · 0,45 → 1,645</span>, cauda esquerda:</p><div class="math-box">$$\hat p_c=0{,}60-1{,}645\times0{,}0346=0{,}543,\qquad RC=\{\hat p\le0{,}543\}$$</div></div><div class="step" data-n="4"><h4>Valor observado</h4><div class="math-box">$$\hat p=\frac{104}{200}=0{,}52\in RC,\qquad z_{obs}=\frac{0{,}52-0{,}60}{0{,}0346}=-2{,}31$$</div><p>Valor-p: <span class="tag tag-tab">📊 Tabela z · linha 2,3, coluna 0,01 → 0,4896</span> ⇒ $0{,}5-0{,}4896=0{,}010$.</p></div><div class="step" data-n="5"><h4>Conclusão</h4><p>Rejeita-se $H_0$: há evidência de que a audiência foi inferior a 60%. Se fosse mesmo 60%, só 1% das amostras de 200 famílias daria 52% ou menos.</p><div class="callout diverge"><span class="co-t">Arredondamento</span><p>O livro dá $\hat p_c=0{,}544$; a conta dá 0,543. Não muda a decisão.</p></div></div><div class="answer"><strong>Resposta:</strong> RC $\{\hat p\le0{,}543\}$, $\hat p=0{,}52$: rejeita $H_0$; $z=-2{,}31$, valor-p ≈ 0,01. <span class="badge badge-ok">bate com o livro</span></div></article><article class="ex pivo" id="m12-e8"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 12.8 · Pivô 4</div><h3 id="m12-e8-h" data-nav="Variabilidade do café: teste χ² bilatera" data-pivo>Variabilidade do café: teste χ² bilateral e IC para σ²</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §12.9, Exemplo 12.8, PDF p. 297</span><p>Uma das maneiras de manter sob controle a qualidade de um produto é controlar sua variabilidade. Uma máquina de encher pacotes de café está regulada para enchê-los com média de 500 g e desvio padrão de 10 g. O peso de cada pacote X segue uma distribuição $N(\mu,\sigma^2)$. Colheu-se uma amostra de 16 pacotes e observou-se uma variância de $S^2=169$ g². Com esse resultado, você diria que a máquina está desregulada com relação à variância?</p><p>(Nível de 5%, como no livro. Acrescentamos o IC de 95% para σ².)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Pergunta sobre <strong>variância</strong> de uma população normal: teste χ² com $n-1=15$ g.l.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \sigma^2=100\ \text{g}^2 \qquad H_1:\ \sigma^2\neq100\ \text{g}^2$$</div><p>"Desregulada" vale para mais ou para menos: bilateral. Atenção: $H_0$ é sobre σ² = 10² = 100, não sobre σ = 10.</p></div></div><div class="step" data-n="3"><h4>Estatística e região crítica</h4><p><a class="tag tag-form" href="../provas/p2.html#f-4">📄 nº 4</a></p><p><span class="tag tag-tab">📊 Tabela χ² · linha 15, coluna 0,975 → 6,262</span> e <span class="tag tag-tab">📊 Tabela χ² · linha 15, coluna 0,025 → 27,488</span>. A coluna é a área à direita: o crítico de baixo sai da coluna 0,975.</p><div class="math-box">$$RC=\{\chi^2\le6{,}262\}\cup\{\chi^2\ge27{,}488\}$$</div></div><div class="step" data-n="4"><h4>Valor observado</h4><div class="math-box">$$\chi^2_0=\frac{(n-1)S^2}{\sigma_0^2}=\frac{15\times169}{100}=25{,}35\notin RC$$</div></div><div class="step" data-n="5"><h4>IC 95% para σ²</h4><div class="math-box">$$\left[\frac{15\times169}{27{,}488};\ \frac{15\times169}{6{,}262}\right]=[92{,}2;\ 404{,}8]\ \text{g}^2$$</div><p>O 100 g² está dentro: mesma conclusão do teste.</p></div><div class="step" data-n="6"><h4>Conclusão</h4><p>Não se rejeita $H_0$ a 5%: a máquina está sob controle quanto à variância. Mas 25,35 está perto do crítico 27,488; a 10% (crítico 24,996) a decisão mudaria.</p><ul><li><span class="tag tag-mem">⚠ cauda esquerda</span> Para "a variância diminuiu" o crítico é o número pequeno, da coluna $1-\alpha$ (2018 T3).</li></ul></div><div class="answer"><strong>Resposta:</strong> $\chi^2_0=25{,}35$, RC $\{\le6{,}262\}\cup\{\ge27{,}488\}$: não rejeita; IC 95% para σ²: $[92{,}2;\ 404{,}8]$ g². <span class="badge badge-ok">bate com o livro</span></div></article><h3 class="sub" id="provas-antigas" data-nav="Provas antigas deste tópico">Provas antigas deste tópico</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Questão (resolvida na página da prova)</th><th>O que treina</th></tr></thead><tbody><tr><td><a href="../provas/p2.html#q-2018T8">2018 · Teste 8 · Bilateral com σ conhecido</a></td><td>z bilateral</td></tr><tr><td><a href="../provas/p2.html#q-2018T2">2018 · Teste 2 · Achar o α</a></td><td>pergunta invertida: da regra para α</td></tr><tr><td><a href="../provas/p2.html#q-2024T4">2024 · Teste 4 · Teste + poder</a></td><td>teste z e poder como no Ex. 12.2</td></tr><tr><td><a href="../provas/p2.html#q-2019T6">2019 · Teste 6 · Poisson, valor-p e α</a></td><td>distribuição discreta: α real da regra</td></tr><tr><td><a href="../provas/p2.html#q-2018T4">2018 · Teste 4 · Valor-p de proporção</a></td><td>valor-p unilateral</td></tr><tr><td><a href="../provas/p2.html#q-2019T4">2019 · Teste 4 · Valor-p com conclusão</a></td><td>"minoria" ⇒ unilateral</td></tr><tr><td><a href="../provas/p2.html#q-2023T6">2023 · Teste 6 · Cinco testes, α variando</a></td><td>proporção com vários α</td></tr><tr><td><a href="../provas/p2.html#q-2018T3">2018 · Teste 3 · χ² na cauda esquerda</a></td><td>variância menor: crítico pequeno</td></tr><tr><td><a href="../provas/p2.html#q-2019T5">2019 · Teste 5 · χ² na cauda direita</a></td><td>variância maior; α decide</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-08"><h3>Testes com uma amostra</h3><div class="r-grid"><div class="r-item"><b>Média, σ dado.</b> <span class="path">form. nº 1 → tabela z</span> z = (x̄ − μ₀)/(σ/√n).</div><div class="r-item"><b>Média, só S.</b> <span class="path">form. nº 2 → tabela t, linha n − 1</span> t com n − 1 g.l.; crítico maior que o de z.</div><div class="r-item"><b>Proporção.</b> <span class="path">form. nº 3 → tabela z</span> Denominador com $p_0$; $np_0>5$.</div><div class="r-item"><b>Variância.</b> <span class="path">form. nº 4 → tabela χ²</span> χ² = (n−1)S²/σ₀²; bilateral usa colunas α/2 e 1−α/2; "menor que" usa o número pequeno.</div><div class="r-item"><b>Conclusão.</b> Sempre no contexto: o que a rejeição significa para a máquina, o lote, a afirmação.</div><div class="r-item"><b>Limites.</b> t e χ² supõem normal (χ² sem perdão); proporção pede n grande; σ conhecido só se o enunciado disser.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="07-fundamentos-do-teste.html"><small>← anterior</small>07 · Fundamentos do teste de hipóteses</a><a class="prox" href="09-duas-medias.html"><small>próximo →</small>09 · Duas médias: independentes e emparelhadas</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PRO3200 · Estatística (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pro3200-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

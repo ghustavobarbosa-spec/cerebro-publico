@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 · Intervalos de confiança (duas amostras) · PRO3200</title>
+<meta name="description" content="Ficha do tópico 6: Intervalos de confiança (duas amostras) (P2)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pro3200-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PRO3200 · Tópico 6</div>
+  <div class="sb-sub">Estatística</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · Antes de começar</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#onde-ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#estrutura">A estrutura única</a></li>
+<li class="nav-ex"><a href="#casos">Qual caso é o seu</a></li>
+<li class="nav-ex"><a href="#ler-ic">Ler o intervalo</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#m13-p5-h">Tempo de adaptação: homens × mulheres (I<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#m13-e5-h">Vigas de aço com variâncias diferentes (</a></li>
+<li class="nav-ex"><a href="#provas-antigas">Provas antigas deste tópico</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Estatística</a> <span class="sep">›</span> <span>06 · Intervalos de confiança (duas amostras)</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 06 · P2</span><h2 id="obj" data-nav="1 · Objetivo">Intervalos de confiança (duas amostras)</h2></div><div class="callout concept"><span class="co-t">Objetivo</span><p>Estimar <strong>quanto</strong> dois grupos diferem: duas médias, duas proporções ou duas variâncias, com uma margem de erro. Pergunta de engenharia: "o processo novo é diferente do antigo, e de quanto?". O intervalo responde as duas coisas de uma vez: se contém o zero, não há evidência de diferença; se não contém, ele mede o tamanho dela.</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · Antes de começar">O que dominar antes</h2></div>
+<ul><li><a href="05-intervalos-de-confianca.html">Ficha 05 · IC com uma amostra</a>: a forma "estimativa ± crítico × erro padrão" e a leitura das tabelas z e t.</li><li><a href="03-distribuicoes-amostrais.html">Ficha 03 · Distribuições amostrais e TLC</a>: por que $\bar X$ é normal com $n$ grande.</li><li><a href="../base.html#b-probabilidade">Base · probabilidade e v.a.</a>: variância de uma soma ou diferença de v.a. independentes.</li></ul>
+</section>
+
+<section class="chapter" id="sec-onde-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="onde-ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Seção</th><th>Páginas</th><th>O que ler</th></tr></thead><tbody><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.3.1 (IC para Δ no fim do Ex. 13.4)</td><td>PDF 309–312</td><td>IC com $S_p$ e com variâncias diferentes</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.4.1 (fim do Ex. 13.10)</td><td>PDF 321–323</td><td>IC para $\mu_D$ (pares)</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.5 (fim do Ex. 13.12)</td><td>PDF 325–327</td><td>IC para $p_A-p_B$</td></tr><tr><td>Morettin &amp; Bussab, 9ª ed.</td><td>§13.2, eq. (13.5) e Ex. 13.3</td><td>PDF 307–309</td><td>IC para a razão de variâncias</td></tr><tr><td>Devore, 6ª ed.</td><td>§9.1 a §9.5</td><td>p. 314, 324, 332, 341, 347</td><td>mesmos casos, com ênfase em IC (é o roteiro das aulas 11–12)</td></tr></tbody></table></div><p class="tbl-cap">Morettin 9ª é e-book sem página impressa: as páginas são as do PDF. Devore: página impressa (PDF = impressa + 15).</p><div class="callout"><span class="co-t">Slides e listas do curso</span><p>A completar quando o material da aula (slides, listas) for incorporado.</p></div>
+</section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+<h3 class="sub" id="estrutura" data-nav="A estrutura única">Uma estrutura só para todos os intervalos</h3>
+<p>Todo intervalo de confiança do curso tem a mesma forma:</p>
+<div class="math-box">$$\text{estimativa} \;\pm\; (\text{valor crítico}) \times (\text{erro padrão da estimativa})$$</div>
+<p>Com duas amostras, a estimativa é uma <strong>diferença</strong> ($\bar X_1-\bar X_2$, $\hat p_1-\hat p_2$) ou uma
+<strong>razão</strong> ($S_1^2/S_2^2$). O erro padrão da diferença vem de uma regra de probabilidade que você já viu na base
+(<a href="../base.html#b-probabilidade">variância de combinação linear</a>): se as amostras são independentes,</p>
+<div class="math-box">$$\operatorname{Var}(\bar X_1-\bar X_2)=\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}$$</div>
+<p>As variâncias <strong>somam</strong> mesmo numa diferença: subtrair duas grandezas incertas acumula as duas incertezas.
+O erro padrão do intervalo é <em>o mesmo denominador</em> da estatística do teste correspondente (fichas <a href="09-duas-medias.html">09</a> e <a href="10-duas-proporcoes-e-variancias.html">10</a>),
+com uma exceção que cai em prova: proporções (abaixo).</p>
+
+<h3 class="sub" id="casos" data-nav="Qual caso é o seu">Qual caso é o seu</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>O enunciado dá…</th><th>Intervalo</th><th>Crítico (tabela)</th><th>Formulário</th></tr></thead><tbody><tr><td>$\sigma_1,\sigma_2$ populacionais</td><td>$(\bar x_1-\bar x_2)\pm z_{\alpha/2}\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}$</td><td>z</td><td><a class="tag tag-form" href="../provas/p2.html#f-5">📄 nº 5</a></td></tr><tr><td>$S_1,S_2$ e manda supor variâncias iguais</td><td>$(\bar x_1-\bar x_2)\pm t_{\alpha/2;\,n_1+n_2-2}\,S_p\sqrt{1/n_1+1/n_2}$</td><td>t, g.l. $n_1+n_2-2$</td><td><a class="tag tag-form" href="../provas/p2.html#f-6">📄 nº 6</a> <a class="tag tag-form" href="../provas/p2.html#f-7">📄 nº 7</a></td></tr><tr><td>$S_1,S_2$, amostras grandes ($n\ge 30$ cada)</td><td>como a 1ª linha, trocando $\sigma$ por $S$</td><td>z (TLC)</td><td><a class="tag tag-form" href="../provas/p2.html#f-5">📄 nº 5</a></td></tr><tr><td>pares (antes/depois, mesmo indivíduo)</td><td>$\bar d\pm t_{\alpha/2;\,n-1}\,S_D/\sqrt n$</td><td>t, g.l. nº de pares − 1</td><td><a class="tag tag-form" href="../provas/p2.html#f-8">📄 nº 8</a></td></tr><tr><td>contagens de sucesso em dois grupos</td><td>$(\hat p_1-\hat p_2)\pm z_{\alpha/2}\sqrt{\hat p_1\hat q_1/n_1+\hat p_2\hat q_2/n_2}$</td><td>z</td><td><a class="tag tag-form" href="../provas/p2.html#f-10">📄 nº 10</a></td></tr><tr><td>$S_1^2,S_2^2$ (comparar dispersão)</td><td>$\left[\dfrac{S_1^2/S_2^2}{F_{\alpha/2;\,\nu_1,\nu_2}};\ (S_1^2/S_2^2)\,F_{\alpha/2;\,\nu_2,\nu_1}\right]$</td><td>F (só 5% e 1% tabelados)</td><td><a class="tag tag-form" href="../provas/p2.html#f-11">📄 nº 11</a></td></tr></tbody></table></div><p class="tbl-cap">O caso de variâncias diferentes (Welch) não está no formulário: aparece só como aprofundamento, no Ex. 13.5 abaixo.</p>
+
+<h3 class="sub" id="ler-ic" data-nav="Ler o intervalo">Como ler um intervalo de diferença</h3>
+<ul>
+<li><strong>Contém o zero?</strong> Então, nesse nível, os dados não mostram diferença. É exatamente o teste bilateral com
+$\alpha = 1-\gamma$: o IC de 95% exclui o zero ⇔ o teste bilateral de 5% rejeita $H_0:\mu_1=\mu_2$.</li>
+<li><strong>O sinal depende da ordem da subtração.</strong> Um IC todo negativo para $\mu_1-\mu_2$ diz que $\mu_1<\mu_2$.
+Escreva qual grupo é o 1 antes de calcular. As alternativas trocam essa ordem de propósito.</li>
+<li><strong>Mais confiança, intervalo mais largo.</strong> Só o crítico muda: 90% → 1,645; 95% → 1,96; 99% → 2,576. A questão
+2024 T9 pede o mesmo IC em três níveis (abaixo).</li>
+<li><strong>Proporções: o IC usa $\hat p_1$ e $\hat p_2$ separados.</strong> No teste usa-se o $\hat p$ combinado, porque o teste
+supõe $p_1=p_2$; o intervalo não supõe nada. Trocar um pelo outro muda a 2ª casa decimal, onde as alternativas se separam.</li>
+</ul>
+
+</section>
+
+<section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul><li><strong>Independência entre as amostras.</strong> A soma das variâncias só vale se os dois grupos não têm ligação. Se cada observação de um grupo tem um par natural no outro, use o intervalo das diferenças (<a class="tag tag-form" href="../provas/p2.html#f-8">📄 nº 8</a>).</li><li><strong>Normalidade ou amostra grande.</strong> Com $n$ pequeno, t e F supõem populações normais. Com $n\ge30$ em cada grupo, o TLC garante a média aproximadamente normal. A F <em>não</em> melhora com $n$ grande: exige normalidade sempre.</li><li><strong>$S_p$ supõe variâncias iguais.</strong> Ou o enunciado diz isso ("supondo variâncias iguais"), ou se confere com o teste F (ficha <a href="10-duas-proporcoes-e-variancias.html">10</a>). Variâncias muito diferentes pedem Welch, que o formulário não traz.</li><li><strong>Proporções:</strong> a aproximação normal pede $n\hat p$ e $n(1-\hat p)$ maiores que 5 em cada grupo.</li><li><strong>Razão de variâncias:</strong> a tabela F do curso só tem caudas de 5% e 1%. Logo só se monta IC de 90% ou de 98% para $\sigma_1^2/\sigma_2^2$.</li></ul>
+</section>
+
+<section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>
+<article class="ex pivo" id="m13-p5"><div class="ex-head"><div><div class="ex-kicker">Morettin cap. 13 · Problema 5 · Pivô</div><h3 id="m13-p5-h" data-nav="Tempo de adaptação: homens × mulheres (I" data-pivo>Tempo de adaptação: homens × mulheres (IC com amostras grandes)</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §13.3, Problema 5, PDF p. 312</span><p>Num estudo comparativo do tempo médio de adaptação, uma amostra aleatória, de 50 homens e 50 mulheres de um grande complexo industrial, produziu os seguintes resultados:</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Estatísticas</th><th>Homens</th><th>Mulheres</th></tr></thead><tbody><tr><td>Médias</td><td>3,2 anos</td><td>3,7 anos</td></tr><tr><td>Desvios padrões</td><td>0,8 anos</td><td>0,9 anos</td></tr></tbody></table></div><p>Que conclusões você poderia tirar para a população de homens e mulheres dessa indústria? (Indique as suposições feitas para resolver o problema.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Duas amostras <strong>independentes</strong> (pessoas diferentes em cada grupo), pergunta sobre <strong>médias</strong>. O enunciado dá desvios <em>amostrais</em>, mas $n=50$ em cada grupo: pelo TLC, $\bar X_H-\bar X_M$ é aproximadamente normal e $S$ substitui $\sigma$ com erro desprezível. Caso z com amostras grandes. A pergunta é aberta ("que conclusões"): responda com um IC de 95% para $\mu_H-\mu_M$ e leia se ele contém o zero.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu_H=\mu_M \qquad H_1:\ \mu_H\neq\mu_M$$</div><p>Nada no enunciado aponta uma direção ("comparativo"), então a alternativa é bilateral. É ela que casa com o IC de 95%: o intervalo e o teste bilateral de 5% dão a mesma conclusão.</p></div></div><div class="step" data-n="3"><h4>Dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde está</th></tr></thead><tbody><tr><td>média, homens</td><td>$\bar x_H$</td><td>3,2 anos</td><td>tabela</td></tr><tr><td>média, mulheres</td><td>$\bar x_M$</td><td>3,7 anos</td><td>tabela</td></tr><tr><td>desvios</td><td>$s_H,\ s_M$</td><td>0,8 e 0,9 anos</td><td>tabela</td></tr><tr><td>tamanhos</td><td>$n_H,\ n_M$</td><td>50 e 50</td><td>texto</td></tr><tr><td>confiança</td><td>$\gamma$</td><td>95% (escolha nossa)</td><td>não dado: padrão</td></tr></tbody></table></div></div><div class="step" data-n="4"><h4>Fórmula</h4><p><a class="tag tag-form" href="../provas/p2.html#f-5">📄 nº 5 · duas médias, variâncias conhecidas</a> com $S$ no lugar de $\sigma$, na forma de intervalo:</p><div class="math-box">$$(\bar x_H-\bar x_M)\pm z_{\alpha/2}\sqrt{\frac{s_H^2}{n_H}+\frac{s_M^2}{n_M}}$$</div></div><div class="step" data-n="5"><h4>Tabela</h4><p><span class="tag tag-tab">📊 Tabela z · procure 0,4750 no miolo → linha 1,9, coluna 0,06</span>: $z_{0{,}025}=1{,}96$. A tabela do curso dá $P(0<Z<z)$; para 95% central, cada metade vale 0,475.</p></div><div class="step" data-n="6"><h4>Cálculo</h4><div class="math-box">$$EP=\sqrt{\frac{0{,}8^2}{50}+\frac{0{,}9^2}{50}}=\sqrt{0{,}0128+0{,}0162}=0{,}1703\ \text{anos}$$</div><div class="math-box">$$IC_{95\%}(\mu_H-\mu_M)=-0{,}5\pm1{,}96\times0{,}1703=[-0{,}834;\ -0{,}166]\ \text{anos}$$</div><p>Na forma de teste: $z_{obs}=-0{,}5/0{,}1703=-2{,}94$; <span class="tag tag-tab">📊 Tabela z · linha 2,9, coluna 0,04 → 0,4984</span>, valor-p bilateral $=2(0{,}5-0{,}4984)=0{,}003$.</p></div><div class="step" data-n="7"><h4>Conclusão</h4><p>O intervalo está <strong>inteiro abaixo de zero</strong>: com 95% de confiança, os homens se adaptam em média entre 0,17 e 0,83 ano mais depressa que as mulheres. Rejeita-se $H_0$ (valor-p 0,3%).</p><p>Suposições a declarar, como pede o enunciado: amostras aleatórias e independentes; $n$ grande para valer o TLC; $s$ como estimativa de $\sigma$. Não é preciso supor normalidade nem variâncias iguais.</p><ul><li><span class="tag tag-mem">⚠ ordem da subtração</span> Com $\mu_M-\mu_H$ o intervalo seria $[0{,}166;\ 0{,}834]$: mesma conclusão, sinais trocados. Nas provas, metade das alternativas erradas é isso.</li></ul></div><div class="answer"><strong>Resposta:</strong> IC 95% para $\mu_H-\mu_M$: $[-0{,}83;\ -0{,}17]$ ano; diferença significativa (homens se adaptam mais rápido). <span class="badge">livro sem resposta impressa · conta conferida em Python</span></div></article><article class="ex" id="m13-e5"><div class="ex-head"><div><div class="ex-kicker">Morettin · Exemplo 13.5 · Aprofundamento</div><h3 id="m13-e5-h" data-nav="Vigas de aço com variâncias diferentes (">Vigas de aço com variâncias diferentes (Welch)</h3></div><div class="ex-badges"><span class="badge">Resolvido</span></div></div><div class="stmt"><span class="lbl">Enunciado · Morettin &amp; Bussab, 9ª ed., §13.3.1(b), Exemplo 13.5, PDF p. 312</span><p>Queremos testar as resistências de dois tipos de vigas de aço, A e B. Tomando-se $n=15$ vigas do tipo A e $m=20$ vigas do tipo B, obtemos os valores na Tabela 13.2. Usando um teste F com nível $\alpha=10\%$ rejeitamos a hipótese de variâncias iguais.</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tipo</th><th>Média</th><th>Variância</th></tr></thead><tbody><tr><td>A</td><td>70,5</td><td>81,6</td></tr><tr><td>B</td><td>84,3</td><td>210,8</td></tr></tbody></table></div><p>(Pedido do livro: testar $H_0:\mu_A=\mu_B$ contra $\mu_A\neq\mu_B$ com $\alpha=5\%$. Acrescentamos o IC de 95%.)</p></div><div class="step" data-n="1"><h4>Classificar</h4><p>Duas amostras independentes, médias, $\sigma$ desconhecidos e <strong>variâncias diferentes</strong> (o próprio enunciado diz que o F rejeitou a igualdade). Não dá para usar $S_p$: entra a estatística de Welch, com g.l. aproximado.</p></div><div class="step" data-n="2"><h4>Hipóteses</h4><div class="callout concept"><span class="co-t">Hipóteses (escreva sempre, mesmo que a questão não peça)</span><div class="math-box">$$H_0:\ \mu_A=\mu_B \qquad H_1:\ \mu_A\neq\mu_B$$</div><p>Antes, o teste preliminar: $H_0:\sigma_A^2=\sigma_B^2$. Com a maior variância em cima, $F=210{,}8/81{,}6=2{,}58$ contra <span class="tag tag-tab">📊 Tabela F · $\nu_1=19$, $\nu_2=14$, coluna 5%</span> = 2,40 (bilateral de 10%): rejeita, como o livro afirma.</p></div></div><div class="step" data-n="3"><h4>Fórmula (fora do formulário)</h4><div class="math-box">$$T=\frac{\bar x_A-\bar x_B}{\sqrt{S_A^2/n_A+S_B^2/n_B}},\qquad \nu=\frac{(A+B)^2}{\frac{A^2}{n_A-1}+\frac{B^2}{n_B-1}},\quad A=\frac{S_A^2}{n_A},\ B=\frac{S_B^2}{n_B}$$</div></div><div class="step" data-n="4"><h4>Cálculo</h4><div class="math-box">$$A=5{,}44,\ B=10{,}54,\quad EP=\sqrt{15{,}98}=4{,}00,\quad \nu=\frac{255{,}4}{2{,}11+5{,}85}=32{,}08\to 32$$</div><p><span class="tag tag-tab">📊 Tabela t · linha 32, coluna 0,025</span> = 2,037.</p><div class="math-box">$$t_0=\frac{70{,}5-84{,}3}{4{,}00}=-3{,}45,\qquad IC_{95\%}(\mu_A-\mu_B)=-13{,}8\pm2{,}037\times4{,}00=[-21{,}9;\ -5{,}7]$$</div></div><div class="step" data-n="5"><h4>Conclusão</h4><p>$|t_0|=3{,}45>2{,}037$: rejeita $H_0$. As vigas B são mais resistentes, entre 5,7 e 21,9 unidades em média.</p><ul><li><span class="tag tag-mem">⚠ fora da prova</span> Welch não está no formulário e não caiu em nenhuma P2 analisada. Serve para entender por que o $S_p$ exige variâncias iguais.</li></ul></div><div class="answer"><strong>Resposta:</strong> $t_0=-3{,}45$, $\nu=32$; rejeita $H_0$; IC 95% $[-21{,}9;\ -5{,}7]$. <span class="badge badge-ok">bate com o livro</span></div></article><h3 class="sub" id="provas-antigas" data-nav="Provas antigas deste tópico">Provas antigas deste tópico</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Questão (resolvida na página da prova)</th><th>O que treina</th></tr></thead><tbody><tr><td><a href="../provas/p2.html#q-2018T1">2018 · Teste 1 · IC da diferença, σ conhecido</a></td><td>IC z de duas médias; ordem da subtração</td></tr><tr><td><a href="../provas/p2.html#q-2018T5">2018 · Teste 5 · IC de duas proporções</a></td><td>IC com $\hat p$ separados, a partir de tabela</td></tr><tr><td><a href="../provas/p2.html#q-2024T9">2024 T9 · 2023 T9 · Um IC, três níveis</a></td><td>efeito do nível de confiança na largura</td></tr></tbody></table></div>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-06"><h3>Intervalos com duas amostras</h3><div class="r-grid"><div class="r-item"><b>Duas médias, σ dados ou n grande.</b> <span class="path">form. nº 5 → tabela z (0,475 → 1,96)</span> Diferença ± 1,96·√(σ₁²/n₁+σ₂²/n₂).</div><div class="r-item"><b>Duas médias, "variâncias iguais".</b> <span class="path">form. nº 6–7 → tabela t</span> $S_p$ e t com $n_1+n_2-2$ g.l.</div><div class="r-item"><b>Pares.</b> <span class="path">form. nº 8 → tabela t</span> Vire tudo em uma amostra de diferenças; t com nº de pares − 1.</div><div class="r-item"><b>Duas proporções.</b> <span class="path">form. nº 10 → tabela z</span> IC com $\hat p_1,\hat p_2$ separados (o teste é que usa o combinado).</div><div class="r-item"><b>Leitura.</b> IC sem o zero ⇔ teste bilateral rejeita. Sinal depende da ordem da subtração.</div><div class="r-item"><b>Limites.</b> Amostras independentes; normalidade se n pequeno; $S_p$ só com variâncias iguais; F só 90% ou 98%.</div></div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="05-intervalos-de-confianca.html"><small>← anterior</small>05 · Intervalos de confiança (uma amostra)</a><a class="prox" href="07-fundamentos-do-teste.html"><small>próximo →</small>07 · Fundamentos do teste de hipóteses</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PRO3200 · Estatística (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pro3200-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

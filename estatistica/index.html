@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estatística · PRO3200</title>
+<meta name="description" content="PRO3200 · mapa de conceitos, programa, bibliografia e provas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pro3200-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PRO3200 · Início</div>
+  <div class="sb-sub">Estatística</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#motivacao">1 · Para que serve</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#programa">2 · Programa</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#bibliografia">3 · Bibliografia</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#mapa">4 · Mapa de conceitos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#mapa-site">O site em uma lista</a></li>
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../index.html">← Disciplinas</a> <span>Estatística</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<header class="hero">
+  <div class="eyebrow">PRO3200 · Estatística · Escola Politécnica USP</div>
+  <h1>Estatística: o site da disciplina</h1>
+  <p class="subtitle">16 tópicos · mapa de pré-requisitos · trilha de exercícios por prova</p>
+  <p>O material está organizado por <strong>tópico</strong>, não por prova: cada ficha ensina uma ideia, com o que ler,
+  onde ela vale e onde falha. A prova é um recorte sobre os tópicos (veja <a href="provas/index.html">O que cai em cada prova</a>).
+  O formulário e as tabelas estatísticas são impressos junto com a prova: aqui se ensina a <em>navegar</em> neles, não a decorar.</p>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">Próxima prova</div><div class="kpi-value">P2</div><div class="kpi-sub">26/out · aulas 11–20 · tópicos 06 a 12</div></div>
+    <div class="kpi-card"><div class="kpi-label">Fichas</div><div class="kpi-value">16</div><div class="kpi-sub">5 de P1 · 7 de P2 · 4 de P3</div></div>
+    <div class="kpi-card"><div class="kpi-label">Questões de P2 antigas</div><div class="kpi-value">38</div><div class="kpi-sub">provas de 2018 a 2024, em <a href="provas/p2.html">provas/p2</a></div></div>
+  </div>
+</header>
+
+<section class="chapter" id="cap-motivacao">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="motivacao" data-nav="1 · Para que serve">Para que serve cada assunto</h2>
+    <p class="section-desc">Estatística é a ferramenta para decidir com dados que variam: peças nunca saem idênticas, ensaios nunca dão o mesmo número duas vezes.</p></div>
+  <div class="card-grid">
+    <div class="card accent-left"><h3>Amostragem e descritiva</h3><p>Antes de qualquer conta, saber <em>de onde vêm</em> os dados e resumi-los sem enganar. Base de controle de qualidade, ensaios de materiais e relatório de laboratório. Fichas <a href="topicos/01-introducao-e-amostragem.html">01</a> e <a href="topicos/02-estatistica-descritiva.html">02</a>.</p></div>
+    <div class="card accent-left"><h3>Estimação e intervalos de confiança</h3><p>Dizer quanto vale uma grandeza <em>com margem de erro</em>: dimensão média de um lote, vida de fadiga, incerteza de medição. Fichas <a href="topicos/03-distribuicoes-amostrais.html">03</a>, <a href="topicos/04-estimacao-pontual.html">04</a>, <a href="topicos/05-intervalos-de-confianca.html">05</a> e <a href="topicos/06-ic-duas-amostras.html">06</a>.</p></div>
+    <div class="card accent-left"><h3>Testes de hipóteses</h3><p>Decidir se um processo melhorou, se dois fornecedores diferem, se uma média cumpre a especificação, e <em>quanto risco</em> se corre ao decidir. Fichas <a href="topicos/07-fundamentos-do-teste.html">07</a> a <a href="topicos/10-duas-proporcoes-e-variancias.html">10</a>.</p></div>
+    <div class="card accent-left"><h3>Aderência e associação</h3><p>Verificar se os dados seguem o modelo que se supôs (normal, Poisson) e se duas características qualitativas, como configuração × modo de falha, andam juntas. Fichas <a href="topicos/11-aderencia.html">11</a> e <a href="topicos/12-associacao.html">12</a>.</p></div>
+    <div class="card accent-left"><h3>ANOVA e regressão</h3><p>Comparar vários tratamentos de uma vez e ajustar curvas de calibração e modelos empíricos a dados de ensaio. Fichas <a href="topicos/13-anova-um-fator.html">13</a> a <a href="topicos/16-regressao-multipla.html">16</a>.</p></div>
+  </div>
+</section>
+
+<section class="chapter" id="cap-programa">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="programa" data-nav="2 · Programa">Programa: aula × tópico × prova</h2>
+    <p class="section-desc">Cronograma geral 2026-2, turmas 01 a 09. As faixas de aulas são aproximadas (derivadas dos mapas livro × cronograma; o PDF do cronograma não estava nesta máquina: <span class="badge badge-warn">a completar</span>).</p></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Aulas</th><th>Tópico (ficha)</th><th>Prova</th></tr></thead><tbody><tr><td>1–2</td><td><a href="topicos/01-introducao-e-amostragem.html">01 · Introdução e amostragem</a></td><td>P1</td></tr><tr><td>3–4</td><td><a href="topicos/02-estatistica-descritiva.html">02 · Estatística descritiva</a></td><td>P1</td></tr><tr><td>5–6</td><td><a href="topicos/03-distribuicoes-amostrais.html">03 · Distribuições amostrais e TLC</a></td><td>P1</td></tr><tr><td>5–6</td><td><a href="topicos/04-estimacao-pontual.html">04 · Estimação pontual</a></td><td>P1</td></tr><tr><td>7–8</td><td><a href="topicos/05-intervalos-de-confianca.html">05 · Intervalos de confiança (uma amostra)</a></td><td>P1</td></tr><tr><td>9–10</td><td><em>Exercícios complementares</em></td><td>P1</td></tr><tr><td>11–12</td><td><a href="topicos/06-ic-duas-amostras.html">06 · Intervalos de confiança (duas amostras)</a></td><td>P2</td></tr><tr><td>13–14</td><td><a href="topicos/07-fundamentos-do-teste.html">07 · Fundamentos do teste de hipóteses</a></td><td>P2</td></tr><tr><td>13–14</td><td><a href="topicos/08-testes-uma-amostra.html">08 · Testes com uma amostra</a></td><td>P2</td></tr><tr><td>15–16</td><td><a href="topicos/09-duas-medias.html">09 · Duas médias: independentes e emparelhadas</a></td><td>P2</td></tr><tr><td>15–16</td><td><a href="topicos/10-duas-proporcoes-e-variancias.html">10 · Duas proporções e razão de variâncias</a></td><td>P2</td></tr><tr><td>17–18</td><td><a href="topicos/11-aderencia.html">11 · Testes de aderência</a></td><td>P2</td></tr><tr><td>17–18</td><td><a href="topicos/12-associacao.html">12 · Teste de associação</a></td><td>P2</td></tr><tr><td>19–20</td><td><em>Exercícios complementares</em></td><td>P2</td></tr><tr><td>21–22</td><td><a href="topicos/13-anova-um-fator.html">13 · ANOVA com um fator</a></td><td>P3</td></tr><tr><td>23–24</td><td><a href="topicos/14-anova-dois-fatores.html">14 · ANOVA com dois fatores</a></td><td>P3</td></tr><tr><td>25–26</td><td><a href="topicos/15-regressao-simples.html">15 · Regressão linear simples</a></td><td>P3</td></tr><tr><td>27–28</td><td><a href="topicos/16-regressao-multipla.html">16 · Regressão linear múltipla</a></td><td>P3</td></tr></tbody></table></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Prova</th><th>Data</th><th>Aulas</th><th>Cobre</th></tr></thead><tbody>
+    <tr><td>P1</td><td>16/set <span class="badge badge-ok">feita</span></td><td>1–10</td><td>fichas 01–05</td></tr>
+    <tr class="hit"><td>P2</td><td>26/out</td><td>11–20</td><td>fichas 06–12</td></tr>
+    <tr><td>P3</td><td>02/dez</td><td>21–28</td><td>fichas 13–16</td></tr>
+    <tr><td>SUB</td><td>09/dez</td><td>1–28</td><td>todas</td></tr>
+  </tbody></table></div>
+  <p class="tbl-cap">Critério de aprovação (fórmula da média): <span class="badge badge-warn">a completar</span>, depende do cronograma oficial.</p>
+</section>
+
+<section class="chapter" id="cap-biblio">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="bibliografia" data-nav="3 · Bibliografia">Bibliografia</h2>
+    <p class="section-desc">Os livros ficam na biblioteca do Drive; aqui só o mapa de onde ler.</p></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Livro</th><th>Papel</th><th>Cobre</th><th>Como citar a página</th></tr></thead><tbody>
+    <tr><td><strong>Morettin &amp; Bussab</strong>, <em>Estatística Básica</em>, 9ª ed. (Saraiva, 2017)</td><td>principal</td>
+      <td>Cap. 1–4 e 10–16 (P1 a P3, exceto ANOVA com 2 fatores e regressão múltipla)</td>
+      <td>O PDF é um e-book <strong>sem numeração de página impressa</strong>: cito <em>capítulo, seção</em> e <em>página do PDF</em> (PDF p.).</td></tr>
+    <tr><td><strong>Devore</strong>, <em>Probabilidade e Estatística para Engenharia e Ciências</em>, 6ª ed. (Cengage, 2006)</td><td>principal (cobre tudo)</td>
+      <td>Cap. 1, 5–14; é a fonte de ANOVA com 2 fatores (cap. 11) e regressão múltipla (cap. 13)</td>
+      <td>Página impressa = página do PDF − 15.</td></tr>
+    <tr><td>Morettin &amp; Bussab, 6ª ed.</td><td>edição anterior</td><td>mesmo conteúdo, numeração diferente</td><td>—</td></tr>
+  </tbody></table></div>
+  <div class="callout"><span class="co-t">Notação</span><p>A notação e os coeficientes do <strong>formulário oficial</strong> prevalecem sobre os do livro. Quando os dois divergirem, a ficha avisa.
+  Probabilidade (Morettin cap. 5–8, Devore cap. 2–4) é pré-requisito: veja a <a href="base.html">revisão de base</a>.</p></div>
+</section>
+
+<section class="chapter" id="cap-mapa">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="mapa" data-nav="4 · Mapa de conceitos">Mapa de conceitos: quem precisa de quem</h2>
+    <p class="section-desc">Uma seta de <em>A</em> para <em>B</em> significa que <em>B precisa de A</em>. Cada caixa é um link. Cores: a prova que cobra o tópico; tracejado cinza é base de cursos anteriores.</p></div>
+<style>
+.mapa-wrap{margin:14px 0 6px}
+.mapa{width:100%;height:auto;max-width:560px;display:block;margin:0 auto;color:var(--text);font-family:var(--font-body)}
+.mapa .e{fill:none;stroke:var(--border-strong);stroke-width:1.4}
+.mapa .seta{fill:var(--border-strong)}
+.mapa .no rect{stroke-width:1.6}
+.mapa .no text{fill:var(--text);font-size:11.5px;font-weight:600;text-anchor:middle}
+.mapa a{text-decoration:none;cursor:pointer}
+.mapa .pb rect{fill:var(--surface-muted);stroke:var(--text-muted);stroke-dasharray:4 3}
+.mapa .p1 rect{fill:var(--info-bg);stroke:var(--info)}
+.mapa .p2 rect{fill:var(--success-bg);stroke:var(--accent)}
+.mapa .p3 rect{fill:var(--warning-bg);stroke:var(--warning)}
+.mapa .no:hover rect{stroke-width:3}
+.mapa .dim{opacity:.22}
+.mapa-leg{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;font-size:12.5px;color:var(--text-secondary);margin:4px 0 12px}
+.mapa-leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1.5px solid}
+.mapa-leg .l-b{background:var(--surface-muted);border-color:var(--text-muted);border-style:dashed}
+.mapa-leg .l-1{background:var(--info-bg);border-color:var(--info)}
+.mapa-leg .l-2{background:var(--success-bg);border-color:var(--accent)}
+.mapa-leg .l-3{background:var(--warning-bg);border-color:var(--warning)}
+</style><div class="mapa-wrap"><svg class="mapa" viewBox="0 0 520 720" role="img" aria-label="Mapa de pré-requisitos dos tópicos de Estatística"><defs><marker id="pt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="seta" d="M0 0L10 5L0 10z"/></marker></defs><path class="e" d="M80 50 C80 63.0 170 63.0 170 75" marker-end="url(#pt)"/><path class="e" d="M260 50 C260 63.0 170 63.0 170 75" marker-end="url(#pt)"/><path class="e" d="M170 116 C170 129.0 260 129.0 260 141" marker-end="url(#pt)"/><path class="e" d="M440 50 C440 63.0 440 63.0 440 75" marker-end="url(#pt)"/><path class="e" d="M440 50 C440 96.0 260 96.0 260 141" marker-end="url(#pt)"/><path class="e" d="M440 116 C440 162.0 350 162.0 350 207" marker-end="url(#pt)"/><path class="e" d="M260 182 C260 195.0 350 195.0 350 207" marker-end="url(#pt)"/><path class="e" d="M260 182 C260 228.0 260 228.0 260 273" marker-end="url(#pt)"/><path class="e" d="M350 248 C350 261.0 260 261.0 260 273" marker-end="url(#pt)"/><path class="e" d="M260 314 C260 327.0 440 327.0 440 339" marker-end="url(#pt)"/><path class="e" d="M260 314 C260 327.0 80 327.0 80 339" marker-end="url(#pt)"/><path class="e" d="M260 182 C260 261.0 80 261.0 80 339" marker-end="url(#pt)"/><path class="e" d="M80 380 C80 393.0 260 393.0 260 405" marker-end="url(#pt)"/><path class="e" d="M440 380 C440 426.0 260 426.0 260 471" marker-end="url(#pt)"/><path class="e" d="M260 446 C260 459.0 260 459.0 260 471" marker-end="url(#pt)"/><path class="e" d="M440 380 C440 426.0 440 426.0 440 471" marker-end="url(#pt)"/><path class="e" d="M260 446 C260 459.0 440 459.0 440 471" marker-end="url(#pt)"/><path class="e" d="M80 380 C80 393.0 80 393.0 80 405" marker-end="url(#pt)"/><path class="e" d="M260 182 C260 294.0 80 294.0 80 405" marker-end="url(#pt)"/><path class="e" d="M80 446 C80 459.0 80 459.0 80 471" marker-end="url(#pt)"/><path class="e" d="M260 512 C260 525.0 350 525.0 350 537" marker-end="url(#pt)"/><path class="e" d="M440 512 C440 525.0 350 525.0 350 537" marker-end="url(#pt)"/><path class="e" d="M350 578 C350 591.0 260 591.0 260 603" marker-end="url(#pt)"/><path class="e" d="M260 446 C260 525.0 440 525.0 440 603" marker-end="url(#pt)"/><path class="e" d="M350 578 C350 591.0 440 591.0 440 603" marker-end="url(#pt)"/><path class="e" d="M440 644 C440 657.0 440 657.0 440 669" marker-end="url(#pt)"/><a href="base.html#b-integrais"><g class="no pb"><rect x="2.0" y="10" width="156" height="40" rx="8"/><text x="80" y="34.0">Integrais e densidades</text></g></a><a href="base.html#b-combinatoria"><g class="no pb"><rect x="182.0" y="10" width="156" height="40" rx="8"/><text x="260" y="34.0">Combinatória e somatórios</text></g></a><a href="topicos/01-introducao-e-amostragem.html"><g class="no p1"><rect x="362.0" y="10" width="156" height="40" rx="8"/><text x="440" y="34.0">01 Introdução e amostragem</text></g></a><a href="base.html#b-probabilidade"><g class="no pb"><rect x="92.0" y="76" width="156" height="40" rx="8"/><text x="170" y="100.0">Probabilidade e v.a.</text></g></a><a href="topicos/02-estatistica-descritiva.html"><g class="no p1"><rect x="362.0" y="76" width="156" height="40" rx="8"/><text x="440" y="100.0">02 Estatística descritiva</text></g></a><a href="topicos/03-distribuicoes-amostrais.html"><g class="no p1"><rect x="182.0" y="142" width="156" height="40" rx="8"/><text x="260" y="166.0">03 Distribuições amostrais</text></g></a><a href="topicos/04-estimacao-pontual.html"><g class="no p1"><rect x="272.0" y="208" width="156" height="40" rx="8"/><text x="350" y="232.0">04 Estimação pontual</text></g></a><a href="topicos/05-intervalos-de-confianca.html"><g class="no p1"><rect x="182.0" y="274" width="156" height="40" rx="8"/><text x="260" y="298.0">05 IC · uma amostra</text></g></a><a href="topicos/06-ic-duas-amostras.html"><g class="no p2"><rect x="362.0" y="340" width="156" height="40" rx="8"/><text x="440" y="364.0">06 IC · duas amostras</text></g></a><a href="topicos/07-fundamentos-do-teste.html"><g class="no p2"><rect x="2.0" y="340" width="156" height="40" rx="8"/><text x="80" y="364.0">07 Fundamentos do teste</text></g></a><a href="topicos/11-aderencia.html"><g class="no p2"><rect x="2.0" y="406" width="156" height="40" rx="8"/><text x="80" y="430.0">11 Aderência</text></g></a><a href="topicos/08-testes-uma-amostra.html"><g class="no p2"><rect x="182.0" y="406" width="156" height="40" rx="8"/><text x="260" y="430.0">08 Testes · uma amostra</text></g></a><a href="topicos/12-associacao.html"><g class="no p2"><rect x="2.0" y="472" width="156" height="40" rx="8"/><text x="80" y="496.0">12 Associação</text></g></a><a href="topicos/09-duas-medias.html"><g class="no p2"><rect x="182.0" y="472" width="156" height="40" rx="8"/><text x="260" y="496.0">09 Duas médias</text></g></a><a href="topicos/10-duas-proporcoes-e-variancias.html"><g class="no p2"><rect x="362.0" y="472" width="156" height="40" rx="8"/><text x="440" y="496.0">10 Duas prop. e variâncias</text></g></a><a href="topicos/13-anova-um-fator.html"><g class="no p3"><rect x="272.0" y="538" width="156" height="40" rx="8"/><text x="350" y="562.0">13 ANOVA · 1 fator</text></g></a><a href="topicos/14-anova-dois-fatores.html"><g class="no p3"><rect x="182.0" y="604" width="156" height="40" rx="8"/><text x="260" y="628.0">14 ANOVA · 2 fatores</text></g></a><a href="topicos/15-regressao-simples.html"><g class="no p3"><rect x="362.0" y="604" width="156" height="40" rx="8"/><text x="440" y="628.0">15 Regressão simples</text></g></a><a href="topicos/16-regressao-multipla.html"><g class="no p3"><rect x="362.0" y="670" width="156" height="40" rx="8"/><text x="440" y="694.0">16 Regressão múltipla</text></g></a></svg></div><div class="mapa-leg"><span><i class="l-b"></i>base (cursos anteriores)</span><span><i class="l-1"></i>P1 · 16/set</span><span><i class="l-2"></i>P2 · 26/out</span><span><i class="l-3"></i>P3 · 02/dez</span></div>
+  <h3 class="sub" id="mapa-site" data-nav="O site em uma lista">O site em uma lista</h3>
+  <ul>
+    <li><a href="base.html">Revisão de base</a> · <a href="calculadora.html">Calculadora científica</a> · <a href="provas/index.html">O que cai em cada prova</a></li>
+    <li>Provas: <a href="provas/p1.html">P1</a> · <a href="provas/p2.html">P2</a> · <a href="provas/p3.html">P3</a></li>
+    <li>Fichas: <a href="topicos/01-introducao-e-amostragem.html">01</a> · <a href="topicos/02-estatistica-descritiva.html">02</a> · <a href="topicos/03-distribuicoes-amostrais.html">03</a> · <a href="topicos/04-estimacao-pontual.html">04</a> · <a href="topicos/05-intervalos-de-confianca.html">05</a> · <a href="topicos/06-ic-duas-amostras.html">06</a> · <a href="topicos/07-fundamentos-do-teste.html">07</a> · <a href="topicos/08-testes-uma-amostra.html">08</a> · <a href="topicos/09-duas-medias.html">09</a> · <a href="topicos/10-duas-proporcoes-e-variancias.html">10</a> · <a href="topicos/11-aderencia.html">11</a> · <a href="topicos/12-associacao.html">12</a> · <a href="topicos/13-anova-um-fator.html">13</a> · <a href="topicos/14-anova-dois-fatores.html">14</a> · <a href="topicos/15-regressao-simples.html">15</a> · <a href="topicos/16-regressao-multipla.html">16</a></li>
+  </ul>
+</section>
+
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PRO3200 · Estatística (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pro3200-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
