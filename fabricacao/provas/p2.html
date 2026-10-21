@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P2 · 23/out · PMR3301</title>
+<meta name="description" content="Escopo, trilha de questões-chave, números para memorizar e resumo pré-prova">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pmr3301-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PMR3301 · P2</div>
+  <div class="sb-sub">Complementos de Fabricação Mecânica</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+    <button class="btn-chip" id="btn-print-resumo" type="button">🖨 Imprimir resumo</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#p2-regras-h">1 · Escopo e regras</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#trilha">2 · Trilha de pivôs</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#memorizar">3 · O que memorizar</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#pegadinhas">Pegadinhas</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#cap9-h">4 · Resumo pré-prova</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Complementos de Fabricação Mecânica</a> <span class="sep">›</span> <a href="index.html">Provas</a> <span class="sep">›</span> <span>P2 · 23/out</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="p2-regras"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">P2 · 23/out</span><h2 id="p2-regras-h" data-nav="1 · Escopo e regras">Escopo e regras da P2</h2><p class="section-desc">Prova objetiva: o que conta é reconhecer o processo, comparar processos e lembrar a ordem de grandeza certa.</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Item</th><th>O que se sabe</th><th>Fonte</th></tr></thead><tbody>
+<tr><td>Data</td><td>sexta, 23/out/2026 (aula 22)</td><td>programa de 14/10</td></tr>
+<tr><td>Formato</td><td><strong>objetiva, 50 questões</strong> de múltipla escolha</td><td>informado em aula (registro de 20–21/10)</td></tr>
+<tr><td>Conteúdo</td><td>aulas 10–21: fichas <a href="../topicos/12-polimeros.html">12</a>, <a href="../topicos/13-compositos.html">13</a>, <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html">14</a>, <a href="../topicos/15-elementos-finitos.html">15</a>, <a href="../topicos/16-juncao.html">16</a>, <a href="../topicos/17-micro-e-nanofabricacao.html">17</a>, <a href="../topicos/18-usinagem-cnc.html">18</a></td><td>programa de 14/10</td></tr>
+<tr><td>Consulta</td><td>não informada; <strong>assumido sem consulta</strong> (daí a seção "o que memorizar")</td><td>hipótese</td></tr>
+<tr><td>Dúvidas abertas</td><td>se MEF/ABAQUS e micro/nano entram mesmo; slides da aula 17 (ABAQUS) não estão na pasta</td><td>—</td></tr>
+<tr><td>Peso</td><td>25% da média final</td><td>programa</td></tr>
+</tbody></table></div>
+<div class="callout"><span class="co-t">Como usar esta página</span><p>Siga a trilha abaixo (11 questões-pivô, uma ou mais por ficha, do conceito à conta). Errou um pivô? Volte à ficha, releia os pontos-chave e faça as demais questões dela. Na véspera, leia "o que memorizar" e imprima o resumo.</p></div>
+</section>
+
+<section class="chapter" id="p2-trilha"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="trilha" data-nav="2 · Trilha de pivôs">Trilha de questões-pivô</h2><p class="section-desc">Cada questão mora na sua ficha; aqui está só a ordem e o que cada uma ensina.</p></div>
+<ol class="method">
+<li><a href="../topicos/12-polimeros.html#q12-1"><strong>12.1 · Qual processo para cada peça plástica</strong></a>: a pergunta-mãe da disciplina; geometria e lote decidem o processo.</li>
+<li><a href="../topicos/13-compositos.html#q13-1"><strong>13.1 · Matriz × reforço</strong></a>: definição e o que determina as propriedades de um compósito.</li>
+<li><a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#q14-1"><strong>14.1 · Suporte e pós-cura</strong></a>: o quadro comparativo SLA/SLS/FDM/LOM/SGC, que rende várias questões.</li>
+<li><a href="../topicos/15-elementos-finitos.html#q15-1"><strong>15.1 · Pré, solver, pós</strong></a>: as três etapas do MEF e o que entra em cada uma.</li>
+<li><a href="../topicos/16-juncao.html#q16-1"><strong>16.1 · Eletrodo e proteção</strong></a>: distinguir ER, MIG/MAG, TIG, arame tubular e arco submerso.</li>
+<li><a href="../topicos/16-juncao.html#q16-2"><strong>16.2 · Brasagem × solda branda</strong></a>: a fronteira de 450 °C e o metal de base que não funde.</li>
+<li><a href="../topicos/17-micro-e-nanofabricacao.html#q17-1"><strong>17.1 · O cubo dividido</strong></a>: por que a física muda na microescala (área/volume).</li>
+<li><a href="../topicos/17-micro-e-nanofabricacao.html#q17-2"><strong>17.2 · Top-down × bottom-up</strong></a>: os dois paradigmas da nanofabricação.</li>
+<li><a href="../topicos/18-usinagem-cnc.html#q18-1"><strong>18.1 · Ler um bloco de código G</strong></a>: N, G, X, Y, F, S, T, M.</li>
+<li><a href="../topicos/18-usinagem-cnc.html#q18-2"><strong>18.2 · Rotação a partir de Vc</strong></a>: a única conta "de fórmula" provável; cuidado com unidades.</li>
+<li><a href="../topicos/18-usinagem-cnc.html#q18-3"><strong>18.3 · Centro de um arco por I e J</strong></a>: G02 × G03 e a conferência dos raios.</li>
+</ol>
+</section>
+
+<section class="chapter" id="p2-memorizar"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="memorizar" data-nav="3 · O que memorizar">O que memorizar (números e pares que viram alternativa)</h2></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tópico</th><th>Número ou par</th><th>Ficha</th></tr></thead><tbody>
+<tr><td>Extrusora</td><td>D 25–200 mm · L/D 5–30 · ~US$ 300 mil</td><td><a href="../topicos/12-polimeros.html#p-extrusao">12</a></td></tr>
+<tr><td>Injeção</td><td>ciclo 5–60 s (minutos p/ termofixo) · molde até ~US$ 100 mil · vida 2·10⁶ ciclos (aço) × 10⁴ (alumínio)</td><td><a href="../topicos/12-polimeros.html#p-injecao">12</a></td></tr>
+<tr><td>Sopro · espuma</td><td>ar a 350–700 kPa · casca ≤ 2 mm, densidade ~40% da maciça</td><td><a href="../topicos/12-polimeros.html#p-outros">12</a></td></tr>
+<tr><td>Fibra de carbono × aço</td><td>3,5 GPa / 1,75 g/cm³ × 1,3 GPa / 7,87 g/cm³ → resistência específica ~12×</td><td><a href="../topicos/13-compositos.html#p-especifica">13</a></td></tr>
+<tr><td>Whiskers · CMC</td><td>3–10 µm de diâmetro · CMC acima de 1000 °C</td><td><a href="../topicos/13-compositos.html#p-reforco">13</a></td></tr>
+<tr><td>Prototipagem</td><td>SLA, Hull, 1983 · SLS patenteada 1989 · economia 70–90% (modelos), 75% (ferramental)</td><td><a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-hist">14</a></td></tr>
+<tr><td>Soldagem</td><td>brasagem &gt; 450 °C &gt; solda branda · Sn/Pb 60/40 ≈ 188 °C · oxiacetileno ≈ 3300 °C</td><td><a href="../topicos/16-juncao.html#p-brasagem">16</a></td></tr>
+<tr><td>Micro/nano</td><td>micro 0,1–1000 µm · nano &lt; 100 nm · oxidação térmica 700–1300 °C, 60–10 000 Å · EBL 10–100 keV</td><td><a href="../topicos/17-micro-e-nanofabricacao.html#p-escala">17</a></td></tr>
+<tr><td>CNC</td><td>conv. ~3600 rpm e 0,05 mm × CNC 10 000+ rpm e 0,001 mm · $n=1000V_c/(\pi D)$ · $F=f_z z n$</td><td><a href="../topicos/18-usinagem-cnc.html#p-sf">18</a></td></tr>
+</tbody></table></div>
+<h3 class="sub" id="pegadinhas" data-nav="Pegadinhas">Pegadinhas que se repetem nas alternativas</h3>
+<ul>
+<li>Trocar o parâmetro de um processo pelo de outro (pressão de ar no sopro, vácuo na termoformação, rotação em dois eixos na rotomoldagem, gavetas na injeção).</li>
+<li>Termoplástico × termofixo: molde frio × molde aquecido; amolece × não amolece.</li>
+<li>"Todo compósito é isotrópico" (só o particulado). Bobinamento a 90° só resiste a esforço circunferencial.</li>
+<li>Quadro da MA: pós-cura <strong>só</strong> SLA; suporte SLA <strong>e</strong> FDM; pós-processamento <strong>todos</strong>.</li>
+<li>Nós × elementos no MEF; pós-processamento do MEF (ler resultados) × pós-processamento do CAD/CAM (adaptar o programa à máquina).</li>
+<li>MIG (inerte) × MAG (ativo); TIG com eletrodo <strong>não</strong> consumível; K é chanfro, não junta.</li>
+<li>Corrosão úmida isotrópica × seca anisotrópica; bottom-up = automontagem.</li>
+<li>G02 horário × G03 anti-horário; G90 absoluto × G91 incremental; M03 × M04; G71 (ISO) e G21 (Fanuc) = mm; com G96, S é m/min.</li>
+</ul>
+</section>
+
+<section class="chapter cap-resumo" id="cap9"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Resumo</span><h2 id="cap9-h" data-nav="4 · Resumo pré-prova">Resumo pré-prova (imprimir)</h2><p class="section-desc">Os resumos das fichas 12–18, na ordem do programa. Botão "Imprimir resumo" no topo.</p></div>
+<div class="resumo"><h3>12 · Peças de plástico</h3><div class="r-grid">
+<div class="r-item"><b>Escolha pela geometria.</b> Seção constante → extrusão · complexa e precisa → injeção · oca fina → sopro · oca grande → rotomoldagem · rasa a partir de chapa → termoformação · filme → <em>blown film</em>.</div>
+<div class="r-item"><b>Ferramental × lote.</b> Injeção: ferramenta cara (até US$ 100 mil), ciclo 5–60 s, alta taxa. Rotomoldagem, termoformação, espuma: ferramenta barata, taxa baixa ou média.</div>
+<div class="r-item"><b>Termo × fixo.</b> Termoplástico: molde frio, resfria. Termofixo: molde aquecido, cura (reticulação irreversível), ciclo de minutos; compressão e transferência.</div>
+<div class="r-item"><b>Números.</b> Extrusora D 25–200 mm, L/D 5–30, ~US$ 300 mil · sopro 350–700 kPa · molde aço 2·10⁶ ciclos, alumínio 10⁴ · espuma: casca ≤ 2 mm, 40% da densidade.</div>
+<div class="r-item"><b>Molde de injeção.</b> Canal frio 2 placas (simples), 3 placas (separa canais), canal quente. Gavetas → roscas. Inserto → metal embutido. Coinjeção → multicor.</div>
+<div class="r-item"><b>Limites.</b> Contração e empeno vêm do resfriamento; números dos slides são ordens de grandeza para comparar processos.</div>
+</div>
+<h3>13 · Compósitos</h3><div class="r-grid">
+<div class="r-item"><b>Definição.</b> Matriz (contínua, dá forma) + reforço (disperso), insolúveis entre si. Propriedade = materiais + forma e arranjo do reforço + interface.</div>
+<div class="r-item"><b>Matriz.</b> CMP leve, baixa T · CMM mais T e resistência, mais pesado · CMC &gt; 1000 °C, ganha $K_{IC}$.</div>
+<div class="r-item"><b>Reforço.</b> Particulado (isotrópico) · escamado (tintas, laminados de circuito) · enchido (W + Cu) · fibroso (vidro, carbono, boro, whiskers 3–10 µm) · lamelar.</div>
+<div class="r-item"><b>Específica.</b> <span class="path">σ/ρ</span> carbono 2,0 × aço 0,17 → ≈ 12×. Por isso aeronave, F1, bicicleta.</div>
+<div class="r-item"><b>Processos.</b> CMP: impregnar → molde → estufa → desmoldar → acabar. CMM: pó + prensa isostática a quente, ou infiltração líquida, depois laminar. CMC: sinterizar sob pressão; gelcasting.</div>
+<div class="r-item"><b>Bobinamento.</b> 90° → só circunferencial · helicoidal → circunferencial + longitudinal. Centrifugação: peças de revolução sem exigência de homogeneidade.</div>
+<div class="r-item"><b>Sanduíche.</b> Lâminas finas, rígidas e densas + núcleo leve; aeroespacial → automotivo/naval → civil.</div>
+<div class="r-item"><b>Limites.</b> Anisotropia, interface fraca e temperatura da matriz polimérica.</div>
+</div>
+<h3>14 · Prototipagem e manufatura aditiva</h3><div class="r-grid">
+<div class="r-item"><b>Definição.</b> Peça direto do CAD, camada a camada, por adição. 7º grupo de processos. PR = protótipos; MA inclui peças finais.</div>
+<div class="r-item"><b>Etapas.</b> CAD → STL → fatiar → construir → limpar e acabar.</div>
+<div class="r-item"><b>Matéria-prima.</b> Líquida: SLA, DLP, jetting · Pó: SLS, SLM, EBM, 3DP · Sólida: FDM, LOM.</div>
+<div class="r-item"><b>Quadro.</b> Suporte: SLA e FDM · pós-cura: só SLA · SLS: resistência e variedade · LOM: barato e impreciso · SLA e SGC: precisão excelente · todos: pós-processamento.</div>
+<div class="r-item"><b>Números.</b> Hull, SLA, 1983–86 · SLS patenteada 1989 · economia 70–90% (modelos), 75% (ferramental).</div>
+<div class="r-item"><b>Limites.</b> Caro em série; anisotropia entre camadas; STL facetado; suportes e pós-processamento.</div>
+</div>
+<h3>15 · Elementos finitos</h3><div class="r-grid">
+<div class="r-item"><b>Para quê.</b> Testar antes de fabricar: menos tentativa e erro, custo, prazo e refugo. Entra geometria, material e carga; sai campo de resposta.</div>
+<div class="r-item"><b>Como.</b> Contínuo → discretizado. Nós conectam, elementos aproximam (interpolação dos valores nodais). Montar → resolver → interpretar.</div>
+<div class="r-item"><b>Etapas.</b> Pré (geometria, malha, material, cargas e apoios) · solver (equações, convergência) · pós (mapas).</div>
+<div class="r-item"><b>Malha.</b> Detalhe onde importa; mais elementos ≠ melhor.</div>
+<div class="r-item"><b>Por processo.</b> Conformação: força, espessura, fratura · usinagem: força, calor, desgaste · soldagem: T → tensão residual → distorção · fundição: preencher, solidificar, contrair · TT: aquecer, manter, resfriar.</div>
+<div class="r-item"><b>Limites.</b> Contorno errado dá resposta convincente e errada; validar com experimento; ler grandeza, unidade e limite, não a cor.</div>
+</div>
+<h3>16 · Junção</h3><div class="r-grid">
+<div class="r-item"><b>Classes.</b> Estado sólido (explosão, ultrassom, atrito, difusão) × fusão (arco, gás, resistência, laser, feixe de elétrons, aluminotermia).</div>
+<div class="r-item"><b>Metalurgia.</b> Zona fundida (grão colunar) → ligação → ZTA (grão grosso perto, refinado mais longe) → metal de base. Tensão residual: tração no cordão, compressão longe.</div>
+<div class="r-item"><b>Arco.</b> ER: escória do revestimento, não para Al e Ti, H fragiliza · MIG inerte / MAG ativo (CO₂) · TIG: W não consumível, com ou sem adição · FCAW: fluxo dentro do arame · SAW: arco sob fluxo granulado.</div>
+<div class="r-item"><b>Gás.</b> Oxiacetileno ~3300 °C; reparos; baixo ponto de fusão.</div>
+<div class="r-item"><b>450 °C.</b> Brasagem: adição &gt; 450 °C, base não funde, dissimilares, fluxo · solda branda: &lt; 450 °C, eletrônica, Sn/Pb 60/40 (188 °C).</div>
+<div class="r-item"><b>Micro.</b> Tensão superficial pesa · microrresistência (calor no contato) · laser (contínuo, &gt; 50 pontos/s) · micro-TIG.</div>
+<div class="r-item"><b>Juntas.</b> Topo, sobreposta, canto, T, face em ângulo. Chanfros I, V, meio V, X, K, U, J.</div>
+<div class="r-item"><b>Defeitos e ensaios.</b> Falta de penetração (mais comum), porosidade (gás, umidade, graxa), escória (limpeza), trinca (S, P, resfriamento rápido). LP só superficial; RX e US internos.</div>
+</div>
+<h3>17 · Micro e nanofabricação</h3><div class="r-grid">
+<div class="r-item"><b>Escalas.</b> Micro 0,1–1000 µm · nano &lt; 100 nm. Cubo de 1 cm → 8 de 0,5 cm: área 6 → 12 cm². Menor = mais área/massa = mais reativo.</div>
+<div class="r-item"><b>Paradigmas.</b> Top-down (litografia, usinagem, EDM) × bottom-up (automontagem, autoduplicação).</div>
+<div class="r-item"><b>Quadro.</b> Massa: litografia e moldagem · protótipo: aditivos, eletrofísicos, mecânicos, feixe · superfície: litografia e mecânicos · materiais: eletrofísicos e feixe.</div>
+<div class="r-item"><b>Deposição.</b> Oxidação térmica 700–1300 °C (SiO₂, 60–10 000 Å) · CVD (química) · PVD (vaporiza sólido) · ALD (precursores em sequência).</div>
+<div class="r-item"><b>Corrosão.</b> Úmida: banho, isotrópica · seca: plasma de íons, anisotrópica. Máscara protege.</div>
+<div class="r-item"><b>Litografia.</b> Máscara + radiação; foto é 2D; EBL 10–100 keV; FIB e prótons sem máscara.</div>
+<div class="r-item"><b>LIGA e MEMS.</b> LIGA = raios X + galvanização + moldagem, alta razão de aspecto, caro. MEMS: partes móveis, 3D, sob demanda.</div>
+<div class="r-item"><b>Limites.</b> µEDM só condutor; microinjeção com molde mais quente; nanofilmes por Langmuir-Blodgett (anfifílicas) e automontagem (~0,5 nm/camada).</div>
+</div>
+<h3>18 · Usinagem CNC</h3><div class="r-grid">
+<div class="r-item"><b>Máquina.</b> Entrada de dados + computador + mecanismos (servos, CLP) + máquina. Malha fechada com <em>feedback</em>. Benefícios: precisão e repetitividade, automatização, flexibilidade.</div>
+<div class="r-item"><b>Conv. × CNC.</b> 3600 × 10 000+ rpm · 0,05 × 0,001 mm · dependência do operador alta × muito baixa.</div>
+<div class="r-item"><b>Zeros.</b> Máquina (fabricante) · referência · peça (programador, origem do programa) · ferramenta. G54–G59 guardam zeros.</div>
+<div class="r-item"><b>Modo.</b> G90 absoluto (a partir do zero; aconselhável) · G91 incremental (a partir da posição atual).</div>
+<div class="r-item"><b>Movimento.</b> G00 rápido sem corte · G01 linear com F · G02 horário · G03 anti-horário; centro = (Xi+I; Yi+J); raios iguais no início e no fim.</div>
+<div class="r-item"><b>M.</b> M03 CW · M04 CCW · M05 para fuso · M06 troca · M08/M09 refrigerante · M30 fim e reset.</div>
+<div class="r-item"><b>Contas.</b> <span class="path">n = 1000·Vc/(π·D)</span> · <span class="path">F = fz·z·n</span>. Fresa Ø 4, 200 m/min → 15 915 rpm. Torno: X é diâmetro (chanfro 8×45 em Ø 50 → X34).</div>
+<div class="r-item"><b>Pegadinhas.</b> G71 (ISO) = G21 (Fanuc) = mm · G96 S = m/min, não rpm · códigos modais · sem G41/G42 o programa segue o centro da fresa.</div>
+</div></div>
+</section>
+
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PMR3301 · Complementos de Fabricação Mecânica (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pmr3301-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 · Fabricação de peças de plástico · PMR3301</title>
+<meta name="description" content="Extrusão, injeção, sopro, espuma, termoformação, rotomoldagem e inspeção automatizada">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pmr3301-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PMR3301 · Tópico 12</div>
+  <div class="sb-sub">Complementos de Fabricação Mecânica</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#p-materia">Matéria-prima e tipos</a></li>
+<li class="nav-ex"><a href="#p-quadro">Quadro dos processos</a></li>
+<li class="nav-ex"><a href="#p-extrusao">Extrusão</a></li>
+<li class="nav-ex"><a href="#p-injecao">Injeção e moldes</a></li>
+<li class="nav-ex"><a href="#p-outros">Espuma, sopro, blown film</a></li>
+<li class="nav-ex"><a href="#p-chapa">Termoformação e rotomoldagem</a></li>
+<li class="nav-ex"><a href="#p-auto">Automação e inspeção</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Questões comentadas</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#q12-1-h">12.1 · garrafa × bombona × perfil<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#q12-2-h">12.2 · termofixo</a></li>
+<li class="nav-ex"><a href="#q12-3-h">12.3 · tipos de molde</a></li>
+<li class="nav-ex"><a href="#q12-4-h">12.4 · vida do molde</a></li>
+<li class="nav-ex"><a href="#q12-5-h">12.5 · extrusora</a></li>
+<li class="nav-ex"><a href="#q12-6-h">12.6 · contração</a></li>
+<li class="nav-ex"><a href="#q12-7-h">12.7 · espuma</a></li>
+<li class="nav-ex"><a href="#q12-8-h">12.8 · inserto</a></li>
+<li class="nav-ex"><a href="#q12-9-h">12.9 · visão industrial</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Complementos de Fabricação Mecânica</a> <span class="sep">›</span> <span>12 · Fabricação de peças de plástico</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 12 · P2 · aula 10</span><h2 id="obj" data-nav="1 · Objetivo">Fabricação de peças de plástico</h2></div>
+<div class="callout concept"><span class="co-t">Objetivo</span><p>Saber <strong>escolher o processo</strong> de conformação de um plástico pela geometria da peça (seção constante, oca, complexa, grande, rasa) e pelo volume de produção, e reconhecer o que cada processo exige do material (termoplástico ou termofixo). Pergunta de engenharia: "esta peça sai por extrusão, injeção, sopro, termoformação ou rotomoldagem, e o lote paga o ferramental?"</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul>
+<li><strong>Termoplástico × termofixo</strong> (Ciência dos Materiais): o termoplástico amolece com calor e pode ser reprocessado; o termofixo cura por reação química irreversível (reticulação, <em>crosslinking</em>) e não amolece mais.</li>
+<li><strong>Extrusão e injeção de metais</strong> (P1, aula 5): o plástico usa a mesma lógica (material forçado por uma matriz ou para dentro de um molde fechado). O guia antigo da P1 está no <a href="../index.html#bibliografia">hub</a>.</li>
+<li><strong>Fundição sob pressão</strong>: a moldagem por injeção é "essencialmente o mesmo processo" (slide 11).</li>
+</ul></section>
+
+<section class="chapter" id="sec-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<ul>
+<li><strong>Slides</strong> <code>Aula10-11Polimeros.pdf</code>, p. 1–33: tipos de plástico (3–4), quadro de processos (5–6), extrusão (7–10), injeção e moldes (11–20), espuma estrutural (25), sopro e <em>blown film</em> (26–30), termoformação a vácuo (21) e rotomoldagem (22–23), automação e inspeção (31–33).</li>
+<li><strong>Livro</strong>: Kalpakjian &amp; Schmid, <em>Manufacturing Engineering and Technology</em>, 7ª ed., capítulo de processamento de plásticos (extrusão, injeção, sopro, rotomoldagem, termoformação). <span class="badge badge-warn">páginas não conferidas</span> o PDF da biblioteca não abriu nesta máquina.</li>
+</ul></section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+<h3 class="sub" id="p-materia" data-nav="Matéria-prima e tipos">Matéria-prima e os dois tipos de plástico</h3>
+<p>O plástico chega à fábrica como <strong>pellets (grãos) ou pó</strong>, e também em chapas, placas, tarugos e tubos; na forma líquida, alimenta as peças reforçadas (ficha 13). Como a temperatura de processamento é baixa comparada à dos metais, plásticos gastam <strong>menos energia</strong> e saem em formas variadas em poucas operações. As propriedades finais dependem muito do <strong>método e dos parâmetros de processo</strong>: controlar o processo é controlar a qualidade (slide 4).</p>
+<p>O que muda entre termoplástico e termofixo na prática: na injeção de termoplástico o molde é <strong>relativamente frio</strong> (a peça solidifica resfriando); no termofixo o molde é <strong>aquecido</strong> para a peça curar (polimerizar), e o ciclo passa de segundos para minutos (slides 12 e 20).</p>
+
+<h3 class="sub" id="p-quadro" data-nav="Quadro dos processos">O quadro dos processos (slides 5–6): é dele que saem as perguntas de escolha</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Processo</th><th>Geometria típica</th><th>Taxa de produção</th><th>Custo do ferramental</th><th>Outros</th></tr></thead><tbody>
+<tr><td>Extrusão</td><td>seções longas e uniformes, sólidas ou vazadas</td><td>alta</td><td>baixo</td><td>tolerâncias abertas</td></tr>
+<tr><td>Injeção</td><td>formas complexas, dimensões variadas</td><td>alta</td><td><strong>alto</strong></td><td>boa precisão; elimina montagem</td></tr>
+<tr><td>Espuma estrutural (plástico aerado)</td><td>peças grandes, alta relação rigidez/peso</td><td>baixa</td><td>menor que o da injeção</td><td>casca sólida, miolo celular</td></tr>
+<tr><td>Sopro</td><td>peças <strong>ocas de paredes finas</strong></td><td>alta</td><td>baixo</td><td>garrafas, frascos</td></tr>
+<tr><td>Rotomoldagem</td><td>peças <strong>ocas grandes</strong> de formato simples</td><td>baixa</td><td>baixo</td><td>caixas d'água, bombonas, playground</td></tr>
+<tr><td>Termoformação</td><td>cavidades rasas ou relativamente profundas (a partir de chapa)</td><td>média</td><td>baixo</td><td>copos, bandejas</td></tr>
+<tr><td>Compressão</td><td>"semelhante ao forjamento"</td><td>média</td><td>baixo</td><td>típico de termofixos</td></tr>
+<tr><td>Transferência</td><td>mais complexas que na compressão</td><td>alta</td><td>médio</td><td>perde matéria-prima</td></tr>
+<tr><td>Fundição</td><td>simples ou complexas, moldes flexíveis</td><td>baixa</td><td>—</td><td></td></tr>
+<tr><td>Compósitos</td><td>conforme o processo</td><td>ciclos longos</td><td>depende do processo</td><td>ver ficha 13</td></tr>
+</tbody></table></div>
+<p class="tbl-cap">Leitura dos slides 5 e 6. O padrão a guardar: <strong>ferramental caro só se paga com lote grande</strong> (injeção); processos de ferramental barato (rotomoldagem, termoformação, espuma) aceitam lotes menores e peças grandes.</p>
+
+<h3 class="sub" id="p-extrusao" data-nav="Extrusão">Extrusão</h3>
+<p>Grânulos ou pó entram pelo funil; um parafuso dentro do cilindro aquecido amolece e empurra o material através da <strong>matriz</strong>, como na extrusão de metais. O extrudado é resfriado ao ar ou num canal com água; <strong>controlar a taxa e a uniformidade do resfriamento</strong> minimiza contração e distorção. Como a alimentação é contínua, saem produtos longos: barras, canais, tubos, perfis e chapas (slides 7–8).</p>
+<ul>
+<li>Variantes: revestimento de fios e cabos (o arame passa pela matriz em velocidade controlada); fabricação dos próprios pellets (barras finas cortadas logo após a extrusão); a extrusora também funde o plástico para a injeção e o sopro (slide 9).</li>
+<li>Classificação da extrusora: <strong>diâmetro D do cilindro e relação L/D</strong>. Típico: D de 25 a 200 mm, L/D de 5 a 30; equipamento da ordem de US$ 300 mil, que exige grandes lotes (slide 10).</li>
+</ul>
+
+<h3 class="sub" id="p-injecao" data-nav="Injeção e moldes">Moldagem por injeção e tipos de molde</h3>
+<p>Pellets entram no cilindro aquecido e o material pastoso é forçado, por <strong>pistão hidráulico ou parafuso rotativo</strong>, para dentro de um molde fechado. O calor gerado por atrito entre polímero e parafuso é apreciável. Depois de resfriada (termoplástico) ou curada (termofixo), a peça é extraída e o ciclo se repete automaticamente; elastômeros também são injetados (slides 11–12).</p>
+<ul>
+<li>Componentes do molde: gavetas, cavidades, canais de resfriamento, insertos, pinos extratores, canais de alimentação, de corte e de distribuição. <strong>Gavetas</strong> (partes móveis, retilíneas ou desparafusáveis) permitem roscas internas e externas e várias cavidades (slide 14).</li>
+<li>Três tipos básicos de molde (slide 16): <strong>canal frio de duas placas</strong> (o mais simples); <strong>canal frio de três placas</strong> (os canais se separam da peça na abertura); <strong>canal quente</strong> (o plástico fica aquecido nos canais).</li>
+<li><strong>Insertos</strong> metálicos (parafusos, pinos, placas) colocados na cavidade viram parte da peça; exemplo comum: componentes elétricos. <strong>Coinjeção</strong> (moldagem multicomponente ou sanduíche) combina cores e materiais, como lanternas de automóvel (slide 18).</li>
+<li>Capacidade (slide 20): ciclo típico de <strong>5 a 60 s</strong> (minutos para termofixos); moldes de aço-ferramenta, ligas de berílio-cobre ou alumínio, com várias cavidades; molde até cerca de US$ 100 mil; vida de cerca de <strong>2 milhões de ciclos em aço e 10 mil em alumínio</strong>.</li>
+</ul>
+
+<h3 class="sub" id="p-outros" data-nav="Espuma, sopro, blown film">Espuma estrutural, sopro e <em>blown film</em></h3>
+<ul>
+<li><strong>Espuma estrutural</strong> (slide 25): casca externa sólida (até 2 mm) e miolo de células vazias; densidade de cerca de 40% da peça maciça, logo boa relação rigidez/peso. Termoplásticos e termofixos (estes na forma líquida, como na injeção reativa). Gabinetes de TV, caixas de bateria, objetos de decoração.</li>
+<li><strong>Sopro por extrusão</strong> (slides 26–28): extruda-se um tubo (<em>parison</em>), o molde fecha sobre ele vedando as pontas, e ar comprimido a <strong>350–700 kPa</strong> o infla contra a cavidade; resfria e ejeta. A extrusão pode ser contínua, com o molde acompanhando o tubo.</li>
+<li><strong>Blown film</strong> (slides 29–30): tubo de parede fina extrudado <strong>de baixo para cima</strong> é inflado como um balão por ar pelo centro da matriz até a espessura desejada; um anel de ar resfria e limita o diâmetro. Produz filmes finos e sacos plásticos.</li>
+</ul>
+
+<h3 class="sub" id="p-chapa" data-nav="Termoformação e rotomoldagem">Termoformação a vácuo e rotomoldagem</h3>
+<ul>
+<li><strong>Termoformação a vácuo</strong> (slide 21): resistências aquecem uma <strong>chapa</strong> plástica, o molde sobe e o vácuo puxa a chapa contra ele. Copos descartáveis, bandejas.</li>
+<li><strong>Rotomoldagem</strong> (slides 22–23): (a) carrega-se <strong>plástico em pó</strong> no molde; (b) o molde gira em dois eixos dentro do forno e o pó funde contra as paredes; (c) resfria girando; (d) desmolda. Peça oca, sem costura, grande: caixas, bombonas, brinquedos de playground.</li>
+</ul>
+
+<h3 class="sub" id="p-auto" data-nav="Automação e inspeção">Automação e inspeção (slides 31–33)</h3>
+<p>Razões para automatizar: produtividade e capacidade, menor custo da não-qualidade, menor custo operacional, menor risco para a marca, ganho de <em>market share</em>. A inspeção usa sobretudo <strong>visão industrial</strong>: presença e posição de componentes, controle dimensional, defeitos superficiais (riscos, manchas, porosidades), troca de componentes (<em>mix-up</em>), leitura de códigos, medição de grandezas físicas e qualidade de impressos. Etapas automatizadas: recepção e alimentação, transporte e manipulação, análise e classificação, contagem dos aprovados, segregação dos defeituosos.</p>
+</section>
+
+<section class="chapter" id="sec-lim"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul>
+<li>As faixas numéricas (ciclo 5–60 s, vida de molde, custos em dólar, pressões de sopro) são <strong>ordens de grandeza</strong> dos slides, citadas de Kalpakjian (edição de 2001). Em prova objetiva, servem para comparar processos, não como valor de projeto.</li>
+<li>"Ferramental barato" não quer dizer "peça barata": rotomoldagem e espuma têm taxa de produção baixa, então o custo por peça só ganha da injeção em lotes pequenos.</li>
+<li>O quadro supõe termoplástico. Termofixo não volta a amolecer: não serve para extrusão de perfil reciclável nem para termoformação de chapa; vai para compressão, transferência e injeção reativa.</li>
+<li>Contração e distorção vêm do <strong>resfriamento</strong>: peça de espessura muito variável injetada ou extrudada tende a empenar. A pergunta típica junta "defeito dimensional" com "controle do resfriamento".</li>
+</ul></section>
+
+<section class="chapter" id="sec-ex"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Questões comentadas">Questões de múltipla escolha comentadas</h2><p class="section-desc">Questões de treino escritas a partir dos slides, no formato da P2 (objetiva). Tente responder antes de abrir o gabarito.</p></div>
+
+<article class="ex pivo" id="q12-1"><div class="ex-head"><div><div class="ex-kicker">Questão 12.1 · escolha de processo · Pivô</div><h3 id="q12-1-h" data-nav="12.1 · garrafa × bombona × perfil" data-pivo>Qual processo para cada peça oca ou contínua?</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+<div class="stmt">Associe a peça ao processo mais adequado: (I) garrafa de água de 500 mL em grande série; (II) caixa d'água de 1000 L; (III) tubo de PVC para esgoto; (IV) saco plástico de supermercado.
+<ol type="a"><li>I sopro · II rotomoldagem · III extrusão · IV <em>blown film</em></li><li>I injeção · II sopro · III extrusão · IV termoformação</li><li>I sopro · II injeção · III extrusão · IV <em>blown film</em></li><li>I rotomoldagem · II sopro · III injeção · IV extrusão de chapa</li><li>I termoformação · II rotomoldagem · III extrusão · IV sopro</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Oca de parede fina em grande série → <strong>sopro</strong>; oca grande e simples → <strong>rotomoldagem</strong> (molde barato, baixa taxa, sem costura); seção constante e longa → <strong>extrusão</strong>; filme fino → <strong>blown film</strong> (slides 5–6, 22, 26, 29). Em (c) a injeção não faz peça oca fechada de 1000 L; em (b) termoformação parte de chapa e faz cavidade aberta, não filme.</p></div></details></article>
+
+<article class="ex" id="q12-2"><div class="ex-head"><div><div class="ex-kicker">Questão 12.2 · materiais</div><h3 id="q12-2-h" data-nav="12.2 · termofixo">Termofixos</h3></div></div>
+<div class="stmt">Sobre os termofixos, é correto afirmar:
+<ol type="a"><li>Amolecem quando reaquecidos e por isso podem ser reciclados por extrusão.</li><li>Curam por reticulação, reação química irreversível; depois de rígidos, não amolecem com o calor.</li><li>Na injeção, exigem molde frio para solidificar rapidamente.</li><li>São adquiridos apenas na forma de chapas.</li><li>Têm ciclo de injeção mais curto que o dos termoplásticos.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 3: a cura é a reticulação (<em>crosslinking</em>), irreversível. (a) descreve o termoplástico. (c) é o contrário: para termofixo o molde é <strong>aquecido</strong> (slide 12). (e) também: o ciclo pode ser de vários minutos (slide 20).</p></div></details></article>
+
+<article class="ex" id="q12-3"><div class="ex-head"><div><div class="ex-kicker">Questão 12.3 · injeção</div><h3 id="q12-3-h" data-nav="12.3 · tipos de molde">Molde de canal quente</h3></div></div>
+<div class="stmt">Num molde de injeção de <strong>canal quente</strong>:
+<ol type="a"><li>os canais de alimentação se separam da peça quando o molde abre, em três placas;</li><li>o plástico é mantido aquecido nos canais de alimentação, que não solidificam a cada ciclo;</li><li>o molde inteiro é mantido acima da temperatura de fusão;</li><li>só se injetam termofixos;</li><li>a peça sai sempre com rosca interna.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 16: canal frio de duas placas (o mais simples), canal frio de três placas (canais separados da peça na abertura, alternativa a), canal quente (plástico aquecido nos canais). Rosca interna é tarefa das <strong>gavetas</strong> (slide 14), não do tipo de canal.</p></div></details></article>
+
+<article class="ex" id="q12-4"><div class="ex-head"><div><div class="ex-kicker">Questão 12.4 · ordens de grandeza</div><h3 id="q12-4-h" data-nav="12.4 · vida do molde">Molde de aço × alumínio</h3></div></div>
+<div class="stmt">Segundo os slides, a vida típica de um molde de injeção de aço e de um de alumínio é, respectivamente, da ordem de:
+<ol type="a"><li>10 mil e 2 milhões de ciclos</li><li>2 milhões e 10 mil ciclos</li><li>200 mil e 100 mil ciclos</li><li>2 milhões e 1 milhão de ciclos</li><li>100 mil ciclos para ambos</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 20. A razão é de 200 vezes: alumínio só compensa para lotes pequenos ou protótipos de molde (ponte com a ferramentaria rápida da <a href="14-prototipagem-e-manufatura-aditiva.html#p-ferramentaria">ficha 14</a>).</p></div></details></article>
+
+<article class="ex" id="q12-5"><div class="ex-head"><div><div class="ex-kicker">Questão 12.5 · extrusão</div><h3 id="q12-5-h" data-nav="12.5 · extrusora">Classificação da extrusora</h3></div></div>
+<div class="stmt">Extrusoras de plástico são classificadas por:
+<ol type="a"><li>força de fechamento do molde e volume de injeção;</li><li>diâmetro D do cilindro e relação comprimento/diâmetro L/D;</li><li>pressão do ar de sopro;</li><li>número de cavidades da matriz;</li><li>temperatura de transição vítrea do polímero.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 10: D de 25 a 200 mm e L/D de 5 a 30. A força de fechamento (a) é como se especifica uma <strong>injetora</strong>, não a extrusora.</p></div></details></article>
+
+<article class="ex" id="q12-6"><div class="ex-head"><div><div class="ex-kicker">Questão 12.6 · defeitos</div><h3 id="q12-6-h" data-nav="12.6 · contração">Contração e distorção na extrusão</h3></div></div>
+<div class="stmt">Um perfil extrudado sai empenado. A variável de processo que os slides apontam como essencial para minimizar contração e distorção é:
+<ol type="a"><li>a pressão do ar comprimido;</li><li>a taxa e a uniformidade do resfriamento do extrudado;</li><li>o número de gavetas do molde;</li><li>o vácuo aplicado à chapa;</li><li>a rotação do molde em dois eixos.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 8. As outras alternativas são variáveis de outros processos: sopro (a), injeção (c), termoformação (d), rotomoldagem (e). Pegadinha clássica: misturar o parâmetro de um processo com outro.</p></div></details></article>
+
+<article class="ex" id="q12-7"><div class="ex-head"><div><div class="ex-kicker">Questão 12.7 · espuma estrutural</div><h3 id="q12-7-h" data-nav="12.7 · espuma">Espuma estrutural</h3></div></div>
+<div class="stmt">Sobre a moldagem de espuma estrutural, é <strong>incorreto</strong> afirmar:
+<ol type="a"><li>a peça tem casca sólida e miolo de células vazias;</li><li>a densidade pode chegar a cerca de 40% da peça maciça;</li><li>a peça tem boa relação rigidez/peso;</li><li>só termoplásticos podem ser usados;</li><li>o ferramental é mais barato que o da injeção convencional.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slide 25: termoplásticos <strong>e termofixos</strong> (estes na forma líquida, como na injeção reativa). As demais estão nos slides 5 e 25.</p></div></details></article>
+
+<article class="ex" id="q12-8"><div class="ex-head"><div><div class="ex-kicker">Questão 12.8 · inserto e coinjeção</div><h3 id="q12-8-h" data-nav="12.8 · inserto">Inserto metálico</h3></div></div>
+<div class="stmt">Um conector elétrico de plástico tem os terminais metálicos embutidos durante a injeção. Esse recurso chama-se:
+<ol type="a"><li>coinjeção;</li><li>moldagem com inserto;</li><li>moldagem por transferência;</li><li>canal quente;</li><li>termoformação.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 18: parafusos, pinos e placas colocados na cavidade viram parte do produto; o exemplo mais comum são componentes elétricos. <strong>Coinjeção</strong> (a) é injetar dois plásticos (cores ou materiais diferentes), como em lanternas de automóvel.</p></div></details></article>
+
+<article class="ex" id="q12-9"><div class="ex-head"><div><div class="ex-kicker">Questão 12.9 · inspeção automatizada</div><h3 id="q12-9-h" data-nav="12.9 · visão industrial">Inspeção por visão</h3></div></div>
+<div class="stmt">Entre as inspeções que os sistemas industriais de visão fazem numa linha de peças plásticas, <strong>não</strong> está citada nos slides:
+<ol type="a"><li>presença e posição de componentes;</li><li>controle dimensional;</li><li>detecção de riscos, manchas e porosidades;</li><li>leitura de códigos alfanuméricos e bidimensionais;</li><li>medição da massa molar do polímero.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slide 32 lista (a)–(d), troca de componentes (<em>mix-up</em>), medição de grandezas físicas e qualidade de impressos. Massa molar é ensaio de laboratório, não inspeção visual de linha.</p></div></details></article>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-12"><h3>12 · Peças de plástico</h3><div class="r-grid">
+<div class="r-item"><b>Escolha pela geometria.</b> Seção constante → extrusão · complexa e precisa → injeção · oca fina → sopro · oca grande → rotomoldagem · rasa a partir de chapa → termoformação · filme → <em>blown film</em>.</div>
+<div class="r-item"><b>Ferramental × lote.</b> Injeção: ferramenta cara (até US$ 100 mil), ciclo 5–60 s, alta taxa. Rotomoldagem, termoformação, espuma: ferramenta barata, taxa baixa ou média.</div>
+<div class="r-item"><b>Termo × fixo.</b> Termoplástico: molde frio, resfria. Termofixo: molde aquecido, cura (reticulação irreversível), ciclo de minutos; compressão e transferência.</div>
+<div class="r-item"><b>Números.</b> Extrusora D 25–200 mm, L/D 5–30, ~US$ 300 mil · sopro 350–700 kPa · molde aço 2·10⁶ ciclos, alumínio 10⁴ · espuma: casca ≤ 2 mm, 40% da densidade.</div>
+<div class="r-item"><b>Molde de injeção.</b> Canal frio 2 placas (simples), 3 placas (separa canais), canal quente. Gavetas → roscas. Inserto → metal embutido. Coinjeção → multicor.</div>
+<div class="r-item"><b>Limites.</b> Contração e empeno vêm do resfriamento; números dos slides são ordens de grandeza para comparar processos.</div>
+</div></div></section>
+
+<nav class="pager" aria-label="Tópicos"><a class="prox" href="13-compositos.html"><small>próximo →</small>13 · Materiais compósitos e sua fabricação</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PMR3301 · Complementos de Fabricação Mecânica (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pmr3301-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

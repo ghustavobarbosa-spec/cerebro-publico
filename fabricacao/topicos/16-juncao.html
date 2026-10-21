@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16 · Processos de junção (soldagem) · PMR3301</title>
+<meta name="description" content="Arco elétrico, ZTA, brasagem, microssoldagem, juntas, defeitos e ensaios">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pmr3301-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PMR3301 · Tópico 16</div>
+  <div class="sb-sub">Complementos de Fabricação Mecânica</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#obj">1 · Objetivo</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#antes">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#ler">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#p-classif">Definição e classificação</a></li>
+<li class="nav-ex"><a href="#p-metal">Metalurgia: ZTA e tensão residual</a></li>
+<li class="nav-ex"><a href="#p-arco">Arco elétrico</a></li>
+<li class="nav-ex"><a href="#p-processos">Processos a arco e a gás</a></li>
+<li class="nav-ex"><a href="#p-brasagem">Brasagem e solda branda</a></li>
+<li class="nav-ex"><a href="#p-micro">Microssoldagem</a></li>
+<li class="nav-ex"><a href="#p-juntas">Projeto de juntas</a></li>
+<li class="nav-ex"><a href="#p-defeitos">Defeitos e ensaios</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#exercicios">6 · Questões comentadas</a><ul class="nav-sub">
+<li class="nav-ex pivo"><a href="#q16-1-h">16.1 · eletrodo e proteção<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#q16-2-h">16.2 · 450 °C<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#q16-3-h">16.3 · ZTA</a></li>
+<li class="nav-ex"><a href="#q16-4-h">16.4 · tração no cordão</a></li>
+<li class="nav-ex"><a href="#q16-5-h">16.5 · porosidade</a></li>
+<li class="nav-ex"><a href="#q16-6-h">16.6 · líquido penetrante</a></li>
+<li class="nav-ex"><a href="#q16-7-h">16.7 · alumínio</a></li>
+<li class="nav-ex"><a href="#q16-8-h">16.8 · laser</a></li>
+<li class="nav-ex"><a href="#q16-9-h">16.9 · cinco juntas</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#resumo">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Complementos de Fabricação Mecânica</a> <span class="sep">›</span> <span>16 · Processos de junção (soldagem)</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="sec-obj"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Ficha 16 · P2 · aula 18</span><h2 id="obj" data-nav="1 · Objetivo">Processos de junção (soldagem)</h2></div>
+<div class="callout concept"><span class="co-t">Objetivo</span><p>Classificar os processos de soldagem, entender o que acontece com o metal perto do cordão (zona fundida, <strong>ZTA</strong>, tensão residual), distinguir os processos a arco (eletrodo revestido, MIG/MAG, TIG, arame tubular, arco submerso), a gás, brasagem e solda branda, conhecer a microssoldagem, o projeto da junta e os defeitos e ensaios. Pergunta de engenharia: "que processo uso para unir estas duas peças, e que defeito devo procurar?"</p></div></section>
+
+<section class="chapter" id="sec-antes"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span><h2 id="antes" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+<ul>
+<li><strong>Diagrama Fe–Fe₃C</strong> e transformações (P1, aula 8): a ZTA é um tratamento térmico involuntário; o slide 13 sobrepõe o diagrama ao perfil de temperatura da solda.</li>
+<li><strong>Tratamento térmico de alívio de tensões</strong> (P1): estruturas soldadas costumam precisar dele.</li>
+<li>Ensaios de tração, dobramento e impacto (P1, aula 1).</li>
+</ul></section>
+
+<section class="chapter" id="sec-ler"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span><h2 id="ler" data-nav="3 · Onde ler">Onde ler</h2></div>
+<ul>
+<li><strong>Slides</strong> <code>Aula18Soldagem.pdf</code> (123 p., Profa. Izabel Machado): definição e classificação (2–5), vantagens e desvantagens (6–7), metalurgia (8–15), arco elétrico e processos a arco (16–35), soldagem a gás (36–38), brasagem e solda branda (39–50), microssoldagem (51–71), projeto de juntas (72–94), defeitos (95–105), ensaios (106–110), glossário (111), automação (114–123).</li>
+<li><strong>Livro</strong>: Kalpakjian &amp; Schmid, 7ª ed., parte de junção (soldagem por fusão, no estado sólido, brasagem e solda branda). <span class="badge badge-warn">páginas não conferidas</span></li>
+</ul></section>
+
+<section class="chapter" id="sec-pontos"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span><h2 id="pontos" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+<h3 class="sub" id="p-classif" data-nav="Definição e classificação">Definição e classificação</h3>
+<p><strong>Soldagem</strong> é o processo de união de duas partes metálicas usando uma fonte de calor; <strong>solda</strong> é o resultado (slide 2). Pela natureza da união (slide 3): <strong>estado sólido</strong> (a frio: explosão, ultrassom; a quente: atrito, difusão) e <strong>fusão</strong> (aluminotermia, feixe de elétrons, laser, gás, resistência elétrica, arco elétrico). O slide 4 agrupa: a arco, a gás, por resistência (topo, ponto, costura, projeção, percussão), térmica, sólida (atrito, ultrassom, difusão, explosão), não convencional (feixe de elétrons, laser) e processos derivados (oxicorte, corte a arco, endurecimento superficial, brasagem, soldagem de baixa temperatura).</p>
+<div class="card-grid"><div class="card accent-left"><h3>Vantagens (slide 6)</h3><p>Bem feita, a junta é mais resistente que o metal de base; equipamento barato e portátil (campo); liberdade de projeto; muitos metais de adição; muitas configurações; automatizável.</p></div>
+<div class="card accent-left"><h3>Desvantagens (slide 7)</h3><p>Radiação, fumos e respingos; <strong>tensões residuais e deformações</strong>; formação e requalificação do soldador; alterações metalúrgicas pelo calor; frequente necessidade de tratamento de alívio de tensões.</p></div></div>
+
+<h3 class="sub" id="p-metal" data-nav="Metalurgia: ZTA e tensão residual">Metalurgia da soldagem: zona fundida, ZTA e tensão residual (slides 8–15)</h3>
+<ul>
+<li>Do centro para fora: <strong>zona fundida</strong> (metal de solda, grãos colunares que crescem da linha de fusão para o centro) → <strong>zona de ligação</strong> → <strong>zona afetada pelo calor (ZTA)</strong>, que não fundiu mas teve a microestrutura alterada → metal de base não afetado.</li>
+<li>Dentro da ZTA de um aço (slide 14, de cima para baixo, ~1500 a ~700 °C): crescimento de grão (mais quente, grão grosso, menor tenacidade), refino de grão, região parcialmente transformada, esferoidização de carbonetos.</li>
+<li>Slide 9: a ZTA começa onde a temperatura atinge o valor que altera a microestrutura do metal de base; a zona fundida, onde passa do ponto de fusão.</li>
+<li><strong>Tensão residual</strong> (slide 15): <strong>tração no cordão</strong> e região vizinha, <strong>compressão</strong> mais longe. O cordão quente quer contrair ao esfriar e é impedido pelo metal frio ao redor. Por isso há distorção e o alívio de tensões.</li>
+</ul>
+
+<h3 class="sub" id="p-arco" data-nav="Arco elétrico">O arco elétrico (slides 16–17)</h3>
+<p>Descarga elétrica entre dois eletrodos, tratada como um <strong>condutor gasoso com impedância própria</strong> que converte energia elétrica em calor. A intensidade de calor se controla pelos parâmetros elétricos <strong>V e I</strong>. O arco também quebra a camada de óxido superficial e controla a transferência de metal. Estrutura: região catódica (−), coluna do arco (elétrons, íons e átomos neutros), região anódica (+).</p>
+
+<h3 class="sub" id="p-processos" data-nav="Processos a arco e a gás">Processos a arco e a gás</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Processo</th><th>Eletrodo</th><th>Proteção da poça</th><th>Notas dos slides</th></tr></thead><tbody>
+<tr><td><strong>Eletrodo revestido</strong> (ER, SMAW)</td><td>consumível, vareta revestida</td><td>gases e <strong>escória</strong> da queima do revestimento</td><td>simples, portátil, barato, qualquer posição, pouco sensível a sujeira e vento. Contra: não indicado para Al (baixo ponto de fusão) nem Ti (reativo); baixa taxa de deposição e produtividade (troca de eletrodo); depende do soldador; remover escória; inclusão de escória, porosidade, <strong>hidrogênio</strong> (fragiliza)</td></tr>
+<tr><td><strong>MIG/MAG</strong> (GMAW)</td><td>arame consumível contínuo</td><td><strong>gás injetado</strong>: MIG inerte (Ar, He); MAG ativo (CO₂ ou misturas)</td><td>a proteção não vem mais do revestimento, vem do gás</td></tr>
+<tr><td><strong>TIG</strong> (GTAW)</td><td><strong>tungstênio, não consumível</strong></td><td>gás inerte</td><td>arco entre peça e eletrodo de W; opera com ou sem metal de adição (adicionado à parte)</td></tr>
+<tr><td><strong>Arame tubular</strong> (FCAW)</td><td>arame tubular contínuo</td><td>fluxo <strong>dentro</strong> do arame</td><td>"o inverso do eletrodo revestido"</td></tr>
+<tr><td><strong>Arco submerso</strong> (SAW)</td><td>arame contínuo</td><td>fluxo granulado depositado sobre a junta; o arco fica <strong>dentro</strong> da cobertura</td><td>automático, alta deposição</td></tr>
+<tr><td><strong>Oxiacetileno</strong> (a gás)</td><td>vareta de adição</td><td>fluxo opcional</td><td>chama de gás + O₂, ~3300 °C; reparos; metais de baixo ponto de fusão</td></tr>
+</tbody></table></div>
+<p>Também citados: feixe de elétrons, laser e soldagem por <strong>atrito</strong> (estado sólido, rotação de uma peça contra a outra).</p>
+
+<h3 class="sub" id="p-brasagem" data-nav="Brasagem e solda branda">Brasagem e solda branda (slides 39–50)</h3>
+<ul>
+<li><strong>Brasagem</strong> (<em>brazing</em>): metal de adição funde <strong>acima de 450 °C</strong>, mas abaixo da fusão do metal de base: <strong>o metal de base não funde</strong>. Une metais dissimilares, peças finas, de espessuras diferentes, tratadas termicamente, metal com cerâmica. Tensões térmicas pequenas; contra: junta menos resistente e preparação mais cuidadosa. Exige limpeza e <strong>fluxo</strong> (dissolve óxidos para o metal de adição molhar e fluir). Aquecimento por chama, forno, indução, resistência, imersão, infravermelho.</li>
+<li><strong>Solda branda / fraca</strong> (<em>soldering</em>): metal de adição funde <strong>abaixo de 450 °C</strong>. Indústria elétrica e eletrônica. Ligas Sn/Pb 60/40 (funde ~188 °C) e 63/37; fio comercial funde ~190 °C, com resina (fluxo) dentro. Tendência a ligas sem chumbo. Papel dos elementos: Ag dá resistência mecânica; Cu baixa o ponto de fusão e melhora fadiga térmica e molhabilidade; Bi baixa muito o ponto de fusão (fase Sn-Pb-Bi a 95 °C, risco de falha); In baixa o ponto de fusão e dá ductilidade; Zn é barato mas corrói; Sb aumenta a resistência sem piorar a molhabilidade.</li>
+</ul>
+
+<h3 class="sub" id="p-micro" data-nav="Microssoldagem">Microssoldagem (slides 51–71)</h3>
+<p>Definição JIS: soldagem de seções tão pequenas que a quantidade de fusão, a espessura de difusão, a deformação e a <strong>tensão superficial</strong> afetam a soldabilidade e a qualidade de modo não desprezível. Processos: <strong>microrresistência</strong> (calor gerado <em>dentro</em>, na resistência de contato, com baixa pressão e tempo curtíssimo; une materiais de capacidades caloríficas e pontos de fusão diferentes), <strong>laser</strong> (pouco efeito térmico e deformação, opera continuamente sem eletrodo a trocar, mais de 50 pontos por segundo com cabeçote <em>scanner</em>; Nd:YAG pulsado penetra mais que o contínuo de mesma potência média; termopares das sondas Apollo) e <strong>micro-TIG</strong> (mesmo princípio do TIG, controle preciso, soldagem direta sem material intermediário).</p>
+
+<h3 class="sub" id="p-juntas" data-nav="Projeto de juntas">Projeto de juntas (slides 72–94)</h3>
+<ul>
+<li>Cinco tipos principais: <strong>de topo (face), sobreposta, de canto (em ângulo), em T e de face em ângulo</strong>.</li>
+<li>Elementos do chanfro: nariz ou encosto (parte não chanfrada), abertura ou fresta (folga da raiz), ângulo do chanfro e ângulo de abertura. Chanfros: I (reto), V, meio V, X (duplo V), K (duplo meio V), U, J.</li>
+<li>Nomes do cordão: reforço, largura, penetração, raiz; no filete, garganta, perna, face. Cordão côncavo ou convexo; medido com gabarito de filete.</li>
+<li>Escolha da junta: acessibilidade, resistência requerida, carga estática ou dinâmica, espessura, processo, material, custo. Posições: plana, horizontal, vertical, sobrecabeça (ASME e ISO).</li>
+</ul>
+
+<h3 class="sub" id="p-defeitos" data-nav="Defeitos e ensaios">Defeitos e ensaios (slides 95–111)</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Defeito</th><th>Causa citada</th></tr></thead><tbody>
+<tr><td><strong>Falta de penetração</strong> (o mais comum)</td><td>arco curto, parâmetros inadequados, velocidade errada</td></tr>
+<tr><td>Fusão incompleta / falta de fusão</td><td>parâmetros incorretos</td></tr>
+<tr><td><strong>Porosidade</strong></td><td>falta ou falha de gás de proteção, eletrodo úmido (ER), contaminação (graxa)</td></tr>
+<tr><td>Inclusão de escória</td><td>limpeza incompleta entre passes</td></tr>
+<tr><td><strong>Trincas</strong></td><td>solidificação muito rápida, S e P, baixa resistência a quente, junta mal preparada</td></tr>
+<tr><td>Mordedura</td><td>entalhe no metal de base na margem do cordão (corrente ou tensão alta)</td></tr>
+<tr><td>Deformação</td><td>dilatação diferencial e taxas de resfriamento diferentes</td></tr>
+</tbody></table></div>
+<p><strong>Ensaios destrutivos</strong>: tração (transversal e longitudinal), tração-cisalhamento (solda a ponto), dobramento, impacto, corrosão e fluência. <strong>Não destrutivos</strong>: visual, <strong>líquido penetrante</strong> (barato, rápido, mas <strong>só superficial</strong>), partículas magnéticas, raios X e gama, ultrassom (estes acham defeitos internos).</p>
+<p><strong>Automação × automatização</strong> (slides 114–116): automação é autorregulada (corrige sem intervenção humana, como o ar-condicionado); automatização precisa do humano para corrigir (o ventilador). A soldagem robotizada busca produtividade, menor custo, qualidade e padronização e menos desgaste do soldador, e resolve gargalos de produção.</p>
+</section>
+
+<section class="chapter" id="sec-lim"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+<ul>
+<li>"A junta é mais resistente que o metal de base" vale para solda <strong>bem feita</strong> em metal de base sem tratamento; num aço temperado, a ZTA pode amolecer ou fragilizar e virar o ponto fraco.</li>
+<li>Brasagem × solda branda é decidido pela temperatura de fusão do <strong>metal de adição</strong> (450 °C), não pela do metal de base. Em nenhuma das duas o metal de base funde.</li>
+<li>Líquido penetrante não enxerga porosidade interna nem falta de penetração escondida: para isso, raios X ou ultrassom.</li>
+<li>O slide 26 grafa "Tunstem"; o correto é <em>tungsten</em> (tungstênio). TIG = <em>Tungsten Inert Gas</em>.</li>
+</ul></section>
+
+<section class="chapter" id="sec-ex"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Questões comentadas">Questões de múltipla escolha comentadas</h2><p class="section-desc">Questões de treino escritas a partir dos slides.</p></div>
+
+<article class="ex pivo" id="q16-1"><div class="ex-head"><div><div class="ex-kicker">Questão 16.1 · processos a arco · Pivô</div><h3 id="q16-1-h" data-nav="16.1 · eletrodo e proteção" data-pivo>Eletrodo e proteção</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+<div class="stmt">Associe: (I) eletrodo não consumível de tungstênio e gás inerte; (II) arame contínuo e proteção por gás inerte ou ativo; (III) proteção por escória e gases da queima do revestimento; (IV) arco aberto sob camada de fluxo granulado.
+<ol type="a"><li>I TIG · II MIG/MAG · III eletrodo revestido · IV arco submerso</li><li>I MIG · II TIG · III arco submerso · IV eletrodo revestido</li><li>I TIG · II arame tubular · III oxiacetileno · IV arco submerso</li><li>I eletrodo revestido · II MIG/MAG · III TIG · IV arame tubular</li><li>I TIG · II MIG/MAG · III arame tubular · IV eletrodo revestido</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slides 21–29. Arame tubular (FCAW) leva o fluxo <em>dentro</em> do arame: não é "queima do revestimento" (III) nem "fluxo granulado sobre a junta" (IV).</p></div></details></article>
+
+<article class="ex pivo" id="q16-2"><div class="ex-head"><div><div class="ex-kicker">Questão 16.2 · brasagem · Pivô</div><h3 id="q16-2-h" data-nav="16.2 · 450 °C" data-pivo>Brasagem × solda branda</h3></div><div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+<div class="stmt">Sobre brasagem e solda branda, é correto:
+<ol type="a"><li>na brasagem o metal de base funde parcialmente;</li><li>na brasagem o metal de adição funde acima de 450 °C e abaixo da fusão do metal de base; na solda branda, abaixo de 450 °C;</li><li>a solda branda usa metal de adição acima de 450 °C;</li><li>a brasagem não permite unir metais dissimilares;</li><li>a junta brasada é mais resistente que a soldada por fusão.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slides 39, 40 e 44. A brasagem é justamente indicada para dissimilares e metal-cerâmica; sua desvantagem é a junta <strong>menos</strong> resistente (slide 40).</p></div></details></article>
+
+<article class="ex" id="q16-3"><div class="ex-head"><div><div class="ex-kicker">Questão 16.3 · metalurgia</div><h3 id="q16-3-h" data-nav="16.3 · ZTA">Zona termicamente afetada</h3></div></div>
+<div class="stmt">A zona afetada pelo calor (ZTA) é a região que:
+<ol type="a"><li>fundiu e solidificou como metal de solda;</li><li>não fundiu, mas teve a microestrutura alterada pelo ciclo térmico;</li><li>não sofreu nenhuma alteração;</li><li>contém apenas o metal de adição;</li><li>existe só na brasagem.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div><p>Slides 9, 13 e 14.</p></div></details></article>
+
+<article class="ex" id="q16-4"><div class="ex-head"><div><div class="ex-kicker">Questão 16.4 · tensão residual</div><h3 id="q16-4-h" data-nav="16.4 · tração no cordão">Perfil de tensão residual</h3></div></div>
+<div class="stmt">Após soldar duas chapas de topo, a tensão residual longitudinal típica é:
+<ol type="a"><li>compressiva no cordão e trativa longe dele;</li><li>trativa no cordão e compressiva mais longe dele;</li><li>nula em toda a chapa;</li><li>trativa e uniforme em toda a chapa;</li><li>compressiva e uniforme em toda a chapa.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 15: o cordão quer contrair ao esfriar e é contido pelo metal frio ao redor, ficando tracionado; o equilíbrio exige compressão mais afastada.</p></div></details></article>
+
+<article class="ex" id="q16-5"><div class="ex-head"><div><div class="ex-kicker">Questão 16.5 · defeitos</div><h3 id="q16-5-h" data-nav="16.5 · porosidade">Causa de porosidade</h3></div></div>
+<div class="stmt">Um cordão MIG apresentou poros distribuídos. A causa mais provável, segundo os slides, é:
+<ol type="a"><li>falha ou falta do gás de proteção, ou contaminação da junta por graxa;</li><li>solidificação lenta demais;</li><li>excesso de penetração;</li><li>chanfro em U;</li><li>uso de eletrodo de tungstênio.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div><p>Slide 100 (no ER, também eletrodo úmido).</p></div></details></article>
+
+<article class="ex" id="q16-6"><div class="ex-head"><div><div class="ex-kicker">Questão 16.6 · ensaios</div><h3 id="q16-6-h" data-nav="16.6 · líquido penetrante">Limite do líquido penetrante</h3></div></div>
+<div class="stmt">A principal limitação do ensaio de líquido penetrante é:
+<ol type="a"><li>custo elevado;</li><li>detectar apenas descontinuidades abertas à superfície;</li><li>exigir peça ferromagnética;</li><li>destruir a peça;</li><li>exigir radiação ionizante.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 109: barato, rápido e fácil, mas só superficial; defeitos internos pedem raios X ou ultrassom. Peça ferromagnética (c) é exigência das partículas magnéticas.</p></div></details></article>
+
+<article class="ex" id="q16-7"><div class="ex-head"><div><div class="ex-kicker">Questão 16.7 · eletrodo revestido</div><h3 id="q16-7-h" data-nav="16.7 · alumínio">Por que não o eletrodo revestido?</h3></div></div>
+<div class="stmt">Os slides não recomendam o eletrodo revestido para alumínio porque:
+<ol type="a"><li>o alumínio é reativo como o titânio;</li><li>o alumínio tem baixo ponto de fusão e a temperatura do arco é muito elevada;</li><li>o eletrodo revestido só funciona em posição plana;</li><li>o eletrodo revestido não forma escória;</li><li>o alumínio não conduz corrente.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 22. O titânio é o exemplo de material reativo (a), outra restrição separada. O ER funciona em qualquer posição (slide 21).</p></div></details></article>
+
+<article class="ex" id="q16-8"><div class="ex-head"><div><div class="ex-kicker">Questão 16.8 · microssoldagem</div><h3 id="q16-8-h" data-nav="16.8 · laser">Vantagem do laser</h3></div></div>
+<div class="stmt">Na microssoldagem, uma vantagem do laser sobre a microrresistência é:
+<ol type="a"><li>gerar o calor dentro da interface, pela resistência de contato;</li><li>operar continuamente, sem eletrodos que precisem ser trocados, com pequeno efeito térmico;</li><li>exigir metal de adição de estanho-chumbo;</li><li>dispensar qualquer controle de energia;</li><li>funcionar apenas em aço.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 59. (a) é o princípio da <strong>microrresistência</strong> (slides 56–57).</p></div></details></article>
+
+<article class="ex" id="q16-9"><div class="ex-head"><div><div class="ex-kicker">Questão 16.9 · juntas</div><h3 id="q16-9-h" data-nav="16.9 · cinco juntas">Tipos de junta</h3></div></div>
+<div class="stmt">Não é um dos cinco tipos principais de junta soldada apresentados:
+<ol type="a"><li>de topo</li><li>sobreposta</li><li>em T</li><li>de canto</li><li>em K</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slide 74: topo, sobreposta, em ângulo (canto), em T e de face em ângulo. <strong>K é tipo de chanfro</strong> (slide 88), não de junta.</p></div></details></article>
+</section>
+
+<section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+<div class="resumo" id="resumo-16"><h3>16 · Junção</h3><div class="r-grid">
+<div class="r-item"><b>Classes.</b> Estado sólido (explosão, ultrassom, atrito, difusão) × fusão (arco, gás, resistência, laser, feixe de elétrons, aluminotermia).</div>
+<div class="r-item"><b>Metalurgia.</b> Zona fundida (grão colunar) → ligação → ZTA (grão grosso perto, refinado mais longe) → metal de base. Tensão residual: tração no cordão, compressão longe.</div>
+<div class="r-item"><b>Arco.</b> ER: escória do revestimento, não para Al e Ti, H fragiliza · MIG inerte / MAG ativo (CO₂) · TIG: W não consumível, com ou sem adição · FCAW: fluxo dentro do arame · SAW: arco sob fluxo granulado.</div>
+<div class="r-item"><b>Gás.</b> Oxiacetileno ~3300 °C; reparos; baixo ponto de fusão.</div>
+<div class="r-item"><b>450 °C.</b> Brasagem: adição &gt; 450 °C, base não funde, dissimilares, fluxo · solda branda: &lt; 450 °C, eletrônica, Sn/Pb 60/40 (188 °C).</div>
+<div class="r-item"><b>Micro.</b> Tensão superficial pesa · microrresistência (calor no contato) · laser (contínuo, &gt; 50 pontos/s) · micro-TIG.</div>
+<div class="r-item"><b>Juntas.</b> Topo, sobreposta, canto, T, face em ângulo. Chanfros I, V, meio V, X, K, U, J.</div>
+<div class="r-item"><b>Defeitos e ensaios.</b> Falta de penetração (mais comum), porosidade (gás, umidade, graxa), escória (limpeza), trinca (S, P, resfriamento rápido). LP só superficial; RX e US internos.</div>
+</div></div></section>
+
+<nav class="pager" aria-label="Tópicos"><a href="15-elementos-finitos.html"><small>← anterior</small>15 · Elementos finitos na fabricação</a><a class="prox" href="17-micro-e-nanofabricacao.html"><small>próximo →</small>17 · Micro e nanofabricação</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PMR3301 · Complementos de Fabricação Mecânica (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pmr3301-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
