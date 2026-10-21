@@ -309,6 +309,15 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ch"><a href="#t13-limites-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
 </ul></li>
 <li class="nav-ch"><a href="#t13-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t13-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#s17-intro-h">A17 intro · balanço sobre mola<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s17-ex2-h">A17 ex.2 · viga biengastada<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#s17-ex1-h">A17 ex.1 · viga com cabo<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#a6-h">#06 · rótula com mola de torção<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t13-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#s17-ex3-h">A17 ex.3 · engastada-apoiada com balanço</a></li>
+<li class="nav-ex"><a href="#s17-ex4-h">A17 ex.4 · viga sobre viga</a></li>
+<li class="nav-ex"><a href="#s17-ex5-h">A17 ex.5 · pórtico em L</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#t13-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
 </ul></li>
@@ -386,8 +395,503 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
 <section class="chapter" id="t13-ex">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
-    <h2 id="t13-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Os exercícios desta ficha estão em preparação (próxima etapa). Enquanto isso, as questões antigas da apostila 03 estão resolvidas na página <a href="../provas/p2.html">P2</a> (ex. 13: hiperestática por energia complementar mínima; ex. 10: a mesma ideia com três incógnitas).</p></div>
-<div class="callout warn"><span class="co-t">Em preparação</span><p>Entram aqui, resolvidos passo a passo com regressão conceitual e hipóteses destacadas: o exercício introdutório da aula 17 (balanço sobre mola, pivô), os Ex.1–5 da aula 17 (Gere exemplo 10-6 e probs. 10.3-2, 10.4-3, 10.4-13, 10.4-21) e o exercício em grupo #06 (rótula com mola de torção). O enunciado completo de cada um está nas fontes da disciplina.</p></div>
+    <h2 id="t13-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Exercícios da aula 17 (introdutório resolvido nos slides e Ex.1–5, que são problemas do cap. 10 do Gere) e o exercício em grupo #06. Todos por energia complementar mínima, com regressão aos conceitos usados e hipóteses destacadas. As questões antigas da apostila 03 (ex. 10 e 13) estão na página <a href="../provas/p2.html">P2</a>.</p></div>
+<h3 class="sub" id="t13-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+<article class="ex pivo" id="s17-intro">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · exercício introdutório (p.3–14) · Pivô da P2</div>
+      <h3 id="s17-intro-h" data-nav="A17 intro · balanço sobre mola" data-pivo>Balanço apoiado numa mola: a primeira hiperestática por energia</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (05/out)</span></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">C1</span><span class="chip">C2</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (slides da aula 17, p.3)</span>
+      A viga AB, de comprimento $L$ e rigidez à flexão $EI$, está engastada em A e apoiada em B sobre uma mola vertical de rigidez $k$, cuja base é fixa. Uma carga uniformemente distribuída $q_0$ atua em todo o vão. Dados: $q_0$, $EI$, $L$, $k$. Determinar: a) as reações de apoio; b) a rotação na extremidade B ($\theta_B$).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 0):</strong> ver o PDF oficial, Slides aula 17, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p>Figura: eixo $x$ ao longo da viga, de A para B; $y$ para cima. A mola fica entre a extremidade B e o solo.</p>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão: o que este exercício reaproveita</span>
+      <p>Ele é o modelo de <em>todas</em> as hiperestáticas da P2. A pergunta nova (uma reação que o equilíbrio não dá) se resolve com ferramentas que você já tem:</p>
+      <div class="math-box">$$\underbrace{V_B}_{\text{incógnita}} \xleftarrow{\ \delta_B = 0\ } \underbrace{\delta_B = \frac{\partial U^*}{\partial V_B}}_{\text{Crotti-Engesser}} \xleftarrow{\ } \underbrace{U^* = \int\frac{M^2}{2EI}ds + \frac{V_B^2}{2k}}_{\text{energia da viga e da mola}} \xleftarrow{\ } \underbrace{M(s)}_{\text{esforços por equilíbrio}}$$</div>
+      <p>A Parte 1 revisa cada seta. A Parte 2 faz os 7 passos do professor. A Parte 3 confere pelos casos-limite e mostra que energia e compatibilidade são a mesma equação.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Grau de hiperestaticidade: por que o equilíbrio não basta</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Uma estrutura plana tem <strong>3 equações de equilíbrio</strong> ($\sum F_x = 0$, $\sum F_y = 0$, $\sum M = 0$). O engaste em A impede as duas translações e a rotação: 3 reações ($H_A$, $V_A$, $M_A$). A mola em B impede (parcialmente) o deslocamento vertical: 1 reação, a força $V_B$ que ela faz na viga. Total: 4 incógnitas para 3 equações.</p>
+      <div class="math-box">$$g = (\text{nº de reações}) - (\text{nº de equações}) = 4 - 3 = 1$$</div>
+      <p><strong>Uma mola é um vínculo?</strong> Sim. Ela não impõe deslocamento zero, mas impõe uma relação força × deslocamento ($V_B = k\,\delta_{mola}$). A força dela é uma incógnita a mais, tão "estática" quanto a de um apoio. É por isso que $g = 1$ mesmo com uma mola "macia".</p></div>
+
+    <div class="step" data-n="2"><h4>Energia complementar da viga e da mola</h4>
+      <p>Fichas: <a href="09-trabalho-e-energia.html">ficha 09 (Trabalho, energia e P.T.E.)</a> (definição de $U^*$), <a href="11-energia-na-flexao.html">ficha 11 (Energia na flexão)</a> (flexão). Para a viga, a densidade de energia complementar com $\sigma = My/I$ integrada na seção dá</p>
+      <div class="math-box">$$U^*_{viga} = \int_0^L \frac{M^2}{2EI}\,ds$$</div>
+      <p>A parcela da cortante ($\int fV^2/2GA$) é desprezada: numa viga esbelta ela é da ordem de $(h/L)^2$ da de flexão (<a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>).</p>
+      <p>Para a mola, o mesmo raciocínio do gráfico força × deslocamento (<a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>). Mola linear: $\delta = F/k$. O trabalho complementar é a área entre a reta e o eixo da força:</p>
+      <div class="math-box">$$U^*_{mola} = W^*_{mola} = \int_0^{V_B}\delta\,dF = \int_0^{V_B}\frac{F}{k}\,dF = \frac{V_B^2}{2k}$$</div>
+      <p><span class="tag tag-mem">⚠ armadilha</span> A mola tem <strong>um único esforço</strong> (a força axial). A regra da aula 14 é clara: elemento de esforço único <em>nunca</em> se despreza, senão a resposta pressupõe rigidez infinita (aula 14 p.31). Esquecer $V_B^2/2k$ transforma a mola num apoio rígido.</p></div>
+
+    <div class="step" data-n="3"><h4>Crotti-Engesser: derivar a energia dá o deslocamento correspondente</h4>
+      <p>Ficha: <a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>. Se uma estrutura <strong>isostática</strong> está sob cargas independentes $P_i$, então $\delta_i = \partial U^*/\partial P_i$, onde $\delta_i$ é o deslocamento <em>correspondente</em> a $P_i$: no ponto de aplicação, na direção e no sentido dela.</p>
+      <p>A ideia-chave da aula 17: <strong>trate a reação $V_B$ como uma carga externa</strong>. Tire o vínculo que a produz (a base da mola deixa de ser fixa) e aplique $V_B$ ali, como se fosse uma força conhecida. A estrutura que sobra é isostática: é a <strong>E.I.F.</strong> (estrutura isostática fundamental). Nela, Crotti-Engesser dá o deslocamento da base da mola em função de $q_0$ e de um $V_B$ qualquer. Como a base real não se move, esse deslocamento tem de ser zero. Essa condição é a equação que faltava.</p></div>
+
+    <div class="step" data-n="4"><h4>Momento fletor por trechos, a partir da ponta livre</h4>
+      <p>Ficha: <a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>. Na E.I.F. a viga é um balanço com $q_0$ e $V_B$ (para cima) na ponta B. Medindo $s$ a partir de B, o pedaço entre B e o corte só tem cargas conhecidas, e a reação do engaste não entra:</p>
+      <div class="math-box">$$M(s) = V_B\,s - \frac{q_0 s^2}{2},\qquad 0 \le s \le L\qquad(\text{positivo tracionando embaixo})$$</div>
+      <p>$V_B$ para cima em B produz momento que traciona as fibras de baixo (positivo); a carga $q_0$ para baixo traciona as de cima (negativo). A convenção é livre, desde que seja a mesma em toda a viga, porque $M$ aparece ao quadrado.</p></div>
+
+    <div class="step" data-n="5"><h4>Carga fictícia para a rotação</h4>
+      <p>Ficha: <a href="12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>. Não há binário aplicado em B, então crie um: $M_B$ (anti-horário), escreva os esforços com ele, derive e <strong>só depois</strong> anule. O resultado positivo significa rotação no sentido arbitrado.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span>
+      <ul>
+        <li><strong>Material elástico-linear</strong> na viga e <strong>mola linear</strong> ($F = k\delta$), sem massa e de base rígida.</li>
+        <li><strong>Linearidade geométrica (L.G.)</strong>: momentos calculados na configuração indeformada. O professor frisa que $\theta_B(V_B, q_0)$ vale para valores "quaisquer" <em>dentro da L.G.</em>.</li>
+        <li><strong>Viga esbelta</strong> (Euler-Bernoulli): energia da cortante desprezada; não há força normal ($H_A = 0$).</li>
+        <li><strong>Carga quase-estática</strong>: sem energia cinética, sem dissipação, $W^* = U^*$.</li>
+      </ul></div>
+
+    <div class="step-part">Parte 2 · Resolução (os 7 passos da aula 17)</div>
+
+    <div class="step" data-n="6"><h4>Passos 1 a 3: D.C.L., E.I.F. e energia</h4>
+      <p>Passo 1: D.C.L. com $H_A$, $V_A$, $M_A$ e $V_B$; $g = 1$. Passo 2: E.I.F. liberando o deslocamento vertical da base da mola; a incógnita $V_B$ age na base. Passo 3:</p>
+      <div class="math-box">$$\delta = \frac{\partial U^*}{\partial V_B} = \frac{\partial}{\partial V_B}\left(\int_0^L\frac{M^2}{2EI}\,ds + \frac{V_B^2}{2k}\right) = \int_0^L\frac{M}{EI}\frac{\partial M}{\partial V_B}\,ds + \frac{V_B}{k},\qquad \frac{\partial M}{\partial V_B} = s$$</div></div>
+
+    <div class="step" data-n="7"><h4>Passo 4: deslocamento da base da mola para $V_B$ "qualquer"</h4>
+      <div class="math-box">$$\delta = \frac{1}{EI}\int_0^L\left(V_Bs - \frac{q_0s^2}{2}\right)s\,ds + \frac{V_B}{k} = \frac{V_BL^3}{3EI} - \frac{q_0L^4}{8EI} + \frac{V_B}{k} = V_B\left(\frac{L^3}{3EI} + \frac1k\right) - \frac{q_0L^4}{8EI}$$</div>
+      <p>Leia cada termo: $q_0L^4/8EI$ é a flecha do balanço sob $q_0$; $V_BL^3/3EI$ é quanto $V_B$ levanta a ponta; $V_B/k$ é quanto a mola encurta. São resultados de tabela que a energia reconstrói sozinha.</p></div>
+
+    <div class="step" data-n="8"><h4>Passo 5: compatibilidade $\delta = 0$</h4>
+      <div class="math-box">$$V_B\left(\frac{L^3}{3EI} + \frac1k\right) = \frac{q_0L^4}{8EI}\ \Rightarrow\ \boxed{V_B = \frac{q_0L^4}{8}\cdot\frac{3k}{kL^3 + 3EI} = \frac{3q_0L}{8}\cdot\frac{kL^3}{kL^3+3EI}}$$</div>
+      <p>Positivo: o sentido arbitrado (para cima) está certo.</p></div>
+
+    <div class="step" data-n="9"><h4>Passo 6: demais reações por equilíbrio</h4>
+      <div class="math-box">$$H_A = 0$$
+      $$V_A = q_0L - V_B = \frac{q_0L\,(5kL^3 + 24EI)}{8(kL^3+3EI)}\ \ (\uparrow)$$
+      $$M_A = \frac{q_0L^2}{2} - V_BL = \frac{q_0L^2\,(kL^3 + 12EI)}{8(kL^3+3EI)}\ \ (\text{anti-horário})$$</div>
+      <p>O sentido de $M_A$: em torno de A, a carga $q_0L$ (no meio do vão) gira no sentido horário e $V_B$ no anti-horário; como $q_0L^2/2 > V_BL$, o engaste precisa de um binário anti-horário.</p></div>
+
+    <div class="step" data-n="10"><h4>Passo 7: rotação em B com binário fictício</h4>
+      <p>Com $V_B$ conhecido, basta olhar a viga AB (o professor: "analisar parte da estrutura"). Com o binário fictício $M_B$ anti-horário em B, $M(s) = M_B + V_Bs - q_0s^2/2$ e $\partial M/\partial M_B = 1$:</p>
+      <div class="math-box">$$\theta_B = \frac{1}{EI}\int_0^L\left(V_Bs - \frac{q_0s^2}{2}\right)(1)\,ds = \frac{V_BL^2}{2EI} - \frac{q_0L^3}{6EI} = \boxed{\frac{q_0L^3}{48EI}\cdot\frac{kL^3 - 24EI}{kL^3 + 3EI}}$$</div>
+      <p>$kL^3 > 24EI$: $\theta_B > 0$ (anti-horário); $kL^3 < 24EI$: horário; $kL^3 = 24EI$: B não gira.</p>
+      <div class="callout concept"><span class="co-t">Por que posso manter $V_B$ fixo ao derivar em $M_B$?</span>
+        <p>Em rigor, ao aplicar $M_B$ na estrutura original, $V_B$ também mudaria. Mas a derivada total é $\frac{dU^*}{dM_B} = \frac{\partial U^*}{\partial M_B} + \frac{\partial U^*}{\partial V_B}\frac{dV_B}{dM_B}$, e o segundo termo é zero porque $\partial U^*/\partial V_B = 0$ é exatamente a condição do passo 5. É o princípio da energia complementar mínima trabalhando a seu favor: depois de achar as incógnitas, trate-as como cargas conhecidas.</p></div></div>
+
+    <div class="step-part">Parte 3 · Verificação e leitura física</div>
+
+    <div class="step" data-n="11"><h4>Casos-limite e a mesma equação por compatibilidade</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$V_B$</th><th>$\theta_B$</th><th>Confere com</th></tr></thead><tbody>
+        <tr><td>$k \to \infty$ (apoio rígido)</td><td>$3q_0L/8$</td><td>$+q_0L^3/48EI$</td><td>viga engastada-apoiada (tabela) <span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$k \to 0$ (sem apoio)</td><td>$0$</td><td>$-q_0L^3/6EI$</td><td>balanço com $q$ (<a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>, slides aula 15 ex.3) <span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$kL^3 = 24EI$</td><td>$\frac{3q_0L}{8}\cdot\frac{24}{27} = \frac{q_0L}{3}$</td><td>$0$</td><td>o momento em B de $V_B$ cancela o da carga</td></tr>
+      </tbody></table></div>
+      <p><strong>Leitura em molas em série.</strong> A ponta do balanço é uma "mola" de rigidez $k_v = 3EI/L^3$. Reescrevendo, $V_B = \frac{3q_0L}{8}\cdot\frac{k}{k + k_v}$: a mola real divide a carga com a flexibilidade da viga. Se $k \gg k_v$ ela trabalha como apoio; se $k \ll k_v$ ela quase não carrega nada.</p>
+      <p><strong>O mesmo resultado pelo Gere (superposição):</strong> flecha do balanço sob $q_0$ menos o levantamento por $V_B$ igual ao encurtamento da mola, $\frac{q_0L^4}{8EI} - \frac{V_BL^3}{3EI} = \frac{V_B}{k}$. É a equação do passo 5 com outra roupa: na aula 17, a equação de energia <em>é</em> a de compatibilidade.</p>
+      <p><strong>Dimensão:</strong> $kL^3$ e $EI$ têm a mesma unidade (N·m²), a fração é adimensional; $q_0L^3/EI$ é adimensional (rad). Contas conferidas em <code>_build/calc/calc_aula17.py</code>.</p>
+      <div class="answer"><strong>Respostas:</strong> a) $H_A = 0$; $V_B = \dfrac{3kq_0L^4}{8(kL^3+3EI)}$ ↑; $V_A = q_0L - V_B$ ↑; $M_A = \dfrac{q_0L^2}{2} - V_BL$ (anti-horário). b) $\theta_B = \dfrac{q_0L^3}{48EI}\cdot\dfrac{kL^3-24EI}{kL^3+3EI}$ (anti-horário se positivo). <span class="badge badge-ok">bate com os slides</span></div>
+      <ul>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer $V_B^2/2k$: dá $V_B = 3q_0L/8$, a resposta do apoio rígido.</li>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $M$ a partir do engaste: aparecem $V_A$ e $M_A$, que dependem de $V_B$, e a derivada fica mais longa (e mais sujeita a erro).</li>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Anular $M_B$ antes de derivar: $\theta_B$ sai zero.</li>
+      </ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício (para a prova sem consulta)</span>
+      <ul>
+        <li>Hiperestática = isostática (E.I.F.) + uma carga incógnita $X$ + uma condição de deslocamento: $\partial U^*/\partial X = 0$.</li>
+        <li>A energia é do <strong>sistema inteiro</strong>: viga + mola ($X^2/2k$) + cabo ($N^2L/2EA$) + mola de torção ($M^2/2k_t$).</li>
+        <li>Reações primeiro (passos 1–6), deslocamentos depois (passo 7), com carga fictícia e as incógnitas já tratadas como cargas conhecidas.</li>
+        <li>Feche sempre com os casos-limite $k \to \infty$ e $k \to 0$.</li>
+      </ul></div>
+  </article>
+<article class="ex pivo" id="s17-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · Ex.2 = Gere 10.3-2 · Pivô da P2</div>
+      <h3 id="s17-ex2-h" data-nav="A17 ex.2 · viga biengastada" data-pivo>Viga biengastada com carga uniforme: duas incógnitas, simetria e linha elástica</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">H2</span><span class="chip">C2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Gere & Goodno 7ª ed., prob. 10.3-2; figura no slide 20 da aula 17)</span>
+      Uma viga biengastada AB com comprimento $L$ suporta um carregamento uniforme de intensidade $q$ (veja a figura). Começando com a equação diferencial de segunda ordem da curva de deflexão (a equação do momento fletor), obtenha as reações, forças de cisalhamento, momentos fletores, inclinações e deflexões da viga. Construa os diagramas de força de cisalhamento e do momento fletor, indicando todas as ordenadas críticas.
+      <br><em>Na aula 17 o exercício é proposto para ser resolvido por energia (energia complementar mínima). Fazemos assim, e conferimos com a resposta do livro, que usa a equação diferencial.</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 2):</strong> ver o PDF oficial, Slides aula 17, p. 20 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Três ideias novas sobre a base do exercício introdutório (<a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a>): (1) quando há <strong>duas</strong> incógnitas, o princípio vira um <strong>sistema</strong> de duas equações; (2) a <strong>simetria</strong> reduz o sistema a uma equação; (3) uma <strong>força fictícia numa posição genérica $\xi$</strong> devolve a linha elástica inteira, $v(\xi)$, e não só um número.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Grau de hiperestaticidade: 6 − 3, mas só 2 contam</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Cada engaste dá 3 reações: 6 no total, para 3 equações, então $g = 3$. Mas as horizontais $H_A$ e $H_B$ não se misturam com a flexão: sem carga horizontal e sob linearidade geométrica, a viga não tem força normal e $H_A = H_B = 0$. <strong>Para a flexão, $g = 2$</strong>: $V$ e $M$ de uma das extremidades.</p>
+      <p><span class="tag tag-mem">⚠</span> Sob grandes deslocamentos isso deixa de valer: a viga biengastada que flete muito se estica e aparece tração ("efeito de membrana"). É a mesma não linearidade geométrica da corda do <a href="09-trabalho-e-energia.html#l5-ex5-h">ficha 09 (Trabalho, energia e P.T.E.)</a>.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia complementar mínima com duas incógnitas</h4>
+      <p>Ficha: <a href="13-hiperestaticas-energia.html#t13-h1">ficha 13 (Hiperestáticas e linha elástica)</a>. Escolhendo como E.I.F. o balanço engastado em A (libera o engaste B), as incógnitas são $R_B$ (para cima) e $M_B$ (binário em B). Cada vínculo liberado dá uma equação: deslocamento vertical de B nulo <em>e</em> rotação de B nula.</p>
+      <div class="math-box">$$\frac{\partial U^*}{\partial R_B} = 0\ (\text{flecha em B}),\qquad \frac{\partial U^*}{\partial M_B} = 0\ (\text{rotação em B})$$</div></div>
+
+    <div class="step" data-n="3"><h4>Simetria: menos incógnitas antes de começar</h4>
+      <p>Viga simétrica, vínculos simétricos e carga simétrica em relação ao meio do vão ⇒ reações simétricas: $R_A = R_B$ e momentos de engaste de mesmo módulo. Com $\sum F_y = 0$, $R_A = R_B = qL/2$ sai sem energia. Sobra <strong>uma</strong> incógnita, o momento de engaste. É o passo 1 da metodologia da aula 17 ("verificar se é possível simplificar explorando simetrias") e o assunto da P3 (<a href="14-estruturas-simetricas.html">ficha 14 (Estruturas simétricas)</a>).</p></div>
+
+    <div class="step" data-n="4"><h4>Linha elástica por energia: força fictícia em $\xi$</h4>
+      <p>Ficha: <a href="13-hiperestaticas-energia.html#t13-h2">ficha 13 (Hiperestáticas e linha elástica)</a>. Crotti-Engesser dá o deslocamento no ponto onde está a carga. Se a carga fictícia $F$ estiver numa posição <em>genérica</em> $\xi$, o resultado é uma função de $\xi$: a própria curva de deflexão. Separe $M$ em dois trechos (antes e depois de $\xi$), porque $F$ só aparece no trecho que a "vê".</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span>
+      <ul>
+        <li>Elástico-linear, $EI$ constante, viga esbelta (cortante desprezada).</li>
+        <li>Linearidade geométrica: daí $H_A = H_B = 0$ e $g = 2$ para a flexão.</li>
+        <li>Engastes perfeitos (rotação e flecha nulas). Engaste real tem alguma flexibilidade: o momento de engaste real é menor que $qL^2/12$.</li>
+      </ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="5"><h4>Caminho 1: E.I.F. em balanço, duas equações</h4>
+      <p>$s$ medido a partir de B; $M$ positivo tracionando embaixo; $M_B$ é o momento fletor na seção B (positivo = traciona embaixo):</p>
+      <div class="math-box">$$M(s) = M_B + R_Bs - \frac{qs^2}{2},\qquad \frac{\partial M}{\partial M_B} = 1,\qquad \frac{\partial M}{\partial R_B} = s$$
+      $$\frac{\partial U^*}{\partial M_B} = \frac1{EI}\int_0^L M\,ds = \frac{1}{EI}\left(M_BL + \frac{R_BL^2}{2} - \frac{qL^3}{6}\right) = 0$$
+      $$\frac{\partial U^*}{\partial R_B} = \frac1{EI}\int_0^L M\,s\,ds = \frac{1}{EI}\left(\frac{M_BL^2}{2} + \frac{R_BL^3}{3} - \frac{qL^4}{8}\right) = 0$$</div>
+      <p>Resolvendo: da 1ª, $M_B = qL^2/6 - R_BL/2$; na 2ª, $\frac{qL^4}{12} - \frac{R_BL^3}{4} + \frac{R_BL^3}{3} - \frac{qL^4}{8} = 0 \Rightarrow R_B = \frac{qL}{2}$ e $M_B = -\frac{qL^2}{12}$.</p></div>
+
+    <div class="step" data-n="6"><h4>Caminho 2: com simetria, uma equação</h4>
+      <div class="math-box">$$M(s) = M_B + \frac{qL}{2}s - \frac{qs^2}{2}\ \Rightarrow\ \frac{\partial U^*}{\partial M_B} = \frac1{EI}\left(M_BL + \frac{qL^3}{4} - \frac{qL^3}{6}\right) = 0\ \Rightarrow\ M_B = -\frac{qL^2}{12}$$</div>
+      <p>Mesmo resultado em metade das contas. Sinal negativo: os engastes tracionam as fibras de cima (momento negativo).</p></div>
+
+    <div class="step" data-n="7"><h4>Esforços e diagramas</h4>
+      <p>Com $x$ a partir de A (por simetria, tanto faz):</p>
+      <div class="math-box">$$V(x) = q\left(\frac{L}{2} - x\right)\qquad M(x) = -\frac{q}{12}\left(L^2 - 6Lx + 6x^2\right)$$
+      $$M(0) = M(L) = -\frac{qL^2}{12}\qquad M\!\left(\tfrac L2\right) = +\frac{qL^2}{24}\qquad M = 0\ \text{em}\ x = L\left(\tfrac12 \pm \tfrac{\sqrt3}{6}\right) = 0{,}211L\ \text{e}\ 0{,}789L$$</div>
+      <p>Diagrama de $V$: reta de $+qL/2$ a $-qL/2$, zero no meio. Diagrama de $M$: parábola com $-qL^2/12$ nas pontas e $+qL^2/24$ no meio (onde $V = 0$). O máximo em módulo é o do engaste, o dobro do do meio.</p></div>
+
+    <div class="step" data-n="8"><h4>Linha elástica: força fictícia $F$ (para baixo) em $\xi$</h4>
+      <p>Mantendo $s$ a partir de B e $\xi$ também medido de B. Para $s < \xi$ o trecho entre B e o corte não contém $F$; para $s > \xi$ contém:</p>
+      <div class="math-box">$$M_1 = M(s)\ (0 \le s \le \xi),\qquad M_2 = M(s) - F(s - \xi)\ (\xi \le s \le L),\qquad \frac{\partial M_2}{\partial F} = -(s-\xi)$$
+      $$v(\xi) = \left.\frac{\partial U^*}{\partial F}\right|_{F=0} = \frac{1}{EI}\int_\xi^L\left[-\frac{q}{12}\left(L^2 - 6Ls + 6s^2\right)\right]\left[-(s - \xi)\right]ds = \boxed{\frac{q\,\xi^2(L-\xi)^2}{24EI}}\ (\text{para baixo})$$</div>
+      <p>As incógnitas $R_B$ e $M_B$ ficam com os valores já achados (justificativa no passo 10 do <a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a>: $\partial U^*/\partial X = 0$ anula o termo da derivada delas). Conferi em Python as duas formas, com e sem esse atalho: dão o mesmo $v(\xi)$.</p>
+      <div class="math-box">$$v_{máx} = v\!\left(\tfrac L2\right) = \frac{qL^4}{384EI}\qquad \theta(x) = \frac{dv}{dx} = \frac{q\,x(L-x)(L-2x)}{12EI}\ \ (\text{inclinação, com }v\text{ para baixo})$$</div>
+      <p>A inclinação é zero nas pontas (engaste, confere) e no meio (simetria, confere).</p></div>
+
+    <div class="step-part">Parte 3 · Verificação</div>
+
+    <div class="step" data-n="9"><h4>Comparação com o livro e com a viga biapoiada</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Grandeza</th><th>Energia</th><th>Gere (eq. diferencial)</th><th></th></tr></thead><tbody>
+        <tr><td>$R_A = R_B$</td><td>$qL/2$</td><td>$qL/2$</td><td><span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$M_A = M_B$</td><td>$qL^2/12$ (traciona em cima)</td><td>$qL^2/12$</td><td><span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$v(x)$</td><td>$qx^2(L-x)^2/24EI$</td><td>$qx^2(L-x)^2/24EI$</td><td><span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$v_{máx}$</td><td>$qL^4/384EI$</td><td>$qL^4/384EI$</td><td><span class="badge badge-ok">bate</span></td></tr>
+      </tbody></table></div>
+      <p><strong>Efeito dos engastes:</strong> a biapoiada tem $v_{máx} = 5qL^4/384EI$ e $M_{máx} = qL^2/8$. Engastar as pontas divide a flecha por 5 e o momento máximo cai de $qL^2/8$ para $qL^2/12$ (−33%). Repare que a soma $qL^2/12 + qL^2/24 = qL^2/8$: os engastes só "sobem" o diagrama da biapoiada. Isso vale sempre: o momento de engaste é uma linha de fecho somada ao diagrama isostático.</p>
+      <div class="answer"><strong>Respostas:</strong> $R_A = R_B = qL/2$; $M_A = M_B = qL^2/12$ (tracionando em cima); $V(x) = q(L/2 - x)$; $M(x) = -q(L^2 - 6Lx + 6x^2)/12$; $v(x) = qx^2(L-x)^2/24EI$ (para baixo); $\theta(x) = qx(L-x)(L-2x)/12EI$; $v_{máx} = qL^4/384EI$. <span class="badge badge-ok">bate com o Gere</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Só impor $\partial U^*/\partial R_B = 0$ e esquecer o engaste em rotação: com $M_B$ livre a viga vira engastada-apoiada e a resposta seria $R_B = 3qL/8$.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Na linha elástica, pôr $F$ nos dois trechos: o trecho entre B e $\xi$ não "vê" a força.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício</span>
+      <ul><li>Cada vínculo liberado gera uma equação $\partial U^*/\partial X_j = 0$; engaste liberado = duas (força e binário).</li>
+          <li>Use a simetria para descobrir reações antes da energia.</li>
+          <li>Força fictícia em posição genérica $\xi$ = linha elástica por energia (H2).</li>
+          <li>Memorizar: biengastada com $q$: $qL^2/12$ nas pontas, $qL^2/24$ no meio, $v_{máx} = qL^4/384EI$.</li></ul></div>
+  </article>
+<article class="ex pivo" id="s17-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · Ex.1 = Gere exemplo 10-6 · Pivô da P2</div>
+      <h3 id="s17-ex1-h" data-nav="A17 ex.1 · viga com cabo" data-pivo>Viga com balanço sustentada por um cabo: a incógnita é um esforço interno</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">W1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Gere & Goodno 7ª ed., exemplo 10-6, p.682; figuras nos slides 18–19 da aula 17)</span>
+      Uma viga ABC repousa sobre suportes simples nos pontos A e B e é suportada por um cabo no ponto C. A viga tem um comprimento total de $2L$ ($AB = BC = L$) e sustenta um carregamento uniforme de intensidade $q$. Antes da aplicação do carregamento uniforme, não há força no cabo nem há qualquer afrouxamento. Quando o carregamento uniforme é aplicado, a viga deflete para baixo no ponto C e uma força de tração $T$ se desenvolve no cabo. Encontre a intensidade dessa força. (Viga com rigidez $E_bI_b$; cabo CD de comprimento $h$ e rigidez axial $E_cA_c$.)</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 1):</strong> ver o PDF oficial, Slides aula 17, p. 18; Slides aula 17, p. 19 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Até aqui a incógnita hiperestática era uma reação de apoio. Aqui ela é a <strong>tração no cabo</strong>, um esforço <em>interno</em>. O raciocínio é o mesmo, mas o "deslocamento correspondente" muda de natureza: para um par de forças internas, ele é o <strong>afastamento relativo</strong> entre as duas faces do corte. Três conceitos sustentam a solução: energia da barra (<a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>), energia da flexão (<a href="11-energia-na-flexao.html">ficha 11 (Energia na flexão)</a>) e Crotti-Engesser aplicado a um par de forças (<a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>).</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Grau de hiperestaticidade da estrutura viga + cabo</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. A estrutura ABCD tem reações em A (fixo: 2), B (móvel: 1) e D (o cabo preso ao teto: 1, vertical). São 4 reações para 3 equações: $g = 1$. Sem carga horizontal, $H_A = 0$; restam 3 reações verticais ($V_A$, $V_B$, $V_D$) e só 2 equações úteis ($\sum F_y$, $\sum M$). O Gere diz exatamente isso.</p></div>
+
+    <div class="step" data-n="2"><h4>Cortar o cabo: a E.I.F. e o par de forças $T$</h4>
+      <p>Escolha a tração $T$ como incógnita e <strong>corte o cabo</strong> em C. A E.I.F. tem duas peças: a viga ABC biapoiada com balanço, recebendo $T$ para cima em C; e o cabo CD, preso em D e puxado por $T$ para baixo. Cada peça é isostática.</p>
+      <p>Crotti-Engesser aplicado ao <strong>par</strong> $T$ (para cima na viga, para baixo no cabo) dá a soma dos deslocamentos de cada face no sentido da sua força: $\partial U^*/\partial T = (\text{subida de C na viga}) + (\text{descida da ponta do cabo})$. Isso é o quanto as duas faces se <em>sobrepõem</em>. Como na estrutura real elas continuam coladas,</p>
+      <div class="math-box">$$\frac{\partial U^*}{\partial T} = 0\qquad\text{(compatibilidade: a ponta do cabo acompanha a viga em C)}$$</div></div>
+
+    <div class="step" data-n="3"><h4>A energia do cabo não pode faltar</h4>
+      <p>Ficha: <a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. O cabo só tem força normal, constante: $U^*_{cabo} = \dfrac{T^2h}{2E_cA_c}$. É o caso clássico de <strong>elemento de esforço único</strong> (aula 14): desprezá-lo equivale a supor o cabo inextensível ($E_cA_c \to \infty$), e a resposta passaria a ser a de um apoio rígido em C.</p></div>
+
+    <div class="step" data-n="4"><h4>Esforços na viga em função de $q$ e $T$</h4>
+      <p>Revisão: <a href="01-esforcos-solicitantes.html">ficha 01 (Esforços solicitantes)</a>. Com $T$ como carga conhecida, as reações da viga saem do equilíbrio. Momentos em B (a resultante $2qL$ passa por B, o meio de AC):</p>
+      <div class="math-box">$$-V_A L + T L = 0\ \Rightarrow\ V_A = T\qquad V_B = 2qL - 2T$$</div>
+      <p>Coordenadas: em AB, $x$ a partir de A; em CB, $s$ a partir de C. $M$ positivo tracionando embaixo:</p>
+      <div class="math-box">$$\text{AB}:\ M = Tx - \frac{qx^2}{2},\quad \frac{\partial M}{\partial T} = x\qquad\qquad \text{CB}:\ M = Ts - \frac{qs^2}{2},\quad \frac{\partial M}{\partial T} = s$$</div>
+      <p>Repare que os dois trechos têm a mesma forma: a viga é "simétrica" em relação a B no esquema de esforços, porque $V_A = T$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span>
+      <ul>
+        <li>Viga e cabo elástico-lineares; viga esbelta (cortante e normal desprezadas na viga).</li>
+        <li><strong>Cabo inicialmente justo</strong>: "antes da aplicação do carregamento não há força no cabo nem afrouxamento". Com folga inicial, o problema teria duas fases (antes e depois de o cabo esticar) e deixaria de ser linear, como as barras com folga da <a href="09-trabalho-e-energia.html#l5-ex4-h">ficha 09 (Trabalho, energia e P.T.E.)</a>.</li>
+        <li><strong>Cabo só traciona.</strong> O resultado precisa sair $T > 0$; se saísse negativo, o cabo afrouxaria e a estrutura seria outra.</li>
+        <li>Linearidade geométrica: $T$ continua vertical (C desce pouco frente a $h$).</li>
+      </ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="5"><h4>Energia e compatibilidade</h4>
+      <div class="math-box">$$U^* = \int_0^L\frac{M_{AB}^2}{2E_bI_b}dx + \int_0^L\frac{M_{CB}^2}{2E_bI_b}ds + \frac{T^2h}{2E_cA_c}$$
+      $$\frac{\partial U^*}{\partial T} = \frac{2}{E_bI_b}\int_0^L\left(Tx - \frac{qx^2}{2}\right)x\,dx + \frac{Th}{E_cA_c} = \frac{2}{E_bI_b}\left(\frac{TL^3}{3} - \frac{qL^4}{8}\right) + \frac{Th}{E_cA_c} = 0$$</div>
+      <p>Lendo os termos como no Gere: $-\frac{qL^4}{4E_bI_b}$ é a flecha de C sob $q$ (para baixo), $+\frac{2TL^3}{3E_bI_b}$ é quanto $T$ levanta C, e $\frac{Th}{E_cA_c}$ é o alongamento do cabo. A equação diz: <em>a descida de C na viga é igual ao alongamento do cabo</em>.</p>
+      <div class="math-box">$$T\left(\frac{2L^3}{3E_bI_b} + \frac{h}{E_cA_c}\right) = \frac{qL^4}{4E_bI_b}\ \Rightarrow\ \boxed{T = \frac{3qL^4E_cA_c}{8L^3E_cA_c + 12hE_bI_b}}$$</div></div>
+
+    <div class="step" data-n="6"><h4>Reações e deslocamento de C</h4>
+      <div class="math-box">$$V_A = T\ (\uparrow)\qquad V_B = 2qL - 2T\ (\uparrow)\qquad \delta_C = \frac{Th}{E_cA_c} = \frac{3qL^4h}{8L^3E_cA_c + 12hE_bI_b}\ (\downarrow)$$</div></div>
+
+    <div class="step-part">Parte 3 · Verificação</div>
+
+    <div class="step" data-n="7"><h4>Casos-limite e conferência com o livro</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$T$</th><th>Leitura</th></tr></thead><tbody>
+        <tr><td>Cabo rígido ($E_cA_c \to \infty$)</td><td>$3qL/8$</td><td>apoio rígido em C: viga contínua de dois vãos iguais, reações $3qL/8$, $10qL/8$, $3qL/8$ <span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>Cabo muito flexível ($E_cA_c \to 0$) ou muito longo ($h \to \infty$)</td><td>$0$</td><td>sem cabo: $V_A = 0$, $V_B = 2qL$ (o balanço equilibra o vão)</td></tr>
+      </tbody></table></div>
+      <p>A expressão coincide com a equação (10.34) do Gere (verificado simbolicamente em <code>calc_aula17.py</code>). Como $T > 0$ sempre, a hipótese "cabo tracionado" se confirma para quaisquer rigidezes. <strong>Molas em série de novo</strong>: a ponta C da viga é uma mola de rigidez $3E_bI_b/2L^3$, e o cabo outra, de rigidez $E_cA_c/h$.</p>
+      <div class="answer"><strong>Resposta:</strong> $T = \dfrac{3qL^4E_cA_c}{8L^3E_cA_c + 12hE_bI_b}$; $V_A = T$; $V_B = 2qL - 2T$. <span class="badge badge-ok">bate com o Gere (eq. 10.34)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer $T^2h/2E_cA_c$: dá $T = 3qL/8$, a resposta de cabo rígido.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $M$ em AB a partir de B: aparece $V_B$, que depende de $T$; partir de A ($V_A = T$) é mais limpo.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício</span>
+      <ul><li>A incógnita pode ser um esforço interno: corte o elemento; $\partial U^*/\partial T$ é o deslocamento relativo das faces do corte, e vale zero.</li>
+          <li>Cabos, tirantes e molas entram em $U^*$ sempre.</li>
+          <li>Feche com os casos-limite (cabo rígido, cabo ausente) e com o sinal (cabo só traciona).</li></ul></div>
+  </article>
+<article class="ex pivo" id="a6">
+    <div class="ex-head"><div><div class="ex-kicker">Exercício em grupo #06 (07/10/2026) · Pivô da P2</div>
+      <h3 id="a6-h" data-nav="#06 · rótula com mola de torção" data-pivo>Viga com rótula e mola de torção: rotação de um lado e flecha no nó</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">sem gabarito oficial</span></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">C2</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Atividade #06, p.1)</span>
+      A estrutura indicada na figura é formada por duas barras (AB e BC), de mesma rigidez flexional $EI$ e de mesmo comprimento $L$. No ponto de ligação entre as barras há uma articulação ideal e uma mola de torção, com comportamento linear e constante $k_t$. Na configuração de referência, os eixos centrais das duas barras estão na horizontal e a mola de torção está descarregada. A seção "A" está engastada e a seção "C" está simplesmente apoiada. Considerando que um carregamento uniformemente distribuído de intensidade $q$ atua sobre as barras AB e BC, e admitindo que $k_t = 0{,}2EI/L$, determine:
+      <ol type="a"><li>O diagrama de corpo livre final da estrutura;</li>
+      <li>A rotação do eixo central da viga AB, calculada em B ($\theta_{e,B}$), em função de $q$, $EI$ e $L$;</li>
+      <li>O deslocamento vertical em B ($\delta_{v,B}$), em função de $q$, $EI$ e $L$.</li></ol>
+      Obs: Despreze as parcelas da energia complementar nas vigas devidas às forças cortantes.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Exercício em grupo #06 · ex. 1):</strong> ver o PDF oficial, Exercício em grupo #06, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>É o <a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a> com a mola trocada de lugar e de tipo: em vez de uma mola de força no apoio, uma <strong>mola de torção dentro da estrutura</strong>. Três perguntas a responder antes de calcular: (1) a rótula com mola cria ou não uma equação extra? (2) qual é a energia de uma mola de torção? (3) "rotação de AB em B" é diferente de "rotação de BC em B"?</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Rótula pura × rótula com mola × ligação rígida</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a> e <a href="01-esforcos-solicitantes.html">ficha 01 (Esforços solicitantes)</a>. Reações: engaste A ($H_A$, $V_A$, $M_A$) e apoio C ($V_C$) = 4; equações globais = 3.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ligação em B</th><th>Condição em B</th><th>Equações</th><th>$g$</th></tr></thead><tbody>
+        <tr><td>Rótula pura</td><td>$M_B = 0$ (equação a mais)</td><td>3 + 1</td><td>0 (isostática)</td></tr>
+        <tr><td><strong>Rótula com mola de torção</strong></td><td>$M_B = k_t\,\Delta\theta$ (relação constitutiva, não equilíbrio)</td><td>3</td><td><strong>1</strong></td></tr>
+        <tr><td>Ligação rígida</td><td>$\Delta\theta = 0$</td><td>3</td><td>1</td></tr>
+      </tbody></table></div>
+      <p>A mola não dá equação de equilíbrio: ela liga o momento a uma <em>deformação</em> ($\Delta\theta$, a rotação relativa entre as barras). Por isso a estrutura é uma vez hiperestática, e os dois extremos ($k_t \to 0$ e $k_t \to \infty$) servem de conferência.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia complementar da mola de torção</h4>
+      <p>Mesmo gráfico do <a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>, trocando força por momento e deslocamento por rotação: mola linear $\Delta\theta = M/k_t$, logo</p>
+      <div class="math-box">$$U^*_{mola} = \int_0^{M_B}\Delta\theta\,dM = \frac{M_B^2}{2k_t}$$</div>
+      <p>É o análogo exato de $F^2/2k$ e de $T^2L/2GI_p$ (<a href="10-energia-na-torcao.html">ficha 10 (Energia na torção)</a>): esforço ao quadrado sobre duas vezes a rigidez. O momento na mola é o momento fletor que passa de uma barra à outra em B.</p></div>
+
+    <div class="step" data-n="3"><h4>Duas rotações em B</h4>
+      <p>A rótula deixa as barras girarem de modos diferentes: a viga AB chega a B com uma inclinação $\theta_{e,B}$ e a BC sai de B com outra. A diferença é a rotação relativa da mola, $\Delta\theta = M_B/k_t$. O deslocamento vertical, porém, é o mesmo dos dois lados (a rótula transmite cortante e mantém as barras ligadas). Por isso o enunciado especifica "rotação do eixo central da viga <strong>AB</strong>". Na carga fictícia (<a href="12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>), o binário tem de ser aplicado na face de AB.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span>
+      <ul>
+        <li>Barras elástico-lineares com o mesmo $EI$; energia da cortante desprezada (pedido do enunciado); sem força normal ($H_A = 0$).</li>
+        <li>Mola de torção linear, <strong>descarregada na configuração de referência</strong> (sem momento inicial) e articulação ideal (sem atrito).</li>
+        <li>Linearidade geométrica; apoio C rígido.</li>
+      </ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>E.I.F. e esforços</h4>
+      <p>Incógnita: $V_C$ (para cima). E.I.F.: tira o apoio C, sobra o balanço A–B–C com mola em B. Coordenadas a partir da ponta livre: $s$ de C para B, $u$ de B para A. $M$ positivo tracionando embaixo:</p>
+      <div class="math-box">$$\text{CB}:\ M = V_Cs - \frac{qs^2}{2}\qquad \text{mola}:\ M_B = V_CL - \frac{qL^2}{2}\qquad \text{BA}:\ M = V_C(L+u) - \frac{q(L+u)^2}{2}$$
+      $$\frac{\partial M}{\partial V_C} = s\ (\text{CB}),\qquad \frac{\partial M_B}{\partial V_C} = L,\qquad \frac{\partial M}{\partial V_C} = L + u\ (\text{BA})$$</div></div>
+
+    <div class="step" data-n="5"><h4>Compatibilidade em C</h4>
+      <div class="math-box">$$\frac{\partial U^*}{\partial V_C} = \frac1{EI}\int_0^L\!\left(V_Cs - \frac{qs^2}{2}\right)s\,ds + \frac1{EI}\int_L^{2L}\!\left(V_Ct - \frac{qt^2}{2}\right)t\,dt + \frac{M_B\,L}{k_t} = 0\qquad(t = L+u)$$
+      $$= \frac{1}{EI}\left[\frac{V_CL^3}{3} - \frac{qL^4}{8} + \frac{7V_CL^3}{3} - \frac{15qL^4}{8}\right] + \frac{L}{k_t}\left(V_CL - \frac{qL^2}{2}\right) = 0$$</div>
+      <p>Os dois integrais de viga juntos são os de um balanço de $2L$ ($\frac{8V_CL^3}{3} - 2qL^4$, sobre $EI$): sem a mola, a resposta seria a da engastada-apoiada. Com $\dfrac{L}{k_t} = \dfrac{5L^2}{EI}$:</p>
+      <div class="math-box">$$\frac{8V_CL^3}{3} - 2qL^4 + 5V_CL^3 - \frac{5qL^4}{2} = 0\ \Rightarrow\ \frac{23}{3}V_C = \frac92 qL\ \Rightarrow\ \boxed{V_C = \frac{27}{46}qL \approx 0{,}587\,qL}$$</div>
+      <p>Forma geral (conferida em Python): $V_C = \dfrac{3qL\,(EI + 4Lk_t)}{2\,(3EI + 8Lk_t)}$.</p></div>
+
+    <div class="step" data-n="6"><h4>a) D.C.L. final</h4>
+      <div class="math-box">$$H_A = 0\qquad V_C = \frac{27}{46}qL\ (\uparrow)\qquad V_A = 2qL - V_C = \frac{65}{46}qL \approx 1{,}413\,qL\ (\uparrow)$$
+      $$M_A = 2qL^2 - 2LV_C = \frac{19}{23}qL^2 \approx 0{,}826\,qL^2\ (\text{anti-horário})$$
+      $$\text{mola: } M_B = V_CL - \frac{qL^2}{2} = \frac{2}{23}qL^2\ (\text{traciona embaixo}),\qquad \Delta\theta = \frac{M_B}{k_t} = \frac{10\,qL^3}{23\,EI}$$</div>
+      <p>$M_A$: em torno de A, a carga $2qL$ (resultante em B) gira $2qL^2$ no horário e $V_C$ gira $2LV_C$ no anti-horário; o engaste fecha com $\frac{19}{23}qL^2$ anti-horário. No D.C.L. da estrutura inteira entram $q$ nos dois trechos, $V_A$, $M_A$ e $V_C$; o momento da mola é interno e aparece só se a estrutura for separada em B.</p></div>
+
+    <div class="step" data-n="7"><h4>b) Rotação de AB em B: binário fictício na face de AB</h4>
+      <p>Pelo 7º passo da aula 17, basta a barra AB com as ações que BC lhe transmite em B: força para baixo $qL - V_C = \frac{19}{46}qL$ e o momento da mola $M_B = \frac{2}{23}qL^2$. Escrevendo a partir de B ($u$ até A), com binário fictício $M_0$ anti-horário na ponta B de AB:</p>
+      <div class="math-box">$$M(u) = M_0 + \frac{2}{23}qL^2 - \frac{19}{46}qL\,u - \frac{qu^2}{2},\qquad \frac{\partial M}{\partial M_0} = 1$$
+      $$\theta_{e,B} = \frac1{EI}\int_0^L\left(\frac{2}{23}qL^2 - \frac{19}{46}qLu - \frac{qu^2}{2}\right)du = \frac{qL^3}{EI}\left(\frac{2}{23} - \frac{19}{92} - \frac16\right) = \boxed{-\frac{79}{276}\frac{qL^3}{EI} \approx -0{,}286\,\frac{qL^3}{EI}}$$</div>
+      <p>Negativo: o eixo de AB gira em B no sentido <strong>horário</strong> (desce em direção a B), como esperado para uma viga carregada para baixo. Conferência por tabela de balanço: $-\frac{qL^3}{6EI} - \frac{(19qL/46)L^2}{2EI} + \frac{(2qL^2/23)L}{EI}$, o mesmo valor.</p></div>
+
+    <div class="step" data-n="8"><h4>c) Flecha em B: força fictícia</h4>
+      <p>Força fictícia $F$ para baixo em B: $\partial M/\partial F = -u$ no trecho BA (e zero em CB e na mola, porque $V_C$ está fixado):</p>
+      <div class="math-box">$$\delta_{v,B} = -\frac1{EI}\int_0^L\left(\frac{2}{23}qL^2 - \frac{19}{46}qLu - \frac{qu^2}{2}\right)u\,du = \frac{qL^4}{EI}\left(-\frac{1}{23} + \frac{19}{138} + \frac18\right) = \boxed{\frac{121}{552}\frac{qL^4}{EI} \approx 0{,}219\,\frac{qL^4}{EI}\ (\downarrow)}$$</div>
+      <p>Aqui tanto faz aplicar $F$ na face de AB ou de BC: o deslocamento vertical é o mesmo dos dois lados da rótula.</p></div>
+
+    <div class="step-part">Parte 3 · Verificação</div>
+
+    <div class="step" data-n="9"><h4>Casos-limite e coerência</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$k_t$</th><th>$V_C$</th><th>Confere com</th></tr></thead><tbody>
+        <tr><td>$\to 0$ (rótula pura)</td><td>$qL/2$</td><td>BC biapoiada entre a rótula e C: cada apoio leva metade <span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$0{,}2EI/L$ (dado)</td><td>$27qL/46 = 0{,}587qL$</td><td>entre os dois extremos</td></tr>
+        <tr><td>$\to \infty$ (ligação rígida)</td><td>$3qL/4$</td><td>engastada-apoiada de vão $2L$: $3q(2L)/8$ <span class="badge badge-ok">bate</span></td></tr>
+      </tbody></table></div>
+      <p><strong>Rotação do lado BC</strong> (aprofundamento): $\theta_{BC,B} = \theta_{e,B} + \Delta\theta = -\frac{79}{276} + \frac{120}{276} = +\frac{41}{276}\frac{qL^3}{EI}$ (anti-horário). As duas barras formam um "V" em B, aberto para cima, e a mola, tracionando as fibras de baixo ($M_B > 0$), resiste a essa dobra. Sinais coerentes.</p>
+      <p><strong>Sem gabarito oficial:</strong> conferido por dois caminhos (energia e tabela de balanço) e pelos dois casos-limite, em <code>_build/calc/calc_aula17.py</code>.</p>
+      <div class="answer"><strong>Respostas:</strong> a) $V_C = \frac{27}{46}qL$ ↑, $V_A = \frac{65}{46}qL$ ↑, $M_A = \frac{19}{23}qL^2$ (anti-horário), $H_A = 0$; momento na mola $\frac{2}{23}qL^2$. b) $\theta_{e,B} = -\frac{79}{276}\frac{qL^3}{EI}$ (horário). c) $\delta_{v,B} = \frac{121}{552}\frac{qL^4}{EI}$ ↓.</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Tratar a rótula com mola como rótula pura ($M_B = 0$): dá $V_C = qL/2$ e uma estrutura isostática errada.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer $M_B^2/2k_t$: equivale a soldar as barras ($V_C = 3qL/4$).</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Aplicar o binário fictício "no nó B" sem dizer de que lado: com mola, as rotações dos dois lados diferem.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício</span>
+      <ul><li>Mola de torção: $U^* = M^2/2k_t$; não gera equação de equilíbrio, só energia.</li>
+          <li>Rótula: flecha contínua, rotação descontínua ($\Delta\theta = M_B/k_t$).</li>
+          <li>Casos-limite $k_t \to 0$ e $\to \infty$ conferem qualquer resposta com mola.</li></ul></div>
+  </article>
+<h3 class="sub" id="t13-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="s17-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · Ex.3 = Gere 10.4-3</div>
+      <h3 id="s17-ex3-h" data-nav="A17 ex.3 · engastada-apoiada com balanço">Viga engastada, apoiada no meio e com balanço: quando o engaste puxa para baixo</h3></div>
+      <div class="ex-badges"></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">C2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (Gere & Goodno, prob. 10.4-3; figura no slide 21 da aula 17)</span>
+      Uma viga engastada em A, de comprimento total $2L$, com apoio simples em B (a uma distância $L$ de A) e balanço BC de comprimento $L$, suporta uma carga uniformemente distribuída de intensidade $q$ em todo o comprimento. Determine todas as reações e desenhe os diagramas de força cortante e de momento fletor, indicando as ordenadas críticas.
+      <br><em>O livro pede o método da superposição; a aula pede energia. Extensão nossa: a flecha na ponta C.</em></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 3):</strong> ver o PDF oficial, Slides aula 17, p. 21 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Roteiro (mesmos passos do <a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a>)</span>
+      <p>Novidade: a incógnita fica <strong>no meio</strong> da E.I.F., então $M$ tem dois trechos e só o trecho entre B e A "vê" $R_B$. E o resultado surpreende: a reação vertical do engaste aponta <strong>para baixo</strong>.</p></div>
+
+    <div class="step" data-n="1"><h4>Grau, E.I.F. e esforços</h4>
+      <p>Reações: $H_A$, $V_A$, $M_A$ e $R_B$ = 4; equações 3; sem carga horizontal, $H_A = 0$ ⇒ $g = 1$. E.I.F.: tira o apoio B, sobra um balanço de comprimento $2L$ engastado em A, com $R_B$ (para cima) em B. Revisão de esforços em balanço: <a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>.</p>
+      <p>$s$ medido a partir da ponta livre C (assim o engaste nunca entra); $M$ positivo tracionando embaixo:</p>
+      <div class="math-box">$$\text{CB }(0\le s\le L):\ M = -\frac{qs^2}{2}\qquad \text{BA }(L\le s\le 2L):\ M = -\frac{qs^2}{2} + R_B(s-L)$$
+      $$\frac{\partial M}{\partial R_B} = 0\ \text{em CB},\qquad \frac{\partial M}{\partial R_B} = s - L\ \text{em BA}$$</div>
+      <p><strong>Por que o trecho CB não entra na derivada?</strong> Mudar $R_B$ não muda o momento no balanço CB (o pedaço entre C e o corte não contém B). Por isso só se integra de $L$ a $2L$. Ter isso claro economiza metade da conta na prova.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Elástico-linear, $EI$ constante, viga esbelta (cortante desprezada), linearidade geométrica.</li>
+          <li>Apoio B rígido e <strong>bilateral</strong>: ele segura a viga tanto para cima quanto para baixo. Aqui a reação sai para cima, então um apoio só de contato também serviria. Já o engaste A precisa puxar para baixo (passo 3).</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Compatibilidade: flecha em B nula</h4>
+      <div class="math-box">$$\frac{\partial U^*}{\partial R_B} = \frac{1}{EI}\int_L^{2L}\left[-\frac{qs^2}{2} + R_B(s-L)\right](s-L)\,ds = \frac1{EI}\left[-\frac{17qL^4}{24} + \frac{R_BL^3}{3}\right] = 0\ \Rightarrow\ \boxed{R_B = \frac{17qL}{8}}$$</div>
+      <p>Conta da primeira integral: $\int_L^{2L}(s^3 - Ls^2)\,ds = \frac{15L^4}{4} - \frac{7L^4}{3} = \frac{17L^4}{12}$, vezes $-q/2$. Leitura de superposição (o método do Gere): $\frac{17qL^4}{24EI}$ é a flecha em B do balanço de $2L$ sob $q$, e $\frac{R_BL^3}{3EI}$ é o quanto $R_B$ levanta B.</p></div>
+
+    <div class="step" data-n="3"><h4>Demais reações: o engaste puxa para baixo</h4>
+      <div class="math-box">$$V_A = 2qL - R_B = -\frac{qL}{8}\ (\text{ou seja, }qL/8\text{ para baixo})\qquad M_A = \frac{qL^2}{8}\ (\text{horário})$$</div>
+      <p>Momento em torno de A: a carga total $2qL$, com resultante em B (no meio de AC), gira $2qL\cdot L = 2qL^2$ no sentido horário; $R_B$ gira $\frac{17}{8}qL^2$ no anti-horário. Sobra $\frac{qL^2}{8}$ anti-horário das cargas, e o engaste reage no <strong>horário</strong>.</p>
+      <p><strong>Por que $V_A$ é para baixo?</strong> O balanço BC empurra a ponta C para baixo e, girando em torno de B como numa gangorra, tende a <em>levantar</em> o trecho AB. O engaste segura. A carga sobre AB não basta para compensar, porque o balanço tem o mesmo comprimento do vão. Com um balanço curto, $V_A$ voltaria a ser para cima.</p></div>
+
+    <div class="step" data-n="4"><h4>Diagramas e ordenadas críticas</h4>
+      <p>Com $x$ a partir de A ($x = 2L - s$):</p>
+      <div class="math-box">$$\text{AB}:\ V = -\frac{qL}{8} - qx,\qquad M = \frac{qL^2}{8} - \frac{qL}{8}x - \frac{qx^2}{2}\qquad \text{BC}:\ V = q(2L - x),\qquad M = -\frac{q(2L-x)^2}{2}$$</div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ponto</th><th>$V$</th><th>$M$</th></tr></thead><tbody>
+        <tr><td>A ($x = 0$)</td><td>$-qL/8$</td><td>$+qL^2/8$ (traciona embaixo)</td></tr>
+        <tr><td>$M = 0$</td><td>—</td><td>$x = 0{,}390L$</td></tr>
+        <tr><td>B à esquerda</td><td>$-9qL/8$</td><td>$-qL^2/2$</td></tr>
+        <tr><td>B à direita</td><td>$+qL$</td><td>$-qL^2/2$</td></tr>
+        <tr><td>C</td><td>0</td><td>0</td></tr>
+      </tbody></table></div>
+      <p>O salto de $V$ em B é $qL + 9qL/8 = 17qL/8 = R_B$ (confere). Em AB, $V$ não muda de sinal, então não há máximo local de $M$ dentro do trecho (o ponto onde $dM/dx = 0$ cairia em $x = -L/8$, fora da viga). <strong>$|M|_{máx} = qL^2/2$ em B</strong>, imposto pelo balanço e independente da hiperestaticidade.</p></div>
+
+    <div class="step" data-n="5"><h4>Extensão: flecha na ponta C</h4>
+      <p>Força fictícia $F$ para baixo em C: $\partial M/\partial F = -s$ nos dois trechos. Com $R_B$ já conhecido:</p>
+      <div class="math-box">$$\delta_C = \frac{1}{EI}\left[\int_0^L\left(-\frac{qs^2}{2}\right)(-s)\,ds + \int_L^{2L}\left(-\frac{qs^2}{2} + \frac{17qL}{8}(s-L)\right)(-s)\,ds\right] = \frac{11qL^4}{48EI}\ (\text{para baixo})$$</div>
+      <p>Sem o apoio B, o balanço de $2L$ teria $q(2L)^4/8EI = 2qL^4/EI$, quase 9 vezes mais.</p>
+      <div class="answer"><strong>Respostas:</strong> $R_B = 17qL/8$ ↑; $V_A = qL/8$ ↓; $M_A = qL^2/8$ (horário); $H_A = 0$; $|M|_{máx} = qL^2/2$ em B. Extensão: $\delta_C = 11qL^4/48EI$ ↓. <span class="badge badge-ok">bate com o Gere</span> (manual de soluções: $R_B = 17qL/8$, $R_A = -qL/8$, $M_A = -qL^2/8$ na convenção da figura).</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Integrar $\partial M/\partial R_B$ em toda a viga: no trecho CB ela é zero.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> "Corrigir" o sinal negativo de $V_A$. Ele é físico: o balanço levanta o vão.</li></ul></div>
+  </article>
+<article class="ex" id="s17-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · Ex.4 = Gere 10.4-13 (8ª ed.: 10.4-17)</div>
+      <h3 id="s17-ex4-h" data-nav="A17 ex.4 · viga sobre viga">Viga engastada apoiada sobre outra viga: a segunda viga é uma mola</h3></div>
+      <div class="ex-badges"></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Gere & Goodno 7ª ed., prob. 10.4-13; figura no slide 22 da aula 17)</span>
+      Uma viga ABC está engastada na extremidade A e suportada pela viga DE no ponto B (veja a figura). Ambas as vigas têm a mesma seção transversal e são feitas do mesmo material. (a) Determine todas as reações devidas ao carregamento $P$. (b) Qual é o momento fletor numericamente maior em ambas as vigas?
+      <br>Cotas da figura: A, D, B, E e C espaçados de $L/4$ (AB = BC = $L/2$; DE = $L/2$ com B no meio; $P$ para baixo em C).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 4):</strong> ver o PDF oficial, Slides aula 17, p. 22 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Roteiro</span>
+      <p>Mesma lógica do cabo (<a href="13-hiperestaticas-energia.html#s17-ex1-h">ficha 13 (Hiperestáticas e linha elástica)</a>): a incógnita é a força de contato $R_B$ entre as vigas (interna ao sistema). A energia da viga DE entra em $U^*$, e ela se comporta exatamente como uma mola de rigidez $k = 48EI/(L/2)^3$, como no <a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a>.</p></div>
+
+    <div class="step" data-n="1"><h4>Grau e E.I.F.</h4>
+      <p>Duas peças, 6 equações. Reações externas: A (3), D (2), E (1) = 6; mais a força de contato $R_B$ = 7 incógnitas. $g = 1$. E.I.F.: separa as vigas em B; $R_B$ age para cima em ABC e para baixo em DE. Compatibilidade: as duas faces em B continuam em contato, $\partial U^*/\partial R_B = 0$.</p></div>
+
+    <div class="step" data-n="2"><h4>Esforços</h4>
+      <p>Viga ABC, $s$ a partir de C; viga DE, $w$ de D até o meio (por simetria, a outra metade é igual). $M$ positivo tracionando embaixo:</p>
+      <div class="math-box">$$\text{CB }(0 \le s \le L/2):\ M = -Ps\qquad \text{BA }(L/2 \le s \le L):\ M = -Ps + R_B\left(s - \tfrac L2\right)\qquad \text{DE}:\ M = \frac{R_B}{2}w\ \ (0 \le w \le L/4)$$</div>
+      <p><strong>A viga DE como mola.</strong> Biapoiada de vão $\ell = L/2$ com carga central $R_B$: $U^*_{DE} = 2\int_0^{L/4}\frac{(R_Bw/2)^2}{2EI}dw = \frac{R_B^2L^3}{768EI} = \frac{R_B^2}{2k}$ com $k = \frac{48EI}{\ell^3} = \frac{384EI}{L^3}$. É a fórmula da flecha $P\ell^3/48EI$ da biapoiada vista como rigidez. O manual do Gere (8ª ed.) apresenta o problema exatamente assim, com a viga DE trocada por uma mola.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Mesmo $EI$ nas duas vigas; elástico-linear; cortante desprezada; linearidade geométrica.</li>
+          <li><strong>Contato em B</strong> sem folga e sem atrito, transmitindo só força vertical. Contato só empurra: o resultado precisa dar $R_B > 0$ (ABC apoiada sobre DE).</li></ul></div>
+
+    <div class="step" data-n="3"><h4>Compatibilidade</h4>
+      <div class="math-box">$$\frac{\partial U^*}{\partial R_B} = \frac1{EI}\int_{L/2}^{L}\left[-Ps + R_B\left(s - \tfrac L2\right)\right]\left(s - \tfrac L2\right)ds + \frac{R_B}{k} = \frac{1}{EI}\left[-\frac{5PL^3}{48} + \frac{R_BL^3}{24}\right] + \frac{R_BL^3}{384EI} = 0$$
+      $$\Rightarrow\ R_B\left(\frac{16 + 1}{384}\right) = \frac{40}{384}P\ \Rightarrow\ \boxed{R_B = \frac{40}{17}P \approx 2{,}35P}$$</div>
+      <p>Leitura: $\frac{5PL^3}{48EI}$ é a flecha em B do balanço ABC sob $P$; $\frac{R_BL^3}{24EI} = \frac{R_B(L/2)^3}{3EI}$ é o quanto $R_B$ levanta B; $R_B/k$ é a flecha de DE. A força de contato é <strong>maior que $P$</strong>: B funciona como fulcro de uma alavanca.</p></div>
+
+    <div class="step" data-n="4"><h4>(a) Reações</h4>
+      <div class="math-box">$$R_D = R_E = \frac{R_B}{2} = \frac{20}{17}P\ (\uparrow)\qquad V_A = P - R_B = -\frac{23}{17}P\ (\text{ou seja, }\tfrac{23}{17}P \downarrow)\qquad M_A = \frac{3}{17}PL\ (\text{horário})\qquad H_A = 0$$</div>
+      <p>$M_A$: em torno de A, $P$ gira $PL$ no horário e $R_B$ gira $\frac{40}{17}P\cdot\frac{L}{2} = \frac{20}{17}PL$ no anti-horário; sobra $\frac{3}{17}PL$ anti-horário, e o engaste reage no horário. Mesmo fenômeno do <a href="13-hiperestaticas-energia.html#s17-ex3-h">ficha 13 (Hiperestáticas e linha elástica)</a>: o balanço faz o engaste puxar para baixo.</p></div>
+
+    <div class="step" data-n="5"><h4>(b) Maior momento fletor</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção</th><th>$M$</th></tr></thead><tbody>
+        <tr><td>ABC em B</td><td>$-PL/2$ (traciona em cima) <strong>← máximo</strong></td></tr>
+        <tr><td>ABC em A</td><td>$+\frac{3}{17}PL \approx 0{,}176PL$</td></tr>
+        <tr><td>DE no meio</td><td>$\frac{R_B}{2}\cdot\frac{L}{4} = \frac{5}{17}PL \approx 0{,}294PL$</td></tr>
+      </tbody></table></div>
+      <p>$M_B = -PL/2$ só depende do balanço BC e do equilíbrio: seria o mesmo com qualquer apoio em B.</p></div>
+
+    <div class="step" data-n="6"><h4>Verificação</h4>
+      <p>Extensão: flecha em C, $\delta_C = \partial U^*/\partial P = \frac{3PL^3}{34EI}$, contra $\frac{PL^3}{3EI}$ sem a viga DE (−74%). Casos-limite da rigidez: DE infinitamente rígida ($k \to \infty$) daria $R_B = \frac{5/48}{1/24}P = \frac{5}{2}P$; DE muito flexível, $R_B \to 0$. O valor $\frac{40}{17}P = 2{,}35P$ está logo abaixo de $2{,}5P$: DE é bem mais rígida que a ponta do balanço AB.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $R_B = \frac{40}{17}P$ (contato); $R_D = R_E = \frac{20}{17}P$ ↑; $V_A = \frac{23}{17}P$ ↓; $M_A = \frac{3}{17}PL$ (horário). (b) $|M|_{máx} = PL/2$, na viga ABC em B; na DE, $\frac{5}{17}PL$. <span class="badge badge-ok">bate com o Gere</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a energia de DE: vira apoio rígido ($R_B = 5P/2$).</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Integrar DE de uma ponta à outra com $M = R_Bw/2$ sem quebrar no meio: a expressão só vale até B.</li></ul></div>
+  </article>
+<article class="ex" id="s17-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 17 · Ex.5 = Gere 10.4-21 (8ª ed.: 10.4-25)</div>
+      <h3 id="s17-ex5-h" data-nav="A17 ex.5 · pórtico em L">Pórtico em L com força horizontal: o momento "dobra a esquina"</h3></div>
+      <div class="ex-badges"></div></div>
+    <div class="ex-topics"><span class="chip">H1</span><span class="chip">W4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Gere & Goodno 7ª ed., prob. 10.4-21; figura no slide 23 da aula 17)</span>
+      A estrutura contínua ABC tem um engastamento em A, um suporte de rolete em C e uma conexão rígida de canto em B (veja a figura). Os membros AB e BC, cada um, têm comprimento $L$ e rigidez de flexão $EI$. Uma força horizontal $P$ atua na altura média do membro AB. (a) Encontre todas as reações da estrutura. (b) Qual é o maior momento fletor $M_{máx}$ na estrutura? (Observação: despreze as deformações axiais no membro AB e considere somente os efeitos da flexão.)</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 17 · ex. 5):</strong> ver o PDF oficial, Slides aula 17, p. 23 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Roteiro</span>
+      <p>Mesmos passos do <a href="13-hiperestaticas-energia.html#s17-intro-h">ficha 13 (Hiperestáticas e linha elástica)</a>, agora num pórtico (<a href="11-energia-na-flexao.html">ficha 11 (Energia na flexão)</a>: a expressão geral soma a energia barra a barra). A novidade é cinemática: numa <strong>ligação rígida de canto</strong>, o momento fletor que chega pela viga BC continua, com o mesmo valor, na coluna AB.</p></div>
+
+    <div class="step" data-n="1"><h4>Grau, E.I.F. e por que a normal é desprezada</h4>
+      <p>Reações: $H_A$, $V_A$, $M_A$ (engaste) e $V_C$ (rolete) = 4; equações 3; $g = 1$. Incógnita: $V_C$; E.I.F.: o pórtico engastado em A com a ponta C livre, recebendo $V_C$.</p>
+      <p>A coluna AB tem força normal ($V_C$ a comprime), mas o enunciado manda desprezá-la: num pórtico esbelto, $N^2/2EA$ é da ordem de $(r/L)^2$ da energia de flexão (<a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>). Não confundir com cabo ou mola, em que a normal é o <em>único</em> esforço.</p></div>
+
+    <div class="step" data-n="2"><h4>Esforços com a convenção "fibra interna"</h4>
+      <p>Num pórtico não há "embaixo" que sirva às duas barras. Convenção: $M$ positivo quando traciona a face <strong>interna</strong> do L (a de baixo em BC, a da direita em AB). Viga BC, $s$ a partir de C; coluna, $y$ medido de B para baixo:</p>
+      <div class="math-box">$$\text{BC}:\ M = V_Cs\qquad \text{AB, acima de }P\ (0 \le y \le L/2):\ M = V_CL\qquad \text{AB, abaixo de }P\ (L/2 \le y \le L):\ M = V_CL - P\left(y - \tfrac L2\right)$$</div>
+      <p>No trecho de cima da coluna o momento é constante: a única força acima do corte é $V_C$, com braço horizontal $L$ em relação a qualquer ponto da coluna. Na esquina, $M_{BC}(L) = V_CL = M_{AB}(0)$: é a continuidade da ligação rígida. A força $P$ (para a direita, braço vertical $y - L/2$) gira em sentido oposto ao de $V_C$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Elástico-linear, $EI$ igual nas duas barras; só flexão (normal e cortante desprezadas, pelo enunciado).</li>
+          <li><strong>Canto rígido</strong>: o ângulo de 90° em B se mantém (as duas barras giram juntas).</li>
+          <li>Linearidade geométrica: o braço de $P$ e de $V_C$ é medido na geometria indeformada.</li></ul></div>
+
+    <div class="step" data-n="3"><h4>Compatibilidade em C</h4>
+      <div class="math-box">$$\frac{\partial U^*}{\partial V_C} = \frac{1}{EI}\left[\int_0^L V_Cs\cdot s\,ds + \int_0^{L/2}V_CL\cdot L\,dy + \int_{L/2}^{L}\left(V_CL - P\left(y - \tfrac L2\right)\right)L\,dy\right] = 0$$
+      $$\frac{V_CL^3}{3} + V_CL^3 - \frac{PL^3}{8} = 0\ \Rightarrow\ \frac{4}{3}V_C = \frac{P}{8}\ \Rightarrow\ \boxed{V_C = \frac{3P}{32}}$$</div>
+      <p>A coluna inteira pesa $V_CL^3$ (três vezes a viga, porque nela o braço de $V_C$ é sempre $L$). Leitura do Gere: $\frac{PL^3}{8EI}$ é a subida de C causada por $P$ (a coluna gira em B de $\frac{PL^2}{8EI}$ e a viga leva essa rotação até C), e $\frac{4V_CL^3}{3EI}$ é quanto $V_C$ a abaixa.</p></div>
+
+    <div class="step" data-n="4"><h4>(a) Reações e (b) momento máximo</h4>
+      <div class="math-box">$$H_A = P\ (\leftarrow)\qquad V_A = V_C = \frac{3P}{32}\ (V_A \downarrow,\ V_C \uparrow)\qquad M_A = \frac{PL}{2} - V_CL = \frac{13PL}{32}\ (\text{anti-horário})$$</div>
+      <p>Em torno de A: $P$ (a $L/2$ de altura, para a direita) gira $PL/2$ no horário; $V_C$ (a $L$ na horizontal) gira $3PL/32$ no anti-horário; o engaste fecha com $13PL/32$ anti-horário. $V_A$ e $V_C$ formam um binário vertical.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Seção</th><th>$M$ (+ = traciona a face interna)</th></tr></thead><tbody>
+        <tr><td>C</td><td>0</td></tr><tr><td>B (esquina) e trecho superior da coluna</td><td>$+3PL/32$</td></tr>
+        <tr><td>sob $P$</td><td>$+3PL/32$</td></tr><tr><td>A</td><td>$3PL/32 - PL/2 = -13PL/32$ (traciona a face externa) <strong>← máximo</strong></td></tr></tbody></table></div>
+      <p>O momento troca de sinal na coluna em $y = L/2 + 3L/32$, logo abaixo de $P$.</p></div>
+
+    <div class="step" data-n="5"><h4>Verificação</h4>
+      <p>Sem o rolete C ($V_C = 0$), a coluna seria um balanço com $P$ a meia altura: $M_A = PL/2$. O rolete alivia o engaste em apenas 19% ($13/32$ contra $16/32$), porque ele é "fraco" para essa carga: a viga BC é longa e flexível frente à rotação do canto. Contas em <code>calc_aula17.py</code>.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $V_C = 3P/32$ ↑; $V_A = 3P/32$ ↓; $H_A = P$ ←; $M_A = 13PL/32$ (anti-horário). (b) $M_{máx} = 13PL/32$, no engaste A. <span class="badge badge-ok">bate com o Gere</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que o momento no trecho superior da coluna é $V_CL$ (não zero): perde a parcela $V_CL^3$, a maior.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Trocar o sinal relativo entre $V_C$ e $P$ na coluna: confira girando cada força em torno do corte.</li></ul></div>
+  </article>
+
 </section>
 
 <section class="chapter" id="t13-resumo">

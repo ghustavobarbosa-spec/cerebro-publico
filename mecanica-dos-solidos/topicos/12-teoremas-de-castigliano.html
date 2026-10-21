@@ -310,6 +310,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex"><a href="#t12-pivos">Pivôs deste tópico</a></li>
 <li class="nav-ex pivo"><a href="#s15-ex1-h">A15 ex.1 · suporte com 2 cargas<span class="nav-pv">PIVÔ</span></a></li>
 <li class="nav-ex pivo"><a href="#s15-ex3-h">A15 ex.3 · balanço com q<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#a5-h">#05 · L espacial com peso próprio<span class="nav-pv">PIVÔ</span></a></li>
 </ul></li>
 <li class="nav-ch"><a href="#t12-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
 </ul></li>
@@ -387,7 +388,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
 <section class="chapter" id="t12-ex">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
-    <h2 id="t12-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Exemplos 1 e 3 da aula 15: Crotti-Engesser com duas cargas e criar força e binário. O exemplo 3 é o modelo de carga fictícia.</p></div>
+    <h2 id="t12-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Exemplos 1 e 3 da aula 15: Crotti-Engesser com duas cargas e criar força e binário (o exemplo 3 é o modelo de carga fictícia). Exercício em grupo #05: estrutura espacial em L com peso próprio, flexão + torção e a regra das cargas independentes.</p></div>
 <h3 class="sub" id="t12-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
 <article class="ex pivo" id="s15-ex1">
     <div class="ex-head"><div><div class="ex-kicker">Slides aula 15 · exemplo 1 (p.10–16) · Pivô 8 da P2</div>
@@ -446,6 +447,86 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <div class="answer"><strong>Respostas:</strong> $\delta_{V,B} = \frac{qL^4}{8EI}$ (para baixo); $\theta_B = \frac{qL^3}{6EI}$ (horário). Sinais positivos = mesmo sentido arbitrado para $P$ e $M_B$. <span class="badge badge-ok">bate com o slide</span></div>
       <ul><li><span class="tag tag-mem">⚠ armadilha</span> Zerar $P$ e $M_B$ <em>antes</em> de derivar: a derivada some junto. Pode zerar depois de derivar e antes de integrar, nunca antes de derivar.</li>
       <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o sinal de $\partial M/\partial P$: com a convenção do slide os dois sinais negativos se cancelam; troque a convenção e confira que o resultado final não muda.</li></ul></div>
+  </article>
+<article class="ex pivo" id="a5">
+    <div class="ex-head"><div><div class="ex-kicker">Exercício em grupo #05 (30/09/2026) · Pivô da P2</div>
+      <h3 id="a5-h" data-nav="#05 · L espacial com peso próprio" data-pivo>Estrutura em L no plano horizontal: força na ponta, peso próprio e o que a torção faz</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">sem gabarito oficial</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span><span class="chip">W4</span><span class="chip">C1</span><span class="chip">E2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Atividade #05, p.1)</span>
+      A estrutura indicada na figura é formada por duas barras (AB e BC) rigidamente ligadas em B, estando a extremidade A engastada e a extremidade C livre. As duas barras possuem a mesma seção transversal, com rigidez à flexão $EI$ e rigidez torcional $GJ = 0{,}8EI$. Na configuração inicial, os eixos das barras encontram-se em um plano horizontal. Desprezando as parcelas da energia complementar devidas às forças cortantes, determine:
+      <ol type="a"><li>O deslocamento vertical da seção C, considerando que o único carregamento consiste em uma força concentrada de magnitude $P$, aplicada na extremidade livre;</li>
+      <li>O deslocamento vertical da seção C, considerando que os carregamentos que atuam sobre a estrutura são a força concentrada $P$ (como no item anterior) e o peso próprio das barras (considere, neste caso, um carregamento uniformemente distribuído de intensidade $q = \mu Ag = \beta P/L$ agindo nas barras);</li>
+      <li>Para o caso particular em que as barras são de seção circular cheia (com diâmetro $d = 40$ mm), $E = 200$ GPa, $\mu = 7800$ kg/m³, $g = 9{,}8$ m/s², e $P = 1$ kN, determine a condição sobre o adimensional $\beta$ para que a parcela do deslocamento vertical em C devida ao peso próprio das barras seja de 10% ou mais do deslocamento vertical total. Com base no valor mínimo de $\beta$, determine o comprimento $L$ associado.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Exercício em grupo #05 · ex. 1):</strong> ver o PDF oficial, Exercício em grupo #05, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p>Figura: AB e BC de comprimento $L$, perpendiculares entre si no plano horizontal; engaste em A; $q$ vertical para baixo nas duas barras; $P$ vertical para baixo em C.</p>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>A estrutura é <strong>isostática</strong> (engaste e ponta livre): não há incógnita hiperestática. O exercício treina três coisas: (1) esforços numa estrutura espacial, onde uma força vertical flete uma barra e <strong>torce</strong> a outra (<a href="01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a>); (2) a energia de torção ao lado da de flexão (<a href="10-energia-na-torcao.html">ficha 10 (Energia na torção)</a>, <a href="11-energia-na-flexao.html">ficha 11 (Energia na flexão)</a>); (3) Crotti-Engesser com <strong>cargas independentes</strong>, o ponto em que o item b esconde uma armadilha (<a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>).</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Esforços em estrutura espacial: flexão numa barra, torção na outra</h4>
+      <p>Ficha: <a href="01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a> (P1, exercício em grupo #01). Corte uma barra e olhe o pedaço que vai até a ponta livre. O momento das forças desse pedaço em relação ao centro do corte é $\vec M = \vec r \times \vec F$. A componente <strong>ao longo do eixo</strong> da barra cortada é torção; a componente <strong>perpendicular</strong> é flexão.</p>
+      <ul><li><strong>Barra BC:</strong> $P$ e o peso de BC estão sobre o eixo de BC: braço só ao longo do eixo, logo só flexão.</li>
+          <li><strong>Barra AB:</strong> $P$ está em C, a uma distância $L$ do eixo de AB (o comprimento de BC), medida na horizontal e perpendicular a AB. Esse braço vira <strong>torção</strong> em AB: $T = PL$, constante ao longo de AB. A distância ao longo de AB, $u$, vira flexão: $M = Pu$.</li>
+          <li>O peso de BC ($qL$, centrado no meio de BC) faz o mesmo: torção $qL\cdot L/2$ e flexão $qL\,u$ em AB. O peso de AB só flete AB ($qu^2/2$).</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Energia de torção e o papel de $GJ = 0{,}8EI$</h4>
+      <p>Ficha: <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>. Para seção circular, $U^*_T = \int \frac{T^2}{2GI_p}dx$ ($J = I_p$). Seção circular cheia com $\nu = 0{,}25$: $G = E/2{,}5$ e $I_p = 2I$, logo $GJ = 0{,}8EI$, o valor dado. A torção é <strong>tão importante quanto a flexão</strong>: numa estrutura 3D ela nunca se despreza (regra da aula 14, <a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>).</p></div>
+
+    <div class="step" data-n="3"><h4>Crotti-Engesser exige cargas independentes</h4>
+      <p>Ficha: <a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>. $\delta_C = \partial U^*/\partial P$ supõe que, ao variar $P$, <em>só</em> $P$ varia. O peso próprio $q$ é outra carga, com valor físico próprio. O enunciado escreve $q = \beta P/L$ só para dar o dado de forma adimensional. Se você substituir $q = \beta P/L$ <strong>antes</strong> de derivar, estará fazendo o peso crescer junto com $P$, e a derivada passa a somar deslocamentos que não correspondem a $P$. Regra: derive com $P$ e $q$ independentes, substitua depois.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span>
+      <ul>
+        <li>Material elástico-linear; seção circular (para valer $U^*_T = \int T^2/2GJ$); cortante desprezada (pedido do enunciado); sem normal.</li>
+        <li><strong>Linearidade geométrica</strong>: esforços na geometria indeformada (o plano das barras continua horizontal). É ela que a parte c põe à prova.</li>
+        <li>Ligação rígida em B (as barras giram juntas); engaste perfeito em A.</li>
+      </ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Esforços com $P$ e $q$ (independentes)</h4>
+      <p>$s$ de C até B (em BC); $u$ de B até A (em AB). Momentos positivos tracionando em cima não importam aqui: só aparecem ao quadrado.</p>
+      <div class="math-box">$$\text{BC}:\ M = Ps + \frac{qs^2}{2}\qquad \text{AB}:\ M = (P + qL)\,u + \frac{qu^2}{2},\qquad T = PL + \frac{qL^2}{2}$$
+      $$\frac{\partial M_{BC}}{\partial P} = s\qquad \frac{\partial M_{AB}}{\partial P} = u\qquad \frac{\partial T}{\partial P} = L$$</div></div>
+
+    <div class="step" data-n="5"><h4>a) Só a força $P$ ($q = 0$)</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\int_0^LPs^2\,ds + \frac1{EI}\int_0^LPu^2\,du + \frac{PL\cdot L\cdot L}{GJ} = \frac{PL^3}{3EI} + \frac{PL^3}{3EI} + \frac{PL^3}{0{,}8EI} = \boxed{\frac{23}{12}\frac{PL^3}{EI} \approx 1{,}917\,\frac{PL^3}{EI}}$$</div>
+      <p>Com uma única carga concentrada e deslocamento correspondente, o P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>) também resolve: $P\delta_C/2 = U^*$ dá o mesmo valor. <strong>A torção de AB responde por 65%</strong> da flecha ($\frac{5/4}{23/12}$): a ponta C desce porque AB gira em torno do próprio eixo e leva BC junto, como um braço de alavanca.</p></div>
+
+    <div class="step" data-n="6"><h4>b) Força $P$ e peso próprio</h4>
+      <p>Derivando em $P$ com $q$ independente, as parcelas novas (as que multiplicam $q$) são:</p>
+      <div class="math-box">$$\underbrace{\frac{1}{EI}\int_0^L\frac{qs^2}{2}s\,ds}_{\text{flexão BC: }qL^4/8EI} + \underbrace{\frac1{EI}\int_0^L\left(qLu + \frac{qu^2}{2}\right)u\,du}_{\text{flexão AB: }11qL^4/24EI} + \underbrace{\frac{(qL^2/2)\,L\cdot L}{0{,}8EI}}_{\text{torção AB: }5qL^4/8EI} = \frac{29}{24}\frac{qL^4}{EI}$$
+      $$\delta_C = \frac{23}{12}\frac{PL^3}{EI} + \frac{29}{24}\frac{qL^4}{EI}\ \overset{q = \beta P/L}{=}\ \boxed{\frac{(46 + 29\beta)}{24}\frac{PL^3}{EI}}$$</div>
+      <div class="callout diverge"><span class="co-t">A armadilha do item b</span>
+        <p>Substituindo $q = \beta P/L$ antes de derivar, sai $\frac{239\beta^2 + 580\beta + 460}{240}\frac{PL^3}{EI}$, com um termo em $\beta^2$ que não tem sentido físico: com $\beta = 0{,}5$ o erro já é de +34% ($3{,}37$ contra $2{,}52\,PL^3/EI$). A derivada estaria respondendo "quanto C desce se $P$ <em>e o peso</em> crescessem juntos", e a pergunta é o deslocamento sob as cargas dadas.</p></div></div>
+
+    <div class="step" data-n="7"><h4>c) Condição sobre $\beta$ e o comprimento</h4>
+      <div class="math-box">$$\frac{\delta_q}{\delta_C} = \frac{29\beta}{29\beta + 46} \ge 0{,}10\ \Rightarrow\ 290\beta \ge 29\beta + 46\ \Rightarrow\ \boxed{\beta \ge \frac{46}{261} \approx 0{,}176}$$</div>
+      <p>A razão não depende de $E$ nem de $I$: as duas parcelas têm o mesmo $1/EI$ (e a mesma razão $GJ/EI$). O comprimento sai de $q = \mu Ag$:</p>
+      <div class="math-box">$$A = \frac{\pi(0{,}040)^2}{4} = 1{,}257\times10^{-3}\ \text{m}^2\qquad q = 7800\cdot1{,}257\times10^{-3}\cdot9{,}8 = 96{,}06\ \text{N/m}$$
+      $$L = \frac{\beta_{mín}P}{q} = \frac{0{,}1762\cdot1000}{96{,}06} = \boxed{1{,}83\ \text{m}}$$</div></div>
+
+    <div class="step-part">Parte 3 · Verificação: o modelo ainda vale com esses números?</div>
+
+    <div class="step" data-n="8"><h4>Checagem das hipóteses para $L = 1{,}83$ m</h4>
+      <p>Com $EI = 200\times10^9\cdot\frac{\pi(0{,}04)^4}{64} = 25\,133$ N·m²:</p>
+      <div class="math-box">$$\delta_C = \frac{46 + 29\cdot0{,}1762}{24}\cdot\frac{1000\cdot1{,}835^3}{25\,133} \approx 0{,}52\ \text{m}\qquad \frac{\delta_C}{L} \approx 0{,}29$$
+      $$\text{em A}:\ M \approx 2{,}32\ \text{kN·m},\ T \approx 2{,}00\ \text{kN·m}\ \Rightarrow\ \sigma = \frac{32M}{\pi d^3} \approx 369\ \text{MPa},\ \tau = \frac{16T}{\pi d^3} \approx 159\ \text{MPa},\ \sigma_{vM} \approx 460\ \text{MPa}$$</div>
+      <div class="callout diverge"><span class="co-t">Os números do item c saem do domínio do modelo</span>
+        <p>Uma flecha de 29% do comprimento viola a <strong>linearidade geométrica</strong>, e 460 MPa de tensão equivalente (von Mises, <a href="06-criterios-de-resistencia.html">ficha 06 (Critérios de resistência)</a>) passa do escoamento de aços estruturais comuns (250–350 MPa), violando a hipótese de <strong>material elástico-linear</strong>. A resposta $\beta \ge 0{,}176$, $L = 1{,}83$ m está certa <em>dentro do modelo</em>, mas uma barra de 40 mm com esse comprimento e 1 kN na ponta não se comporta linearmente. Na prova, escreva a resposta pedida e acrescente essa observação: é o tipo de comentário que o professor valoriza no fim de cada exemplo.</p></div>
+      <p><strong>Sem gabarito oficial:</strong> conferido em Python (<code>calc_aula17.py</code>) pelas parcelas e pela comparação P.T.E. × Crotti-Engesser no item a.</p>
+      <div class="answer"><strong>Respostas:</strong> a) $\delta_C = \frac{23}{12}\frac{PL^3}{EI}$ ↓. b) $\delta_C = \frac{23}{12}\frac{PL^3}{EI} + \frac{29}{24}\frac{qL^4}{EI} = \frac{46 + 29\beta}{24}\frac{PL^3}{EI}$ ↓. c) $\beta \ge 46/261 \approx 0{,}176$; $L \approx 1{,}83$ m (com a ressalva de validade acima).</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a torção em AB: a flecha cai para $\frac{2}{3}\frac{PL^3}{EI}$, um terço do valor certo.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Pôr torção em BC: a força em C passa pelo eixo de BC.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Derivar depois de substituir $q = \beta P/L$.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício</span>
+      <ul><li>Em L espacial: força vertical na ponta flete as duas barras e torce a do engaste com $T = P\times(\text{comprimento da outra})$.</li>
+          <li>Cargas literais e independentes até a derivada; parâmetros adimensionais só depois.</li>
+          <li>Confira se a resposta numérica respeita as hipóteses (L.G., regime elástico).</li></ul></div>
   </article>
 
 </section>
