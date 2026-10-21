@@ -311,6 +311,10 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex"><a href="#t10-demais">Demais exercícios</a></li>
 <li class="nav-ex"><a href="#l5-ex7-h">L5 ex.7 · tubo quadrado</a></li>
 <li class="nav-ex"><a href="#l5-ex8-h">L5 ex.8 · tubo afilado</a></li>
+<li class="nav-ex"><a href="#s13-ex1-h">A13 ex.1 · rigidez à torção</a></li>
+<li class="nav-ex"><a href="#s13-ex2-h">A13 ex.2 · eixo escalonado</a></li>
+<li class="nav-ex"><a href="#s13-ex3-h">A13 ex.3 · eixo tronco-cônico</a></li>
+<li class="nav-ex"><a href="#s13-ex4-h">A13 · 3.10-3 tubo retangular</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#t10-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
 </ul></li>
@@ -373,7 +377,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
 <section class="chapter" id="t10-ex">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
-    <h2 id="t10-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 5 (ex. 6, 7 e 8): torque distribuído e tubos de parede fina. O ex. 6 é pivô; os outros repetem o método.</p></div>
+    <h2 id="t10-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 5 (ex. 6, 7 e 8): torque distribuído e tubos de parede fina. O ex. 6 é pivô; os outros repetem o método. Em "Demais exercícios", os 4 exemplos dos slides da aula 13 (eixo uniforme, escalonado, cônico e o tubo retangular 3.10-3).</p></div>
 <h3 class="sub" id="t10-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
 <article class="ex pivo" id="l5-ex6">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 6 (Gere 3.9-5) · Pivô 3 da P2</div>
@@ -439,6 +443,112 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     $$\phi = \frac{2TL}{\pi G t}\cdot\frac{d_B^2 - d_A^2}{(d_B - d_A)\,d_A^2d_B^2} = \frac{2TL}{\pi G t}\cdot\frac{d_A + d_B}{(d_A d_B)^2}\ \checkmark$$</div>
     <p>A integral usa a mudança $\eta = d(x)$, $dx = \frac{L}{d_B - d_A}d\eta$, igual ao exemplo 3 da aula 12 (pilar tronco-cônico).</p>
     <div class="answer"><strong>Resultado:</strong> fórmula demonstrada; conferida simbolicamente em sympy (<code>calc_l5.py</code>). Caso-limite: com $d_A = d_B = d$, $\phi = \frac{4TL}{\pi G t d^3} = \frac{TL}{GI_p}$ ✓.</div>
+  </article>
+<article class="ex" id="s13-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 13 · exemplo 1 (p.26–28)</div>
+      <h3 id="s13-ex1-h" data-nav="A13 ex.1 · rigidez à torção">Eixo circular uniforme: ângulo de torção e rigidez torcional pela energia</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (21/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 13, p.26)</span>
+      Uma barra circular de comprimento $L$ e momento polar $I_p$, engastada numa extremidade, recebe um torque $T$ na extremidade livre. Dados: $T$, $G$, $I_p$, $L$. Pede-se: o ângulo de torção $\phi$ e a rigidez torcional $k_t$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 13 · ex. 1):</strong> ver o PDF oficial, Slides aula 13, p. 26 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step" data-n="1"><h4>Regressão: o dicionário tração ↔ torção</h4>
+      <p>A aula 13 é a aula 12 com outras letras (<a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>): força $P$ → torque $T$; deslocamento $\delta$ → ângulo $\phi$; $\sigma$ → $\tau$; $E$ → $G$; $A$ → $I_p$. A densidade complementar do cisalhamento puro é $u^* = \tau^2/2G$, e com $\tau = T\rho/I_p$ (<a href="../base.html#torcao">Base</a>) a integral na seção dá $\iint\rho^2\,dA = I_p$:</p>
+      <div class="math-box">$$U^* = \int_V\frac{\tau^2}{2G}dV = \int_0^L\frac{T^2}{2G I_p^2}\underbrace{\iint\rho^2dA}_{I_p}\,dx = \int_0^L\frac{T^2}{2GI_p}dx\qquad W = W^* = \frac{T\phi}{2}$$</div></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li><strong>Seção circular</strong> (cheia ou vazada): as seções giram como discos rígidos e continuam planas, o que dá $\tau = T\rho/I_p$. Em seção não circular há empenamento e $I_p$ não serve.</li>
+          <li>Elástico-linear, pequenas rotações, carga quase-estática.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <div class="math-box">$$U^* = \frac{T^2L}{2GI_p}\qquad \frac{T\phi}{2} = \frac{T^2L}{2GI_p}\ \Rightarrow\ \boxed{\phi = \frac{TL}{GI_p}},\qquad T = \frac{GI_p}{L}\phi\ \Rightarrow\ \boxed{k_t = \frac{GI_p}{L}}$$</div>
+      <p>Esta $k_t$ é a mesma "mola de torção" do exercício <a href="13-hiperestaticas-energia.html#a6-h">ficha 13 (Hiperestáticas e linha elástica)</a>: um eixo é uma mola de torção de rigidez $GI_p/L$.</p>
+      <div class="answer"><strong>Respostas:</strong> $\phi = TL/GI_p$; $k_t = GI_p/L$. <span class="badge badge-ok">bate com os slides</span></div></div>
+  </article>
+<article class="ex" id="s13-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 13 · exemplo 2 (p.29–31)</div>
+      <h3 id="s13-ex2-h" data-nav="A13 ex.2 · eixo escalonado">Eixo escalonado: dobrar o diâmetro multiplica $I_p$ por 16, mas a rigidez só sobe 45%</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (21/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 13, p.29)</span>
+      O eixo engastado da figura tem, junto ao engaste, diâmetro $2d$ e comprimento $L/3$; em seguida, diâmetro $d$ e comprimento $2L/3$. Um torque $T$ atua na extremidade livre. Dados: $T$, $G$, $d$, $L$, com $I_p = \pi d^4/32$. Pede-se: $\phi$ e $k_t$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 13 · ex. 2):</strong> ver o PDF oficial, Slides aula 13, p. 29 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step" data-n="1"><h4>Regressão: $I_p$ cresce com a quarta potência</h4>
+      <p><a href="../base.html#torcao">Base</a>: $I_p = \pi d^4/32$. Dobrando o diâmetro, $I_p$ fica $2^4 = 16$ vezes maior. O torque interno é $T$ nos dois trechos (nada é aplicado entre eles), e a energia soma por trecho, como na barra escalonada (<a href="09-trabalho-e-energia.html#s12-ex2-h">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>As do <a href="10-energia-na-torcao.html#s13-ex1-h">ficha 10 (Energia na torção)</a>; a perturbação de tensão junto ao degrau (concentração) é ignorada no cálculo de $\phi$.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <div class="math-box">$$U^* = \int_0^{2L/3}\frac{T^2}{2GI_p}dx + \int_0^{L/3}\frac{T^2}{2G(16I_p)}dx = \frac{T^2L}{GI_p}\left(\frac13 + \frac1{96}\right) = \frac{11}{32}\frac{T^2L}{GI_p}$$
+      $$\frac{T\phi}{2} = U^*\ \Rightarrow\ \boxed{\phi = \frac{11}{16}\frac{TL}{GI_p}},\qquad \boxed{k_t = \frac{16}{11}\frac{GI_p}{L}}\ (+45{,}5\%)$$</div></div>
+
+    <div class="step" data-n="3"><h4>Leitura: molas de torção em série</h4>
+      <p>$k_{t1} = \frac{GI_p}{2L/3}$ e $k_{t2} = \frac{16GI_p}{L/3}$; em série, $\frac1{k_t} = \frac1{k_{t1}} + \frac1{k_{t2}}$, mesmo resultado. O trecho fino responde por $32/33 \approx 97\%$ do ângulo de torção: o trecho grosso é praticamente rígido. Para enrijecer um eixo, engrosse o trecho <em>mais flexível</em>.</p>
+      <div class="answer"><strong>Respostas:</strong> $\phi = \frac{11}{16}\frac{TL}{GI_p}$; $k_t = \frac{16}{11}\frac{GI_p}{L}$. <span class="badge badge-ok">bate com os slides</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $2I_p$ (ou $4I_p$) no trecho de diâmetro $2d$: é $16I_p$.</li></ul></div>
+  </article>
+<article class="ex" id="s13-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 13 · exemplo 3 (p.32–35)</div>
+      <h3 id="s13-ex3-h" data-nav="A13 ex.3 · eixo tronco-cônico">Eixo tronco-cônico sob torção: a mesma conta do pilar, com expoente 4</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (21/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 13, p.32)</span>
+      Um eixo de comprimento $L$, engastado, tem diâmetro $2d$ no engaste e $d$ na extremidade livre, variando linearmente. Um torque $T$ atua na extremidade livre. Dados: $T$, $G$, $L$, $d$, com $I_p = \pi d^4/32$. Pede-se: $\phi$ e $k_t$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 13 · ex. 3):</strong> ver o PDF oficial, Slides aula 13, p. 32 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step" data-n="1"><h4>Regressão</h4>
+      <p>É o pilar cônico da aula 12 (<a href="09-trabalho-e-energia.html#s12-ex3-h">ficha 09 (Trabalho, energia e P.T.E.)</a>) trocando $A \propto d^2$ por $I_p \propto d^4$ (<a href="09-trabalho-e-energia.html#t09-cone">ficha 09 (Trabalho, energia e P.T.E.)</a>). Com $x$ medido da extremidade livre (diâmetro $d$) para o engaste: $d(x) = d(1 + x/L)$, $I_p(x) = I_p(1 + x/L)^4$, e $\eta = 1 + x/L$ leva a $\int_1^2\eta^{-4}d\eta = \left[-\frac{1}{3\eta^3}\right]_1^2 = \frac13 - \frac1{24} = \frac{7}{24}$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Seção circular e <strong>conicidade suave</strong>: a fórmula $\tau = T\rho/I_p(x)$ do eixo prismático é aplicada seção a seção (aproximação boa se o diâmetro varia devagar ao longo de $x$).</li>
+          <li>Elástico-linear, pequenas rotações.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <div class="math-box">$$\int_0^L\frac{dx}{I_p(x)} = \frac{L}{I_p}\int_1^2\frac{d\eta}{\eta^4} = \frac{7}{24}\frac{L}{I_p}\qquad U^* = \frac{T^2}{2G}\cdot\frac{7}{24}\frac{L}{I_p} = \frac{7}{48}\frac{T^2L}{GI_p}$$
+      $$\frac{T\phi}{2} = U^*\ \Rightarrow\ \boxed{\phi = \frac{7}{24}\frac{TL}{GI_p}},\qquad \boxed{k_t = \frac{24}{7}\frac{GI_p}{L} \approx 3{,}43\,\frac{GI_p}{L}}$$</div></div>
+
+    <div class="step" data-n="3"><h4>Verificação: entre os dois eixos uniformes</h4>
+      <p>Eixo todo com diâmetro $d$: $k_t = GI_p/L$. Todo com $2d$: $16GI_p/L$. O cone fica em $3{,}43\,GI_p/L$, entre os dois, e bem mais perto do fino: a flexibilidade se concentra onde o diâmetro é pequeno. O slide diz "aumento de 243%": é $3{,}43 - 1 = 2{,}43$. Comparado ao escalonado (<a href="10-energia-na-torcao.html#s13-ex2-h">ficha 10 (Energia na torção)</a>, $1{,}45$), o cone é mais rígido porque o diâmetro passa de $d$ ao longo de quase todo o comprimento, enquanto no escalonado dois terços do eixo continuam com o diâmetro mínimo.</p>
+      <div class="answer"><strong>Respostas:</strong> $\phi = \frac{7}{24}\frac{TL}{GI_p}$; $k_t = \frac{24}{7}\frac{GI_p}{L}$. <span class="badge badge-ok">bate com os slides</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Medir $x$ do engaste e esquecer que então o diâmetro <em>diminui</em>: $d(x) = 2d(1 - x/2L)$. Dá o mesmo resultado, mas a conta fica mais longa. Escolha a origem que faz o diâmetro crescer.</li></ul></div>
+  </article>
+<article class="ex" id="s13-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 13 · Gere 3.10-3 resolvido (p.36–37)</div>
+      <h3 id="s13-ex4-h" data-nav="A13 · 3.10-3 tubo retangular">Tubo retangular de parede fina: fluxo de cisalhamento e ângulo de torção</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (21/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 13, p.36; Gere & Goodno, prob. 3.10-3)</span>
+      Um tubo de alumínio de paredes finas e seção transversal retangular tem dimensões (seguindo a linha central) $b$ = 50 mm e $h$ = 20 mm. A espessura da parede é constante e igual a $t$ = 3 mm. a) Determine a tensão de cisalhamento no tubo devida ao torque $T$ = 90 N·m; b) Determine o ângulo de torção (em graus) se o comprimento do tubo é $L$ = 0,25 m e o módulo de cisalhamento é $G$ = 26 GPa.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 13 · ex. 4):</strong> ver o PDF oficial, Slides aula 13, p. 36 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step-part">Regressão conceitual</div>
+    <div class="step" data-n="1"><h4>Por que o fluxo $f = \tau t$ é constante</h4>
+      <p>Ficha: <a href="10-energia-na-torcao.html#t10-fino">ficha 10 (Energia na torção)</a>. Corte um pedaço de parede entre dois pontos da linha média e escreva o equilíbrio na direção do eixo do tubo. As tensões de cisalhamento nas faces longitudinais do pedaço são $\tau_b$ e $\tau_c$ (pela simetria do tensor, <a href="02-tensor-e-cauchy.html">ficha 02 (Tensor das tensões e Cauchy)</a>, iguais às da seção). Equilíbrio: $\tau_bt_b\,dx = \tau_ct_c\,dx$. Logo o produto $f = \tau t$ não muda ao longo da parede: onde a parede é fina, a tensão é maior.</p></div>
+    <div class="step" data-n="2"><h4>Do fluxo ao torque: $T = 2fA_m$</h4>
+      <p>Cada trecho $ds$ da linha média carrega a força $f\,ds$ tangente à parede. O momento dela em relação a um polo O é $f\,r\,ds$, e $r\,ds$ é o dobro da área do triângulo de vértice O e base $ds$. Somando a volta inteira: $T = \oint f\,r\,ds = f\cdot 2A_m$, onde $A_m$ é a área <strong>delimitada pela linha média</strong>.</p></div>
+    <div class="step" data-n="3"><h4>Do P.T.E. ao ângulo de torção</h4>
+      <p>Mesma ideia das aulas 12 e 13: $T\phi/2 = U^* = \int_V\frac{\tau^2}{2G}dV = \frac{L}{2G}\oint\frac{f^2}{t}\,ds$. Com $f = T/2A_m$:</p>
+      <div class="math-box">$$\phi = \frac{TL}{4GA_m^2}\oint\frac{ds}{t} = \frac{TL}{GI_t},\qquad I_t = \frac{4A_m^2}{\oint ds/t}\ \overset{t\ \text{const.}}{=}\ \frac{4A_m^2t}{L_m}$$</div>
+      <p>$L_m$ é o perímetro da linha média, $2(b + h)$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li><strong>Parede fina</strong>: $\tau$ constante na espessura. Aqui $t/h = 0{,}15$ e $t/b = 0{,}06$: o lado curto está no limite do que se chama "fino", então as fórmulas são uma aproximação razoável, não exata.</li>
+          <li><strong>Tubo fechado</strong> (sem rasgo longitudinal). Com um rasgo, a seção vira aberta e a rigidez despenca.</li>
+          <li>Torção uniforme (empenamento livre), elástico-linear; cantos vivos ignorados (concentração de tensão nos cantos internos).</li></ul></div>
+
+    <div class="step-part">Resolução</div>
+    <div class="step" data-n="4"><h4>a) Tensão de cisalhamento</h4>
+      <div class="math-box">$$A_m = bh = 50\cdot20 = 1000\ \text{mm}^2\qquad \tau = \frac{T}{2tA_m} = \frac{90\,000\ \text{N·mm}}{2\cdot3\cdot1000\ \text{mm}^3} = \boxed{15{,}0\ \text{MPa}}$$</div></div>
+    <div class="step" data-n="5"><h4>b) Ângulo de torção</h4>
+      <div class="math-box">$$I_t = \frac{4A_m^2t}{2(b+h)} = \frac{4\cdot1000^2\cdot3}{140} = 85\,714\ \text{mm}^4\qquad k_t = \frac{GI_t}{L} = \frac{26\,000\cdot85\,714}{250} = 8{,}914\times10^6\ \text{N·mm/rad}$$
+      $$\phi = \frac{T}{k_t} = \frac{90\,000}{8{,}914\times10^6} = 0{,}01010\ \text{rad} = \boxed{0{,}578°}$$</div>
+      <p>Conferência pelo P.T.E. direto: $U^* = \frac{\tau^2}{2G}\cdot(L_m t L) = 454{,}3$ N·mm e $\phi = 2U^*/T = 0{,}01010$ rad. Igual (<code>calc_slides_12_15.py</code>).</p>
+      <div class="answer"><strong>Respostas:</strong> a) $\tau = 15$ MPa; b) $\phi \approx 0{,}578°$. <span class="badge badge-ok">bate com os slides</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar as dimensões externas ($53\times23$ mm) em $A_m$: dá $\tau = 12{,}3$ MPa, 18% abaixo (contra a segurança).</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Trocar $L_m$ (perímetro, 140 mm) por $L$ (comprimento do tubo, 250 mm) em $I_t$.</li></ul></div>
   </article>
 
 </section>

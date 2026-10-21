@@ -311,6 +311,8 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex pivo"><a href="#s15-ex1-h">A15 ex.1 · suporte com 2 cargas<span class="nav-pv">PIVÔ</span></a></li>
 <li class="nav-ex pivo"><a href="#s15-ex3-h">A15 ex.3 · balanço com q<span class="nav-pv">PIVÔ</span></a></li>
 <li class="nav-ex pivo"><a href="#a5-h">#05 · L espacial com peso próprio<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t12-demais">Demais exercícios</a></li>
+<li class="nav-ex"><a href="#s15-ex2-h">A14 ex.1 / A15 ex.2 · binário na ponta</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#t12-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
 </ul></li>
@@ -527,6 +529,38 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <ul><li>Em L espacial: força vertical na ponta flete as duas barras e torce a do engaste com $T = P\times(\text{comprimento da outra})$.</li>
           <li>Cargas literais e independentes até a derivada; parâmetros adimensionais só depois.</li>
           <li>Confira se a resposta numérica respeita as hipóteses (L.G., regime elástico).</li></ul></div>
+  </article>
+<h3 class="sub" id="t12-demais" data-nav="Demais exercícios">Demais exercícios</h3>
+<article class="ex" id="s15-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 ex.1 (p.23–24) e aula 15 ex.2 (p.17–18)</div>
+      <h3 id="s15-ex2-h" data-nav="A14 ex.1 / A15 ex.2 · binário na ponta">Balanço com binário na ponta: o mesmo resultado pelo P.T.E. e por Crotti-Engesser</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (23 e 28/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W2</span><span class="chip">W4</span><span class="chip">C1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 15, p.17; o da aula 14, p.23, é o mesmo pedindo o P.T.E.)</span>
+      A barra AB, engastada em A e livre em B, de comprimento $L$ e rigidez $EI$, está submetida a um momento fletor $M_0$ na extremidade B. Determine o ângulo de rotação $\theta_B$ (aula 14: pelo Princípio do Trabalho e da Energia; aula 15: pelo Teorema de Crotti-Engesser).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 15 · ex. 2):</strong> ver o PDF oficial, Slides aula 15, p. 17 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Por que o professor repete o exercício</span>
+      <p>Para mostrar que os dois métodos coincidem <strong>quando o P.T.E. se aplica</strong> (uma única carga, deslocamento correspondente) e preparar o terreno para o caso em que ele não se aplica. A extensão no passo 3 mostra exatamente esse limite.</p></div>
+
+    <div class="step" data-n="1"><h4>Regressão: flexão pura e deslocamento "correspondente" a um binário</h4>
+      <p><a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>: um binário na ponta, sem forças, deixa o momento fletor <strong>constante</strong> ao longo da barra (flexão pura/uniforme): $M(x) = -M_0$ com a convenção dos slides (traciona em cima). A energia é $\int M^2/2EI$.</p>
+      <p><a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>: o deslocamento <em>correspondente</em> a um binário é uma <strong>rotação</strong>, no ponto e no sentido do binário. O gráfico $M_0\times\theta_B$ é uma reta, e $W = M_0\theta_B/2$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Elástico-linear e linearidade geométrica (o P.T.E. exige a estrutura linear; Crotti-Engesser exige só a geometria linear).</li>
+          <li>Euler-Bernoulli: na flexão pura não há cortante, então aqui nem é aproximação desprezá-la.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Os dois caminhos</h4>
+      <div class="math-box">$$U^* = \int_0^L\frac{M_0^2}{2EI}dx = \frac{M_0^2L}{2EI}$$
+      $$\text{P.T.E. (aula 14):}\ \frac{M_0\theta_B}{2} = \frac{M_0^2L}{2EI}\ \Rightarrow\ \theta_B = \frac{M_0L}{EI}\qquad\qquad \text{Crotti-Engesser (aula 15):}\ \theta_B = \frac{\partial U^*}{\partial M_0} = \frac{M_0L}{EI}$$</div>
+      <p>Para uma estrutura linear com uma só carga, $U^* = \frac12 C\,P^2$ (onde $C$ é uma flexibilidade) e as duas contas são literalmente a mesma: $2U^*/P = \partial U^*/\partial P = CP$.</p></div>
+
+    <div class="step" data-n="3"><h4>Extensão: a flecha em B, onde o P.T.E. não alcança</h4>
+      <p>E a flecha de B? O P.T.E. não dá: a única carga é um binário, e o trabalho dele só "enxerga" a rotação. Crotti-Engesser resolve com uma força fictícia $F$ para baixo em B (<a href="12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>). Com $s$ medido de B: $M = -M_0 - Fs$, $\partial M/\partial F = -s$:</p>
+      <div class="math-box">$$\delta_B = \frac1{EI}\int_0^L(-M_0)(-s)\,ds = \frac{M_0L^2}{2EI}\ (\text{para baixo, com }M_0\text{ horário})$$</div>
+      <p>É a linha da tabela de balanço com binário: $\theta = ML/EI$, $\delta = ML^2/2EI$. Conferido em <code>calc_slides_12_15.py</code>.</p>
+      <div class="answer"><strong>Respostas:</strong> $\theta_B = \dfrac{M_0L}{EI}$ (no sentido de $M_0$); extensão: $\delta_B = \dfrac{M_0L^2}{2EI}$. <span class="badge badge-ok">bate com os slides</span></div></div>
   </article>
 
 </section>

@@ -319,6 +319,9 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex"><a href="#t09-demais">Demais exercícios</a></li>
 <li class="nav-ex"><a href="#l5-ex2-h">L5 ex.2 · treliça de 2 barras</a></li>
 <li class="nav-ex"><a href="#l5-ex3-h">L5 ex.3 · barra rígida em 5 molas</a></li>
+<li class="nav-ex"><a href="#s12-ex1-h">A12 ex.1 · rigidez da barra</a></li>
+<li class="nav-ex"><a href="#s12-ex2-h">A12 ex.2 · barra escalonada</a></li>
+<li class="nav-ex"><a href="#s12-ex3-h">A12 ex.3 · pilar tronco-cônico</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#t09-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
 </ul></li>
@@ -396,7 +399,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
 <section class="chapter" id="t09-ex">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
-    <h2 id="t09-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 5 (energia, parte I): barras, treliças e os dois casos não lineares.</p></div>
+    <h2 id="t09-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Lista 5 (energia, parte I): barras, treliças e os dois casos não lineares. Em "Demais exercícios", os 3 exemplos resolvidos nos slides da aula 12 (rigidez de barra prismática, escalonada e cônica).</p></div>
 <p class="section-desc" style="margin-bottom:10px">9 exercícios (<code>01_material_oficial/listas/MecanicaDosSolidosIIListaV.pdf</code>, 5 p.): 8 do Gere (seções 2.7, 3.9 e 3.10) e 1 complementar. A lista só traz resposta do complementar. As dos problemas do Gere foram conferidas no apêndice do livro (impressas 829–832, PDF 850–853). As 9 contas batem.</p><div class="callout"><span class="co-t">Onde estão os outros exercícios desta lista</span>Os exercícios 6, 7 e 8 (torção e tubos de parede fina) estão na ficha <a href="10-energia-na-torcao.html">ficha 10 (Energia na torção)</a>.</div><h3 class="sub" id="l5-premissas" data-nav="Premissas da lista">Premissas que valem para a lista inteira</h3>
   <ul>
     <li><strong>Hipóteses da aula 12 (p.19):</strong> material homogêneo, isótropo e elástico-linear em cada trecho; linearidade geométrica (os esforços saem do equilíbrio na configuração não deformada); carga quase-estática; seção variável só com conicidade suave. Os exercícios 4 e 5 existem justamente para mostrar o que acontece quando uma dessas hipóteses cai.</li>
@@ -634,6 +637,90 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     <div class="math-box">$$\frac{W\delta}{2} = \sum_i\frac{k_i\delta^2}{2} = \frac{(2\cdot3k + 2\cdot1{,}5k + k)\,\delta^2}{2} = 5k\delta^2\ \Rightarrow\ \delta = \frac{W}{10k} = \frac{400}{50} = 8{,}0\ \text{mm}$$</div>
     <p>Forças: $F_1 = 3k\delta = 120$ N, $F_2 = 1{,}5k\delta = 60$ N, $F_3 = k\delta = 40$ N. Confere o equilíbrio: $2(120) + 2(60) + 40 = 400$ N ✓.</p>
     <div class="answer"><strong>Respostas:</strong> $\delta = 8{,}0$ mm; $F_1 = 120$ N, $F_2 = 60$ N, $F_3 = 40$ N; $U = 1{,}6$ J. <span class="badge badge-ok">bate com o Gere (2.7-8: δ = W/10k, F₁ = 3W/10, F₂ = 3W/20, F₃ = W/10)</span></div>
+  </article>
+<article class="ex" id="s12-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 12 · exemplo 1 (p.28–30)</div>
+      <h3 id="s12-ex1-h" data-nav="A12 ex.1 · rigidez da barra">Barra prismática: deslocamento e rigidez pelo princípio do trabalho e energia</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (16/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 12, p.28)</span>
+      Uma barra prismática de área $A$, comprimento $L$ e módulo de elasticidade $E$ está engastada numa extremidade e submetida a uma força axial de tração $P$ na outra. Dados: $P$, $E$, $A$, $L$. Pede-se: o deslocamento $\delta$ da extremidade livre e a rigidez axial $k$ da barra.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 12 · ex. 1):</strong> ver o PDF oficial, Slides aula 12, p. 28 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="callout concept"><span class="co-t">Por que um exercício cuja resposta você já sabe</span>
+      <p>$\delta = PL/EA$ é de Mecânica dos Sólidos I (<a href="../base.html#tracao">Base</a>). O objetivo aqui é chegar a ela <strong>por outro caminho</strong>, o da energia, que depois funciona onde a fórmula pronta não existe (seção variável, várias barras, torção, flexão). É o primeiro uso do P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step" data-n="1"><h4>Regressão: do gráfico $P\times\delta$ às energias</h4>
+      <p>Ficha: <a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>. A carga cresce de 0 a $P$ devagar (quase-estática). O <strong>trabalho</strong> é a área sob a curva $P\times\delta$; o <strong>trabalho complementar</strong>, a área entre a curva e o eixo $P$. Com material elástico-linear e pequenos deslocamentos, a curva é uma reta, e as duas áreas são triângulos iguais:</p>
+      <div class="math-box">$$W = W^* = \frac{P\delta}{2}$$</div>
+      <p>Do lado de dentro, a energia complementar por volume é $u^* = \int\varepsilon\,d\sigma = \sigma^2/2E$. Com $\sigma = N/A$ uniforme na seção:</p>
+      <div class="math-box">$$U^* = \int_V\frac{\sigma^2}{2E}\,dV = \int_0^L\frac{N^2}{2EA}\,dx$$</div></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Material homogêneo, elástico-linear; pequenos deslocamentos (linearidade geométrica): sem elas a reta vira curva e $W \ne P\delta/2$.</li>
+          <li>Tensão uniforme na seção (Saint-Venant: longe do ponto de aplicação da carga e do engaste).</li>
+          <li>Carga quase-estática, sem dissipação: $W^* = U^*$.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <p>Esforço normal constante: $N(x) = P$ (tração).</p>
+      <div class="math-box">$$U^* = \int_0^L\frac{P^2}{2EA}\,dx = \frac{P^2L}{2EA}\qquad \frac{P\delta}{2} = \frac{P^2L}{2EA}\ \Rightarrow\ \boxed{\delta = \frac{PL}{EA}},\qquad P = \underbrace{\frac{EA}{L}}_{k}\,\delta\ \Rightarrow\ \boxed{k = \frac{EA}{L}}$$</div>
+      <p>A <strong>rigidez</strong> é a força por unidade de deslocamento: a barra é uma mola. Essa leitura é a que se usa nas hiperestáticas da aula 17 (uma viga ou um cabo vistos como mola, <a href="13-hiperestaticas-energia.html#s17-ex4-h">ficha 13 (Hiperestáticas e linha elástica)</a>).</p>
+      <div class="answer"><strong>Respostas:</strong> $\delta = PL/EA$; $k = EA/L$. <span class="badge badge-ok">bate com os slides e com Mec. Sól. I</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> $W = P\delta$ (sem o ½): só vale se a força for aplicada inteira de uma vez, e aí há dissipação (vibração). Na carga gradual, ½.</li></ul></div>
+  </article>
+<article class="ex" id="s12-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 12 · exemplo 2 (p.31–33)</div>
+      <h3 id="s12-ex2-h" data-nav="A12 ex.2 · barra escalonada">Barra escalonada: somar energias por trecho é somar molas em série</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (16/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 12, p.31)</span>
+      A barra engastada da figura tem dois trechos: junto ao engaste, área $2A$ e comprimento $L/3$; em seguida, área $A$ e comprimento $2L/3$. Uma força de tração $P$ atua na extremidade livre. Dados: $P$, $E$, $A$, $L$. Pede-se: $\delta$ e a rigidez $k$.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 12 · ex. 2):</strong> ver o PDF oficial, Slides aula 12, p. 31 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step" data-n="1"><h4>Regressão: a energia é aditiva por trecho</h4>
+      <p>Base: <a href="09-trabalho-e-energia.html#s12-ex1-h">ficha 09 (Trabalho, energia e P.T.E.)</a> e <a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. $U^* = \int N^2/2EA\,dx$ é uma integral ao longo do eixo: quando $A$ muda, divide-se em trechos e somam-se as integrais. O $N$ é o mesmo nos dois trechos ($P$), porque nenhuma força age entre eles.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>As do <a href="09-trabalho-e-energia.html#s12-ex1-h">ficha 09 (Trabalho, energia e P.T.E.)</a> (linear, quase-estático, tensão uniforme na seção).</li>
+          <li><strong>A mudança brusca de seção é ignorada</strong>: junto ao degrau a tensão não é uniforme (concentração de tensão). Para deslocamento isso pesa pouco, porque a região perturbada é pequena frente a $L$; para resistência, não se pode ignorar.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <div class="math-box">$$U^* = \int_0^{2L/3}\frac{P^2}{2EA}dx + \int_0^{L/3}\frac{P^2}{2E(2A)}dx = \frac{P^2L}{EA}\left(\frac13 + \frac1{12}\right) = \frac{5}{12}\frac{P^2L}{EA}$$
+      $$\frac{P\delta}{2} = U^*\ \Rightarrow\ \boxed{\delta = \frac56\frac{PL}{EA}},\qquad \boxed{k = \frac65\frac{EA}{L}}\ (+20\%\ \text{em relação à barra toda com área }A)$$</div></div>
+
+    <div class="step" data-n="3"><h4>Leitura: molas em série</h4>
+      <p>Cada trecho é uma mola ($k_i = E_iA_i/L_i$): $k_1 = \frac{EA}{2L/3} = \frac{3EA}{2L}$ e $k_2 = \frac{2EA}{L/3} = \frac{6EA}{L}$. Elas estão em <strong>série</strong> (mesma força, deslocamentos somados), então as <em>flexibilidades</em> se somam:</p>
+      <div class="math-box">$$\frac1k = \frac{1}{k_1} + \frac{1}{k_2} = \frac{2L}{3EA} + \frac{L}{6EA} = \frac{5L}{6EA}\ \Rightarrow\ k = \frac{6EA}{5L}$$</div>
+      <p>Mesmo resultado: somar energias de trechos com a mesma força é somar molas em série. E mostra onde vale gastar material: dobrar a área de <em>um terço</em> da barra só dá +20% de rigidez, porque o trecho fino continua dominando a flexibilidade (80% dela).</p>
+      <div class="answer"><strong>Respostas:</strong> $\delta = \frac56\frac{PL}{EA}$; $k = \frac65\frac{EA}{L}$. <span class="badge badge-ok">bate com os slides</span></div></div>
+  </article>
+<article class="ex" id="s12-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 12 · exemplo 3 (p.34–37)</div>
+      <h3 id="s12-ex3-h" data-nav="A12 ex.3 · pilar tronco-cônico">Pilar tronco-cônico em compressão: área variável e a mudança de variável</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (16/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (slides da aula 12, p.34)</span>
+      Um pilar de seção circular, com diâmetro $d$ no topo e $2d$ na base (engastada no solo) e altura $L$, recebe no topo uma força de compressão $P$. Dados: $P$, $E$, $L$, $d$. Pede-se: o encurtamento $\delta$ e a rigidez $k$ do pilar.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 12 · ex. 3):</strong> ver o PDF oficial, Slides aula 12, p. 34 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+
+    <div class="step" data-n="1"><h4>Regressão: área como função de $x$ e o sinal da compressão</h4>
+      <p>Base: <a href="09-trabalho-e-energia.html#s12-ex1-h">ficha 09 (Trabalho, energia e P.T.E.)</a> e <a href="09-trabalho-e-energia.html#t09-cone">ficha 09 (Trabalho, energia e P.T.E.)</a>. Com $x$ medido do topo para baixo, o diâmetro cresce linearmente: $d(x) = d(1 + x/L)$, e a área cresce com o quadrado: $A(x) = \frac{\pi d^2}{4}(1 + x/L)^2$. A força normal é $N = -P$ em todo o pilar (peso próprio desprezado). Como $N$ entra ao quadrado, <strong>o sinal da compressão não importa</strong> para $U^*$.</p>
+      <p>Cálculo I: com $\eta = 1 + x/L$, $dx = L\,d\eta$ e os limites viram $\eta = 1$ e $\eta = 2$. A integral de $1/\eta^2$ é $-1/\eta$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li><strong>Conicidade suave</strong> (aula 12 p.19): a tensão é tomada uniforme em cada seção, $\sigma = N/A(x)$. Num cone muito aberto, a tensão deixa de ser uniforme e $\sigma = N/A$ é só aproximada.</li>
+          <li>Compressão sem flambagem: pilar curto ou robusto (estabilidade é assunto da P3, <a href="16-flambagem-de-euler.html">ficha 16 (Flambagem de Euler)</a>).</li>
+          <li>Peso próprio desprezado; elástico-linear; linearidade geométrica.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Resolução</h4>
+      <div class="math-box">$$\int_0^L\frac{dx}{A(x)} = \frac{4}{\pi d^2}\int_1^2\frac{L\,d\eta}{\eta^2} = \frac{4L}{\pi d^2}\left[-\frac1\eta\right]_1^2 = \frac{4L}{\pi d^2}\cdot\frac12 = \frac{2L}{\pi d^2}$$
+      $$U^* = \frac{P^2}{2E}\cdot\frac{2L}{\pi d^2} = \frac{P^2L}{\pi Ed^2}\qquad \frac{P\delta}{2} = U^*\ \Rightarrow\ \boxed{\delta = \frac{2PL}{\pi Ed^2}},\qquad \boxed{k = \frac{\pi Ed^2}{2L}}$$</div></div>
+
+    <div class="step" data-n="3"><h4>Verificação e uma regra útil</h4>
+      <ul><li>Comparado a um pilar prismático de diâmetro $d$ (o menor), $k = \pi Ed^2/4L$: o cone é <strong>2 vezes</strong> mais rígido. Comparado ao de diâmetro $2d$, 2 vezes mais flexível. Coerente: fica entre os dois.</li>
+          <li>Usar o diâmetro médio $1{,}5d$ superestima a rigidez em 12,5%. O resultado exato equivale a usar a área $A = \frac{\pi d_1d_2}{4}$ (com $d_1 = d$, $d_2 = 2d$): para tronco de cone, $\int dx/A = \frac{4L}{\pi d_1d_2}$ vale sempre. Conferido em <code>calc_slides_12_15.py</code>.</li></ul>
+      <div class="answer"><strong>Respostas:</strong> $\delta = \dfrac{2PL}{\pi Ed^2}$ (encurtamento); $k = \dfrac{\pi Ed^2}{2L}$. <span class="badge badge-ok">bate com os slides</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o $L$ do $dx = L\,d\eta$ na mudança de variável.</li></ul></div>
   </article>
 
 </section>
