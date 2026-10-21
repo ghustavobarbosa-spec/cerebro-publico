@@ -299,7 +299,10 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ch"><a href="#t13-ler-h">3 · Onde ler</a><ul class="nav-sub">
 </ul></li>
 <li class="nav-ch"><a href="#t13-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t13-ideia">A ideia</a></li>
+<li class="nav-ex"><a href="#t13-7passos">Os 7 passos da aula 17</a></li>
 <li class="nav-ex"><a href="#t13-h1">Energia complementar mínima</a></li>
+<li class="nav-ex"><a href="#t13-limite">Casos-limite</a></li>
 <li class="nav-ex"><a href="#t13-h2">Linha elástica</a></li>
 <li class="nav-ex"><a href="#t13-algo">Algoritmo do professor</a></li>
 </ul></li>
@@ -318,7 +321,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
 <section class="chapter" id="t13-obj">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
-    <h2 id="t13-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">H1</span> <span class="chip">H2</span> · aulas 17 (05/10), 19 (14/10) e 21</p></div>
+    <h2 id="t13-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2><p class="section-desc"><span class="chip">H1</span> <span class="chip">H2</span> · aula 17 (05/10) · exercício #06 (07/10)</p></div>
 <div class="callout concept"><span class="co-t">Pergunta de engenharia</span><p>Como achar as reações que o equilíbrio sozinho não dá, e como obter a linha elástica de uma viga pelos teoremas de energia? A ideia é tratar uma reação redundante $X$ como uma
         carga cujo deslocamento correspondente é conhecido (zero num apoio fixo): Crotti-Engesser com $\delta_X = 0$ vira $\partial U^*/\partial X = 0$. Ao fim você deve identificar o grau de hiperestaticidade,
         escolher a incógnita, escrever $U^*$ só em função dela e resolver.</p></div>
@@ -331,18 +334,39 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <section class="chapter" id="t13-ler">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
     <h2 id="t13-ler-h" data-nav="3 · Onde ler">Onde ler</h2><p class="section-desc">Páginas impressas do livro (some 21 para chegar à página do PDF do Gere 7ª ed.).</p></div>
-<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Apostila 03 (Clóvis)</td><td>§10 p.33–36 (exemplo 9) e exercícios do §12</td><td>fonte principal enquanto não houver slides das aulas 17 e 19 na pasta</td></tr><tr><td>Slides do Prof. Ramos</td><td>aulas 17 e 19: ainda não estão na pasta</td><td>a completar</td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>§10.3–10.4 (666–683)</td><td>resolve hiperestáticas por compatibilidade, não por energia</td></tr></tbody></table></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody><tr><td>Slides do Prof. Ramos</td><td>Aula 17: p.3–14 (exercício introdutório resolvido em 7 passos), p.15–16 (princípio da energia complementar mínima), p.17 (metodologia), p.18–23 (Ex.1–5, só figuras)</td><td>fonte principal; notação da prova (E.I.F.)</td></tr><tr><td>Apostila 03 (Clóvis)</td><td>§10 p.33–36 (exemplo 9) e exercícios do §12</td><td>mesma ideia, com dedução</td></tr><tr><td>Gere & Goodno 7ª ed.</td><td>cap. 10, §10.3–10.4 (666–683): exemplo 10-6, probs. 10.3-2, 10.4-3, 10.4-13, 10.4-21</td><td>enunciados dos Ex.1–5 da aula 17; o livro resolve por compatibilidade, a aula pede energia</td></tr></tbody></table></div>
 </section>
 
 <section class="chapter" id="t13-pontos">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
     <h2 id="t13-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
 
-        <h3 class="sub" id="t13-h1" data-nav="Energia complementar mínima">Energia complementar mínima</h3>
-        <p>O grau de hiperestaticidade é $g$ = nº de reações − nº de equações de equilíbrio úteis. Escolha $g$ reações que <em>podem</em> ser independentes como incógnitas $X_j$, escreva as demais
-        reações e os esforços em função das cargas e de $X_j$, e imponha
-        $$\frac{\partial U^*}{\partial X_j} = 0\quad(\text{apoio fixo; recalque }\Delta_j\text{ se houver: }\partial U^*/\partial X_j = \Delta_j).$$
-        Depois, com as reações conhecidas, carga fictícia para os deslocamentos desejados. Em ordem: <strong>reações primeiro, rotações depois</strong>.</p>
+        <h3 class="sub" id="t13-ideia" data-nav="A ideia">A ideia: liberar um vínculo e devolvê-lo pela energia</h3>
+        <p>Numa estrutura hiperestática o equilíbrio dá menos equações que incógnitas. A aula 17 resolve isso em dois movimentos. Primeiro, <strong>libera</strong> $n = g$ vínculos e
+        põe no lugar deles as reações correspondentes $X_j$ como se fossem cargas externas: a estrutura que sobra é a <strong>E.I.F. (estrutura isostática fundamental)</strong>,
+        em que todos os esforços saem do equilíbrio em função das cargas e de $X_j$. Depois, usa Crotti-Engesser (<a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>) para calcular, na E.I.F., o deslocamento
+        correspondente a cada $X_j$, e impõe o valor que o vínculo original exigia (zero num apoio fixo). Essa imposição é uma <strong>equação de compatibilidade de deslocamentos</strong>
+        escrita em forma de energia.</p>
+        <h3 class="sub" id="t13-7passos" data-nav="Os 7 passos da aula 17">Os 7 passos (aula 17, exercício introdutório)</h3>
+        <ol class="method">
+          <li><strong>D.C.L. e grau</strong>: $g$ = nº de reações − nº de equações de equilíbrio. Balanço sobre mola: $g = 4 - 3 = 1$.</li>
+          <li><strong>E.I.F.</strong>: liberar $n = g$ incógnitas. No exemplo, "imagine que o deslocamento da base da mola seja liberado": a incógnita é $V_B$.</li>
+          <li><strong>Crotti-Engesser na E.I.F.</strong>: $\delta = \partial U^*/\partial V_B$, com $U^*$ <em>de todo o sistema</em>: viga ($\int M^2/2EI$) <strong>e mola</strong> ($U^*_{mola} = V_B^2/2k$). Os esforços ficam em função das cargas da E.I.F. ($q_0$ e $V_B$).</li>
+          <li><strong>Relação adicional</strong>: $\delta(V_B, q_0)$ é o deslocamento da base da mola para valores "quaisquer" de $V_B$ e $q_0$.</li>
+          <li><strong>Compatibilidade</strong>: impor $\delta = 0$ e achar $V_B$. Sinal positivo = sentido arbitrado no D.C.L. está certo.</li>
+          <li><strong>Equilíbrio</strong>: as demais reações saem das equações da estática.</li>
+          <li><strong>Deslocamento pedido</strong>: basta analisar <em>parte</em> da estrutura (a viga AB, com $V_B$ já conhecido como carga) e aplicar Crotti-Engesser com esforço fictício.</li>
+        </ol>
+        <h3 class="sub" id="t13-h1" data-nav="Energia complementar mínima">Princípio da energia complementar mínima</h3>
+        <p>Generalizando (aula 17 p.15): com $m$ cargas $P_i$ e $n$ incógnitas $X_j$ escolhidas <strong>de modo que a E.I.F. continue em equilíbrio</strong> sob as cargas originais mais as $X_j$,
+        os valores reais das incógnitas tornam mínima a energia complementar total:
+        $$\frac{\partial U^*(P_1,\dots,P_m,X_1,\dots,X_n)}{\partial X_j} = 0,\qquad 1\le j\le n\qquad(\text{recalque conhecido }\Delta_j:\ \partial U^*/\partial X_j = \Delta_j).$$
+        Observações do professor (p.16): vale com comportamento <strong>não linear</strong>; e simetria da estrutura e do carregamento reduz o número de incógnitas (assunto da P3, <a href="14-estruturas-simetricas.html">ficha 14 (Estruturas simétricas)</a>).</p>
+        <p>Metodologia (p.17): (1) procurar simetrias; (2) simplificar; (3) D.C.L. e $g$; (4) escolher a E.I.F.; (5) aplicar o princípio $n$ vezes; (6) resolver o sistema e
+        expressar as incógnitas em função do carregamento original. Em ordem: <strong>reações primeiro, deslocamentos depois</strong>.</p>
+        <h3 class="sub" id="t13-limite" data-nav="Casos-limite">Conferir pelos casos-limite</h3>
+        <p>O exemplo da aula fecha com $\theta_B = \frac{q_0L^3}{48EI}\cdot\frac{kL^3-24EI}{kL^3+3EI}$ e testa os extremos: $k\to\infty$ dá $q_0L^3/48EI$ (viga engastada-apoiada) e $k\to0$ dá
+        $-q_0L^3/6EI$ (balanço livre, <a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>). Fazer esse teste em toda resposta com mola é a forma mais rápida de achar erro de sinal ou de álgebra.</p>
         <h3 class="sub" id="t13-h2" data-nav="Linha elástica">Linha elástica por energia (H2)</h3>
         <p>Aplique uma <strong>força fictícia $F$ numa posição genérica $\xi$</strong>, escreva $M(x)$ separando $x < \xi$ e $x > \xi$ e calcule $v(\xi) = (\partial U^*/\partial F)_{F=0}$: a função de $\xi$ <em>é</em> a
         linha elástica. Conferência: balanço com $P$ na ponta, força fictícia em $\xi$ medido do engaste ⇒ $v(\xi) = P\xi^2(3L-\xi)/6EI$, que dá $PL^3/3EI$ em $\xi = L$.</p>
@@ -357,20 +381,21 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <section class="chapter" id="t13-limites">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
     <h2 id="t13-limites-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
-<ul><li>Vale para apoio fixo (recalque zero) ou recalque conhecido; apoio elástico entra com a energia da mola em $U^*$.</li><li>Escolher como incógnita uma reação que <em>não</em> pode ser independente (o equilíbrio já a determina) leva a sistema impossível.</li><li>Elástico-linear e geometria linear.</li></ul>
+<ul><li><strong>E.I.F. em equilíbrio:</strong> as incógnitas liberadas têm de deixar uma estrutura isostática estável. Liberar uma reação que o equilíbrio já determina (por exemplo, a horizontal $H_A$ sem carga horizontal) não gera equação nova e deixa a E.I.F. hipostática.</li><li><strong>Vínculo fixo ou recalque conhecido:</strong> $\partial U^*/\partial X = 0$ só porque o apoio não se move. Apoio elástico não é recalque: a mola entra <em>dentro</em> de $U^*$ ($X^2/2k$, ou $M^2/2k_t$ na mola de torção).</li><li><strong>Linearidade geométrica (L.G.):</strong> esforços calculados na configuração indeformada; o professor frisa que $\theta_B(V_B, q_0)$ vale para valores "quaisquer" dentro da L.G.</li><li><strong>Material:</strong> o princípio vale até com não linearidade; as fórmulas $M^2/2EI$ e $V^2/2k$ supõem elástico-linear.</li><li><strong>Cortante desprezada</strong> nas vigas (default do curso, explícito nos exercícios #05 e #06); cabo e mola nunca.</li></ul>
 </section>
 
 <section class="chapter" id="t13-ex">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
-    <h2 id="t13-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Ainda sem exercícios de lista: as questões antigas da apostila 03 estão resolvidas na página <a href="../provas/p2.html">P2</a> (pivô: ex. 13, hiperestática por energia complementar mínima; ex. 10 usa a mesma ideia com três incógnitas). Entram aqui o exercício em grupo #06 e a lista da aula 17 quando forem acrescentados.</p></div>
-<div class="callout"><span class="co-t">A completar</span><p>Pivôs de lista desta ficha dependem do material das aulas 17 e 19 e dos exercícios em grupo #06 (07/10) e #07 (19/10).</p></div>
+    <h2 id="t13-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2><p class="section-desc">Os exercícios desta ficha estão em preparação (próxima etapa). Enquanto isso, as questões antigas da apostila 03 estão resolvidas na página <a href="../provas/p2.html">P2</a> (ex. 13: hiperestática por energia complementar mínima; ex. 10: a mesma ideia com três incógnitas).</p></div>
+<div class="callout warn"><span class="co-t">Em preparação</span><p>Entram aqui, resolvidos passo a passo com regressão conceitual e hipóteses destacadas: o exercício introdutório da aula 17 (balanço sobre mola, pivô), os Ex.1–5 da aula 17 (Gere exemplo 10-6 e probs. 10.3-2, 10.4-3, 10.4-13, 10.4-21) e o exercício em grupo #06 (rótula com mola de torção). O enunciado completo de cada um está nas fontes da disciplina.</p></div>
 </section>
 
 <section class="chapter" id="t13-resumo">
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
     <h2 id="t13-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
 <div class="resumo"><div class="r-grid">
-          <div class="r-item"><b>Hiperestática.</b> <span class="path">$g$ = reações − equações · escolher $X$ · $\partial U^*/\partial X=0$</span>. Reações antes de rotações.</div>
+          <div class="r-item"><b>Hiperestática (7 passos).</b> <span class="path">D.C.L., $g$ · E.I.F. · $\delta=\partial U^*/\partial X$ (viga + mola) · $\delta=0$ · equilíbrio · carga fictícia</span>. Reações antes de rotações.</div>
+          <div class="r-item"><b>Conferência.</b> Casos-limite: $k\to\infty$ = apoio; $k\to0$ = sem apoio. Sinal + = sentido arbitrado.</div>
           <div class="r-item"><b>Linha elástica.</b> <span class="path">força fictícia em $\xi$ · $v(\xi)=(\partial U^*/\partial F)_{F=0}$</span>.</div>
           <div class="r-item"><b>Armadilha.</b> Incógnita que não pode ser independente; esquecer a energia da mola de apoio.</div></div></div>
 </section>
