@@ -377,21 +377,145 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 4, p.1)</span>
       7.7-17. Uma barra circular sólida de diâmetro $d$ = 40 mm está submetida a uma força axial $P$ e a um torque $T$ (vide figura). Os extensômetros A e B montados na superfície da barra fornecem as leituras $\varepsilon_a = 100 \times 10^{-6}$ e $\varepsilon_b = -55 \times 10^{-6}$. A barra é feita de aço tendo $E$ = 200 GPa e ν = 0,29. Pede-se: a) Determine a força axial $P$ e o torque $T$; b) Determine a distorção máxima e a tensão de cisalhamento máxima na barra.<br>Resp.: a) $P$ = 25,133 kN, $T$ = 176,327 N.m, b) $\gamma_{máx} = 222 \times 10^{-6}$, $\tau_{máx}$ = 17,78 MPa</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 4 · ex. 1):</strong> ver o PDF oficial, Lista 4, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Problema inverso: medir deformações para descobrir cargas. Na superfície da barra o estado é EPT, com $\sigma_x = P/A$ e $\tau_{xy} = 16T/\pi d^3$. Duas leituras ⇒ duas incógnitas.</p>
-      <div class="callout concept"><span class="co-t">Conceito: o que um extensômetro "vê"</span>
-        <p>Um extensômetro mede só o alongamento na direção dele, $\varepsilon_\theta = \vec n^{\,t}[E]\vec n$. Alinhado com o eixo ($\theta = 0$), mede $\varepsilon_x$, e a torção não aparece (cisalhamento puro não alonga as fibras do eixo). A 45°, mede $\frac{\varepsilon_x + \varepsilon_y}{2} + \frac{\gamma}{2}$, e aí a torção aparece. Mesmo sem tensão em $y$, $\varepsilon_y = -\nu\varepsilon_x \ne 0$ (Poisson): esquecer isso é o erro clássico.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$d = 40$ mm, $A = 1256{,}6$ mm², $E = 200$ GPa, $\nu = 0{,}29$ ⇒ $G = E/2(1+\nu) = 77{,}5$ GPa; A a 0°, B a 45°.</p></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$P$, $T$, $\gamma_{máx}$, $\tau_{máx}$.</p></div>
-    <div class="step" data-n="4"><h4>Fórmulas</h4><p><span class="tag tag-form">📄 Aula 10 p.49</span> $\varepsilon_\theta$; <span class="tag tag-form">📄 Aula 10 p.41</span> Hooke.</p></div>
-    <div class="step" data-n="5"><h4>Deformações</h4>
-      <div class="math-box">$$\varepsilon_x = \varepsilon_a = 100\mu\qquad \varepsilon_y = -\nu\varepsilon_x = -29\mu\qquad \varepsilon_b = \frac{100 - 29}{2} + \frac{\gamma_{xy}}{2} = -55\ \Rightarrow\ \gamma_{xy} = -181\mu$$</div></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$\sigma_x = E\varepsilon_x = 20\ \text{MPa} \Rightarrow P = 20\cdot1256{,}6 = 25{,}13\ \text{kN}\qquad \tau = G\gamma = 77{,}5\times10^3\cdot181\times10^{-6} = 14{,}03\ \text{MPa} \Rightarrow T = \frac{\tau\pi d^3}{16} = 176{,}3\ \text{N·m}$$
-      $$\gamma_{máx} = 2\sqrt{\left(\frac{\varepsilon_x - \varepsilon_y}{2}\right)^2 + \left(\frac{\gamma}{2}\right)^2} = 222\mu\qquad \tau_{máx} = G\gamma_{máx} = \sqrt{10^2 + 14{,}03^2} = 17{,}2\ \text{MPa}$$</div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> $P = 25{,}13$ kN, $T = 176{,}3$ N·m, $\gamma_{máx} = 222\mu$ <span class="badge badge-ok">bate com a lista</span>; $\tau_{máx} = 17{,}2$ MPa (lista: 17,78).</div>
-      <div class="callout diverge"><span class="co-t">Divergência pequena: τmáx</span><p>Com $G = E/2(1+\nu) = 77{,}5$ GPa, $\tau_{máx} = 17{,}23$ MPa, coerente com $\sigma = 20$ e $\tau = 14{,}03$. O valor da lista (17,78) é $80\text{ GPa}\times222\mu$: usa G = 80 GPa, que não é consistente com E e ν dados.</p></div>
-      <ul><li>Na barra, $\varepsilon_z$ (radial) $= -29\mu$ também: é a principal intermediária, e $\gamma_{máx}$ continua sendo o do plano.</li></ul></div>
+    <p>Figura: barra engastada à esquerda, com $P$ (tração) e $T$ aplicados na extremidade livre. No ponto C da face da frente, o extensômetro A fica alinhado com o eixo e o B a 45° dele, para cima e para a direita.</p>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão: do que se pede até o que se mede</span>
+      <p>O problema é <strong>inverso</strong>: em vez de "dadas as cargas, ache as deformações", ele dá as deformações e pede as cargas. A resolução anda de trás para frente, e cada seta é um conceito que precisa estar firme:</p>
+      <div class="math-box">$$\underbrace{P,\ T}_{\text{pedido}} \xleftarrow{\ \text{tração e torção}\ } \underbrace{\sigma_x,\ \tau_{x\theta}}_{\text{tensões em C}} \xleftarrow{\ \text{Hooke generalizada}\ } \underbrace{\varepsilon_x,\ \varepsilon_\theta,\ \gamma_{x\theta}}_{\text{deformações em C}} \xleftarrow{\ \text{transformação de }\varepsilon\ } \underbrace{\varepsilon_a,\ \varepsilon_b}_{\text{leituras}}$$</div>
+      <p>A Parte 1 percorre esse caminho conceito a conceito (a regressão). A Parte 2 faz as contas na ordem inversa, das leituras até as cargas. A Parte 3 resolve o item b e confere tudo.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Esforços → tensões: o que $P$ e $T$ fazem no ponto C</h4>
+      <p>Revisão de base: <a href="../base.html#tracao">tração</a> e <a href="../base.html#torcao">torção</a>. Os dois esforços agem juntos, mas cada um gera a sua tensão, e elas se somam (superposição, válida em regime linear):</p>
+      <ul>
+        <li><strong>Força axial $P$ → tensão normal uniforme.</strong> Longe dos pontos de aplicação (Saint-Venant), a seção inteira está tracionada por igual: $\sigma_x = P/A$, com $A = \pi d^2/4$.</li>
+        <li><strong>Torque $T$ → tensão de cisalhamento que cresce com o raio.</strong> Na barra circular, as seções giram como discos rígidos, a distorção cresce linearmente com $r$ e, pela lei de Hooke, a tensão também: $\tau = T r/J$, com $J = \pi d^4/32$. O máximo fica na superfície ($r = d/2$): $\tau = \dfrac{16T}{\pi d^3}$.</li>
+      </ul>
+      <p>Por isso os extensômetros vão <strong>na superfície</strong>: ali a torção é máxima e é o único lugar acessível. Mas a superfície tem uma consequência: ela é <strong>livre</strong>, sem nada empurrando a barra radialmente, então $\sigma_r = \tau_{rx} = \tau_{r\theta} = 0$. Sobra um <strong>estado plano de tensões (EPT)</strong> no plano tangente, com eixos $x$ (ao longo da barra) e $\theta$ (circunferencial, que em C aponta para cima):</p>
+      <div class="math-box">$$[T]_C = \begin{bmatrix}\sigma_x & \tau_{x\theta} & 0\\ \tau_{x\theta} & 0 & 0\\ 0 & 0 & 0\end{bmatrix},\qquad \sigma_x = \frac{4P}{\pi d^2},\qquad |\tau_{x\theta}| = \frac{16T}{\pi d^3}$$</div>
+      <div class="math-box" style="text-align:center">
+        <svg viewBox="0 0 320 230" width="100%" style="max-width:420px;color:var(--text)" role="img" aria-label="Elemento de superfície em C: tensão normal sigma x nas faces verticais, cisalhamento negativo (face da direita para baixo) e extensômetros A (eixo) e B (45 graus)">
+          <defs>
+            <marker id="l4e1-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+            <marker id="l4e1-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00B131"/></marker>
+          </defs>
+          <rect x="110" y="65" width="100" height="100" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <!-- σx -->
+          <line x1="210" y1="115" x2="262" y2="115" stroke="currentColor" stroke-width="1.6" marker-end="url(#l4e1-a)"/>
+          <line x1="110" y1="115" x2="58" y2="115" stroke="currentColor" stroke-width="1.6" marker-end="url(#l4e1-a)"/>
+          <text x="266" y="111" font-size="12" fill="currentColor">σx</text>
+          <text x="22" y="111" font-size="12" fill="currentColor">σx</text>
+          <!-- τ negativo: face +x para baixo, face -x para cima, face +θ para a esquerda, face -θ para a direita -->
+          <line x1="219" y1="80" x2="219" y2="150" stroke="#00B131" stroke-width="1.6" marker-end="url(#l4e1-b)"/>
+          <line x1="101" y1="150" x2="101" y2="80" stroke="#00B131" stroke-width="1.6" marker-end="url(#l4e1-b)"/>
+          <line x1="195" y1="56" x2="125" y2="56" stroke="#00B131" stroke-width="1.6" marker-end="url(#l4e1-b)"/>
+          <line x1="125" y1="174" x2="195" y2="174" stroke="#00B131" stroke-width="1.6" marker-end="url(#l4e1-b)"/>
+          <text x="224" y="160" font-size="12" fill="#00B131">τ</text>
+          <!-- extensômetros -->
+          <rect x="140" y="111" width="40" height="8" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <text x="184" y="133" font-size="12" fill="currentColor">A (0°)</text>
+          <line x1="132" y1="148" x2="188" y2="82" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <text x="190" y="80" font-size="12" fill="currentColor">B (45°)</text>
+          <!-- eixos -->
+          <line x1="30" y1="205" x2="70" y2="205" stroke="currentColor" stroke-width="1.2" marker-end="url(#l4e1-a)"/>
+          <line x1="30" y1="205" x2="30" y2="165" stroke="currentColor" stroke-width="1.2" marker-end="url(#l4e1-a)"/>
+          <text x="74" y="209" font-size="11" fill="currentColor">x (eixo)</text>
+          <text x="36" y="168" font-size="11" fill="currentColor">θ (circunf.)</text>
+          <text x="160" y="222" font-size="11" fill="currentColor" text-anchor="middle">elemento em C, visto de frente</text>
+        </svg></div>
+      <p><strong>Qual o sinal de $\tau_{x\theta}$?</strong> Pela figura, a seta do torque passa por cima da barra vindo para o observador e desce pela face da frente. Pela regra da mão direita, $\vec T$ aponta para $+x$, saindo da parede. Na face $+x$ do elemento em C, a tensão acompanha o giro, ou seja, aponta para baixo ($-\theta$). Com a convenção usual (face positiva, sentido negativo ⇒ negativo), resulta $\tau_{x\theta} \lt 0$. O desenho acima já mostra esse sentido.</p>
+      <div class="callout warn"><span class="co-t">Onde isso vale</span><p>Seção circular cheia, material linear, ponto longe do engaste e da extremidade carregada. Junto ao engaste, a parede impede a contração de Poisson e o estado deixa de ser esse.</p></div></div>
+
+    <div class="step" data-n="2"><h4>Tensões → deformações: Hooke generalizada</h4>
+      <p>Revisão de base: <a href="../base.html#hooke">lei de Hooke</a>. Material <strong>isótropo e linear</strong>: o mesmo par $(E,\nu)$ vale em qualquer direção, e cada tensão produz a sua deformação, que se soma às demais.</p>
+      <ul>
+        <li><strong>Tensão normal → deformações normais, nunca distorção.</strong> $\sigma_x$ alonga a direção $x$ ($\sigma_x/E$) e encurta todas as transversais ($-\nu\sigma_x/E$): é o efeito Poisson.</li>
+        <li><strong>Cisalhamento → só distorção.</strong> $\tau_{x\theta}$ muda o ângulo reto entre $x$ e $\theta$, sem alongar nenhum dos dois eixos: $\gamma_{x\theta} = \tau_{x\theta}/G$.</li>
+      </ul>
+      <div class="math-box">$$\varepsilon_x = \frac{\sigma_x - \nu(\sigma_\theta + \sigma_r)}{E} = \frac{\sigma_x}{E},\qquad \varepsilon_\theta = \frac{\sigma_\theta - \nu(\sigma_x + \sigma_r)}{E} = -\nu\frac{\sigma_x}{E} = -\nu\varepsilon_x,\qquad \varepsilon_r = -\nu\varepsilon_x,\qquad \gamma_{x\theta} = \frac{\tau_{x\theta}}{G}$$</div>
+      <p>Duas observações que este exercício cobra:</p>
+      <ul>
+        <li><strong>Tensão zero não quer dizer deformação zero.</strong> Não há $\sigma_\theta$, mas há $\varepsilon_\theta = -\nu\varepsilon_x$: a barra afina quando é tracionada. Esquecer esse termo é o erro clássico.</li>
+        <li><strong>$E$, $G$ e $\nu$ não são independentes.</strong> No material isótropo só duas constantes são livres: $G = \dfrac{E}{2(1+\nu)}$. A dedução usa o cisalhamento puro, que equivale a $\pm\tau$ normais a 45°, e é a mesma ideia do passo 3 (Gere §3.6). Aqui, $G = \dfrac{200}{2\cdot1{,}29} = 77{,}52$ GPa.</li>
+      </ul></div>
+
+    <div class="step" data-n="3"><h4>Deformações → leitura: o que um extensômetro "vê"</h4>
+      <p>Ficha anterior: <a href="07-deformacoes.html">ficha 07 (Deformações num ponto)</a>. O extensômetro é um fio colado: ele só mede o <strong>alongamento relativo na direção em que foi colado</strong>, na superfície. Para uma direção $\vec n = (\cos\theta,\ \sin\theta)$ no plano $x\theta$:</p>
+      <div class="math-box">$$\varepsilon(\theta) = \vec n^{\,t}[E]\,\vec n = \varepsilon_x\cos^2\theta + \varepsilon_\theta\sin^2\theta + \gamma_{x\theta}\sin\theta\cos\theta = \frac{\varepsilon_x + \varepsilon_\theta}{2} + \frac{\varepsilon_x - \varepsilon_\theta}{2}\cos2\theta + \frac{\gamma_{x\theta}}{2}\sin2\theta$$</div>
+      <p>O fator $\tfrac12$ vem do tensor das deformações, que guarda $\gamma/2$ fora da diagonal (e não $\gamma$). <span class="tag tag-form">📄 Aula 10 p.49</span> Aplicando aos dois extensômetros:</p>
+      <ul>
+        <li><strong>A ($\theta = 0°$):</strong> $\varepsilon_a = \varepsilon_x$. A torção some da leitura, porque cisalhamento puro não alonga as fibras do eixo. <strong>A mede só $P$.</strong></li>
+        <li><strong>B ($\theta = 45°$):</strong> $\cos 90° = 0$ e $\sin 90° = 1$, logo $\varepsilon_b = \dfrac{\varepsilon_x + \varepsilon_\theta}{2} + \dfrac{\gamma_{x\theta}}{2}$. <strong>B mede $P$ e $T$ misturados.</strong> O ângulo de 45° é o que dá a B a maior sensibilidade à torção, porque $\sin2\theta$ é máximo nele.</li>
+      </ul>
+      <p>Por isso bastam dois extensômetros: são duas incógnitas ($P$ e $T$) e duas equações, e o sistema é triangular. A dá $\varepsilon_x$ direto; com ele, B dá $\gamma$.</p>
+      <div class="callout concept"><span class="co-t">Leitura física: superposição das duas cargas</span>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Carga atuando sozinha</th><th>$\varepsilon_a$</th><th>$\varepsilon_b$</th><th>Por quê</th></tr></thead><tbody>
+          <tr><td>só $P$</td><td>+100µ</td><td>+35,5µ</td><td>alonga o eixo; a 45°, pesa a média de $\varepsilon_x$ com $\varepsilon_\theta = -29\mu$</td></tr>
+          <tr><td>só $T$</td><td>0</td><td>−90,5µ</td><td>cisalhamento puro: a diagonal a 45° é uma direção principal e encurta</td></tr>
+          <tr><td><strong>$P + T$</strong></td><td><strong>+100µ</strong></td><td><strong>−55µ</strong></td><td>soma, porque o regime é linear (bate com as leituras)</td></tr>
+        </tbody></table></div>
+        <p><strong>Por que a diagonal de B encurta?</strong> Com $\tau_{x\theta} \lt 0$ (passo 1), a face da direita do elemento desce em relação à da esquerda. O canto de cima à direita se aproxima do canto de baixo à esquerda, e é exatamente essa a diagonal de B. Leitura negativa: coerente com o sentido de $T$ na figura.</p></div></div>
+
+    <div class="step-part">Parte 2 · Resolução (das leituras até as cargas)</div>
+
+    <div class="step" data-n="4"><h4>Dados e constantes</h4>
+      <div class="math-box">$$d = 40\ \text{mm}\quad A = \frac{\pi d^2}{4} = 1256{,}6\ \text{mm}^2\quad \frac{\pi d^3}{16} = 12\,566\ \text{mm}^3\quad E = 200\ \text{GPa}\quad \nu = 0{,}29\quad G = 77{,}52\ \text{GPa}$$</div></div>
+
+    <div class="step" data-n="5"><h4>Leituras → deformações em C</h4>
+      <div class="math-box">$$\varepsilon_x = \varepsilon_a = 100\mu\qquad \varepsilon_\theta = -\nu\varepsilon_x = -0{,}29\cdot100 = -29\mu$$
+      $$\varepsilon_b = \frac{100 + (-29)}{2} + \frac{\gamma_{x\theta}}{2} = -55\ \Rightarrow\ \frac{\gamma_{x\theta}}{2} = -55 - 35{,}5 = -90{,}5\mu\ \Rightarrow\ \gamma_{x\theta} = -181\mu$$</div>
+      <p>O sinal de $\gamma$ saiu negativo, o mesmo que o passo 1 previu pela figura. Se tivesse saído positivo, ou a figura ou a leitura estariam erradas.</p></div>
+
+    <div class="step" data-n="6"><h4>Deformações → tensões → cargas (item a)</h4>
+      <div class="math-box">$$\sigma_x = E\varepsilon_x = 200\,000 \cdot 100\times10^{-6} = 20{,}0\ \text{MPa}\ \Rightarrow\ P = \sigma_x A = 20{,}0 \cdot 1256{,}6 = 25\,133\ \text{N} = 25{,}13\ \text{kN}$$
+      $$\tau_{x\theta} = G\gamma_{x\theta} = 77\,519 \cdot (-181\times10^{-6}) = -14{,}03\ \text{MPa}\ \Rightarrow\ T = |\tau|\,\frac{\pi d^3}{16} = 14{,}03 \cdot 12\,566 = 176\,319\ \text{N·mm} = 176{,}3\ \text{N·m}$$</div>
+      <div class="callout warn"><span class="co-t">Por que $\sigma_x = E\varepsilon_x$ vale aqui (e na roseta do compl. 4 não)</span>
+        <p>A forma completa no EPT é $\sigma_x = \frac{E}{1-\nu^2}(\varepsilon_x + \nu\varepsilon_\theta)$. Substituindo $\varepsilon_\theta = -\nu\varepsilon_x$: $\frac{E}{1-\nu^2}(1-\nu^2)\varepsilon_x = E\varepsilon_x$. O atalho só vale porque o estado é <strong>uniaxial em tensão normal</strong>. Quando há $\sigma_\theta \ne 0$ (vaso de pressão, roseta genérica), é preciso a fórmula completa.</p></div></div>
+
+    <div class="step-part">Parte 3 · Item b e verificação</div>
+
+    <div class="step" data-n="7"><h4>Distorção máxima: círculo de Mohr das deformações</h4>
+      <p>Ficha de referência: <a href="04-circulos-de-mohr.html">ficha 04 (Círculos de Mohr)</a>. As deformações num ponto seguem a mesma matemática das tensões, trocando $\sigma \to \varepsilon$ e $\tau \to \gamma/2$. No plano $x\theta$:</p>
+      <div class="math-box">$$c = \frac{\varepsilon_x + \varepsilon_\theta}{2} = 35{,}5\mu\qquad R = \sqrt{\left(\frac{\varepsilon_x - \varepsilon_\theta}{2}\right)^2 + \left(\frac{\gamma_{x\theta}}{2}\right)^2} = \sqrt{64{,}5^2 + 90{,}5^2} = 111{,}1\mu$$
+      $$\varepsilon_1 = c + R = 146{,}6\mu\qquad \varepsilon_2 = c - R = -75{,}6\mu\qquad \tan 2\theta_p = \frac{\gamma_{x\theta}}{\varepsilon_x - \varepsilon_\theta} = \frac{-181}{129}\ \Rightarrow\ \theta_p = -27{,}3°$$</div>
+      <p>$\varepsilon_1$ fica a 27,3° do eixo, girando no sentido horário (para baixo, na vista de frente): a tração puxa a direção principal para o eixo, e a torção a puxa para 45°.</p>
+      <p><strong>Não esquecer a terceira direção.</strong> A direção radial também é principal, com $\varepsilon_r = -\nu\varepsilon_x = -29\mu$. Como ela fica entre $\varepsilon_2$ e $\varepsilon_1$, o maior círculo de Mohr 3D é o do plano, e:</p>
+      <div class="math-box">$$\gamma_{máx} = \varepsilon_1 - \varepsilon_2 = 2R = 222\times10^{-6}$$</div>
+      <p>Se $\varepsilon_r$ caísse fora do intervalo, o máximo absoluto viria de $\varepsilon_r$ e de uma das principais do plano. É a mesma armadilha de esquecer $\sigma_3 = 0$ no Tresca.</p></div>
+
+    <div class="step" data-n="8"><h4>Tensão de cisalhamento máxima: dois caminhos que precisam concordar</h4>
+      <p><strong>Caminho 1, pelas tensões</strong> (Mohr das tensões, com $\sigma_\theta = 0$):</p>
+      <div class="math-box">$$\sigma_{1,2} = \frac{\sigma_x}{2} \pm \sqrt{\left(\frac{\sigma_x}{2}\right)^2 + \tau_{x\theta}^2} = 10 \pm \sqrt{10^2 + 14{,}03^2} = 10 \pm 17{,}23\ \Rightarrow\ \sigma_1 = 27{,}23,\ \ \sigma_2 = -7{,}23,\ \ \sigma_3 = 0\ \text{MPa}$$
+      $$\tau_{máx} = \frac{\sigma_{máx} - \sigma_{mín}}{2} = \frac{27{,}23 - (-7{,}23)}{2} = 17{,}23\ \text{MPa}$$</div>
+      <p>Como $\sigma_1 \gt 0 \gt \sigma_2$, o $\sigma_3 = 0$ fica entre eles e o máximo absoluto é o do plano.</p>
+      <p><strong>Caminho 2, pelas deformações:</strong> $\tau_{máx} = G\gamma_{máx} = 77{,}52\times10^3 \cdot 222{,}3\times10^{-6} = 17{,}23$ MPa.</p>
+      <div class="callout concept"><span class="co-t">Por que os dois caminhos coincidem</span>
+        <p>No material isótropo, as direções principais de tensão e de deformação são as mesmas, porque o material não tem direção preferida que as desalinhe. Logo os planos de $\tau_{máx}$ e de $\gamma_{máx}$ também coincidem, e $\tau_{máx} = G\gamma_{máx}$. Num material anisótropo, como um compósito com fibras, isso falharia.</p></div></div>
+
+    <div class="step" data-n="9"><h4>Verificação e conclusão</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Grandeza</th><th>Calculado</th><th>Lista</th><th></th></tr></thead><tbody>
+        <tr><td>$P$</td><td>25,133 kN</td><td>25,133 kN</td><td><span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$T$</td><td>176,32 N·m</td><td>176,327 N·m</td><td><span class="badge badge-ok">bate</span> (diferença de arredondamento)</td></tr>
+        <tr><td>$\gamma_{máx}$</td><td>222,3µ</td><td>222µ</td><td><span class="badge badge-ok">bate</span></td></tr>
+        <tr><td>$\tau_{máx}$</td><td>17,23 MPa</td><td>17,78 MPa</td><td><span class="badge badge-warn">diverge</span></td></tr>
+      </tbody></table></div>
+      <div class="answer"><strong>Respostas:</strong> a) $P = 25{,}13$ kN e $T = 176{,}3$ N·m; b) $\gamma_{máx} = 222\times10^{-6}$ e $\tau_{máx} = 17{,}2$ MPa.</div>
+      <div class="callout diverge"><span class="co-t">Divergência com a lista: τmáx</span><p>O gabarito dá $17{,}78 = 80\ \text{GPa}\times222\mu$, ou seja, usa $G = 80$ GPa. Esse valor não é coerente com $E = 200$ GPa e $\nu = 0{,}29$ dados, que levam a $G = 77{,}52$ GPa, valor que o próprio gabarito usa para chegar em $T = 176{,}3$ N·m. Os dois caminhos do passo 8 concordam em 17,23 MPa. Na prova, use o $G$ que sai de $E$ e $\nu$ e deixe a conta à mostra.</p></div>
+      <p><strong>Checagens de ordem de grandeza:</strong> 20 MPa e 14 MPa estão muito abaixo do escoamento de um aço (~250 MPa), então a hipótese de regime linear está garantida. Deformações da ordem de $10^{-4}$ também são típicas de extensômetro em serviço.</p>
+      <ul>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Usar $\varepsilon_\theta = 0$ porque $\sigma_\theta = 0$. Daria $\gamma = 2(-55 - 50) = -210\mu$ e um $T$ 16% maior.</li>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Usar $\gamma$ no lugar de $\gamma/2$ na fórmula de $\varepsilon(\theta)$, o que leva a $\gamma$ pela metade.</li>
+        <li><span class="tag tag-mem">⚠ armadilha</span> Calcular $\gamma_{máx}$ só no plano sem olhar $\varepsilon_r$. Aqui não muda o resultado, mas é preciso dizer por quê.</li>
+      </ul></div>
+
+    <div class="callout concept"><span class="co-t">O que levar deste exercício (para a prova sem consulta)</span>
+      <ul>
+        <li>Superfície livre de barra ⇒ EPT. Tração dá $\sigma_x = 4P/\pi d^2$; torção dá $\tau = 16T/\pi d^3$ na superfície.</li>
+        <li>Hooke isótropa: normal só gera normal (com Poisson nas transversais) e cisalhamento só gera distorção. $G = E/2(1+\nu)$.</li>
+        <li>Extensômetro: $\varepsilon(\theta) = \frac{\varepsilon_x + \varepsilon_y}{2} + \frac{\varepsilon_x - \varepsilon_y}{2}\cos2\theta + \frac{\gamma}{2}\sin2\theta$. A 0° ele isola a força axial; a 45° ele pega a torção.</li>
+        <li>$\gamma_{máx} = \varepsilon_1 - \varepsilon_3$ olhando as <strong>três</strong> principais; $\tau_{máx} = G\gamma_{máx}$ no material isótropo.</li>
+      </ul></div>
   </article>
 <article class="ex pivo" id="l4-ex10">
     <div class="ex-head"><div><div class="ex-kicker">Lista 4 · Complementar 3 · Pivô 17 da P1</div>
