@@ -394,6 +394,9 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.37)</span>
       1) A viga ABC possui rigidez flexional $EI$ e está simplesmente apoiada em A e presa a um cabo de rigidez axial $(EA)_c$ e comprimento $L$ em C. A viga está submetida a uma força concentrada de magnitude P aplicada em B. Determine o deslocamento vertical dos pontos B e C em função dos parâmetros fornecidos.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 1):</strong> ver o PDF oficial, Slides da aula 14, p. 37 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span><p>Conceitos que o exercício usa, na ordem em que aparecem: equilíbrio de corpo rígido para as reações (<a href="../base.html#equilibrio">Base</a>); esforços numa viga biapoiada, diagrama triangular (<a href="../base.html#diagramas">Base</a>, <a href="01-esforcos-solicitantes.html">ficha 01 (Esforços solicitantes)</a>); energia na flexão $\int M^2/2EI$ (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>); energia de barra $N^2L/2EA$ para o cabo (<a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>); P.T.E. e o que ele não alcança (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>). Repare que o cabo aqui é um apoio elástico, a mesma ideia que vira incógnita hiperestática no <a href="13-hiperestaticas-energia.html#s17-ex1-h">ficha 13 (Hiperestáticas e linha elástica)</a>.</p></div>
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span><ul><li>Viga e cabo elástico-lineares; linearidade geométrica (o cabo continua vertical e as reações saem da geometria indeformada).</li><li>Viga esbelta: energia da cortante desprezada (aula 14 p.28). O cabo, elemento de esforço único, <strong>não</strong> se despreza.</li><li>Carga única e deslocamento correspondente: condições do P.T.E. para $\delta_{v,B}$. Para $\delta_{v,C}$ elas falham.</li><li>Cabo só traciona: a resposta precisa dar $N_c > 0$ (dá: $Pa/(a+b)$).</li></ul></div>
+
     <div class="step" data-n="1"><h4>Classificar</h4><p>Viga isostática (apoio em A + cabo em C) sob flexão simples; o cabo só tem força normal. Uma carga ($P$ em B), e pede-se o deslocamento de B (correspondente, então P.T.E. serve) e de C (não correspondente, então não serve).</p>
       <div class="callout concept"><span class="co-t">Conceito: energia na flexão e a regra do "esforço único"</span>
         <p>Na flexão, $\sigma_x = -M_zy/I_z$ e $u^* = \sigma^2/2E$. Integrando $y^2$ na seção aparece $I_z$ (aula 14 p.10): $U^* = \int\frac{M^2}{2EI}ds$. A cortante também guarda energia, mas numa viga esbelta ela é da ordem de $(h/L)^2$ da de flexão e se despreza. O <strong>cabo</strong> é diferente: ele só tem força normal, é o <em>único</em> esforço dele. Desprezar essa energia significaria tratar o cabo como rígido (aula 14 p.32). Por isso a resposta tem a parcela $L/(EA)_c$.</p></div></div>
@@ -426,6 +429,9 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       2) A estrutura ABC é formada pelas barras AB e BC, de seção transversal circular cheia e diâmetro $d$. O material das barras é elástico-linear, com módulo de elasticidade $E$ e coeficiente de Poisson ν dados. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em C, determine o deslocamento vertical em C pelo Princípio do Trabalho e da Energia.
       <br>Resp. (slide): $\delta_{v,C} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA} = \frac{PL^3}{EI}\left[\frac38 + \frac{(1+\nu)}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 2):</strong> ver o PDF oficial, Slides da aula 14, p. 38 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span><p>Conceitos que o exercício usa: esforços em estrutura espacial, $\vec M = \vec r\times\vec P$ separado em torção e flexão (<a href="01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a>); energia de flexão, torção e cortante na expressão geral (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>, <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>); fator de forma $f_c$ e o que desprezar (<a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>); $G = E/2(1+\nu)$ (<a href="08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>); P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>). É o "irmão" do exercício em grupo #05 (<a href="12-teoremas-de-castigliano.html#a5-h">ficha 12 (Crotti-Engesser e Castigliano)</a>).</p></div>
+    <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span><ul><li>Seção circular cheia: $I_p = 2I$ e $U^*_T = \int T^2/2GI_p$ valem. Em seção não circular a torção pede outra constante.</li><li>Elástico-linear, isótropo ($G = E/2(1+\nu)$); linearidade geométrica (as barras continuam no plano horizontal).</li><li>A cortante é <em>mantida</em> de propósito, para medir quanto pesa ($\propto (d/L)^2$). Normal inexistente (cargas perpendiculares às barras).</li><li>Ligação rígida em B; engaste perfeito em A; carga única com deslocamento correspondente (P.T.E. vale).</li></ul></div>
+
     <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A) no plano horizontal, carga vertical. Em BC há flexão e cortante; em AB há flexão, cortante <strong>e torção</strong>. Carga única, deslocamento correspondente: P.T.E.</p>
       <div class="callout concept"><span class="co-t">Conceito: como achar $M$ e $T$ numa estrutura 3D</span>
         <p>Corte a barra, olhe para a parte que vai até a carga e calcule o momento de $P$ em relação ao centro da seção: $\vec M = \vec r\times\vec P$. A componente de $\vec M$ <em>ao longo do eixo da barra</em> é o torque $T$, e a componente <em>perpendicular</em> é o fletor $M$. Em AB, a força em C tem braço $s$ (ao longo de AB) e braço $L/2$ (ao longo de BC, perpendicular a AB). O braço ao longo da própria barra gera flexão ($M = Ps$); o braço perpendicular gera torção ($T = PL/2$, constante). Isso é revisão da aula 2 (Lista 1) aplicada à energia.</p></div></div>
@@ -450,38 +456,102 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
   </article>
 <h3 class="sub" id="t11-demais" data-nav="Demais exercícios">Demais exercícios</h3>
 <article class="ex" id="s14-ex5">
-    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exemplo 2 (p.25–28) · ver <a href="11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
-      <h3 id="s14-ex5-h" data-nav="A14 ex.2 · cortante no balanço">Balanço com $P$: quanto pesa a cortante</h3></div></div>
-    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
-    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.25)</span>
-      A barra AB, engastada em A e livre em B, está submetida a uma carga concentrada $P$ na extremidade B. A barra possui seção transversal retangular ($b\times h$). Determine o deslocamento vertical $\delta_{v,B}$ do ponto B pelo Princípio do Trabalho e da Energia. (Dados: $P, L, E, b, h$, $f = 6/5$, $\nu = 0{,}3$.)</div>
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exemplo 2 (p.25–28)</div>
+      <h3 id="s14-ex5-h" data-nav="A14 ex.2 · cortante no balanço">Balanço com $P$: quanto pesa a cortante (e por que o curso a despreza)</h3></div>
+      <div class="ex-badges"><span class="badge badge-aula">Resolvido em aula (23/set)</span></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.25)</span> A barra AB, engastada em A e livre em B, está submetida a uma carga concentrada $P$ na extremidade B. A barra possui seção transversal retangular ($b\times h$). Determine o deslocamento vertical $\delta_{v,B}$ do ponto B pelo Princípio do Trabalho e da Energia. (Dados: $P, L, E, b, h$, $f = 6/5$, $\nu = 0{,}3$.)</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 5):</strong> ver o PDF oficial, Slides da aula 14, p. 25 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> com $s$ a partir de B, $V_y = P$ e $M_z = -Ps$. $U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \int_0^L\frac{fP^2}{2GA}ds = \frac{P^2L^3}{6EI} + \frac{fP^2L}{2GA}$.</p>
-    <div class="math-box">$$\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA} = \frac{PL^3}{3EI}\left[1 + \eta\right],\qquad \eta = \frac{3fEI}{GAL^2} = f(1+\nu)\frac12\left(\frac hL\right)^2 = 0{,}78\left(\frac hL\right)^2$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA}$; com $h/L = 0{,}1$ a cortante acrescenta só 0,78%. <span class="badge badge-ok">bate com o slide</span> É a justificativa do default "desprezar a cortante em vigas".</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Este exemplo é a <strong>justificativa</strong> de uma regra usada em todos os outros: "despreze a energia da cortante". Ele junta: esforços no balanço a partir da ponta (<a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>); energia de flexão (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>); energia de cisalhamento com o fator de forma (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>, $\tau = VQ/Ib$ de Mec. Sól. I, <a href="../base.html#flexao">Base</a>); relação $E/G = 2(1+\nu)$ (<a href="08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>); P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step" data-n="1"><h4>Regressão: de onde vem o fator de forma $f$</h4>
+      <p>Na flexão simples, além de $\sigma = My/I$ a seção tem $\tau = VQ/Ib$, que não é uniforme (parábola no retângulo, máxima no centro e zero nas bordas). A energia de cisalhamento é $\int\tau^2/2G\,dV$. Integrando a parábola na seção e comparando com o valor "ingênuo" $V^2/2GA$ (tensão média), sobra um número que só depende da forma da seção: $U^*_V = \int f\,V^2/2GA\,ds$, com $f = 6/5$ no retângulo e $10/9$ no círculo (aula 14 p.15–20). $f > 1$ porque a tensão real se concentra no meio.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Elástico-linear, isótropo, linearidade geométrica; carga única e deslocamento correspondente (P.T.E. vale).</li>
+          <li>Seção retangular constante; tensão de cisalhamento pela fórmula de Jourawski ($\tau = VQ/Ib$), que supõe $\tau$ uniforme ao longo da largura $b$.</li>
+          <li>Junto ao engaste e ao ponto de carga, a distribuição real difere (Saint-Venant); o efeito no deslocamento é pequeno.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Esforços e energia</h4>
+      <p>Com $s$ a partir de B, o trecho entre B e o corte só tem $P$: $V_y = P$ (constante) e $M_z = -Ps$ (traciona em cima).</p>
+      <div class="math-box">$$U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \int_0^L\frac{fP^2}{2GA}ds = \frac{P^2L^3}{6EI} + \frac{fP^2L}{2GA}$$
+      $$\frac{P\,\delta_{v,B}}{2} = U^*\ \Rightarrow\ \boxed{\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA}}$$</div></div>
+
+    <div class="step" data-n="3"><h4>Quanto pesa a cortante</h4>
+      <div class="math-box">$$\delta_{v,B} = \frac{PL^3}{3EI}\left[1 + \eta\right],\qquad \eta = \frac{3fEI}{GAL^2} = 3f\cdot2(1+\nu)\cdot\frac{bh^3/12}{bh\,L^2} = \frac{f(1+\nu)}{2}\left(\frac hL\right)^2 = 0{,}78\left(\frac hL\right)^2$$</div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$h/L$</th><th>$\eta$ (acréscimo pela cortante)</th><th>Leitura</th></tr></thead><tbody>
+        <tr><td>0,05</td><td>0,2%</td><td>viga esbelta típica</td></tr>
+        <tr><td>0,1</td><td>0,8%</td><td>limite citado no slide</td></tr>
+        <tr><td>0,3</td><td>7%</td><td>viga curta: começa a pesar</td></tr>
+        <tr><td>1</td><td>78%</td><td>"viga" cúbica: a teoria de vigas já não vale</td></tr></tbody></table></div>
+      <p>O professor: "como as vigas possuem, em geral, relações $h/L < 0{,}1$, a parcela devida às forças cortantes pode ser desprezada em quase todos os casos práticos". É daí que vem o default do curso.</p>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{fPL}{GA} = \frac{PL^3}{3EI}\left[1 + 0{,}78(h/L)^2\right]$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠</span> A regra vale para <strong>vigas</strong>. Nunca para cabos, molas e barras de treliça (esforço único), nem para a torção em estruturas espaciais.</li></ul></div>
   </article>
 <article class="ex" id="s14-ex3">
-    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 3 (p.39) · ver <a href="11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
-      <h3 id="s14-ex3-h" data-nav="A14 exerc.3 · arco semicircular">Arco semicircular engastado</h3></div></div>
-    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
-    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.39)</span>
-      3) O eixo central do arco AB possui raio de curvatura R e sua seção transversal é quadrada de lado $a$. O material das barras é elástico-linear, com módulo de elasticidade $E$. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em B, determine o deslocamento vertical neste ponto em função dos parâmetros fornecidos usando o Princípio do Trabalho e da Energia. <em>Obs</em>: Considere também as parcelas devidas à força normal e à força cortante no cálculo da energia complementar e verifique em quais condições tais parcelas podem ser desprezadas.</div>
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 3 (p.39)</div>
+      <h3 id="s14-ex3-h" data-nav="A14 exerc.3 · arco semicircular">Arco semicircular engastado: coordenada angular e as três parcelas de energia</h3></div>
+      <div class="ex-badges"></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.39)</span> 3) O eixo central do arco AB possui raio de curvatura $R$ e sua seção transversal é quadrada de lado $a$. O material das barras é elástico-linear, com módulo de elasticidade $E$. Considerando que a seção A esteja engastada e que uma força concentrada de magnitude $P$ seja aplicada em B, determine o deslocamento vertical neste ponto em função dos parâmetros fornecidos usando o Princípio do Trabalho e da Energia. <em>Obs</em>: Considere também as parcelas devidas à força normal e à força cortante no cálculo da energia complementar e verifique em quais condições tais parcelas podem ser desprezadas.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 3):</strong> ver o PDF oficial, Slides da aula 14, p. 39 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> coordenada angular $\theta$ medida a partir de B, $ds = R\,d\theta$, $\theta \in [0, \pi]$. Na seção $\theta$, o braço horizontal de $P$ é $R(1 - \cos\theta)$ ⇒ $M = PR(1-\cos\theta)$; decompondo $P$ na tangente e na normal ao arco: $N = P\sin\theta$, $V = P\cos\theta$ (sinais não importam, tudo ao quadrado).</p>
-    <div class="math-box">$$U^* = \frac{P^2R^3}{2EI}\int_0^\pi(1-\cos\theta)^2d\theta + \frac{P^2R}{2EA}\int_0^\pi\sin^2\theta\,d\theta + \frac{f_cP^2R}{2GA}\int_0^\pi\cos^2\theta\,d\theta = \frac{3\pi P^2R^3}{4EI} + \frac{\pi P^2R}{4EA} + \frac{\pi f_cP^2R}{4GA}$$
-    $$\delta_{v,B} = \frac{3\pi PR^3}{2EI}\left[1 + \frac1{36}\left(\frac aR\right)^2 + \frac{1+\nu}{15}\left(\frac aR\right)^2\right]\qquad (I = a^4/12,\ A = a^2,\ f_c = 6/5)$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} \cong \frac{3\pi PR^3}{2EI}$; as parcelas de $N$ e $V$ são de ordem $(a/R)^2$, desprezíveis em arco esbelto ($a \ll R$). <span class="badge badge-ok">bate com o slide</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Esforços em arco (Lista 1 da P1: o arco vertical com peso, <a href="01-esforcos-solicitantes.html#l1-ex2-h">ficha 01 (Esforços solicitantes)</a>); decomposição de uma força nas direções tangente e normal ao eixo (<a href="../base.html#vetores">Base</a>); a expressão geral da energia com $N$, $V$ e $M$ (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>) e o fator de forma (<a href="11-energia-na-flexao.html#s14-ex5-h">ficha 11 (Energia na flexão)</a>); integrais trigonométricas (<a href="../base.html#trigonometria">Base</a>); P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step" data-n="1"><h4>Regressão: a coordenada certa para um arco</h4>
+      <p>No arco, o comprimento ao longo do eixo é $ds = R\,d\theta$. Medindo $\theta$ a partir da ponta livre B, o pedaço entre B e o corte só tem $P$, e a reação do engaste não entra. Na seção $\theta$:</p>
+      <ul><li><strong>Momento:</strong> o braço de $P$ (vertical) em relação ao centro da seção é a distância horizontal entre eles, $R(1 - \cos\theta)$: $M = PR(1 - \cos\theta)$.</li>
+          <li><strong>Normal e cortante:</strong> decomponha $P$ na direção tangente ao eixo e na normal a ele. Em B ($\theta = 0$) a tangente é vertical e $P$ é puramente axial; no topo ($\theta = 90°$) a tangente é horizontal e $P$ é puramente cortante. Logo $N = P\cos\theta$ e $V = P\sin\theta$ (sinais irrelevantes: tudo entra ao quadrado).</li></ul>
+      <p>Integrais úteis: $\int_0^\pi(1 - \cos\theta)^2d\theta = \frac{3\pi}{2}$; $\int_0^\pi\sin^2\theta\,d\theta = \int_0^\pi\cos^2\theta\,d\theta = \frac\pi2$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li><strong>Arco esbelto</strong> ($a \ll R$): usa-se a energia de viga reta ($M^2/2EI$) ao longo do eixo curvo. Para curvatura forte ($R$ da ordem de $a$), a tensão de flexão deixa de ser linear na seção (viga curva) e a fórmula é só aproximada.</li>
+          <li>Elástico-linear, isótropo; linearidade geométrica; carga única com deslocamento correspondente.</li>
+          <li>Seção quadrada: $I = a^4/12$, $A = a^2$, $f_c = 6/5$.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Energia e deslocamento</h4>
+      <p>A versão anterior deste guia trocava $\sin$ e $\cos$ em $N$ e $V$; o resultado não muda porque $\int_0^\pi\sin^2 = \int_0^\pi\cos^2$, mas a leitura física correta é a de cima.</p>
+      <div class="math-box">$$U^* = \frac{P^2R^3}{2EI}\cdot\frac{3\pi}{2} + \frac{P^2R}{2EA}\cdot\frac\pi2 + \frac{f_cP^2R}{2GA}\cdot\frac\pi2 = \frac{3\pi P^2R^3}{4EI} + \frac{\pi P^2R}{4EA} + \frac{\pi f_cP^2R}{4GA}$$
+      $$\delta_{v,B} = \frac{2U^*}{P} = \frac{3\pi PR^3}{2EI}\left[1 + \frac{I}{3AR^2} + \frac{f_cEI}{3GAR^2}\right] = \frac{3\pi PR^3}{2EI}\left[1 + \frac{1}{36}\left(\frac aR\right)^2 + \frac{1+\nu}{15}\left(\frac aR\right)^2\right]$$</div></div>
+
+    <div class="step" data-n="3"><h4>Quando desprezar $N$ e $V$</h4>
+      <p>As duas parcelas extras são de ordem $(a/R)^2$. Com $a/R = 0{,}1$ e $\nu = 0{,}3$: normal $0{,}03\%$, cortante $0{,}09\%$. Mesmo com $a/R = 0{,}3$ somam ~1%. No arco esbelto, só a flexão importa, como na viga reta (<a href="11-energia-na-flexao.html#s14-ex5-h">ficha 11 (Energia na flexão)</a>).</p>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{3\pi PR^3}{2EI}\left[1 + \frac{1}{36}\left(\frac aR\right)^2 + \frac{1+\nu}{15}\left(\frac aR\right)^2\right] \cong \frac{3\pi PR^3}{2EI}$ para $a \ll R$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o $R$ de $ds = R\,d\theta$: a flexão sairia com $R^2$ e a dimensão não fecharia ($PR^3/EI$ é comprimento).</li></ul></div>
   </article>
 <article class="ex" id="s14-ex4">
-    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 4 (p.40) · ver <a href="11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
-      <h3 id="s14-ex4-h" data-nav="A14 exerc.4 · mola de torção">Viga com mola de torção no apoio</h3></div></div>
-    <div class="ex-topics"><span class="chip">W4</span><span class="chip">A4</span></div>
-    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.40)</span>
-      4) A viga AB possui comprimento $L$ e rigidez flexional $EI$ (constante). A extremidade A está conectada a uma mola de torção (de comportamento linear) com constante $k_t$ (dada). Considerando que uma força concentrada de intensidade $P$ seja aplicada na extremidade livre B, determine o deslocamento vertical neste ponto pelo Princípio do Trabalho e da Energia, em função dos parâmetros fornecidos. Considere válida a hipótese de linearidade geométrica.</div>
+    <div class="ex-head"><div><div class="ex-kicker">Slides aula 14 · exercício 4 (p.40)</div>
+      <h3 id="s14-ex4-h" data-nav="A14 exerc.4 · mola de torção">Viga com mola de torção no apoio: a mola gira a viga como corpo rígido</h3></div>
+      <div class="ex-badges"></div></div>
+    <div class="ex-topics"><span class="chip">W4</span><span class="chip">W2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Aula 14, p.40)</span> 4) A viga AB possui comprimento $L$ e rigidez flexional $EI$ (constante). A extremidade A está conectada a uma mola de torção (de comportamento linear) com constante $k_t$ (dada). Considerando que uma força concentrada de intensidade $P$ seja aplicada na extremidade livre B, determine o deslocamento vertical neste ponto pelo Princípio do Trabalho e da Energia, em função dos parâmetros fornecidos. Considere válida a hipótese de linearidade geométrica.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Slides aula 14 · ex. 4):</strong> ver o PDF oficial, Slides da aula 14, p. 40 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> a mola de torção é um elemento de esforço único, então a energia dela entra (A4): $U^*_{mola} = \frac{M_A^2}{2k_t}$ com $M_A = PL$. Na viga, $M = Ps$ a partir de B.</p>
-    <div class="math-box">$$U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \frac{(PL)^2}{2k_t}\ \Rightarrow\ \delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t} = \frac{PL^3}{3EI}\left(1 + \frac{3EI}{k_tL}\right)$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t}$. <span class="badge badge-ok">bate com o slide</span> Leitura: a mola deixa a viga girar $\theta_A = PL/k_t$ como corpo rígido, e B desce $L\theta_A$ a mais.</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Balanço a partir da ponta livre (<a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>); energia de flexão (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>); energia da mola pelo gráfico esforço × deformação (<a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>), agora com momento e rotação; regra do esforço único (<a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>); P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>). A mesma mola de torção volta, dentro da estrutura, no exercício em grupo #06 (<a href="13-hiperestaticas-energia.html#a6-h">ficha 13 (Hiperestáticas e linha elástica)</a>).</p></div>
+
+    <div class="step" data-n="1"><h4>Regressão: energia de uma mola de torção</h4>
+      <p>Mola de torção linear: $M = k_t\theta$. No gráfico $M\times\theta$ (uma reta), o trabalho complementar acumulado até o momento $M_A$ é a área $\int\theta\,dM = \int\frac{M}{k_t}dM = \frac{M_A^2}{2k_t}$. Mesma forma de $F^2/2k$ (mola de força) e de $T^2L/2GI_p$ (eixo, que é uma mola de torção com $k_t = GI_p/L$, <a href="10-energia-na-torcao.html#s13-ex1-h">ficha 10 (Energia na torção)</a>). A mola tem <strong>um único esforço</strong>: a energia dela entra sempre.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Mola de torção linear e sem folga; viga elástico-linear, esbelta (cortante desprezada).</li>
+          <li>Linearidade geométrica (pedida no enunciado): o momento na mola é $PL$, calculado com a viga ainda horizontal, mesmo depois de ela girar.</li>
+          <li>Apoio em A impede translações e só permite a rotação controlada pela mola.</li></ul></div>
+
+    <div class="step" data-n="2"><h4>Esforços e energia</h4>
+      <p>Com $s$ a partir de B: $M = Ps$ (em módulo) na viga. Na mola, o momento é o da viga em A: $M_A = PL$.</p>
+      <div class="math-box">$$U^* = \int_0^L\frac{P^2s^2}{2EI}ds + \frac{(PL)^2}{2k_t} = \frac{P^2L^3}{6EI} + \frac{P^2L^2}{2k_t}\qquad \frac{P\delta_{v,B}}{2} = U^*\ \Rightarrow\ \boxed{\delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t}}$$</div></div>
+
+    <div class="step" data-n="3"><h4>Leitura física e casos-limite</h4>
+      <p>A mola deixa a viga girar em A de $\theta_A = M_A/k_t = PL/k_t$ <strong>como corpo rígido</strong>; isso abaixa B de $L\theta_A = PL^2/k_t$. Sobre esse giro, a viga ainda flete como balanço ($PL^3/3EI$). As duas parcelas se somam (molas em série).</p>
+      <ul><li>$k_t \to \infty$: engaste perfeito, $\delta = PL^3/3EI$ ✓.</li>
+          <li>$k_t \to 0$: rótula sem mola, mecanismo (a viga cai): $\delta \to \infty$ ✓.</li>
+          <li>As parcelas se igualam quando $k_t = 3EI/L$: é a rigidez rotacional "natural" de uma viga desse tamanho.</li></ul>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \frac{PL^3}{3EI} + \frac{PL^2}{k_t} = \frac{PL^3}{3EI}\left(1 + \frac{3EI}{k_tL}\right)$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer $M_A^2/2k_t$: a resposta vira a do engaste perfeito.</li></ul></div>
   </article>
 
 </section>
