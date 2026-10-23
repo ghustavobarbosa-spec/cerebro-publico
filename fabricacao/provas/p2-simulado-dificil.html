@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P2 · simulado difícil · PMR3301</title>
+<meta name="description" content="50 questões novas de múltipla escolha, nível difícil, com gabarito comentado e diagnóstico por ficha">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pmr3301-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PMR3301 · Simulado difícil</div>
+  <div class="sb-sub">Complementos de Fabricação Mecânica</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#d-intro-h">Como fazer</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f12-h">1–8 · Peças de plástico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f13-h">9–15 · Compósitos</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f14-h">16–22 · Prototipagem e manufatura aditiva</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f15-h">23–27 · Elementos finitos</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f16-h">28–36 · Junção (soldagem)</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f17-h">37–42 · Micro e nanofabricação</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-f18-h">43–50 · Usinagem CNC</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#d-gabarito-h">Gabarito e diagnóstico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Complementos de Fabricação Mecânica</a> <span class="sep">›</span> <a href="index.html">Provas</a> <span class="sep">›</span> <span>P2 · simulado difícil</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="d-intro"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Simulado · difícil</span><h2 id="d-intro-h" data-nav="Como fazer">Simulado difícil da P2</h2><p class="section-desc">50 questões de múltipla escolha, uma correta por questão, na ordem do programa (fichas 12 a 18).</p></div>
+<p><strong>O que torna estas difíceis:</strong> "assinale a incorreta", afirmações I a IV para julgar, associações em que uma única troca derruba a alternativa, parâmetros de um processo trocados pelos de outro e contas de um passo (n, F, área/volume, vida de molde). Tudo sai dos slides e das fichas.</p><div class="callout"><span class="co-t">Como fazer</span><p>Faça as 50 de uma vez, sem consulta, como na prova (o site assume P2 sem consulta). Anote as letras numa folha e só então abra os gabaritos. Na impressão os gabaritos somem: imprima e faça no papel, se preferir. As questões são novas: nenhuma repete as 58 das fichas. As contas foram conferidas em Python (<code>simulados_p2.py</code>).</p></div>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ficha</th><th>Questões</th></tr></thead><tbody><tr><td><a href="../topicos/12-polimeros.html">12 · Peças de plástico</a></td><td class="num">1–8 (8)</td></tr><tr><td><a href="../topicos/13-compositos.html">13 · Compósitos</a></td><td class="num">9–15 (7)</td></tr><tr><td><a href="../topicos/14-prototipagem-e-manufatura-aditiva.html">14 · Prototipagem e manufatura aditiva</a></td><td class="num">16–22 (7)</td></tr><tr><td><a href="../topicos/15-elementos-finitos.html">15 · Elementos finitos</a></td><td class="num">23–27 (5)</td></tr><tr><td><a href="../topicos/16-juncao.html">16 · Junção (soldagem)</a></td><td class="num">28–36 (9)</td></tr><tr><td><a href="../topicos/17-micro-e-nanofabricacao.html">17 · Micro e nanofabricação</a></td><td class="num">37–42 (6)</td></tr><tr><td><a href="../topicos/18-usinagem-cnc.html">18 · Usinagem CNC</a></td><td class="num">43–50 (8)</td></tr></tbody></table></div></section>
+<section class="chapter" id="d-f12"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1–8</span><h2 id="d-f12-h" data-nav="1–8 · Peças de plástico">Peças de plástico</h2><p class="section-desc">Ficha <a href="../topicos/12-polimeros.html">12</a> · 8 questões.</p></div>
+<article class="ex" id="d1"><div class="ex-head"><div><div class="ex-kicker">Questão 1 · ficha 12 · escolha de processo</div><h3 id="d1-h">Tanque grande, lote pequeno</h3></div></div>
+<div class="stmt">Uma empresa vai produzir cerca de 300 unidades por ano de um tanque <strong>oco, fechado, sem costura</strong>, de 2 m³, e o cliente muda o projeto a cada dois anos. O processo mais adequado, com a justificativa correta, é:
+<ol type="a"><li>sopro por extrusão: é o processo de peças ocas, e o ferramental é barato;</li><li>injeção: é o único processo com boa precisão para peças grandes;</li><li>termoformação a vácuo: faz cavidades profundas a partir de chapa, sem costura;</li><li>espuma estrutural: tem a melhor relação rigidez/peso para peças grandes.</li><li>rotomoldagem: faz peças ocas grandes de formato simples com ferramental barato, compatível com a taxa baixa e o lote pequeno;</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slides 5–6 e 22–23. O sopro ((a)) é para peças ocas <strong>de paredes finas</strong> em alta taxa (garrafas), não para 2 m³. A injeção ((b)) não faz peça oca fechada e seu molde caro não se paga em 300 peças/ano com projeto que muda. A termoformação ((c)) parte de chapa e faz cavidade <strong>aberta</strong>: um tanque fechado exigiria juntar duas metades (costura). A espuma estrutural ((d)) tem miolo celular, não é oca.</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-quadro">ficha 12 · quadro dos processos</a></p></div></details></article>
+<article class="ex" id="d2"><div class="ex-head"><div><div class="ex-kicker">Questão 2 · ficha 12 · injeção</div><h3 id="d2-h">Afirmações sobre a injeção</h3></div></div>
+<div class="stmt">Considere:<br>I. Na injetora, a parcela de calor gerada pelo atrito entre o polímero e o parafuso é apreciável.<br>II. Na injeção de termofixos, o molde é aquecido para permitir a polimerização.<br>III. Gavetas (partes móveis retilíneas ou desparafusáveis) permitem obter roscas internas e externas.<br>IV. No molde de canal frio de duas placas, os canais de alimentação se separam da peça quando o molde abre.<br>Está correto o que se afirma em:
+<ol type="a"><li>I e II, apenas</li><li>I, II e III, apenas</li><li>II e IV, apenas</li><li>I, III e IV, apenas</li><li>I, II, III e IV</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>I: slide 11. II: slide 12. III: slide 14. IV é falsa: separar os canais da peça na abertura é a característica do molde de canal frio de <strong>três</strong> placas; o de duas placas é o mais simples (slide 16).</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-injecao">ficha 12 · injeção e tipos de molde</a></p></div></details></article>
+<article class="ex" id="d3"><div class="ex-head"><div><div class="ex-kicker">Questão 3 · ficha 12 · troca de parâmetros</div><h3 id="d3-h">De que processo é este parâmetro?</h3></div></div>
+<div class="stmt">Associe cada parâmetro ao processo: (1) ar comprimido a 350–700 kPa; (2) vácuo que puxa a chapa aquecida contra o molde; (3) molde girando em dois eixos dentro do forno; (4) anel de ar que resfria e limita o diâmetro do balão.
+<ol type="a"><li>1 sopro · 2 termoformação · 3 rotomoldagem · 4 <em>blown film</em></li><li>1 <em>blown film</em> · 2 termoformação · 3 rotomoldagem · 4 sopro</li><li>1 sopro · 2 rotomoldagem · 3 termoformação · 4 <em>blown film</em></li><li>1 sopro · 2 termoformação · 3 moldagem por centrifugação · 4 extrusão de tubo</li><li>1 injeção · 2 termoformação · 3 rotomoldagem · 4 sopro</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slides 21, 22, 26 e 29. O <em>blown film</em> também usa ar, mas pelo centro da matriz e a baixa pressão, para inflar um balão de filme; os 350–700 kPa são do sopro. A centrifugação ((d)) é processo de compósito (ficha 13), com o molde girando em torno do próprio eixo, sem forno de dois eixos.</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-outros">ficha 12 · sopro, blown film, termoformação e rotomoldagem</a></p></div></details></article>
+<article class="ex" id="d4"><div class="ex-head"><div><div class="ex-kicker">Questão 4 · ficha 12 · ordens de grandeza</div><h3 id="d4-h">Quanto rende um molde de alumínio</h3></div></div>
+<div class="stmt">Um molde de injeção de <strong>alumínio</strong> com 4 cavidades trabalha com ciclo de 30 s. Usando a vida típica de molde dos slides, o molde produz, até o fim da vida, cerca de:
+<ol type="a"><li>10 000 peças, em cerca de 83 h de máquina</li><li>40 000 peças, em cerca de 333 h de máquina</li><li>8 milhões de peças, em cerca de 16 667 h de máquina</li><li>2 500 peças, em cerca de 21 h de máquina</li><li>40 000 peças, em cerca de 83 h de máquina</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Vida do molde de alumínio ≈ 10⁴ <strong>ciclos</strong> (slide 20); cada ciclo dá 4 peças → 40 000 peças. Tempo = 10⁴ × 30 s = 3·10⁵ s ≈ 83 h. (a) esquece as cavidades; (b) multiplica o tempo pelas cavidades (as 4 saem no mesmo ciclo); (c) usa a vida do molde de aço (2·10⁶ ciclos). Conferido em <code>simulados_p2.py</code>.</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-injecao">ficha 12 · capacidade da injeção</a></p></div></details></article>
+<article class="ex" id="d5"><div class="ex-head"><div><div class="ex-kicker">Questão 5 · ficha 12 · termofixos</div><h3 id="d5-h">O que não serve para termofixo</h3></div></div>
+<div class="stmt">Para uma peça de resina <strong>termofixa</strong>, qual dos processos abaixo é inadequado?
+<ol type="a"><li>termoformação a vácuo a partir de chapa</li><li>moldagem por compressão</li><li>moldagem por transferência</li><li>injeção com molde aquecido (injeção reativa)</li><li>fundição em molde flexível</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>O termofixo cura por reticulação irreversível e <strong>não volta a amolecer</strong> (slide 3): não dá para aquecer uma chapa curada e conformá-la. Compressão é "típica de termofixos" e transferência é sua versão para peças mais complexas (slides 5–6); a injeção de termofixo usa molde aquecido (slide 12); fundição de resina em molde flexível é o último item do quadro.</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-materia">ficha 12 · termoplástico × termofixo</a></p></div></details></article>
+<article class="ex" id="d6"><div class="ex-head"><div><div class="ex-kicker">Questão 6 · ficha 12 · espuma estrutural</div><h3 id="d6-h">Gabinete em espuma</h3></div></div>
+<div class="stmt">Um gabinete que, maciço, teria 3,0 kg passa a ser moldado em espuma estrutural. Segundo os slides, a massa aproximada e a estrutura da peça são:
+<ol type="a"><li>1,8 kg; casca externa sólida e miolo de células vazias</li><li>1,2 kg; casca externa celular e miolo sólido</li><li>0,48 kg; peça toda celular, sem casca</li><li>1,2 kg; casca externa sólida (até ~2 mm) e miolo de células vazias</li><li>7,5 kg; casca sólida e miolo de células vazias</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Densidade ≈ 40% da peça maciça (slide 25) → 0,40 × 3,0 = 1,2 kg. (a) aplica uma redução de 40% em vez de ficar com 40%; (e) divide em vez de multiplicar. A casca é sólida e o miolo é que é celular (boa rigidez/peso).</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-outros">ficha 12 · espuma estrutural</a></p></div></details></article>
+<article class="ex" id="d7"><div class="ex-head"><div><div class="ex-kicker">Questão 7 · ficha 12 · extrusora</div><h3 id="d7-h">Dimensões de uma extrusora</h3></div></div>
+<div class="stmt">Uma extrusora tem cilindro de diâmetro D = 90 mm e relação L/D = 24. O comprimento do cilindro e o enquadramento nas faixas típicas dos slides são:
+<ol type="a"><li>2 160 mm; dentro das faixas típicas (D de 25 a 200 mm, L/D de 5 a 30)</li><li>2 160 mm; fora da faixa, porque L/D típico vai só até 20</li><li>3,75 mm; dentro das faixas típicas</li><li>2 160 mm; fora da faixa, porque D típico vai só até 50 mm</li><li>216 mm; dentro das faixas típicas</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>L = 24 × 90 = 2 160 mm. Slide 10: D de 25 a 200 mm e L/D de 5 a 30, equipamento da ordem de US$ 300 mil. (c) é 90/24 (divide em vez de multiplicar).</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-extrusao">ficha 12 · extrusão</a></p></div></details></article>
+<article class="ex" id="d8"><div class="ex-head"><div><div class="ex-kicker">Questão 8 · ficha 12 · automação</div><h3 id="d8-h">Por que automatizar a inspeção</h3></div></div>
+<div class="stmt">Entre as razões para automatizar uma linha de peças plásticas listadas nos slides, <strong>não</strong> está:
+<ol type="a"><li>aumentar a produtividade e a capacidade de produção;</li><li>reduzir o custo da não-qualidade;</li><li>reduzir os riscos para a marca da empresa;</li><li>dispensar o controle dos parâmetros de processo, já que a inspeção por visão segrega os defeituosos;</li><li>ganhar <em>market share</em>.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slide 31 lista (a) a (e) (e redução do custo operacional). A afirmação (d) contradiz o slide 4: as propriedades do plástico dependem muito do método e dos parâmetros de processo, e controlá-los "é essencial para a qualidade da peça". Inspeção separa defeito; não substitui o controle do processo.</p><p>Revisar: <a href="../topicos/12-polimeros.html#p-auto">ficha 12 · automação e inspeção</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f13"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">9–15</span><h2 id="d-f13-h" data-nav="9–15 · Compósitos">Compósitos</h2><p class="section-desc">Ficha <a href="../topicos/13-compositos.html">13</a> · 7 questões.</p></div>
+<article class="ex" id="d9"><div class="ex-head"><div><div class="ex-kicker">Questão 9 · ficha 13 · classificação</div><h3 id="d9-h">Que compósito é este?</h3></div></div>
+<div class="stmt">Classifique pelo reforço: (I) alumínio com partículas de SiC; (II) tinta com escamas de alumínio; (III) tungstênio poroso impregnado com prata; (IV) epóxi com fibras de boro.
+<ol type="a"><li>I enchido · II escamado · III particulado · IV fibroso</li><li>I particulado · II escamado · III enchido · IV fibroso</li><li>I particulado · II lamelar · III enchido · IV fibroso</li><li>I particulado · II escamado · III fibroso · IV lamelar</li><li>I fibroso · II escamado · III enchido · IV particulado</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slides 41–44. O enchido é uma matriz tridimensional contínua (o W poroso) impregnada pelo enchimento (Cu ou Ag), típico de contatos elétricos. Escamas em tinta são escamado, não lamelar (lamelar é camada sobreposta inteira).</p><p>Revisar: <a href="../topicos/13-compositos.html#p-reforco">ficha 13 · classificação pelo reforço</a></p></div></details></article>
+<article class="ex" id="d10"><div class="ex-head"><div><div class="ex-kicker">Questão 10 · ficha 13 · conta</div><h3 id="d10-h">Rigidez específica</h3></div></div>
+<div class="stmt">Com os dados do slide 45 (fibra de carbono: E = 230 GPa, ρ = 1,75 g/cm³; aço de alta resistência: E = 210 GPa, ρ = 7,87 g/cm³), o módulo específico (E/ρ) da fibra é, aproximadamente, quantas vezes o do aço?
+<ol type="a"><li>0,2</li><li>1,1</li><li>4,5</li><li>5</li><li>12</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>E/ρ: carbono 131, aço 26,7 GPa/(g/cm³) → razão ≈ 4,9. (b) compara só os módulos (230/210); (c) só as densidades; (e) é a razão das <strong>resistências</strong> específicas (≈ 12), outra grandeza. (a) é a razão invertida.</p><p>Revisar: <a href="../topicos/13-compositos.html#p-especifica">ficha 13 · resistência e rigidez específicas</a></p></div></details></article>
+<article class="ex" id="d11"><div class="ex-head"><div><div class="ex-kicker">Questão 11 · ficha 13 · bobinamento</div><h3 id="d11-h">Vaso de pressão bobinado</h3></div></div>
+<div class="stmt">Um vaso de pressão cilíndrico com tampos, sob pressão interna, foi fabricado <strong>só</strong> com bobinamento circunferencial. O problema dessa escolha é:
+<ol type="a"><li>o bobinamento circunferencial não resiste a esforços circunferenciais;</li><li>as fibras circunferenciais ficam a 0° do eixo e só resistem a esforço axial;</li><li>nenhum: como o compósito é isotrópico, a orientação das fibras não importa;</li><li>o bobinamento só pode ser feito por centrifugação.</li><li>a pressão nos tampos gera esforço longitudinal, ao qual as fibras a 90° do eixo não resistem; o helicoidal (ângulo α) resiste aos dois;</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slides 57–58: circunferencial (90°) resiste a esforços circunferenciais; helicoidal resiste a circunferenciais <strong>e</strong> longitudinais. Num vaso fechado, a pressão nos tampos puxa o cilindro na direção do eixo. (c): só o particulado é isotrópico.</p><p>Revisar: <a href="../topicos/13-compositos.html#p-proc">ficha 13 · processos de fabricação</a></p></div></details></article>
+<article class="ex" id="d12"><div class="ex-head"><div><div class="ex-kicker">Questão 12 · ficha 13 · CMC</div><h3 id="d12-h">Compósito de matriz cerâmica</h3></div></div>
+<div class="stmt">Sobre compósitos de matriz cerâmica (CMC), é <strong>incorreto</strong> afirmar:
+<ol type="a"><li>são usados em aplicações de temperatura elevada (acima de 1000 °C);</li><li>têm maior tenacidade à fratura ($K_{IC}$) que o cerâmico não reforçado;</li><li>são geralmente processados com geometria não definida, para posterior operação metalúrgica de laminação;</li><li>na fabricação, matriz e reforço são submetidos a temperatura e pressão simultâneas para a sinterização;</li><li>no <em>gelcasting</em>, pó, água e monômeros orgânicos solúveis polimerizam num gel que dá a forma, e depois se seca e sinteriza.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>(c) descreve o compósito de matriz <strong>metálica</strong> (slide 51), que sai em forma não definida para laminar. As demais: slides 49, 54 e 55.</p><p>Revisar: <a href="../topicos/13-compositos.html#p-proc">ficha 13 · processos de CMM e CMC</a></p></div></details></article>
+<article class="ex" id="d13"><div class="ex-head"><div><div class="ex-kicker">Questão 13 · ficha 13 · CMM</div><h3 id="d13-h">Afirmações sobre CMM</h3></div></div>
+<div class="stmt">Sobre compósitos de matriz metálica:<br>I. Podem ser usados a temperaturas superiores às dos compósitos de matriz polimérica.<br>II. Têm maior resistência mecânica que o metal da matriz não reforçado.<br>III. Na fase líquida, a matriz fundida pode infiltrar os interstícios de um tecido ou pré-forma de reforço.<br>IV. No estado sólido, os pós são compactados em prensa isostática a frio, sem sinterização.<br>Está correto o que se afirma em:
+<ol type="a"><li>I e II, apenas</li><li>III e IV, apenas</li><li>I, II e III, apenas</li><li>I, II e IV, apenas</li><li>I, II, III e IV</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>I e II: slide 48. III: slide 53. IV é falsa: no estado sólido há compactação <strong>e sinterização</strong> de pós, em prensa isostática <strong>a quente</strong> (slide 52, ex.: Al/Al₂O₃).</p><p>Revisar: <a href="../topicos/13-compositos.html#p-proc">ficha 13 · processos de CMM</a></p></div></details></article>
+<article class="ex" id="d14"><div class="ex-head"><div><div class="ex-kicker">Questão 14 · ficha 13 · sanduíche</div><h3 id="d14-h">Por que o sanduíche é rígido</h3></div></div>
+<div class="stmt">O painel sanduíche tem alta rigidez à flexão com pouco peso porque:
+<ol type="a"><li>o núcleo denso e rígido leva a flexão, e as lâminas finas apenas protegem contra corrosão;</li><li>as três camadas têm a mesma rigidez, e a espessura total é que dá a resistência;</li><li>as lâminas levam o cisalhamento e o núcleo leva a tração;</li><li>o núcleo é sempre homogêneo, o que elimina a anisotropia.</li><li>as lâminas finas e rígidas, afastadas da linha neutra, levam a tração e a compressão da flexão, e o núcleo leve as mantém afastadas e transmite o cisalhamento, como numa viga I;</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slides 61–63: duas lâminas finas, rígidas e densas separadas por núcleo de baixa densidade, menos rígido e resistente. O núcleo pode ser homogêneo (espuma) ou não homogêneo (colmeia, corrugado), por isso (d) também é falsa.</p><p>Revisar: <a href="../topicos/13-compositos.html#p-sanduiche">ficha 13 · lamelares e painéis sanduíche</a></p></div></details></article>
+<article class="ex" id="d15"><div class="ex-head"><div><div class="ex-kicker">Questão 15 · ficha 13 · centrifugação</div><h3 id="d15-h">Moldagem por centrifugação</h3></div></div>
+<div class="stmt">Sobre a moldagem de compósitos por centrifugação, é correto:
+<ol type="a"><li>as fibras contínuas são enroladas sobre um mandril a 90° do eixo;</li><li>é escolhida quando se exigem propriedades homogêneas em toda a peça;</li><li>aplica-se a peças planas, como painéis sanduíche;</li><li>é semelhante à rotomoldagem, usada para peças de revolução: fibras cortadas e resina são injetadas no molde em rotação, e a centrifugação impregna e compacta;</li><li>é o processo típico de compósitos de matriz cerâmica.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slide 56. (a) é o bobinamento. (b) é o contrário: a centrifugação é usada justamente quando <strong>não</strong> se exige homogeneidade de propriedades.</p><p>Revisar: <a href="../topicos/13-compositos.html#p-proc">ficha 13 · moldagem por centrifugação</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f14"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">16–22</span><h2 id="d-f14-h" data-nav="16–22 · Prototipagem e manufatura aditiva">Prototipagem e manufatura aditiva</h2><p class="section-desc">Ficha <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html">14</a> · 7 questões.</p></div>
+<article class="ex" id="d16"><div class="ex-head"><div><div class="ex-kicker">Questão 16 · ficha 14 · quadro comparativo</div><h3 id="d16-h">Sem suporte e contração excelente</h3></div></div>
+<div class="stmt">Pelo quadro comparativo do curso, os processos que <strong>não</strong> precisam de estrutura de suporte <strong>e</strong> têm contração classificada como excelente são:
+<ol type="a"><li>SLA e SGC</li><li>FDM e LOM</li><li>SLS e LOM</li><li>SLS e SGC</li><li>SLA e FDM</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Slide 26. Sem suporte: SLS, LOM e SGC. Contração excelente: SLS e LOM (SLA, FDM e SGC têm "boa"). A interseção é SLS e LOM. SLA e FDM ((e)) são justamente os que <strong>pedem</strong> suporte.</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-quadro">ficha 14 · quadro comparativo</a></p></div></details></article>
+<article class="ex" id="d17"><div class="ex-head"><div><div class="ex-kicker">Questão 17 · ficha 14 · quadro comparativo</div><h3 id="d17-h">Leitura do quadro</h3></div></div>
+<div class="stmt">Segundo o quadro comparativo do curso, é <strong>incorreto</strong>:
+<ol type="a"><li>a FDM tem precisão e superfície para acabamento excelentes;</li><li>apenas a SLA exige pós-cura;</li><li>todos os cinco processos exigem pós-processamento;</li><li>a LOM tem o menor custo de protótipo e a menor precisão;</li><li>a SLS tem grande variedade de materiais e resistência excelente.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slide 26: a FDM tem precisão <strong>regular</strong> e superfície <strong>regular</strong>. Precisão excelente é da SLA e da SGC; superfície excelente, da SLS.</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-quadro">ficha 14 · quadro comparativo</a></p></div></details></article>
+<article class="ex" id="d18"><div class="ex-head"><div><div class="ex-kicker">Questão 18 · ficha 14 · matéria-prima</div><h3 id="d18-h">Só base pó</h3></div></div>
+<div class="stmt">O grupo que contém <strong>apenas</strong> processos de base pó é:
+<ol type="a"><li>SLS, DLP, EBM e SLM</li><li>SLS, SLM, EBM e 3D Printing (jato de ligante)</li><li>SLA, <em>jetting</em> e DLP</li><li>FDM, SLS e LOM</li><li>SLM, LOM e 3D Printing</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 19: líquida = SLA, <em>jetting</em>, DLP; pó = SLS, 3DP, SLM, EBM e outras sinterizações; sólida = FDM e LOM (<em>sheet stacking</em>). (a) inclui DLP (líquida); (d) e (e) incluem processos de base sólida.</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-classif">ficha 14 · classificação pela matéria-prima</a></p></div></details></article>
+<article class="ex" id="d19"><div class="ex-head"><div><div class="ex-kicker">Questão 19 · ficha 14 · STL</div><h3 id="d19-h">O que o STL faz</h3></div></div>
+<div class="stmt">Sobre o arquivo STL na cadeia da prototipagem rápida, é correto:
+<ol type="a"><li>contém as trajetórias da ferramenta camada a camada, em código G;</li><li>é gerado depois do fatiamento, a partir das camadas;</li><li>descreve o volume da peça por cubos (voxels) com a densidade de cada ponto;</li><li>representa a superfície da peça por uma malha de triângulos; superfícies curvas viram facetas, o que limita a precisão antes mesmo da máquina;</li><li>só é usado na FDM; os demais processos leem o CAD direto.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slide 14: CAD → <strong>STL</strong> → fatiamento → construção → acabamento. As trajetórias ((a)) saem do fatiamento, que vem depois do STL ((b)). O formato nasceu na estereolitografia e serve a todos os processos.</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-etapas">ficha 14 · as cinco etapas</a></p></div></details></article>
+<article class="ex" id="d20"><div class="ex-head"><div><div class="ex-kicker">Questão 20 · ficha 14 · ferramentaria rápida</div><h3 id="d20-h">Refrigeração conformal</h3></div></div>
+<div class="stmt">O slide 28 mostra um molde de injeção com refrigeração conformal feito por LENS. A vantagem desse molde, ligando as fichas 12 e 14, é:
+<ol type="a"><li>canais que seguem a superfície da peça, impossíveis de furar, resfriam a peça de modo mais uniforme, o que reduz o ciclo e a contração diferencial (empeno);</li><li>o molde dispensa refrigeração, porque o metal depositado por LENS não aquece;</li><li>permite injetar termofixos com molde frio;</li><li>aumenta a vida do molde de alumínio para 2 milhões de ciclos;</li><li>elimina a necessidade de pinos extratores.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Ficha 14: "formas complexas são melhor fabricadas por prototipagem rápida", e canais que acompanham a superfície não saem por furação. Ficha 12: contração e distorção vêm do resfriamento, e o tempo de ciclo é dominado por ele. (c) inverte a regra (termofixo exige molde aquecido).</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-ferramentaria">ficha 14 · ferramentaria rápida</a></p></div></details></article>
+<article class="ex" id="d21"><div class="ex-head"><div><div class="ex-kicker">Questão 21 · ficha 14 · história</div><h3 id="d21-h">As quatro revoluções</h3></div></div>
+<div class="stmt">Associe a revolução industrial ao marco citado nos slides: (1) primeira; (2) segunda; (3) terceira; (4) quarta.
+<ol type="a"><li>1 linha de produção · 2 máquina a vapor · 3 comando numérico · 4 impressão 3D</li><li>1 máquina a vapor · 2 comando numérico · 3 linha de produção · 4 impressão 3D</li><li>1 máquina a vapor · 2 linha de produção · 3 impressão 3D · 4 comando numérico</li><li>1 máquina a vapor (EUA) · 2 linha de produção (Inglaterra) · 3 comando numérico · 4 impressão 3D</li><li>1 máquina a vapor (Inglaterra) · 2 linha de produção (EUA) · 3 comando numérico (EUA, John Parsons) · 4 impressão 3D e Indústria 4.0</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slides 4–8. O CNC (John Parsons) é marco da 3ª revolução e a impressão 3D, da 4ª; a 1ª começou na Inglaterra (fim do séc. XVIII) e a 2ª nos EUA (início do séc. XX).</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-hist">ficha 14 · origem e definição</a></p></div></details></article>
+<article class="ex" id="d22"><div class="ex-head"><div><div class="ex-kicker">Questão 22 · ficha 14 · anisotropia</div><h3 id="d22-h">Peça FDM que rompeu cedo</h3></div></div>
+<div class="stmt">Corpos de prova FDM tracionados no plano X-Y aguentaram bem a carga, mas os tracionados na direção de empilhamento (Z) romperam com carga bem menor. A explicação é:
+<ol type="a"><li>o STL tinha poucos triângulos, o que reduz a resistência em Z;</li><li>faltou pós-cura, obrigatória na FDM;</li><li>a peça feita em camadas é anisotrópica: a ligação entre camadas é mais fraca que o filamento, por isso a orientação de construção é decisão de projeto;</li><li>a FDM tem resistência excelente em todas as direções; o ensaio está errado;</li><li>o termoplástico da FDM é um termofixo e trinca entre camadas.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Limitações da ficha 14 (slide 27, <em>orientation</em>). Pós-cura ((b)) só a SLA exige. O facetamento do STL ((a)) afeta a forma da superfície, não a ligação entre camadas.</p><p>Revisar: <a href="../topicos/14-prototipagem-e-manufatura-aditiva.html#p-quadro">ficha 14 · quadro e limitações</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f15"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">23–27</span><h2 id="d-f15-h" data-nav="23–27 · Elementos finitos">Elementos finitos</h2><p class="section-desc">Ficha <a href="../topicos/15-elementos-finitos.html">15</a> · 5 questões.</p></div>
+<article class="ex" id="d23"><div class="ex-head"><div><div class="ex-kicker">Questão 23 · ficha 15 · nós e elementos</div><h3 id="d23-h">Afirmações sobre a malha</h3></div></div>
+<div class="stmt">Considere:<br>I. A grandeza (deslocamento, temperatura) é calculada nos nós e aproximada no interior do elemento pela combinação dos valores nodais.<br>II. Nós conectam; elementos aproximam.<br>III. Refinar a malha corrige uma condição de contorno mal definida.<br>IV. Mais elementos aumentam o custo computacional.<br>Está correto o que se afirma em:
+<ol type="a"><li>I e II, apenas</li><li>I, II e III, apenas</li><li>I, II e IV, apenas</li><li>II, III e IV, apenas</li><li>I, II, III e IV</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>I: slide 8. II: slide 7. IV: slide 10. III é falsa: refinar reduz o erro de discretização, não o de modelagem; contorno errado dá "resposta convincente e errada" com qualquer malha (slide 12).</p><p>Revisar: <a href="../topicos/15-elementos-finitos.html#p-conceitos">ficha 15 · discretização, nós e elementos</a></p></div></details></article>
+<article class="ex" id="d24"><div class="ex-head"><div><div class="ex-kicker">Questão 24 · ficha 15 · MEF por processo</div><h3 id="d24-h">Cada processo, sua pergunta</h3></div></div>
+<div class="stmt">Associe o processo aos campos que o MEF procura capturar: (P) usinagem; (Q) fundição; (R) tratamento térmico; (S) conformação.
+<ol type="a"><li>P força, espessura, fratura · Q preenchimento, solidificação, contração · R aquecer, manter, resfriar · S força, calor, desgaste</li><li>P força, calor, desgaste · Q preenchimento, solidificação, contração · R aquecer, manter, resfriar · S força, espessura, fratura</li><li>P força, calor, desgaste · Q temperatura, tensão residual, distorção · R aquecer, manter, resfriar · S força, espessura, fratura</li><li>P força, calor, desgaste · Q preenchimento, solidificação, contração · R temperatura, tensão residual, distorção · S força, espessura, fratura</li><li>P preenchimento, solidificação, contração · Q força, calor, desgaste · R aquecer, manter, resfriar · S força, espessura, fratura</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 22 (mapa de perguntas). "Temperatura → tensão residual → distorção" é a cadeia da <strong>soldagem</strong> (slide 19), que aparece como intrusa em (c) e (d).</p><p>Revisar: <a href="../topicos/15-elementos-finitos.html#p-processos">ficha 15 · MEF por processo</a></p></div></details></article>
+<article class="ex" id="d25"><div class="ex-head"><div><div class="ex-kicker">Questão 25 · ficha 15 · interpretação</div><h3 id="d25-h">Um mapa todo vermelho</h3></div></div>
+<div class="stmt">Um colega mostra o pós-processamento de uma simulação: "a região vermelha é crítica, a peça vai falhar ali". Segundo a aula, antes de concordar é preciso perguntar:
+<ol type="a"><li>qual grandeza está no mapa, em que unidade, e qual região e limite definem o que é crítico;</li><li>quantos elementos tem a malha, porque mais elementos garantem o resultado;</li><li>se o solver convergiu, porque resultado convergido é verdade automática;</li><li>qual a cor máxima da escala, porque vermelho sempre indica falha;</li><li>nada: o mapa de cores já é a interpretação.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slide 25: "interpretação não é só olhar a cor". Slide 15: "resultado numérico não é verdade automática" ((c)). Slide 10: "mais elementos não significa sempre melhor" ((b)).</p><p>Revisar: <a href="../topicos/15-elementos-finitos.html#p-interpretar">ficha 15 · interpretar não é só olhar a cor</a></p></div></details></article>
+<article class="ex" id="d26"><div class="ex-head"><div><div class="ex-kicker">Questão 26 · ficha 15 · usinagem</div><h3 id="d26-h">Corte como problema acoplado</h3></div></div>
+<div class="stmt">O slide 18 diz que "cortar também é um problema acoplado". O acoplamento a que se refere é:
+<ol type="a"><li>entre o preenchimento e a solidificação do material;</li><li>entre o problema mecânico (forças de corte) e o térmico (temperatura), que juntos governam o desgaste da ferramenta;</li><li>entre o pré-processamento e o pós-processamento;</li><li>entre a malha grossa e a refinada;</li><li>entre a tensão residual e a distorção da peça soldada.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 18: forças de corte, temperatura, desgaste de ferramenta. (a) é fundição; (e) é soldagem.</p><p>Revisar: <a href="../topicos/15-elementos-finitos.html#p-processos">ficha 15 · MEF por processo</a></p></div></details></article>
+<article class="ex" id="d27"><div class="ex-head"><div><div class="ex-kicker">Questão 27 · ficha 15 · malha</div><h3 id="d27-h">Onde refinar</h3></div></div>
+<div class="stmt">Uma placa com um entalhe será analisada sob tração para localizar o pico de tensão. A estratégia de malha mais coerente com a aula é:
+<ol type="a"><li>malha uniformemente refinada em toda a placa, porque mais elementos é sempre melhor;</li><li>malha grossa no entalhe e refinada longe dele, para economizar elementos onde a tensão é alta;</li><li>malha grossa em toda a placa, porque o resultado não depende da malha;</li><li>malha refinada perto do entalhe, onde o gradiente é alto, e mais grossa longe dele;</li><li>não usar malha: o entalhe se resolve pelo pós-processamento.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slide 10: malha "adequada" = detalhe onde importa; refinar tudo custa caro. Limitações da ficha 15: refinar onde o gradiente é alto (entalhes, região da solda, raio de dobra).</p><p>Revisar: <a href="../topicos/15-elementos-finitos.html#p-conceitos">ficha 15 · qualidade da malha</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f16"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">28–36</span><h2 id="d-f16-h" data-nav="28–36 · Junção (soldagem)">Junção (soldagem)</h2><p class="section-desc">Ficha <a href="../topicos/16-juncao.html">16</a> · 9 questões.</p></div>
+<article class="ex" id="d28"><div class="ex-head"><div><div class="ex-kicker">Questão 28 · ficha 16 · classificação</div><h3 id="d28-h">Só estado sólido</h3></div></div>
+<div class="stmt">O grupo que contém <strong>apenas</strong> processos de soldagem no estado sólido é:
+<ol type="a"><li>atrito, laser, difusão e explosão</li><li>ultrassom, resistência elétrica, atrito e difusão</li><li>aluminotermia, explosão, ultrassom e atrito</li><li>difusão, feixe de elétrons, atrito e ultrassom</li><li>explosão, ultrassom, atrito e difusão</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slide 3: estado sólido a frio (explosão, ultrassom) e a quente (atrito, difusão); fusão: aluminotermia, feixe de elétrons, laser, gás, resistência elétrica e arco.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-classif">ficha 16 · classificação</a></p></div></details></article>
+<article class="ex" id="d29"><div class="ex-head"><div><div class="ex-kicker">Questão 29 · ficha 16 · ZTA</div><h3 id="d29-h">Da linha de fusão para fora</h3></div></div>
+<div class="stmt">Na ZTA de um aço (slide 14), indo da linha de fusão em direção ao metal de base, a sequência de regiões é:
+<ol type="a"><li>refino de grão → crescimento de grão → região parcialmente transformada → esferoidização de carbonetos</li><li>esferoidização de carbonetos → região parcialmente transformada → refino de grão → crescimento de grão</li><li>crescimento de grão → refino de grão → região parcialmente transformada → esferoidização de carbonetos</li><li>crescimento de grão → região parcialmente transformada → refino de grão → esferoidização de carbonetos</li><li>zona fundida → crescimento de grão → zona fundida → metal de base</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Quanto mais perto do cordão, mais quente (≈ 1500 °C): o grão cresce (menor tenacidade). Um pouco mais longe, a austenitização curta refina o grão; depois a transformação é parcial e, perto de ~700 °C, só há esferoidização.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-metal">ficha 16 · metalurgia da soldagem</a></p></div></details></article>
+<article class="ex" id="d30"><div class="ex-head"><div><div class="ex-kicker">Questão 30 · ficha 16 · escolha do processo</div><h3 id="d30-h">Quatro situações, quatro processos</h3></div></div>
+<div class="stmt">Escolha o processo: (I) estrutura em campo, ao ar livre, qualquer posição, equipamento barato e portátil; (II) chapas grossas em posição plana, processo automático e de alta deposição; (III) chapa fina de alumínio, alta qualidade, com ou sem metal de adição; (IV) produção semiautomática com arame contínuo e proteção por CO₂.
+<ol type="a"><li>I eletrodo revestido · II arco submerso · III eletrodo revestido · IV MIG</li><li>I TIG · II arco submerso · III MIG · IV MAG</li><li>I arame tubular · II TIG · III TIG · IV MIG</li><li>I eletrodo revestido · II MAG · III TIG · IV arco submerso</li><li>I eletrodo revestido · II arco submerso · III TIG · IV MAG</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>ER: simples, portátil, barato, qualquer posição, ao ar livre (slide 21), mas <strong>não</strong> para alumínio (slide 22). SAW: arco sob fluxo granulado, automático. TIG: eletrodo de W não consumível, adição opcional. CO₂ é gás <strong>ativo</strong> → MAG, não MIG ((a), (c)).</p><p>Revisar: <a href="../topicos/16-juncao.html#p-arco">ficha 16 · processos a arco</a></p></div></details></article>
+<article class="ex" id="d31"><div class="ex-head"><div><div class="ex-kicker">Questão 31 · ficha 16 · brasagem</div><h3 id="d31-h">Brasagem: a falsa</h3></div></div>
+<div class="stmt">Sobre a brasagem, é <strong>incorreto</strong>:
+<ol type="a"><li>permite unir metais dissimilares e metal com cerâmica;</li><li>as tensões térmicas resultantes nas peças são pequenas;</li><li>como o metal de base funde parcialmente junto com o de adição, a junta brasada é mais resistente que a soldada por fusão;</li><li>exige limpeza das superfícies e fluxo, que dissolve os óxidos para o metal de adição molhar e fluir;</li><li>o aquecimento pode ser por chama, forno, indução, resistência, imersão ou infravermelho.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Na brasagem o metal de base <strong>não</strong> funde (o de adição funde acima de 450 °C e abaixo da fusão do metal de base), e a desvantagem citada é justamente a junta <strong>menos</strong> resistente (slides 39–41).</p><p>Revisar: <a href="../topicos/16-juncao.html#p-brasagem">ficha 16 · brasagem e solda branda</a></p></div></details></article>
+<article class="ex" id="d32"><div class="ex-head"><div><div class="ex-kicker">Questão 32 · ficha 16 · solda branda</div><h3 id="d32-h">Para que serve cada elemento</h3></div></div>
+<div class="stmt">Nas ligas de solda branda, os slides atribuem a Ag, Cu e Bi, respectivamente:
+<ol type="a"><li>resistência mecânica · baixa o ponto de fusão e melhora fadiga térmica e molhabilidade · baixa muito o ponto de fusão (risco de fase a 95 °C)</li><li>baixa o ponto de fusão · resistência mecânica · aumenta a ductilidade</li><li>resistência mecânica · aumenta a resistência sem piorar a molhabilidade · barato, mas corrói</li><li>ductilidade · resistência mecânica · baixa o ponto de fusão</li><li>baixa muito o ponto de fusão · resistência mecânica · melhora a fadiga térmica</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slides 47–49. Os papéis trocados nas outras alternativas são de outros elementos: In dá ductilidade e baixa o ponto de fusão; Sb aumenta a resistência sem piorar a molhabilidade; Zn é barato mas corrói.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-brasagem">ficha 16 · solda branda</a></p></div></details></article>
+<article class="ex" id="d33"><div class="ex-head"><div><div class="ex-kicker">Questão 33 · ficha 16 · defeitos</div><h3 id="d33-h">Defeito e causa</h3></div></div>
+<div class="stmt">Associe defeito e causa: (1) inclusão de escória; (2) trinca; (3) falta de penetração; (4) porosidade.
+<ol type="a"><li>1 falta de gás de proteção · 2 solidificação muito rápida, S e P · 3 limpeza incompleta · 4 arco curto</li><li>1 limpeza incompleta · 2 arco curto · 3 solidificação muito rápida, S e P · 4 falta de gás de proteção</li><li>1 limpeza incompleta · 2 falta de gás de proteção · 3 arco curto · 4 S e P</li><li>1 limpeza incompleta · 2 solidificação muito rápida, S e P · 3 arco curto, parâmetros e velocidade inadequados · 4 falta de gás de proteção, eletrodo úmido, graxa</li><li>1 S e P · 2 limpeza incompleta · 3 arco curto · 4 falta de gás de proteção</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slides 97–103. Falta de penetração é o defeito <strong>mais comum</strong>.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-defeitos">ficha 16 · defeitos e ensaios</a></p></div></details></article>
+<article class="ex" id="d34"><div class="ex-head"><div><div class="ex-kicker">Questão 34 · ficha 16 · ensaios</div><h3 id="d34-h">Achar falta de penetração na raiz</h3></div></div>
+<div class="stmt">Deseja-se verificar, sem destruir a peça, se há falta de penetração na raiz de um cordão de topo em chapa grossa de <strong>aço inoxidável austenítico</strong> (não magnético). O ensaio adequado é:
+<ol type="a"><li>líquido penetrante</li><li>raios X ou ultrassom</li><li>partículas magnéticas</li><li>dobramento</li><li>inspeção visual da face do cordão</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slide 109. Líquido penetrante só acha descontinuidade aberta à superfície; partículas magnéticas exigem material ferromagnético (o inox austenítico não é); dobramento é destrutivo; a raiz não está na face. Defeito interno pede radiografia ou ultrassom.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-defeitos">ficha 16 · ensaios</a></p></div></details></article>
+<article class="ex" id="d35"><div class="ex-head"><div><div class="ex-kicker">Questão 35 · ficha 16 · tensão residual</div><h3 id="d35-h">Por que a peça empenou</h3></div></div>
+<div class="stmt">Após a soldagem, a peça empenou. A explicação correta, segundo a aula, é:
+<ol type="a"><li>o cordão fica comprimido e o metal de base tracionado, porque o metal de adição dilata ao solidificar;</li><li>a ZTA funde e escorre;</li><li>o cordão quente tende a contrair ao esfriar e é contido pelo metal frio ao redor, ficando tracionado (com compressão mais longe); a dilatação e o resfriamento diferenciais distorcem a peça, e o alívio de tensões é o remédio usual;</li><li>a tensão residual é uniforme em toda a chapa, por isso ela empena por igual;</li><li>empeno só ocorre em brasagem.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Slides 15 e 105; desvantagens no slide 7 (tensões residuais, deformações, necessidade de alívio de tensões). É a mesma cadeia que o MEF de soldagem modela: temperatura → tensão residual → distorção (ficha 15).</p><p>Revisar: <a href="../topicos/16-juncao.html#p-metal">ficha 16 · tensão residual</a></p></div></details></article>
+<article class="ex" id="d36"><div class="ex-head"><div><div class="ex-kicker">Questão 36 · ficha 16 · microssoldagem</div><h3 id="d36-h">O que é microssoldagem</h3></div></div>
+<div class="stmt">Segundo a definição da norma JIS citada na aula, microssoldagem é a soldagem:
+<ol type="a"><li>de qualquer peça com espessura menor que 1 mm;</li><li>feita exclusivamente com laser pulsado;</li><li>de componentes eletrônicos com estanho-chumbo;</li><li>feita com microscópio, independentemente do tamanho da peça.</li><li>de seções tão pequenas que a quantidade de fusão, a espessura de difusão, a deformação e a tensão superficial afetam a soldabilidade e a qualidade de modo não desprezível;</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slide 51. Na microescala pesam efeitos de superfície (tensão superficial), a mesma ideia do cubo dividido da ficha 17.</p><p>Revisar: <a href="../topicos/16-juncao.html#p-micro">ficha 16 · microssoldagem</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f17"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">37–42</span><h2 id="d-f17-h" data-nav="37–42 · Micro e nanofabricação">Micro e nanofabricação</h2><p class="section-desc">Ficha <a href="../topicos/17-micro-e-nanofabricacao.html">17</a> · 6 questões.</p></div>
+<article class="ex" id="d37"><div class="ex-head"><div><div class="ex-kicker">Questão 37 · ficha 17 · área/volume</div><h3 id="d37-h">Cubo em cubinhos de 1 mm</h3></div></div>
+<div class="stmt">Um cubo de 1 cm de aresta é cortado em cubos de 1 mm de aresta. A área superficial total passa de 6 cm² para:
+<ol type="a"><li>12 cm²</li><li>60 cm²</li><li>600 cm²</li><li>6 000 cm²</li><li>6 cm² (a área não muda com o corte)</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>10 cubos por aresta → 10³ = 1000 cubos de 0,1 cm; cada um com 6 × 0,1² = 0,06 cm² → 60 cm². A área é 6·n cm² com n cortes por aresta: cresce na razão em que a aresta diminui (área/volume = 6/a). (a) é o exemplo do slide 6 (n = 2).</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-escala">ficha 17 · escalas e área/volume</a></p></div></details></article>
+<article class="ex" id="d38"><div class="ex-head"><div><div class="ex-kicker">Questão 38 · ficha 17 · corrosão</div><h3 id="d38-h">Paredes verticais sob a máscara</h3></div></div>
+<div class="stmt">Precisa-se abrir uma trincheira de paredes verticais exatamente sob a abertura da máscara, sem avançar por baixo dela. O processo indicado e o motivo são:
+<ol type="a"><li>corrosão úmida em banho agitado, que é anisotrópica;</li><li>corrosão úmida, porque dispensa máscara;</li><li>oxidação térmica, que cresce SiO₂ a 700–1300 °C;</li><li>corrosão seca, por bombardeio de íons de um plasma, que normalmente grava de forma direcional (anisotrópica);</li><li>corrosão seca, porque é isotrópica e avança igual em todas as direções.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Slides 14–17: a úmida tende a ser <strong>isotrópica</strong> (avança para os lados, sob a máscara); a seca é direcional. Oxidação é deposição, não remoção.</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-corrosao">ficha 17 · corrosão</a></p></div></details></article>
+<article class="ex" id="d39"><div class="ex-head"><div><div class="ex-kicker">Questão 39 · ficha 17 · fotolitografia</div><h3 id="d39-h">Resiste positivo</h3></div></div>
+<div class="stmt">Na fotolitografia com resiste <strong>positivo</strong>, a sequência de etapas e o efeito da exposição são:
+<ol type="a"><li>spin-coating → revelação → exposição → corrosão → remoção; a região exposta fica</li><li>spin-coating do resiste → exposição pela máscara → revelação → corrosão ou implantação → remoção do resiste; a região exposta sai na revelação</li><li>exposição → spin-coating → revelação → remoção → corrosão; a região exposta sai</li><li>spin-coating → exposição → revelação → corrosão → remoção; a região exposta fica</li><li>spin-coating → exposição → corrosão → revelação → remoção; a região não exposta sai</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>Slides 19–21. Resiste positivo: a parte exposta é removida na revelação; negativo: a exposta fica ((d) descreve o negativo).</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-lito">ficha 17 · litografia</a></p></div></details></article>
+<article class="ex" id="d40"><div class="ex-head"><div><div class="ex-kicker">Questão 40 · ficha 17 · deposição</div><h3 id="d40-h">Quatro deposições</h3></div></div>
+<div class="stmt">Associe: (1) cresce SiO₂ sobre silício a 700–1300 °C em O₂ ou H₂O; (2) precursores reagem e depositam, produz grafeno monocamada; (3) sólido vaporizado atravessa a câmara e condensa no substrato; (4) dois precursores entram em sequência, nunca juntos na câmara.
+<ol type="a"><li>1 oxidação térmica · 2 CVD · 3 PVD · 4 ALD</li><li>1 CVD · 2 oxidação térmica · 3 PVD · 4 ALD</li><li>1 oxidação térmica · 2 PVD · 3 CVD · 4 ALD</li><li>1 oxidação térmica · 2 ALD · 3 PVD · 4 CVD</li><li>1 PVD · 2 CVD · 3 oxidação térmica · 4 ALD</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slides 11–13. ALD é uma variante do CVD; PVD é deposição <strong>física</strong> (vaporiza um sólido), CVD é química.</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-deposicao">ficha 17 · deposição</a></p></div></details></article>
+<article class="ex" id="d41"><div class="ex-head"><div><div class="ex-kicker">Questão 41 · ficha 17 · quadro de Rajurkar</div><h3 id="d41-h">Bom para protótipo, ruim para série</h3></div></div>
+<div class="stmt">Pelo quadro comparativo de processos de microfabricação (slide 8), as famílias boas em diversidade de materiais e em prototipagem, mas ruins para produção em massa, são:
+<ol type="a"><li>litográficos e moldagem</li><li>mecânicos</li><li>aditivos e corrosivos</li><li>moldagem e mecânicos</li><li>eletrofísicos e químicos, e feixe de energia</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slide 8: eletrofísicos/químicos e feixe de energia têm (+) em materiais e prototipagem e (−) em massa. Litografia e moldagem são o oposto (boas em massa, ruins em protótipo). Aditivos têm (−) em diversidade de materiais; mecânicos têm (o) em materiais e em massa.</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-quadro">ficha 17 · quadro comparativo</a></p></div></details></article>
+<article class="ex" id="d42"><div class="ex-head"><div><div class="ex-kicker">Questão 42 · ficha 17 · nanomateriais</div><h3 id="d42-h">Quantas dimensões nano</h3></div></div>
+<div class="stmt">Na classificação dos nanomateriais pelo número de dimensões abaixo de 200 nm (slide 9), um ponto quântico, um nanotubo de carbono e um filme fino têm, respectivamente:
+<ol type="a"><li>3, 2 e 1 dimensões</li><li>1, 2 e 3 dimensões</li><li>3, 1 e 2 dimensões</li><li>2, 2 e 1 dimensões</li><li>3, 3 e 1 dimensões</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>3 dimensões nano: partículas, pontos quânticos; 2: tubos, fibras, fitas (só o comprimento é grande); 1: filmes, <em>coatings</em>, multicamadas (só a espessura é nano).</p><p>Revisar: <a href="../topicos/17-micro-e-nanofabricacao.html#p-classif">ficha 17 · classificação</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-f18"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">43–50</span><h2 id="d-f18-h" data-nav="43–50 · Usinagem CNC">Usinagem CNC</h2><p class="section-desc">Ficha <a href="../topicos/18-usinagem-cnc.html">18</a> · 8 questões.</p></div>
+<article class="ex" id="d43"><div class="ex-head"><div><div class="ex-kicker">Questão 43 · ficha 18 · S e F</div><h3 id="d43-h">Rotação e avanço de uma fresa</h3></div></div>
+<div class="stmt">Uma fresa de topo de Ø 10 mm com 3 dentes deve trabalhar a $V_c$ = 150 m/min e $f_z$ = 0,05 mm/dente. A rotação e o avanço programados são, aproximadamente:
+<ol type="a"><li>S4775 e F239</li><li>S477 e F72</li><li>S47746 e F7162</li><li>S4775 e F716</li><li>S15000 e F2250</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>$n = 1000\cdot150/(\pi\cdot10) = 4775$ rpm; $F = f_z\,z\,n = 0{,}05\cdot3\cdot4775 = 716$ mm/min. (a) esquece z; (b) usa D = 100 mm; (c) usa D em cm; (e) esquece o π.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-sf">ficha 18 · rotação e avanço</a></p></div></details></article>
+<article class="ex" id="d44"><div class="ex-head"><div><div class="ex-kicker">Questão 44 · ficha 18 · rastrear programa</div><h3 id="d44-h">Onde está a ferramenta</h3></div></div>
+<div class="stmt">A ferramenta parte de X0 Y0 e executa:<br><code>N10 G90 G00 X20 Y10</code><br><code>N20 G91 G01 X15 Y-5 F100</code><br><code>N30 X5 Y20</code><br>Ao fim de N30, a ferramenta está em:
+<ol type="a"><li>(5; 20), e N30 foi executado em rápido</li><li>(40; 25), e N30 foi executado cortando, a F100</li><li>(40; 25), e N30 foi executado em rápido</li><li>(35; 5), porque N30 sem G não move</li><li>(25; 30), e N30 foi executado cortando, a F100</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>N10 leva a (20; 10). N20, incremental: (35; 5). N30 não repete G, mas G91 e G01 são <strong>modais</strong>: soma (5; 20) → (40; 25), cortando a F100. (a) lê N30 como absoluto; (e) esquece N20.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-codigos">ficha 18 · códigos modais</a></p></div></details></article>
+<article class="ex" id="d45"><div class="ex-head"><div><div class="ex-kicker">Questão 45 · ficha 18 · arco</div><h3 id="d45-h">Um quarto de volta</h3></div></div>
+<div class="stmt">A ferramenta está em (30; 0) e executa <code>G03 X0 Y30 I-30 J0 F100</code> (I e J incrementais a partir do ponto inicial). O arco descrito e o tempo de corte são:
+<ol type="a"><li>três quartos de volta horário de raio 30; 141,4 mm em cerca de 85 s</li><li>quarto de volta horário de raio 30 em torno de (0; 0); 47,1 mm em cerca de 28 s</li><li>quarto de volta anti-horário de raio 30 em torno de (0; 0); 47,1 mm em cerca de 28 s</li><li>meia volta anti-horária de raio 30 em torno de (−30; 0); 94,2 mm</li><li>o bloco dá erro, porque os raios inicial e final não coincidem</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Centro = (30 − 30; 0 + 0) = (0; 0); raio 30 no início e no fim (válido). G03 é anti-horário: de 0° a 90°, um quarto de volta, L = π·30/2 = 47,1 mm; a F100 mm/min, t = 0,471 min ≈ 28 s. Com G02, o mesmo início e fim dariam três quartos de volta ((a)).</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-movimentos">ficha 18 · G02 e G03</a></p></div></details></article>
+<article class="ex" id="d46"><div class="ex-head"><div><div class="ex-kicker">Questão 46 · ficha 18 · códigos G</div><h3 id="d46-h">A associação errada</h3></div></div>
+<div class="stmt">Qual associação entre código G (tabela ISO do curso) e função está <strong>errada</strong>?
+<ol type="a"><li>G04: temporização</li><li>G17: seleção do plano XY</li><li>G40: cancela a compensação de raio</li><li>G54: sistema de coordenadas de trabalho (zero fixo)</li><li>G94: avanço por rotação</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (e).</strong></div>
+<p>Slides 41–42: G94 é avanço <strong>por minuto</strong>; por rotação é G95. Também valem: G28 volta ao zero-máquina, G96/G97 velocidade de corte constante / rpm.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-codigos">ficha 18 · tabela de códigos G</a></p></div></details></article>
+<article class="ex" id="d47"><div class="ex-head"><div><div class="ex-kicker">Questão 47 · ficha 18 · torneamento</div><h3 id="d47-h">Rotação com velocidade de corte constante</h3></div></div>
+<div class="stmt">Num torno com <code>G96 S180</code> ativo, faceia-se uma barra de Ø 60 mm até Ø 20 mm. A rotação no início e no fim do passe é, aproximadamente:
+<ol type="a"><li>180 rpm o tempo todo</li><li>2865 rpm e 955 rpm</li><li>955 rpm e 2865 rpm</li><li>955 rpm o tempo todo</li><li>1910 rpm e 5730 rpm</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (c).</strong></div>
+<p>Com G96, S é a velocidade de corte em m/min e o comando recalcula $n = 1000\cdot180/(\pi D)$: 955 rpm a Ø 60 e 2865 rpm a Ø 20. A rotação <strong>sobe</strong> quando o diâmetro cai. (e) usa o raio no lugar do diâmetro; (b) inverte início e fim.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-sf">ficha 18 · G96 no torno</a></p></div></details></article>
+<article class="ex" id="d48"><div class="ex-head"><div><div class="ex-kicker">Questão 48 · ficha 18 · leitura de bloco</div><h3 id="d48-h">O bloco da furação</h3></div></div>
+<div class="stmt">No exemplo de furação do slide 36, o bloco <code>N15 G43 H01 Z10. M08</code> vem logo depois de <code>N10 G00 X100. Y100.</code>. Ele faz:
+<ol type="a"><li>ativa a compensação de raio à esquerda com o valor H01 e fura até Z10;</li><li>ativa a compensação de comprimento positiva com o valor do registro H01, desce em rápido (G00 modal) até Z10 e liga o refrigerante;</li><li>troca para a ferramenta 1 e desliga o refrigerante;</li><li>desce cortando até Z10 com avanço H01 e liga o fuso;</li><li>volta ao zero-máquina em Z e liga o refrigerante.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (b).</strong></div>
+<p>G43 = compensação de comprimento + (G41/G42 são de raio); H guarda o comprimento da ferramenta; M08 liga o refrigerante (M09 desliga). Como G00 é modal desde N10, a descida até Z10 é em rápido; o corte vem em N20 com G01 F100.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-exemplos">ficha 18 · exemplos lidos bloco a bloco</a></p></div></details></article>
+<article class="ex" id="d49"><div class="ex-head"><div><div class="ex-kicker">Questão 49 · ficha 18 · compensação de raio</div><h3 id="d49-h">Contorno sem G41/G42</h3></div></div>
+<div class="stmt">Um contorno <strong>externo</strong> retangular de 80 × 60 mm foi programado nas cotas do desenho, sem compensação de raio (G40), com fresa de Ø 10 mm. A peça sai com:
+<ol type="a"><li>80 × 60 mm, porque o comando compensa o raio automaticamente;</li><li>90 × 70 mm, porque a fresa fica do lado de fora;</li><li>75 × 55 mm, porque a fresa come 5 mm só em um lado de cada dimensão;</li><li>70 × 50 mm, porque o centro da fresa percorre a linha programada e ela come 5 mm para dentro de cada lado;</li><li>80 × 60 mm, mas com quinas externas vivas.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (d).</strong></div>
+<p>Sem G41/G42 (slide 56), a trajetória programada é a do <strong>centro</strong> da fresa: a borda cortante fica a 5 mm da linha, para dentro do contorno externo. Cada dimensão perde 2 × 5 = 10 mm. Para cortar na cota, compensa-se com G41/G42 e D.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-movimentos">ficha 18 · compensações</a></p></div></details></article>
+<article class="ex" id="d50"><div class="ex-head"><div><div class="ex-kicker">Questão 50 · ficha 18 · controle de movimento</div><h3 id="d50-h">O coração do CNC</h3></div></div>
+<div class="stmt">O que caracteriza o controle de movimento de uma máquina CNC, chamado nos slides de "coração do CNC"?
+<ol type="a"><li>o servomotor gira o fuso de esferas e um dispositivo de resposta (<em>feedback</em>) confirma a posição: controle em malha fechada;</li><li>o operador gira a manivela e confere a posição no anel graduado;</li><li>o motor de passo move a mesa sem medir a posição: malha aberta;</li><li>o CLP decide a trajetória e o operador corrige a posição;</li><li>a posição é medida só no fim do programa, na máquina de medir por coordenadas.</li></ol></div>
+<details class="deep"><summary>Gabarito comentado</summary><div class="deep-body"><div class="answer"><strong>Resposta: (a).</strong></div>
+<p>Slides 15–17. (b) descreve a máquina convencional.</p><p>Revisar: <a href="../topicos/18-usinagem-cnc.html#p-maquina">ficha 18 · a máquina CNC</a></p></div></details></article>
+</section>
+<section class="chapter" id="d-gabarito"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Gabarito</span><h2 id="d-gabarito-h" data-nav="Gabarito e diagnóstico">Gabarito rápido e diagnóstico por ficha</h2><p class="section-desc">Corrija só depois de responder as 50. O gabarito comentado de cada questão está logo abaixo dela.</p></div>
+<details class="deep"><summary>Abrir o gabarito rápido</summary><div class="deep-body"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Q</th><th>Resp.</th><th>Q</th><th>Resp.</th><th>Q</th><th>Resp.</th><th>Q</th><th>Resp.</th><th>Q</th><th>Resp.</th></tr></thead><tbody><tr><td class="num">1</td><td class="num"><strong>e</strong></td><td class="num">11</td><td class="num"><strong>e</strong></td><td class="num">21</td><td class="num"><strong>e</strong></td><td class="num">31</td><td class="num"><strong>c</strong></td><td class="num">41</td><td class="num"><strong>e</strong></td></tr><tr><td class="num">2</td><td class="num"><strong>b</strong></td><td class="num">12</td><td class="num"><strong>c</strong></td><td class="num">22</td><td class="num"><strong>c</strong></td><td class="num">32</td><td class="num"><strong>a</strong></td><td class="num">42</td><td class="num"><strong>a</strong></td></tr><tr><td class="num">3</td><td class="num"><strong>a</strong></td><td class="num">13</td><td class="num"><strong>c</strong></td><td class="num">23</td><td class="num"><strong>c</strong></td><td class="num">33</td><td class="num"><strong>d</strong></td><td class="num">43</td><td class="num"><strong>d</strong></td></tr><tr><td class="num">4</td><td class="num"><strong>e</strong></td><td class="num">14</td><td class="num"><strong>e</strong></td><td class="num">24</td><td class="num"><strong>b</strong></td><td class="num">34</td><td class="num"><strong>b</strong></td><td class="num">44</td><td class="num"><strong>b</strong></td></tr><tr><td class="num">5</td><td class="num"><strong>a</strong></td><td class="num">15</td><td class="num"><strong>d</strong></td><td class="num">25</td><td class="num"><strong>a</strong></td><td class="num">35</td><td class="num"><strong>c</strong></td><td class="num">45</td><td class="num"><strong>c</strong></td></tr><tr><td class="num">6</td><td class="num"><strong>d</strong></td><td class="num">16</td><td class="num"><strong>c</strong></td><td class="num">26</td><td class="num"><strong>b</strong></td><td class="num">36</td><td class="num"><strong>e</strong></td><td class="num">46</td><td class="num"><strong>e</strong></td></tr><tr><td class="num">7</td><td class="num"><strong>a</strong></td><td class="num">17</td><td class="num"><strong>a</strong></td><td class="num">27</td><td class="num"><strong>d</strong></td><td class="num">37</td><td class="num"><strong>b</strong></td><td class="num">47</td><td class="num"><strong>c</strong></td></tr><tr><td class="num">8</td><td class="num"><strong>d</strong></td><td class="num">18</td><td class="num"><strong>b</strong></td><td class="num">28</td><td class="num"><strong>e</strong></td><td class="num">38</td><td class="num"><strong>d</strong></td><td class="num">48</td><td class="num"><strong>b</strong></td></tr><tr><td class="num">9</td><td class="num"><strong>b</strong></td><td class="num">19</td><td class="num"><strong>d</strong></td><td class="num">29</td><td class="num"><strong>c</strong></td><td class="num">39</td><td class="num"><strong>b</strong></td><td class="num">49</td><td class="num"><strong>d</strong></td></tr><tr><td class="num">10</td><td class="num"><strong>d</strong></td><td class="num">20</td><td class="num"><strong>a</strong></td><td class="num">30</td><td class="num"><strong>e</strong></td><td class="num">40</td><td class="num"><strong>a</strong></td><td class="num">50</td><td class="num"><strong>a</strong></td></tr></tbody></table></div></div></details>
+<h3 class="sub" id="d-diag">Onde revisar</h3><p>Conte os erros por ficha. Se passar do limite da última coluna, releia os pontos-chave e as limitações da ficha e refaça as questões dela (as da própria ficha e as deste simulado).</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ficha</th><th>Questões</th><th>Quantas</th><th>Revisar se errar mais de</th></tr></thead><tbody><tr><td><a href="../topicos/12-polimeros.html">12 · Peças de plástico</a></td><td class="num">1–8</td><td class="num">8</td><td class="num">2</td></tr><tr><td><a href="../topicos/13-compositos.html">13 · Compósitos</a></td><td class="num">9–15</td><td class="num">7</td><td class="num">1</td></tr><tr><td><a href="../topicos/14-prototipagem-e-manufatura-aditiva.html">14 · Prototipagem e manufatura aditiva</a></td><td class="num">16–22</td><td class="num">7</td><td class="num">1</td></tr><tr><td><a href="../topicos/15-elementos-finitos.html">15 · Elementos finitos</a></td><td class="num">23–27</td><td class="num">5</td><td class="num">1</td></tr><tr><td><a href="../topicos/16-juncao.html">16 · Junção (soldagem)</a></td><td class="num">28–36</td><td class="num">9</td><td class="num">2</td></tr><tr><td><a href="../topicos/17-micro-e-nanofabricacao.html">17 · Micro e nanofabricação</a></td><td class="num">37–42</td><td class="num">6</td><td class="num">1</td></tr><tr><td><a href="../topicos/18-usinagem-cnc.html">18 · Usinagem CNC</a></td><td class="num">43–50</td><td class="num">8</td><td class="num">2</td></tr></tbody></table></div>
+<p class="tbl-cap">Distribuição das respostas: (a) 10 · (b) 10 · (c) 10 · (d) 10 · (e) 10.</p></section>
+
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PMR3301 · Complementos de Fabricação Mecânica (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pmr3301-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>
