@@ -47,3 +47,10 @@ desktop.ini
 node_modules/
 dist/
 .cache/
+
+# Finanças pessoais: o portal em financas/ não leva dado nenhum. Extrato, saldo e
+# lançamento ficam em ~/Workspace_Financas (local e privado). Segunda linha de defesa:
+financas/*.json
+financas/*.csv
+financas/dados/
+financas/extratos/
