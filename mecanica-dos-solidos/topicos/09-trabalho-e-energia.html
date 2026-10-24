@@ -427,7 +427,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
   <h3 class="sub" id="t09-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
 <article class="ex pivo" id="l5-ex1">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 1 (Gere 2.7-4) · Pivô 1 da P2</div>
-      <h3 id="l5-ex1-h" data-nav="L5 ex.1 · barra ABC, P e Q" data-pivo>Barra ABC com duas forças: energia não se superpõe</h3></div>
+      <h3 id="l5-ex1-h" data-nav="L5 ex.1 · barra ABC, P e Q" data-pivo>Barra ABC com duas forças: a energia não se superpõe e o P.T.E. tem limite</h3></div>
       <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
     <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span><span class="chip">NL</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.1)</span>
@@ -435,56 +435,73 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <ol type="a"><li>Determine a energia complementar $U_1^*$ da barra quando a força $P$ age sozinha;</li>
       <li>Determine a energia complementar $U_2^*$ da barra quando a força $Q$ age sozinha;</li>
       <li>Determine a energia complementar $U_3^*$ quando as forças $P$ e $Q$ agem simultaneamente na barra. Verifique que, no tocante ao cálculo das energias, não é possível aplicar o princípio da superposição ou seja, não é verdade que $U_3^* = U_1^* + U_2^*$, mesmo considerando que a estrutura tenha comportamento elástico-linear. Explique!</li>
-      <li>Em cada um dos itens anteriores veja se é possível determinar os deslocamentos longitudinais dos pontos B e C pelo Princípio do Trabalho e Energia. Em caso positivo, determine-os.</li></ol></div>
+      <li>Em cada um dos itens anteriores veja se é possível determinar os deslocamentos longitudinais dos pontos B e C pelo Princípio do Trabalho e Energia. Em caso positivo, determine-os.</li></ol>
+      <em>Figura: AB = BC = L/2; $Q$ em B e $P$ em C, ambas para a direita (tração).</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 1):</strong> ver o PDF oficial, Lista 5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4>
-      <p>Barra prismática sob <strong>força normal</strong> (tração), isostática, dois trechos com $N$ diferente. Pergunta-alvo: energia complementar $U^*$ em três cenários e, depois, deslocamentos pelo princípio do trabalho e energia.</p>
-      <div class="callout concept"><span class="co-t">Conceito: trabalho × energia, externo × interno</span>
-        <p>O professor separa duas famílias de grandezas (aula 12 p.4–8):</p>
-        <ul><li><strong>Trabalho</strong> $W=\int_0^\delta P\,d\delta$ e <strong>trabalho complementar</strong> $W^*=\int_0^P \delta\,dP$ são calculados com as <em>forças externas</em> e os <em>deslocamentos dos seus pontos de aplicação</em>. No gráfico $P\times\delta$, $W$ é a área <em>embaixo</em> da curva e $W^*$ a área <em>entre a curva e o eixo P</em>. As duas somam o retângulo $P\delta$.</li>
-        <li><strong>Energia de deformação</strong> $U$ e <strong>energia complementar</strong> $U^*$ são calculadas com os <em>esforços internos</em> (tensões) e as <em>deformações</em>, integrando as densidades $u=\int\sigma\,d\varepsilon$ e $u^*=\int\varepsilon\,d\sigma$ no volume.</li></ul>
-        <p>Sem dissipação, a energia que entra pelas forças externas fica guardada no material: $W=U$ e $W^*=U^*$. Na barra sob força normal isso vira a fórmula que você vai usar em quase toda a P2:</p>
-        <div class="math-box">$$U^* = \int_0^L \frac{N(x)^2}{2\,E\,A(x)}\,dx \qquad\text{(aula 12 p.22)}$$</div>
-        <p>De onde vem: $\sigma_x = N/A$, e com Hooke $u^* = \int_0^{\sigma}\frac{\sigma}{E}d\sigma = \frac{\sigma^2}{2E}$. Integrando na área da seção, $\iint \frac{N^2}{2EA^2}\,dA = \frac{N^2}{2EA}$ por unidade de comprimento. $U^*$ depende só dos <em>esforços</em> ($N$), por isso ela é a energia "natural" quando a estrutura é isostática e os esforços saem do equilíbrio.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
-        <tr><td>Rigidez axial</td><td>$EA$</td><td>constante</td><td>enunciado</td></tr>
-        <tr><td>Trecho AB</td><td>$L_{AB}$</td><td>$L/2$</td><td>figura (cota)</td></tr>
-        <tr><td>Trecho BC</td><td>$L_{BC}$</td><td>$L/2$</td><td>figura (cota)</td></tr>
-        <tr><td>Forças</td><td>$Q$ em B, $P$ em C</td><td>ambas para a direita (tração)</td><td>figura</td></tr>
-      </tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$U_1^*,\ U_2^*,\ U_3^*$; comparar $U_3^*$ com $U_1^*+U_2^*$. Em (d), usar $W = U^*$ quando for possível escrever $W$ com uma única incógnita.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.22</span> $U^*=\sum_i \int_0^{L_i} \frac{N_i^2}{2E_iA_i}dx_i$ &nbsp;·&nbsp; <span class="tag tag-form">📄 Aula 12 p.27</span> comportamento linear: $W = W^* = U^* = U$, com $W = P\delta/2$ para <em>uma</em> força.</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos por trecho</h4>
-      <p>Corte em cada trecho e olhe para a parte livre (à direita), assim a reação do engaste não entra na conta:</p>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>É o exercício-base da P2. Para resolvê-lo de verdade você precisa de quatro peças, cada uma apoiada na anterior: (1) achar o <strong>esforço normal</strong> $N$ em cada trecho por corte; (2) saber de onde sai $U^* = N^2L/2EA$ (densidade $u^* = \sigma^2/2E$ integrada no volume); (3) saber o que o <strong>princípio do trabalho e energia</strong> (P.T.E.) iguala e por que ele só tem uma equação; (4) entender por que uma grandeza <em>quadrática</em> não se superpõe. O item (d) é a ponte para a aula 15 (Crotti-Engesser).</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Esforço normal por corte</h4>
+      <p>Revisão: <a href="../base.html#tracao">Base</a> e o método do corte em <a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>. Corte a barra numa seção qualquer e olhe para a parte que <strong>não</strong> contém o engaste (a da direita): assim a reação de A não entra. O esforço normal $N$ é a força que a parte esquerda faz na direita, positiva quando puxa (tração). Equilíbrio da parte livre na direção do eixo:</p>
+      <div class="math-box">$$\text{corte em BC: } N_{BC} = P\qquad \text{corte em AB: } N_{AB} = P + Q$$</div>
+      <p>Regra prática: $N$ num corte = soma das forças axiais que estão do lado livre, com sinal positivo se puxam para fora. Esforços <strong>se superpõem</strong>: com as duas forças, $N$ é a soma dos $N$ de cada força sozinha.</p></div>
+
+    <div class="step" data-n="2"><h4>De onde vem $U^* = N^2L/2EA$</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a> e <a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. No material, a energia complementar por volume é a área entre a curva $\sigma\times\varepsilon$ e o eixo $\sigma$: $u^* = \int_0^\sigma\varepsilon\,d\sigma$. Com Hooke ($\varepsilon = \sigma/E$, <a href="../base.html#hooke">Base</a>) e $\sigma = N/A$ uniforme na seção:</p>
+      <div class="math-box">$$u^* = \int_0^{\sigma}\frac{\sigma}{E}\,d\sigma = \frac{\sigma^2}{2E}\qquad U^* = \int_0^L\!\!\iint_A\frac{N^2}{2EA^2}\,dA\,dx = \int_0^L\frac{N^2}{2EA}\,dx\ \overset{N\text{ const.}}{=}\ \frac{N^2L}{2EA}$$</div>
+      <p>Repare: $U^*$ é escrita com <strong>esforços</strong> (que saem do equilíbrio), não com deslocamentos. Por isso ela é a energia natural de estruturas isostáticas. Com trechos diferentes, soma-se trecho a trecho.</p></div>
+
+    <div class="step" data-n="3"><h4>O que o P.T.E. iguala</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>. Sem dissipação, o trabalho das forças externas fica guardado: $W = U$ e $W^* = U^*$. Se a estrutura é linear (material elástico-linear <em>e</em> linearidade geométrica), $W = W^* = U = U^*$. Uma força que cresce de 0 a $P$ junto com o deslocamento do seu ponto, de 0 a $\delta$, faz $W = P\delta/2$ (área do triângulo). Então, com <strong>uma só força</strong>:</p>
+      <div class="math-box">$$\frac{P\,\delta}{2} = U^*\quad\Rightarrow\quad\delta = \frac{2U^*}{P}$$</div>
+      <p>É <strong>uma</strong> equação escalar. Ela só pode dar <strong>uma</strong> incógnita: o deslocamento do ponto onde está a força, na direção dela. Esse é o limite que o item (d) quer que você descubra.</p></div>
+
+    <div class="step" data-n="4"><h4>Por que energia não se superpõe</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-super">ficha 09 (Trabalho, energia e P.T.E.)</a>. Se $N = N_1 + N_2$, então $N^2 = N_1^2 + 2N_1N_2 + N_2^2$. A energia do conjunto tem um termo <strong>cruzado</strong> $2N_1N_2$ que não existe em nenhum dos casos isolados. Superpõe-se o que é <em>linear</em> nas cargas (esforços, tensões, deslocamentos); energia é <em>quadrática</em>.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Material homogêneo, isótropo, elástico-linear; $EA$ constante.</li>
+          <li>Linearidade geométrica: o equilíbrio é escrito na barra não deformada.</li>
+          <li>Cargas aplicadas quase-estaticamente (crescem devagar de zero: sem energia cinética), o que justifica o ½ em $W = P\delta/2$.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="5"><h4>Esforços nos três cenários</h4>
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$N_{AB}$</th><th>$N_{BC}$</th></tr></thead><tbody>
         <tr><td>(a) só $P$</td><td>$P$</td><td>$P$</td></tr>
-        <tr><td>(b) só $Q$</td><td>$Q$</td><td>$0$</td></tr>
+        <tr><td>(b) só $Q$</td><td>$Q$</td><td>$0$ (o lado livre de um corte em BC não tem força)</td></tr>
         <tr><td>(c) $P$ e $Q$</td><td>$P+Q$</td><td>$P$</td></tr>
       </tbody></table></div></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="step-part">(a) só $P$</div>
-      <div class="math-box">$$U_1^* = \frac{P^2 (L/2)}{2EA} + \frac{P^2 (L/2)}{2EA} = \frac{P^2L}{2EA}$$</div>
-      <div class="step-part">(b) só $Q$ (BC fica descarregado)</div>
-      <div class="math-box">$$U_2^* = \frac{Q^2 (L/2)}{2EA} = \frac{Q^2L}{4EA}$$</div>
-      <div class="step-part">(c) $P$ e $Q$ juntos</div>
-      <div class="math-box">$$U_3^* = \frac{(P+Q)^2 (L/2)}{2EA} + \frac{P^2(L/2)}{2EA} = \frac{P^2L}{2EA} + \frac{PQL}{2EA} + \frac{Q^2L}{4EA}$$</div>
-      <p>$U_3^* - (U_1^* + U_2^*) = \dfrac{PQL}{2EA} \neq 0$. A energia é <strong>quadrática</strong> nos esforços. Os esforços se superpõem ($N_{AB} = P + Q$), mas o quadrado da soma tem o termo cruzado $2PQ$. Fisicamente: quando $Q$ é aplicada depois de $P$, a força $P$ (que já estava lá, com valor cheio) trabalha sobre o deslocamento extra de C causado por $Q$. Esse trabalho "cruzado" não existe em nenhum dos casos isolados.</p>
-      <div class="step-part">(d) Deslocamentos pelo princípio do trabalho e energia</div>
+
+    <div class="step" data-n="6"><h4>a), b), c) Energias</h4>
+      <div class="math-box">$$U_1^* = \frac{P^2(L/2)}{2EA} + \frac{P^2(L/2)}{2EA} = \frac{P^2L}{2EA}\qquad U_2^* = \frac{Q^2(L/2)}{2EA} + 0 = \frac{Q^2L}{4EA}$$
+      $$U_3^* = \frac{(P+Q)^2(L/2)}{2EA} + \frac{P^2(L/2)}{2EA} = \frac{P^2L}{2EA} + \frac{PQL}{2EA} + \frac{Q^2L}{4EA}$$
+      $$U_3^* - (U_1^* + U_2^*) = \frac{PQL}{2EA}\neq 0$$</div>
+      <p><strong>Explicação pedida em (c).</strong> A estrutura é linear, então os <em>esforços</em> se somam ($N_{AB} = P + Q$). Mas a energia depende do <em>quadrado</em> do esforço, e $(P+Q)^2 \neq P^2 + Q^2$. Fisicamente, o termo cruzado é o trabalho que uma força faz sobre o deslocamento causado pela outra (detalhe no aprofundamento). Teste extremo: com $Q = -P$, o trecho AB fica descarregado e $U_3^* = P^2L/4EA$, <em>menor</em> que $U_1^* + U_2^* = 3P^2L/4EA$. Acrescentar uma carga pode até diminuir a energia.</p></div>
+
+    <div class="step" data-n="7"><h4>d) Deslocamentos pelo P.T.E.</h4>
       <ul>
-        <li><strong>Caso (a):</strong> uma só força. $W = P\delta_C/2 = U_1^*$ ⇒ $\boxed{\delta_C = PL/EA}$. O deslocamento de B <em>não</em> sai: não há força em B, e ele não aparece em $W$.</li>
-        <li><strong>Caso (b):</strong> $Q\delta_B/2 = U_2^*$ ⇒ $\boxed{\delta_B = QL/2EA}$. O de C não sai.</li>
-        <li><strong>Caso (c):</strong> $W = \frac{P\delta_C}{2} + \frac{Q\delta_B}{2} = U_3^*$ é <em>uma</em> equação com <em>duas</em> incógnitas. <strong>Não dá.</strong></li>
+        <li><strong>Caso (a), só $P$:</strong> $W = P\delta_C/2 = U_1^*$ ⇒ $\boxed{\delta_C = PL/EA}$. O deslocamento de B <strong>não sai</strong>: não há força em B, então $\delta_B$ não aparece em $W$.</li>
+        <li><strong>Caso (b), só $Q$:</strong> $Q\delta_B/2 = U_2^*$ ⇒ $\boxed{\delta_B = QL/2EA}$. O de C não sai (C acompanha B porque BC não se deforma, mas o P.T.E. não "sabe" disso).</li>
+        <li><strong>Caso (c), $P$ e $Q$:</strong> $W = \frac{P\delta_C}{2} + \frac{Q\delta_B}{2} = U_3^*$ é <strong>uma equação com duas incógnitas</strong>. Não dá.</li>
       </ul>
-      <div class="callout warn"><span class="co-t">A limitação que motiva o resto do curso</span>
-        <p>O princípio do trabalho e energia só entrega o deslocamento <strong>do ponto onde está a única carga, na direção dela</strong>. Para qualquer outro deslocamento, ou com mais de uma carga, é preciso Crotti-Engesser / Castigliano (aula 15): $\delta_i = \partial U^*/\partial P_i$. Veja como isso resolve o caso (c) em uma linha: $\delta_C = \partial U_3^*/\partial P = \frac{PL}{EA} + \frac{QL}{2EA}$ e $\delta_B = \partial U_3^*/\partial Q = \frac{PL}{2EA} + \frac{QL}{2EA}$. Confira pela compatibilidade: $\delta_B = N_{AB}(L/2)/EA = (P+Q)L/2EA$ ✓.</p></div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> $U_1^* = P^2L/2EA$; $U_2^* = Q^2L/4EA$; $U_3^* = P^2L/2EA + PQL/2EA + Q^2L/4EA$; (d) caso a: $\delta_C = PL/EA$; caso b: $\delta_B = QL/2EA$; caso c: impossível só com $W=U^*$. <span class="badge badge-ok">bate com o Gere (2.7-4 c)</span></div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Somar energias de casos separados. Superpõe-se <strong>esforço</strong> e <strong>deslocamento</strong>, nunca energia.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $W = P\delta$ (sem o ½). A força cresce de 0 até $P$ junto com o deslocamento; o ½ é a área do triângulo.</li>
-      <li><span class="tag tag-mem">⚠ memorizar</span> Conferência dimensional: $[N^2 L/EA] = \text{N}^2\cdot\text{mm}/\text{N} = \text{N·mm}$ ✓.</li></ul></div>
-    <details class="deep"><summary>Aprofundamento: de onde vem o termo cruzado, pela ordem de carregamento</summary><div class="deep-body">
-      <p>Aplique primeiro $P$ (de 0 a $P$): trabalho $P\cdot\frac{PL}{EA}\cdot\frac12 = \frac{P^2L}{2EA}$. Depois aplique $Q$ (de 0 a $Q$) com $P$ mantida: $Q$ faz $\frac12 Q \cdot \frac{QL}{2EA}$, e $P$, que já está cheia, desloca-se mais $\frac{QL}{2EA}$ (C anda o mesmo que B, porque BC não muda de comprimento com $Q$), fazendo $P\cdot\frac{QL}{2EA}$ <em>sem o ½</em>. Somando: $\frac{P^2L}{2EA} + \frac{Q^2L}{4EA} + \frac{PQL}{2EA} = U_3^*$ ✓. O termo cruzado é esse trabalho "de força constante". Invertendo a ordem, o resultado é o mesmo (a energia é função de estado); é essa independência de caminho que torna possível derivar $U^*$ em relação a cada força.</p></div></details>
+      <p>Conferência por compatibilidade (<a href="../base.html#tracao">Base</a>): $\delta_B = N_{AB}(L/2)/EA$ e $\delta_C = \delta_B + N_{BC}(L/2)/EA$. No caso (a), $\delta_C = PL/2EA + PL/2EA = PL/EA$ ✓.</p>
+      <div class="callout"><span class="co-t">Como a aula 15 destrava o caso (c)</span>
+        <p>Crotti-Engesser (<a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>): o deslocamento correspondente a cada força é a derivada de $U^*$ em relação a ela. Em uma linha:</p>
+        <div class="math-box">$$\delta_C = \frac{\partial U_3^*}{\partial P} = \frac{(2P + Q)L}{2EA}\qquad \delta_B = \frac{\partial U_3^*}{\partial Q} = \frac{(P + Q)L}{2EA}$$</div>
+        <p>Batem com a compatibilidade: $\delta_B = (P+Q)(L/2)/EA$ ✓ e $\delta_C = \delta_B + P(L/2)/EA$ ✓.</p></div>
+      <div class="answer"><strong>Respostas:</strong> (a) $U_1^* = \dfrac{P^2L}{2EA}$; (b) $U_2^* = \dfrac{Q^2L}{4EA}$; (c) $U_3^* = \dfrac{P^2L}{2EA} + \dfrac{PQL}{2EA} + \dfrac{Q^2L}{4EA} \neq U_1^* + U_2^*$; (d) caso a: $\delta_C = PL/EA$; caso b: $\delta_B = QL/2EA$; caso c: o P.T.E. não basta (uma equação, duas incógnitas). <span class="badge badge-ok">bate com o Gere (2.7-4)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Somar energias de casos separados. Superpõe-se esforço e deslocamento, nunca energia.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $W = P\delta$ (sem o ½): a força cresce junto com o deslocamento.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Tirar $\delta_B$ do caso (a) pelo P.T.E.: não há força em B.</li>
+          <li>Dimensão: $[N^2L/EA] = \text{N}^2\cdot\text{mm}/\text{N} = \text{N·mm}$ ✓.</li></ul></div>
+
+    <details class="deep"><summary>Aprofundamento: o termo cruzado é o trabalho de uma força que já estava lá</summary><div class="deep-body">
+      <p>Aplique primeiro $P$ (de 0 a $P$): ela faz $\frac12P\cdot\frac{PL}{EA} = \frac{P^2L}{2EA}$. Depois aplique $Q$ (de 0 a $Q$), mantendo $P$. A própria $Q$ faz $\frac12Q\cdot\frac{QL}{2EA}$. E $P$, que já está com valor cheio, anda junto com C mais $\frac{QL}{2EA}$ (BC não muda de comprimento com $Q$), fazendo $P\cdot\frac{QL}{2EA}$ <strong>sem o ½</strong>, porque é força constante. Total: $\frac{P^2L}{2EA} + \frac{Q^2L}{4EA} + \frac{PQL}{2EA} = U_3^*$ ✓.</p>
+      <p>Invertendo a ordem ($Q$ primeiro), o termo cruzado vira $Q\cdot\frac{PL}{2EA}$: o mesmo valor (conferido em <code>calc_l5_detalhado.py</code>). A energia final não depende da ordem de carregamento: é uma <strong>função de estado</strong> das cargas. Essa independência de caminho é o que permite, na aula 15, derivar $U^*$ em relação a cada carga.</p></div></details>
   </article>
 <article class="ex pivo" id="l5-ex9">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 9 (complementar 1) · Pivô 2 da P2</div>
@@ -494,29 +511,49 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.5, Parte II)</span>
       1. A estrutura treliçada indicada abaixo é formada por barras de mesmo material (com módulo de elasticidade $E$) e mesma área de seção transversal $A$. Determine o deslocamento vertical do ponto de aplicação da força $P$ utilizando o princípio do trabalho e energia. Indique o resultado em função de $P$, $L$ e $EA$. Sugestão: utilize a simetria da estrutura e do carregamento para calcular as forças nas barras simétricas uma única vez.<br>
       <em>Importante:</em> o resultado obtido não está considerando a ação do peso próprio da estrutura, mas, em projetos reais, o peso próprio deve ser devidamente considerado.<br>
-      Resp.: $\delta = (2\sqrt2 + 3)(PL/EA) \cong 5{,}83\,(PL/EA)$</div>
+      Resp.: $\delta = (2\sqrt2 + 3)(PL/EA) \cong 5{,}83\,(PL/EA)$
+      <br><em>Figura: vão $4L$ em 4 painéis quadrados de lado $L$; pino à esquerda, rolete à direita; $P$ para baixo no nó inferior central. Numeração nossa: nós inferiores 1 a 5 (esquerda → direita), superiores 6, 7, 8 (sobre 2, 3, 4).</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 9):</strong> ver o PDF oficial, Lista 5, p. 5 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Treliça plana isostática (13 barras, 8 nós: $2\cdot 8 = 16 = 13 + 3$ reações). Barras só com força normal constante, $A$ e $E$ constantes. Uma única carga, e pede-se o deslocamento <em>do ponto e na direção da carga</em>: é exatamente o caso em que o princípio do trabalho e energia basta.</p>
-      <div class="callout concept"><span class="co-t">Conceito: $U^*$ de treliça</span>
-        <p>Em cada barra $N_i$ é constante, então a integral vira produto: $U^* = \sum_i \frac{N_i^2 L_i}{2E_iA_i}$. Com $EA$ igual em todas: $U^* = \frac{1}{2EA}\sum_i N_i^2L_i$. O sinal de $N_i$ não importa, porque aparece ao quadrado. Barras de força zero não armazenam energia.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
-        <tr><td>Vão / altura</td><td>$4L$ / $L$ (4 painéis quadrados)</td><td>figura</td></tr>
-        <tr><td>Apoios</td><td>pino à esquerda, rolete à direita</td><td>figura</td></tr>
-        <tr><td>Carga</td><td>$P$ para baixo no nó inferior central</td><td>figura</td></tr>
-        <tr><td>Diagonais</td><td>comprimento $L\sqrt2$; montantes e banzos: $L$</td><td>geometria</td></tr>
-      </tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\delta_V$ do nó carregado, por $\frac{P\delta}{2} = U^*$ (<span class="tag tag-form">📄 Aula 12 p.27</span>).</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{P\,\delta}{2} = U^* = \sum_{i=1}^{13}\frac{N_i^2L_i}{2EA}\quad\Longrightarrow\quad \delta = \frac{1}{P\,EA}\sum_i N_i^2L_i$$</div></div>
-    <div class="step" data-n="5"><h4>Esforços internos (método dos nós, metade da treliça)</h4>
-      <p>Reações: simetria ⇒ $V_A = V_D = P/2$; horizontal no pino $= 0$. Numere os nós de baixo 1 a 5 (esq. → dir.) e os de cima 6, 7, 8. Tração positiva.</p>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>O formato que mais cai: treliça grande, uma carga, deslocamento sob a carga. O trabalho todo está nos <strong>esforços</strong>; a energia é uma soma. Peças: (1) a treliça é isostática?; (2) reações e simetria; (3) método dos nós com as regras de barra de força zero; (4) conferência pelo método das seções; (5) $U^* = \sum N^2L/2EA$ e o P.T.E.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Contagem: isostática?</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Cada nó dá 2 equações ($2n$); as incógnitas são as forças nas barras ($b$) e as reações ($r$). Aqui $n = 8$, $b = 13$, $r = 3$ (pino 2 + rolete 1): $2n = 16 = b + r$ ✓. Isostática: todos os $N$ saem só do equilíbrio, e então $U^*$ também.</p></div>
+
+    <div class="step" data-n="2"><h4>Método dos nós e as duas regras de força zero</h4>
+      <p>Revisão: <a href="../base.html#equilibrio">Base</a>. Convenção: todo $N$ desenhado como tração (saindo do nó). Comece por um nó com no máximo duas barras desconhecidas. Duas regras que economizam tempo de prova:</p>
+      <ul><li>Nó com três barras, duas alinhadas e sem carga externa: a terceira tem força zero (o equilíbrio na direção perpendicular às alinhadas só envolve ela).</li>
+          <li>Nó com duas barras não alinhadas e sem carga: as duas têm força zero.</li></ul>
+      <p>Aqui os montantes 2-6 e 4-8 caem na primeira regra (nós 2 e 4: banzo alinhado + montante, sem carga), e o 3-7 também (nó 7: banzo superior alinhado + montante, sem carga).</p></div>
+
+    <div class="step" data-n="3"><h4>Simetria</h4>
+      <p>Estrutura e carga simétricas em relação à vertical pelo nó 3: barras espelhadas têm o mesmo $N$. Basta resolver a metade esquerda. (O rolete não quebra a simetria: com carga só vertical, a reação horizontal do pino é zero.)</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Nós articulados sem atrito; carga só nos nós; peso próprio desprezado (o enunciado avisa).</li>
+          <li>Mesmo $EA$ em todas as barras; elástico-linear; linearidade geométrica.</li>
+          <li>Barras comprimidas não flambam.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Reações</h4>
+      <p>Simetria: $V_1 = V_5 = P/2$ (para cima); $H_1 = 0$.</p></div>
+
+    <div class="step" data-n="5"><h4>Nós da metade esquerda</h4>
+      <p>Diagonais a 45°: componentes $\frac{\sqrt2}{2}N$.</p>
       <ol>
-        <li><strong>Nó 1 (apoio):</strong> só a diagonal 1-6 tem componente vertical: $N_{16}\frac{\sqrt2}{2} + \frac P2 = 0$ ⇒ $N_{16} = -\frac{\sqrt2}{2}P$ (compressão). Horizontal: $N_{12} + N_{16}\frac{\sqrt2}{2} = 0$ ⇒ $N_{12} = +\frac P2$.</li>
-        <li><strong>Nó 2:</strong> montante 2-6 sozinho na vertical ⇒ $N_{26} = 0$; horizontal ⇒ $N_{23} = N_{12} = \frac P2$.</li>
-        <li><strong>Nó 6:</strong> vertical: $-N_{16}\frac{\sqrt2}{2} - N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{63} = +\frac{\sqrt2}{2}P$. Horizontal: $N_{67} - N_{16}\frac{\sqrt2}{2} + N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{67} = -P$.</li>
-        <li><strong>Nó 7:</strong> montante 3-7 sozinho na vertical ⇒ $N_{37} = 0$.</li>
+        <li><strong>Nó 1</strong> (barras 1-2 e 1-6): vertical, $N_{16}\frac{\sqrt2}{2} + \frac P2 = 0$ ⇒ $N_{16} = -\frac{\sqrt2}{2}P$ (compressão). Horizontal, $N_{12} + N_{16}\frac{\sqrt2}{2} = 0$ ⇒ $N_{12} = +\frac P2$.</li>
+        <li><strong>Nó 2</strong>: montante sozinho na vertical ⇒ $N_{26} = 0$; horizontal ⇒ $N_{23} = N_{12} = \frac P2$.</li>
+        <li><strong>Nó 6</strong> (barras 6-1, 6-2, 6-7, 6-3): vertical, $-N_{16}\frac{\sqrt2}{2} - N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{63} = +\frac{\sqrt2}{2}P$. Horizontal, $N_{67} - N_{16}\frac{\sqrt2}{2} + N_{63}\frac{\sqrt2}{2} = 0$ ⇒ $N_{67} = -P$.</li>
+        <li><strong>Nó 7</strong>: montante 3-7 sozinho na vertical ⇒ $N_{37} = 0$.</li>
       </ol>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barras (par simétrico)</th><th>$N$</th><th>$L$</th><th>$N^2L$ (par)</th></tr></thead><tbody>
+      <p><strong>Conferência pelo método das seções</strong> (corte vertical entre $x = L$ e $x = 2L$, que corta 6-7, 6-3 e 2-3; parte esquerda): momentos em torno do nó 3 eliminam 6-3 e 2-3, $\frac P2\cdot2L + N_{67}\cdot L = 0$ ⇒ $N_{67} = -P$ ✓. Momentos em torno do nó 6: $\frac P2\cdot L - N_{23}\cdot L = 0$ ⇒ $N_{23} = \frac P2$ ✓. Resultado: o banzo de cima comprime, o de baixo traciona, como numa viga biapoiada com carga no meio.</p></div>
+
+    <div class="step" data-n="6"><h4>Tabela de energia</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barras</th><th>$N$</th><th>$L_i$</th><th>$\sum N^2L_i$</th></tr></thead><tbody>
         <tr><td>diagonais de apoio 1-6, 8-5</td><td class="num">$-\frac{\sqrt2}{2}P$</td><td class="num">$\sqrt2 L$</td><td class="num">$2\cdot\frac{P^2}{2}\sqrt2L = \sqrt2\,P^2L$</td></tr>
         <tr><td>banzo inferior 1-2, 2-3, 3-4, 4-5</td><td class="num">$+\frac P2$</td><td class="num">$L$</td><td class="num">$4\cdot\frac{P^2}{4}L = P^2L$</td></tr>
         <tr><td>diagonais centrais 6-3, 3-8</td><td class="num">$+\frac{\sqrt2}{2}P$</td><td class="num">$\sqrt2 L$</td><td class="num">$\sqrt2\,P^2L$</td></tr>
@@ -524,13 +561,14 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
         <tr><td>montantes 2-6, 3-7, 4-8</td><td class="num">$0$</td><td class="num">$L$</td><td class="num">$0$</td></tr>
         <tr class="hit"><td colspan="3"><strong>Soma</strong></td><td class="num">$(3 + 2\sqrt2)\,P^2L$</td></tr>
       </tbody></table></div></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$U^* = \frac{(3+2\sqrt2)P^2L}{2EA}\qquad\frac{P\delta}{2} = \frac{(3+2\sqrt2)P^2L}{2EA}\ \Longrightarrow\ \delta = (3+2\sqrt2)\frac{PL}{EA}\approx 5{,}83\,\frac{PL}{EA}$$</div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+
+    <div class="step" data-n="7"><h4>P.T.E.</h4>
+      <div class="math-box">$$U^* = \frac{(3 + 2\sqrt2)P^2L}{2EA}\qquad \frac{P\delta}{2} = U^*\ \Rightarrow\ \delta = (3 + 2\sqrt2)\frac{PL}{EA} \approx 5{,}83\,\frac{PL}{EA}$$</div>
+      <p>Uma carga, deslocamento do ponto dela, na direção dela: as três condições do P.T.E. estão satisfeitas (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>). Divisão da energia: diagonais 49%, banzos 51%; montantes nada.</p>
       <div class="answer"><strong>Resposta:</strong> $\delta_V = (2\sqrt2 + 3)\,PL/EA \approx 5{,}83\,PL/EA$ (para baixo). <span class="badge badge-ok">bate com a resposta da lista</span> (conferido também resolvendo as 16 equações de nó em Python)</div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o comprimento $\sqrt2 L$ das diagonais em $N^2L$.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Montante sozinho na vertical num nó sem carga vertical ⇒ força zero. Olhe isso antes de montar equações: economiza tempo de prova.</li>
-      <li>Sinal: $\delta > 0$ sai <em>no sentido da força</em>, porque $W = P\delta/2$ é positivo. Nesta estrutura a flecha é para baixo.</li></ul></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o comprimento $\sqrt2L$ das diagonais em $N^2L$.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Contar as barras simétricas uma vez só na soma: a simetria economiza o <em>cálculo</em> de $N$, não as parcelas de energia.</li>
+          <li>Sinal: pelo P.T.E. $\delta$ sai sempre no sentido da força ($W \gt 0$).</li></ul></div>
   </article>
 <article class="ex pivo" id="l5-ex4">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 4 (Gere 2.7-10) · Pivô 4 da P2</div>
@@ -544,35 +582,56 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <li>Determinar a energia de deformação total $U$ das três barras quando $P = 400$ kN;</li>
       <li>Explique por que a energia de deformação calculada no item anterior não é igual a $P\delta/2$ (Sugestão: faça um esboço do diagrama $P \times \delta$).</li></ol></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 4):</strong> ver o PDF oficial, Lista 5, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Barras em paralelo sob compressão, material elástico-linear, mas a <strong>estrutura</strong> muda de rigidez quando a folga fecha. O material é linear e a estrutura não é: o gráfico $P\times\delta$ é bilinear.</p>
-      <div class="callout concept"><span class="co-t">Conceito: "comportamento linear" é da estrutura, não só do material</span>
-        <p>A cadeia $W = W^* = U^* = U$ com $W = P\delta/2$ exige que a curva $P\times\delta$ <em>da estrutura</em> seja uma reta pela origem (aula 12 p.27). Um contato que se fecha, uma folga, um cabo que afrouxa ou uma mudança grande de geometria quebram a reta, mesmo com aço perfeitamente elástico. Nesse caso ainda vale $W = U$, mas $W$ tem de ser calculado como a <em>área real</em> sob a curva, e não como $P\delta/2$.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Unidade</th></tr></thead><tbody>
-      <tr><td>Comprimento</td><td>$L$</td><td class="num">1000</td><td>mm</td></tr>
-      <tr><td>Área de cada barra</td><td>$A$</td><td class="num">3000</td><td>mm²</td></tr>
-      <tr><td>Módulo</td><td>$E$</td><td class="num">45 000</td><td>MPa</td></tr>
-      <tr><td>Folga</td><td>$s$</td><td class="num">1,0</td><td>mm</td></tr>
-      <tr><td>Carga final</td><td>$P$</td><td class="num">400 000</td><td>N</td></tr>
-      <tr><td>Rigidez de uma barra</td><td>$k = EA/L$</td><td class="num">135 000</td><td>N/mm</td></tr>
-    </tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$P_1$, $\delta$, $U$; comparar $U$ com $P\delta/2$.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.30 (ex. 1)</span> rigidez de barra $k = EA/L$; energia de cada barra $U_i = \frac{k\,\delta_i^2}{2} = \frac{N_i^2L}{2EA}$ (<span class="tag tag-form">📄 Aula 12 p.22/p.26</span>).</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Fase 1 ($P \le P_1$): só as 2 barras externas trabalham, rigidez $2k$. Fase 2 ($P &gt; P_1$): as 3 trabalham, rigidez $3k$ para o <em>acréscimo</em> de carga.</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="step-part">(a) fechar a folga</div>
-      <div class="math-box">$$P_1 = 2k\,s = 2\cdot 135\,000\cdot 1{,}0 = 270\,000\ \text{N} = 270\ \text{kN}$$</div>
-      <div class="step-part">(b) deslocamento com $P = 400$ kN</div>
-      <div class="math-box">$$\delta = s + \frac{P - P_1}{3k} = 1{,}0 + \frac{130\,000}{405\,000} = 1{,}321\ \text{mm}$$</div>
-      <div class="step-part">(c) energia: cada barra guarda $k\delta_i^2/2$ com o <em>seu</em> encurtamento</div>
-      <div class="math-box">$$U = 2\cdot\frac{135\,000\cdot 1{,}321^2}{2} + \frac{135\,000\cdot 0{,}321^2}{2} = 235\,580 + 6\,955 = 242\,500\ \text{N·mm} \approx 243\ \text{J}$$</div>
-      <div class="step-part">(d) por que $U \neq P\delta/2 = 264{,}2$ J</div>
-      <p>O diagrama $P\times\delta$ é uma reta de inclinação $2k$ até $(s, P_1) = (1{,}0;\ 270)$ e depois uma reta mais íngreme ($3k$) até $(1{,}321;\ 400)$. A área embaixo dele é</p>
-      <div class="math-box">$$W = \tfrac12\cdot 270\,000\cdot 1{,}0 + \tfrac12(270\,000 + 400\,000)\cdot 0{,}321 = 242{,}5\ \text{J} = U\ \checkmark$$</div>
-      <p>$P\delta/2$ seria a área do triângulo da origem até (1,321; 400), que fica <em>acima</em> da curva real (a curva é convexa). Por isso $P\delta/2 &gt; U$.</p></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> (a) $P_1 = 270$ kN; (b) $\delta = 1{,}321$ mm; (c) $U \approx 243$ J; (d) curva $P\times\delta$ bilinear: $W = U$ = área real, não o triângulo. <span class="badge badge-ok">bate com o Gere (2.7-10)</span></div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o mesmo $\delta$ para a barra do meio: ela só encurta $\delta - s = 0{,}321$ mm.</li>
-      <li>Ordem de grandeza: $\delta \sim$ 1 mm num metro de barra ⇒ $\varepsilon \sim 10^{-3}$, $\sigma \approx E\varepsilon \approx 59$ MPa nas externas. Plausível para magnésio.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>O material é linear, mas a <strong>estrutura</strong> não é: a rigidez muda quando a folga fecha. Peças: (1) rigidez de barra $k = EA/L$ e barras em paralelo; (2) resolver em <strong>fases</strong> (antes e depois do contato), com compatibilidade na fase 2; (3) energia como área sob a curva $P\times\delta$, e por que ela só é $P\delta/2$ quando a curva é uma reta pela origem.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Barra como mola, barras em paralelo</h4>
+      <p>Revisão: <a href="../base.html#tracao">Base</a>. $\delta = NL/EA$ ⇒ $N = \frac{EA}{L}\delta$: uma barra é uma mola de rigidez $k = EA/L$. Barras que encurtam o mesmo tanto (presas à mesma placa rígida) estão em paralelo: as rigidezes somam (<a href="09-trabalho-e-energia.html#l5-ex3-h">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step" data-n="2"><h4>"Linear" é da estrutura, não só do material</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>. A cadeia $W = W^* = U = U^* = P\delta/2$ exige que a curva $P\times\delta$ <em>da estrutura</em> seja uma reta pela origem. Contato que fecha, folga, cabo que afrouxa ou geometria que muda muito quebram a reta, mesmo com material perfeitamente elástico. Sem dissipação, ainda vale $W = U$, mas $W$ passa a ser a <strong>área real</strong> sob a curva, não o triângulo.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Placa rígida; carga centrada (por simetria a placa só translada); barras elástico-lineares e iguais.</li>
+          <li>Pequenos deslocamentos; barras curtas e grossas o bastante para não flambar.</li>
+          <li>Contato da barra do meio sem atrito e sem dissipação ao fechar a folga (carga quase-estática).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Dados em N e mm</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th></tr></thead><tbody>
+        <tr><td>$L$, $A$, $E$, $s$</td><td>1000 mm, 3000 mm², 45 000 MPa, 1,0 mm</td></tr>
+        <tr><td>Rigidez de uma barra $k = EA/L$</td><td>$45\,000\cdot3000/1000 = 135\,000$ N/mm</td></tr>
+        <tr><td>Carga final</td><td>$P = 400\,000$ N</td></tr>
+      </tbody></table></div></div>
+
+    <div class="step" data-n="4"><h4>a) Fase 1: só as externas trabalham</h4>
+      <p>Enquanto $\delta \lt s$, a barra do meio não toca a placa: duas molas em paralelo, $k_1 = 2k$. A folga fecha quando $\delta = s$:</p>
+      <div class="math-box">$$P_1 = 2k\,s = 2\cdot135\,000\cdot1{,}0 = 270\,000\ \text{N} = 270\ \text{kN}$$</div></div>
+
+    <div class="step" data-n="5"><h4>b) Fase 2: as três trabalham</h4>
+      <p>Compatibilidade: as externas encurtam $\delta$; a do meio, só $\delta - s$. Equilíbrio da placa:</p>
+      <div class="math-box">$$P = 2k\delta + k(\delta - s)\ \Rightarrow\ \delta = \frac{P + ks}{3k} = s + \frac{P - P_1}{3k} = 1{,}0 + \frac{130\,000}{405\,000} = 1{,}321\ \text{mm}$$</div>
+      <p>Forças: externas $N = k\delta = 178{,}3$ kN (59,4 MPa); meio $N = k(\delta - s) = 43{,}3$ kN (14,4 MPa). Soma $2(178{,}3) + 43{,}3 = 400$ kN ✓.</p></div>
+
+    <div class="step" data-n="6"><h4>c) Energia: cada barra com o seu encurtamento</h4>
+      <div class="math-box">$$U = \sum\frac{N_i^2L}{2EA} = 2\cdot\frac{135\,000\cdot1{,}321^2}{2} + \frac{135\,000\cdot0{,}321^2}{2} = 235\,580 + 6\,950 \approx 242\,500\ \text{N·mm} \approx 243\ \text{J}$$</div></div>
+
+    <div class="step" data-n="7"><h4>d) Por que $U \neq P\delta/2$</h4>
+      <p>O diagrama $P\times\delta$ é <strong>bilinear</strong>: reta de inclinação $2k$ da origem até $(1{,}0\text{ mm};\ 270\text{ kN})$, depois reta mais íngreme ($3k$) até $(1{,}321;\ 400)$. A área sob ele (o trabalho $W$) é:</p>
+      <div class="math-box">$$W = \tfrac12\cdot270\,000\cdot1{,}0 + \tfrac12(270\,000 + 400\,000)\cdot0{,}321 = 242{,}5\ \text{J} = U\ ✓\qquad \frac{P\delta}{2} = \frac{400\,000\cdot1{,}321}{2} = 264{,}2\ \text{J}$$</div>
+      <p>$P\delta/2$ é a área do triângulo da origem até o ponto final, que fica <strong>acima</strong> da curva real (a curva "dobra para cima" em $P_1$). A diferença é o pedaço de triângulo entre a reta da origem e o "joelho". Sem dissipação $W = U$ continua valendo; o que falha é $W = P\delta/2$, que pressupõe reta pela origem.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $P_1 = 270$ kN; (b) $\delta = 1{,}321$ mm; (c) $U \approx 243$ J; (d) o diagrama $P\times\delta$ é bilinear (rigidez $2k$ e depois $3k$), então $W = U$ é a área real sob ele, menor que o triângulo $P\delta/2 = 264$ J. <span class="badge badge-ok">bate com o Gere (2.7-10)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o mesmo $\delta$ na barra do meio: ela só encurta $\delta - s = 0{,}321$ mm.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Calcular $\delta$ com $3k$ desde o início ($P/3k = 0{,}99$ mm, menor que a folga!): é sinal de que a barra do meio nem encostaria. Sempre teste a fase.</li>
+          <li>Ordem de grandeza: $\varepsilon \approx 1{,}3\times10^{-3}$ e $\sigma \approx 59$ MPa nas externas: plausível para magnésio.</li></ul></div>
+
+    <details class="deep"><summary>Aprofundamento: e a energia complementar? A folga também "guarda" $W^*$</summary><div class="deep-body">
+      <p>Cada barra é linear, então para as barras $U^* = U = 242{,}5$ J. Mas o trabalho complementar da carga é a área entre a curva e o eixo $P$: $W^* = P\delta - W = 528{,}4 - 242{,}5 = 285{,}9$ J. A diferença, $W^* - U^* = 43{,}3$ J, é exatamente $N_{meio}\cdot s = 43\,333\ \text{N}\times1{,}0\ \text{mm}$ (conferido em <code>calc_l5_detalhado.py</code>).</p>
+      <p>Leitura: a folga funciona como um "elemento" que, depois de fechado, tem deslocamento fixo $s$ para qualquer força. A energia complementar dele é $\int s\,dN = s\,N$, como a de uma deformação inicial (erro de montagem, variação de temperatura). Por isso, em estruturas com folga ou erro de montagem, $W^* = U^*$ só vale se essa parcela entrar em $U^*$. É o mesmo motivo pelo qual, nas hiperestáticas com recalque, a condição deixa de ser $\partial U^*/\partial X = 0$ (<a href="13-hiperestaticas-energia.html#t13-h1">ficha 13 (Hiperestáticas e linha elástica)</a>).</p></div></details>
   </article>
 <article class="ex pivo" id="l5-ex5">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 5 (Gere 2.7-12) · Pivô 5 da P2</div>
@@ -586,57 +645,155 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <li>Compare as energias $U$ e $U^*$ à quantidade $P\delta_C/2$.</li></ol>
       Nota: observe que, nas condições dadas, não existe linearidade geométrica.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 5):</strong> ver o PDF oficial, Lista 5, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Cabo elástico-linear ($F = k\,\Delta$), mas com <strong>grande mudança de geometria</strong>: o ângulo dos ramos muda com a carga, então o equilíbrio tem de ser escrito na configuração <em>deformada</em>. É o contraexemplo da hipótese de linearidade geométrica.</p>
-      <div class="callout concept"><span class="co-t">Conceito: duas fontes de não linearidade</span>
-        <p>A estrutura só é "linear" se (i) o material for elástico-linear e (ii) valer linearidade geométrica (aula 12 p.27). No Pivô 4 a quebra era de rigidez (contato). Aqui o material é linear, então $u = u^*$ em cada ponto da corda e <strong>$U = U^*$</strong>. Mas a relação $P\times\delta_C$ não é reta, porque a geometria muda: $W \ne P\delta_C/2$ e $W^* \ne W$. Como $W = U$ continua valendo, $W^* = P\delta_C - W$ fica diferente de $U^*$. O "atalho" $W^* = U^*$ precisa de linearidade geométrica. Esse detalhe é a razão de o curso trabalhar com $U^*$ e com $W^*$ separadamente.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Unidade</th><th>Onde</th></tr></thead><tbody>
-      <tr><td>Comprimento livre da corda</td><td>$L_0$</td><td class="num">760</td><td>mm</td><td>enunciado</td></tr>
-      <tr><td>Rigidez da corda inteira</td><td>$k$</td><td class="num">140 N/m = 0,140</td><td>N/mm</td><td>enunciado (converter!)</td></tr>
-      <tr><td>Distância entre estacas</td><td>$b$</td><td class="num">380</td><td>mm</td><td>enunciado/figura</td></tr>
-      <tr><td>Força no meio da corda</td><td>$P$</td><td class="num">80</td><td>N</td><td>enunciado, perpendicular a AB</td></tr>
-    </tbody></table></div>
-    <p>Hipótese de leitura (a mesma do Gere): $\delta_C$ é medido a partir da posição em que a corda fica <em>reta sem tração</em>. Como $L_0 = 760 &gt; b = 380$, a corda começa frouxa; esticada sem tração, cada metade (380 mm) forma com AB um triângulo de cateto $b/2 = 190$ mm, e $x_0 = \sqrt{380^2 - 190^2} = 329{,}1$ mm.</p></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Tração $F$ na corda (incógnita-chave), depois $\delta_C$, $U$, $U^*$ e comparação com $P\delta_C/2$.</p></div>
-    <div class="step" data-n="4"><h4>Fórmulas</h4>
-      <div class="math-box">$$\text{Constitutiva: } F = k\,\Delta\qquad\text{Geometria: } L_h = \frac{L_0 + \Delta}{2},\ \ x = \sqrt{L_h^2 - (b/2)^2}\qquad\text{Equilíbrio em C (deformada): } P = 2F\,\frac{x}{L_h}$$</div>
-      <p>Energia: $U = U^* = \frac{F^2}{2k}$ (material linear, <span class="tag tag-form">📄 Aula 12 p.15–16</span>).</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Uma única tração $F$ ao longo da corda toda (polia ideal em C, sem atrito). O equilíbrio depende de $x/L_h$, que depende de $F$: equação não linear em $F$, resolvida numericamente (<code>calc_l5.py</code>). Na prova, o professor daria um valor que feche ou pediria só o equacionamento.</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$F = 42{,}81\ \text{N}\ \Rightarrow\ \Delta = F/k = 305{,}8\ \text{mm},\ L_h = 532{,}9\ \text{mm},\ x = 497{,}9\ \text{mm}$$
-      $$\delta_C = x - x_0 = 497{,}9 - 329{,}1 = 168{,}8\ \text{mm}$$
-      $$U = U^* = \frac{F^2}{2k} = \frac{42{,}81^2}{2\cdot0{,}140} = 6546\ \text{N·mm} = 6{,}55\ \text{J}$$
-      $$\frac{P\,\delta_C}{2} = \frac{80\cdot168{,}8}{2} = 6752\ \text{N·mm} = 6{,}75\ \text{J}$$</div>
-      <p>Tabela da curva $P\times\delta_C$ (mesmo script): $\delta$ = 20,5 / 40,7 / 80,4 / 119,5 / 168,7 mm para $P$ = 8,8 / 17,8 / 36,3 / 55,2 / 80 N. A razão $P/\delta$ cresce (0,43 → 0,47 N/mm): a estrutura <strong>enrijece</strong> à medida que os ramos se alinham com a força.</p></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> (a) $U = U^* = 6{,}55$ J; (b) $\delta_C = 168{,}8$ mm; (c) $P\delta_C/2 = 6{,}75$ J $&gt; U$. A curva $P\times\delta_C$ é côncava para cima, e a área sob ela é menor que o triângulo. <span class="badge badge-ok">bate com o Gere (2.7-12)</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Segundo contraexemplo da "estrutura linear" (o primeiro é o <a href="09-trabalho-e-energia.html#l5-ex4-h">ficha 09 (Trabalho, energia e P.T.E.)</a>). Aqui o material é linear, mas a <strong>geometria</strong> muda tanto que o equilíbrio tem de ser escrito na configuração deformada. Peças: (1) o que é linearidade geométrica e quando ela falha; (2) as três equações de sempre (constitutiva, geometria, equilíbrio), agora acopladas; (3) por que $U = U^*$ continua valendo na corda, mas $W^* = U^*$ e $W = P\delta/2$ não.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Linearidade geométrica</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-limites-h">ficha 09 (Trabalho, energia e P.T.E.)</a>. Em toda a P2 se escreve o equilíbrio na geometria <em>inicial</em>: os ângulos e braços não mudam com a carga. Isso vale quando os deslocamentos são pequenos perto das dimensões da estrutura. Na corda, o ponto C anda 169 mm num vão de 380 mm, e o ângulo de cada ramo com a direção de $P$ cai de 30° para 21°. O "braço" com que a tração equilibra $P$ muda com a própria carga: o equilíbrio fica não linear.</p></div>
+
+    <div class="step" data-n="2"><h4>As três equações de qualquer problema de sólidos</h4>
+      <p>Mesmo esqueleto do <a href="../base.html#tracao">Base</a>, agora sem poder separar as equações:</p>
+      <ul><li><strong>Constitutiva</strong> (material linear): tração $F = k\,\Delta$, com $\Delta$ o alongamento da corda inteira e $k$ a rigidez da corda inteira.</li>
+          <li><strong>Geometria</strong>: cada metade mede $L_h = (L_0 + \Delta)/2$ e, com cateto $b/2$, a distância de C à linha das estacas é $x = \sqrt{L_h^2 - (b/2)^2}$.</li>
+          <li><strong>Equilíbrio em C, na configuração deformada</strong>: as duas metades têm a mesma tração $F$ (por simetria), e só a componente ao longo de $P$ equilibra: $P = 2F\,\dfrac{x}{L_h}$.</li></ul></div>
+
+    <div class="step" data-n="3"><h4>Quais igualdades de energia sobrevivem</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-defs">ficha 09 (Trabalho, energia e P.T.E.)</a>. Ponto a ponto, o material é linear: $u = u^*$, então <strong>$U = U^*$</strong> na corda, e ambos valem $F^2/2k$. Sem dissipação, <strong>$W = U$</strong> continua valendo (conservação de energia). O que cai é a reta $P\times\delta_C$: como a curva não é reta, $W \neq P\delta_C/2$ e $W \neq W^*$. Daí $W^* = P\delta_C - W \neq U^*$: a igualdade $W^* = U^*$, que é a base de Crotti-Engesser, <strong>precisa de linearidade geométrica</strong>.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Corda elástica linear (dado), sem massa, sem rigidez à flexão; tração igual nos dois ramos (simetria, força exatamente no ponto médio).</li>
+          <li>$\delta_C$ medido a partir da corda <strong>reta e sem tração</strong> (é a leitura do Gere). Como $L_0 = 760 \gt b = 380$, a corda começa frouxa; esticada sem tração, C fica a $x_0 = \sqrt{380^2 - 190^2} = 329{,}1$ mm da linha das estacas.</li>
+          <li>Carga quase-estática; estacas rígidas.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Unidades</h4>
+      <p>$k = 140$ N/m $= 0{,}140$ N/mm. $L_0 = 760$ mm, $b/2 = 190$ mm, $P = 80$ N.</p></div>
+
+    <div class="step" data-n="5"><h4>Uma equação em $F$, resolvida por tentativa</h4>
+      <p>Juntando as três equações: $P(F) = 2F\,\dfrac{\sqrt{L_h^2 - 190^2}}{L_h}$ com $L_h = \dfrac{760 + F/0{,}140}{2}$. Não há fórmula fechada; na prova, a calculadora resolve em poucas tentativas:</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$F$ (N)</th><th>$L_h$ (mm)</th><th>$x$ (mm)</th><th>$P(F)$ (N)</th></tr></thead><tbody>
+        <tr><td>40,0</td><td>522,9</td><td>487,1</td><td>74,5 (pouco)</td></tr>
+        <tr><td>45,0</td><td>540,7</td><td>506,2</td><td>84,3 (muito)</td></tr>
+        <tr><td>42,5</td><td>531,8</td><td>496,7</td><td>79,4</td></tr>
+        <tr class="hit"><td>42,8</td><td>532,9</td><td>497,9</td><td>80,0 ✓</td></tr>
+      </tbody></table></div>
+      <p>Com bisseção (ou interpolação linear entre 40 e 45), três tentativas bastam. Resultado: $F = 42{,}8$ N, $\Delta = F/k = 305{,}8$ mm.</p></div>
+
+    <div class="step" data-n="6"><h4>b) Deslocamento</h4>
+      <div class="math-box">$$\delta_C = x - x_0 = 497{,}9 - 329{,}1 = 168{,}8\ \text{mm}$$</div></div>
+
+    <div class="step" data-n="7"><h4>a) Energias e c) comparação</h4>
+      <div class="math-box">$$U = U^* = \frac{F^2}{2k} = \frac{42{,}81^2}{2\cdot0{,}140} = 6546\ \text{N·mm} = 6{,}55\ \text{J}\qquad \frac{P\delta_C}{2} = \frac{80\cdot168{,}8}{2} = 6752\ \text{N·mm} = 6{,}75\ \text{J}$$</div>
+      <p>A curva $P\times\delta_C$ (mesmo script, com $F$ como parâmetro) passa por $\delta$ = 20,5 / 40,7 / 80,4 / 119,5 / 168,8 mm para $P$ = 8,8 / 17,8 / 36,3 / 55,2 / 80 N. A razão $P/\delta$ cresce (0,43 → 0,47 N/mm): a estrutura <strong>enrijece</strong>, porque os ramos se alinham com a força. Curva que se curva para cima fica abaixo da corda que liga a origem ao ponto final, então a área sob ela é menor que o triângulo: $W = U \lt P\delta_C/2$. A integral numérica da curva dá $W = 6546$ N·mm $= U$ ✓.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $U = U^* = 6{,}55$ J (material linear); (b) $\delta_C = 168{,}8$ mm; (c) $P\delta_C/2 = 6{,}75$ J $\gt U = U^*$: sem linearidade geométrica a curva $P\times\delta_C$ não é reta. Além disso $W^* = P\delta_C - W = 6{,}96$ J $\neq U^*$. <span class="badge badge-ok">bate com o Gere (2.7-12)</span></div>
       <ul><li><span class="tag tag-mem">⚠ armadilha</span> $k$ em N/m: 140 N/m = 0,140 N/mm. Errar isso muda $\Delta$ por 1000.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever o equilíbrio com o ângulo inicial: é exatamente o que a linearidade geométrica permitiria e que aqui não vale.</li>
-      <li>Leitura fina: $W^* = P\delta_C - W = 6{,}96$ J $\neq U^* = 6{,}55$ J. Com não linearidade geométrica, $W^* = U^*$ deixa de valer. Por isso o professor exige linearidade geométrica para Crotti-Engesser.</li></ul></div>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Escrever o equilíbrio com o ângulo inicial (30°): é exatamente a hipótese que não vale aqui.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Medir $\delta_C$ da posição frouxa ou da linha das estacas: deixe claro a partir de onde mede (corda reta sem tração).</li></ul></div>
+
+    <details class="deep"><summary>Aprofundamento: as duas não linearidades lado a lado</summary><div class="deep-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th></th><th>Ex. 4 (folga)</th><th>Ex. 5 (corda)</th></tr></thead><tbody>
+        <tr><td>Material</td><td>linear</td><td>linear</td></tr>
+        <tr><td>O que quebra a reta</td><td>a rigidez muda quando um contato fecha</td><td>a geometria muda com a carga</td></tr>
+        <tr><td>Curva $P\times\delta$</td><td>bilinear, enrijece no joelho</td><td>suave, enrijece aos poucos</td></tr>
+        <tr><td>$W = U$?</td><td>sim</td><td>sim</td></tr>
+        <tr><td>$U = U^*$?</td><td>sim (nas barras)</td><td>sim</td></tr>
+        <tr><td>$W = P\delta/2$?</td><td>não ($U \lt P\delta/2$)</td><td>não ($U \lt P\delta/2$)</td></tr>
+        <tr><td>$W^* = U^*$?</td><td>não: falta a parcela $N\,s$ da folga</td><td>não: falta linearidade geométrica</td></tr>
+      </tbody></table></div>
+      <p>Moral para a prova: os teoremas da P2 (P.T.E. com ½, Crotti-Engesser) pressupõem as duas linearidades. Quando o enunciado diz "não existe linearidade geométrica" ou mostra uma folga, a pergunta é exatamente "o que deixa de valer e por quê".</p></div></details>
   </article>
 <h3 class="sub" id="t09-demais" data-nav="Demais exercícios">Demais exercícios</h3>
 <article class="ex" id="l5-ex2">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 2 (Gere 2.7-6) · ver <a href="09-trabalho-e-energia.html#l5-ex9-h">L5 ex.9</a></div>
-      <h3 id="l5-ex2-h" data-nav="L5 ex.2 · treliça de 2 barras">Treliça ABC com carga horizontal</h3></div></div>
-    <div class="ex-topics"><span class="chip">W5</span><span class="chip">W2</span></div>
+      <h3 id="l5-ex2-h" data-nav="L5 ex.2 · treliça de 2 barras">Treliça ABC com carga horizontal: energia e deslocamento do nó</h3></div></div>
+    <div class="ex-topics"><span class="chip">W5</span><span class="chip">W1</span><span class="chip">W2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.1)</span>
       2.7-6. A treliça ABC ilustrada abaixo está submetida a uma carga horizontal $P$ na junta B. As duas barras são idênticas, com rigidez axial $EA$. Considerando que $\beta = 60°$, que existam condições de linearidade geométrica e que o material possua comportamento elástico-linear, determine:
-      a) A energia complementar $U^*$ da treliça; e b) o deslocamento horizontal $\delta_{H,B}$ da junta B.</div>
+      a) A energia complementar $U^*$ da treliça; e b) o deslocamento horizontal $\delta_{H,B}$ da junta B.
+      <br><em>Figura: A e C são pinos no mesmo nível, a uma distância $L$; B é o vértice superior; cada barra faz $\beta$ com a horizontal.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 2):</strong> ver o PDF oficial, Lista 5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> com $\beta = 60°$ e vão $L$, o triângulo é equilátero e cada barra mede $L$. Nó B: vertical ⇒ $N_{AB} = -N_{BC}$; horizontal ⇒ $-N_{AB}\cos60° + N_{BC}\cos60° + P = 0$ ⇒ $N_{AB} = +P$ (tração), $N_{BC} = -P$ (compressão). Uma força só, e o deslocamento pedido está no ponto e na direção dela: princípio do trabalho e energia (<span class="tag tag-form">📄 Aula 12 p.27</span>).</p>
-    <div class="math-box">$$U^* = 2\cdot\frac{P^2L}{2EA} = \frac{P^2L}{EA}\qquad \frac{P\,\delta_{H,B}}{2} = U^*\ \Rightarrow\ \delta_{H,B} = \frac{2PL}{EA}$$</div>
-    <div class="answer"><strong>Respostas:</strong> (a) $U^* = P^2L/EA$; (b) $\delta_{H,B} = 2PL/EA$ (para a direita). <span class="badge badge-ok">bate com o Gere (2.7-6)</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Três peças: (1) <strong>geometria</strong> (comprimento das barras a partir de $L$ e $\beta$); (2) <strong>método dos nós</strong> para o esforço normal de cada barra; (3) $U^*$ de treliça e o P.T.E. Como só há uma força e o deslocamento pedido é o dela, o P.T.E. basta (diferente do caso (c) do <a href="09-trabalho-e-energia.html#l5-ex1-h">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Barra de treliça e método dos nós</h4>
+      <p>Revisão: <a href="../base.html#equilibrio">Base</a>. Barra de treliça = barra reta, articulada nas duas pontas, sem carga no meio: o equilíbrio da própria barra obriga a força a ser <strong>axial e constante</strong> (momento em torno de uma ponta mostra que a força na outra ponta passa pela primeira). Então cada barra só tem $N$. No nó, as forças das barras e as cargas externas formam um sistema concorrente: duas equações ($\Sigma F_x = 0$, $\Sigma F_y = 0$), duas incógnitas por nó no máximo.</p>
+      <p><strong>Convenção que evita erro de sinal:</strong> desenhe todo $N$ como tração, isto é, saindo do nó ao longo da barra. Se a conta der negativo, a barra está comprimida.</p></div>
+
+    <div class="step" data-n="2"><h4>$U^*$ de treliça</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. $N$ constante em cada barra transforma a integral em produto: $U^* = \sum_i N_i^2L_i/2E_iA_i$. O sinal de $N$ some no quadrado: barra comprimida guarda energia igual à tracionada com o mesmo $|N|$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Nós articulados sem atrito, carga só nos nós ⇒ só esforço normal.</li>
+          <li>Material elástico-linear e linearidade geométrica (dadas no enunciado): equilíbrio na geometria inicial.</li>
+          <li>Barra comprimida não flamba (a flambagem é assunto da P3).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Geometria</h4>
+      <p>Cada barra cobre metade do vão na horizontal: $\ell\cos\beta = L/2$ ⇒ $\ell = \dfrac{L}{2\cos60°} = L$. Com $\beta = 60°$ o triângulo ABC é <strong>equilátero</strong>.</p></div>
+
+    <div class="step" data-n="4"><h4>Nó B</h4>
+      <p>Unitários saindo de B: para A, $(-\cos60°, -\sin60°)$; para C, $(+\cos60°, -\sin60°)$. Carga $P$ para a direita:</p>
+      <div class="math-box">$$\Sigma F_y:\ -N_{AB}\sin60° - N_{BC}\sin60° = 0\ \Rightarrow\ N_{BC} = -N_{AB}$$
+      $$\Sigma F_x:\ -N_{AB}\cos60° + N_{BC}\cos60° + P = 0\ \Rightarrow\ -\tfrac12N_{AB} - \tfrac12N_{AB} + P = 0\ \Rightarrow\ N_{AB} = +P,\quad N_{BC} = -P$$</div>
+      <p>Leitura física: $P$ empurra B para a direita, afastando-o de A (AB estica, tração) e aproximando-o de C (BC encurta, compressão).</p></div>
+
+    <div class="step" data-n="5"><h4>a) Energia e b) deslocamento</h4>
+      <div class="math-box">$$U^* = \frac{P^2L}{2EA} + \frac{(-P)^2L}{2EA} = \frac{P^2L}{EA}\qquad \frac{P\,\delta_{H,B}}{2} = U^*\ \Rightarrow\ \delta_{H,B} = \frac{2PL}{EA}$$</div></div>
+
+    <div class="step" data-n="6"><h4>Verificação por compatibilidade (sem energia)</h4>
+      <p>O alongamento de cada barra é a projeção do deslocamento $\vec u$ de B sobre a direção da barra: $\Delta_{AB} = \vec u\cdot\hat e_{AB}$, com $\hat e_{AB} = (\tfrac12, \tfrac{\sqrt3}2)$ e $\hat e_{CB} = (-\tfrac12, \tfrac{\sqrt3}2)$ (sempre do apoio para B). Com $\Delta_{AB} = +PL/EA$ e $\Delta_{CB} = -PL/EA$:</p>
+      <div class="math-box">$$\tfrac12u_x + \tfrac{\sqrt3}2u_y = \frac{PL}{EA},\qquad -\tfrac12u_x + \tfrac{\sqrt3}2u_y = -\frac{PL}{EA}\ \Rightarrow\ u_x = \frac{2PL}{EA},\ u_y = 0\ ✓$$</div>
+      <p>O deslocamento vertical é nulo, como se espera pela antissimetria (uma barra estica o mesmo que a outra encurta). O mesmo zero sai por Crotti-Engesser com força fictícia vertical em B (<a href="12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>; conferido em <code>calc_l5_detalhado.py</code>).</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $U^* = P^2L/EA$; (b) $\delta_{H,B} = 2PL/EA$ (para a direita). Esforços: $N_{AB} = +P$, $N_{BC} = -P$. <span class="badge badge-ok">bate com o Gere (2.7-6)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $L$ (vão) como comprimento sem conferir: só vale porque $\beta = 60°$. Com outro ângulo, $\ell = L/2\cos\beta$.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Pelo P.T.E. não sai o deslocamento vertical de B: não há força vertical.</li></ul></div>
   </article>
 <article class="ex" id="l5-ex3">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 3 (Gere 2.7-8) · ver <a href="09-trabalho-e-energia.html#l5-ex1-h">L5 ex.1</a></div>
-      <h3 id="l5-ex3-h" data-nav="L5 ex.3 · barra rígida em 5 molas">Barra rígida sustentada por cinco molas</h3></div></div>
+      <h3 id="l5-ex3-h" data-nav="L5 ex.3 · barra rígida em 5 molas">Barra rígida sustentada por cinco molas: P.T.E. com molas em paralelo</h3></div></div>
     <div class="ex-topics"><span class="chip">W1</span><span class="chip">W2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.2)</span>
-      2.7-8. A estrutura indicada abaixo consiste em uma barra rígida (indeformável) horizontal AB sustentada por cinco molas igualmente espaçadas. As molas 1, 2 e 3 têm rigidez $3k$, $1{,}5k$ e $k$, respectivamente. As extremidades inferiores de todas as cinco molas permanecem numa linha horizontal quando as molas não estão tensionadas. A barra AB, que tem peso $W$, faz as molas se alongarem até um valor $\delta$. Determine o deslocamento sofrido pelas molas e as forças em cada uma delas. Dados: $W = 400$ N, $k = 5$ N/mm.</div>
+      2.7-8. A estrutura indicada abaixo consiste em uma barra rígida (indeformável) horizontal AB sustentada por cinco molas igualmente espaçadas. As molas 1, 2 e 3 têm rigidez $3k$, $1{,}5k$ e $k$, respectivamente. As extremidades inferiores de todas as cinco molas permanecem numa linha horizontal quando as molas não estão tensionadas. A barra AB, que tem peso $W$, faz as molas se alongarem até um valor $\delta$. Determine o deslocamento sofrido pelas molas e as forças em cada uma delas. Dados: $W = 400$ N, $k = 5$ N/mm.
+      <br><em>Figura: da esquerda para a direita, molas 1 ($3k$), 2 ($1{,}5k$), 3 ($k$, central), 2, 1; peso no centro; arranjo simétrico.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 3):</strong> ver o PDF oficial, Lista 5, p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> estrutura e carga simétricas ⇒ a barra rígida só translada ⇒ todas as molas alongam o mesmo $\delta$. Trabalho do peso = soma das energias das molas (cuidado: aqui $W$ é o <em>peso</em>, não o trabalho):</p>
-    <div class="math-box">$$\frac{W\delta}{2} = \sum_i\frac{k_i\delta^2}{2} = \frac{(2\cdot3k + 2\cdot1{,}5k + k)\,\delta^2}{2} = 5k\delta^2\ \Rightarrow\ \delta = \frac{W}{10k} = \frac{400}{50} = 8{,}0\ \text{mm}$$</div>
-    <p>Forças: $F_1 = 3k\delta = 120$ N, $F_2 = 1{,}5k\delta = 60$ N, $F_3 = k\delta = 40$ N. Confere o equilíbrio: $2(120) + 2(60) + 40 = 400$ N ✓.</p>
-    <div class="answer"><strong>Respostas:</strong> $\delta = 8{,}0$ mm; $F_1 = 120$ N, $F_2 = 60$ N, $F_3 = 40$ N; $U = 1{,}6$ J. <span class="badge badge-ok">bate com o Gere (2.7-8: δ = W/10k, F₁ = 3W/10, F₂ = 3W/20, F₃ = W/10)</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>(1) Quantos parâmetros descrevem o movimento de uma barra rígida, e por que a simetria reduz a um só; (2) energia de uma mola, $k\delta^2/2 = F^2/2k$; (3) o P.T.E. com o peso fazendo o papel da carga. Atenção à notação: aqui <strong>$W$ é o peso</strong>, não o trabalho.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Cinemática de barra rígida e simetria</h4>
+      <p>Uma barra rígida no plano, sem deslocamento horizontal, tem dois movimentos possíveis: translação vertical $\delta$ e rotação $\theta$. Molas, barra e carga são simétricas em relação ao centro: se a barra girasse num sentido, o problema espelhado exigiria girar no outro, o que só é compatível com $\theta = 0$. Então <strong>todas as molas alongam o mesmo $\delta$</strong>. (Sem simetria seriam dois parâmetros, e o P.T.E., que é uma equação só, não bastaria.)</p>
+      <p>Os detalhes da figura (molas de comprimentos diferentes, face inferior em V) são distratores: o que importa para cada mola é a rigidez e o alongamento.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia de mola e molas em paralelo</h4>
+      <p>Revisão: <a href="09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. Mola linear $F = k\delta$: a área do triângulo dá $U = U^* = \frac{k\delta^2}{2} = \frac{F^2}{2k}$. Molas que sofrem o <strong>mesmo</strong> deslocamento estão em paralelo: as forças somam, então as rigidezes somam, $k_{eq} = \sum k_i$. É a mesma conta de uma barra ($k = EA/L$, aula 12).</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Barra rígida; molas lineares; deslocamentos pequenos (molas continuam verticais).</li>
+          <li><strong>Peso aplicado quase-estaticamente</strong> (a barra é baixada devagar até o equilíbrio). Esse é o ½ do P.T.E. Se a barra fosse <em>solta</em> com as molas sem tração, o peso agiria cheio desde o início: $W\delta_{máx} = k_{eq}\delta_{máx}^2/2$ ⇒ $\delta_{máx} = 2W/k_{eq}$, o dobro (e a barra oscilaria).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>P.T.E.</h4>
+      <div class="math-box">$$k_{eq} = 2(3k) + 2(1{,}5k) + k = 10k = 50\ \text{N/mm}$$
+      $$\frac{W\delta}{2} = \sum_i\frac{k_i\delta^2}{2} = \frac{10k\,\delta^2}{2}\ \Rightarrow\ \delta = \frac{W}{10k} = \frac{400}{50} = 8{,}0\ \text{mm}$$</div></div>
+
+    <div class="step" data-n="4"><h4>Forças nas molas e verificação</h4>
+      <div class="math-box">$$F_1 = 3k\delta = 120\ \text{N}\qquad F_2 = 1{,}5k\delta = 60\ \text{N}\qquad F_3 = k\delta = 40\ \text{N}$$</div>
+      <p>Equilíbrio vertical da barra: $2(120) + 2(60) + 40 = 400$ N $= W$ ✓. Na verdade, a equação de equilíbrio sozinha ($10k\delta = W$) já dá $\delta$: o P.T.E. e o equilíbrio coincidem porque há um único parâmetro. Energia guardada: $U = 10k\delta^2/2 = 1600$ N·mm $= 1{,}6$ J $= W\delta/2$ ✓.</p>
+      <div class="answer"><strong>Respostas:</strong> $\delta = W/10k = 8{,}0$ mm; $F_1 = 3W/10 = 120$ N, $F_2 = 3W/20 = 60$ N, $F_3 = W/10 = 40$ N. <span class="badge badge-ok">bate com o Gere (2.7-8)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Confundir o peso $W$ com o trabalho $W$ na mesma equação.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Contar cada tipo de mola uma vez só: são duas molas 1 e duas molas 2.</li>
+          <li>A mola mais rígida leva a maior força: em paralelo, a carga se divide na proporção das rigidezes.</li></ul></div>
   </article>
 <article class="ex" id="s12-ex1">
     <div class="ex-head"><div><div class="ex-kicker">Slides aula 12 · exemplo 1 (p.28–30)</div>

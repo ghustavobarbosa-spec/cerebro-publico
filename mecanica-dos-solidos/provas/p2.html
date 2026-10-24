@@ -470,100 +470,174 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
   <!-- ============ PIVÔ 10 ============ -->
   <article class="ex pivo" id="pa-ex6">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 6 (p.58) · Pivô 10</div>
-      <h3 id="pa-ex6-h" data-nav="Prova ex.6 · barra rígida em hastes" data-pivo>Barra rígida apoiada em B e presa a duas hastes: energia em deslocamentos</h3></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 6 (p.58) · Pivô 10 da P2</div>
+      <h3 id="pa-ex6-h" data-nav="Prova ex.6 · barra rígida em hastes" data-pivo>Barra rígida apoiada em B e presa a duas hastes: energia em deslocamentos e em forças</h3></div>
       <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">C3</span><span class="chip">W2</span><span class="chip">H1</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.58)</span>
-      A estrutura abaixo é formada por duas hastes verticais, de mesma rigidez axial EA, e uma barra horizontal rígida (indeformável) ABCD. As hastes possuem comprimentos l e 2l, conforme indicado na figura, e estão articuladas à barra horizontal, que se encontra simplesmente apoiada em B. Considerando que uma única força vertical de intensidade P seja aplicada em C, determine o ângulo de rotação ($\theta$) da barra horizontal, utilizando, entre outras relações, o Princípio do Trabalho e Energia. Admita que o material das hastes tenha comportamento elástico-linear e considere a hipótese de linearidade geométrica (pequenas deformações e pequenos deslocamentos).</div>
+      A estrutura abaixo é formada por duas hastes verticais, de mesma rigidez axial EA, e uma barra horizontal rígida (indeformável) ABCD. As hastes possuem comprimentos l e 2l, conforme indicado na figura, e estão articuladas à barra horizontal, que se encontra simplesmente apoiada em B. Considerando que uma única força vertical de intensidade P seja aplicada em C, determine o ângulo de rotação ($\theta$) da barra horizontal, utilizando, entre outras relações, o Princípio do Trabalho e Energia. Admita que o material das hastes tenha comportamento elástico-linear e considere a hipótese de linearidade geométrica (pequenas deformações e pequenos deslocamentos).
+      <br><em>Figura: AB = BC = CD = $a$; haste de comprimento $l$ em A e de $2l$ em D, ambas penduradas no teto; apoio articulado em B; $P$ para baixo em C.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 6):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 58 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Três forças verticais desconhecidas (haste em A, haste em D, apoio B) e só duas equações úteis (forças verticais e momentos): <strong>hiperestática, $g = 1$</strong>. Mas a <em>cinemática</em> é trivial: a barra rígida só pode girar em torno de B, um único parâmetro $\theta$. Nesse caso, escrever a energia em função do deslocamento é muito mais rápido.</p>
-      <div class="callout concept"><span class="co-t">Conceito: energia de deformação $U$ × energia complementar $U^*$</span>
-        <p>$U^*$ se escreve com os <strong>esforços</strong>, e isso exige equilíbrio (que aqui não basta). $U$ se escreve com os <strong>deslocamentos</strong>, e isso exige compatibilidade (que aqui é imediata). Numa mola ou haste, $U = \frac{k\Delta^2}{2}$ com $k = EA/\ell$. A apostila comenta que este é "um dos raros problemas em que é mais imediato usar a energia de deformação". Formalmente é o <strong>1º teorema de Castigliano</strong> $P_i = \partial U/\partial\delta_i$ (aula 15 p.6).</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
-      <tr><td>Espaçamento A–B–C–D</td><td>$a$ cada</td><td>figura</td></tr>
-      <tr><td>Haste em A / em D</td><td>comprimento $l$ / $2l$, rigidez axial $EA$</td><td>figura</td></tr>
-      <tr><td>Apoio em B; carga $P$ ↓ em C</td><td>—</td><td>figura</td></tr></tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\theta$ via $W = U(\theta)$ (uma carga só, então o P.T.E. vale), ou via 1º Castigliano.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 12 p.5, p.27</span> $W = \frac{P\delta_C}{2}$; $U = \sum\frac{k_i\Delta_i^2}{2}$, $k_i = \frac{EA}{\ell_i}$. <span class="tag tag-form">📄 Aula 15 p.6</span> $P = \partial U/\partial\delta_C$.</p></div>
-    <div class="step" data-n="5"><h4>Cinemática (substitui "esforços internos")</h4>
-      <p>Rotação horária $\theta$ em torno de B: $\delta_A = \theta a$ (A <strong>sobe</strong>, haste de A comprimida), $\delta_C = \theta a$ (↓), $\delta_D = 2\theta a$ (↓, haste de D tracionada).</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$U = \frac{EA}{l}\frac{(\theta a)^2}{2} + \frac{EA}{2l}\frac{(2\theta a)^2}{2} = \frac{3EA}{2l}\theta^2a^2\qquad W = \frac{P\,\theta a}{2}$$
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>A estrutura é <strong>hiperestática</strong> ($g = 1$) e, ao mesmo tempo, tem <strong>um só grau de liberdade</strong> (a rotação $\theta$ da barra). Isso abre dois caminhos duais, e vale a pena ver os dois: (1) energia de deformação $U(\theta)$, escrita com deslocamentos (o da apostila); (2) energia complementar mínima, escrita com forças (<a href="../topicos/13-hiperestaticas-energia.html">ficha 13 (Hiperestáticas e linha elástica)</a>). Peças: grau de hiperestaticidade, cinemática de corpo rígido, $U$ × $U^*$.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Contar: hiperestática, mas com um grau de liberdade</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Incógnitas verticais: força na haste A, força na haste D, reação em B = 3. Equações úteis: $\Sigma F_y$ e $\Sigma M$ = 2 (a horizontal em B é zero). <strong>$g = 1$</strong>: o equilíbrio sozinho não reparte a carga entre as hastes. Por outro lado, a barra rígida presa em B só pode girar: o movimento inteiro é dado por $\theta$.</p></div>
+
+    <div class="step" data-n="2"><h4>$U$ (deslocamentos) × $U^*$ (forças)</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-c3">ficha 12 (Crotti-Engesser e Castigliano)</a>. $U^*$ se escreve com esforços, e isso exige o equilíbrio, que aqui não basta (sobra uma incógnita). $U$ se escreve com deslocamentos, e isso exige a compatibilidade, que aqui é imediata (tudo em função de $\theta$). Em haste ou mola, $U = k\Delta^2/2$ com $k = EA/\ell$. Daí o comentário da apostila: "um dos raros problemas em que é mais imediato usar a energia de deformação". Formalmente, é o <strong>1º teorema de Castigliano</strong>: $P_i = \partial U/\partial\delta_i$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Barra ABCD rígida; hastes elástico-lineares (dado) que resistem a tração <em>e</em> compressão (são barras, não cabos).</li>
+          <li>Linearidade geométrica (dado): $\theta$ pequeno, deslocamentos verticais $= \theta\times$ distância a B.</li>
+          <li>A haste comprimida não flamba.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução pelo caminho da apostila ($U$)</div>
+
+    <div class="step" data-n="3"><h4>Cinemática</h4>
+      <p>$P$ em C, à direita de B, gira a barra no sentido <strong>horário</strong>. Então A (a $a$ à esquerda de B) <strong>sobe</strong> $\theta a$, comprimindo a haste de A; C desce $\theta a$; D (a $2a$ à direita) desce $2\theta a$, alongando a haste de D.</p></div>
+
+    <div class="step" data-n="4"><h4>Energia e P.T.E.</h4>
+      <div class="math-box">$$U = \frac{EA}{l}\frac{(\theta a)^2}{2} + \frac{EA}{2l}\frac{(2\theta a)^2}{2} = \frac{EA\,a^2\theta^2}{2l} + \frac{EA\,a^2\theta^2}{l} = \frac{3EA\,a^2}{2l}\theta^2\qquad W = \frac{P\,\delta_C}{2} = \frac{P\theta a}{2}$$
       $$W = U\ \Rightarrow\ \theta = \frac13\frac{P}{EA}\frac{l}{a}$$</div>
-      <p>Pelo 1º Castigliano: com $\delta_C = \theta a$, $U = \frac{3EA}{2l}\delta_C^2$ ⇒ $P = \frac{\partial U}{\partial\delta_C} = \frac{3EA}{l}\delta_C$, o mesmo resultado. Forças nas hastes: $\frac{EA}{l}\theta a = \frac P3$ (compressão em A: empurra a barra para baixo) e $\frac{EA}{2l}2\theta a = \frac P3$ (tração em D: puxa para cima). Conferência: momentos em B, $\frac P3a + \frac P3(2a) = Pa$ ✓; forças verticais, $R_B = P$ ✓.</p></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Resposta:</strong> $\theta = \dfrac{Pl}{3EAa}$ (horário). <span class="badge badge-ok">bate com a apostila</span></div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> A haste de D tem comprimento $2l$ ⇒ rigidez $EA/2l$, metade, mas alonga o dobro. A energia dela é o <em>dobro</em> da de A.</li>
-      <li>Dimensão: $P l/(EA\,a)$ é adimensional (rad) ✓.</li></ul></div>
+      <p>Pelo 1º Castigliano: com $\delta_C = \theta a$, $U = \frac{3EA}{2l}\delta_C^2$ e $P = \frac{\partial U}{\partial\delta_C} = \frac{3EA}{l}\delta_C$: o mesmo resultado. (O conjunto é uma mola de rigidez $3EA/l$ vista de C.)</p></div>
+
+    <div class="step-part">Parte 3 · O caminho dual ($U^*$ mínima)</div>
+
+    <div class="step" data-n="5"><h4>Mesma resposta pelas forças</h4>
+      <p>Revisão: <a href="../topicos/13-hiperestaticas-energia.html#t13-h1">ficha 13 (Hiperestáticas e linha elástica)</a>. Chame $F_A$ a compressão na haste de A (empurra a barra para baixo) e $F_D$ a tração na de D (puxa para cima). Momentos em B: $P\,a = F_A\,a + F_D\,2a$ ⇒ $F_A = P - 2F_D$. Com $F_D$ como incógnita hiperestática:</p>
+      <div class="math-box">$$U^* = \frac{F_A^2\,l}{2EA} + \frac{F_D^2\,(2l)}{2EA} = \frac{(P - 2F_D)^2l}{2EA} + \frac{F_D^2\,l}{EA}\qquad \frac{\partial U^*}{\partial F_D} = \frac{l}{EA}\left[-2(P - 2F_D) + 2F_D\right] = 0\ \Rightarrow\ F_D = \frac P3,\ F_A = \frac P3$$</div>
+      <p>E então $\theta = \dfrac{\text{encurtamento da haste A}}{a} = \dfrac{F_Al/EA}{a} = \dfrac{Pl}{3EAa}$ ✓. Conferência de equilíbrio: $\frac P3a + \frac P3(2a) = Pa$ ✓; $R_B = P - \frac P3 + \frac P3 = P$ ✓.</p>
+      <div class="answer"><strong>Resposta:</strong> $\theta = \dfrac{Pl}{3EAa}$ (horário). Forças: $P/3$ de compressão na haste de A, $P/3$ de tração na de D, $R_B = P$. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> A haste de D tem comprimento $2l$ ⇒ rigidez $EA/2l$ (metade), mas alonga o dobro: a energia dela é o <strong>dobro</strong> da de A.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Supor as duas hastes tracionadas: A sobe, então a haste de A é comprimida.</li>
+          <li>Dimensão: $Pl/(EA\,a)$ é adimensional (rad) ✓.</li></ul></div>
+
+    <details class="deep"><summary>Aprofundamento: quando escolher $U$ e quando escolher $U^*$</summary><div class="deep-body">
+      <p>Conte as incógnitas dos dois lados. <strong>Graus de liberdade</strong> (deslocamentos independentes compatíveis com os vínculos) = 1 aqui. <strong>Grau de hiperestaticidade</strong> (forças que o equilíbrio não dá) = 1 também. Empate; a apostila escolhe $U$ porque a cinemática de barra rígida é trivial. Numa viga ou pórtico hiperestático, os graus de liberdade são infinitos (a linha elástica inteira), e só o caminho das forças ($U^*$, com poucas incógnitas) é viável à mão: é por isso que a P2 trabalha quase sempre com $U^*$. Estruturas de barras rígidas + molas ou hastes, como esta, são a exceção.</p></div></details>
   </article>
 
   <!-- ============ PIVÔ 11 ============ -->
   <article class="ex pivo" id="pa-ex10">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 10 (p.66) · Pivô 11</div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 10 (p.66) · Pivô 11 da P2</div>
       <h3 id="pa-ex10-h" data-nav="Prova ex.10 · barra em L 3D, 3 incógnitas" data-pivo>Barra dobrada em L no plano horizontal: deslocamento e duas rotações</h3></div>
       <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">E2</span><span class="chip">W3</span><span class="chip">W4</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.66)</span>
       A estrutura ABC da figura está contida em um plano horizontal. Ela é formada por uma barra de seção circular cheia, de raio R, dobrada em ângulo de 90°, e engastada no ponto A. A estrutura está submetida apenas à força vertical P aplicada ao ponto C. É dada a rigidez flexional da viga $EI$. Pedem-se:
       <ol type="a"><li>o deslocamento vertical do ponto C;</li><li>a rotação do ponto C em torno da direção x;</li><li>a rotação do ponto C em torno da direção y.</li></ol>
-      Notas: 1) Desprezar a contribuição das forças cortantes à energia complementar. 2) Usar $GI_P = \frac45EI$.</div>
+      Notas: 1) Desprezar a contribuição das forças cortantes à energia complementar. 2) Usar $GI_P = \frac45EI$.
+      <br><em>Figura: AB = $L$ ao longo de $y$; BC = $L$ ao longo de $x$; $z$ vertical para cima; $P$ para baixo em C.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 10):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 67 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A). AB (ao longo de $y$) e BC (ao longo de $x$), cada um com comprimento $L$. Três perguntas: (a) sai pelo P.T.E. ou por Crotti-Engesser; (b) e (c) são <strong>rotações sem binário correspondente</strong>, então é preciso criar dois binários fictícios.</p>
-      <div class="callout concept"><span class="co-t">Conceito: o binário fictício num problema 3D flete uma barra e torce a outra</span>
-        <p>Um binário $\bar M$ em C com vetor ao longo de $y$ é <em>perpendicular</em> a BC (então flete BC) e <em>paralelo</em> a AB (então torce AB). Um binário $\bar T$ com vetor ao longo de $x$ faz o contrário: torce BC e flete AB. Por isso a tabela de derivadas é o coração da questão: cada esforço interno, em cada trecho, derivado em relação a cada carga.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$L$ em cada trecho; $EI$ dado; $GI_P = \frac45EI$ ⇒ $\frac{1}{GI_P} = \frac{5}{4EI}$; cortante desprezada (nota 1).</p></div>
-    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_C = \partial U^*/\partial P$; $\phi_x = (\partial U^*/\partial\bar T)_0$; $\theta_y = (\partial U^*/\partial\bar M)_0$.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\delta_i = \sum_{\text{trechos}}\left[\int\frac{M}{EI}\frac{\partial M}{\partial P_i}dx + \int\frac{T}{GI_P}\frac{\partial T}{\partial P_i}dx\right]\qquad\text{(aula 15 p.22; apostila §9.4)}$$</div></div>
-    <div class="step" data-n="5"><h4>Esforços internos (1 = CB, $x$ a partir de C; 2 = BA, $x$ a partir de B)</h4>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Três perguntas, três cargas: (a) é a própria $P$; (b) e (c) são rotações sem binário, então entram dois <strong>binários fictícios</strong> em C. O coração da questão é a <strong>tabela de derivadas</strong>: cada esforço (flexão e torção), em cada trecho, derivado em relação a cada carga. Peças: esforços 3D com $\vec r\times\vec F$, o que um binário faz em cada trecho, Crotti-Engesser e a leitura do sinal.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Esforços em L espacial</h4>
+      <p>Revisão: <a href="../topicos/01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a> e <a href="p2.html#pa-ex1-h">P2</a>. Em CB, o braço de $P$ é ao longo do próprio trecho: só flexão, $Ps$. Em BA, o braço tem duas partes: ao longo de BA (flexão, $Ps$) e o comprimento $L$ de BC, perpendicular a BA (torção, $PL$ constante).</p></div>
+
+    <div class="step" data-n="2"><h4>O que um binário fictício faz em cada trecho</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a> e <a href="p2.html#pa-ex3-h">P2</a>. O binário é vetor livre: chega igual a todas as seções. Um binário $\bar M$ com vetor ao longo de $y$ é <em>perpendicular</em> a CB (flete CB) e <em>paralelo</em> a BA (torce BA). Um $\bar T$ ao longo de $x$ faz o contrário: torce CB e flete BA. Por isso a mesma carga fictícia aparece em esforços de tipos diferentes em cada trecho.</p></div>
+
+    <div class="step" data-n="3"><h4>Crotti-Engesser com flexão e torção</h4>
+      <div class="math-box">$$\delta_i = \sum_{\text{trechos}}\left[\int\frac{M}{EI}\frac{\partial M}{\partial Q_i}ds + \int\frac{T}{GI_P}\frac{\partial T}{\partial Q_i}ds\right]_{\text{fictícias}=0}\qquad \frac{1}{GI_P} = \frac{5}{4EI}$$</div>
+      <p>Derivar <strong>antes</strong> de anular as fictícias; depois de derivar, só sobrevivem os termos com $P$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Barra de seção circular cheia, esbelta, elástico-linear; cortante desprezada (nota 1); dobra rígida.</li>
+          <li>Linearidade geométrica; engaste perfeito em A.</li>
+          <li>Convenção de sinal: rotação positiva no sentido do binário fictício adotado ($\bar T$ em $+x$, $\bar M$ em $+y$).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Tabela de esforços e derivadas</h4>
+      <p>Trecho 1 = CB ($s$ a partir de C); trecho 2 = BA ($s$ a partir de B). Sinais na convenção da apostila:</p>
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Esforço</th><th>$\partial/\partial P$</th><th>$\partial/\partial\bar M$</th><th>$\partial/\partial\bar T$</th></tr></thead><tbody>
-        <tr><td>$M_1 = -(\bar M + Px)$</td><td>$-x$</td><td>$-1$</td><td>$0$</td></tr>
-        <tr><td>$M_2 = \bar T - Px$</td><td>$-x$</td><td>$0$</td><td>$1$</td></tr>
+        <tr><td>$M_1 = -(\bar M + Ps)$</td><td>$-s$</td><td>$-1$</td><td>$0$</td></tr>
+        <tr><td>$M_2 = \bar T - Ps$</td><td>$-s$</td><td>$0$</td><td>$1$</td></tr>
         <tr><td>$T_1 = \bar T$</td><td>$0$</td><td>$0$</td><td>$1$</td></tr>
-        <tr><td>$T_2 = \bar M + PL$</td><td>$L$</td><td>$1$</td><td>$0$</td></tr></tbody></table></div>
-      <p>Em BA, o braço de $P$ ao longo da própria barra dá flexão ($Px$), e o braço $L$ (comprimento de BC, perpendicular) dá torção ($PL$).</p></div>
-    <div class="step" data-n="6"><h4>Cálculo (fictícios = 0 depois de derivar)</h4>
-      <div class="math-box">$$\delta_C = \frac1{EI}\int_0^LPx^2dx + \frac1{EI}\int_0^LPx^2dx + \frac{5}{4EI}\int_0^L PL\cdot L\,dx = \left(\frac13 + \frac13 + \frac54\right)\frac{PL^3}{EI} = \frac{23}{12}\frac{PL^3}{EI}$$
-      $$\phi_x = \frac1{EI}\int_0^L(-Px)(1)dx = -\frac{PL^2}{2EI}\qquad \theta_y = \frac1{EI}\int_0^L(-Px)(-1)dx + \frac{5}{4EI}\int_0^LPL\,dx = \left(\frac12 + \frac54\right)\frac{PL^2}{EI} = \frac74\frac{PL^2}{EI}$$</div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \frac{23}{12}\frac{PL^3}{EI}$ (↓); (b) $\phi_x = -\frac{PL^2}{2EI}$ (sentido oposto ao $\bar T$ adotado); (c) $\theta_y = \frac74\frac{PL^2}{EI}$. <span class="badge badge-ok">bate com a apostila</span></div>
-      <ul><li>Leitura física de (b): a torção de CB é nula, então o giro em torno de $x$ vem só da flexão de AB: é o $PL^2/2EI$ do balanço, com sinal pela convenção.</li>
-      <li>Em (c), o termo $\frac54$ é a torção de AB girando BC como corpo rígido: domina o resultado.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que $\bar M$ também torce AB (entra em $T_2$): perde-se a maior parcela de $\theta_y$.</li></ul></div>
+        <tr><td>$T_2 = \bar M + PL$</td><td>$L$</td><td>$1$</td><td>$0$</td></tr>
+      </tbody></table></div>
+      <p>(Conferido por $\vec r\times\vec F$ em <code>calc_ap3_detalhado.py</code>.)</p></div>
+
+    <div class="step" data-n="5"><h4>a) Deslocamento vertical de C</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\int_0^LPs^2ds + \frac1{EI}\int_0^LPs^2ds + \frac{5}{4EI}\int_0^LPL\cdot L\,ds = \left(\frac13 + \frac13 + \frac54\right)\frac{PL^3}{EI} = \frac{23}{12}\frac{PL^3}{EI}$$</div>
+      <p>Só há uma carga real, então o P.T.E. também daria isso. A torção de BA, sozinha, responde por $\frac54/\frac{23}{12} = 65\%$.</p></div>
+
+    <div class="step" data-n="6"><h4>b) Rotação em torno de $x$</h4>
+      <div class="math-box">$$\phi_x = \frac1{EI}\int_0^L(-Ps)(1)\,ds = -\frac{PL^2}{2EI}$$</div>
+      <p>Só BA contribui: a torção de CB é zero com $\bar T = 0$. Leitura física: BA flete como um balanço com $P$ na ponta, e a rotação da ponta de um balanço é $PL^2/2EI$; BC, preso rigidamente em B, gira junto em torno de $x$. O sinal negativo diz que é no sentido oposto ao $\bar T$ adotado: a flexão de BA abaixa B, e com $+x$ na regra da mão direita isso é rotação negativa.</p></div>
+
+    <div class="step" data-n="7"><h4>c) Rotação em torno de $y$</h4>
+      <div class="math-box">$$\theta_y = \frac1{EI}\int_0^L(-Ps)(-1)\,ds + \frac{5}{4EI}\int_0^LPL\cdot1\,ds = \left(\frac12 + \frac54\right)\frac{PL^2}{EI} = \frac74\frac{PL^2}{EI}$$</div>
+      <p>Duas parcelas: a flexão de CB (balanço, $PL^2/2EI$) e a torção de BA, que gira BC inteiro como corpo rígido em torno de $y$ ($TL/GI_P = PL\cdot L\cdot\frac{5}{4EI}$). A segunda domina.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \dfrac{23}{12}\dfrac{PL^3}{EI}$ ↓; (b) $\phi_x = -\dfrac{PL^2}{2EI}$ (oposto ao $\bar T$ adotado); (c) $\theta_y = \dfrac74\dfrac{PL^2}{EI}$ (no sentido de $\bar M$, que abaixa C). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que $\bar M$ também torce BA (entra em $T_2$): perde-se a maior parcela de $\theta_y$.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Anular as fictícias antes de derivar: a derivada some junto.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> O raio $R$ do enunciado não entra: só serve para dizer que a seção é circular ($I_P = 2I$).</li></ul></div>
   </article>
 
   <!-- ============ PIVÔ 12 ============ -->
   <article class="ex pivo" id="pa-ex12">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 12 (p.70) · Pivô 12</div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 12 (p.70) · Pivô 12 da P2</div>
       <h3 id="pa-ex12-h" data-nav="Prova ex.12 · pórtico em L com q" data-pivo>Pórtico em L com carga distribuída: três cargas fictícias</h3></div>
       <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.70)</span>
       A estrutura ABC da figura é formada por dois segmentos prismáticos em ângulo reto, cada um com comprimento L e rigidez à flexão EI. Ela está engastada em A e submetida a uma carga distribuída uniforme q em seu trecho BC. Pede-se determinar, considerando apenas o efeito da flexão:
-      <ol type="a"><li>o deslocamento vertical do ponto C;</li><li>o deslocamento horizontal do ponto B;</li><li>a rotação da seção C.</li></ol></div>
+      <ol type="a"><li>o deslocamento vertical do ponto C;</li><li>o deslocamento horizontal do ponto B;</li><li>a rotação da seção C.</li></ol>
+      <em>Figura: coluna AB vertical, engastada na base A; viga BC horizontal para a direita a partir do topo B, com $q$ para baixo em todo BC.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 12):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 70 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico plano isostático (coluna AB engastada em A, viga BC em balanço). Só carga distribuída: <em>nenhum</em> dos três deslocamentos tem carga correspondente. Três cargas fictícias, uma para cada pergunta, sempre com a mesma $M(x)$ de base.</p></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>AB = BC = $L$, $EI$ constante, $q$ ↓ em BC. Só flexão (enunciado).</p></div>
-    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>(a) força fictícia vertical em C; (b) força fictícia horizontal em B; (c) binário fictício em C. Crotti-Engesser com derivação sob a integral.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 15 p.22</span> $\delta = \sum\int\frac{M}{EI}\frac{\partial M}{\partial P}dx$.</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos (1 = BC, $x$ a partir de C; 2 = BA, $x$ a partir de B, descendo)</h4>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caso</th><th>$M_1$ (BC)</th><th>$\partial M_1$</th><th>$M_2$ (BA)</th><th>$\partial M_2$</th></tr></thead><tbody>
-        <tr><td>(a) $P$ ↓ em C</td><td>$-Px - \frac{qx^2}{2}$</td><td>$-x$</td><td>$-PL - \frac{qL^2}{2}$ (constante)</td><td>$-L$</td></tr>
-        <tr><td>(b) $P$ → em B</td><td>$-\frac{qx^2}{2}$</td><td>$0$</td><td>$-Px - \frac{qL^2}{2}$</td><td>$-x$</td></tr>
-        <tr><td>(c) $M$ em C</td><td>$-M - \frac{qx^2}{2}$</td><td>$-1$</td><td>$-M - \frac{qL^2}{2}$</td><td>$-1$</td></tr></tbody></table></div>
-      <p>Na coluna, a carga da viga ($qL$ a $L/2$ do eixo) dá momento constante $qL^2/2$: a coluna inteira flete uniformemente.</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$\delta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}x\,dx + \int_0^L\frac{qL^2}{2}L\,dx\right] = \frac{qL^4}{8EI} + \frac{qL^4}{2EI} = \frac{5qL^4}{8EI}$$
-      $$\delta_B = \frac1{EI}\int_0^L\frac{qL^2}{2}x\,dx = \frac{qL^4}{4EI}\qquad \theta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}dx + \int_0^L\frac{qL^2}{2}dx\right] = \frac{qL^3}{6EI} + \frac{qL^3}{2EI} = \frac{2qL^3}{3EI}$$</div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \frac{5qL^4}{8EI}$ ↓; (b) $\delta_B = \frac{qL^4}{4EI}$ (no sentido da força fictícia); (c) $\theta_C = \frac{2qL^3}{3EI}$ (horário). <span class="badge badge-ok">bate com a apostila</span></div>
-      <ul><li>Decomposição física de (a): $\frac{qL^4}{8EI}$ é o balanço BC sozinho; $\frac{qL^4}{2EI}$ é a coluna girando o topo ($\theta_B = \frac{qL^2}{2}\frac{L}{EI}$) vezes o braço $L$. A coluna manda!</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Em (b) a força fictícia em B não mexe em BC; esquecer isso não muda o resultado, mas gasta tempo.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Só há carga distribuída, então <strong>nenhum</strong> dos três deslocamentos tem carga correspondente: cada pergunta pede sua carga fictícia. Peças: (1) momento num pórtico, incluindo o que a viga transmite à coluna pelo nó rígido; (2) carga fictícia (força ou binário) no ponto e na direção pedidos; (3) decomposição física do resultado (balanço + coluna girando), que serve de conferência.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Momento em pórtico: o nó rígido passa o momento adiante</h4>
+      <p>Revisão: <a href="../topicos/01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a> e <a href="../base.html#diagramas">Base</a>. Corte a coluna a uma altura qualquer e olhe para cima (lado livre: o resto da coluna e a viga inteira). A carga da viga, $qL$, tem resultante a $L/2$ do eixo da coluna: momento <strong>constante</strong> $qL^2/2$ em toda a coluna. É o "momento que dobra a esquina" do <a href="../topicos/13-hiperestaticas-energia.html#s17-ex5-h">ficha 13 (Hiperestáticas e linha elástica)</a>. A força $qL$ também comprime a coluna, mas o enunciado manda considerar só flexão.</p></div>
+
+    <div class="step" data-n="2"><h4>Uma fictícia por pergunta</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>. Deslocamento vertical em C: força vertical $F$ em C. Deslocamento horizontal em B: força horizontal $F$ em B. Rotação em C: binário $\bar M$ em C. Em cada caso, $M(x) = M_q(x) + F\cdot m(x)$, e $\partial M/\partial F = m(x)$ é o momento de uma carga <strong>unitária</strong> no lugar da fictícia. Depois de derivar, $F = 0$: sobra $\delta = \frac1{EI}\int M_q\,m\,dx$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Só flexão (dado): normal na coluna e cortantes desprezadas; $EI$ igual nos dois trechos.</li>
+          <li>Nó B rígido (o ângulo de 90° se mantém); engaste perfeito; linearidade geométrica.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Esforços (1 = BC, $x$ a partir de C; 2 = BA, $x$ a partir de B, descendo)</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Pergunta (fictícia)</th><th>$M_1$ (BC)</th><th>$\partial M_1$</th><th>$M_2$ (BA)</th><th>$\partial M_2$</th></tr></thead><tbody>
+        <tr><td>(a) $F$ ↓ em C</td><td>$-Fx - \frac{qx^2}{2}$</td><td>$-x$</td><td>$-FL - \frac{qL^2}{2}$</td><td>$-L$</td></tr>
+        <tr><td>(b) $F$ → em B</td><td>$-\frac{qx^2}{2}$</td><td>$0$</td><td>$-Fx - \frac{qL^2}{2}$</td><td>$-x$</td></tr>
+        <tr><td>(c) $\bar M$ horário em C</td><td>$-\bar M - \frac{qx^2}{2}$</td><td>$-1$</td><td>$-\bar M - \frac{qL^2}{2}$</td><td>$-1$</td></tr>
+      </tbody></table></div>
+      <p>Em (b), a força em B não mexe na viga BC (ela está acima/ao lado do corte), então só a coluna contribui.</p></div>
+
+    <div class="step" data-n="4"><h4>a) Deslocamento vertical de C</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}x\,dx + \int_0^L\frac{qL^2}{2}L\,dx\right] = \frac{qL^4}{8EI} + \frac{qL^4}{2EI} = \frac{5qL^4}{8EI}$$</div></div>
+
+    <div class="step" data-n="5"><h4>b) Deslocamento horizontal de B</h4>
+      <div class="math-box">$$\delta_B = \frac1{EI}\int_0^L\frac{qL^2}{2}x\,dx = \frac{qL^4}{4EI}\ (\text{no sentido da fictícia: para a direita})$$</div></div>
+
+    <div class="step" data-n="6"><h4>c) Rotação de C</h4>
+      <div class="math-box">$$\theta_C = \frac1{EI}\left[\int_0^L\frac{qx^2}{2}dx + \int_0^L\frac{qL^2}{2}dx\right] = \frac{qL^3}{6EI} + \frac{qL^3}{2EI} = \frac{2qL^3}{3EI}\ (\text{horário})$$</div></div>
+
+    <div class="step" data-n="7"><h4>Conferência por decomposição física</h4>
+      <p>A coluna está sob momento constante $qL^2/2$: o topo gira $\theta_B = \frac{qL^2}{2}\cdot\frac{L}{EI} = \frac{qL^3}{2EI}$ e se desloca $\frac{qL^2}{2}\cdot\frac{L^2}{2EI} = \frac{qL^4}{4EI}$ para o lado (item b ✓). A viga BC é um balanço com $q$ sobre um "engaste" que gira $\theta_B$: flecha $\frac{qL^4}{8EI} + \theta_BL$ (item a ✓) e rotação $\frac{qL^3}{6EI} + \theta_B$ (item c ✓). A coluna responde por 80% da flecha em C.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $\delta_C = \dfrac{5qL^4}{8EI}$ ↓; (b) $\delta_B = \dfrac{qL^4}{4EI}$ →; (c) $\theta_C = \dfrac{2qL^3}{3EI}$ (horário). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a coluna: quem só integra a viga acha $qL^4/8EI$, 20% da resposta.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Pôr a força fictícia de (b) em C: o pedido é o deslocamento de B.</li></ul></div>
   </article>
 
   <!-- ============ PIVÔ 13 ============ -->
   <article class="ex pivo" id="pa-ex13">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 13 (p.74) + Exemplo 9 (p.33) · Pivô 13</div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 13 (p.74) + Exemplo 9 (p.33) · Pivô 13 da P2</div>
       <h3 id="pa-ex13-h" data-nav="Prova ex.13 · hiperestática" data-pivo>Viga engastada e apoiada: incógnita hiperestática por energia complementar mínima</h3></div>
       <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">H1</span><span class="chip">C2</span><span class="chip">C1</span><span class="chip">W4</span></div>
@@ -572,145 +646,514 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       Pede-se determinar a rotação $\theta_B$ que acontece na sua extremidade B quando é aplicada a carga uniformemente distribuída q.
       <br><em>(O Exemplo 9 da apostila, p.33, é a mesma viga espelhada, pedindo "a) Calcular as reações vinculares; b) Calcular a rotação no ponto A".)</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 13):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 74 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Reações: $R_A$, $M_A$ (engaste) e $R_B$ (apoio) são 3 incógnitas; equações úteis no plano sem forças horizontais: 2 ⇒ <strong>$g = 1$</strong>. Não dá para escrever $M(x)$ sem antes descobrir uma reação. O tópico é das aulas 17 e 19; aqui ele é ensinado pela apostila §10 (p.33–36).</p>
-      <div class="callout concept"><span class="co-t">Conceito: princípio da energia complementar mínima</span>
-        <p>Troque o apoio B pela força que ele exerce, $R_B = X$, e trate $X$ como uma carga externa qualquer. A estrutura vira isostática (a <em>isostática fundamental</em>: um balanço com $q$ e $X$). Crotti-Engesser diz que $\partial U^*/\partial X$ é o deslocamento de B na direção de $X$. Mas o apoio real impede esse deslocamento, então:</p>
-        <div class="math-box">$$\frac{\partial U^*}{\partial X} = 0$$</div>
-        <p>Ou seja, de todas as distribuições de esforços em equilíbrio com as cargas, a verdadeira é a que <strong>minimiza</strong> $U^*$ (a segunda derivada $\int(\partial M/\partial X)^2/EI$ é positiva). Com $g$ incógnitas são $g$ equações. Qualquer reação pode ser a incógnita, desde que as outras possam ser escritas em função dela; o Exemplo 9 escolhe a do apoio. Se o apoio tiver recalque conhecido $\Delta$, a equação vira $\partial U^*/\partial X = \Delta$.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$L$, $EI$ constantes; $q$ uniforme em todo o vão; só flexão.</p></div>
-    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>1º: $R_B$ por $\partial U^*/\partial R_B = 0$. 2º: $\theta_B$ por binário fictício $\bar M$ em B, <em>já com $R_B$ conhecido</em>.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{\partial U^*}{\partial R_B} = \frac1{EI}\int_0^LM\frac{\partial M}{\partial R_B}dx = 0\qquad \theta_B = \left(\frac1{EI}\int_0^LM\frac{\partial M}{\partial\bar M}dx\right)_{\bar M = 0}\qquad\text{(apostila §10 p.33)}$$</div></div>
-    <div class="step" data-n="5"><h4>Esforços internos (isostática fundamental, $x$ a partir de B)</h4>
-      <div class="math-box">$$M(x) = \bar M + R_Bx - \frac{qx^2}{2}\qquad\frac{\partial M}{\partial R_B} = x\qquad\frac{\partial M}{\partial\bar M} = 1$$</div>
-      <p>A reação do engaste não aparece porque a coordenada parte de B. Esse é o truque para ter uma única incógnita no $M(x)$.</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$\int_0^L\left(R_Bx - \frac{qx^2}{2}\right)x\,dx = \frac{R_BL^3}{3} - \frac{qL^4}{8} = 0\ \Rightarrow\ R_B = \frac38qL$$
-      $$\text{Equilíbrio: } R_A = \frac58qL,\quad M_A = R_BL - \frac{qL^2}{2} = -\frac{qL^2}{8}\ (\text{módulo } qL^2/8)$$
-      $$\theta_B = \frac1{EI}\int_0^L\left(\frac38qLx - \frac{qx^2}{2}\right)dx = \frac1{EI}\left(\frac{3qL^3}{16} - \frac{qL^3}{6}\right) = \frac{qL^3}{48EI}$$</div></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> $R_B = \frac38qL$, $R_A = \frac58qL$, $|M_A| = \frac{qL^2}{8}$; $\theta_B = \frac{qL^3}{48EI}$ (sentido do $\bar M$ adotado, anti-horário na figura da apostila). Exemplo 9: $\theta_A = -\frac{qL^3}{48EI}$ (mesma viga espelhada, $\bar M$ no outro sentido). <span class="badge badge-ok">bate com a apostila</span></div>
-      <ul><li>Conferência pelo caso clássico: $R = 3qL/8$ na apoiada-engastada é resultado de tabela ✓.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Tentar calcular $\theta_B$ antes de achar $R_B$: o $M(x)$ ainda teria uma incógnita. A apostila insiste: <strong>reações primeiro</strong>.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Escolher como incógnita uma reação que o equilíbrio já determina (ex.: $V_A$ quando só há uma força vertical possível): não dá equação nova.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>É a hiperestática mínima, e o roteiro é o da aula 17 (<a href="../topicos/13-hiperestaticas-energia.html#t13-7passos">ficha 13 (Hiperestáticas e linha elástica)</a>): grau, isostática fundamental (E.I.F.), $\partial U^*/\partial X = 0$, equilíbrio, e só então a rotação com binário fictício. Peças: contar $g$; entender por que $\partial U^*/\partial X = 0$ é uma condição de <strong>compatibilidade</strong>; carga fictícia na estrutura já resolvida.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Grau de hiperestaticidade</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Reações: engaste A ($V_A$, $M_A$; a horizontal é zero sem carga horizontal) e apoio B ($R_B$) = 3. Equações úteis: $\Sigma F_y$ e $\Sigma M$ = 2. <strong>$g = 1$</strong>: não dá para escrever $M(x)$ só com o equilíbrio.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia complementar mínima</h4>
+      <p>Revisão: <a href="../topicos/13-hiperestaticas-energia.html#t13-h1">ficha 13 (Hiperestáticas e linha elástica)</a>. Troque o apoio B pela força que ele faz, $R_B = X$, e trate $X$ como carga externa: sobra um balanço com $q$ e $X$ (a E.I.F.). Por Crotti-Engesser, $\partial U^*/\partial X$ é o deslocamento de B na direção de $X$. O apoio real impede esse deslocamento:</p>
+      <div class="math-box">$$\frac{\partial U^*}{\partial X} = 0$$</div>
+      <p>É uma equação de compatibilidade escrita em energia. E é um mínimo: $\partial^2U^*/\partial X^2 = \int(\partial M/\partial X)^2/EI\,dx \gt 0$. Das distribuições de esforços em equilíbrio, a verdadeira é a de menor $U^*$.</p></div>
+
+    <div class="step" data-n="3"><h4>Escolha da coordenada</h4>
+      <p>Medindo $x$ a partir de B (a ponta livre da E.I.F.), o lado livre de cada corte contém só $q$ e $X$: as reações do engaste nunca entram em $M(x)$. É o truque para ter uma única incógnita.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Viga esbelta, elástico-linear, $EI$ constante; só flexão.</li>
+          <li>Engaste perfeito e apoio B rígido, sem recalque (se B afundasse $\Delta$, a condição seria $\partial U^*/\partial X = -\Delta$ no sentido de $X$).</li>
+          <li>Linearidade geométrica.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>E.I.F. e compatibilidade</h4>
+      <div class="math-box">$$M(x) = \bar M + R_Bx - \frac{qx^2}{2}\qquad \frac{\partial M}{\partial R_B} = x\qquad \frac{\partial M}{\partial\bar M} = 1$$
+      $$\frac{\partial U^*}{\partial R_B} = \frac1{EI}\int_0^L\left(R_Bx - \frac{qx^2}{2}\right)x\,dx = \frac1{EI}\left(\frac{R_BL^3}{3} - \frac{qL^4}{8}\right) = 0\ \Rightarrow\ R_B = \frac38qL$$</div>
+      <p>(O binário fictício $\bar M$, anti-horário em B, já está escrito, mas vale zero aqui.) Leitura de superposição: $\frac{qL^4}{8EI}$ é a flecha do balanço sob $q$; $\frac{R_BL^3}{3EI}$ é o quanto $R_B$ levanta a ponta.</p></div>
+
+    <div class="step" data-n="5"><h4>Demais reações</h4>
+      <div class="math-box">$$V_A = qL - \frac38qL = \frac58qL\qquad M(L) = \frac38qL^2 - \frac{qL^2}{2} = -\frac{qL^2}{8}\ \Rightarrow\ |M_A| = \frac{qL^2}{8}$$</div>
+      <p>O maior momento positivo está em $x = 3L/8$ (onde a cortante zera) e vale $\frac{9qL^2}{128}$, menor que o do engaste.</p></div>
+
+    <div class="step" data-n="6"><h4>Rotação em B (com $R_B$ já conhecido)</h4>
+      <div class="math-box">$$\theta_B = \frac1{EI}\int_0^L\left(\frac38qLx - \frac{qx^2}{2}\right)(1)\,dx = \frac1{EI}\left(\frac{3qL^3}{16} - \frac{qL^3}{6}\right) = \frac{qL^3}{48EI}$$</div>
+      <p><strong>Conferência por superposição de tabela:</strong> no balanço, $q$ gira a ponta $\frac{qL^3}{6EI}$ e $R_B$ a gira $\frac{R_BL^2}{2EI} = \frac{3qL^3}{16EI}$ no sentido oposto; diferença $\frac{qL^3}{48EI}$ ✓. O Exemplo 9 é a mesma viga espelhada: $\theta_A = -\frac{qL^3}{48EI}$ (o sinal vem do $\bar M$ adotado no outro sentido).</p>
+      <div class="answer"><strong>Respostas:</strong> $R_B = \frac38qL$, $V_A = \frac58qL$, $|M_A| = \frac{qL^2}{8}$; $\theta_B = \dfrac{qL^3}{48EI}$ (anti-horário, sentido do $\bar M$ adotado). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Calcular $\theta_B$ antes de achar $R_B$: o $M(x)$ ainda teria uma incógnita. <strong>Reações primeiro.</strong></li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Escolher como incógnita uma reação que o equilíbrio já dá (ex.: a horizontal, que é zero): não gera equação nova.</li>
+          <li>Caso de tabela: $R = 3qL/8$ na apoiada-engastada. Vale a pena saber de cor para conferir.</li></ul></div>
+
     <details class="deep"><summary>Aprofundamento: e se a incógnita fosse o momento do engaste?</summary><div class="deep-body">
-      <p>Com $X = M_A$ (e $x$ a partir de A), $R_A = \frac{qL}{2} + \frac{X}{L}$ e $M(x) = X + R_Ax - \frac{qx^2}{2}$, $\frac{\partial M}{\partial X} = 1 - \frac xL$. Impondo $\int_0^LM(1 - x/L)dx = 0$ sai $X = -qL^2/8$, a mesma resposta. A escolha só muda o trabalho algébrico. Regra prática: escolha a reação cuja coordenada deixe o $M(x)$ mais curto.</p></div></details>
+      <p>Com $X = M_A$ e $x$ a partir de A, $V_A = \frac{qL}{2} + \frac{X}{L}$ e $M(x) = X + V_Ax - \frac{qx^2}{2}$, $\frac{\partial M}{\partial X} = 1 - \frac xL$. Impondo $\int_0^LM(1 - x/L)dx = 0$ sai $X = -qL^2/8$, a mesma resposta. Aqui a E.I.F. é uma viga biapoiada e a condição é "rotação nula em A". A escolha só muda o trabalho algébrico. Regra prática: escolha a reação cuja coordenada deixe o $M(x)$ mais curto.</p></div></details>
   </article>
 
   <h3 class="sub" id="pa-demais" data-nav="Provas · demais questões P2">Demais questões do escopo da P2 (por bloco)</h3>
 
   <article class="ex" id="pa-ex1">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 1 (p.49) · bloco A · ver Pivô 7</div>
-      <h3 id="pa-ex1-h" data-nav="Prova ex.1 · arame 3D (G = E/3)">Arame dobrado engastado em D, força em A</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 1 (p.49) · bloco A · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
+      <h3 id="pa-ex1-h" data-nav="Prova ex.1 · arame 3D (G = E/3)">Arame dobrado engastado em D, força em A: flexão e torção no mesmo P.T.E.</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.49)</span>
-      A estrutura horizontal da figura é formada por um arame de peso desprezível, dobrado em ângulos de $90°$, e está engastada na sua extremidade $D$. Usando o Princípio do Trabalho e da Energia, pede-se calcular o deslocamento vertical sofrido pela extremidade A quando nela é aplicada uma força P, desprezando a energia devida às forças cortantes. São dados: $E$ e $I$. Fazer: $G = E/3$ e $I_P = 2I$.</div>
+      A estrutura horizontal da figura é formada por um arame de peso desprezível, dobrado em ângulos de $90°$, e está engastada na sua extremidade $D$. Usando o Princípio do Trabalho e da Energia, pede-se calcular o deslocamento vertical sofrido pela extremidade A quando nela é aplicada uma força P, desprezando a energia devida às forças cortantes. São dados: $E$ e $I$. Fazer: $G = E/3$ e $I_P = 2I$.
+      <br><em>Figura: AB = $L$; BC = $L$, perpendicular a AB; CD = $2L$, paralelo a AB e voltando no sentido de A; tudo no plano horizontal; $P$ vertical para baixo em A.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 1):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 49 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> AB = $L$, BC = $L$ (⊥ AB), CD = $2L$ (∥ AB). Por $\vec M = \vec r\times\vec P$: flexão triangular de 0 a $PL$ em AB e em BC; em CD, flexão linear de $-PL$ a $+PL$ (equivale a dois triângulos de comprimento $L$); torção $PL$ constante em BC e CD (3L no total). Com $GI_P = \frac E3\cdot 2I = \frac23EI$:</p>
-    <div class="math-box">$$U^*_M = 4\cdot\frac{P^2L^3}{6EI} = \frac23\frac{P^2L^3}{EI}\qquad U^*_T = \frac{(PL)^2\cdot 3L}{2GI_P} = \frac94\frac{P^2L^3}{EI}\qquad \frac{P\delta_A}{2} = \frac{35}{12}\frac{P^2L^3}{EI}\ \Rightarrow\ \delta_A = \frac{35}{6}\frac{PL^3}{EI}$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_A = \frac{35}{6}\frac{PL^3}{EI}$ ↓. <span class="badge badge-ok">bate com a apostila</span> A torção responde por 77% do deslocamento.</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>O ponto se ganha (ou se perde) nos <strong>esforços 3D</strong>: para cada trecho, quanto do momento da força é flexão e quanto é torção. Peças: (1) momento de uma força em relação a uma seção, $\vec M = \vec r\times\vec P$, decomposto na direção do eixo do trecho (torção) e perpendicular a ele (flexão); (2) $U^*$ de flexão e de torção por trecho; (3) o P.T.E. com uma carga só; (4) o que significam $G = E/3$ e $I_P = 2I$.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Flexão ou torção? O braço decide</h4>
+      <p>Revisão: <a href="../topicos/01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a> e <a href="../base.html#vetores">Base</a>. Corte um trecho e olhe para o lado livre (o que contém A, a ponta carregada). O momento que $P$ faz na seção é $\vec r\times\vec P$, com $\vec r$ indo da seção até A. Como $P$ é vertical e o arame é horizontal, $\vec r\times\vec P$ é horizontal e perpendicular a $\vec r$. Separe $\vec r$ em duas partes:</p>
+      <ul><li>a parte de $\vec r$ <strong>ao longo do eixo</strong> do trecho gera momento perpendicular ao eixo: <strong>flexão</strong>, que cresce com a distância ao longo do trecho;</li>
+          <li>a parte de $\vec r$ <strong>perpendicular ao eixo</strong> (no plano horizontal) gera momento ao longo do eixo: <strong>torção</strong>, constante no trecho.</li></ul>
+      <p>Regra de bolso: torção num trecho = $P$ × (distância horizontal de A até a <em>reta</em> do trecho); flexão = $P$ × (distância de A à seção, medida <em>ao longo</em> do trecho, a partir do pé da perpendicular).</p></div>
+
+    <div class="step" data-n="2"><h4>Energia de flexão e de torção</h4>
+      <p>Revisão: <a href="../topicos/11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a> e <a href="../topicos/10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>. $U^* = \int\frac{M^2}{2EI}ds + \int\frac{T^2}{2GI_P}ds$, trecho a trecho. A cortante é desprezada pelo enunciado (<a href="../topicos/11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>: em barra esbelta ela pesa da ordem de $(R/L)^2$).</p></div>
+
+    <div class="step" data-n="3"><h4>O que $G = E/3$ e $I_P = 2I$ significam</h4>
+      <p>$I_P = 2I$ é exato para seção circular ($I_P = \pi R^4/2$, $I = \pi R^4/4$). $G = E/2(1+\nu)$ (<a href="../topicos/08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>): $G = E/3$ corresponde a $\nu = 0{,}5$, material incompressível. É uma escolha para a conta fechar em frações simples; para aço ($\nu \approx 0{,}3$, $G \approx E/2{,}6$) a resposta seria $5{,}23\,PL^3/EI$ em vez de $5{,}83$. O que importa: $GI_P = \frac23EI$, a rigidez à torção é <em>menor</em> que a de flexão, e a torção vai dominar.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Arame de seção circular constante, esbelto; elástico-linear; peso desprezado (dado).</li>
+          <li>Energia da cortante desprezada (dado); sem força normal (todos os trechos são horizontais e a força é vertical).</li>
+          <li>Linearidade geométrica; dobras rígidas (o ângulo de 90° não se abre).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Esforços por trecho</h4>
+      <p>Origem em B, eixo $u$ de A para B e eixo $v$ de B para C: A $= (-L, 0)$, C $= (0, L)$, D $= (-2L, L)$.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>Flexão $M$</th><th>Torção $T$</th><th>Por quê</th></tr></thead><tbody>
+        <tr><td>AB ($s$ de A)</td><td>$Ps$: de 0 a $PL$</td><td>0</td><td>A está sobre a reta de AB</td></tr>
+        <tr><td>BC ($s$ de B)</td><td>$Ps$: de 0 a $PL$</td><td>$PL$</td><td>A está a $L$ da reta de BC; o pé da perpendicular é B</td></tr>
+        <tr><td>CD ($s$ de C)</td><td>$P(s - L)$: de $-PL$ a $+PL$</td><td>$PL$</td><td>A está a $L$ da reta de CD; o pé da perpendicular fica no meio de CD</td></tr>
+      </tbody></table></div>
+      <p>Em CD a flexão troca de sinal no meio do trecho: lá a seção está exatamente "na frente" de A, e o braço ao longo do trecho é nulo. Para a energia, CD equivale a dois triângulos de comprimento $L$ e pico $PL$. (Conferido por $\vec r\times\vec P$ em <code>calc_ap3_detalhado.py</code>.)</p></div>
+
+    <div class="step" data-n="5"><h4>Energias</h4>
+      <p>Cada triângulo de flexão de comprimento $L$ e pico $PL$ dá $\int_0^L\frac{(Ps)^2}{2EI}ds = \frac{P^2L^3}{6EI}$. São quatro (AB, BC e as duas metades de CD):</p>
+      <div class="math-box">$$U_M^* = 4\cdot\frac{P^2L^3}{6EI} = \frac23\frac{P^2L^3}{EI}\qquad U_T^* = \frac{(PL)^2\cdot(L + 2L)}{2GI_P} = \frac{3P^2L^3}{2\cdot\frac23EI} = \frac94\frac{P^2L^3}{EI}$$
+      $$U^* = \left(\frac23 + \frac94\right)\frac{P^2L^3}{EI} = \frac{35}{12}\frac{P^2L^3}{EI}$$</div></div>
+
+    <div class="step" data-n="6"><h4>P.T.E.</h4>
+      <p>Uma só força, deslocamento no ponto e na direção dela (<a href="../topicos/09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>):</p>
+      <div class="math-box">$$\frac{P\delta_A}{2} = \frac{35}{12}\frac{P^2L^3}{EI}\ \Rightarrow\ \delta_A = \frac{35}{6}\frac{PL^3}{EI}\approx 5{,}83\,\frac{PL^3}{EI}$$</div>
+      <div class="answer"><strong>Resposta:</strong> $\delta_A = \dfrac{35}{6}\dfrac{PL^3}{EI}$ (para baixo). <span class="badge badge-ok">bate com a apostila</span> A torção responde por $27/35 \approx 77\%$ da energia.</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a torção em CD (3L de torção, não L).</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Tratar CD como um triângulo só de comprimento $2L$ e pico $2PL$: dá $\frac{(2P L)^2(2L)}{6EI}$, o quádruplo do certo. O diagrama cruza zero no meio.</li>
+          <li>Dimensão: $PL^3/EI$ é comprimento ✓.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex2">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 2 (p.50) · bloco A · ver Pivô 7</div>
-      <h3 id="pa-ex2-h" data-nav="Prova ex.2 · arame ABCD, força">Arame ABCD com trecho vertical, força em D</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 2 (p.50) · bloco A · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
+      <h3 id="pa-ex2-h" data-nav="Prova ex.2 · arame ABCD, força">Arame ABCD com trecho vertical, força em D: os quatro esforços</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">W1</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.50)</span>
       A estrutura da figura é formada pelo arame ABCD, de seção circular e comprimento 3L, dobrado em ângulos retos e engastado no ponto A. Em D está aplicada uma força P vertical. São dadas: a rigidez axial EA, a rigidez à flexão EI e a rigidez à torção $GI_p$ do arame. Pede-se:
-      <ol type="a"><li>desenhe os diagramas de esforços solicitantes;</li><li>calcule a energia complementar devida à força P, desprezando o efeito da força cortante;</li><li>usando o Princípio do Trabalho e da Energia, calcule o deslocamento vertical do ponto D devido à força P;</li><li>justifique a importância da energia complementar devida à força normal no cálculo do deslocamento vertical em D.</li></ol></div>
+      <ol type="a"><li>desenhe os diagramas de esforços solicitantes;</li><li>calcule a energia complementar devida à força P, desprezando o efeito da força cortante;</li><li>usando o Princípio do Trabalho e da Energia, calcule o deslocamento vertical do ponto D devido à força P;</li><li>justifique a importância da energia complementar devida à força normal no cálculo do deslocamento vertical em D.</li></ol>
+      <em>Figura: AB = $L$ horizontal; BC = $L$ vertical para cima; CD = $L$ horizontal, perpendicular a AB; $P$ para baixo em D.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 2):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 51 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> AB horizontal, BC vertical, CD horizontal ⊥ AB. Esforços: BC comprimida ($N = -P$) e com $M = PL$ constante; AB e CD com flexão triangular até $PL$; AB com torção $T = PL$; cortante $P$ em AB e CD.</p>
-    <div class="math-box">$$U^* = \frac{P^2L}{2EA} + \frac{5P^2L^3}{6EI} + \frac{P^2L^3}{2GI_P}\qquad \delta_D = \frac{PL}{EA} + \frac{5PL^3}{3EI} + \frac{PL^3}{GI_P}$$</div>
-    <div class="answer"><strong>Respostas:</strong> como acima; (d) a parcela normal é da ordem de $(R/L)^2$ da de flexão, desprezível. <span class="badge badge-ok">bate com a apostila</span></div>
-    <div class="callout diverge"><span class="co-t">Erro de digitação na apostila (p.53)</span><p>A apostila imprime $\delta = \frac{P^2L}{EA} + \dots$ com $P^2$. O correto (dimensão de comprimento) é $\frac{PL}{EA}$, como acima.</p></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Aqui aparecem os <strong>quatro</strong> esforços: normal (no trecho vertical, paralelo à força), cortante, flexão e torção. Peças: (1) $\vec M = \vec r\times\vec P$ por trecho, como no <a href="p2.html#pa-ex1-h">P2</a>, agora com um trecho vertical; (2) a energia de cada esforço; (3) o item (d), que pede a ordem de grandeza de $U_N^*$ diante de $U_M^*$: é o argumento de por que se despreza normal e cortante em barras esbeltas.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Quando aparece força normal</h4>
+      <p>Revisão: <a href="../base.html#tracao">Base</a> e <a href="../topicos/01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a>. A <em>força</em> resultante do lado livre é sempre $\vec P$ (vertical). Ela se decompõe em componente ao longo do eixo do trecho (normal $N$) e perpendicular (cortante $V$). Trechos horizontais: $P$ é perpendicular ⇒ só cortante. Trecho vertical BC: $P$ é axial ⇒ só normal, de compressão (a força em D empurra BC para baixo).</p></div>
+
+    <div class="step" data-n="2"><h4>A energia de cada esforço</h4>
+      <p>Revisão: <a href="../topicos/09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>, <a href="../topicos/10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>, <a href="../topicos/11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>:</p>
+      <div class="math-box">$$U^* = \int\frac{N^2}{2EA}ds + \int\frac{M^2}{2EI}ds + \int\frac{T^2}{2GI_P}ds\ \left(+\int\frac{f_cV^2}{2GA}ds,\ \text{desprezada}\right)$$</div></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Arame esbelto de seção circular constante; elástico-linear; linearidade geométrica; dobras rígidas.</li>
+          <li>Cortante desprezada (dado). A normal é calculada e depois julgada no item (d).</li>
+          <li>Trecho BC comprimido não flamba.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>a) Esforços por trecho</h4>
+      <p>Coordenadas: A na origem, AB ao longo de $x$, BC ao longo de $z$ (vertical), CD ao longo de $y$. D $= (L, L, L)$.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>$N$</th><th>$V$</th><th>$M$</th><th>$T$</th></tr></thead><tbody>
+        <tr><td>DC ($s$ de D)</td><td>0</td><td>$P$</td><td>$Ps$: de 0 a $PL$</td><td>0</td></tr>
+        <tr><td>CB</td><td>$-P$ (compressão)</td><td>0</td><td>$PL$ constante</td><td>0</td></tr>
+        <tr><td>BA ($s$ de B)</td><td>0</td><td>$P$</td><td>$Ps$: de 0 a $PL$</td><td>$PL$</td></tr>
+      </tbody></table></div>
+      <p>Leitura de CB: o braço horizontal de D até a reta vertical de CB é $L$ (o comprimento de CD), e é perpendicular ao eixo: flexão $PL$ constante, sem torção. Leitura de BA: o braço até D tem a parte $L$ (de CD, perpendicular a AB) que gera torção $PL$, e a parte ao longo de AB, que gera flexão crescente até $PL$ no engaste. (Conferido por $\vec r\times\vec P$ em <code>calc_ap3_detalhado.py</code>.)</p></div>
+
+    <div class="step" data-n="4"><h4>b) Energia complementar</h4>
+      <div class="math-box">$$U_N^* = \frac{P^2L}{2EA}\qquad U_M^* = 2\cdot\frac{P^2L^3}{6EI} + \frac{(PL)^2L}{2EI} = \frac{5P^2L^3}{6EI}\qquad U_T^* = \frac{(PL)^2L}{2GI_P}$$
+      $$U^* = \frac{P^2L}{2EA} + \frac{5P^2L^3}{6EI} + \frac{P^2L^3}{2GI_P}$$</div></div>
+
+    <div class="step" data-n="5"><h4>c) Deslocamento</h4>
+      <div class="math-box">$$\frac{P\delta_D}{2} = U^*\ \Rightarrow\ \delta_D = \frac{PL}{EA} + \frac{5PL^3}{3EI} + \frac{PL^3}{GI_P}$$</div></div>
+
+    <div class="step" data-n="6"><h4>d) A parcela normal pesa quanto?</h4>
+      <p>Para seção circular de raio $R$: $A = \pi R^2$, $I = \pi R^4/4$, então $I/A = R^2/4$:</p>
+      <div class="math-box">$$\frac{U_N^*}{U_M^*} = \frac{P^2L/2EA}{5P^2L^3/6EI} = \frac35\cdot\frac{I}{AL^2} = \frac{3}{20}\left(\frac RL\right)^2$$</div>
+      <p>Para um arame com $R/L = 0{,}01$, a razão é $1{,}5\times10^{-5}$: a normal é <strong>desprezível</strong>. A flexão "usa" o braço $L$ (momento $PL$), a normal não; por isso a rigidez axial é $(L/R)^2$ vezes maior. A mesma conta justifica desprezar a cortante.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) tabela acima; (b) $U^* = \dfrac{P^2L}{2EA} + \dfrac{5P^2L^3}{6EI} + \dfrac{P^2L^3}{2GI_P}$; (c) $\delta_D = \dfrac{PL}{EA} + \dfrac{5PL^3}{3EI} + \dfrac{PL^3}{GI_P}$ ↓; (d) $U_N^*/U_M^* = \frac{3}{20}(R/L)^2 \ll 1$, desprezível. <span class="badge badge-ok">bate com a apostila</span></div>
+      <div class="callout diverge"><span class="co-t">Erro de digitação na apostila (p.53)</span><p>A apostila imprime $\delta = \frac{P^2L}{EA} + \dots$ com $P^2$. O certo (dimensão de comprimento) é $\frac{PL}{EA}$, como acima.</p></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que o trecho vertical tem flexão: o braço é o comprimento de CD.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Pôr torção em BC: o braço $L$ é perpendicular ao eixo vertical e horizontal, então gera momento horizontal, que é flexão para uma barra vertical.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex3">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 3 (p.53) · bloco A · ver Pivô 7</div>
-      <h3 id="pa-ex3-h" data-nav="Prova ex.3 · arame ABCD, binário">O mesmo arame com binário em D</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 3 (p.53) · bloco A · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
+      <h3 id="pa-ex3-h" data-nav="Prova ex.3 · arame ABCD, binário">O mesmo arame com binário em D: o vetor do binário não muda de trecho para trecho</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">W3</span><span class="chip">W4</span><span class="chip">E2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.53)</span>
-      A estrutura da figura é formada pelo arame ABCD, de seção circular e comprimento 3L, dobrado em ângulos retos e engastado no ponto A. Em D está aplicado um binário de magnitude $M_0$. São dadas: a rigidez à flexão EI e a rigidez à torção $GI_P$ do arame. Pedem-se: a) os diagramas de esforços solicitantes; b) a energia complementar devida a $M_0$; c) a rotação no ponto D devida a $M_0$, usando o Princípio do Trabalho e da Energia.</div>
+      A estrutura da figura é formada pelo arame ABCD, de seção circular e comprimento 3L, dobrado em ângulos retos e engastado no ponto A. Em D está aplicado um binário de magnitude $M_0$. São dadas: a rigidez à flexão EI e a rigidez à torção $GI_P$ do arame. Pedem-se: a) os diagramas de esforços solicitantes; b) a energia complementar devida a $M_0$; c) a rotação no ponto D devida a $M_0$, usando o Princípio do Trabalho e da Energia.
+      <br><em>Figura: o mesmo arame do exercício 2; o vetor do binário em D é horizontal e paralelo a AB.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 3):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 53 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> binário (vetor ∥ AB): flete CD e BC com $M_0$ constante e torce AB com $M_0$. Binário não gera força, então não há cortante nem normal.</p>
-    <div class="math-box">$$U^* = 2\frac{M_0^2L}{2EI} + \frac{M_0^2L}{2GI_P}\qquad \frac{M_0\theta_D}{2} = U^*\ \Rightarrow\ \theta_D = M_0L\left(\frac{2}{EI} + \frac{1}{GI_P}\right)$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\theta_D = M_0L\left(\frac2{EI} + \frac1{GI_P}\right)$. <span class="badge badge-ok">bate com a apostila</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Um binário é um vetor livre: o mesmo $\vec M_0$ chega a <strong>todas</strong> as seções, sem braço. A única pergunta por trecho é se o eixo do trecho é paralelo (torção) ou perpendicular (flexão) a $\vec M_0$. E o P.T.E. vale para binário com a rotação correspondente: $W = M_0\theta/2$.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Binário: vetor livre</h4>
+      <p>Revisão: <a href="../topicos/01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a>. O momento de um binário é o mesmo em relação a qualquer ponto (as duas forças do binário se cancelam e o momento não depende do polo). Então, cortando qualquer trecho, o lado livre transmite exatamente $\vec M_0$, sem força: <strong>sem normal e sem cortante</strong> em lugar nenhum, e momento constante em cada trecho.</p></div>
+
+    <div class="step" data-n="2"><h4>Trabalho de um binário</h4>
+      <p>Revisão: <a href="../topicos/09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>. Força ↔ deslocamento, binário ↔ rotação. Um binário que cresce de 0 a $M_0$ enquanto a seção gira de 0 a $\theta$ (em torno do eixo do vetor) faz $W = M_0\theta/2$. O P.T.E. dá a rotação <em>correspondente</em>: em torno do mesmo eixo do binário.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Arame esbelto de seção circular; elástico-linear; linearidade geométrica; dobras rígidas.</li>
+          <li>Não há cortante nem normal a desprezar: o binário não gera força.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>a) Esforços: $\vec M_0$ paralelo a AB</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>Eixo</th><th>$\vec M_0$ em relação ao eixo</th><th>Esforço</th></tr></thead><tbody>
+        <tr><td>DC</td><td>horizontal, ⊥ AB</td><td>perpendicular</td><td>flexão $M_0$ constante</td></tr>
+        <tr><td>CB</td><td>vertical</td><td>perpendicular</td><td>flexão $M_0$ constante</td></tr>
+        <tr><td>BA</td><td>horizontal, ∥ AB</td><td>paralelo</td><td>torção $M_0$ constante</td></tr>
+      </tbody></table></div></div>
+
+    <div class="step" data-n="4"><h4>b) Energia e c) rotação</h4>
+      <div class="math-box">$$U^* = 2\cdot\frac{M_0^2L}{2EI} + \frac{M_0^2L}{2GI_P} = M_0^2L\left(\frac{1}{EI} + \frac{1}{2GI_P}\right)$$
+      $$\frac{M_0\theta_D}{2} = U^*\ \Rightarrow\ \theta_D = M_0L\left(\frac{2}{EI} + \frac{1}{GI_P}\right)$$</div>
+      <p>Leitura: $\theta_D$ é a soma das rotações de três "molas de rotação" em série, $L/EI$ (CD), $L/EI$ (CB) e $L/GI_P$ (BA), cada uma girando no eixo de $\vec M_0$. Momento constante ⇒ rotação = $ML/EI$ ou $TL/GI_P$, como num eixo (<a href="../topicos/10-energia-na-torcao.html#s13-ex1-h">ficha 10 (Energia na torção)</a> mostra a versão de torção).</p>
+      <div class="answer"><strong>Respostas:</strong> (a) flexão $M_0$ em DC e CB, torção $M_0$ em BA, sem $N$ e $V$; (b) $U^* = M_0^2L\left(\frac1{EI} + \frac1{2GI_P}\right)$; (c) $\theta_D = M_0L\left(\frac2{EI} + \frac1{GI_P}\right)$, em torno do eixo de $\vec M_0$. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Procurar braço para o binário: não há. Momento de binário não depende da posição.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Dar a rotação em outro eixo pelo P.T.E.: só sai a rotação em torno do eixo do binário.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex4">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 4 (p.54) · bloco B · ver Pivô 6</div>
-      <h3 id="pa-ex4-h" data-nav="Prova ex.4 · viga + cabo (numérico)">Viga com engaste deslizante e cabo: valor numérico</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 4 (p.54) · bloco B · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
+      <h3 id="pa-ex4-h" data-nav="Prova ex.4 · viga + cabo (numérico)">Viga com engaste deslizante e cabo: expressão literal e valor numérico</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">W4</span><span class="chip">W1</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.54)</span>
       A estrutura da figura é formada por uma viga uniforme ABC, de comprimento total 2L, seção transversal retangular (b×h), feita com material de módulo de elasticidade E, e é submetida a um único esforço vertical de intensidade P, aplicado no meio do vão. Considerando que a extremidade C esteja ligada a um cabo de rigidez axial (EA)c e comprimento L, pede-se determinar o deslocamento vertical em B (expressão literal e valor numérico), após a aplicação da carga, utilizando o Princípio do Trabalho e da Energia.<br>
-      Dados: P = 2 kN, L = 1,0 m, b = 5 cm, (h/L) = 0,1, E = 200 GPa, (EA)c = 1000 kN</div>
+      Dados: P = 2 kN, L = 1,0 m, b = 5 cm, (h/L) = 0,1, E = 200 GPa, (EA)c = 1000 kN
+      <br><em>Figura: em A, vínculo com dois roletes contra a parede (engaste deslizante); cabo vertical de C até um pino no teto.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 4):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 55 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> A é engaste deslizante (impede rotação e translação horizontal, deixa descer). Equilíbrio: cabo com $V_D = P$; $M_A = PL$. Trecho BC: $M = Ps$ (a partir de C); trecho AB: $M = PL$ constante.</p>
-    <div class="math-box">$$U^* = \frac{P^2L^3}{6EI} + \frac{P^2L^3}{2EI} + \frac{P^2L}{2(EA)_c}\ \Rightarrow\ \delta_{v,B} = \frac{4PL^3}{3EI} + \frac{PL}{(EA)_c} = 16\frac{P}{Eb}\left(\frac Lh\right)^3 + \frac{PL}{(EA)_c}$$
-    $$\delta_{v,B} = 3{,}2\ \text{mm (viga)} + 2{,}0\ \text{mm (cabo)} = 5{,}2\ \text{mm}$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = 5{,}2$ mm. <span class="badge badge-ok">bate com a apostila</span> <span class="tag tag-mem">⚠</span> O cabo responde por 38%: é o exemplo numérico da regra "não desprezar elemento de esforço único".</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Três peças: (1) ler o vínculo em A, um <strong>engaste deslizante</strong>, e ver que ele não dá força vertical; (2) diagrama de momento com isso; (3) $U^*$ da viga + $U^*$ do cabo, e a regra "elemento de esforço único nunca se despreza". O valor numérico mostra quanto o cabo pesa.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Engaste deslizante</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Os dois roletes contra a parede impedem o deslocamento horizontal e a rotação (o par de roletes resiste a binário), mas deixam a seção A <strong>subir e descer</strong>. Reações: $H_A$ e $M_A$, nenhuma vertical. Com o cabo (1 reação: força ao longo dele), são 3 reações e 3 equações: isostática.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia da viga e do cabo</h4>
+      <p>Revisão: <a href="../topicos/11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a> e <a href="../topicos/09-trabalho-e-energia.html#t09-barra">ficha 09 (Trabalho, energia e P.T.E.)</a>. Viga esbelta: $\int M^2/2EI$ (cortante desprezada). Cabo: só normal, $N^2L/2(EA)_c$. O cabo é o único caminho da carga até o teto: se for desprezado, a viga "flutua".</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Viga elástico-linear, esbelta ($h/L = 0{,}1$), cortante desprezada; linearidade geométrica.</li>
+          <li>Cabo elástico-linear e <strong>tracionado</strong> (cabo não resiste a compressão; aqui ele puxa para cima, ok).</li>
+          <li>Roletes sem atrito.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Reações</h4>
+      <div class="math-box">$$\Sigma F_x = 0:\ H_A = 0\qquad \Sigma F_y = 0:\ V_D = P\ (\text{cabo})\qquad \Sigma M_A = 0:\ V_D\cdot2L = P\cdot L + M_A\ \Rightarrow\ M_A = PL$$</div>
+      <p>Toda a carga vai para o cabo, porque A não tem reação vertical.</p></div>
+
+    <div class="step" data-n="4"><h4>Momento fletor ($s$ a partir de C)</h4>
+      <div class="math-box">$$\text{CB }(0\le s\le L):\ M = Ps\qquad \text{BA }(L\le s\le 2L):\ M = Ps - P(s - L) = PL\ \text{(constante)}$$</div>
+      <p>Momento constante em AB = flexão pura: a cortante é zero ali, coerente com A não ter reação vertical.</p></div>
+
+    <div class="step" data-n="5"><h4>Energia e P.T.E.</h4>
+      <div class="math-box">$$U^* = \int_0^L\frac{(Ps)^2}{2EI}ds + \frac{(PL)^2L}{2EI} + \frac{P^2L}{2(EA)_c} = \frac{2P^2L^3}{3EI} + \frac{P^2L}{2(EA)_c}$$
+      $$\frac{P\delta_{v,B}}{2} = U^*\ \Rightarrow\ \delta_{v,B} = \frac{4PL^3}{3EI} + \frac{PL}{(EA)_c}$$</div>
+      <p>Com $I = bh^3/12$ e $h = 0{,}1L$: $\frac{4PL^3}{3EI} = 16\frac{P}{Eb}\left(\frac Lh\right)^3$.</p></div>
+
+    <div class="step" data-n="6"><h4>Valor numérico (N, mm)</h4>
+      <p>$h = 100$ mm, $b = 50$ mm, $I = 50\cdot100^3/12 = 4{,}17\times10^6$ mm⁴, $EI = 8{,}33\times10^{11}$ N·mm².</p>
+      <div class="math-box">$$\frac{4PL^3}{3EI} = \frac{4\cdot2000\cdot1000^3}{3\cdot8{,}33\times10^{11}} = 3{,}2\ \text{mm}\qquad \frac{PL}{(EA)_c} = \frac{2000\cdot1000}{10^6} = 2{,}0\ \text{mm}\qquad \delta_{v,B} = 5{,}2\ \text{mm}$$</div></div>
+
+    <div class="step" data-n="7"><h4>Verificação por outro caminho</h4>
+      <p>O cabo estica $PL/(EA)_c = 2$ mm e a viga inteira desce isso como corpo rígido (A pode descer). A parcela da viga sai de um caso de tabela: o engaste deslizante é exatamente o que acontece no <strong>meio</strong> de uma viga simétrica (rotação nula, sem impedir a flecha). A viga ABC é metade de uma biapoiada de vão $4L$ com duas cargas $P$ a $L$ de cada apoio, cuja flecha sob a carga é $\frac{Pa^2(3\ell - 4a)}{6EI}$ com $a = L$, $\ell = 4L$: $\frac{PL^2\cdot8L}{6EI} = \frac{4PL^3}{3EI}$ ✓. (Esse "cortar no plano de simetria" é a ideia da P3, <a href="../topicos/14-estruturas-simetricas.html">ficha 14 (Estruturas simétricas)</a>.)</p>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,B} = \dfrac{4PL^3}{3EI} + \dfrac{PL}{(EA)_c} = 16\dfrac{P}{Eb}\left(\dfrac Lh\right)^3 + \dfrac{PL}{(EA)_c} = 3{,}2 + 2{,}0 = 5{,}2$ mm (para baixo). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Pôr reação vertical em A: o engaste deslizante não tem. Com ela, a estrutura viraria hiperestática e o momento mudaria.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Desprezar o cabo: perde 38% da resposta.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Unidades: $(EA)_c = 1000$ kN $= 10^6$ N; $E = 200$ GPa $= 2\times10^5$ MPa.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex5">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 5 (p.56) · bloco B · ver Pivô 6</div>
-      <h3 id="pa-ex5-h" data-nav="Prova ex.5 · viga + tirante">Viga articulada suportada por tirante</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 5 (p.56) · bloco B · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex1-h">A14 exerc.1</a></div>
+      <h3 id="pa-ex5-h" data-nav="Prova ex.5 · viga + tirante">Viga articulada suportada por tirante: a alavanca dobra a parcela do tirante</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">W4</span><span class="chip">W1</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.56)</span>
-      A viga ABC da figura está articulada em A e é suportada por um tirante em B. O comprimento da viga é 2L e a sua rigidez flexional é EI. O comprimento do tirante é L e sua rigidez axial é EA. Pede-se determinar, usando o Princípio do Trabalho e da Energia, o deslocamento vertical $\delta$ que sofre a extremidade livre C da viga quando nela é aplicada uma força vertical P.</div>
+      A viga ABC da figura está articulada em A e é suportada por um tirante em B. O comprimento da viga é 2L e a sua rigidez flexional é EI. O comprimento do tirante é L e sua rigidez axial é EA. Pede-se determinar, usando o Princípio do Trabalho e da Energia, o deslocamento vertical $\delta$ que sofre a extremidade livre C da viga quando nela é aplicada uma força vertical P.
+      <br><em>Figura: AB = BC = $L$; tirante vertical DB, de B até um pino no teto; $P$ para baixo em C.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 5):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 57 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> momento em A: tirante com $N = 2P$ (braço $L$ contra braço $2L$). Diagrama de $M$ triangular com pico $PL$ em B, simétrico nos dois trechos.</p>
-    <div class="math-box">$$U^* = \frac{(2P)^2L}{2EA} + 2\int_0^L\frac{(Px)^2}{2EI}dx = \frac{2P^2L}{EA} + \frac{P^2L^3}{3EI}\ \Rightarrow\ \delta_C = \frac{2PL^3}{3EI} + \frac{4PL}{EA}$$</div>
-    <div class="answer"><strong>Resposta:</strong> $\delta_C = \frac{2PL^3}{3EI} + \frac{4PL}{EA}$ ↓. <span class="badge badge-ok">bate com a apostila</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Mesma família do <a href="p2.html#pa-ex4-h">P2</a>: viga + elemento de esforço único. Peças: (1) a força no tirante por momentos (alavanca); (2) o diagrama de momento de uma viga com balanço; (3) $U^*$ da viga + do tirante e o P.T.E. Na verificação, a mesma resposta sai por compatibilidade, e dá para ver por que a parcela do tirante é $4PL/EA$ e não $2PL/EA$.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Tirante: barra biarticulada</h4>
+      <p>Revisão: <a href="../base.html#equilibrio">Base</a>. O tirante DB é articulado nas duas pontas e não tem carga no meio: só força normal, ao longo dele (vertical). A viga tem 3 reações (2 do pino A + 1 do tirante) e 3 equações: isostática.</p></div>
+
+    <div class="step" data-n="2"><h4>Viga com balanço</h4>
+      <p>Revisão: <a href="../base.html#diagramas">Base</a>. Entre os apoios (A e B) e no balanço (BC) o momento é linear, com pico no apoio intermediário B. Viga esbelta: energia só de flexão (<a href="../topicos/11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>).</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Viga elástico-linear, esbelta, $EI$ constante; tirante elástico-linear e tracionado.</li>
+          <li>Linearidade geométrica (o tirante continua vertical); articulações sem atrito.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Reações e força no tirante</h4>
+      <div class="math-box">$$\Sigma M_A = 0:\ N\cdot L = P\cdot2L\ \Rightarrow\ N = 2P\ (\text{tração})\qquad \Sigma F_y = 0:\ R_A = P - 2P = -P\ (\text{ou seja, }P\text{ para baixo})$$</div>
+      <p>É uma alavanca: a carga está ao dobro da distância do tirante, então o tirante leva o dobro da carga, e o pino A puxa para baixo.</p></div>
+
+    <div class="step" data-n="4"><h4>Momento fletor</h4>
+      <div class="math-box">$$\text{CB }(s\text{ de C}):\ M = -Ps\qquad \text{AB }(x\text{ de A}):\ M = R_Ax = -Px$$</div>
+      <p>Dois triângulos iguais, com pico $|M| = PL$ em B (tracionando em cima).</p></div>
+
+    <div class="step" data-n="5"><h4>Energia e P.T.E.</h4>
+      <div class="math-box">$$U^* = \frac{(2P)^2L}{2EA} + 2\int_0^L\frac{(Px)^2}{2EI}dx = \frac{2P^2L}{EA} + \frac{P^2L^3}{3EI}\qquad \frac{P\delta}{2} = U^*\ \Rightarrow\ \delta_C = \frac{2PL^3}{3EI} + \frac{4PL}{EA}$$</div></div>
+
+    <div class="step" data-n="6"><h4>Verificação por compatibilidade</h4>
+      <ul><li><strong>Tirante:</strong> alonga $NL/EA = 2PL/EA$; B desce isso; com a viga girando rígida em torno de A, C (a $2L$ de A) desce o dobro: $4PL/EA$ ✓. O fator 4 é a alavanca agindo duas vezes: na força (2P) e no deslocamento (×2).</li>
+          <li><strong>Viga:</strong> balanço de comprimento $L$ sobre um vão $L$ biapoiado, carga na ponta: flecha $\frac{PL^2(L + L)}{3EI} = \frac{2PL^3}{3EI}$ ✓ (caso de tabela; conferido em <code>calc_ap3_detalhado.py</code>).</li></ul>
+      <div class="answer"><strong>Resposta:</strong> $\delta_C = \dfrac{2PL^3}{3EI} + \dfrac{4PL}{EA}$ (para baixo); tirante com $N = 2P$. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $N = P$ no tirante (esquecer a alavanca): a parcela axial sai 4 vezes menor.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Integrar a flexão só no balanço: o trecho AB também flete (o pino puxa para baixo).</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex7">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 7 (p.59) · bloco A · ver Pivô 7</div>
-      <h3 id="pa-ex7-h" data-nav="Prova ex.7 · grelha com anéis">Grelha apoiada em anéis, torque na ponta</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 7 (p.59) · bloco A · ver <a href="../topicos/11-energia-na-flexao.html#s14-ex2-h">A14 exerc.2</a></div>
+      <h3 id="pa-ex7-h" data-nav="Prova ex.7 · grelha com anéis">Grelha apoiada em anéis, torque na ponta: equilíbrio 3D e as três energias</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W2</span><span class="chip">E2</span><span class="chip">W3</span><span class="chip">W4</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.59)</span>
       A estrutura indicada na figura é formada por barras de seção transversal circular cheia sendo dados: EI, $GI_P$, GA e seu fator de forma $f_c$. Todas as barras estão dispostas no plano horizontal xz e todas as ligações entre elas são rígidas, sendo seus comprimentos: m(AD) = 3L e m(BE) = m(CF) = L. Os únicos vínculos, nos pontos A, B e C, são constituídos por anéis que podem fornecer duas componentes de força em direções ortogonais ao eixo da barra em que se encontram. O único esforço aplicado à estrutura é um momento de torção de magnitude $T_0$. Pedem-se:
-      <ol type="a"><li>o diagrama de corpo livre final da estrutura com todos os esforços vinculares (em função de $T_0$) indicados e os diagramas de esforços solicitantes (V, M, e T) finais;</li><li>as parcelas de energia complementar devidas às forças cortantes ($U_V^*$), aos momentos fletores ($U_M^*$) e aos momentos de torção ($U_T^*$);</li><li>o ângulo de giro da seção D.</li></ol></div>
+      <ol type="a"><li>o diagrama de corpo livre final da estrutura com todos os esforços vinculares (em função de $T_0$) indicados e os diagramas de esforços solicitantes (V, M, e T) finais;</li><li>as parcelas de energia complementar devidas às forças cortantes ($U_V^*$), aos momentos fletores ($U_M^*$) e aos momentos de torção ($U_T^*$);</li><li>o ângulo de giro da seção D.</li></ol>
+      <em>Figura: AD ao longo de $x$, com E em $x = L$, F em $x = 2L$, D em $x = 3L$; EB sai de E para trás ($-z$), FC sai de F para a frente ($+z$); $y$ vertical; $T_0$ em D com vetor em $+x$.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 7):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 59 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> 6 reações (2 por anel), 6 equações de equilíbrio 3D ⇒ isostática. Momentos em A: em torno de $x$, $T_0 + V_BL - V_CL = 0$; em torno de $z$, $V_BL + 2V_CL = 0$; forças verticais somam zero ⇒ $V_A = V_C = \frac{T_0}{3L}$, $V_B = -\frac{2T_0}{3L}$, horizontais nulas. Diagramas: cortantes constantes por trecho, fletores triangulares (AE, EB, FC) e torção $\frac23T_0$ em EF e $T_0$ em FD.</p>
-    <div class="math-box">$$U_V^* = \frac{7}{18}\frac{f_cT_0^2}{GAL}\qquad U_M^* = \frac{7}{54}\frac{T_0^2L}{EI}\qquad U_T^* = \frac{13}{18}\frac{T_0^2L}{GI_P}\qquad \theta_D = \frac{2U^*}{T_0} = \left(\frac79\frac{f_c}{GAL} + \frac{7}{27}\frac{L}{EI} + \frac{13}{9}\frac{L}{GI_P}\right)T_0$$</div>
-    <div class="answer"><strong>Respostas:</strong> como acima. <span class="badge badge-ok">bate com a apostila</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>A dificuldade está no <strong>equilíbrio 3D</strong>, não na energia. Peças: (1) o que um anel transmite (e o que não transmite); (2) as 6 equações de equilíbrio no espaço, com momentos por $\vec r\times\vec F$; (3) como o momento passa de uma barra para outra numa ligação rígida a 90° (flexão de uma vira torção da outra); (4) as três energias, inclusive a da cortante, com o fator de forma $f_c$.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>O vínculo anel</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Um anel envolve a barra: impede que ela se mova nas duas direções perpendiculares ao seu eixo (duas forças), mas deixa a barra deslizar ao longo do eixo e girar livremente (nenhum momento). Três anéis = 6 reações; no espaço há 6 equações: <strong>isostática</strong> (se os anéis estiverem bem dispostos, o que a solução confirma).</p></div>
+
+    <div class="step" data-n="2"><h4>Equilíbrio 3D</h4>
+      <p>Revisão: <a href="../topicos/01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a> e <a href="../base.html#vetores">Base</a>. $\sum\vec F = \vec 0$ (3 equações) e $\sum\vec M_A = \sum\vec r\times\vec F + \vec T_0 = \vec 0$ (3 equações). Tomar momentos em A elimina as reações de A. Com $\vec r_B = (L, 0, -L)$ e $\vec F_B = (H_B, V_B, 0)$: $\vec r_B\times\vec F_B = (LV_B,\ -LH_B,\ LV_B)$. Com $\vec r_C = (2L, 0, L)$ e $\vec F_C = (H_C, V_C, 0)$: $\vec r_C\times\vec F_C = (-LV_C,\ LH_C,\ 2LV_C)$.</p></div>
+
+    <div class="step" data-n="3"><h4>Ligação rígida a 90°</h4>
+      <p>Na junta E, a barra EB chega perpendicular a AD. O momento fletor de EB tem vetor ao longo de $x$ (é perpendicular ao eixo $z$ de EB) e entra em AD como <strong>torção</strong>. É assim que o torque $T_0$ é "descarregado" aos poucos ao longo de AD: cada braço lateral tira uma parte.</p></div>
+
+    <div class="step" data-n="4"><h4>Energia da cortante</h4>
+      <p>Revisão: <a href="../topicos/11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>. $U_V^* = \int\frac{f_cV^2}{2GA}ds$, com $f_c$ o fator de forma ($10/9$ para seção circular cheia). O enunciado pede essa parcela; o passo 9 mostra quanto ela pesa.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Barras de seção circular cheia, elástico-lineares; ligações rígidas; anéis sem atrito e sem folga.</li>
+          <li>Linearidade geométrica; peso próprio desprezado (só $T_0$ age).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="5"><h4>a) Reações</h4>
+      <div class="math-box">$$\Sigma F_x:\ H_B + H_C = 0\quad \Sigma F_y:\ V_A + V_B + V_C = 0\quad \Sigma F_z:\ H_A = 0$$
+      $$\Sigma M_{A,x}:\ T_0 + LV_B - LV_C = 0\quad \Sigma M_{A,y}:\ -LH_B + LH_C = 0\quad \Sigma M_{A,z}:\ LV_B + 2LV_C = 0$$
+      $$\Rightarrow\ H_A = H_B = H_C = 0,\qquad V_A = V_C = \frac{T_0}{3L}\ (\uparrow),\qquad V_B = -\frac{2T_0}{3L}\ (\downarrow)$$</div>
+      <p>Leitura: as três forças verticais formam um binário que equilibra $T_0$; nenhuma força horizontal é necessária.</p></div>
+
+    <div class="step" data-n="6"><h4>a) Diagramas</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>$|V|$</th><th>$|M|$</th><th>$|T|$</th></tr></thead><tbody>
+        <tr><td>AE</td><td>$T_0/3L$</td><td>de 0 (A) a $T_0/3$ (E)</td><td>0</td></tr>
+        <tr><td>EB</td><td>$2T_0/3L$</td><td>de 0 (B) a $2T_0/3$ (E)</td><td>0</td></tr>
+        <tr><td>EF</td><td>$T_0/3L$</td><td>de $T_0/3$ (E) a 0 (F)</td><td>$2T_0/3$</td></tr>
+        <tr><td>FC</td><td>$T_0/3L$</td><td>de 0 (C) a $T_0/3$ (F)</td><td>0</td></tr>
+        <tr><td>FD</td><td>0</td><td>0</td><td>$T_0$</td></tr>
+      </tbody></table></div>
+      <p>Torção ao longo de AD, vindo de D: $T_0$ em FD; em F, o braço FC tira $V_C\cdot L = T_0/3$ (o fletor de FC no engaste com AD), sobra $2T_0/3$ em EF; em E, o braço EB tira $|V_B|\cdot L = 2T_0/3$, sobra <strong>0</strong> em AE, como tem de ser, porque o anel em A não segura torque. Essa conferência de "torque que chega a zero no anel" pega erro de sinal na hora. (Tudo conferido por $\vec r\times\vec F$ em <code>calc_ap3_detalhado.py</code>.)</p></div>
+
+    <div class="step" data-n="7"><h4>b) As três energias</h4>
+      <div class="math-box">$$U_V^* = \frac{f_c}{2GA}\left[3\left(\frac{T_0}{3L}\right)^2L + \left(\frac{2T_0}{3L}\right)^2L\right] = \frac{7}{18}\frac{f_cT_0^2}{GAL}$$
+      $$U_M^* = \frac{1}{2EI}\left[3\cdot\frac{(T_0/3)^2L}{3} + \frac{(2T_0/3)^2L}{3}\right] = \frac{7}{54}\frac{T_0^2L}{EI}\qquad U_T^* = \frac{1}{2GI_P}\left[T_0^2L + \left(\frac{2T_0}3\right)^2L\right] = \frac{13}{18}\frac{T_0^2L}{GI_P}$$</div>
+      <p>Cada triângulo de momento com pico $M$ e comprimento $L$ contribui $M^2L/3$ para $\int M^2$.</p></div>
+
+    <div class="step" data-n="8"><h4>c) Giro de D pelo P.T.E.</h4>
+      <div class="math-box">$$\frac{T_0\theta_D}{2} = U_V^* + U_M^* + U_T^*\ \Rightarrow\ \theta_D = \left(\frac79\frac{f_c}{GAL} + \frac{7}{27}\frac{L}{EI} + \frac{13}{9}\frac{L}{GI_P}\right)T_0$$</div></div>
+
+    <div class="step" data-n="9"><h4>Quanto pesa cada parcela</h4>
+      <p>Seção circular cheia ($f_c = 10/9$, $I_P = 2I$), $\nu = 0{,}3$ e barras com $R/L = 0{,}05$: relativas à torção, a flexão vale 14% e a cortante <strong>0,07%</strong>. É o número por trás da regra de desprezar a cortante em barras esbeltas.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $V_A = V_C = T_0/3L$ ↑, $V_B = 2T_0/3L$ ↓, horizontais nulas; diagramas na tabela; (b) $U_V^* = \frac{7}{18}\frac{f_cT_0^2}{GAL}$, $U_M^* = \frac{7}{54}\frac{T_0^2L}{EI}$, $U_T^* = \frac{13}{18}\frac{T_0^2L}{GI_P}$; (c) $\theta_D = \left(\frac79\frac{f_c}{GAL} + \frac{7}{27}\frac{L}{EI} + \frac{13}{9}\frac{L}{GI_P}\right)T_0$. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Dar torque ao trecho AE: o anel em A não segura momento, a torção ali é zero.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que EB e FC saem para lados opostos ($-z$ e $+z$): o sinal de $V_B$ e $V_C$ depende disso.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex8">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 8 (p.62) · bloco D · ver Pivô 9</div>
-      <h3 id="pa-ex8-h" data-nav="Prova ex.8 · rotação dos dois lados da rótula">Rótula em B: rotação à esquerda e à direita</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 8 (p.62) · bloco D · ver <a href="../topicos/12-teoremas-de-castigliano.html#s15-ex3-h">A15 ex.3</a></div>
+      <h3 id="pa-ex8-h" data-nav="Prova ex.8 · rotação dos dois lados da rótula">Rótula em B: a rotação de cada lado</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">C1</span><span class="chip">C2</span><span class="chip">W4</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.62)</span>
       A estrutura da figura é formada por duas barras iguais, AB e BC, de comprimento L e rigidez flexional EI. A barra AB está engastada em A e articulada em B. A barra BC, por sua vez, está articulada em B e simplesmente apoiada em C. Há uma força vertical P aplicada na articulação B, conforme a figura. Pede-se: a) calcular a rotação da extremidade B da barra AB; b) calcular a rotação da extremidade B da barra BC.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 8):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 63 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> BC é biarticulada sem carga no meio ⇒ só poderia ter força normal, e o apoio simples em C a anula: <strong>BC não tem esforço</strong> e gira como corpo rígido. AB é um balanço com $P$ na ponta.</p>
-    <div class="math-box">$$\theta_B^- = \left(\frac{\partial U^*}{\partial\bar M}\right)_0 = \frac1{EI}\int_0^LPx\,dx = \frac{PL^2}{2EI}\qquad y_B = \frac{\partial U^*}{\partial P} = \frac{PL^3}{3EI}\ \Rightarrow\ \theta_B^+ = \frac{y_B}{L} = \frac{PL^2}{3EI}$$</div>
-    <div class="answer"><strong>Respostas:</strong> (a) $\frac{PL^2}{2EI}$ (horário); (b) $\frac{PL^2}{3EI}$ (anti-horário). <span class="badge badge-ok">bate com a apostila</span> Na rótula a rotação é descontínua: cada lado tem a sua.</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Peças: (1) o que a rótula faz com o grau de hiperestaticidade e por que BC fica <strong>sem esforço</strong>; (2) por que numa rótula há duas rotações; (3) rotação sem binário aplicado: <strong>binário fictício</strong> (Crotti-Engesser); (4) barra sem esforço gira como corpo rígido, e a rotação dela sai da geometria.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Rótula, contagem e a barra BC</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a>. Reações: engaste A (3) + apoio C (1) = 4. Equações: 3 globais + 1 da rótula ($M_B = 0$) = 4: <strong>isostática</strong>. A barra BC só recebe forças nas pontas (a carga $P$ está no pino, que se pode atribuir a AB) e não tem carga no meio: é uma barra de dois esforços, a força nela seria axial (horizontal). O apoio C só dá força vertical ⇒ essa força é zero. <strong>BC não tem esforço</strong>: não se deforma e não guarda energia.</p></div>
+
+    <div class="step" data-n="2"><h4>Duas rotações em B</h4>
+      <p>A rótula transmite força mas não momento, e deixa as barras girarem independentemente. O deslocamento vertical de B é um só (as barras continuam ligadas), mas a inclinação de AB em B ($\theta_B^-$) e a de BC em B ($\theta_B^+$) são diferentes. O mesmo acontece no exercício em grupo #06 (<a href="../topicos/13-hiperestaticas-energia.html#a6-h">ficha 13 (Hiperestáticas e linha elástica)</a>), onde a rótula tem mola.</p></div>
+
+    <div class="step" data-n="3"><h4>Rotação sem binário: carga fictícia</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>. Para a rotação de uma seção onde não há binário, aplique um binário fictício $\bar M$ ali, escreva $M(x)$ com ele, derive e só então anule: $\theta = \left(\partial U^*/\partial\bar M\right)_{\bar M = 0}$. O binário fictício tem de agir na barra cuja rotação se quer: aqui, na face de AB.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Barras elástico-lineares, esbeltas (só flexão); rótula ideal sem atrito; apoio C sem atrito.</li>
+          <li>Linearidade geométrica: rotações pequenas, $\tan\theta\approx\theta$.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>a) Rotação de AB em B</h4>
+      <p>AB é um balanço com $P$ na ponta. Com $x$ a partir de B e o binário fictício $\bar M$ (horário) em B, momento negativo tracionando em cima:</p>
+      <div class="math-box">$$M(x) = -(\bar M + Px)\qquad \frac{\partial M}{\partial\bar M} = -1\qquad \theta_B^- = \frac{1}{EI}\int_0^L Px\,dx = \frac{PL^2}{2EI}$$</div>
+      <p>Positivo ⇒ no sentido de $\bar M$: <strong>horário</strong> (a ponta do balanço se inclina para baixo à direita).</p></div>
+
+    <div class="step" data-n="5"><h4>b) Rotação de BC em B</h4>
+      <p>BC é corpo rígido: B desce $y_B$ e C fica parado. Então BC gira $\theta_B^+ = y_B/L$. A flecha de B sai por Crotti-Engesser com a própria $P$:</p>
+      <div class="math-box">$$M = -Px,\quad \frac{\partial M}{\partial P} = -x\qquad y_B = \frac{1}{EI}\int_0^LPx^2\,dx = \frac{PL^3}{3EI}\qquad \theta_B^+ = \frac{y_B}{L} = \frac{PL^2}{3EI}$$</div>
+      <p>Sentido: B (ponta esquerda de BC) desce e C não ⇒ <strong>anti-horário</strong>.</p></div>
+
+    <div class="step" data-n="6"><h4>Leitura do resultado</h4>
+      <p>As duas barras giram em sentidos opostos: a rótula "abre" um ângulo $\frac{PL^2}{2EI} + \frac{PL^2}{3EI} = \frac{5PL^2}{6EI}$. Com ligação rígida em B, esse salto seria zero e a estrutura seria hiperestática ($g = 1$).</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $\theta_B^- = \dfrac{PL^2}{2EI}$ (horário); (b) $\theta_B^+ = \dfrac{PL^2}{3EI}$ (anti-horário). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Pôr esforço em BC: o apoio simples em C mata a única força que ela poderia ter.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Dar uma rotação só para B: numa rótula, pergunte sempre "de qual barra?".</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex9">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 9 (p.64) · bloco D · ver Pivô 8</div>
-      <h3 id="pa-ex9-h" data-nav="Prova ex.9 · treliça, δ horizontal">Treliça: deslocamento vertical e horizontal do nó carregado</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 9 (p.64) · bloco D · ver <a href="../topicos/12-teoremas-de-castigliano.html#s15-ex1-h">A15 ex.1</a></div>
+      <h3 id="pa-ex9-h" data-nav="Prova ex.9 · treliça, δ horizontal">Treliça: deslocamento vertical pelo P.T.E. e horizontal por força fictícia</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">W5</span><span class="chip">W2</span><span class="chip">C1</span><span class="chip">C2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.64)</span>
-      A treliça da figura é formada por barras com rigidez axial EA e com rigidez flexional EI dadas e está contida em um plano vertical. Sabendo que ela está submetida a uma força P aplicada ao seu nó A, pede-se: a) determinar as forças que atuam em cada barra; b) calcular a energia complementar armazenada na treliça; c) determinar o deslocamento vertical do nó A; d) determinar o deslocamento horizontal do nó A.</div>
+      A treliça da figura é formada por barras com rigidez axial EA e com rigidez flexional EI dadas e está contida em um plano vertical. Sabendo que ela está submetida a uma força P aplicada ao seu nó A, pede-se: a) determinar as forças que atuam em cada barra; b) calcular a energia complementar armazenada na treliça; c) determinar o deslocamento vertical do nó A; d) determinar o deslocamento horizontal do nó A.
+      <br><em>Figura: A embaixo à esquerda; B embaixo à direita, a $2L$ de A, articulado na parede; C acima, a $L$ de A na horizontal e a altura $L$; D articulado na parede acima de B; barras AB, AC, BC e CD ($= L$).</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 9):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 65 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> nós: $F_{AC} = \sqrt2P$, $F_{AB} = -P$, $F_{BC} = -\sqrt2P$, $F_{CD} = 2P$. (O $EI$ dado é distrator: barras de treliça só têm $N$.)</p>
-    <div class="math-box">$$U^* = \frac{1}{2EA}\left[P^2(2L) + 2P^2(\sqrt2L) + 2P^2(\sqrt2L) + 4P^2L\right] = \frac{P^2L}{EA}(3 + 2\sqrt2)\qquad\delta_V = \frac{2PL}{EA}(3 + 2\sqrt2)$$
-    $$\text{Força fictícia } H \to \text{ em A: só muda } N_{AB} = -(P + H)\ \Rightarrow\ \delta_H = \left(\frac{\partial U^*}{\partial H}\right)_0 = \frac{2PL}{EA}$$</div>
-    <div class="answer"><strong>Respostas:</strong> (c) $\delta_V \approx 11{,}66\,PL/EA$ ↓; (d) $\delta_H = 2PL/EA$ (→, AB comprimida encurta). <span class="badge badge-ok">bate com a apostila</span></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Dois itens com a mesma energia: (c) é o caso do P.T.E. (deslocamento sob a única carga, na direção dela); (d) não é (não há força horizontal), então entra a <strong>força fictícia</strong>. Peças: método dos nós, $U^*$ de treliça, P.T.E., Crotti-Engesser com carga fictícia, e uma conferência por compatibilidade que resolve (d) em uma linha.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Isostática e só força normal</h4>
+      <p>Revisão: <a href="../base.html#isostatica">Base</a> e <a href="../base.html#equilibrio">Base</a>. $n = 4$ nós, $b = 4$ barras, $r = 4$ reações (dois pinos): $2n = 8 = b + r$ ✓. Barras de treliça só têm $N$: o $EI$ dado no enunciado é <strong>distrator</strong>.</p></div>
+
+    <div class="step" data-n="2"><h4>Força fictícia para deslocamento sem carga</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>. Aplique $H$ horizontal em A, recalcule os $N_i$ em função de $P$ e $H$, e use $\delta_H = \left(\sum\frac{N_iL_i}{EA}\frac{\partial N_i}{\partial H}\right)_{H=0}$. Só as barras cujo $N$ depende de $H$ contribuem.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Nós articulados sem atrito; carga só no nó A; peso próprio desprezado.</li>
+          <li>Mesmo $EA$ em todas; elástico-linear; linearidade geométrica; barras comprimidas não flambam.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>a) Método dos nós, já com $H$</h4>
+      <p>Convenção: $N$ de tração saindo do nó. Diagonais a 45°.</p>
+      <ul><li><strong>Nó A</strong> (barras AC e AB; $P$ ↓, $H$ →): vertical, $N_{AC}\frac{\sqrt2}{2} - P = 0$ ⇒ $N_{AC} = \sqrt2P$; horizontal, $N_{AB} + N_{AC}\frac{\sqrt2}{2} + H = 0$ ⇒ $N_{AB} = -(P + H)$.</li>
+          <li><strong>Nó C</strong> (barras CA, CB, CD): vertical, $-N_{AC}\frac{\sqrt2}{2} - N_{BC}\frac{\sqrt2}{2} = 0$ ⇒ $N_{BC} = -\sqrt2P$; horizontal, $-N_{AC}\frac{\sqrt2}{2} + N_{BC}\frac{\sqrt2}{2} + N_{CD} = 0$ ⇒ $N_{CD} = 2P$.</li></ul>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barra</th><th>$N$ ($H = 0$)</th><th>$L_i$</th><th>$N^2L_i$</th><th>$\partial N/\partial H$</th></tr></thead><tbody>
+        <tr><td>AB</td><td>$-P$</td><td>$2L$</td><td>$2P^2L$</td><td>$-1$</td></tr>
+        <tr><td>AC</td><td>$\sqrt2P$</td><td>$\sqrt2L$</td><td>$2\sqrt2P^2L$</td><td>0</td></tr>
+        <tr><td>BC</td><td>$-\sqrt2P$</td><td>$\sqrt2L$</td><td>$2\sqrt2P^2L$</td><td>0</td></tr>
+        <tr><td>CD</td><td>$2P$</td><td>$L$</td><td>$4P^2L$</td><td>0</td></tr>
+        <tr class="hit"><td colspan="3"><strong>Soma</strong></td><td>$(6 + 4\sqrt2)P^2L$</td><td></td></tr>
+      </tbody></table></div></div>
+
+    <div class="step" data-n="4"><h4>b) Energia e c) deslocamento vertical</h4>
+      <div class="math-box">$$U^* = \frac{(6 + 4\sqrt2)P^2L}{2EA} = (3 + 2\sqrt2)\frac{P^2L}{EA}\qquad \frac{P\delta_V}{2} = U^*\ \Rightarrow\ \delta_V = 2(3 + 2\sqrt2)\frac{PL}{EA}\approx 11{,}66\,\frac{PL}{EA}$$</div></div>
+
+    <div class="step" data-n="5"><h4>d) Deslocamento horizontal</h4>
+      <div class="math-box">$$\delta_H = \frac{N_{AB}L_{AB}}{EA}\frac{\partial N_{AB}}{\partial H}\bigg|_{H=0} = \frac{(-P)(2L)}{EA}(-1) = \frac{2PL}{EA}\ (\text{no sentido de }H\text{, para a direita})$$</div>
+      <p><strong>Conferência por compatibilidade:</strong> B é fixo e AB é horizontal; o deslocamento horizontal de A é exatamente o encurtamento de AB, $|N_{AB}|\cdot2L/EA = 2PL/EA$, aproximando A de B (para a direita) ✓.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $N_{AC} = \sqrt2P$, $N_{AB} = -P$, $N_{BC} = -\sqrt2P$, $N_{CD} = 2P$; (b) $U^* = (3 + 2\sqrt2)P^2L/EA$; (c) $\delta_V = 2(3 + 2\sqrt2)PL/EA \approx 11{,}66\,PL/EA$ ↓; (d) $\delta_H = 2PL/EA$ →. <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o P.T.E. para $\delta_H$: não há força horizontal, o trabalho não "vê" esse deslocamento.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Incluir energia de flexão por causa do $EI$ dado.</li></ul></div>
   </article>
 
   <article class="ex" id="pa-ex11">
-    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 11 (p.69) · bloco D · ver Pivô 9</div>
-      <h3 id="pa-ex11-h" data-nav="Prova ex.11 · viga com balanço">Viga biapoiada com balanço: deflexão e rotação na ponta</h3></div></div>
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 03 · Exercício 11 (p.69) · bloco D · ver <a href="../topicos/12-teoremas-de-castigliano.html#s15-ex3-h">A15 ex.3</a></div>
+      <h3 id="pa-ex11-h" data-nav="Prova ex.11 · viga com balanço">Viga biapoiada com balanço: deflexão e rotação na ponta, com a carga do vão puxando para o outro lado</h3></div>
+      <div class="ex-badges"><span class="badge badge-warn">prova antiga</span></div></div>
     <div class="ex-topics"><span class="chip">C1</span><span class="chip">C2</span><span class="chip">W4</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Apostila 03, p.69)</span>
-      A viga da figura tem rigidez flexional EI e suporta um carregamento distribuído uniforme de intensidade q na extensão AB e uma força concentrada P na extremidade C do trecho em balanço. Determine a deflexão vertical e o ângulo de rotação no ponto C.</div>
+      A viga da figura tem rigidez flexional EI e suporta um carregamento distribuído uniforme de intensidade q na extensão AB e uma força concentrada P na extremidade C do trecho em balanço. Determine a deflexão vertical e o ângulo de rotação no ponto C.
+      <br><em>Figura: pino em A, rolete em B, vão AB = $L$ com $q$; balanço BC = $L/2$ com $P$ para baixo em C.</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (PA · ex. 11):</strong> ver o PDF oficial, Apostila 03 (questões de prova), p. 69 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> $AB = L$ com $q$, balanço $BC = L/2$ com $P$. Reação $R_A = \frac{qL}{2} - \frac P2$ (e, com o binário fictício $M_C$ horário em C, $-\frac{M_C}{L}$). $x_1$ a partir de A, $x_2$ a partir de C:</p>
-    <div class="math-box">$$M_{AB} = \frac{qLx_1}{2} - \frac{Px_1}{2} - \frac{qx_1^2}{2} - \frac{M_Cx_1}{L}\qquad M_{BC} = -Px_2 - M_C$$
-    $$\delta_C = \frac{PL^3}{8EI} - \frac{qL^4}{48EI}\qquad \theta_C = \frac{7PL^2}{24EI} - \frac{qL^3}{24EI}$$</div>
-    <div class="answer"><strong>Respostas:</strong> como acima (positivo = sentido de $P$ / horário). <span class="badge badge-ok">bate com a apostila</span> O $q$ no vão levanta a ponta do balanço (sinal −): leitura física que vale ponto.</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Duas cargas reais e duas perguntas. A deflexão em C é o deslocamento correspondente a $P$: Crotti-Engesser direto ($\partial U^*/\partial P$, sem fictícia). A rotação precisa de um <strong>binário fictício</strong>, e aqui há uma sutileza: o binário fictício <strong>muda as reações</strong>, então ele aparece também no trecho AB. Peças: reações de viga com balanço, $M(x)$ por trechos, Crotti-Engesser, leitura física do sinal.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Por que só $\partial/\partial P$ na deflexão</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>. Crotti-Engesser dá o deslocamento correspondente a cada carga <em>independente</em>: $\delta_C = \partial U^*/\partial P$ é o deslocamento vertical de C, com $q$ e $P$ agindo. Não se pode usar o P.T.E.: há duas cargas (e uma é distribuída).</p></div>
+
+    <div class="step" data-n="2"><h4>A fictícia entra nas reações</h4>
+      <p>Revisão: <a href="../topicos/12-teoremas-de-castigliano.html#t12-fict">ficha 12 (Crotti-Engesser e Castigliano)</a>. Numa viga biapoiada, um binário aplicado em C desequilibra os momentos em B e é absorvido por um <strong>binário de reações</strong> ($R_A$ e $R_B$ mudam $\pm\bar M/L$). Por isso $\partial M/\partial\bar M \neq 0$ no vão AB, e esquecer isso dá a rotação errada. No balanço em si, isso não acontece porque a coordenada parte da ponta livre.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Viga esbelta, elástico-linear, $EI$ constante; cortante desprezada; apoios rígidos.</li>
+          <li>Linearidade geométrica. Convenção: $M$ positivo tracionando embaixo; $\delta_C$ positivo para baixo (sentido de $P$), $\theta_C$ positivo horário (sentido do $\bar M$ adotado).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Reações e momentos</h4>
+      <p>Momentos em B (com o binário fictício $M_C$ horário em C): $R_A L - qL\cdot\frac L2 + P\frac L2 + M_C = 0$ ⇒ $R_A = \frac{qL}{2} - \frac P2 - \frac{M_C}{L}$. Com $x_1$ de A para B e $x_2$ de C para B:</p>
+      <div class="math-box">$$M_{AB} = \left(\frac{qL}{2} - \frac P2 - \frac{M_C}{L}\right)x_1 - \frac{qx_1^2}{2}\qquad M_{BC} = -Px_2 - M_C$$
+      $$\frac{\partial M_{AB}}{\partial P} = -\frac{x_1}{2},\ \frac{\partial M_{BC}}{\partial P} = -x_2\qquad \frac{\partial M_{AB}}{\partial M_C} = -\frac{x_1}{L},\ \frac{\partial M_{BC}}{\partial M_C} = -1$$</div></div>
+
+    <div class="step" data-n="4"><h4>Deflexão em C</h4>
+      <div class="math-box">$$\delta_C = \frac1{EI}\int_0^L\left(\frac{qLx_1}{2} - \frac{Px_1}{2} - \frac{qx_1^2}{2}\right)\left(-\frac{x_1}{2}\right)dx_1 + \frac1{EI}\int_0^{L/2}Px_2^2\,dx_2$$
+      $$= \frac1{EI}\left(-\frac{qL^4}{48} + \frac{PL^3}{12}\right) + \frac{PL^3}{24EI} = \frac{PL^3}{8EI} - \frac{qL^4}{48EI}$$</div></div>
+
+    <div class="step" data-n="5"><h4>Rotação em C ($M_C = 0$ depois de derivar)</h4>
+      <div class="math-box">$$\theta_C = \frac1{EI}\int_0^L\left(\frac{qLx_1}{2} - \frac{Px_1}{2} - \frac{qx_1^2}{2}\right)\left(-\frac{x_1}{L}\right)dx_1 + \frac1{EI}\int_0^{L/2}Px_2\,dx_2 = \left(\frac{PL^2}{6} - \frac{qL^3}{24}\right)\frac1{EI} + \frac{PL^2}{8EI} = \frac{7PL^2}{24EI} - \frac{qL^3}{24EI}$$</div></div>
+
+    <div class="step" data-n="6"><h4>Leitura física dos sinais</h4>
+      <p>$P$ empurra a ponta para baixo; $q$ no vão faz o vão "embarrigar" para baixo, o que gira a seção B no sentido anti-horário e <strong>levanta</strong> o balanço (que é rígido em relação a B). Por isso os termos em $q$ entram com sinal negativo. Há um equilíbrio entre os dois: a ponta não desce quando $qL = 6P$, e não gira quando $qL = 7P$ (conferido em <code>calc_ap3_detalhado.py</code>).</p>
+      <div class="answer"><strong>Respostas:</strong> $\delta_C = \dfrac{PL^3}{8EI} - \dfrac{qL^4}{48EI}$ (positivo para baixo); $\theta_C = \dfrac{7PL^2}{24EI} - \dfrac{qL^3}{24EI}$ (positivo horário). <span class="badge badge-ok">bate com a apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o $-M_C/L$ em $R_A$: perde-se a parcela $\frac{PL^2}{6} - \frac{qL^3}{24}$ do vão.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> "Corrigir" o sinal negativo do termo em $q$: ele é físico.</li></ul></div>
   </article>
 
   <h3 class="sub" id="pa-p3" data-nav="Provas · questões da P3">Questões 14 a 22: ficam para a P3 (simetria)</h3>

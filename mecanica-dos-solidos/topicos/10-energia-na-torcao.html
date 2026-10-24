@@ -388,61 +388,145 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       3.9-5. Uma barra engastada de seção transversal circular e comprimento $L$ está fixa numa extremidade e livre na outra. A barra está carregada por um torque $T$ na extremidade livre e por um torque distribuído (por unidade de comprimento) de intensidade $t$, constante, ao longo do comprimento da barra. Pede-se:
       <ol type="a"><li>Determinar a energia complementar $U_1^*$ da barra quando o torque $T$ age sozinho;</li>
       <li>Determinar a energia complementar $U_2^*$ da barra quando o torque $t$ age sozinho;</li>
-      <li>Determinar a energia complementar $U_3^*$ quando os dois torques agem simultaneamente na barra.</li></ol></div>
+      <li>Determinar a energia complementar $U_3^*$ quando os dois torques agem simultaneamente na barra.</li></ol>
+      <em>Figura: $t$ gira no mesmo sentido de $T$ (leitura das setas; é o caso do Gere).</em></div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 6):</strong> ver o PDF oficial, Lista 5, p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Torção de seção circular, isostática, torque interno variável ao longo do eixo. É o "ex. 1" da torção: mesma estrutura de raciocínio, com $N\to T$, $EA\to GI_p$.</p>
-      <div class="callout concept"><span class="co-t">Conceito: a analogia tração ↔ torção (aula 13)</span>
-        <p>A aula 13 repete a aula 12 trocando $P\to T$, $\delta\to\phi$, $\sigma\to\tau$, $\varepsilon\to\gamma$, $E\to G$, $A\to I_p$. Com $\tau = \frac{T(x)}{I_p(x)}\rho$ e $u^* = \frac{\tau^2}{2G}$, a integral de $\rho^2$ na seção é exatamente $I_p$:</p>
-        <div class="math-box">$$U^* = \int_0^L \frac{T(x)^2}{2\,G\,I_p(x)}\,dx\qquad\text{(aula 13 p.14)}$$</div>
-        <p>Para seção circular cheia $I_p = \pi d^4/32$; para tubo circular $I_p = \pi(d_e^4 - d_i^4)/32$.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Onde</th></tr></thead><tbody>
-      <tr><td>Comprimento, rigidez à torção</td><td>$L$, $GI_p$ (constantes)</td><td>enunciado</td></tr>
-      <tr><td>Torque na ponta</td><td>$T$</td><td>figura</td></tr>
-      <tr><td>Torque distribuído</td><td>$t$ [N·mm/mm], constante, <strong>mesmo sentido de $T$</strong></td><td>figura (leitura das setas; é o caso do Gere)</td></tr>
-    </tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$U_1^*, U_2^*, U_3^*$ e o termo cruzado.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 13 p.14</span> $U^* = \int_0^L \frac{T(x)^2}{2GI_p}dx$.</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos</h4><p>Com $x$ medido a partir do engaste e corte olhando para a parte livre (de $x$ até $L$): o torque interno equilibra $T$ mais o distribuído no trecho de comprimento $L-x$:</p>
-      <div class="math-box">$$T(x) = T + t\,(L - x)$$</div>
-      <p>Máximo no engaste ($T + tL$), igual a $T$ na ponta.</p></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$U_1^* = \int_0^L \frac{T^2}{2GI_p}dx = \frac{T^2L}{2GI_p}\qquad U_2^* = \int_0^L\frac{t^2(L-x)^2}{2GI_p}dx = \frac{t^2L^3}{6GI_p}$$
-      $$U_3^* = \int_0^L\frac{[T + t(L-x)]^2}{2GI_p}dx = \frac{T^2L}{2GI_p} + \frac{T\,t\,L^2}{2GI_p} + \frac{t^2L^3}{6GI_p}$$</div>
-      <p>De novo $U_3^* \ne U_1^* + U_2^*$: o termo cruzado é $\frac{TtL^2}{2GI_p}$.</p>
-      <p><strong>Bônus (antecipando a aula 15):</strong> a rotação da ponta é $\phi_{ponta} = \frac{\partial U_3^*}{\partial T} = \frac{TL}{GI_p} + \frac{tL^2}{2GI_p}$. O primeiro termo é o clássico $TL/GI_p$; o segundo equivale a colocar o torque distribuído total $tL$ no meio do vão.</p></div>
-    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Respostas:</strong> $U_1^* = T^2L/2GI_p$; $U_2^* = t^2L^3/6GI_p$; $U_3^* = T^2L/2GI_p + TtL^2/2GI_p + t^2L^3/6GI_p$. <span class="badge badge-ok">bate com o Gere (3.9-5 c)</span></div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Se $t$ girasse no sentido oposto a $T$, o termo cruzado trocaria de sinal ($T(x) = T - t(L-x)$). Leia o sentido das setas.</li>
-      <li><span class="tag tag-mem">⚠ armadilha</span> Unidade de $t$: momento por comprimento (N·mm/mm). Confira: $[t^2L^3/GI_p] = \text{N}^2\text{mm}^3/(\text{N·mm}^2) = $ N·mm ✓.</li></ul></div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>É o <a href="09-trabalho-e-energia.html#l5-ex1-h">ficha 09 (Trabalho, energia e P.T.E.)</a> traduzido para torção, com uma novidade: o esforço interno <strong>varia ao longo do eixo</strong> por causa do torque distribuído, então a energia vira integral de verdade. Peças: (1) torque interno $T(x)$ por corte, como se faz com a cortante sob carga distribuída; (2) $U^* = \int T^2/2GI_p\,dx$ a partir de $u^* = \tau^2/2G$; (3) o termo cruzado de novo.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Torque interno com torque distribuído</h4>
+      <p>Revisão: <a href="../base.html#torcao">Base</a> e <a href="01-esforcos-solicitantes.html#t01-corte">ficha 01 (Esforços solicitantes)</a>. Corte em $x$ (medido a partir do engaste) e olhe para a parte livre, de $x$ até $L$. Ela recebe $T$ na ponta e o distribuído $t$ ao longo de $L - x$, total $t(L-x)$. O torque interno equilibra os dois:</p>
+      <div class="math-box">$$T(x) = T + t\,(L - x)\qquad \frac{dT}{dx} = -t$$</div>
+      <p>A segunda forma é a mesma relação $dV/dx = -q$ da viga (<a href="../base.html#diagramas">Base</a>): torque distribuído está para o torque interno como carga distribuída está para a cortante. O diagrama é uma reta: $T$ na ponta, $T + tL$ no engaste.</p></div>
+
+    <div class="step" data-n="2"><h4>Energia complementar na torção</h4>
+      <p>Revisão: <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>. Cisalhamento puro: $u^* = \tau^2/2G$. Em seção circular $\tau = T\rho/I_p$, e $\iint\rho^2\,dA = I_p$:</p>
+      <div class="math-box">$$U^* = \int_0^L\!\!\iint_A\frac{T^2\rho^2}{2GI_p^2}\,dA\,dx = \int_0^L\frac{T(x)^2}{2GI_p}\,dx$$</div>
+      <p>Dicionário com a tração: $N \to T$, $EA \to GI_p$, $\delta \to \phi$. Como $T(x)$ varia, a integral não vira produto.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Seção <strong>circular</strong> (cheia ou vazada) e constante: seções planas giram como discos, $\tau = T\rho/I_p$.</li>
+          <li>Material elástico-linear; rotações pequenas; cargas quase-estáticas.</li>
+          <li>Sentido de $t$ igual ao de $T$ (se fosse oposto, troca o sinal do termo cruzado).</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>a) e b) Cada carga sozinha</h4>
+      <div class="math-box">$$U_1^* = \int_0^L\frac{T^2}{2GI_p}dx = \frac{T^2L}{2GI_p}\qquad U_2^* = \int_0^L\frac{t^2(L-x)^2}{2GI_p}dx = \frac{t^2}{2GI_p}\cdot\frac{L^3}{3} = \frac{t^2L^3}{6GI_p}$$</div>
+      <p>Na segunda, a substituição $u = L - x$ deixa a integral como $\int_0^Lu^2\,du = L^3/3$.</p></div>
+
+    <div class="step" data-n="4"><h4>c) As duas juntas</h4>
+      <div class="math-box">$$U_3^* = \int_0^L\frac{[T + t(L-x)]^2}{2GI_p}dx = \frac{1}{2GI_p}\left[T^2L + 2Tt\frac{L^2}{2} + t^2\frac{L^3}{3}\right] = \frac{T^2L}{2GI_p} + \frac{TtL^2}{2GI_p} + \frac{t^2L^3}{6GI_p}$$</div>
+      <p>De novo $U_3^* \neq U_1^* + U_2^*$: o termo cruzado é $\dfrac{TtL^2}{2GI_p}$, pela mesma razão do <a href="09-trabalho-e-energia.html#t09-super">ficha 09 (Trabalho, energia e P.T.E.)</a>.</p></div>
+
+    <div class="step" data-n="5"><h4>Extensão: rotação da ponta (o P.T.E. não alcança, Crotti-Engesser sim)</h4>
+      <p>Com $T$ sozinho, $T\phi/2 = U_1^*$ dá $\phi = TL/GI_p$. Com $t$ sozinho, o trabalho é $\int t\,\phi(x)\,dx/2$, que envolve a rotação de <em>todas</em> as seções: o P.T.E. não dá a rotação da ponta. Pela aula 15 (<a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>), basta derivar em relação ao torque da ponta:</p>
+      <div class="math-box">$$\phi_{ponta} = \frac{\partial U_3^*}{\partial T} = \frac{TL}{GI_p} + \frac{tL^2}{2GI_p}$$</div>
+      <p>Conferência por integração direta da taxa de torção (<a href="../base.html#torcao">Base</a>): $\phi = \int_0^L\frac{T(x)}{GI_p}dx = \frac{TL + tL^2/2}{GI_p}$ ✓. Leitura: o distribuído total $tL$ gira a ponta como se estivesse concentrado no meio do eixo.</p>
+      <div class="answer"><strong>Respostas:</strong> (a) $U_1^* = \dfrac{T^2L}{2GI_p}$; (b) $U_2^* = \dfrac{t^2L^3}{6GI_p}$; (c) $U_3^* = \dfrac{T^2L}{2GI_p} + \dfrac{TtL^2}{2GI_p} + \dfrac{t^2L^3}{6GI_p}$. Extensão: $\phi_{ponta} = \dfrac{L(2T + tL)}{2GI_p}$. <span class="badge badge-ok">bate com o Gere (3.9-5)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Com $t$ no sentido oposto, $T(x) = T - t(L-x)$ e o termo cruzado fica <strong>negativo</strong>. Leia as setas.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Medir $x$ a partir da ponta livre e esquecer de trocar $L - x$ por $x$: o resultado é o mesmo, mas a expressão de $T(x)$ muda. Escolha uma e mantenha.</li>
+          <li>Unidade de $t$: N·mm/mm. $[t^2L^3/GI_p] = \text{N}^2\text{mm}^3/(\text{N·mm}^2) = \text{N·mm}$ ✓.</li></ul></div>
   </article>
 <h3 class="sub" id="t10-demais" data-nav="Demais exercícios">Demais exercícios</h3>
 <article class="ex" id="l5-ex7">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 7 (Gere 3.10-11) · ver <a href="10-energia-na-torcao.html#l5-ex6-h">L5 ex.6</a></div>
-      <h3 id="l5-ex7-h" data-nav="L5 ex.7 · tubo quadrado">Tubo quadrado de parede fina: espessura mínima</h3></div></div>
+      <h3 id="l5-ex7-h" data-nav="L5 ex.7 · tubo quadrado">Tubo quadrado de parede fina: espessura mínima por tensão e por rigidez</h3></div></div>
     <div class="ex-topics"><span class="chip">W3</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.4)</span>
       3.10-11. Uma barra tubular de alumínio ($G = 28$ GPa) de seção transversal quadrada, com dimensões externas 50 mm × 50 mm, deve resistir a um torque $T = 300$ N.m. Calcule a espessura de parede mínima requerida ($t_{mín}$) se a tensão de cisalhamento admissível for 20 MPa e a taxa de torção admissível for 0,025 rad/m.</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 7):</strong> ver o PDF oficial, Lista 5, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> tubo fechado unicelular de parede fina, espessura constante (hipóteses da aula 13 p.19). Linha média: quadrado de lado $b_m = 50 - t$, área encerrada $A_m = (50 - t)^2$, perímetro $L_m = 4(50 - t)$. Dois critérios; vale o que exigir a <em>maior</em> espessura.</p>
-    <div class="math-box">$$\tau = \frac{T}{2\,t\,A_m} \le 20\ \text{MPa}\ \Rightarrow\ t \ge 3{,}46\ \text{mm}\qquad \frac{d\phi}{dx} = \frac{T\,L_m}{4\,G\,A_m^2\,t} \le 0{,}025\ \text{rad/m} = 2{,}5\times10^{-5}\ \text{rad/mm}\ \Rightarrow\ t \ge 4{,}57\ \text{mm}$$</div>
-    <p>As duas fórmulas vêm da aula 13 (p.21–25). O equilíbrio de um elemento da parede dá <strong>fluxo de cisalhamento constante</strong> $f = \tau\,t$. O torque que esse fluxo produz é $T = 2fA_m$ (p.22), daí $\tau = T/(2A_m t)$. O ângulo sai do princípio do trabalho e energia: $\frac{T\phi}{2} = U^* = \frac{T^2L}{8GA_m^2}\oint\frac{ds}{t}$ ⇒ $\phi = \frac{TL}{4GA_m^2}\oint\frac{ds}{t}$ (p.25). Na forma do professor, $\phi = \frac{TL}{GI_t}$ com $I_t = \frac{4A_m^2}{\oint ds/t}$ (para $t$ constante, $I_t = 4A_m^2t/L_m$). <span class="tag tag-mem">⚠</span> "Não confundir $L$ com $L_m$, nem $A_m$ com $A$!!" (p.25).</p>
-    <div class="answer"><strong>Resposta:</strong> $t_{mín} = 4{,}57$ mm (governa a taxa de torção). <span class="badge badge-ok">bate com o Gere (3.10-11)</span></div>
-    <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar a dimensão externa (50 mm) em $A_m$: é a linha <strong>média</strong>, $50 - t$. Com 50 mm dá $t$ subestimado.</li>
-    <li><span class="tag tag-mem">⚠ armadilha</span> Taxa em rad/m com $T$ em N·mm: converta para rad/mm.</li></ul>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Seção quadrada: a fórmula $\tau = T\rho/I_p$ <strong>não vale</strong> (só serve para seção circular). O caminho é o tubo de parede fina da aula 13: (1) <strong>fluxo de cisalhamento</strong> $f = \tau t$ constante ao redor da parede; (2) $T = 2fA_m$ (fórmula de Bredt); (3) o ângulo pelo P.T.E., que dá $I_t$. Depois, um problema de dimensionamento com dois critérios: vale o mais exigente.</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Fluxo de cisalhamento constante</h4>
+      <p>Revisão: <a href="10-energia-na-torcao.html#t10-fino">ficha 10 (Energia na torção)</a>. Parede fina: $\tau$ é praticamente uniforme na espessura e tangente à linha média. Isole um pedaço da parede entre dois cortes longitudinais: o equilíbrio na direção do eixo obriga $\tau_1t_1 = \tau_2t_2$. Então o <strong>fluxo</strong> $f = \tau\,t$ é o mesmo em todo o contorno, e onde a parede é mais fina a tensão é maior. Aqui $t$ é constante, então $\tau$ também é.</p></div>
+
+    <div class="step" data-n="2"><h4>Torque e fluxo: $T = 2fA_m$</h4>
+      <p>A força num trecho $ds$ da parede é $f\,ds$, tangente à linha média. O momento dela em torno de um ponto O é $f\,ds\cdot r_\perp$, e $r_\perp ds$ é o dobro da área do triângulo com vértice em O. Somando o contorno, $T = f\oint r_\perp ds = 2fA_m$, com $A_m$ a área <strong>encerrada pela linha média</strong>. Logo:</p>
+      <div class="math-box">$$\tau = \frac{T}{2\,t\,A_m}$$</div></div>
+
+    <div class="step" data-n="3"><h4>Ângulo de torção pelo P.T.E.</h4>
+      <p>$u^* = \tau^2/2G$ no volume da parede (área $t\,ds$ por unidade de comprimento): $U^* = \oint\frac{(f/t)^2}{2G}t\,ds\cdot L = \frac{T^2L}{8GA_m^2}\oint\frac{ds}{t}$. Igualando a $T\phi/2$:</p>
+      <div class="math-box">$$\phi = \frac{TL}{4GA_m^2}\oint\frac{ds}{t} = \frac{TL}{GI_t},\qquad I_t = \frac{4A_m^2}{\oint ds/t}\ \overset{t\text{ const.}}{=}\ \frac{4A_m^2\,t}{L_m}$$</div>
+      <p>$L_m$ é o perímetro da linha média. Aviso do professor (aula 13 p.25): "não confundir $L$ com $L_m$, nem $A_m$ com $A$".</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Tubo <strong>fechado</strong>, unicelular, de parede fina ($t \ll$ dimensões da seção) e espessura constante.</li>
+          <li>Cantos arredondados desprezados: a linha média é um quadrado de lado $b_m = 50 - t$.</li>
+          <li>Elástico-linear; torção uniforme (empenamento livre); sem concentração de tensão nos cantos.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="4"><h4>Geometria da linha média</h4>
+      <p>Lado externo 50 mm, parede $t$: a linha média passa a $t/2$ da face externa, então $b_m = 50 - t$, $A_m = (50 - t)^2$, $L_m = 4(50 - t)$. Unidades: $T = 300\,000$ N·mm, $G = 28\,000$ MPa, taxa admissível $0{,}025$ rad/m $= 2{,}5\times10^{-5}$ rad/mm.</p></div>
+
+    <div class="step" data-n="5"><h4>Critério 1: tensão</h4>
+      <div class="math-box">$$\frac{T}{2tA_m} \le 20\ \Rightarrow\ (50 - t)^2\,t \ge \frac{300\,000}{2\cdot20} = 7500\ \text{mm}^3$$</div>
+      <p>Iteração de ponto fixo na calculadora, $t \leftarrow 7500/(50 - t)^2$, partindo de $t = 3$: 3,395 → 3,453 → 3,462 → 3,463. Então $t \ge 3{,}46$ mm.</p></div>
+
+    <div class="step" data-n="6"><h4>Critério 2: taxa de torção</h4>
+      <div class="math-box">$$\frac{\phi}{L} = \frac{T\,L_m}{4GA_m^2\,t} = \frac{T\cdot4(50-t)}{4G(50-t)^4\,t} = \frac{T}{G\,(50 - t)^3\,t} \le 2{,}5\times10^{-5}\ \Rightarrow\ (50 - t)^3\,t \ge \frac{300\,000}{28\,000\cdot2{,}5\times10^{-5}} = 428\,571\ \text{mm}^4$$</div>
+      <p>Iteração $t \leftarrow 428\,571/(50 - t)^3$, partindo de $t = 4$: 4,403 → 4,521 → 4,556 → 4,567 → 4,570 → 4,571. Então $t \ge 4{,}57$ mm.</p></div>
+
+    <div class="step" data-n="7"><h4>Decisão e verificação</h4>
+      <p>A espessura tem de satisfazer os dois: vale a maior, <strong>$t_{mín} = 4{,}57$ mm</strong>, e quem governa é a rigidez. Conferência com $t = 4{,}571$: $A_m = 2064$ mm², $\tau = 15{,}9$ MPa (folga em relação a 20) e taxa $= 0{,}0250$ rad/m (no limite) ✓. Parede fina? $t/b_m = 0{,}10$: no limite do razoável para a teoria.</p>
+      <div class="answer"><strong>Resposta:</strong> $t_{mín} = 4{,}57$ mm (governa a taxa de torção; pela tensão bastariam 3,46 mm). <span class="badge badge-ok">bate com o Gere (3.10-11)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar 50 mm em $A_m$: a área é a da linha <strong>média</strong>, $(50 - t)^2$.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Taxa em rad/m com $T$ em N·mm: converta para rad/mm antes.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Ficar só com o primeiro critério: em dimensionamento, sempre teste todos e fique com o mais exigente.</li></ul></div>
   </article>
 <article class="ex" id="l5-ex8">
     <div class="ex-head"><div><div class="ex-kicker">Lista 5 · Exercício 8 (Gere 3.10-13) · ver <a href="10-energia-na-torcao.html#l5-ex6-h">L5 ex.6</a></div>
-      <h3 id="l5-ex8-h" data-nav="L5 ex.8 · tubo afilado">Tubo afilado de parede fina: dedução de $\phi$</h3></div></div>
+      <h3 id="l5-ex8-h" data-nav="L5 ex.8 · tubo afilado">Tubo afilado de parede fina: dedução do ângulo de torção</h3></div></div>
     <div class="ex-topics"><span class="chip">W3</span><span class="chip">W2</span></div>
     <div class="stmt"><span class="lbl">Enunciado completo (Lista 5, p.4)</span>
       3.10-13. Um longo tubo afilado AB, de paredes finas e seção transversal circular, está submetido a um torque $T$. O tubo tem comprimento $L$ e espessura de parede $t$ (constante). Os diâmetros das linhas médias das seções transversais nas extremidades A e B são $d_A$ e $d_B$ respectivamente. Deduza a fórmula a seguir para o ângulo de torção do tubo:
       $$\phi = \frac{2TL}{\pi G t}\left(\frac{d_A + d_B}{(d_A d_B)^2}\right)$$</div>
     <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Lista 5 · ex. 8):</strong> ver o PDF oficial, Lista 5, p. 4 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
-    <p><strong>Roteiro:</strong> torque interno constante $T$, seção variável (conicidade suave, hipótese da aula 13 p.11). Diâmetro médio linear em $x$: $d(x) = d_A + (d_B - d_A)\frac{x}{L}$. Tubo circular de parede fina: $I_p \approx 2\pi r^3 t = \frac{\pi d^3 t}{4}$. Pelo princípio do trabalho e energia (<span class="tag tag-form">📄 Aula 13 p.14</span>):</p>
-    <div class="math-box">$$\frac{T\phi}{2} = U^* = \int_0^L\frac{T^2}{2G\,\frac{\pi d(x)^3t}{4}}dx\ \Rightarrow\ \phi = \frac{4T}{\pi G t}\int_0^L\frac{dx}{d(x)^3} = \frac{4T}{\pi G t}\cdot\frac{L}{d_B - d_A}\cdot\frac12\left(\frac1{d_A^2} - \frac1{d_B^2}\right)$$
-    $$\phi = \frac{2TL}{\pi G t}\cdot\frac{d_B^2 - d_A^2}{(d_B - d_A)\,d_A^2d_B^2} = \frac{2TL}{\pi G t}\cdot\frac{d_A + d_B}{(d_A d_B)^2}\ \checkmark$$</div>
-    <p>A integral usa a mudança $\eta = d(x)$, $dx = \frac{L}{d_B - d_A}d\eta$, igual ao exemplo 3 da aula 12 (pilar tronco-cônico).</p>
-    <div class="answer"><strong>Resultado:</strong> fórmula demonstrada; conferida simbolicamente em sympy (<code>calc_l5.py</code>). Caso-limite: com $d_A = d_B = d$, $\phi = \frac{4TL}{\pi G t d^3} = \frac{TL}{GI_p}$ ✓.</div>
+
+    <div class="callout concept"><span class="co-t">Mapa da regressão</span>
+      <p>Torque interno constante, mas <strong>seção variável</strong>: a rigidez muda ao longo do eixo. Peças: (1) o momento polar de um tubo circular fino, por dois caminhos que precisam concordar; (2) $U^*$ com $I_p(x)$ e o P.T.E.; (3) a integral de $1/d(x)^3$ por mudança de variável, a mesma do pilar cônico da aula 12 (<a href="09-trabalho-e-energia.html#t09-cone">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p></div>
+
+    <div class="step-part">Parte 1 · Regressão conceitual</div>
+
+    <div class="step" data-n="1"><h4>Momento polar de tubo circular fino: dois caminhos</h4>
+      <p><strong>Caminho 1 (fórmula exata, <a href="../base.html#torcao">Base</a>):</strong> com raio médio $r = d/2$ e raios $r \pm t/2$, $I_p = \frac{\pi}{2}\left[(r + \tfrac t2)^4 - (r - \tfrac t2)^4\right] = 2\pi r^3t + \frac{\pi rt^3}{2}$. Parede fina: o termo em $t^3$ some, $I_p \approx 2\pi r^3t = \dfrac{\pi d^3t}{4}$.</p>
+      <p><strong>Caminho 2 (Bredt, <a href="10-energia-na-torcao.html#t10-fino">ficha 10 (Energia na torção)</a>):</strong> $A_m = \pi d^2/4$, $\oint ds/t = \pi d/t$, $I_t = \dfrac{4A_m^2}{\oint ds/t} = \dfrac{4\,\pi^2d^4/16}{\pi d/t} = \dfrac{\pi d^3t}{4}$.</p>
+      <p>Os dois coincidem: para o tubo circular, a teoria de parede fina é a aproximação da fórmula exata. Bom teste de consistência para levar à prova.</p></div>
+
+    <div class="step" data-n="2"><h4>P.T.E. com rigidez variável</h4>
+      <p>O torque interno é $T$ em todas as seções (só há torques nas pontas). A rigidez varia, então a energia é uma integral (<a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>):</p>
+      <div class="math-box">$$U^* = \int_0^L\frac{T^2}{2G\,I_p(x)}\,dx\qquad \frac{T\phi}{2} = U^*\ \Rightarrow\ \phi = \frac{T}{G}\int_0^L\frac{dx}{I_p(x)}$$</div>
+      <p>O mesmo resultado sai por compatibilidade, somando as rotações de fatias: $d\phi = T\,dx/GI_p(x)$.</p></div>
+
+    <div class="callout warn"><span class="co-t">Hipóteses</span>
+      <ul><li>Parede fina e espessura $t$ constante; seção circular.</li>
+          <li><strong>Conicidade suave</strong> ("tubo longo"): cada fatia se comporta como um tubo cilíndrico. Com afilamento forte, as tensões deixam de ser só de torção pura.</li>
+          <li>Diâmetro médio variando linearmente de $d_A$ a $d_B$; elástico-linear; pequenas rotações.</li></ul></div>
+
+    <div class="step-part">Parte 2 · Resolução</div>
+
+    <div class="step" data-n="3"><h4>Montar a integral</h4>
+      <div class="math-box">$$d(x) = d_A + (d_B - d_A)\frac{x}{L}\qquad \phi = \frac{T}{G}\int_0^L\frac{4\,dx}{\pi t\,d(x)^3} = \frac{4T}{\pi Gt}\int_0^L\frac{dx}{d(x)^3}$$</div></div>
+
+    <div class="step" data-n="4"><h4>Mudança de variável</h4>
+      <p>Troque $x$ por $\eta = d(x)$: $d\eta = \frac{d_B - d_A}{L}dx$, e os limites vão de $d_A$ a $d_B$:</p>
+      <div class="math-box">$$\int_0^L\frac{dx}{d(x)^3} = \frac{L}{d_B - d_A}\int_{d_A}^{d_B}\eta^{-3}\,d\eta = \frac{L}{d_B - d_A}\cdot\frac12\left(\frac{1}{d_A^2} - \frac{1}{d_B^2}\right) = \frac{L}{2}\cdot\frac{d_B^2 - d_A^2}{(d_B - d_A)\,d_A^2d_B^2} = \frac{L}{2}\cdot\frac{d_A + d_B}{d_A^2d_B^2}$$</div>
+      <p>O passo-chave é fatorar $d_B^2 - d_A^2 = (d_B - d_A)(d_B + d_A)$, que cancela o $(d_B - d_A)$ do denominador.</p></div>
+
+    <div class="step" data-n="5"><h4>Resultado e casos-limite</h4>
+      <div class="math-box">$$\phi = \frac{4T}{\pi Gt}\cdot\frac L2\cdot\frac{d_A + d_B}{(d_Ad_B)^2} = \frac{2TL}{\pi Gt}\left(\frac{d_A + d_B}{(d_Ad_B)^2}\right)\ ✓$$</div>
+      <p><strong>Tubo cilíndrico</strong> ($d_A = d_B = d$): $\phi = \dfrac{2TL\cdot2d}{\pi Gtd^4} = \dfrac{4TL}{\pi Gtd^3} = \dfrac{TL}{GI_p}$ com $I_p = \pi d^3t/4$ ✓. A fórmula também é simétrica em $d_A$ e $d_B$, como deve ser (virar o tubo não muda o ângulo).</p>
+      <div class="answer"><strong>Resultado:</strong> fórmula demonstrada; conferida em sympy (<code>calc_l5.py</code> e <code>calc_l5_detalhado.py</code>), inclusive o limite cilíndrico. <span class="badge badge-ok">bate com o enunciado</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $I_p$ médio ($d$ médio) em vez de integrar: $1/d^3$ não é linear, a média dá resultado errado.</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o fator $L/(d_B - d_A)$ da mudança de variável.</li></ul></div>
   </article>
 <article class="ex" id="s13-ex1">
     <div class="ex-head"><div><div class="ex-kicker">Slides aula 13 · exemplo 1 (p.26–28)</div>
