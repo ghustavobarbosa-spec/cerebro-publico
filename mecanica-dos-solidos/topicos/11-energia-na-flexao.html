@@ -432,27 +432,247 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
     <div class="callout concept"><span class="co-t">Mapa da regressão</span><p>Conceitos que o exercício usa: esforços em estrutura espacial, $\vec M = \vec r\times\vec P$ separado em torção e flexão (<a href="01-esforcos-solicitantes.html#t01-3d">ficha 01 (Esforços solicitantes)</a>); energia de flexão, torção e cortante na expressão geral (<a href="11-energia-na-flexao.html#t11-flex">ficha 11 (Energia na flexão)</a>, <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>); fator de forma $f_c$ e o que desprezar (<a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>); $G = E/2(1+\nu)$ (<a href="08-extensometros-e-hooke.html">ficha 08 (Extensômetros e Hooke generalizada)</a>); P.T.E. (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>). É o "irmão" do exercício em grupo #05 (<a href="12-teoremas-de-castigliano.html#a5-h">ficha 12 (Crotti-Engesser e Castigliano)</a>).</p></div>
     <div class="callout warn"><span class="co-t">Hipóteses deste exercício</span><ul><li>Seção circular cheia: $I_p = 2I$ e $U^*_T = \int T^2/2GI_p$ valem. Em seção não circular a torção pede outra constante.</li><li>Elástico-linear, isótropo ($G = E/2(1+\nu)$); linearidade geométrica (as barras continuam no plano horizontal).</li><li>A cortante é <em>mantida</em> de propósito, para medir quanto pesa ($\propto (d/L)^2$). Normal inexistente (cargas perpendiculares às barras).</li><li>Ligação rígida em B; engaste perfeito em A; carga única com deslocamento correspondente (P.T.E. vale).</li></ul></div>
 
-    <div class="step" data-n="1"><h4>Classificar</h4><p>Pórtico espacial isostático (engaste em A) no plano horizontal, carga vertical. Em BC há flexão e cortante; em AB há flexão, cortante <strong>e torção</strong>. Carga única, deslocamento correspondente: P.T.E.</p>
-      <div class="callout concept"><span class="co-t">Conceito: como achar $M$ e $T$ numa estrutura 3D</span>
-        <p>Corte a barra, olhe para a parte que vai até a carga e calcule o momento de $P$ em relação ao centro da seção: $\vec M = \vec r\times\vec P$. A componente de $\vec M$ <em>ao longo do eixo da barra</em> é o torque $T$, e a componente <em>perpendicular</em> é o fletor $M$. Em AB, a força em C tem braço $s$ (ao longo de AB) e braço $L/2$ (ao longo de BC, perpendicular a AB). O braço ao longo da própria barra gera flexão ($M = Ps$); o braço perpendicular gera torção ($T = PL/2$, constante). Isso é revisão da aula 2 (Lista 1) aplicada à energia.</p></div></div>
-    <div class="step" data-n="2"><h4>Roteiro de dados</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
-      <tr><td>AB (engastada em A)</td><td>comprimento $L$</td><td>figura</td></tr><tr><td>BC ⊥ AB, horizontal</td><td>comprimento $L/2$</td><td>figura</td></tr>
-      <tr><td>Seção circular cheia</td><td>$I = \pi d^4/64$, $I_p = 2I$, $A = \pi d^2/4$, $f_c = 10/9$</td><td>enunciado + geometria</td></tr>
-      <tr><td>Material</td><td>$E$, ν ⇒ $G = E/2(1+\nu)$</td><td>enunciado</td></tr></tbody></table></div></div>
-    <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{v,C}$ por $\frac{P\delta}{2} = U^*$, <em>mantendo</em> a cortante para ver quanto ela pesa.</p></div>
-    <div class="step" data-n="4"><h4>Fórmula</h4><p><span class="tag tag-form">📄 Aula 14 p.31</span> $U^* = \sum\int\left(\frac{M^2}{2EI} + \frac{T^2}{2GI_p} + \frac{f_cV^2}{2GA}\right)ds$.</p></div>
-    <div class="step" data-n="5"><h4>Esforços internos</h4><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>coordenada</th><th>$M$</th><th>$T$</th><th>$V$</th></tr></thead><tbody>
-      <tr><td>BC</td><td>$s$ a partir de C, $0..L/2$</td><td>$Ps$</td><td>0</td><td>$P$</td></tr>
-      <tr><td>AB</td><td>$s$ a partir de B, $0..L$</td><td>$Ps$</td><td>$PL/2$</td><td>$P$</td></tr></tbody></table></div></div>
-    <div class="step" data-n="6"><h4>Cálculo</h4>
-      <div class="math-box">$$U^*_M = \frac{P^2(L/2)^3}{6EI} + \frac{P^2L^3}{6EI} = \frac{3P^2L^3}{16EI}\qquad U^*_T = \frac{(PL/2)^2L}{2GI_p} = \frac{P^2L^3}{8GI_p}\qquad U^*_V = \frac{f_cP^2(3L/2)}{2GA}$$
-      $$\delta_{v,C} = \frac{2U^*}{P} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA}$$</div>
-      <p>Adimensionalizando com $I_p = 2I$ e $E/G = 2(1+\nu)$: $\frac{EI}{4GI_p} = \frac{1+\nu}{4}$; com $f_c = 10/9$ e $I/A = d^2/16$: a cortante vale $\frac{5(1+\nu)}{24}\left(\frac dL\right)^2$.</p></div>
+    <div class="callout concept"><span class="co-t">A ideia em uma frase</span>
+      <p>A força $P$ empurra a ponta C para baixo, devagar, de zero até $P$. Enquanto desce $\delta$, ela faz trabalho, e esse trabalho fica <strong>guardado nas barras</strong> como energia elástica, igual a uma mola comprimida. As barras guardam energia de três jeitos: <strong>dobrando</strong>, <strong>torcendo</strong> e <strong>escorregando</strong> (as fatias da barra deslizam umas sobre as outras). A receita: calcular a energia de cada jeito, somar, igualar ao trabalho da força e isolar $\delta$.</p></div>
+
+    <div class="callout"><span class="co-t">Vocabulário mínimo (para quem nunca viu)</span>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Símbolo</th><th>Nome</th><th>Em palavras</th></tr></thead><tbody>
+        <tr><td>$M$</td><td>momento fletor</td><td>força × braço que <strong>dobra</strong> a barra (como dobrar uma régua).</td></tr>
+        <tr><td>$T$</td><td>torque (momento torçor)</td><td>força × braço que <strong>torce</strong> a barra (como a chave de roda torce o parafuso).</td></tr>
+        <tr><td>$V$</td><td>força cortante</td><td>força que tenta <strong>cortar</strong> a barra, como uma tesoura: faz as fatias vizinhas escorregarem.</td></tr>
+        <tr><td>$E$, $G$</td><td>módulos do material</td><td>$E$ mede a resistência a esticar/encolher; $G$, a resistência a escorregar. Para metal, $G = E/2(1+\nu) \approx 0{,}38E$.</td></tr>
+        <tr><td>$I$, $I_p$, $A$</td><td>propriedades da seção</td><td>quanto o <em>formato</em> da seção resiste a dobrar ($I = \pi d^4/64$), a torcer ($I_p = \pi d^4/32 = 2I$) e a escorregar (a área $A = \pi d^2/4$).</td></tr>
+        <tr><td>$f_c$</td><td>fator de forma (de cisalhamento)</td><td>número puro que corrige a energia da cortante. Círculo: $10/9$. Ver a seção "O fator $f_c$" abaixo.</td></tr>
+      </tbody></table></div></div>
+
+    <figure style="margin:14px auto;max-width:520px">
+      <svg viewBox="0 0 440 265" width="100%" style="color:var(--text)" role="img" aria-label="Estrutura em L vista de cima em perspectiva. Num corte da barra AB, a força P em C tem dois braços: s ao longo de AB, que dobra AB, e L/2 para o lado, que torce AB">
+        <defs><marker id="s14e2-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/></marker><marker id="s14e2-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--warning)"/></marker><marker id="s14e2-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--error)"/></marker></defs>
+        <polygon points="40,30 75,48 75,108 40,90" style="fill:var(--surface-muted);stroke:currentColor;stroke-width:2"/>
+        <g style="stroke:var(--border-strong);stroke-width:10;stroke-linecap:round"><line x1="60" y1="64" x2="330" y2="150"/><line x1="330" y1="150" x2="200" y2="215"/></g>
+        <line x1="211.6" y1="98" x2="203.6" y2="122.8" style="stroke:currentColor;stroke-width:2"/>
+        <line x1="213.8" y1="91.4" x2="336.2" y2="131" style="stroke:var(--accent);stroke-width:2" marker-start="url(#s14e2-g)" marker-end="url(#s14e2-g)"/>
+        <line x1="338.9" y1="167.9" x2="208.9" y2="232.9" style="stroke:var(--warning);stroke-width:2" marker-start="url(#s14e2-o)" marker-end="url(#s14e2-o)"/>
+        <line x1="200" y1="158" x2="200" y2="207" style="stroke:var(--error);stroke-width:2.5" marker-end="url(#s14e2-r)"/>
+        <g style="font-size:12.5px;font-weight:700;fill:currentColor"><text x="84" y="100">A</text><text x="346" y="154">B</text><text x="188" y="238" text-anchor="end">C</text></g>
+        <text x="188" y="174" text-anchor="end" style="fill:var(--error);font-size:13px;font-weight:700">P</text>
+        <text x="203" y="140" text-anchor="middle" style="fill:var(--text-secondary);font-size:11px">corte</text>
+        <text x="279" y="100" text-anchor="middle" transform="rotate(18 279 100)" style="fill:var(--accent-ink);font-size:12px;font-weight:700">braço s → dobra AB</text>
+        <text x="282" y="214" text-anchor="middle" transform="rotate(-26.6 282 214)" style="fill:var(--warning-ink);font-size:12px;font-weight:700">braço L/2 → torce AB</text>
+      </svg>
+      <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">Corte a barra AB a uma distância $s$ de B e olhe até C. A força está $s$ "à frente" (ao longo de AB: dobra, $M = Ps$) e $L/2$ "para o lado" (perpendicular a AB: torce, $T = PL/2$). BC funciona como o cabo de uma chave de roda, e AB como o parafuso.</figcaption>
+    </figure>
+
+    <div class="step" data-n="1"><h4>Entender a figura</h4>
+      <p>As duas barras estão deitadas num plano horizontal, formando um L: AB (comprimento $L$) sai da parede em A; BC (comprimento $L/2$) sai de B em ângulo reto. A força $P$ é vertical, para baixo, na ponta C. Queremos quanto C desce: $\delta_{v,C}$. Estrutura <em>isostática</em> (só o engaste em A segura tudo), então todos os esforços saem do equilíbrio, sem truque.</p></div>
+
+    <div class="step" data-n="2"><h4>O que cada barra sofre: o método do braço</h4>
+      <p>Regra para qualquer estrutura 3D: <strong>corte a barra num ponto, olhe para o pedaço que vai até a carga e pergunte: em que direção está o braço?</strong></p>
+      <ul><li><strong>Braço ao longo da barra</strong> → a força dobra a barra (momento fletor).</li>
+          <li><strong>Braço de lado</strong> (perpendicular à barra, no plano horizontal) → a força torce a barra (torque).</li>
+          <li><strong>A força em si</strong>, sem braço → tenta cortar a seção (força cortante, $V = P$).</li></ul>
+      <p><strong>Barra BC</strong> (corte a $s$ de C, $s$ de 0 a $L/2$): o braço é só $s$, ao longo de BC. Ela só dobra: $M = Ps$, $T = 0$, $V = P$.</p>
+      <p><strong>Barra AB</strong> (corte a $s$ de B, $s$ de 0 a $L$): a força está $s$ à frente <em>e</em> $L/2$ para o lado (figura acima). Então AB dobra ($M = Ps$) <em>e</em> torce ($T = P\cdot L/2$, o mesmo valor em toda a barra, porque o braço lateral não muda), e ainda tem $V = P$.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Barra</th><th>$s$ medido a partir de</th><th>vai de</th><th>$M$ (dobra)</th><th>$T$ (torce)</th><th>$V$ (corta)</th></tr></thead><tbody>
+        <tr><td>BC</td><td>C</td><td>0 a $L/2$</td><td>$Ps$</td><td>0</td><td>$P$</td></tr>
+        <tr><td>AB</td><td>B</td><td>0 a $L$</td><td>$Ps$</td><td>$PL/2$</td><td>$P$</td></tr></tbody></table></div>
+      <p style="font-size:13.5px;color:var(--text-secondary)">Na linguagem vetorial da aula 2: $\vec M = \vec r\times\vec P$. Com $x$ ao longo de AB, $y$ ao longo de BC e $z$ para cima, o corte em AB tem $\vec r = (s,\ L/2,\ 0)$ e $\vec P = (0,0,-P)$, então $\vec M = (-PL/2,\ Ps,\ 0)$: a componente em $x$ (eixo da barra) é o torque, a em $y$ é o fletor.</p></div>
+
+    <figure style="margin:14px auto;max-width:560px">
+      <svg viewBox="0 0 480 140" width="100%" style="color:var(--text)" role="img" aria-label="Os três jeitos de a barra guardar energia: dobrar (o eixo curva), torcer (as seções giram e uma linha reta vira hélice) e escorregar (as fatias deslizam umas sobre as outras)">
+        <defs><marker id="s14e2-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+        <g style="fill:currentColor;font-size:12.5px;font-weight:700" text-anchor="middle"><text x="80" y="20">dobrar</text><text x="240" y="20">torcer</text><text x="400" y="20">escorregar</text></g>
+        <line x1="20" y1="35" x2="20" y2="95" style="stroke:currentColor;stroke-width:2"/>
+        <rect x="20" y="55" width="120" height="10" style="fill:none;stroke:var(--text-muted);stroke-dasharray:4 3"/>
+        <path d="M20,55 Q85,55 138,84 L133,93 Q82,65 20,65 Z" style="fill:var(--info);fill-opacity:.35;stroke:currentColor;stroke-width:1.2"/>
+        <line x1="185" y1="35" x2="185" y2="85" style="stroke:currentColor;stroke-width:2"/>
+        <rect x="185" y="45" width="110" height="30" style="fill:var(--accent);fill-opacity:.25;stroke:currentColor;stroke-width:1.2"/>
+        <ellipse cx="295" cy="60" rx="7" ry="15" style="fill:var(--accent);fill-opacity:.25;stroke:currentColor;stroke-width:1.2"/>
+        <line x1="185" y1="51" x2="295" y2="51" style="stroke:var(--text-muted);stroke-dasharray:4 3"/>
+        <line x1="185" y1="51" x2="295" y2="70" style="stroke:currentColor;stroke-width:1.6"/>
+        <path d="M310,46 A9,15 0 0 1 310,74" style="fill:none;stroke:currentColor;stroke-width:1.5" marker-end="url(#s14e2-b)"/>
+        <line x1="343" y1="30" x2="343" y2="100" style="stroke:currentColor;stroke-width:2"/>
+        <rect x="345" y="40" width="108" height="44" style="fill:none;stroke:var(--text-muted);stroke-dasharray:4 3"/>
+        <g style="fill:var(--warning);fill-opacity:.3;stroke:currentColor;stroke-width:1">
+          <rect x="345" y="41" width="20" height="44"/><rect x="367" y="45" width="20" height="44"/><rect x="389" y="49" width="20" height="44"/><rect x="411" y="53" width="20" height="44"/><rect x="433" y="57" width="20" height="44"/></g>
+        <g style="fill:var(--text-secondary);font-size:11px" text-anchor="middle">
+          <text x="80" y="118">o eixo curva</text><text x="80" y="133">rigidez: EI</text>
+          <text x="240" y="118">as seções giram</text><text x="240" y="133">rigidez: GIₚ</text>
+          <text x="400" y="118">as fatias deslizam</text><text x="400" y="133">rigidez: GA/f</text></g>
+      </svg>
+      <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">Os três jeitos de guardar energia que aparecem aqui. (O quarto, esticar pela força normal $N$, não existe neste exercício: nenhuma força está ao longo das barras.)</figcaption>
+    </figure>
+
+    <div class="step" data-n="3"><h4>A energia de cada jeito</h4>
+      <p>Para uma mola, energia $= F^2/2k$: força ao quadrado dividida pelo dobro da rigidez. A barra é igual, só que fatia por fatia, e a gente soma as fatias (é isso que a integral $\int\dots ds$ faz). <span class="tag tag-form">📄 Aula 14 p.31</span></p>
+      <div class="math-box">$$U^* = \sum_{\text{barras}}\int\left(\underbrace{\frac{M^2}{2EI}}_{\text{dobrar}} + \underbrace{\frac{T^2}{2GI_p}}_{\text{torcer}} + \underbrace{\frac{f_c\,V^2}{2GA}}_{\text{escorregar}}\right)ds$$</div>
+      <p>Uma soma só precisa ser feita "de verdade" quando o esforço muda ao longo da barra. Quando ele é constante, a soma é só valor × comprimento.</p>
+      <ol>
+        <li><strong>Dobrar</strong> ($M = Ps$ cresce com $s$). A soma das fatias de $s^2$, de 0 até $a$, dá $a^3/3$ (é a área sob a parábola $s^2$):
+          $$\int_0^a \frac{(Ps)^2}{2EI}ds = \frac{P^2}{2EI}\cdot\frac{a^3}{3} = \frac{P^2a^3}{6EI}$$
+          BC ($a = L/2$): $\frac{P^2L^3}{48EI}$. AB ($a = L$): $\frac{P^2L^3}{6EI} = \frac{8P^2L^3}{48EI}$. Somando: $\boxed{U^*_M = \frac{9P^2L^3}{48EI} = \frac{3P^2L^3}{16EI}}$</li>
+        <li><strong>Torcer</strong> (só AB; $T = PL/2$ constante ao longo de $L$):
+          $$U^*_T = \frac{T^2}{2GI_p}\cdot L = \frac{(PL/2)^2L}{2GI_p} = \boxed{\frac{P^2L^3}{8GI_p}}$$</li>
+        <li><strong>Escorregar</strong> ($V = P$ constante nas duas barras, comprimento total $L + L/2 = 3L/2$):
+          $$U^*_V = \frac{f_cP^2}{2GA}\cdot\frac{3L}{2} = \boxed{\frac{3f_cP^2L}{4GA}}$$</li></ol></div>
+
+    <div class="step" data-n="4"><h4>Trabalho da força = energia guardada (P.T.E.)</h4>
+      <p>A força cresce de 0 até $P$ enquanto C desce de 0 até $\delta$ (material linear: o gráfico força × deslocamento é uma reta). O trabalho é a área do triângulo, $P\delta/2$. Tudo vira energia nas barras:</p>
+      <div class="math-box">$$\frac{P\,\delta_{v,C}}{2} = \frac{3P^2L^3}{16EI} + \frac{P^2L^3}{8GI_p} + \frac{3f_cP^2L}{4GA}$$
+      $$\text{multiplicando por } \frac2P:\qquad \boxed{\delta_{v,C} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA}}$$</div>
+      <p>Já é a resposta do slide. Os três termos são três "quedas" que se somam: a da dobra, a da torção e a do escorregamento.</p></div>
+
+    <div class="step" data-n="5"><h4>Deixar em números puros, para comparar os termos</h4>
+      <p>Colocando $\frac{PL^3}{EI}$ em evidência, cada termo vira um número que dá para comparar com os outros. Três trocas, todas da seção circular e do material:</p>
+      <ul><li>Torção: $I_p = 2I$ e $\frac EG = 2(1+\nu)$, então $\frac{PL^3}{4GI_p} = \frac{PL^3}{EI}\cdot\frac{E}{8G} = \frac{PL^3}{EI}\cdot\frac{1+\nu}{4}$.</li>
+          <li>Cortante: $\frac IA = \frac{\pi d^4/64}{\pi d^2/4} = \frac{d^2}{16}$ e $f_c = \frac{10}{9}$, então $\frac32\frac{f_cPL}{GA} = \frac{PL^3}{EI}\cdot\frac32\cdot\frac{10}{9}\cdot 2(1+\nu)\cdot\frac{d^2}{16L^2} = \frac{PL^3}{EI}\cdot\frac{5(1+\nu)}{24}\left(\frac dL\right)^2$.</li></ul>
+      <div class="math-box">$$\delta_{v,C} = \frac{PL^3}{EI}\Bigg[\underbrace{\frac13}_{\text{dobra AB}} + \underbrace{\frac1{24}}_{\text{dobra BC}} + \underbrace{\frac{1+\nu}{4}}_{\text{torção AB}} + \underbrace{\frac{5(1+\nu)}{24}\left(\frac dL\right)^2}_{\text{cortante}}\Bigg]$$</div>
+      <p>Com $\nu = 0{,}3$ e uma barra comum ($d/L = 0{,}05$): $0{,}333 + 0{,}042 + 0{,}325 + 0{,}0007$. A torção pesa quase tanto quanto a dobra; a cortante é 0,1% do total.</p></div>
+
+    <div class="step" data-n="6"><h4>Exemplo com números (para sentir o tamanho)</h4>
+      <p>Aço ($E = 200$ GPa, $\nu = 0{,}3$, $G = 76{,}9$ GPa), $L = 1$ m, $d = 40$ mm, $P = 100$ N (um saco de cimento pequeno):</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parcela</th><th>Queda de C</th><th>% do total</th></tr></thead><tbody>
+        <tr><td>Dobra de AB</td><td>1,326 mm</td><td>47,6%</td></tr>
+        <tr><td>Dobra de BC</td><td>0,166 mm</td><td>6,0%</td></tr>
+        <tr><td>Torção de AB</td><td>1,293 mm</td><td>46,4%</td></tr>
+        <tr><td>Cortante (AB + BC)</td><td>0,0017 mm</td><td>0,06%</td></tr>
+        <tr><td><strong>Total $\delta_{v,C}$</strong></td><td><strong>2,787 mm</strong></td><td>100%</td></tr></tbody></table></div></div>
+
     <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
-      <div class="answer"><strong>Resposta:</strong> $\delta_{v,C} = \frac{PL^3}{EI}\left[\frac38 + \frac{1+\nu}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$. <span class="badge badge-ok">bate com o slide</span></div>
-      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Desprezar a torção "porque é pequena": com ν = 0,3 ela vale 0,325 contra 0,375 da flexão. <strong>Em estrutura espacial a torção sempre entra.</strong></li>
-      <li>Já a cortante, com $d/L = 0{,}05$, vale 0,0007: essa sim é desprezível.</li>
-      <li>Conferência: sem BC ($L/2 \to 0$), sobra $PL^3/3EI$ do balanço ✓.</li></ul></div>
+      <div class="answer"><strong>Resposta:</strong> $\delta_{v,C} = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA} = \frac{PL^3}{EI}\left[\frac38 + \frac{1+\nu}{4} + \frac{5(1+\nu)}{24}\left(\frac dL\right)^2\right]$. <span class="badge badge-ok">bate com o slide</span></div>
+      <ul><li><strong>Unidades:</strong> $\frac{PL^3}{EI}$ é N·m³/(N/m²·m⁴) = m ✓; o colchete é número puro.</li>
+          <li><strong>Caso-limite:</strong> sem BC ($L/2 \to 0$, força em B), não há braço lateral: some a torção e a dobra de BC, sobra $PL^3/3EI$ do balanço ✓.</li>
+          <li><strong>Três caminhos, mesmo resultado</strong> (ver "Outras formas" abaixo; contas em <code>calc/calc_s14_ex2_detalhado.py</code>).</li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Desprezar a torção "porque é pequena": com ν = 0,3 ela vale 0,325 contra 0,375 da flexão. <strong>Em estrutura espacial a torção sempre entra.</strong></li>
+          <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a dobra de BC: BC também é um balanço (engastado em B).</li></ul></div>
+
+    <h4 style="margin-top:22px">Por que o termo da cortante aparece (e por que quase nunca importa)</h4>
+    <p><strong>O que ele é.</strong> Pense num baralho apoiado na mesa: empurre o topo para o lado e as cartas escorregam umas sobre as outras, sem nenhuma carta dobrar. A força cortante faz isso com as fatias da barra. É uma deformação real, então guarda energia de verdade, e a expressão geral (Aula 14 p.31) tem que incluí-la. O slide pede para <em>mantê-la</em> justamente para você medir o tamanho dela.</p>
+    <p><strong>Por que ela é pequena numa barra comprida.</strong> Compare num balanço simples as duas quedas:</p>
+    <div class="math-box">$$\text{dobra: } \frac{PL^3}{3EI}\qquad\qquad \text{cortante: } \frac{f_cPL}{GA}\qquad\Rightarrow\qquad \frac{\text{cortante}}{\text{dobra}} = \frac{3f_cEI}{GAL^2} \propto \left(\frac dL\right)^2$$</div>
+    <p>A dobra cresce com o <strong>cubo</strong> do comprimento (dobre $L$ e a flecha fica 8 vezes maior: é por isso que uma régua comprida dobra fácil). O escorregamento cresce só com $L$. Numa barra fina e comprida, a dobra ganha de longe. Neste exercício:</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$d/L$</th><th>Barra típica</th><th>Peso da cortante no total</th></tr></thead><tbody>
+      <tr><td>0,02</td><td>arame, tubulação</td><td>0,02%</td></tr>
+      <tr><td>0,05</td><td>eixo, barra comum</td><td>0,1%</td></tr>
+      <tr><td>0,1</td><td>barra grossa</td><td>0,4%</td></tr>
+      <tr><td>0,2</td><td>toco curto</td><td>1,5%</td></tr>
+      <tr><td>0,5</td><td>"barra" quase um bloco</td><td>8,8%</td></tr></tbody></table></div>
+    <p><strong>Quando importa:</strong> barras curtas e grossas ($d/L$ acima de uns 0,3), materiais com $G$ muito baixo em relação a $E$ (madeira, painéis sanduíche) e o caso em que a cortante é o <em>único</em> esforço de um elemento (regra da Aula 14 p.32: esforço único nunca se despreza, senão o elemento vira infinitamente rígido).</p>
+    <p><strong>Na prova:</strong> escreva a expressão geral, mostre que a cortante dá um termo em $(d/L)^2$ (ou $(h/L)^2$) e despreze, salvo se o enunciado pedir para mantê-la. A torção, ao contrário, <strong>não</strong> se despreza: ela cresce com $L^3$ como a dobra, porque o braço lateral $L/2$ também cresce com $L$.</p>
+
+    <h4 style="margin-top:22px">O fator $f_c$: fator de forma, não "fluxo de cisalhamento"</h4>
+    <div class="callout warn"><span class="co-t">Cuidado com o nome</span><p>Os slides usam a letra $f$ para duas coisas diferentes. Na <strong>aula 13</strong>, $f = \tau t$ é o <strong>fluxo de cisalhamento</strong> de um tubo de parede fina na torção (unidade N/m; <a href="10-energia-na-torcao.html#t10-fino">ficha 10 (Energia na torção)</a>). Na <strong>aula 14</strong>, $f$ (aqui $f_c$) é o <strong>fator de forma</strong> da seção, um número puro que só aparece na energia da cortante. Neste exercício é o segundo. Não há tubo de parede fina nem fluxo aqui.</p></div>
+    <p><strong>Por que precisa de um fator.</strong> Se a tensão de cisalhamento fosse igual em toda a seção, ela valeria $\bar\tau = V/A$ e a energia sairia exata com $V^2/2GA$ (Aula 14 p.22). Mas ela <strong>não</strong> é igual: é zero no topo e no fundo da seção e máxima no meio (no círculo, $\tau_{max} = \frac43\bar\tau$). A energia depende de $\tau^2$, e <strong>a média dos quadrados é maior que o quadrado da média</strong>. Exemplo de bolso: duas fibras com $\tau = 0$ e $\tau = 2$ têm média 1, mas a média dos quadrados é $(0 + 4)/2 = 2$, e não $1^2 = 1$. Por isso a energia de verdade é maior que a da tensão média, e $f_c$ diz quanto maior:</p>
+    <div class="math-box">$$U^*_V = \int\frac{f_c\,V^2}{2GA}ds,\qquad f_c = \frac{\overline{\tau^2}}{\bar\tau^{\,2}} = \frac{A}{I^2}\iint_A\frac{Q^2}{b^2}dA\qquad\begin{cases}\text{círculo: } f_c = 10/9 \approx 1{,}11\\ \text{retângulo: } f_c = 6/5 = 1{,}2\end{cases}$$</div>
+    <p>No círculo, a energia de cisalhamento é 11% maior do que seria com a tensão média. Na prova sem consulta, basta lembrar que $f_c$ é um número um pouco maior que 1 e que depende só do formato da seção. A dedução completa vem a seguir.</p>
+    <h5 style="margin:18px 0 6px">De onde vem o fator de forma: dedução passo a passo</h5>
+    <div class="callout warn"><span class="co-t">Hipóteses assumidas na dedução</span><ul>
+      <li><strong>Material</strong> homogêneo, isótropo e elástico-linear: vale $\tau = G\gamma$, e a energia por volume é $u^* = \sigma^2/2E + \tau^2/2G$, sem termo cruzado entre $\sigma$ e $\tau$. É isso que permite separar a energia da cortante da energia da flexão (Aula 14 p.18–19).</li>
+      <li><strong>Flexão simples num plano de simetria</strong> ($xy$): só existe a cortante $V_y$, e a seção é simétrica em relação a esse plano.</li>
+      <li><strong>Só $\tau_{xy}$</strong> (a componente vertical do cisalhamento) entra na conta, como no slide p.18. No retângulo isso é praticamente exato. No círculo, perto da borda, $\tau$ também tem uma componente horizontal $\tau_{xz}$, que fica desprezada.</li>
+      <li><strong>$\tau_{xy}$ uniforme ao longo da largura</strong> $b$ em cada altura $y$ (hipótese de Jourawski). Funciona bem quando a seção não é muito mais larga que alta.</li>
+      <li><strong>$\sigma_x$ pela fórmula da flexão</strong>, $\sigma_x = -My/I$, mesmo havendo cortante: seções planas continuam planas, e o empenamento causado pelo cisalhamento é desprezado.</li>
+      <li><strong>Faces de cima e de baixo livres</strong>: nada raspa a superfície da barra, então $\tau = 0$ ali.</li>
+      <li><strong>Seção constante</strong> (ou que varia devagar) ao longo de $x$, e $dM/dx = V$ (equilíbrio da fatia, sem carga distribuída no trecho).</li></ul></div>
+
+    <p><strong>Passo 1. Energia por volume.</strong> Um cubinho de material com cisalhamento $\tau$ se deforma $\gamma = \tau/G$, de forma linear, como uma mola. A energia que ele guarda por unidade de volume é a área do triângulo $\tau\times\gamma$:</p>
+    <div class="math-box">$$u^* = \int_0^\tau \gamma\,d\tau = \int_0^\tau\frac{\tau}{G}\,d\tau = \frac{\tau^2}{2G}$$</div>
+
+    <p><strong>Passo 2. Energia de uma fatia da barra.</strong> Pegue uma fatia de espessura $ds$. Somando todos os pedacinhos $dA$ da seção:</p>
+    <div class="math-box">$$dU^*_V = ds\iint_A\frac{\tau^2}{2G}\,dA$$</div>
+    <p>Se $\tau$ fosse uniforme, igual a $\bar\tau = V/A$, a conta acabaria aqui: $dU^*_V = \frac{(V/A)^2}{2G}A\,ds = \frac{V^2}{2GA}ds$ (Aula 14 p.22). O problema é saber <em>como</em> $\tau$ se distribui na seção.</p>
+
+    <p><strong>Passo 3. Como $\tau$ se distribui (fórmula de Jourawski).</strong> Corte uma fatia de comprimento $dx$ e, dentro dela, separe o pedaço acima da altura $y$ (em verde na figura):</p>
+    <figure style="margin:10px auto;max-width:460px">
+      <svg viewBox="0 0 420 185" width="100%" style="color:var(--text)" role="img" aria-label="Fatia de viga de comprimento dx. O pedaço acima da cota y recebe força F na face esquerda e F mais dF na direita; o desequilíbrio dF é compensado pelo cisalhamento tau vezes b vezes dx na face horizontal de baixo do pedaço">
+        <defs><marker id="s14e2-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+          <marker id="s14e2-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--warning)"/></marker></defs>
+        <rect x="80" y="30" width="220" height="120" style="fill:var(--surface-muted);stroke:currentColor;stroke-width:1.5"/>
+        <rect x="80" y="30" width="220" height="30" style="fill:var(--accent);fill-opacity:.3;stroke:currentColor;stroke-width:1.5"/>
+        <line x1="80" y1="90" x2="300" y2="90" style="stroke:var(--text-muted);stroke-dasharray:5 4"/>
+        <g style="stroke:currentColor;stroke-width:2"><line x1="28" y1="45" x2="78" y2="45" marker-end="url(#s14e2-k)"/><line x1="372" y1="45" x2="302" y2="45" marker-end="url(#s14e2-k)" style="stroke-width:3"/></g>
+        <g style="stroke:var(--warning);stroke-width:2"><line x1="105" y1="66" x2="140" y2="66" marker-end="url(#s14e2-t)"/><line x1="172" y1="66" x2="207" y2="66" marker-end="url(#s14e2-t)"/><line x1="239" y1="66" x2="274" y2="66" marker-end="url(#s14e2-t)"/></g>
+        <line x1="68" y1="90" x2="68" y2="62" style="stroke:currentColor;stroke-width:1.2" marker-end="url(#s14e2-k)"/>
+        <line x1="80" y1="168" x2="300" y2="168" style="stroke:currentColor;stroke-width:1.2" marker-start="url(#s14e2-k)" marker-end="url(#s14e2-k)"/>
+        <g style="fill:currentColor;font-size:12px">
+          <text x="50" y="36" text-anchor="middle">F</text><text x="338" y="36" text-anchor="middle">F + dF</text>
+          <text x="60" y="80" text-anchor="end">y</text><text x="190" y="182" text-anchor="middle">dx</text>
+          <text x="306" y="94" style="fill:var(--text-secondary);font-size:11px">linha neutra</text></g>
+        <text x="190" y="84" text-anchor="middle" style="fill:var(--warning-ink);font-size:12px;font-weight:700">τ · b · dx</text>
+      </svg>
+      <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">O momento fletor muda de $M$ para $M + dM$ ao longo de $dx$. As tensões normais empurram o pedaço verde com $F$ de um lado e $F + dF$ do outro. Quem equilibra a diferença é o cisalhamento na face de baixo do pedaço.</figcaption>
+    </figure>
+    <ol>
+      <li>Força normal numa face do pedaço: $F = \iint \sigma\,dA = \frac{M}{I}\iint_{\text{acima de }y}\eta\,dA = \frac{M\,Q(y)}{I}$, onde $Q(y)$ é o <strong>momento estático</strong> da parte da seção acima de $y$ (área × distância do centroide dela à linha neutra).</li>
+      <li>Na outra face, $F + dF = \frac{(M + dM)\,Q}{I}$. Sobra $dF = \frac{dM\,Q}{I}$ sem equilíbrio.</li>
+      <li>A única outra face do pedaço com força horizontal é a de baixo (área $b\cdot dx$): $\tau\,b\,dx = dF = \frac{dM\,Q}{I}$.</li>
+      <li>Dividindo por $dx$ e usando $\frac{dM}{dx} = V$: $$\boxed{\tau(y) = \frac{V\,Q(y)}{I\,b(y)}}$$</li></ol>
+    <p>Note que no topo ($y$ no limite da seção) não sobra área acima, então $Q = 0$ e $\tau = 0$, como exige a face livre. Na linha neutra $Q$ é máximo, e $\tau$ também.</p>
+
+    <p><strong>Passo 4. Pôr $\tau(y)$ na energia.</strong> Substituindo o passo 3 no passo 2 ($V$ e $I$ não dependem de $y$ e saem da integral):</p>
+    <div class="math-box">$$dU^*_V = ds\iint_A\frac{1}{2G}\frac{V^2Q^2}{I^2b^2}\,dA = \frac{V^2}{2G\,I^2}\left(\iint_A\frac{Q^2}{b^2}dA\right)ds$$</div>
+    <p>Para comparar com o caso uniforme $\frac{V^2}{2GA}ds$, multiplique e divida por $A$:</p>
+    <div class="math-box">$$dU^*_V = \frac{V^2}{2GA}\underbrace{\left(\frac{A}{I^2}\iint_A\frac{Q^2}{b^2}dA\right)}_{f}ds\qquad\Rightarrow\qquad \boxed{f = \frac{A}{I^2}\iint_A\frac{Q^2}{b^2}\,dA}\qquad \boxed{U^*_V = \int\frac{f\,V^2}{2GA}ds}$$</div>
+    <p>É a fórmula do slide (Aula 14 p.20–21). Nela só entram $A$, $I$, $Q$ e $b$, que dependem apenas do <strong>formato</strong> da seção. Por isso o nome "fator de forma": $V$, $G$ e o comprimento não aparecem.</p>
+
+    <p><strong>Passo 5. O que $f$ significa.</strong> Como $\tau = VQ/Ib$, a integral do passo 4 é a soma de $\tau^2$ na seção. Reorganizando:</p>
+    <div class="math-box">$$f = \frac{\dfrac1A\iint_A\tau^2\,dA}{\bar\tau^{\,2}} = \frac{\overline{\tau^2}}{\bar\tau^{\,2}} = \frac{\text{média dos quadrados}}{\text{quadrado da média}}\ \ge 1$$</div>
+    <p>Só dá $f = 1$ se $\tau$ for igual em toda a seção. Quanto mais desigual a distribuição, maior o $f$.</p>
+
+    <figure style="margin:10px auto;max-width:520px">
+      <svg viewBox="0 0 510 190" width="100%" style="color:var(--text)" role="img" aria-label="Distribuição de tau na altura da seção. Retângulo: parábola com máximo 1,5 vezes a média. Círculo: parábola com máximo 4/3 da média. Em tracejado, a tensão média V/A">
+        <g style="fill:currentColor;font-size:12.5px;font-weight:700" text-anchor="middle"><text x="140" y="18">retângulo: f = 6/5</text><text x="370" y="18">círculo: f = 10/9</text></g>
+        <rect x="40" y="30" width="50" height="120" style="fill:var(--surface-muted);stroke:currentColor;stroke-width:1.5"/>
+        <path d="M120,30 Q300,90 120,150 Z" style="fill:var(--warning);fill-opacity:.3;stroke:var(--warning);stroke-width:2"/>
+        <line x1="120" y1="25" x2="120" y2="155" style="stroke:currentColor;stroke-width:1.2"/>
+        <line x1="180" y1="30" x2="180" y2="150" style="stroke:var(--text-muted);stroke-dasharray:4 3"/>
+        <circle cx="300" cy="90" r="60" style="fill:var(--surface-muted);stroke:currentColor;stroke-width:1.5"/>
+        <path d="M380,30 Q540,90 380,150 Z" style="fill:var(--warning);fill-opacity:.3;stroke:var(--warning);stroke-width:2"/>
+        <line x1="380" y1="25" x2="380" y2="155" style="stroke:currentColor;stroke-width:1.2"/>
+        <line x1="440" y1="30" x2="440" y2="150" style="stroke:var(--text-muted);stroke-dasharray:4 3"/>
+        <g style="fill:var(--text-secondary);font-size:11px">
+          <text x="214" y="94">1,5 τ̄</text><text x="182" y="166" text-anchor="middle">τ̄ = V/A</text><text x="124" y="166" text-anchor="middle">0</text>
+          <text x="463" y="94">1,33 τ̄</text><text x="442" y="166" text-anchor="middle">τ̄</text><text x="384" y="166" text-anchor="middle">0</text></g>
+      </svg>
+      <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">$\tau$ ao longo da altura da seção (em laranja) contra a média $\bar\tau = V/A$ (tracejado). As duas são parábolas, zero no topo e no fundo. A do retângulo é mais "pontuda" (pico de 1,5 contra 1,33), por isso o $f$ dela é maior.</figcaption>
+    </figure>
+
+    <p><strong>Exemplo 1: retângulo $b\times h$ (só polinômio).</strong></p>
+    <ol>
+      <li>Momento estático da parte acima de $y$: área $b\left(\frac h2 - y\right)$ vezes a distância do centroide dela, $\frac12\left(\frac h2 + y\right)$: $\ Q = \frac b2\left(\frac{h^2}{4} - y^2\right)$.</li>
+      <li>Jourawski, com $I = \frac{bh^3}{12}$ e largura constante $b$: $\ \tau = \frac{VQ}{Ib} = \frac{3V}{2bh}\left(1 - \frac{4y^2}{h^2}\right) = \frac32\,\bar\tau\,(1 - u^2)$, com $u = \frac{2y}{h}$ indo de −1 (fundo) a 1 (topo).</li>
+      <li>Média de $(1 - u^2)^2$ entre −1 e 1: $\ \frac12\int_{-1}^{1}(1 - 2u^2 + u^4)\,du = \frac12\left(2 - \frac43 + \frac25\right) = \frac{8}{15}$.</li>
+      <li>Então $\overline{\tau^2} = \left(\frac32\right)^2\cdot\frac{8}{15}\,\bar\tau^{\,2} = \frac65\,\bar\tau^{\,2}$, e $\boxed{f_{ret} = 6/5}$. Pela fórmula do passo 4: $\frac{A}{I^2}\int\left(\frac Qb\right)^2 b\,dy = \frac{144}{bh^5}\cdot\frac{bh^5}{120} = \frac65$ ✓.</li></ol>
+
+    <p><strong>Exemplo 2: círculo de raio $R$</strong> (o deste exercício).</p>
+    <ol>
+      <li>Largura na altura $y$: $b = 2\sqrt{R^2 - y^2}$ (a corda do círculo).</li>
+      <li>Momento estático da parte acima de $y$: $Q = \int_y^R \eta\cdot 2\sqrt{R^2 - \eta^2}\,d\eta = \frac23(R^2 - y^2)^{3/2}$ (substituição $w = R^2 - \eta^2$).</li>
+      <li>Então $\frac Qb = \frac{R^2 - y^2}{3}$ e $\tau = \frac{V(R^2 - y^2)}{3I}$. No centro: $\tau_{max} = \frac{VR^2}{3\cdot\pi R^4/4} = \frac43\cdot\frac{V}{\pi R^2} = \frac43\,\bar\tau$.</li>
+      <li>A integral do passo 4, com $dA = b\,dy$: $\ \int_{-R}^{R}\frac{(R^2 - y^2)^2}{9}\cdot 2\sqrt{R^2 - y^2}\,dy = \frac29\int_{-R}^{R}(R^2 - y^2)^{5/2}dy = \frac29\cdot\frac{5\pi R^6}{16} = \frac{5\pi R^6}{72}$ (com $y = R\,\text{sen}\,\theta$, a integral vira $R^6\int\cos^6\theta\,d\theta = \frac{5\pi}{16}R^6$).</li>
+      <li>$f_c = \frac{A}{I^2}\cdot\frac{5\pi R^6}{72} = \frac{\pi R^2\cdot 16}{\pi^2R^8}\cdot\frac{5\pi R^6}{72} = \frac{80}{72} = \boxed{\frac{10}{9}}$.</li></ol>
+    <p>Por que o círculo dá menos que o retângulo, se as duas distribuições são parábolas? No círculo há pouca área perto do topo e do fundo, onde $\tau$ é pequeno, e muita perto do meio, onde $\tau$ é grande. A distribuição fica mais "parelha" com a média, e $f$ fica mais perto de 1.</p>
+
+    <p style="font-size:13.5px;color:var(--text-secondary)"><strong>Até onde vale.</strong> O 10/9 e o 6/5 dependem das hipóteses acima, principalmente "só $\tau_{xy}$" e "$\tau$ uniforme na largura". Uma teoria mais refinada (Cowper, 1966, que trata a seção como problema de elasticidade) dá, com ν = 0,3, $f \approx 1{,}13$ para o círculo e $1{,}18$ para o retângulo: diferença de 2%. Como a cortante inteira já pesa 0,1% neste exercício, isso não muda nada. Na disciplina, use os valores do slide. Leitura útil: $GA/f$ funciona como a "rigidez ao escorregamento" da seção, como se só a área $A/f$ trabalhasse.</p>
+    <p style="font-size:13px;color:var(--text-secondary)">Contas em <code>calc/calc_s14_ex2_detalhado.py</code> (seções 5 e 9): Jourawski simbólico, as duas integrais e a comparação com Cowper.</p>
+
+    <h4 style="margin-top:22px">Outras formas de resolver</h4>
+    <p><strong>Forma 2: Crotti-Engesser (2º Castigliano), $\delta = \partial U^*/\partial P$.</strong> Monte a mesma $U^*$ da solução (passo 3, "A energia de cada jeito") e derive em relação a $P$ em vez de igualar a $P\delta/2$:</p>
+    <div class="math-box">$$\delta_{v,C} = \frac{\partial}{\partial P}\left(\frac{3P^2L^3}{16EI} + \frac{P^2L^3}{8GI_p} + \frac{3f_cP^2L}{4GA}\right) = \frac{3PL^3}{8EI} + \frac{PL^3}{4GI_p} + \frac32\frac{f_cPL}{GA}\ ✓$$</div>
+    <p>Aqui dá o mesmo trabalho que o P.T.E. A vantagem aparece quando há mais de uma carga ou quando se pede o deslocamento de um ponto sem carga (aí entra a carga fictícia da aula 15): o P.T.E. não serve nesses casos, e Crotti-Engesser serve.</p>
+
+    <p><strong>Forma 3: somar quedas (superposição, sem energia).</strong> Use só as fórmulas do balanço da P1 e pense em cada deformação como uma "queda" separada de C:</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Causa</th><th>Como pensar</th><th>Queda de C</th></tr></thead><tbody>
+      <tr><td>BC dobra</td><td>BC é um balanço de comprimento $L/2$ engastado em B</td><td>$\frac{P(L/2)^3}{3EI} = \frac{PL^3}{24EI}$</td></tr>
+      <tr><td>AB dobra</td><td>leve $P$ até B: AB é um balanço de comprimento $L$; B desce e leva BC junto</td><td>$\frac{PL^3}{3EI}$</td></tr>
+      <tr><td>AB torce</td><td>torque $T = PL/2$ gira a seção B de $\varphi = \frac{TL}{GI_p}$; C está a $L/2$ do eixo de AB e desce $\varphi\cdot\frac L2$ (como a ponta de um ponteiro que gira)</td><td>$\frac{PL^2}{2GI_p}\cdot\frac L2 = \frac{PL^3}{4GI_p}$</td></tr>
+      <tr><td>Cortante</td><td>cada barra escorrega $f_cV\ell/GA$</td><td>$\frac{f_cP(3L/2)}{GA}$</td></tr></tbody></table></div>
+    <p>A soma é exatamente a resposta ✓. Um detalhe: ao dobrar, AB também <em>inclina</em> em B. Essa inclinação gira BC em torno de uma linha paralela à própria BC, e BC só gira em torno de si mesma: C não desce por causa dela. Por isso não há quinta parcela.</p>
+    <p style="font-size:13.5px;color:var(--text-secondary)"><strong>A ligação entre as formas:</strong> cada deformação funciona como uma mola, e as molas estão <strong>em série</strong> (a força $P$ passa inteira por todas). Em série, as flexibilidades ($1/k$) se somam. A Forma 3 soma as quedas $P/k_i$; as Formas 1 e 2 somam as energias $P^2/2k_i$. É a mesma conta escrita de dois jeitos.</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Forma</th><th>Quando preferir</th></tr></thead><tbody>
+      <tr><td>1 · P.T.E. ($P\delta/2 = U^*$)</td><td>uma só carga e o deslocamento pedido é o dela (o caso deste exercício e o que o enunciado exige).</td></tr>
+      <tr><td>2 · Crotti-Engesser ($\partial U^*/\partial P$)</td><td>várias cargas, ou deslocamento num ponto sem carga (com carga fictícia). É a ferramenta geral da P2.</td></tr>
+      <tr><td>3 · Somar quedas</td><td>conferir a resposta da energia, ou estruturas simples em que cada queda tem fórmula pronta. Fica difícil quando há muitos trechos ou hiperestática.</td></tr></tbody></table></div>
   </article>
 <h3 class="sub" id="t11-demais" data-nav="Demais exercícios">Demais exercícios</h3>
 <article class="ex" id="s14-ex5">

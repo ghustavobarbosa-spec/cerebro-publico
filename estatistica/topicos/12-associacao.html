@@ -302,6 +302,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex"><a href="#tabela-dupla">Tabela de dupla entrada</a></li>
 <li class="nav-ex"><a href="#homog-indep">Homogeneidade × independência</a></li>
 <li class="nav-ex"><a href="#interpretar">Interpretar</a></li>
+<li class="nav-ex"><a href="#lista-prof">Lista da professora</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
 </ul></li>
@@ -358,11 +359,15 @@ $\chi^2=z^2$ (ficha <a href="10-duas-proporcoes-e-variancias.html">10</a>).</p>
 <h3 class="sub" id="interpretar" data-nav="Interpretar">Depois de rejeitar: onde está a associação</h3>
 <p>O χ² diz que há associação, não qual. Olhe as maiores parcelas $(O-E)^2/E$ e o sinal de $O-E$ nessas células: é ali que o
 observado se afasta do cenário independente.</p>
+<h3 class="sub" id="lista-prof" data-nav="Lista da professora">Para treinar: lista complementar da professora</h3>
+<p>Lista "Testes de Aderência e Associação" (prof.ª Aline, 2026/2), partes 2 e 3. Valores refeitos em Python.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Item</th><th>Tabela</th><th>Pergunta</th><th>χ² conferido</th><th>g.l. · crítico</th><th>Decisão</th></tr></thead><tbody><tr><td>2.1</td><td>2×4: escola × faixa de nota, α = 1%</td><td>homogeneidade</td><td>7,08</td><td>3 · 11,34</td><td>não rejeita</td></tr><tr><td>2.2</td><td>2×2: droga A/B × eficaz, α = 1%</td><td>homogeneidade</td><td>1,34</td><td>1 · 6,63</td><td>não rejeita</td></tr><tr><td>3.1</td><td>2×3: opinião × residência, α = 5%</td><td>independência</td><td>19,67</td><td>2 · 5,99</td><td>rejeita</td></tr><tr><td>3.2</td><td>2×2: sexo × fidelidade (100/200 e 120/200), α = 5%</td><td>independência</td><td>4,04 (lista: 4,06)</td><td>1 · 3,84</td><td>rejeita, de raspão (valor-p 0,044)</td></tr></tbody></table></div>
+<p class="tbl-cap">O item 3.3 da lista é o teste t da correlação: ver as limitações abaixo.</p>
 
 </section>
 
 <section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
-<ul><li><strong>$E_{ij}\ge5$ em todas as células</strong> (Morettin, fim da §14.4). Se falhar, agrupe categorias vizinhas e recalcule os g.l.</li><li><strong>Associação não é causa</strong>, e o χ² não mede a força nem a direção: só a existência.</li><li><strong>Contagens, não porcentagens.</strong> O χ² com porcentagens no lugar de frequências absolutas dá um número sem sentido (depende de $n$).</li><li><strong>Sem correção de Yates</strong> no curso (o livro também não usa). Se uma calculadora aplicar, o valor muda em tabelas 2×2.</li><li>Cada indivíduo em uma única célula; observações independentes.</li></ul>
+<ul><li><strong>$E_{ij}\ge5$ em todas as células</strong> (Morettin, fim da §14.4). Se falhar, agrupe categorias vizinhas e recalcule os g.l.</li><li><strong>Associação não é causa</strong>, e o χ² não mede a força nem a direção: só a existência.</li><li><strong>Contagens, não porcentagens.</strong> O χ² com porcentagens no lugar de frequências absolutas dá um número sem sentido (depende de $n$).</li><li><strong>Sem correção de Yates</strong> no curso (o livro também não usa). Se uma calculadora aplicar, o valor muda em tabelas 2×2.</li><li>Cada indivíduo em uma única célula; observações independentes.</li><li><strong>Variáveis quantitativas</strong> não entram no χ² sem agrupar. Para elas há o teste t da correlação (lista da professora, item 3.3): $H_0:\rho=0$, $t=r\sqrt{(n-2)/(1-r^2)}$ com $n-2$ g.l. Com $r=0{,}6$ e $n=12$: $t=2{,}37&gt;2{,}228$, rejeita (a lista imprime 3,37, mas a conta dá 2,37; a conclusão não muda). <strong>Não está no formulário</strong> da P2.</li></ul>
 </section>
 
 <section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>

@@ -299,6 +299,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ch"><a href="#t13-ler-h">3 · Onde ler</a><ul class="nav-sub">
 </ul></li>
 <li class="nav-ch"><a href="#t13-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t13-quadro">Quadro dos teoremas</a></li>
 <li class="nav-ex"><a href="#t13-ideia">A ideia</a></li>
 <li class="nav-ex"><a href="#t13-7passos">Os 7 passos da aula 17</a></li>
 <li class="nav-ex"><a href="#t13-h1">Energia complementar mínima</a></li>
@@ -350,6 +351,64 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
   <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
     <h2 id="t13-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
 
+        <h3 class="sub" id="t13-quadro" data-nav="Quadro dos teoremas">Quadro comparativo: P.T.E., Crotti-Engesser, 2º e 1º Castigliano</h3>
+        <p>Os quatro saem da mesma ideia: <strong>o trabalho das cargas vira energia guardada na estrutura</strong>. Eles diferem em três escolhas: qual energia ($U$ ou $U^*$), escrita em função de quê
+        (forças ou deslocamentos) e o que se faz com ela (igualar ou derivar). A energia complementar mínima desta ficha é Crotti-Engesser com o deslocamento conhecido (linha de baixo).</p>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th></th><th>P.T.E.</th><th>Crotti-Engesser</th><th>2º Castigliano</th><th>1º Castigliano</th></tr></thead><tbody>
+          <tr><td><strong>Fórmula</strong></td><td>$\frac12P\,\delta = U^*$</td><td>$\delta_i = \dfrac{\partial U^*}{\partial P_i}$</td><td>$\delta_i = \dfrac{\partial U}{\partial P_i}$</td><td>$P_i = \dfrac{\partial U}{\partial \delta_i}$</td></tr>
+          <tr><td><strong>O que faz</strong></td><td>iguala trabalho e energia</td><td>deriva a energia em relação a uma <em>força</em></td><td>deriva a energia em relação a uma <em>força</em></td><td>deriva a energia em relação a um <em>deslocamento</em></td></tr>
+          <tr><td><strong>Energia usada</strong></td><td>complementar $U^*$</td><td>complementar $U^*$</td><td>de deformação $U$</td><td>de deformação $U$</td></tr>
+          <tr><td><strong>Escrita em função de</strong></td><td>cargas</td><td>cargas ($N$, $M$, $T$ por trecho)</td><td>cargas</td><td>deslocamentos ($U = \sum k\Delta^2/2$)</td></tr>
+          <tr><td><strong>Pergunta que responde</strong></td><td>"quanto desce o ponto da única carga?"</td><td>"quanto se move <em>qualquer</em> ponto, em qualquer direção?"</td><td>a mesma do Crotti-Engesser</td><td>"que força produz este deslocamento?"</td></tr>
+          <tr><td><strong>Quantas cargas</strong></td><td>uma só, concentrada, sem distribuída</td><td>quantas quiser (independentes)</td><td>quantas quiser</td><td>quantas quiser</td></tr>
+          <tr><td><strong>Ponto sem carga ou rotação</strong></td><td>não</td><td>sim, com carga fictícia</td><td>sim, com carga fictícia</td><td>sim, impondo o deslocamento</td></tr>
+          <tr><td><strong>Material não linear (elástico)</strong></td><td>não (o ½ supõe reta)</td><td><strong>sim</strong></td><td>não</td><td><strong>sim</strong></td></tr>
+          <tr><td><strong>Hiperestáticas</strong></td><td>não</td><td>sim: $\partial U^*/\partial X = 0$ (energia complementar mínima)</td><td>sim, no caso linear</td><td>sim, se a cinemática for simples</td></tr>
+          <tr><td><strong>Quando usar no curso</strong></td><td>conferência rápida, uma carga</td><td><strong>o padrão</strong>: fichas 12 e 13</td><td>é o que o Gere chama de "teorema de Castigliano"</td><td>barra rígida sobre molas ou hastes (um grau de liberdade)</td></tr>
+          <tr><td><strong>Balanço, $P$ na ponta</strong></td><td>$\frac12P\delta = \frac{P^2L^3}{6EI}$ ⇒ $\delta = \frac{PL^3}{3EI}$</td><td>$\frac{\partial}{\partial P}\frac{P^2L^3}{6EI} = \frac{PL^3}{3EI}$</td><td>idem (linear: $U = U^*$)</td><td>$U = \frac{3EI}{2L^3}\delta^2$ ⇒ $P = \frac{3EI}{L^3}\delta$</td></tr>
+        </tbody></table></div>
+        <p><strong>Em uma frase cada:</strong> o P.T.E. é o atalho de uma carga só; Crotti-Engesser é a ferramenta geral (força → deslocamento); o 2º Castigliano é o Crotti-Engesser do caso linear, com $U$ no
+        lugar de $U^*$ (em tudo deste curso as duas contas são idênticas); o 1º Castigliano faz o caminho inverso (deslocamento → força).</p>
+        <details class="deep"><summary>Passo a passo detalhado: de onde vem cada teorema e por que $U$ e $U^*$ só se confundem no caso linear</summary><div class="deep-body">
+          <h5>1. As duas energias são duas áreas do mesmo gráfico</h5>
+          <p>Carregue uma peça elástica devagar, de zero até $(\delta, P)$, e desenhe a curva força × deslocamento. Ela divide o retângulo $P\cdot\delta$ em duas áreas:</p>
+          <figure style="margin:10px auto;max-width:420px">
+            <svg viewBox="0 0 360 230" width="100%" style="color:var(--text)" role="img" aria-label="Gráfico força P contra deslocamento delta, com curva que começa plana e sobe (material que endurece). A área entre a curva e o eixo delta é a energia de deformação U; a área entre a curva e o eixo P é a energia complementar U estrela. As duas somam o retângulo P vezes delta">
+              <defs><marker id="t13q-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+              <path d="M60,190 Q180,190 300,40 L60,40 Z" style="fill:var(--warning);fill-opacity:.25"/>
+              <path d="M60,190 Q180,190 300,40 L300,190 Z" style="fill:var(--accent);fill-opacity:.3"/>
+              <path d="M60,190 Q180,190 300,40" style="fill:none;stroke:currentColor;stroke-width:2.5"/>
+              <g style="stroke:currentColor;stroke-width:1.5"><line x1="60" y1="190" x2="335" y2="190" marker-end="url(#t13q-k)"/><line x1="60" y1="190" x2="60" y2="15" marker-end="url(#t13q-k)"/></g>
+              <g style="stroke:var(--text-muted);stroke-dasharray:4 4"><line x1="300" y1="40" x2="300" y2="190"/><line x1="60" y1="40" x2="300" y2="40"/></g>
+              <g style="fill:currentColor;font-size:13px"><text x="340" y="194">δ</text><text x="52" y="14" text-anchor="end">P</text><text x="300" y="208" text-anchor="middle">δ</text><text x="52" y="44" text-anchor="end">P</text></g>
+              <text x="245" y="160" text-anchor="middle" style="fill:currentColor;font-size:13px;font-weight:700">U = ∫P dδ</text>
+              <text x="140" y="85" text-anchor="middle" style="fill:var(--warning-ink);font-size:13px;font-weight:700">U* = ∫δ dP</text>
+            </svg>
+            <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">$U$ (verde): área entre a curva e o eixo $\delta$. $U^*$ (laranja): área entre a curva e o eixo $P$. Sempre $U + U^* = P\,\delta$.</figcaption>
+          </figure>
+          <ul><li><strong>1º Castigliano:</strong> aumente o deslocamento em $d\delta$. A área de baixo cresce uma faixa vertical de altura $P$: $dU = P\,d\delta$, logo $P = \partial U/\partial\delta$.</li>
+              <li><strong>Crotti-Engesser:</strong> aumente a força em $dP$. A área de cima cresce uma faixa horizontal de largura $\delta$: $dU^* = \delta\,dP$, logo $\delta = \partial U^*/\partial P$.</li></ul>
+          <p>Nenhum dos dois supôs curva reta: por isso os dois valem com material não linear (desde que elástico, isto é, que descarregue pela mesma curva).</p>
+          <h5>2. Quando a curva é reta, as duas áreas são iguais</h5>
+          <p>Com material elástico-linear a curva é uma reta e as duas áreas são triângulos iguais: $U = U^* = \frac12P\delta$. Daí saem os outros dois:</p>
+          <ul><li><strong>2º Castigliano:</strong> como $U = U^*$, troque $U^*$ por $U$ no Crotti-Engesser: $\delta = \partial U/\partial P$. É a mesma conta ($\int M^2/2EI$ derivada em $P$), só com outro nome para a energia.</li>
+              <li><strong>P.T.E.:</strong> o trabalho da carga é a área do triângulo, $\frac12P\delta$, e ele vira energia: $\frac12P\delta = U^*$. O ½ é a área do triângulo: só vale com reta, e só com uma carga, porque com duas não dá para separar quanto cada uma trabalhou (o "cofrinho" do pivô 9, <a href="12-teoremas-de-castigliano.html#s15-ex3-h">ficha 12 (Crotti-Engesser e Castigliano)</a>).</li></ul>
+          <h5>3. Um exemplo em que eles se separam</h5>
+          <p>Mola que endurece, $P = k\delta^2$ (é a curva da figura). As áreas: $U = \frac{k\delta^3}{3} = \frac13P\delta$ e $U^* = \frac23P\delta$, diferentes.</p>
+          <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Teorema</th><th>Conta</th><th>Resultado</th></tr></thead><tbody>
+            <tr><td>1º Castigliano</td><td>$\partial U/\partial\delta = k\delta^2$</td><td>$= P$ ✓</td></tr>
+            <tr><td>Crotti-Engesser</td><td>$U^* = \frac{2P^{3/2}}{3\sqrt k}$ ⇒ $\partial U^*/\partial P = \sqrt{P/k}$</td><td>$= \delta$ ✓</td></tr>
+            <tr><td>2º Castigliano</td><td>$U = \frac{P^{3/2}}{3\sqrt k}$ ⇒ $\partial U/\partial P = \frac12\sqrt{P/k}$</td><td>$= \delta/2$ ✗</td></tr>
+            <tr><td>P.T.E.</td><td>$\frac12P\delta = U^*$ ⇒ $\delta = 2U^*/P$</td><td>$= \frac43\delta$ ✗</td></tr>
+          </tbody></table></div>
+          <p>É por isso que o professor ensina Crotti-Engesser com $U^*$ e não o 2º Castigliano: a conta é a mesma em tudo deste curso, mas a versão com $U^*$ continua certa quando a mola ou o material deixam de ser lineares.</p>
+          <h5>4. Como escolher na prova</h5>
+          <ol><li><strong>Uma carga só e o deslocamento é o dela?</strong> P.T.E. (ou Crotti-Engesser, que dá o mesmo).</li>
+              <li><strong>Qualquer outro deslocamento ou rotação, várias cargas, carga distribuída?</strong> Crotti-Engesser, criando a carga fictícia se preciso (<a href="12-teoremas-de-castigliano.html">ficha 12 (Crotti-Engesser e Castigliano)</a>).</li>
+              <li><strong>Reação que o equilíbrio não dá?</strong> Crotti-Engesser com o deslocamento conhecido: $\partial U^*/\partial X = 0$ (esta ficha).</li>
+              <li><strong>Barra rígida apoiada em molas ou hastes, com um deslocamento que descreve tudo?</strong> 1º Castigliano: escreva cada alongamento em função desse deslocamento, some $k\Delta^2/2$ e derive.</li>
+              <li><strong>Viu "teorema de Castigliano" no Gere?</strong> É o 2º, versão linear: mesma conta do Crotti-Engesser.</li></ol>
+          <p style="font-size:12.5px;color:var(--text-secondary)">Contas em <code>calc/calc_quadro_teoremas.py</code> (balanço pelos quatro teoremas e a mola $P = k\delta^2$).</p></div></details>
         <h3 class="sub" id="t13-ideia" data-nav="A ideia">A ideia: liberar um vínculo e devolvê-lo pela energia</h3>
         <p>Numa estrutura hiperestática o equilíbrio dá menos equações que incógnitas. A aula 17 resolve isso em dois movimentos. Primeiro, <strong>libera</strong> $n = g$ vínculos e
         põe no lugar deles as reações correspondentes $X_j$ como se fossem cargas externas: a estrutura que sobra é a <strong>E.I.F. (estrutura isostática fundamental)</strong>,

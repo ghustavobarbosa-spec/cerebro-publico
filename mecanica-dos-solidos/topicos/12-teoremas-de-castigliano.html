@@ -440,11 +440,117 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 
     <div class="step" data-n="1"><h4>Classificar</h4><p>Balanço isostático sob carga distribuída. Duas limitações do P.T.E. ao mesmo tempo: carga distribuída e deslocamentos sem esforço correspondente. Ferramenta: Crotti-Engesser com esforços <strong>criados</strong> em B.</p>
       <div class="callout concept"><span class="co-t">Conceito: carga fictícia ("é necessário criá-los")</span>
-        <p>Crotti-Engesser só dá deslocamentos que têm uma carga correspondente. Se não há força vertical em B, <em>crie</em> uma ($P$); se não há binário, crie $M_B$ (aula 15 p.20). Escreva $U^*(q, P, M_B)$, derive e, <strong>só depois</strong>, faça $P = M_B = 0$. A derivada guarda a informação "quanto B se move por unidade de carga em B", que é justamente o deslocamento. A apostila compara com a <em>sopa de pedra</em>: sem a pedra não há sopa, mas no fim ela não muda o sabor.</p></div></div>
+        <p>Crotti-Engesser só dá deslocamentos que têm uma carga correspondente. Se não há força vertical em B, <em>crie</em> uma ($P$); se não há binário, crie $M_B$ (aula 15 p.20). Escreva $U^*(q, P, M_B)$, derive e, <strong>só depois</strong>, faça $P = M_B = 0$. A derivada guarda a informação "quanto B se move por unidade de carga em B", que é justamente o deslocamento. A apostila compara com a <em>sopa de pedra</em>: sem a pedra não há sopa, mas no fim ela não muda o sabor.</p></div>
+    <details class="deep"><summary>Passo a passo detalhado: por que não basta calcular $U^* = \int \frac{M^2}{2EI}ds$?</summary><div class="deep-body">
+      <p><strong>A dúvida.</strong> "Corto a viga a uma distância $s$ do engaste, faço o equilíbrio do pedaço da esquerda (reação do engaste + carga distribuída), acho $M(s) = -\frac{qL^2}{2} + \frac{qs^2}{2}$, integro $\frac{M^2}{2EI}$ e pronto. O momento é máximo em $s = 0$ e cai até zero na ponta. Por que isso não resolve?" Há dois tropeços, um pequeno e um grande.</p>
+
+      <h5>1. O tropeço pequeno: faltou uma força no pedaço da esquerda</h5>
+      <p>O engaste segura a viga de <strong>dois jeitos</strong>: um binário $M_A = \frac{qL^2}{2}$ (para ela não girar) e uma força para cima $R_A = qL$ (para ela não cair). As duas aparecem no pedaço da esquerda, e a força $R_A$, a uma distância $s$ do corte, também gira o pedaço.</p>
+      <figure style="margin:10px auto;max-width:520px">
+        <svg viewBox="0 0 440 190" width="100%" style="color:var(--text)" role="img" aria-label="Pedaço da esquerda do balanço, do engaste A até o corte a uma distância s. Agem o binário do engaste, a força para cima R A igual a q L, a carga distribuída q no trecho s, com resultante q s no meio do trecho, e o momento interno M de s no corte. O resto da viga, até B, aparece tracejado">
+          <defs><marker id="s15e3-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+            <marker id="s15e3-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--warning)"/></marker></defs>
+          <rect x="40" y="60" width="10" height="70" style="fill:var(--surface-muted);stroke:currentColor;stroke-width:1.5"/>
+          <rect x="50" y="88" width="210" height="14" style="fill:var(--accent);fill-opacity:.3;stroke:currentColor;stroke-width:1.5"/>
+          <rect x="260" y="88" width="140" height="14" style="fill:none;stroke:var(--text-muted);stroke-dasharray:5 4"/>
+          <line x1="260" y1="78" x2="260" y2="112" style="stroke:currentColor;stroke-width:2"/>
+          <g style="stroke:currentColor;stroke-width:1.2"><line x1="70" y1="58" x2="70" y2="86" marker-end="url(#s15e3-k)"/><line x1="110" y1="58" x2="110" y2="86" marker-end="url(#s15e3-k)"/><line x1="150" y1="58" x2="150" y2="86" marker-end="url(#s15e3-k)"/><line x1="190" y1="58" x2="190" y2="86" marker-end="url(#s15e3-k)"/><line x1="230" y1="58" x2="230" y2="86" marker-end="url(#s15e3-k)"/><line x1="55" y1="58" x2="258" y2="58"/></g>
+          <line x1="58" y1="160" x2="58" y2="106" style="stroke:var(--warning);stroke-width:3" marker-end="url(#s15e3-w)"/>
+          <path d="M 28 70 A 32 32 0 0 0 28 120" style="fill:none;stroke:currentColor;stroke-width:2" marker-end="url(#s15e3-k)"/>
+          <path d="M 285 75 A 22 22 0 0 1 285 115" style="fill:none;stroke:currentColor;stroke-width:2" marker-end="url(#s15e3-k)"/>
+          <line x1="50" y1="178" x2="260" y2="178" style="stroke:currentColor;stroke-width:1.2" marker-start="url(#s15e3-k)" marker-end="url(#s15e3-k)"/>
+          <g style="fill:currentColor;font-size:12px">
+            <text x="150" y="50" text-anchor="middle">q (resultante q·s no meio do trecho, a s/2 do corte)</text>
+            <text x="14" y="98" text-anchor="middle">M_A</text><text x="300" y="100">M(s)</text>
+            <text x="155" y="172" text-anchor="middle">s</text><text x="404" y="100">B</text><text x="44" y="146" text-anchor="end">A</text></g>
+          <text x="66" y="150" style="fill:var(--warning-ink);font-size:12px;font-weight:700">R_A = qL  ← a esquecida</text>
+        </svg>
+        <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">Pedaço da esquerda (verde). Três coisas giram em torno do corte: o binário do engaste, a força do engaste (braço $s$) e a carga até o corte (resultante $qs$, braço $s/2$).</figcaption>
+      </figure>
+      <div class="math-box">$$M(s) = \underbrace{-\frac{qL^2}{2}}_{\text{binário do engaste}} + \underbrace{qL\cdot s}_{\text{força do engaste}} - \underbrace{qs\cdot\frac{s}{2}}_{\text{carga até o corte}} = -\frac{q\,(L-s)^2}{2}$$</div>
+      <p>A fórmula sem $R_A$ acerta as duas pontas por coincidência e erra no meio (a diferença é $qs(L-s)$, que zera em $s = 0$ e em $s = L$):</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$s$</th><th>Sem $R_A$: $-\frac{qL^2}{2} + \frac{qs^2}{2}$</th><th>Correto: $-\frac{q(L-s)^2}{2}$</th></tr></thead><tbody>
+        <tr><td>$0$ (engaste)</td><td>$-qL^2/2$</td><td>$-qL^2/2$</td></tr>
+        <tr><td>$L/2$</td><td>$-3qL^2/8$</td><td>$-qL^2/8$</td></tr>
+        <tr><td>$L$ (ponta B)</td><td>$0$</td><td>$0$</td></tr>
+      </tbody></table></div>
+      <p>O resto da intuição está certo: o momento é máximo (em módulo) no engaste e cai até zero na ponta. <strong>Dica:</strong> num balanço, olhe o pedaço do lado da ponta livre. Lá não há reação nenhuma, só a carga, e sai direto $M = -\frac{qx^2}{2}$ com $x$ medido a partir de B. É o mesmo momento ($x = L - s$), sem precisar das reações. Por isso a resolução mede a partir de B.</p>
+
+      <h5>2. Com o momento certo, a integral funciona: a energia está certa</h5>
+      <div class="math-box">$$U^* = \int_0^L\frac{1}{2EI}\left[\frac{q(L-s)^2}{2}\right]^2 ds = \frac{q^2}{8EI}\int_0^L (L-s)^4\,ds = \frac{q^2L^5}{40\,EI}$$</div>
+      <p>Medindo a partir de B dá o mesmo valor. Com o momento sem $R_A$ sairia $\frac{q^2L^5}{15EI}$, 8/3 vezes maior. A energia é a soma, ao longo da viga, do "esforço guardado" em cada fatia: <strong>um número só</strong>. É aí que mora o tropeço grande.</p>
+
+      <h5>3. O tropeço grande: o número total não diz quanto B desceu</h5>
+      <div class="callout concept"><span class="co-t">O cofrinho da turma</span>
+        <p>Cada criança da turma põe um pouco de dinheiro num cofrinho. No fim você conta: R$ 100. Alguém pergunta: "quanto o Pedro pôs?". Não dá para saber, porque o total não diz quanto cada um pôs.</p></div>
+      <p>A carga distribuída é a turma inteira: um pedacinho de carga $q\,ds$ em cada ponto, e <strong>cada ponto desce uma quantidade diferente</strong> $v(s)$. Cada pedacinho faz o seu trabalho, e o trabalho da carga é a soma de todos eles:</p>
+      <div class="math-box">$$W = \frac12\int_0^L q\,v(s)\,ds = U^* \quad\Rightarrow\quad \int_0^L v(s)\,ds = \frac{2U^*}{q} = \frac{qL^4}{20EI}\cdot L$$</div>
+      <p>O P.T.E. entrega o <strong>total do cofrinho</strong>: a área embaixo da linha elástica. Dividindo por $L$, isso dá a descida média dos pontos da viga, $\frac{qL^4}{20EI}$, que é só $\frac25$ da descida da ponta ($\frac{qL^4}{8EI}$). A ponta, que é o ponto que mais desce, não aparece separada.</p>
+      <div class="callout warn"><span class="co-t">Armadilha: fingir que a carga toda está na ponta</span>
+        <p>Trocar a carga pela resultante $qL$ e escrever $\frac12(qL)\,\delta = U^*$ dá $\delta = \frac{qL^4}{20EI}$: a descida média, 40% da resposta certa. A resultante serve para o equilíbrio, mas não para o trabalho, porque cada pedacinho de carga anda uma distância diferente.</p></div>
+      <p><strong>Com uma força só, o cofrinho tem um dono só.</strong> Se houvesse apenas uma força $P$ na ponta, $\frac12P\,\delta_B = U^*$ daria $\delta_B$ direto. Essa é a limitação do P.T.E. citada no passo 1: ele só funciona com uma carga concentrada e só dá o deslocamento dela (<a href="09-trabalho-e-energia.html#t09-pte">ficha 09 (Trabalho, energia e P.T.E.)</a>).</p>
+
+      <h5>4. Derivar em relação a $q$ também não resolve</h5>
+      <div class="math-box">$$\frac{\partial U^*}{\partial q} = \frac{qL^5}{20EI} = \int_0^L v(s)\,ds$$</div>
+      <p>Crotti-Engesser funciona, mas responde outra pergunta: o "deslocamento" que corresponde a uma carga espalhada é a <strong>área</strong> varrida pela viga, de novo a soma de todos os pontos, e não a descida de B.</p>
+
+      <h5>5. A pedra da sopa: pôr uma conta separada só para B</h5>
+      <p>Para perguntar sobre B, é preciso pôr uma carga <strong>em B</strong>. Criando $P$ na ponta ($M = -\frac{qx^2}{2} - Px$, com $x$ a partir de B):</p>
+      <div class="math-box">$$U^*(q, P) = \underbrace{\frac{q^2L^5}{40EI}}_{\text{só } q} + \underbrace{P\cdot\frac{qL^4}{8EI}}_{\text{termo cruzado}} + \underbrace{\frac{P^2L^3}{6EI}}_{\text{só } P}\qquad\Rightarrow\qquad \left.\frac{\partial U^*}{\partial P}\right|_{P=0} = \frac{qL^4}{8EI}$$</div>
+      <p>O termo cruzado é $P$ vezes a descida de B causada por $q$: é a "conta de B" dentro do cofrinho. A derivada em $P$ lê exatamente essa conta, e depois $P = 0$ tira a pedra da sopa sem apagar a informação.</p>
+      <div class="answer"><strong>Resumo:</strong> a integral $\int\frac{M^2}{2EI}ds$ está certa (com $R_A$ no momento) e dá a energia certa. O erro é esperar que <strong>um número total</strong> diga o deslocamento de <strong>um ponto específico</strong> quando a carga está espalhada. Energia total → área sob a elástica; descida de B → carga em B.</div>
+      <p style="font-size:12.5px;color:var(--text-secondary)">Contas em <code>calc/calc_s15_ex3_detalhado.py</code> (momento pelos dois lados, $U^*$, linha elástica, $\int v\,ds$, $\partial U^*/\partial q$ e $U^*(q,P)$).</p></div></details></div>
     <div class="step" data-n="2"><h4>Roteiro de dados</h4><p>$q$ (uniforme, ↓), $L$, $EI$ constantes; cortante desprezada (mandado pelo enunciado). Criados: $P$ ↓ e $M_B$ horário em B.</p></div>
     <div class="step" data-n="3"><h4>Incógnita e ferramenta</h4><p>$\delta_{V,B} = \left(\frac{\partial U^*}{\partial P}\right)_{P=M_B=0}$ e $\theta_B = \left(\frac{\partial U^*}{\partial M_B}\right)_{P=M_B=0}$.</p></div>
     <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\delta_{V,B} = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial P}ds\qquad\theta_B = \int_0^L\frac{M_z}{EI}\frac{\partial M_z}{\partial M_B}ds\qquad\text{(aula 15 p.22–23)}$$</div>
-      <p>A regra da cadeia sob a integral evita elevar ao quadrado e depois derivar: $\frac{\partial}{\partial P}\frac{M^2}{2EI} = \frac{M}{EI}\frac{\partial M}{\partial P}$.</p></div>
+      <p>A regra da cadeia sob a integral evita elevar ao quadrado e depois derivar: $\frac{\partial}{\partial P}\frac{M^2}{2EI} = \frac{M}{EI}\frac{\partial M}{\partial P}$.</p>
+    <details class="deep"><summary>Passo a passo detalhado: primeiro integrar ou primeiro derivar? Onde entra a regra da cadeia</summary><div class="deep-body">
+      <p><strong>A dúvida.</strong> Para achar $\delta_{V,B} = \partial U^*/\partial P$, há dois caminhos. <strong>Rota A:</strong> elevar $M$ ao quadrado (distributiva), integrar e achar $U^*(q, P, M_B)$ inteira, e só então derivar. <strong>Rota B:</strong> derivar o que está dentro da integral e só depois integrar. As duas dão o mesmo resultado. A rota B só pula a parte trabalhosa. Abaixo, as duas lado a lado, com $s$ medido a partir de B.</p>
+
+      <h5>1. Rota A: integrar tudo e depois derivar</h5>
+      <p>Com $M = -\left(\frac{qs^2}{2} + Ps + M_B\right)$, o quadrado (o sinal some) tem <strong>6 termos</strong>: 3 quadrados e 3 cruzados.</p>
+      <div class="math-box">$$M^2 = \underbrace{\frac{q^2s^4}{4} + P^2s^2 + M_B^2}_{\text{quadrados}} + \underbrace{qPs^3 + qM_Bs^2 + 2PM_Bs}_{\text{cruzados } (2ab)}$$</div>
+      <p>Integrando cada termo de $0$ a $L$ e dividindo por $2EI$:</p>
+      <div class="math-box">$$U^* = \frac{1}{EI}\left(\frac{q^2L^5}{40} + \frac{P^2L^3}{6} + \frac{M_B^2L}{2} + \frac{qPL^4}{8} + \frac{qM_BL^3}{6} + \frac{PM_BL^2}{2}\right)$$</div>
+      <p>Agora deriva em $P$. Cada termo reage de um jeito:</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Termo de $U^*$</th><th>$\partial/\partial P$</th><th>Sobra em $P = M_B = 0$?</th></tr></thead><tbody>
+        <tr><td>$\frac{q^2L^5}{40EI}$ (não tem $P$)</td><td>$0$</td><td>—</td></tr>
+        <tr><td>$\frac{P^2L^3}{6EI}$</td><td>$\frac{PL^3}{3EI}$</td><td>não</td></tr>
+        <tr><td>$\frac{M_B^2L}{2EI}$ (não tem $P$)</td><td>$0$</td><td>—</td></tr>
+        <tr><td>$\frac{qPL^4}{8EI}$ (cruzado $q \times P$)</td><td>$\frac{qL^4}{8EI}$</td><td><strong>sim: é a resposta</strong></td></tr>
+        <tr><td>$\frac{qM_BL^3}{6EI}$ (não tem $P$)</td><td>$0$</td><td>—</td></tr>
+        <tr><td>$\frac{PM_BL^2}{2EI}$ (cruzado $P \times M_B$)</td><td>$\frac{M_BL^2}{2EI}$</td><td>não</td></tr>
+      </tbody></table></div>
+      <p>Resultado: $\frac{\partial U^*}{\partial P} = \frac{1}{EI}\left(\frac{qL^4}{8} + \frac{PL^3}{3} + \frac{M_BL^2}{2}\right)$, igual ao passo 6. Mas repare no desperdício: você calculou 6 integrais, 3 delas morreram na derivada (não tinham $P$) e mais 2 morreram ao zerar $P$ e $M_B$. <strong>Das 6 contas, 1 servia.</strong></p>
+
+      <h5>2. Por que a regra da cadeia faz a mesma coisa</h5>
+      <p>Olhe um caso pequeno: $(a + b)^2 = a^2 + 2ab + b^2$. Derivando termo a termo em relação a $b$:</p>
+      <div class="math-box">$$\frac{d}{db}\left(a^2 + 2ab + b^2\right) = 0 + 2a + 2b = 2(a + b)$$</div>
+      <p>E pela regra da cadeia, sem abrir o quadrado: "derivada do quadrado = 2 × (o que está dentro) × (derivada do que está dentro)":</p>
+      <div class="math-box">$$\frac{d}{db}(a + b)^2 = 2(a + b)\cdot\underbrace{\frac{d(a+b)}{db}}_{=\,1} = 2(a + b)\ ✓$$</div>
+      <p>É a mesma coisa. Abrir o quadrado <strong>cria</strong> os termos cruzados, e a derivada <strong>apaga</strong> metade deles ($a^2$ some; $2ab$ vira $2a$; $b^2$ vira $2b$). A regra da cadeia já entrega direto o que sobra, sem criar e apagar. Por isso você sentiu que "derivar a soma ao quadrado extrai os termos cruzados": o fator $2(a + b)$ é exatamente a soma das derivadas dos cruzados e do quadrado de $b$.</p>
+      <p>Na viga, $a$, $b$, $c$ são as três parcelas do momento ($\frac{qs^2}{2}$, $Ps$, $M_B$), e $\frac{\partial M}{\partial P} = -s$ faz o papel do "$\frac{d(a+b)}{db} = 1$":</p>
+      <div class="math-box">$$\frac{\partial}{\partial P}\left(\frac{M^2}{2EI}\right) = \frac{2M}{2EI}\cdot\frac{\partial M}{\partial P} = \frac{M}{EI}\frac{\partial M}{\partial P}$$</div>
+
+      <h5>3. Pode passar a derivada para dentro da integral?</h5>
+      <p>Pode, porque nada fora do integrando depende de $P$: os limites ($0$ e $L$) são fixos e $EI$ é constante. Derivar a soma das fatias é o mesmo que somar as derivadas das fatias:</p>
+      <div class="math-box">$$\frac{\partial}{\partial P}\int_0^L \frac{M^2}{2EI}\,ds = \int_0^L \frac{\partial}{\partial P}\left(\frac{M^2}{2EI}\right)ds = \int_0^L \frac{M}{EI}\frac{\partial M}{\partial P}\,ds$$</div>
+
+      <h5>4. Rota B: derivar, zerar e só então integrar (o atalho)</h5>
+      <p>Depois de derivar, a informação de "quanto B se move" já está guardada em $\frac{\partial M}{\partial P} = -s$. Daí em diante pode zerar $P$ e $M_B$ <strong>antes de integrar</strong>, e $M$ fica só com a parte de $q$:</p>
+      <div class="math-box">$$\delta_{V,B} = \int_0^L \frac{1}{EI}\underbrace{\left(-\frac{qs^2}{2}\right)}_{M\text{ com } P = M_B = 0}\underbrace{(-s)}_{\partial M/\partial P}ds = \frac{q}{2EI}\int_0^L s^3\,ds = \frac{qL^4}{8EI}$$
+      $$\theta_B = \int_0^L \frac{1}{EI}\left(-\frac{qs^2}{2}\right)(-1)\,ds = \frac{q}{2EI}\int_0^L s^2\,ds = \frac{qL^3}{6EI}$$</div>
+      <p>Uma integral de um termo só, em vez de seis. O passo 6 manteve $P$ e $M_B$ até o fim só para mostrar os "casos clássicos" de brinde.</p>
+      <div class="callout warn"><span class="co-t">A ordem que importa: derivar → zerar → integrar</span>
+        <p>Zerar $P$ <strong>antes</strong> de derivar estraga tudo: $M$ vira $-\frac{qs^2}{2}$, que não tem $P$, então $\frac{\partial M}{\partial P} = 0$ e a resposta sai zero. A pedra da sopa tem que estar na panela na hora de derivar; depois pode tirar.</p></div>
+
+      <h5>5. Resumo: qual rota usar</h5>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Rota</th><th>Ordem</th><th>Trabalho</th><th>Quando usar</th></tr></thead><tbody>
+        <tr><td>A</td><td>quadrado → integra → deriva → zera</td><td>6 integrais, 5 jogadas fora</td><td>Quando você quer a própria $U^*$ (P.T.E., ou energia pedida no enunciado)</td></tr>
+        <tr><td>B</td><td>deriva (regra da cadeia) → zera → integra</td><td>1 integral por deslocamento</td><td><strong>Sempre que o pedido é um deslocamento</strong> (Crotti-Engesser, carga fictícia)</td></tr>
+      </tbody></table></div>
+      <p>As duas são matematicamente idênticas: a rota B é a rota A com a parte inútil cortada antes de ser calculada. Na prova, use a B.</p>
+      <p style="font-size:12.5px;color:var(--text-secondary)">Contas em <code>calc/calc_s15_ex3_detalhado.py</code>, seção 6 (rotas A e B, atalho e o erro de zerar antes).</p></div></details></div>
     <div class="step" data-n="5"><h4>Esforços internos</h4><p>Com $s$ a partir de B (ponta livre):</p>
       <div class="math-box">$$M_z(s) = -\frac{qs^2}{2} - Ps - M_B\qquad \frac{\partial M_z}{\partial P} = -s\qquad \frac{\partial M_z}{\partial M_B} = -1$$</div></div>
     <div class="step" data-n="6"><h4>Cálculo</h4>
@@ -481,7 +587,56 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
           <li>O peso de BC ($qL$, centrado no meio de BC) faz o mesmo: torção $qL\cdot L/2$ e flexão $qL\,u$ em AB. O peso de AB só flete AB ($qu^2/2$).</li></ul></div>
 
     <div class="step" data-n="2"><h4>Energia de torção e o papel de $GJ = 0{,}8EI$</h4>
-      <p>Ficha: <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>. Para seção circular, $U^*_T = \int \frac{T^2}{2GI_p}dx$ ($J = I_p$). Seção circular cheia com $\nu = 0{,}25$: $G = E/2{,}5$ e $I_p = 2I$, logo $GJ = 0{,}8EI$, o valor dado. A torção é <strong>tão importante quanto a flexão</strong>: numa estrutura 3D ela nunca se despreza (regra da aula 14, <a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>).</p></div>
+      <p>Ficha: <a href="10-energia-na-torcao.html#t10-circ">ficha 10 (Energia na torção)</a>. Para seção circular, $U^*_T = \int \frac{T^2}{2GI_p}dx$ ($J = I_p$). Seção circular cheia com $\nu = 0{,}25$: $G = E/2{,}5$ e $I_p = 2I$, logo $GJ = 0{,}8EI$, o valor dado. A torção é <strong>tão importante quanto a flexão</strong>: numa estrutura 3D ela nunca se despreza (regra da aula 14, <a href="11-energia-na-flexao.html#t11-desp">ficha 11 (Energia na flexão)</a>).</p>
+    <details class="deep"><summary>Passo a passo detalhado: quando posso desprezar a energia da cortante (e por que aqui pode)</summary><div class="deep-body">
+      <p><strong>Resposta curta.</strong> Pode desprezar a cortante numa barra que também tem <strong>flexão ou torção</strong>, desde que a barra seja <strong>esbelta</strong> (comprimento bem maior que a dimensão da seção). Não pode quando ela é a única energia da peça, quando a viga é curta e alta, ou quando o material ou o perfil cisalha com facilidade. Abaixo, o porquê, com os números deste exercício.</p>
+
+      <h5>1. A intuição: flexão e torção têm alavanca, a cortante não</h5>
+      <p>Uma barra guarda energia de três jeitos: <strong>dobrando</strong> ($M$), <strong>torcendo</strong> ($T$) e <strong>escorregando</strong> as fatias umas sobre as outras ($V$). Compare como cada esforço depende da distância até a carga, aqui na barra BC com só a força $P$:</p>
+      <ul><li><strong>Flexão:</strong> $M = P\cdot s$. O momento é força × braço, e o braço cresce com a distância até C. Quanto mais longe da carga, mais a barra dobra.</li>
+          <li><strong>Torção em AB:</strong> $T = P\cdot L$. O braço é o comprimento da outra barra (BC), que também é grande.</li>
+          <li><strong>Cortante:</strong> $V = P$. É a mesma força em qualquer seção, sem braço nenhum.</li></ul>
+      <p>Ao elevar ao quadrado e somar ao longo da barra, a alavanca faz toda a diferença:</p>
+      <div class="math-box">$$\underbrace{\int_0^L \frac{(Ps)^2}{2EI}ds = \frac{P^2L^3}{6EI}}_{\text{flexão: cresce com } L^3}\qquad\qquad \underbrace{\int_0^L \frac{f\,P^2}{2GA}ds = \frac{fP^2L}{2GA}}_{\text{cortante: cresce com } L}$$</div>
+      <p>Dobrar o comprimento multiplica a energia de flexão por 8 e a de cortante só por 2. A torção, com $T = PL$ constante ao longo de AB, dá $\frac{(PL)^2L}{2GJ}$, que também cresce com $L^3$. Por isso ela nunca se despreza: ela é tão "alavanca" quanto a flexão.</p>
+
+      <h5>2. A conta neste exercício (item a, só $P$)</h5>
+      <p>Mantendo a cortante, $V = P$ nas duas barras. A parcela dela em $\delta_C = \partial U^*/\partial P$ é:</p>
+      <div class="math-box">$$\delta_V = \frac{f}{GA}\left(\int_0^L P\,ds + \int_0^L P\,du\right) = \frac{2fPL}{GA}\qquad\text{contra}\qquad \delta_{M+T} = \frac{23}{12}\frac{PL^3}{EI}$$</div>
+      <p>A razão entre as duas separa três fatores:</p>
+      <div class="math-box">$$\frac{\delta_V}{\delta_{M+T}} = \frac{24}{23}\cdot\underbrace{f}_{\text{forma}}\cdot\underbrace{\frac{E}{G}}_{\text{material}}\cdot\underbrace{\frac{I/A}{L^2}}_{\text{geometria}} = \frac{24}{23}\cdot\frac{10}{9}\cdot 2{,}5\cdot\frac{d^2}{16L^2} = \frac{25}{138}\left(\frac{d}{L}\right)^2 \approx 0{,}18\left(\frac dL\right)^2$$</div>
+      <ul><li><strong>Geometria, $(d/L)^2$:</strong> é o fator que manda. $I/A$ é o quadrado do raio de giração da seção ($d^2/16$ no círculo), e ele fica ao quadrado contra o comprimento.</li>
+          <li><strong>Material, $E/G$:</strong> $E/G = 2(1+\nu)$, entre 2 e 3 para metais. Aqui vale 2,5, que é o que está por trás de $GJ = 0{,}8EI$ ($\nu = 0{,}25$).</li>
+          <li><strong>Forma, $f$:</strong> 10/9 no círculo e 6/5 no retângulo. A dedução está no pivô 7 (<a href="11-energia-na-flexao.html#s14-ex2-h">ficha 11 (Energia na flexão)</a>).</li></ul>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$L/d$</th><th>Cortante, em % da flecha de flexão + torção</th><th>Que peça é essa?</th></tr></thead><tbody>
+        <tr><td>1,35</td><td>10%</td><td>quase um cubo: não é barra</td></tr>
+        <tr><td>2</td><td>4,5%</td><td>bloco curto</td></tr>
+        <tr><td>5</td><td>0,7%</td><td>barra atarracada</td></tr>
+        <tr><td>10</td><td>0,18%</td><td>barra comum</td></tr>
+        <tr><td><strong>45,9 (item c)</strong></td><td><strong>0,009%</strong></td><td>a estrutura deste exercício</td></tr>
+      </tbody></table></div>
+      <p>No item c ($d = 40$ mm, $L = 1{,}83$ m) a cortante somaria $4{,}8\times10^{-5}$ m a uma flecha de $0{,}52$ m. Desprezar a cortante não muda nenhum algarismo da resposta. Para ela chegar a 1%, a barra teria que ter $L \approx 4{,}3\,d$ (17 cm de comprimento com 4 cm de diâmetro).</p>
+
+      <h5>3. Como identificar na prova: a receita</h5>
+      <ol><li><strong>O enunciado manda?</strong> Obedeça. Aqui ele manda desprezar, e a conta acima mostra que é razoável.</li>
+          <li><strong>Liste os esforços de cada barra.</strong> A pergunta não é "a cortante é pequena?", e sim "pequena <em>comparada a quê, na mesma barra</em>?".</li>
+          <li><strong>A barra tem $M$ ou $T$ e é esbelta ($L/h \gtrsim 10$)?</strong> Despreze $V$ e $N$ dessa barra. Num balanço retangular de aço a cortante é $0{,}78(h/L)^2$ da flexão: 0,8% em $L/h = 10$, 3% em $L/h = 5$.</li>
+          <li><strong>A peça só tem um esforço?</strong> Barra de treliça, cabo e tirante só têm $N$; mola só tem a energia dela. Essa é a <strong>única</strong> energia da peça, então nunca se despreza, mesmo que seja "uma normal".</li>
+          <li><strong>Estrutura espacial?</strong> A torção nunca se despreza: ela cresce com $L^3$, como a flexão.</li>
+          <li><strong>Procure os sinais de alerta</strong> (situações em que a cortante pesa):
+            <ul><li>viga curta ou alta ($L/h < 5$): consolo, dente de engrenagem, viga-parede;</li>
+                <li>$G$ baixo em relação a $E$: madeira ($E/G \approx 16$ dá cerca de 5% já em $L/h = 10$), compósitos, painéis sanduíche;</li>
+                <li>perfil de alma fina (I, caixão): $f$ fica bem maior que 1,2, porque só a alma resiste ao cisalhamento.</li></ul></li>
+          <li><strong>Na dúvida:</strong> escreva o termo $\int fV^2/2GA$, mostre que ele dá uma parcela proporcional a $(h/L)^2$ e então despreze. É o argumento que o professor espera.</li></ol>
+
+      <h5>4. Resumo em uma tabela</h5>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Esforço</th><th>Tem braço?</th><th>Energia cresce com</th><th>Pode desprezar?</th></tr></thead><tbody>
+        <tr><td>Flexão $M$</td><td>sim</td><td>$L^3$</td><td>nunca (costuma dominar)</td></tr>
+        <tr><td>Torção $T$ (estrutura 3D)</td><td>sim</td><td>$L^3$</td><td>nunca</td></tr>
+        <tr><td>Cortante $V$</td><td>não</td><td>$L$</td><td>sim, frente a $M$ ou $T$ na mesma barra, se ela for esbelta</td></tr>
+        <tr><td>Normal $N$</td><td>não</td><td>$L$</td><td>sim, frente a $M$ ou $T$ na mesma barra; <strong>nunca</strong> se for a única energia (treliça, cabo, tirante)</td></tr>
+      </tbody></table></div>
+      <p style="font-size:12.5px;color:var(--text-secondary)">Contas em <code>calc/calc_a5_cortante.py</code> (parcelas com $P$ e $q$, razão em função de $L/d$, números do item c, balanço retangular e madeira).</p></div></details></div>
 
     <div class="step" data-n="3"><h4>Crotti-Engesser exige cargas independentes</h4>
       <p>Ficha: <a href="12-teoremas-de-castigliano.html#t12-ce">ficha 12 (Crotti-Engesser e Castigliano)</a>. $\delta_C = \partial U^*/\partial P$ supõe que, ao variar $P$, <em>só</em> $P$ varia. O peso próprio $q$ é outra carga, com valor físico próprio. O enunciado escreve $q = \beta P/L$ só para dar o dado de forma adimensional. Se você substituir $q = \beta P/L$ <strong>antes</strong> de derivar, estará fazendo o peso crescer junto com $P$, e a derivada passa a somar deslocamentos que não correspondem a $P$. Regra: derive com $P$ e $q$ independentes, substitua depois.</p></div>
@@ -530,6 +685,85 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
       <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a torção em AB: a flecha cai para $\frac{2}{3}\frac{PL^3}{EI}$, um terço do valor certo.</li>
           <li><span class="tag tag-mem">⚠ armadilha</span> Pôr torção em BC: a força em C passa pelo eixo de BC.</li>
           <li><span class="tag tag-mem">⚠ armadilha</span> Derivar depois de substituir $q = \beta P/L$.</li></ul></div>
+
+    <details class="deep"><summary>Aprofundamento: e se quiséssemos o deslocamento e a rotação de um ponto qualquer D?</summary><div class="deep-body">
+      <p><strong>A ideia.</strong> Crotti-Engesser só dá o deslocamento <em>na direção de uma carga</em>. Num ponto D sem carga, cria-se a carga lá, como na "sopa de pedra" do pivô 9 (<a href="12-teoremas-de-castigliano.html#s15-ex3-h">ficha 12 (Crotti-Engesser e Castigliano)</a>): uma <strong>força</strong> para cada deslocamento desejado e um <strong>binário</strong> para cada rotação. Deriva-se em relação a ela e depois ela é zerada. Abaixo, só com $P$ (item a). Com o peso próprio a receita é a mesma, com $q$ independente (ver o fim).</p>
+
+      <h5>1. Quais movimentos existem e quais cargas criar</h5>
+      <p>As barras estão num plano horizontal e as cargas são verticais (uma <strong>grelha</strong>). Cada seção pode descer e girar em torno de dois eixos horizontais. Os outros três movimentos (andar em x ou em y, girar em torno da vertical) são nulos no modelo: uma força fictícia horizontal criaria esforços no plano das barras, que não aparecem nos esforços de $P$, e o produto $M\,\partial M/\partial F$ daria zero. Então, em D:</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Quero</th><th>Crio em D</th><th>Resposta</th></tr></thead><tbody>
+        <tr><td>Deslocamento vertical $\delta_D$</td><td>força $F$ vertical, para baixo</td><td>$\delta_D = \left.\partial U^*/\partial F\right|_0$</td></tr>
+        <tr><td>Rotação $\theta_1$ em torno de um eixo paralelo a AB</td><td>binário $M_1$ com vetor paralelo a AB</td><td>$\theta_1 = \left.\partial U^*/\partial M_1\right|_0$</td></tr>
+        <tr><td>Rotação $\theta_2$ em torno de um eixo paralelo a BC</td><td>binário $M_2$ com vetor paralelo a BC</td><td>$\theta_2 = \left.\partial U^*/\partial M_2\right|_0$</td></tr>
+      </tbody></table></div>
+      <p>Os sentidos de $F$, $M_1$ e $M_2$ são arbitrados no sentido do movimento esperado: resultado positivo confirma o sentido.</p>
+      <figure style="margin:10px auto;max-width:440px">
+        <svg viewBox="0 0 400 210" width="100%" style="color:var(--text)" role="img" aria-label="Vista de cima da estrutura em L. AB horizontal com engaste em A à esquerda; BC sobe a partir de B até C. O ponto D fica em BC, a uma distância a de C e b de B. Em D atuam a força fictícia F para baixo, representada entrando no papel, o binário M1 com vetor paralelo a AB e o binário M2 com vetor paralelo a BC. A força P em C também entra no papel">
+          <defs><marker id="a5pq-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+            <marker id="a5pq-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--warning)"/></marker></defs>
+          <line x1="50" y1="140" x2="50" y2="200" style="stroke:currentColor;stroke-width:4"/>
+          <line x1="50" y1="170" x2="270" y2="170" style="stroke:var(--accent);stroke-width:6"/>
+          <line x1="270" y1="170" x2="270" y2="30" style="stroke:var(--accent);stroke-width:6"/>
+          <g style="fill:currentColor;font-size:13px"><text x="38" y="166" text-anchor="end">A</text><text x="282" y="188">B</text><text x="282" y="28">C</text></g>
+          <circle cx="270" cy="30" r="9" style="fill:var(--surface);stroke:currentColor;stroke-width:1.5"/><path d="M264,24 L276,36 M276,24 L264,36" style="stroke:currentColor;stroke-width:1.5"/>
+          <text x="248" y="22" text-anchor="end" style="fill:currentColor;font-size:13px">P</text>
+          <circle cx="270" cy="85" r="9" style="fill:var(--surface);stroke:var(--warning);stroke-width:1.8"/><path d="M264,79 L276,91 M276,79 L264,91" style="stroke:var(--warning);stroke-width:1.8"/>
+          <text x="252" y="80" text-anchor="end" style="fill:var(--warning-ink);font-size:13px;font-weight:700">F (D)</text>
+          <g style="stroke:var(--warning);stroke-width:2"><line x1="282" y1="85" x2="352" y2="85" marker-end="url(#a5pq-w)"/><line x1="282" y1="85" x2="342" y2="85" marker-end="url(#a5pq-w)"/>
+            <line x1="300" y1="140" x2="300" y2="62" marker-end="url(#a5pq-w)"/><line x1="300" y1="140" x2="300" y2="72" marker-end="url(#a5pq-w)"/></g>
+          <g style="fill:var(--warning-ink);font-size:12px;font-weight:700"><text x="358" y="89">M₁ (∥ AB)</text><text x="308" y="150">M₂ (∥ BC)</text></g>
+          <g style="stroke:currentColor;stroke-width:1.1"><line x1="230" y1="34" x2="230" y2="81" marker-start="url(#a5pq-k)" marker-end="url(#a5pq-k)"/><line x1="230" y1="89" x2="230" y2="166" marker-start="url(#a5pq-k)" marker-end="url(#a5pq-k)"/></g>
+          <g style="fill:currentColor;font-size:12px"><text x="222" y="62" text-anchor="end">a</text><text x="222" y="132" text-anchor="end">b = L − a</text></g>
+        </svg>
+        <figcaption style="font-size:12.5px;color:var(--text-secondary);text-align:center">Vista de cima. ⊗ = força vertical para baixo (entrando no papel). Binários desenhados como vetor de seta dupla (regra da mão direita). Em verde, as barras.</figcaption>
+      </figure>
+
+      <h5>2. A observação que economiza metade do trabalho</h5>
+      <p>Os esforços numa seção vêm das cargas do pedaço que vai do corte até a ponta livre C. Uma carga em D só aparece nas seções <strong>entre D e o engaste</strong>. No trecho de D até C ela não está no pedaço, então ali $\partial M/\partial F = 0$ e a integral desse trecho some. <strong>Integre só de D até A.</strong> Fisicamente, o pedaço além de D não "carrega" D até o apoio.</p>
+
+      <h5>3. D em BC, a uma distância $a$ de C</h5>
+      <p>Com $s$ de C para B e $u$ de B para A, como no passo 4:</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Trecho</th><th>Esforços (com $P$ e as fictícias)</th><th>$\partial/\partial F$</th><th>$\partial/\partial M_1$</th><th>$\partial/\partial M_2$</th></tr></thead><tbody>
+        <tr><td>CD ($0 \le s \le a$)</td><td>$M = Ps$, $T = 0$</td><td>$0$</td><td>$0$</td><td>$0$</td></tr>
+        <tr><td>DB ($a \le s \le L$)</td><td>$M = Ps + F(s - a) + M_1$; $T = M_2$</td><td>$\frac{\partial M}{\partial F} = s - a$</td><td>$\frac{\partial M}{\partial M_1} = 1$</td><td>$\frac{\partial T}{\partial M_2} = 1$</td></tr>
+        <tr><td>AB ($0 \le u \le L$)</td><td>$M = (P + F)u + M_2$; $T = PL + F(L - a) + M_1$</td><td>$\frac{\partial M}{\partial F} = u$, $\frac{\partial T}{\partial F} = L - a$</td><td>$\frac{\partial T}{\partial M_1} = 1$</td><td>$\frac{\partial M}{\partial M_2} = 1$</td></tr>
+      </tbody></table></div>
+      <p>Repare como cada carga fictícia "troca de papel" ao virar a esquina em B, pela mesma regra do passo 1 ($\vec r\times\vec F$, componente ao longo do eixo = torção):</p>
+      <ul><li>$F$ em D está a $L - a$ do eixo de AB, então <strong>torce</strong> AB com braço $L - a$ (e flete AB como $P$).</li>
+          <li>$M_1$ é paralelo a AB: <strong>flete</strong> BC e <strong>torce</strong> AB.</li>
+          <li>$M_2$ é paralelo a BC: <strong>torce</strong> BC e <strong>flete</strong> AB.</li></ul>
+      <p>Derivando, zerando as fictícias e integrando (regra da cadeia, como no pivô 9):</p>
+      <div class="math-box">$$\delta_D = \frac{1}{EI}\int_a^L Ps\,(s - a)\,ds + \frac{1}{EI}\int_0^L Pu\cdot u\,du + \frac{1}{GJ}\int_0^L PL\,(L - a)\,du = \boxed{\frac{P}{EI}\left(\frac{23L^3}{12} - \frac{7L^2a}{4} + \frac{a^3}{6}\right)}$$
+      $$\theta_1 = \frac{1}{EI}\int_a^L Ps\,ds + \frac{1}{GJ}\int_0^L PL\,du = \frac{P(L^2 - a^2)}{2EI} + \frac{5PL^2}{4EI} = \boxed{\frac{P}{EI}\left(\frac{7L^2}{4} - \frac{a^2}{2}\right)}$$
+      $$\theta_2 = \underbrace{\frac{1}{GJ}\int_a^L 0\cdot 1\,ds}_{T_{BC} = 0\text{ com } P} + \frac{1}{EI}\int_0^L Pu\,du = \boxed{\frac{PL^2}{2EI}}\quad(\text{igual em todo BC})$$</div>
+      <p><strong>Leitura de $\theta_2$:</strong> $P$ não torce BC, então BC inteira gira em torno do próprio eixo como um corpo rígido, pelo ângulo de que AB se inclina na ponta B ($PL^2/2EI$, a rotação clássica do balanço). <strong>Leitura de $\theta_1$:</strong> é a inclinação de BC em D: a flexão de BC (que cresce de B até C) somada ao giro de AB em torno do próprio eixo ($5PL^2/4EI$, a torção), que inclina BC inteira.</p>
+
+      <h5>4. D em AB, a uma distância $e$ de B</h5>
+      <p>Agora o trecho sem carga fictícia é BC inteira e o pedaço BD de AB. Em DA ($e \le u \le L$): $M = Pu + F(u - e) + M_2$ e $T = PL + M_1$, com $M_1$ agora no eixo de AB (torção) e $M_2$ perpendicular (flexão). $F$ está sobre o eixo de AB e não torce nada:</p>
+      <div class="math-box">$$\delta_D = \frac1{EI}\int_e^L Pu\,(u - e)\,du = \frac{P(L - e)^2(2L + e)}{6EI}\qquad \theta_1 = \frac{1}{GJ}\int_e^L PL\,du = \frac{5PL(L - e)}{4EI}\qquad \theta_2 = \frac{1}{EI}\int_e^L Pu\,du = \frac{P(L^2 - e^2)}{2EI}$$</div>
+      <p>Aqui $\theta_1$ é o quanto AB torceu entre A e D, e $\theta_2$ é a inclinação de AB em D.</p>
+
+      <h5>5. Conferências (o que dá para checar sem gabarito)</h5>
+      <ul><li><strong>Pontas:</strong> em C ($a = 0$), $\delta_D = \frac{23}{12}\frac{PL^3}{EI}$, o resultado do item a ✓. Em A ($e = L$), tudo zera: é o engaste ✓.</li>
+          <li><strong>Continuidade em B</strong> (ligação rígida: as duas barras têm que dar o mesmo movimento em B). Com $a = L$ e com $e = 0$: $\delta_B = \frac{PL^3}{3EI}$, $\theta_1 = \frac{5PL^2}{4EI}$, $\theta_2 = \frac{PL^2}{2EI}$ nas duas fórmulas ✓.</li>
+          <li><strong>Superposição.</strong> Com $b = L - a$ (distância de D a B), a descida de D em BC é a soma de três movimentos:
+            $$\delta_D = \underbrace{\frac{PL^3}{3EI}}_{\text{B desce (flexão de AB)}} + \underbrace{\frac{5PL^2}{4EI}\cdot b}_{\text{AB torce e BC gira como alavanca}} + \underbrace{\frac{Pb^2(3L - b)}{6EI}}_{\text{BC flete como balanço preso em B}}$$
+            que, expandido, é a mesma fórmula do item 3 ✓. A inclinação de AB em B ($\theta_2$) não entra: ela gira BC em torno do próprio eixo e não desce nenhum ponto dele.</li></ul>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Ponto</th><th>A</th><th>meio de AB</th><th>B</th><th>meio de BC</th><th>C</th></tr></thead><tbody>
+        <tr><td>$\delta_D$ em $PL^3/EI$</td><td>0</td><td>$5/48 \approx 0{,}10$</td><td>$1/3 \approx 0{,}33$</td><td>$17/16 \approx 1{,}06$</td><td>$23/12 \approx 1{,}92$</td></tr>
+      </tbody></table></div>
+      <p>De B ao meio de BC a descida mais que triplica, quase toda por causa da torção de AB: é o braço de alavanca do passo 5 aparecendo ponto a ponto.</p>
+
+      <h5>6. Com o peso próprio</h5>
+      <p>Mesma receita: os esforços ganham as parcelas de $q$ do passo 4 (o peso de C até o corte, em BC; o peso de BC inteira e o de AB até o corte, em AB) e as derivadas em $F$, $M_1$, $M_2$ não mudam, porque $q$ é independente das fictícias. Para D em BC:</p>
+      <div class="math-box">$$\delta_D = \frac{P}{EI}\left(\frac{23L^3}{12} - \frac{7L^2a}{4} + \frac{a^3}{6}\right) + \frac{q}{24EI}\left(29L^4 - 19L^3a + a^4\right)$$</div>
+      <p>Com $a = 0$, a parcela de $q$ volta a ser $\frac{29}{24}\frac{qL^4}{EI}$, a do item b ✓.</p>
+      <div class="callout concept"><span class="co-t">Receita para qualquer ponto de qualquer estrutura</span>
+        <ol><li>Para cada movimento desejado em D, crie a carga conjugada: força na direção do deslocamento, binário em torno do eixo da rotação.</li>
+            <li>Escreva os esforços com as cargas fictícias, lembrando que elas só aparecem entre D e o apoio, e que, ao virar uma esquina, flexão vira torção e vice-versa.</li>
+            <li>Derive (regra da cadeia sob a integral), zere as fictícias, integre.</li>
+            <li>Confira nas pontas e na continuidade das ligações rígidas.</li></ol></div>
+      <p style="font-size:12.5px;color:var(--text-secondary)">Contas em <code>calc/calc_a5_ponto_qualquer.py</code> (esforços por $\vec r\times\vec F$ em eixos globais, D em BC e em AB, continuidade em B, caso com $q$).</p></div></details>
 
     <div class="callout concept"><span class="co-t">O que levar deste exercício</span>
       <ul><li>Em L espacial: força vertical na ponta flete as duas barras e torce a do engaste com $T = P\times(\text{comprimento da outra})$.</li>

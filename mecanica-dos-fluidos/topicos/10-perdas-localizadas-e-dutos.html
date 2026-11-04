@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perdas localizadas, dutos e instalações · PME3230</title>
+<meta name="description" content="Site de estudo de PME3230 (Poli-USP): fichas por tópico com exercícios resolvidos e a trilha da P2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3230-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3230 · Tópico 10</div>
+  <div class="sb-sub">Mecânica dos Fluidos I</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t10-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t10-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t10-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t10-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t10-dh">Diâmetro hidráulico</a></li>
+<li class="nav-ex"><a href="#t10-k">Perdas localizadas</a></li>
+<li class="nav-ex"><a href="#t10-bomba">Ponto de operação</a></li>
+<li class="nav-ex"><a href="#t10-med">Medidores de vazão (Exp. 2)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t10-lim-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t10-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t10-matriz">Matriz de cobertura L5</a></li>
+<li class="nav-ex"><a href="#t10-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#pr5-ex1-h">Prep. L5 ex.1 · galeria<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#pr5-ex2-h">Prep. L5 ex.2 · soma de K<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#le05-ex4-h">LE05 ex.4 · querosene<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#le05-ex6-h">LE05 ex.6 · ponto de operação<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#le05-ex3-h">LE05 ex.3 · sucção<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t10-demais">Demais exercícios L5</a></li>
+<li class="nav-ex"><a href="#le05-ex1-h">LE05 ex.1 · turbina</a></li>
+<li class="nav-ex"><a href="#le05-ex2-h">LE05 ex.2 · caixa d'água</a></li>
+<li class="nav-ex"><a href="#le05-ex5-h">LE05 ex.5 · ar-condicionado</a></li>
+<li class="nav-ex"><a href="#pr5-ex3-h">Prep. L5 ex.3 · bomba de 1 cv</a></li>
+<li class="nav-ex"><a href="#t10-roteiro">Para treinar (roteiro)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t10-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Fluidos I</a> <span class="sep">›</span> <span>Perdas localizadas, dutos e instalações</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t10-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t10-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2>
+    <p class="section-desc"><span class="chip">L5</span> laboratório (Prof. Bruno), aula de 22/10 · Exp. 2 · entra na P2 por decisão de 25/10 (o plano de aulas a coloca antes da prova)</p></div>
+  <div class="callout concept"><span class="co-t">Pergunta de engenharia</span>
+    <p>Uma instalação real tem entrada, curvas, válvulas, mudanças de diâmetro, bomba e, às vezes, dutos que não são circulares. Esta ficha fecha o cálculo de condutos: <strong>somar</strong> as perdas localizadas às distribuídas, <strong>usar</strong> o diâmetro hidráulico em dutos, <strong>achar</strong> o ponto de operação de uma bomba e <strong>dimensionar</strong> a sucção para não ter pressão baixa demais.</p></div>
+</section>
+
+<section class="chapter" id="t10-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t10-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+  <ul>
+    <li><a href="09-perda-distribuida-turbulento.html">Ficha 09</a>: Colebrook e os tipos I, II e III; tudo aqui é o mesmo roteiro com mais termos.</li>
+    <li><a href="07-equacao-da-energia.html">Ficha 07</a>: potência, rendimento e sentido do escoamento.</li>
+    <li><strong>Equação do 2º grau e interseção de curvas:</strong> o ponto de operação é onde a curva da bomba encontra a do sistema.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t10-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t10-ler-h" data-nav="3 · Onde ler">Onde ler</h2></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody>
+    <tr><td>Prof. Bruno, notas parte 3</td><td>§1 (diâmetro hidráulico) e §2 (entradas, saídas, expansões, contrações, curvas, válvulas)</td><td>regras de cada $K$</td></tr>
+    <tr><td>“Diagrama de Moody e coeficientes de perda de carga localizada” (4 p.)</td><td>p. 2: entradas, contrações e expansões (Fox, White) · p. 3: cotovelos e válvulas ($L_e/D$ do Fox; Tabela 6.5 do White) · p. 4: tabela de $K_L$ do Munson</td><td>os valores de $K$ usados abaixo</td></tr>
+    <tr><td>LE 05 e preparação L5</td><td>6 + 3 exercícios (abaixo)</td><td>formato das questões</td></tr>
+    <tr><td>Apostila 08 (Coletânea)</td><td>ex. 8.4 (galeria, p. 15–17), 8.09 (tubulação equivalente, p. 18), 8.11 (ar-condicionado, p. 21), 8.17–8.19 (bombas, p. 26–30)</td><td>exercícios resolvidos</td></tr>
+    <tr><td>Roteiro da Exp. 2</td><td>perda localizada na redução, Venturi e placa de orifício</td><td>a questão de laboratório</td></tr>
+    <tr><td>White, 6ª ed. (PT)</td><td>§6.8 dutos (p. 388–394), §6.9 perdas localizadas (p. 394–402), §6.12 medidores (p. 414–431)</td><td>Ex. 6.13–6.16</td></tr>
+    <tr><td>Munson, 7ª ed. (EN)</td><td>§8.4.2 (p. 432), §8.5.2 (p. 455), §8.6 (p. 459)</td><td>livro-texto do plano</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t10-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t10-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+  <h3 class="sub" id="t10-dh" data-nav="Diâmetro hidráulico">Dutos não circulares</h3>
+  <div class="math-box">$$D_h = \frac{4A}{P}\ \ (P = \text{perímetro molhado}),\qquad \text{retângulo } b\times h:\ D_h = \frac{2bh}{b+h}\ \ (\text{válido para } 1/4 &lt; b/h &lt; 4)$$</div>
+  <p>Use $D_h$ no lugar de $D$ em Re, em $\varepsilon/D$ e em Darcy-Weisbach. A velocidade continua sendo $V = Q/A$ com a área <strong>real</strong> do duto (não $\pi D_h^2/4$).</p>
+
+  <h3 class="sub" id="t10-k" data-nav="Perdas localizadas">Perdas localizadas</h3>
+  <div class="math-box">$$h_m = K\frac{\bar V^2}{2g}\qquad\text{ou}\qquad h_m = f\frac{L_e}{D}\frac{\bar V^2}{2g}\qquad\Rightarrow\qquad h_{LT} = \frac{\bar V^2}{2g}\Big(f\frac{L}{D} + \sum K\Big)\ \ (\text{diâmetro único})$$</div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Singularidade</th><th>Valor de referência</th><th>Velocidade de referência</th></tr></thead><tbody>
+    <tr><td>Entrada de borda viva · reentrante · arredondada ($r/D \ge 0{,}15$)</td><td>0,5 · 0,78 · 0,04</td><td>no tubo</td></tr>
+    <tr><td>Saída para reservatório ou atmosfera</td><td>$K = \alpha$ (≈ 1 no turbulento): toda a energia cinética é dissipada</td><td>no tubo</td></tr>
+    <tr><td>Expansão brusca $d \to D$</td><td>$K = (1 - d^2/D^2)^2$</td><td>no tubo menor</td></tr>
+    <tr><td>Contração brusca</td><td>gráfico do Fox (≈ 0,4 para $A_2/A_1 = 0{,}25$)</td><td>no tubo menor</td></tr>
+    <tr><td>Cotovelo 90° · globo aberta · gaveta aberta (Fox, $L_e/D$)</td><td>30 · 340 · 8</td><td>no tubo</td></tr>
+    <tr><td>Cotovelo 90° · globo (White, Tabela 6.5)</td><td>depende do diâmetro e de rosqueado × flangeado</td><td>no tubo</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que existe perda numa singularidade</span>
+    <p>Na entrada, o jato se contrai (<em>vena contracta</em>) e depois se reexpande; na expansão, curva ou válvula, o escoamento descola da parede e forma vórtices. Essa energia vira calor. Os coeficientes são empíricos e dependem só da geometria: por isso cada professor manda usar uma tabela (“coeficientes do Fox” no LE 05 ex. 3).</p></div>
+
+  <h3 class="sub" id="t10-bomba" data-nav="Ponto de operação">Curva do sistema e ponto de operação</h3>
+  <div class="math-box">$$H_{sist}(Q) = \Delta z + \Delta\frac{p}{\gamma} + \frac{Q^2}{2gA^2}\Big(f\frac{L}{D} + \sum K\Big),\qquad h_b(Q) = H_{sist}(Q)\ \Rightarrow\ Q_{op},\qquad W = \frac{\gamma Q\,h_b}{\eta}$$</div>
+  <p>A bomba fornece cada vez menos carga quando a vazão aumenta; o sistema pede cada vez mais. Com a válvula toda aberta, a interseção é a <strong>vazão máxima</strong>; fechar a válvula aumenta $\sum K$ e reduz $Q$.</p>
+
+  <h3 class="sub" id="t10-med" data-nav="Medidores de vazão (Exp. 2)">Medidores de vazão (Exp. 2)</h3>
+  <p>Venturi e placa de orifício estrangulam o escoamento; Bernoulli entre a seção 1 e a garganta (diâmetro $d$, $\beta = d/D$) com um coeficiente de descarga $C$ que corrige perdas e contração:</p>
+  <div class="math-box">$$Q = C\,\frac{\pi d^2}{4}\sqrt{\frac{2\,\Delta p/\rho}{1 - \beta^4}},\qquad \Delta p = (\gamma_{Hg} - \gamma)\,h\ \ (\text{manômetro de mercúrio})$$</div>
+  <p>Venturi: $C \approx 0{,}98$ e pouca perda permanente. Placa de orifício: $C \approx 0{,}6$ (o relatório 2 de 2026 mediu 0,623) e grande perda permanente.</p>
+</section>
+
+<section class="chapter" id="t10-lim">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t10-lim-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+  <ul>
+    <li><strong>$D_h$ é aproximação:</strong> erra pouco no turbulento e em dutos não muito achatados; no laminar o erro chega a 40%.</li>
+    <li><strong>$K$ tabelado vale para escoamento turbulento</strong> e singularidades afastadas umas das outras. Duas curvas coladas perdem diferente da soma.</li>
+    <li><strong>As fontes divergem</strong> (Fox, White e Munson dão $K$ diferentes para a “mesma” peça). Use a tabela que o enunciado mandar e declare a escolha; respostas a 3% do gabarito são isso.</li>
+    <li><strong>Diâmetros diferentes:</strong> cada $K$ e cada trecho usa a sua velocidade; não dá para fatorar um único $V^2/2g$.</li>
+    <li><strong>Pressão na sucção:</strong> o limite é mecânico (cavitação); a análise completa (NPSH) é da P3.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t10-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t10-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2>
+    <p class="section-desc">LE 05 (6 exercícios, com respostas) e preparação da aula L5 (3 exercícios, sem resposta impressa; são os exemplos das notas parte 3). Contas em <code>calc/calc_L5.py</code>. 5 das 6 respostas da LE 05 batem; o ex. 1 difere 3% (coeficientes K).</p></div>
+
+  <h3 class="sub" id="t10-matriz" data-nav="Matriz de cobertura L5">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">DH</span> diâmetro hidráulico · <span class="chip">K</span> perdas localizadas · <span class="chip">II</span> vazão iterativa · <span class="chip">BMB</span> bomba ou turbina, potência · <span class="chip">OP</span> curva da bomba × sistema · <span class="chip">SUC</span> pressão mínima / sucção</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Exercício</th><th>DH</th><th>K</th><th>II</th><th>BMB</th><th>OP</th><th>SUC</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>Prep. L5 ex. 1 (galeria de mina)</td><td class="x">●</td><td></td><td class="x">●</td><td></td><td></td><td></td><td>Pivô 1</td></tr>
+    <tr class="pv"><td>Prep. L5 ex. 2 (White, desnível H)</td><td></td><td class="x">●</td><td></td><td></td><td></td><td></td><td>Pivô 2</td></tr>
+    <tr class="pv"><td>LE 05 ex. 4 (querosene)</td><td></td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td>Pivô 3</td></tr>
+    <tr class="pv"><td>LE 05 ex. 6 (curva da bomba)</td><td></td><td class="x">●</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td>Pivô 4</td></tr>
+    <tr class="pv"><td>LE 05 ex. 3 (sucção)</td><td></td><td class="x">●</td><td></td><td></td><td></td><td class="x">●</td><td>Pivô 5</td></tr>
+    <tr><td>LE 05 ex. 1 (turbina, 3 diâmetros)</td><td></td><td class="x">●</td><td></td><td class="x">●</td><td></td><td></td><td>ver Pivô 2</td></tr>
+    <tr><td>LE 05 ex. 2 (caixa d'água)</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td>ver Pivô 3</td></tr>
+    <tr><td>LE 05 ex. 5 (ar-condicionado)</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td></td><td>ver Pivô 1</td></tr>
+    <tr><td>Prep. L5 ex. 3 (bomba de 1 cv)</td><td></td><td class="x">●</td><td></td><td class="x">●</td><td></td><td class="x">●</td><td>ver Pivô 5</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que estes pivôs</span>
+    <p>O <strong>Pivô 1</strong> mostra o $D_h$ num tipo II; o <strong>Pivô 2</strong> é a soma de perdas mais simples (tipo I com $K$, tirada do White, que o Bruno resolve em vídeo); o <strong>Pivô 3</strong> junta tipo II com $K$ e depois uma bomba; o <strong>Pivô 4</strong> é o ponto de operação, que é o formato mais “de prova” da lista; o <strong>Pivô 5</strong> inverte a pergunta (achar $D$ por um limite de pressão).</p></div>
+
+  <h3 class="sub" id="t10-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+
+  <!-- PIVÔ 1 -->
+  <article class="ex pivo" id="pr5-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">Preparação L5 · Exercício 1 (= Apostila 08, ex. 8.4) · Pivô 1</div>
+      <h3 id="pr5-ex1-h" data-nav="Prep. L5 ex.1 · galeria" data-pivo>Galeria quadrada esgotando ar de uma mina</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Exemplo das notas (Bruno)</span></div></div>
+    <div class="ex-topics"><span class="chip">DH</span><span class="chip">II</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Exercícios de preparação L5, p. 1)</span> Uma galeria de seção quadrada (0,6 m × 0,6 m) esgota ar de uma mina, onde a pressão é de 0,2 mca, para a atmosfera. Calcule a vazão de ar, desprezando as perdas singulares. Dados: $\nu_{ar} = 10^{-5}$ m²/s, $\gamma_{ar} = 12{,}7$ N/m³, $\varepsilon = 10^{-3}$ m. Na figura: galeria horizontal de 500 m entre as seções 1 (na mina) e 2 (na saída).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Preparação L5 · ex. 1):</strong> ver o PDF oficial, Preparação L5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Tipo II em duto não circular: usar $D_h$. A pressão de 0,2 mca está dada em coluna de <strong>água</strong>, e o fluido é ar: é preciso converter para coluna de ar.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Seção</td><td>$a \times a$</td><td>0,6 × 0,6 m</td><td>texto</td></tr>
+        <tr><td>Comprimento</td><td>$L$</td><td>500 m</td><td>figura</td></tr>
+        <tr><td>Pressão em 1 (efetiva)</td><td>$p_1$</td><td>0,2 mca = 0,2 · 9800 = 1960 Pa</td><td>texto</td></tr>
+        <tr><td>Ar</td><td>$\gamma_{ar}$, $\nu_{ar}$</td><td>12,7 N/m³; 10⁻⁵ m²/s</td><td>texto</td></tr>
+        <tr><td>Rugosidade</td><td>$\varepsilon$</td><td>1 mm</td><td>texto</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$Q$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><div class="math-box">$$D_h = \frac{4a^2}{4a} = a = 0{,}6\ \text{m},\qquad H_1 - H_2 = \frac{p_1}{\gamma_{ar}} = f\frac{L}{D_h}\frac{V^2}{2g}\ \ (V_1 = V_2,\ z_1 = z_2)$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>$\varepsilon/D_h = 0{,}00167$; $f_{cr} = 0{,}0223$ para começar.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\frac{p_1}{\gamma_{ar}} = \frac{1960}{12{,}7} = 154\ \text{m de ar},\qquad V = \sqrt{\frac{2g(154)(0{,}6)}{f(500)}}$$</div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Passo</th><th>$f$</th><th>$V$ (m/s)</th><th>Re</th><th>$f$ novo</th></tr></thead><tbody>
+        <tr><td>0</td><td class="num">0,0223</td><td class="num">12,75</td><td class="num">7,65·10⁵</td><td class="num">0,0226</td></tr>
+        <tr><td>1</td><td class="num">0,0226</td><td class="num">12,67</td><td class="num">7,60·10⁵</td><td class="num">0,0226</td></tr>
+      </tbody></table></div>
+      <div class="math-box">$$Q = V a^2 = 12{,}67(0{,}36) = 4{,}56\ \text{m}^3/\text{s}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $Q \approx 4{,}6$ m³/s. <span class="badge badge-ok">bate com a Apostila 08 (4,61 m³/s, f = 0,0225)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $p_1/\gamma = 0{,}2$ m: isso é coluna de água. Em coluna de ar são 154 m.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Calcular $V$ com a área do círculo de diâmetro $D_h$ (0,283 m²): a área real é 0,36 m².</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 2 -->
+  <article class="ex pivo" id="pr5-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">Preparação L5 · Exercício 2 (White) · Pivô 2</div>
+      <h3 id="pr5-ex2-h" data-nav="Prep. L5 ex.2 · soma de K" data-pivo>Desnível entre reservatórios com válvula e cotovelos</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em vídeo (Bruno)</span></div></div>
+    <div class="ex-topics"><span class="chip">K</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Exercícios de preparação L5, p. 1)</span> (White) Se a vazão através de um tubo de ferro forjado de 10 cm de diâmetro no sistema da figura é de 0,04 m³/s, encontre a diferença de elevação $H$ para os dois reservatórios. Na figura: água a 20 °C; válvula globo rosqueada totalmente aberta; dois cotovelos rosqueados; trechos de 20 m, 10 m (vertical) e 20 m.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Preparação L5 · ex. 2):</strong> ver o PDF oficial, Preparação L5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Tipo I com perdas localizadas: energia de superfície livre a superfície livre ($V_1 = V_2 = 0$, $p = 0$), então $H$ é a soma de todas as perdas.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Tubo</td><td>$D$, $L$</td><td>0,10 m; 20 + 10 + 20 = 50 m</td><td>texto + figura</td></tr>
+        <tr><td>Rugosidade (ferro forjado)</td><td>$\varepsilon$</td><td>0,046 mm</td><td>Moody do curso</td></tr>
+        <tr><td>Vazão; água a 20 °C</td><td>$Q$, $\nu$</td><td>0,04 m³/s; 1,0·10⁻⁶ m²/s</td><td>texto / tabela</td></tr>
+        <tr><td>Entrada (borda viva); saída</td><td>$K_{ent}$, $K_{sai}$</td><td>0,5; 1,0</td><td>notas parte 3 / tabela p. 2</td></tr>
+        <tr><td>Globo rosqueada, 4" (100 mm)</td><td>$K_{gl}$</td><td>5,7</td><td>White Tab. 6.5 (tabela p. 3)</td></tr>
+        <tr><td>Cotovelo 90° normal rosqueado, 4"</td><td>$K_{cot}$</td><td>0,64 (cada, 2 cotovelos)</td><td>White Tab. 6.5</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$H$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$H = \frac{V^2}{2g}\Big(f\frac{L}{D} + K_{ent} + K_{gl} + 2K_{cot} + K_{sai}\Big)$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p><span class="tag tag-tab">📊 White Tab. 6.5</span> coluna “parafusada, 4 (100)”: globo 5,7; cotovelo 90° normal 0,64. <span class="tag tag-tab">📊 Moody</span> $\varepsilon/D = 4{,}6\cdot10^{-4}$, Re = 5,1·10⁵ → $f = 0{,}0174$.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$V = \frac{0{,}04}{\pi(0{,}1)^2/4} = 5{,}09\ \text{m/s},\quad \frac{V^2}{2g} = 1{,}32\ \text{m},\quad f\frac{L}{D} = 0{,}0174(500) = 8{,}70,\quad \sum K = 0{,}5 + 5{,}7 + 1{,}28 + 1 = 8{,}48$$
+      $$H = 1{,}32\,(8{,}70 + 8{,}48) = 22{,}7\ \text{m}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $H \approx 22{,}7$ m. <span class="badge badge-warn">sem gabarito impresso; conferido em Python</span> As perdas localizadas são metade do total: num tubo curto, elas mandam.</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer a saída ($K = 1$): entre reservatórios, a energia cinética do jato que entra no reservatório 2 é perdida.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Pegar a coluna “flangeada” da tabela quando o enunciado diz rosqueada: o globo cairia de 5,7 para 6,0 e os cotovelos de 0,64 para 0,30.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 3 -->
+  <article class="ex pivo" id="le05-ex4">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 4 · Pivô 3</div>
+      <h3 id="le05-ex4-h" data-nav="LE05 ex.4 · querosene" data-pivo>Querosene entre dois reservatórios; depois, com bomba</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">K</span><span class="chip">II</span><span class="chip">BMB</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 2)</span> Na planta de uma indústria química, existem dois reservatórios de querosene em níveis diferentes. Os dois reservatórios são ligados por uma tubulação de diâmetro $D = 130$ mm conforme o esquema abaixo, onde $h_a = 15$ m, $h_b = 10$ m, $L_1 = 10$ m, $L_2 = 3$ m e $L_3 = 12$ m. Sabendo que a querosene tem massa específica $\rho = 820$ kg/m³ e viscosidade cinemática $\nu = 2\times10^{-6}$ m²/s, e que a tubulação é feita de ferro forjado, pede-se: <ol type="a"><li>Dados os coeficientes de perda de carga da entrada $K_{ent} = 0{,}5$, de cada uma das curvas $K_{curva} = 1{,}3$ e da saída $K_{saída} = 1$, calcule a vazão que passa pela tubulação nessas condições.</li><li>Assuma agora que se queira uma vazão de 0,08 m³/s no sistema, e para isso se instale uma bomba cujo rendimento total seja 0,7. Calcule a potência que será consumida pela bomba.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 4):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>(a) Tipo II com perdas localizadas; (b) tipo I com bomba. O desnível sai da geometria: $h_a$ é medido do nível A ao tubo de cima, $h_b$ do nível B ao tubo de baixo, e os tubos diferem de $L_2$.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Desnível entre os níveis</td><td>$\Delta z$</td><td>$h_a + L_2 - h_b = 15 + 3 - 10 = 8$ m</td><td>figura</td></tr>
+        <tr><td>Comprimento total</td><td>$L$</td><td>10 + 3 + 12 = 25 m</td><td>texto</td></tr>
+        <tr><td>Soma dos $K$</td><td>$\sum K$</td><td>0,5 + 2(1,3) + 1 = 4,1</td><td>texto (2 curvas)</td></tr>
+        <tr><td>Rugosidade (ferro forjado)</td><td>$\varepsilon$</td><td>0,046 mm → $\varepsilon/D = 3{,}5\cdot10^{-4}$</td><td>Moody</td></tr>
+        <tr><td>Querosene</td><td>$\rho$, $\nu$</td><td>820 kg/m³; 2·10⁻⁶ m²/s</td><td>texto</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>(a) $Q$; (b) $W_{eixo}$ para $Q = 0{,}08$ m³/s (maior que a vazão por gravidade, por isso precisa de bomba).</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><div class="math-box">$$\text{(a) } \Delta z = \frac{V^2}{2g}\Big(f\frac{L}{D} + \sum K\Big)\qquad \text{(b) } \Delta z + H_B = \frac{V^2}{2g}\Big(f\frac{L}{D}+\sum K\Big),\quad W = \frac{\rho g Q H_B}{\eta}$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Colebrook a cada passo.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) Iteração (começando do rugoso, $f = 0{,}0154$) até $f = 0{,}0173$</div>
+      <div class="math-box">$$8 = \frac{V^2}{2(9{,}8)}\Big(0{,}0173\cdot\frac{25}{0{,}13} + 4{,}1\Big) = \frac{V^2}{19{,}6}(3{,}33 + 4{,}1)\Rightarrow V = 4{,}59\ \text{m/s},\ Re = 3{,}0\cdot10^5,\ Q = 0{,}0610\ \text{m}^3/\text{s}$$</div>
+      <div class="step-part">(b) Q = 0,08 m³/s</div>
+      <div class="math-box">$$V = 6{,}03\ \text{m/s},\ Re = 3{,}9\cdot10^5,\ f = 0{,}0170:\ \ \text{perdas} = \frac{6{,}03^2}{19{,}6}(3{,}27 + 4{,}1) = 13{,}6\ \text{m}$$
+      $$H_B = 13{,}6 - 8 = 5{,}6\ \text{m},\qquad W = \frac{820(9{,}8)(0{,}08)(5{,}6)}{0{,}7} = 5{,}2\ \text{kW}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $Q = 0{,}061$ m³/s; (b) $W \approx 5{,}2$ kW. <span class="badge badge-ok">bate com o gabarito (0,0609 m³/s; 5,21 kW)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $h_a - h_b = 5$ m como desnível: esquece o degrau $L_2$ entre os dois trechos horizontais.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> No item (b), a bomba só precisa cobrir o que falta além do desnível que já ajuda ($H_B = $ perdas − 8 m).</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 4 -->
+  <article class="ex pivo" id="le05-ex6">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 6 · Pivô 4</div>
+      <h3 id="le05-ex6-h" data-nav="LE05 ex.6 · ponto de operação" data-pivo>Ponto de operação de uma bomba num recalque</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">K</span><span class="chip">BMB</span><span class="chip">OP</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 3)</span> Você estagia numa empresa que está projetando o sistema de recalque ilustrado na figura. Ele tem como objetivo transportar água ($\rho = 998$ kg/m³, $\nu = 10^{-6}$ m²/s) do reservatório (1), cujo nível está a uma altura $z_1 = 3$ m com relação à superfície onde será instalada a bomba, para o reservatório (2), cujo nível está a $z_2 = 25$ m de altura em relação à mesma superfície. A tubulação terá diâmetro interno de 80 mm, possuirá três cotovelos de 90° além de uma válvula globo para regular a vazão, e os trechos retos somarão 60 m de comprimento. O material do tubo será ferro galvanizado, com rugosidade média $\varepsilon = 0{,}15$ mm. A aceleração da gravidade no local da instalação vale 9,8 m/s². Os coeficientes de perda localizada podem ser admitidos $K_{cot} = 0{,}7$ (cotovelos), $K_{val} = 9$ (válvula totalmente aberta), $K_{ent} = 0{,}5$ (entrada) e $K_{sai} = 1$ (saída). Deseja-se utilizar uma bomba cuja carga é dada em função da vazão volumétrica, $Q$, pela expressão $h_b = 35 - 37\,000\,Q^2$, onde $h_b$ está em metros e $Q$ em m³/s, e que tem rendimento de 72%. Para avaliar essa possibilidade, sua chefe lhe pede que você determine: <ol type="a"><li>A vazão volumétrica máxima no sistema (isto é, com a válvula totalmente aberta);</li><li>A potência consumida na condição determinada no item (a).</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 6):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Ponto de operação: a carga da bomba depende de $Q$, e a do sistema também. Igualar as duas e resolver em $Q$ (com $f$ dependendo de $Q$: iterar ou resolver numericamente).</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Desnível</td><td>$z_2 - z_1$</td><td>22 m</td><td>texto</td></tr>
+        <tr><td>Tubo</td><td>$D$, $L$, $\varepsilon$</td><td>0,08 m; 60 m; 0,15 mm</td><td>texto</td></tr>
+        <tr><td>Soma dos $K$</td><td>$\sum K$</td><td>3(0,7) + 9 + 0,5 + 1 = 12,6</td><td>texto</td></tr>
+        <tr><td>Curva da bomba; rendimento</td><td>$h_b(Q)$, $\eta$</td><td>$35 - 37\,000Q^2$; 0,72</td><td>texto</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$Q_{max}$ (válvula aberta) e $W$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$35 - 37\,000\,Q^2 = 22 + \frac{Q^2}{2gA^2}\Big(f\frac{L}{D} + 12{,}6\Big),\qquad A = \frac{\pi(0{,}08)^2}{4} = 5{,}03\cdot10^{-3}\ \text{m}^2$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>$\varepsilon/D = 0{,}0019$; com Re ≈ 1,8·10⁵, Colebrook dá $f = 0{,}0240$.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <p>Com $f = 0{,}024$: $\frac{1}{2gA^2}(fL/D + 12{,}6) = 2019(18 + 12{,}6) = 61\,800$ s²/m⁵. Então:</p>
+      <div class="math-box">$$13 = (37\,000 + 61\,800)\,Q^2 \Rightarrow Q = 0{,}01147\ \text{m}^3/\text{s},\quad V = 2{,}28\ \text{m/s},\ Re = 1{,}8\cdot10^5\ (f = 0{,}0240\ \text{confere})$$
+      $$h_b = 35 - 37\,000(0{,}01147)^2 = 30{,}1\ \text{m},\qquad W = \frac{998(9{,}8)(0{,}01147)(30{,}1)}{0{,}72} = 4694\ \text{W}$$</div>
+      <div class="callout concept"><span class="co-t">Leitura gráfica</span><p>A curva do sistema começa em 22 m (o desnível a vencer com $Q = 0$) e sobe com $Q^2$; a da bomba começa em 35 m (<em>shut-off</em>) e desce com $Q^2$. O cruzamento é o ponto de operação. Fechar a válvula aumenta $K_{val}$, deixa a curva do sistema mais íngreme e reduz $Q$; por isso, com a válvula aberta, $Q$ é o máximo.</p></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $Q_{max} = 0{,}01147$ m³/s; (b) $W = 4694$ W. <span class="badge badge-ok">bate com o gabarito</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que $f$ depende de $Q$: chute $f$, resolva, recalcule Re e confira (aqui converge no primeiro passo).</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> A potência consumida usa $h_b$ no ponto de operação (30,1 m), não o desnível (22 m).</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 5 -->
+  <article class="ex pivo" id="le05-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 3 · Pivô 5</div>
+      <h3 id="le05-ex3-h" data-nav="LE05 ex.3 · sucção" data-pivo>Diâmetro mínimo da sucção de uma bomba</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">K</span><span class="chip">SUC</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 2)</span> Uma bomba está localizada 4,5 m para o lado e 3,5 m acima de um reservatório. Ela foi projetada para uma vazão de 6 L/s. Para operação satisfatória, a pressão estática manométrica na sucção da bomba não deve ser inferior a −6 m de coluna d'água. Determine o diâmetro mínimo da tubulação de aço comercial. (Usar coeficientes de perda singular do Fox.) Na figura: água a 5 °C; tubo que entra no reservatório pelo topo (reentrante), um cotovelo de 90°.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 3):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 2 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Energia do nível do reservatório até a sucção (sem máquina no trecho). A pressão na sucção cai por três motivos: subir 3,5 m, acelerar a água e perder carga. Quanto menor $D$, maior $V$ e mais a pressão cai: o limite dá $D_{min}$.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Altura da bomba sobre o nível</td><td>$z_s$</td><td>3,5 m</td><td>texto</td></tr>
+        <tr><td>Comprimento do tubo</td><td>$L$</td><td>3,5 + 4,5 = 8 m</td><td>texto + figura</td></tr>
+        <tr><td>Vazão</td><td>$Q$</td><td>6 L/s</td><td>texto</td></tr>
+        <tr><td>Limite de pressão</td><td>$p_s/\gamma$</td><td>≥ −6 m</td><td>texto</td></tr>
+        <tr><td>Entrada reentrante (Fox)</td><td>$K_{ent}$</td><td>0,78</td><td>tabela p. 2</td></tr>
+        <tr><td>Cotovelo padrão 90° (Fox)</td><td>$L_e/D$</td><td>30</td><td>tabela p. 3</td></tr>
+        <tr><td>Água a 5 °C; aço comercial</td><td>$\nu$, $\varepsilon$</td><td>1,52·10⁻⁶ m²/s; 0,045 mm</td><td>tabela / Moody</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$D_{min}$ tal que $p_s/\gamma = -6$ m.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$0 = \frac{p_s}{\gamma} + 3{,}5 + \frac{V^2}{2g}\Big(1 + K_{ent} + f\frac{L}{D} + f\frac{L_e}{D}\Big)\ \Rightarrow\ \frac{p_s}{\gamma} = -3{,}5 - \frac{V^2}{2g}\Big(1{,}78 + f\,\frac{8}{D} + 30f\Big)$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Colebrook para cada $D$ testado.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <p>A incógnita está em $V$, Re e $f$ ao mesmo tempo: teste diâmetros e interpole.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>$D$ (m)</th><th class="num">0,045</th><th class="num">0,050</th><th class="num">0,051</th><th class="num">0,0525</th><th class="num">0,055</th></tr></thead><tbody>
+        <tr><td>$p_s/\gamma$ (m)</td><td class="num">−8,10</td><td class="num">−6,32</td><td class="num">−6,08</td><td class="num">−5,76</td><td class="num">−5,32</td></tr>
+      </tbody></table></div>
+      <div class="math-box">$$D_{min} = 0{,}0513\ \text{m}\quad (V = 2{,}90\ \text{m/s},\ Re = 9{,}8\cdot10^4,\ f = 0{,}0218)$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $D_{min} \approx 0{,}051$ m (na prática, o tubo comercial de 2" acima disso). <span class="badge badge-ok">bate com o gabarito</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o “1” da carga cinética na sucção: a pressão cai também porque a água ganha velocidade.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Usar a entrada de borda viva (0,5): o tubo mergulha no reservatório, entrada reentrante (0,78).</li></ul></div>
+  </article>
+
+  <h3 class="sub" id="t10-demais" data-nav="Demais exercícios L5">Demais exercícios</h3>
+
+  <article class="ex" id="le05-ex1">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 1 · ver Pivô 2</div>
+      <h3 id="le05-ex1-h" data-nav="LE05 ex.1 · turbina">Turbina numa linha com três diâmetros</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 1)</span> Na instalação abaixo, encontram-se 38 m de tubo de 50 mm de diâmetro, 23 m de tubo de 150 mm de diâmetro e 46 m de tubo de 75 mm de diâmetro, todos de ferro fundido. Há também dois cotovelos de 90° e uma válvula globo aberta, todos flangeados. Se a elevação na saída é zero, qual é a potência extraída pela turbina quando a vazão é 4,5 L/s de água a 20 °C. (Na figura: nível a 30 m.)</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 1):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> cada trecho com a sua velocidade: $V_{50} = 2{,}29$, $V_{150} = 0{,}255$, $V_{75} = 1{,}02$ m/s; $f$ = 0,0315; 0,0267; 0,0288 ($\varepsilon = 0{,}26$ mm). Perdas distribuídas: 6,42 + 0,01 + 0,94 = 7,37 m. Localizadas (White Tab. 6.5 flangeada): entrada 0,5, dois cotovelos de 2" (0,39 cada) e expansão 50→150 ($K = (1 - 1/9)^2 = 0{,}79$) na velocidade de 50 mm; contração 150→75 (0,37, Fox) e globo de 3" (7,25, interpolada entre 8,5 e 6,0) na de 75 mm: total 0,96 m.</p>
+    <div class="math-box">$$H_T = 30 - \frac{V_{75}^2}{2g} - 7{,}37 - 0{,}96 = 21{,}6\ \text{m},\qquad W = \gamma Q H_T = 9800(0{,}0045)(21{,}6) = 0{,}95\ \text{kW}$$</div>
+    <div class="answer"><strong>Resposta:</strong> $W \approx 0{,}95$ kW. <span class="badge badge-warn">diverge 3% do gabarito (0,98 kW)</span></div>
+    <div class="callout diverge"><span class="co-t">Divergência: 0,95 × 0,98 kW</span><p>A perda distribuída sozinha já é 7,4 m; para chegar a 0,98 kW o total de perdas teria de ser 7,7 m, o que só fecha deixando a válvula globo e as mudanças de diâmetro de fora (sobram só a entrada e os cotovelos, 0,34 m). Causa provável: o gabarito usou outros $K$ ou omitiu singularidades. O método acima é o completo; na prova, declare os $K$ escolhidos.</p></div>
+  </article>
+
+  <article class="ex" id="le05-ex2">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 2 · ver Pivô 3</div>
+      <h3 id="le05-ex2-h" data-nav="LE05 ex.2 · caixa d'água">Caixa d'água com válvula globo</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 1)</span> Uma tubulação de diâmetro interno $D = 25$ mm e rugosidade média $\varepsilon = 0{,}08$ mm é ligada a um reservatório elevado de água, conforme mostrado na figura. A vazão é controlada por uma válvula globo, localizada próxima à saída da tubulação. A água tem massa específica $\rho = 1000$ kg/m³ e viscosidade cinemática $\nu = 1\times10^{-6}$ m²/s e a aceleração da gravidade no local é $g = 9{,}8$ m/s². <ol type="a"><li>Dados os coeficientes de perda de carga localizada da entrada $K_{ent} = 0{,}5$, da curva $K_{curva} = 1{,}2$ e da válvula globo quando totalmente aberta $K_{válvula} = 8{,}2$, calcule a vazão que passa pela tubulação quando a válvula está totalmente aberta.</li><li>A válvula é parcialmente fechada de forma que se leve 5 segundos para encher um recipiente de 2 litros. Calcule o coeficiente de perda localizada da válvula nessa condição.</li></ol> Dados da figura: $h_r = 10$ m, $L_1 = 2$ m, $L_2 = 3$ m, $L_3 = 5{,}5$ m.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 2):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> o desnível que move a água é do nível até a saída: $L_2 + L_3 = 8{,}5$ m ($h_r$ não entra); o tubo tem $L_1 + L_3 = 7{,}5$ m. Saída livre: a carga cinética do jato fica na equação.</p>
+    <div class="math-box">$$8{,}5 = \frac{V^2}{2g}\Big(1 + 0{,}5 + 1{,}2 + K_v + f\frac{7{,}5}{0{,}025}\Big)\quad\text{(a) } K_v = 8{,}2:\ V = 2{,}93\ \text{m/s},\ f = 0{,}0283,\ Q = 1{,}44\cdot10^{-3}\ \text{m}^3/\text{s}$$
+    $$\text{(b) } Q = 2\ \text{L}/5\ \text{s} = 4\cdot10^{-4}\ \text{m}^3/\text{s}:\ V = 0{,}815\ \text{m/s},\ f = 0{,}0317\ \Rightarrow\ K_v = \frac{8{,}5}{V^2/2g} - (2{,}7 + 9{,}5) = 239$$</div>
+    <div class="answer"><strong>Respostas:</strong> (a) $Q = 0{,}00144$ m³/s; (b) $K_v \approx 239$. <span class="badge badge-ok">bate com o gabarito</span></div>
+  </article>
+
+  <article class="ex" id="le05-ex5">
+    <div class="ex-head"><div><div class="ex-kicker">LE 05 · Exercício 5 (= Apostila 08, ex. 8.11) · ver Pivô 1</div>
+      <h3 id="le05-ex5-h" data-nav="LE05 ex.5 · ar-condicionado">Duto retangular de ar-condicionado</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (LE 05, p. 2–3)</span> Na instalação de ar-condicionado apresentada pede-se a relação entre a vazão do sistema e a diferença de pressão entre as seções 1 e 7. Dados: seção transversal do duto retangular, constante e igual a 0,6 m × 0,3 m; rugosidade média $\varepsilon = 10^{-3}$ m; cotovelos: $K_s = 1{,}3$; registro: $L_{eq} = 7$ m; propriedades físicas do ar: $\gamma_{ar} = 1{,}3$ kgf/m³, $\nu_{ar} = 10^{-6}$ m²/s.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (LE 05 · ex. 5):</strong> ver o PDF oficial, LE 05 (Prof. Bruno), p. 3 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $D_h = 4(0{,}18)/1{,}8 = 0{,}4$ m; $\varepsilon/D_h = 0{,}0025$; Re alto ⇒ regime rugoso, $f = 0{,}025$ independente de $Q$. Comprimento: 4 × 5 m na horizontal + 5 m descendo + 5 m subindo = 30 m, mais $L_{eq} = 7$ m; 4 cotovelos (3, 4, 5, 6). Desníveis se cancelam (1 e 7 na mesma cota) e o ar tem peso desprezível.</p>
+    <div class="math-box">$$\Delta p_{1,7} = \frac{\rho}{2}\Big(\frac{Q}{A}\Big)^2\Big[f\frac{L + L_{eq}}{D_h} + 4K_s\Big] = \frac{1{,}3}{2(0{,}18)^2}\big[0{,}025(92{,}5) + 5{,}2\big]Q^2 = 150{,}7\,Q^2\ \ (\text{Pa})$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\Delta p_{1,7} = 150{,}7\,Q^2$ (Pa, com $Q$ em m³/s), válida enquanto o regime for rugoso. <span class="badge badge-ok">bate com o gabarito</span> $\gamma = 1{,}3$ kgf/m³ equivale a $\rho = 1{,}3$ kg/m³.</div>
+  </article>
+
+  <article class="ex" id="pr5-ex3">
+    <div class="ex-head"><div><div class="ex-kicker">Preparação L5 · Exercício 3 · ver Pivô 5</div>
+      <h3 id="pr5-ex3-h" data-nav="Prep. L5 ex.3 · bomba de 1 cv">Bomba de 1 cv: desnível, rugosidade e altura de sucção</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Exercícios de preparação L5, p. 1)</span> Na instalação da figura, a potência fornecida ao fluido é de 1 cv e a tubulação tem diâmetro constante e igual a 3 cm. A vazão que passa pela tubulação é de 3 L/s. Os coeficientes de perda de carga singular nos pontos 1, 4, 5 e 6 são respectivamente $k_{s1} = 0{,}5$, $k_{s4} = 1{,}3$, $k_{s5} = 1{,}3$ e $k_{s6} = 1{,}0$. O fator de atrito nessa condição de escoamento é $f = 0{,}02$. A viscosidade cinemática do fluido é $\nu = 10^{-6}$ m²/s e seu peso específico $\gamma = 1000$ kgf/m³. O comprimento do trecho 1–2 é $L_{1,2} = 2$ m e do trecho 3–6 é $L_{3,6} = 10$ m. Calcule (a) o desnível entre os reservatórios; (b) a rugosidade do conduto; (c) a altura $h_0$ para que a pressão efetiva na entrada da bomba seja nula.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Preparação L5 · ex. 3):</strong> ver o PDF oficial, Preparação L5, p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <p><strong>Roteiro:</strong> $V = 4{,}24$ m/s, $V^2/2g = 0{,}919$ m; $H_B = 735{,}5/(9800\cdot0{,}003) = 25{,}0$ m. (a) energia de 0 a 7: $\Delta h = H_B - \frac{V^2}{2g}\big(\sum k_s + f\frac{12}{0{,}03}\big)$. (b) Colebrook “ao contrário”: com $f$ e Re conhecidos, isole $\varepsilon$. (c) energia de 0 a 2 com $p_2 = 0$ e PHR no eixo da bomba.</p>
+    <div class="math-box">$$\text{(a) } \Delta h = 25{,}0 - 0{,}919(4{,}1 + 8{,}0) = 13{,}9\ \text{m}\qquad \text{(b) } Re = 1{,}27\cdot10^5,\ \frac{\varepsilon}{D} = 3{,}7\Big[10^{-1/(2\sqrt f)} - \frac{2{,}51}{Re\sqrt f}\Big] = 5{,}6\cdot10^{-4},\ \varepsilon = 0{,}017\ \text{mm}$$
+    $$\text{(c) } h_0 = \frac{V^2}{2g}\Big(1 + k_{s1} + f\frac{L_{1,2}}{D}\Big) = 0{,}919(1 + 0{,}5 + 1{,}33) = 2{,}6\ \text{m}$$</div>
+    <div class="answer"><strong>Respostas:</strong> (a) $\Delta h \approx 13{,}9$ m; (b) $\varepsilon \approx 0{,}017$ mm; (c) $h_0 \approx 2{,}6$ m. <span class="badge badge-warn">sem gabarito impresso; conferido em Python</span> Note que $k_{s6} = 1$ é a saída no reservatório 7.</div>
+  </article>
+
+  <h3 class="sub" id="t10-roteiro" data-nav="Para treinar (roteiro)">Para treinar</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Exercício</th><th>O que treina</th><th>Onde</th></tr></thead><tbody>
+    <tr><td>Apostila 08, ex. 8.09</td><td>tubulação equivalente a 28 elementos</td><td>Apostila 08, p. 18–19 (resolvido)</td></tr>
+    <tr><td>Apostila 08, ex. 8.17–8.19</td><td>bombas, vazões e pressões numa instalação</td><td>Apostila 08, p. 26–30 (resolvidos)</td></tr>
+    <tr><td>White P6.100, P6.103, P6.107</td><td>perdas localizadas</td><td>roteiro da P2</td></tr>
+    <tr><td>White P6.140–P6.143, P6.154–P6.159</td><td>placa de orifício e Venturi (Exp. 2)</td><td>roteiro da P2</td></tr>
+    <tr><td>Relatório da Exp. 2 (2026)</td><td>$K$ da redução medido (0,256 contra 0,23 do Fox) e $C$ do orifício (0,623)</td><td><code>Laboratorio/experiencia_2/overleaf/</code></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t10-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t10-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+  <div class="resumo"><div class="r-grid">
+    <div class="r-item"><b>Dutos.</b> <span class="path">$D_h=4A/P$ (retângulo $2bh/(b+h)$) em Re, $\varepsilon/D$ e $fL/D$; $V=Q/A_{real}$</span>.</div>
+    <div class="r-item"><b>Localizadas.</b> <span class="path">$h_m=KV^2/2g$ ou $fL_e/D$ · entrada 0,5 (viva), 0,78 (reentrante) · saída 1 · expansão $(1-d^2/D^2)^2$ no tubo menor</span>. Use a tabela que o enunciado manda.</div>
+    <div class="r-item"><b>Bomba.</b> <span class="path">$h_b(Q)=\Delta z+\frac{Q^2}{2gA^2}(fL/D+\sum K)$ → $Q_{op}$ → $W=\gamma Qh_b/\eta$</span>. Válvula aberta ⇒ $Q_{max}$.</div>
+    <div class="r-item"><b>Sucção e medidores.</b> $p_s/\gamma=-z_s-\frac{V^2}{2g}(1+\sum K+fL/D)$. Venturi/orifício: $Q=CA_t\sqrt{2\Delta p/\rho(1-\beta^4)}$.</div>
+  </div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="09-perda-distribuida-turbulento.html"><small>← anterior</small>Perda distribuída no turbulento: Moody e Colebrook</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3230 · Mecânica dos Fluidos I (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3230-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

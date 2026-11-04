@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro da P2 · 27/out · PME3230</title>
+<meta name="description" content="Roteiro de estudo para a P2 de PME3230: o que ler no White (6ª ed.) e quais exercícios resolver em volume de controle, energia e escoamento em condutos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3230-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3230 · Roteiro P2</div>
+  <div class="sb-sub">Mecânica dos Fluidos I</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#cap1-h">Como usar</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap2-h">1 · Volume de controle</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap3-h">2 · Energia</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap4-h">3 · Condutos</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap5-h">4 · Perdas distribuídas</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap6-h">5 · Laboratório</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#cap7-h">Checklist</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../index.html">← Disciplinas</a> <span>Mecânica dos Fluidos I</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="cap1">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Roteiro</span>
+    <h2 id="cap1-h" data-nav="Como usar">Roteiro da P2: o que ler e o que resolver</h2>
+    <p class="section-desc">Prova em 27/10/2026, sem consulta. Livro-base: White, <em>Mecânica dos Fluidos</em>, 6ª ed. em português. Páginas sempre <strong>impressas</strong>.</p></div>
+  <div class="callout"><span class="co-t">O que este roteiro é</span>
+    <p>Uma lista de leitura e de exercícios, sem soluções e sem trechos do livro. Ele diz o que ler, em que ordem e quais exercícios resolver para cobrir cada ponto ao menos uma vez. “Ex” é exemplo resolvido do livro (leia e refaça sem olhar); “P” é problema do fim do capítulo (resolva). A numeração dos problemas foi conferida no PDF da 6ª ed. em português; se a sua edição for outra, a numeração pode mudar.</p></div>
+  <ol class="method">
+    <li><strong>Volume de controle e continuidade</strong> (T4): White 3.2 e 3.3, p. 153–165. Dá a ferramenta de balanço usada em todo o resto.</li>
+    <li><strong>Equação da energia</strong> (T5): White 3.6, p. 184–194, e a comparação com Bernoulli (3.7), p. 195–202.</li>
+    <li><strong>Regimes e perda de carga em condutos</strong> (L3): White 6.1 a 6.6, p. 353–379.</li>
+    <li><strong>Os problemas típicos de perda distribuída</strong> (L4): White 6.7 e 6.8, p. 379–394. É onde o Colebrook iterativo aparece.</li>
+    <li><strong>Laboratório</strong>: ponte entre as Exp. 1 e 2 e o livro (seção 5), porque sempre há uma questão de laboratório.</li>
+  </ol>
+  <div class="callout warn"><span class="co-t">Escopo a confirmar</span>
+    <p>(1) Perdas localizadas (6.9) e medidores (6.12) caem na P2? O cronograma dá L5 até 23/10, mas o planejamento do site os colocou na P3; a seção 5 os inclui por causa da Exp. 2. (2) A modelagem da turbulência (6.5, P6.34–P6.40) só vale se o professor tiver passado em aula: os slides de L3 falam em “noções de camada limite”, não em deduções de Reynolds. Confirme os dois pontos no material de aula antes de gastar tempo.</p></div>
+</section>
+
+<section class="chapter" id="cap2">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1 · T4</span>
+    <h2 id="cap2-h" data-nav="1 · Volume de controle">Volume de controle, TTR e continuidade</h2>
+    <p class="section-desc">White 3.2 e 3.3, p. 153–165. Pergunta do tópico: quanto entra, quanto sai e quanto se acumula num volume de controle.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Ponto</th><th>Ler e refazer</th><th>Resolver</th><th>O que exercita</th></tr></thead><tbody>
+    <tr><td>TTR e vazão (3.1–3.2)</td><td>Ex 3.1 (p. 158)</td><td>P3.3 · P3.4</td><td>Q a partir de u(r) laminar; mangueira e bocal</td></tr>
+    <tr><td>VC deformável</td><td>Ex 3.2 (p. 160, balão)</td><td>P3.23 · P3.24</td><td>Seringa; cone com V = Kt</td></tr>
+    <tr><td>Continuidade permanente (3.3)</td><td>Ex 3.3 e 3.4 (p. 163)</td><td>P3.8 · P3.32</td><td>Junção de três tubos; bifurcação</td></tr>
+    <tr><td>Perfil de velocidade não uniforme</td><td>Ex 3.3 e 3.4</td><td>P3.15</td><td>Velocidade média a partir de um perfil</td></tr>
+    <tr><td>Transiente: enchimento e esvaziamento</td><td>Ex 3.5 (p. 164, reservatório com duas entradas)</td><td>P3.12 · P3.13</td><td>dh/dt de tanque</td></tr>
+    <tr><td>Massa específica variável</td><td>Ex 3.5</td><td>P3.7</td><td>Tanque esférico que perde ar</td></tr>
+    </tbody></table></div>
+  <details class="deep"><summary>Extras, só se sobrar tempo</summary><div class="deep-body"><p>P3.9, P3.10, P3.14, P3.16, P3.17, P3.18, P3.19, P3.20, P3.28, P3.31. Os exercícios de aula de Mariani (T4, ex. 4.9 e 4.12) e de Marcos cobrem o mesmo assunto.</p></div></details>
+</section>
+
+<section class="chapter" id="cap3">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2 · T5</span>
+    <h2 id="cap3-h" data-nav="2 · Energia">Equação da energia</h2>
+    <p class="section-desc">White 3.6, p. 184–194, mais a comparação com Bernoulli em 3.7. Pergunta do tópico: de onde vem e para onde vai a energia, com bomba, turbina, perdas e calor.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Ponto</th><th>Ler e refazer</th><th>Resolver</th><th>O que exercita</th></tr></thead><tbody>
+    <tr><td>Forma geral: trabalho de eixo, calor, α</td><td>Ex 3.16 (p. 187), Ex 3.18 (p. 190)</td><td>P3.127 · P3.140</td><td>Calor perdido ao rio; turbina a vapor</td></tr>
+    <tr><td>Perda de carga na equação</td><td>Ex 3.17 (p. 189)</td><td>P3.133 · P3.136</td><td>Pressão e válvula; dois reservatórios com tubo longo</td></tr>
+    <tr><td>Bomba: potência fornecida ao fluido</td><td>Ex 3.20 (p. 193)</td><td>P3.130 · P3.146</td><td>Bomba com perda de 5 m; querosene com 8 hp</td></tr>
+    <tr><td>Turbina: potência extraída</td><td>Ex 3.19 (p. 193)</td><td>P3.129 · P3.145</td><td>Cataratas; turbina de barragem</td></tr>
+    <tr><td>Jato e barco: energia vira velocidade de saída</td><td>Ex 3.20</td><td>P3.137 · P3.144</td><td>Barco anti-incêndio; jato de alcance máximo</td></tr>
+    <tr><td>Energia × Bernoulli</td><td>Ex 3.21 a 3.24 (p. 199–202)</td><td>sem problema novo</td><td>Quando Bernoulli basta e quando não (P3.147 em diante é revisão da P1)</td></tr>
+    </tbody></table></div>
+  <details class="deep"><summary>Extras, só se sobrar tempo</summary><div class="deep-body"><p>P3.126, P3.131, P3.132, P3.134, P3.139, P3.141.</p></div></details>
+</section>
+
+<section class="chapter" id="cap4">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3 · L3</span>
+    <h2 id="cap4-h" data-nav="3 · Condutos">Condutos: regimes, perda de carga, Moody e Colebrook</h2>
+    <p class="section-desc">White 6.1 a 6.6, p. 353–379. Pergunta do tópico: qual é o fator de atrito e, com ele, a perda de carga.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Ponto</th><th>Ler e refazer</th><th>Resolver</th><th>O que exercita</th></tr></thead><tbody>
+    <tr><td>Regimes e Re crítico (6.1–6.2)</td><td>Ex 6.1 (p. 354), Ex 6.2 (p. 360)</td><td>P6.1 · P6.4</td><td>Laminar ou turbulento; vazão de transição</td></tr>
+    <tr><td>Perda de carga e fator de atrito (6.3)</td><td>Ex 6.3 (p. 363)</td><td>P6.9 · P6.11</td><td>f a partir de pressões medidas</td></tr>
+    <tr><td>Laminar desenvolvido (6.4)</td><td>Ex 6.4 (p. 365)</td><td>P6.12 · P6.19 · P6.32</td><td>Capilar como viscosímetro; ν a partir de Q; tubo inclinado</td></tr>
+    <tr><td>Turbulento em tubos, Moody e Colebrook (6.6)</td><td>Ex 6.6 (Moody, p. 377; o OCR do PDF numera “6.62”), Ex 6.7 (p. 378), Ex 6.8 (p. 379)</td><td>P6.41 · P6.44 · P6.46</td><td>Reservatórios com tubo novo; mercúrio em vidro liso; perda e potência a partir de Q e D</td></tr>
+    <tr><td>Turbulento: parede e perfil log (6.5), se estiver no escopo</td><td>Ex 6.5 (p. 371)</td><td>P6.36 · P6.51</td><td>Dados u(y) de parede; subcamada viscosa</td></tr>
+    </tbody></table></div>
+  <details class="deep"><summary>Extras, só se sobrar tempo</summary><div class="deep-body"><p>P6.7, P6.10, P6.29, P6.33, P6.43, P6.45, P6.50, P6.52.</p></div></details>
+</section>
+
+<section class="chapter" id="cap5">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4 · L4</span>
+    <h2 id="cap5-h" data-nav="4 · Perdas distribuídas">Perdas distribuídas: os três tipos de problema</h2>
+    <p class="section-desc">White 6.7 e 6.8, p. 379–394. Reconheça o que é dado e o que é incógnita antes de escolher o método.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Tipo</th><th>Ler e refazer</th><th>Resolver</th></tr></thead><tbody>
+    <tr><td>1. Dados Q e D, achar h<sub>f</sub></td><td>Ex 6.6 (p. 377)</td><td>P6.46 (já na seção 3) · P6.62</td></tr>
+    <tr><td>2. Dados h<sub>f</sub> (ou Δp) e D, achar Q</td><td>Ex 6.9 (p. 380), Ex 6.10 (p. 382)</td><td>P6.55 · P6.61</td></tr>
+    <tr><td>3. Dados h<sub>f</sub> e Q, achar D</td><td>Ex 6.11 (p. 384), Ex 6.12 (p. 385)</td><td>P6.84 · P6.72 (usa os dados do P6.57)</td></tr>
+    <tr><td>Dutos não circulares, D<sub>h</sub></td><td>Ex 6.13 (p. 389), Ex 6.14 (p. 392), Ex 6.15 (p. 394)</td><td>P6.86 · P6.87 · P6.92</td></tr>
+    </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Resolução iterativa</span>
+    <p>Nos tipos 2 e 3 o fator de atrito depende de Re, que depende da incógnita. Treine a iteração de Colebrook no SOLVE da calculadora: ela está na ficha de base B7 do planejamento do site.</p></div>
+  <details class="deep"><summary>Extras, só se sobrar tempo</summary><div class="deep-body"><p>P6.49, P6.64 (óleo, laminar), P6.66, P6.83, P6.90, P6.95.</p></div></details>
+</section>
+
+<section class="chapter" id="cap6">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5 · Laboratório</span>
+    <h2 id="cap6-h" data-nav="5 · Laboratório">Ponte entre as experiências e o livro</h2>
+    <p class="section-desc">A teoria dos roteiros fica nos roteiros das experiências; aqui só se indica onde ela está no White.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Experiência</th><th>No White</th><th>Resolver</th></tr></thead><tbody>
+    <tr><td>Exp. 1, escoamento laminar (08/10)</td><td>Regime e Re (6.1, Ex 6.1); Hagen-Poiseuille e f = 64/Re (6.4, Ex 6.4); comprimento de entrada; Q por volume e tempo, com incerteza</td><td>P6.12 · P6.19 · P6.29 (viscosímetro capilar: P6.13 a P6.18)</td></tr>
+    <tr><td>Exp. 2, turbulento e medidores (22/10)</td><td>f(Re, ε/D) no Moody (6.6); perda localizada e coeficiente K (6.9, p. 394–402, Ex 6.16 na p. 402); orifício e Venturi com manômetro de Hg e coeficiente C (6.12, p. 414–431)</td><td>Perdas localizadas: P6.100 · P6.103 · P6.107. Orifício: P6.140 · P6.141 · P6.143. Venturi: P6.154 · P6.156 · P6.159</td></tr>
+    </tbody></table></div>
+  <div class="callout warn"><span class="co-t">Cuidado com a incerteza do diâmetro</span>
+    <p>Re ∝ Q/D, V ∝ Q/D² e f ∝ J·D⁵/Q². Uma incerteza pequena em D pesa muito em f. O professor penalizou o tratamento dessa incerteza em 2025.</p></div>
+</section>
+
+<section class="chapter" id="cap7">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">Fechamento</span>
+    <h2 id="cap7-h" data-nav="Checklist">Checklist antes da prova</h2></div>
+  <ul>
+    <li>Escrevo o balanço de massa em VC (regime permanente e transiente) sem consultar.</li>
+    <li>Escrevo a equação da energia com bomba, turbina, perda e α, e converto potência em carga e vice-versa.</li>
+    <li>Classifico o regime pelo Re e escolho entre 64/Re e Colebrook.</li>
+    <li>Reconheço, só pelo enunciado, qual dos três tipos de problema de perda distribuída é.</li>
+    <li>Itero o Colebrook na calculadora sem erro de unidade (carga em m, pressão em Pa).</li>
+    <li>Sei calcular D<sub>h</sub> e usar o mesmo método em dutos não circulares.</li>
+  </ul>
+  <p class="tbl-cap">Roteiro gerado em 23/10/2026. A escolha dos exercícios é a cobertura mínima por ponto e passa por revisão antes de virar ficha de tópico.</p>
+</section>
+
+
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3230 · Mecânica dos Fluidos I (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build_roteiro/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3230-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

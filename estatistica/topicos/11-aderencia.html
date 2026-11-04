@@ -302,6 +302,8 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ex"><a href="#ideia">A ideia</a></li>
 <li class="nav-ex"><a href="#gl-p">O p de k−1−p</a></li>
 <li class="nav-ex"><a href="#continua">Variável contínua</a></li>
+<li class="nav-ex"><a href="#poisson-cauda">Discreta: a última classe</a></li>
+<li class="nav-ex"><a href="#lista-prof">Lista da professora</a></li>
 </ul></li>
 <li class="nav-ch"><a href="#limites">5 · Limitações e hipóteses</a><ul class="nav-sub">
 </ul></li>
@@ -354,11 +356,20 @@ analisadas, o parâmetro sempre veio dado.</p>
 <h3 class="sub" id="continua" data-nav="Variável contínua">Variável contínua</h3>
 <p>Para testar uma normal (ou outra contínua), crie classes por intervalos. Um jeito limpo: usar os quantis teóricos, de modo que
 cada classe tenha a mesma probabilidade (Ex. 14.6 abaixo, com os quartis da $N(10,25)$).</p>
+<h3 class="sub" id="poisson-cauda" data-nav="Discreta: a última classe">Discreta: a última classe é aberta</h3>
+<p>Numa Poisson (ou binomial agrupada), a última classe observada ("4 ou mais") recebe a probabilidade que sobra:
+$P(X\ge k)=1-\sum_{x&lt;k}P(X=x)$, ou, em contagens, $E_{\text{última}}=n-\sum E_{\text{anteriores}}$. Sem isso, os esperados não somam $n$.</p>
+<h3 class="sub" id="lista-prof" data-nav="Lista da professora">Para treinar: lista complementar da professora</h3>
+<p>Lista "Testes de Aderência e Associação" (prof.ª Aline, 2026/2). Resolva sozinho e confira a resposta. Os valores abaixo foram
+refeitos em Python. Onde o gabarito da lista diverge, a tabela mostra os dois valores. Só no 1.4 a conclusão muda, e ali vale a
+regra do formulário ($E_i&gt;5$): se cair algo assim na prova, junte as classes e escreva que juntou.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Item</th><th>O que pede</th><th>χ² conferido</th><th>g.l. · crítico</th><th>Decisão</th><th>Gabarito da lista</th></tr></thead><tbody><tr><td>1.1</td><td>modelo genético, 4 classes, $p_i$ dados</td><td>0,563</td><td>3 · 7,81</td><td>não rejeita</td><td>confere (E₄ = 31,13, não 31,94)</td></tr><tr><td>1.2</td><td>Poisson com λ = 2,1 dado, última classe aberta</td><td><strong>6,31</strong></td><td>4 · 9,49</td><td>não rejeita</td><td>imprime 7,75 (é o E₅)</td></tr><tr><td>1.3</td><td>exponencial de média 0,5, quartis, α = 1%</td><td><strong>14,8</strong> (O = 5, 1, 12, 2)</td><td>3 · 11,34</td><td>rejeita</td><td>O = 6, 1, 11, 2; χ² 12,4; crítico de 5%</td></tr><tr><td>1.4</td><td>binomial(4; 0,39), n = 150</td><td><strong>1,73</strong> juntando "3" e "4" (E = 20,77; 53,11; 50,94; 25,18)</td><td>3 · 7,81</td><td><strong>não rejeita</strong> (valor-p 0,63)</td><td><span class="badge badge-warn">diverge</span> rejeita com χ² 15,63, sem juntar: o E₅ = 3,47 viola $E_i&gt;5$ e sozinho responde por 12,3 do χ²</td></tr><tr><td>1.5</td><td>Poisson com λ estimado ($\bar x$ = 3,877), 8 e 9 juntos, α = 10%</td><td>7,81</td><td>7 · 12,02</td><td>não rejeita</td><td>≈ 8,00</td></tr><tr><td>1.6</td><td>normal(30; 10) dada, quartis</td><td><strong>2,4</strong> (O = 8, 4, 4, 4)</td><td>3 · 7,81</td><td>não rejeita</td><td>2,8</td></tr></tbody></table></div>
+<p class="tbl-cap">O item 1.7 da lista usa Kolmogorov-Smirnov: ver as limitações abaixo.</p>
 
 </section>
 
 <section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
-<ul><li><strong>Aproximação χ²</strong>: vale com frequências esperadas grandes. Regra do curso: $E_i&gt;5$ em toda classe; se falhar, junte com a classe vizinha e recalcule $k$ (e os g.l.). A regra de agrupar não está no formulário (<a href="../provas/p2.html#f-17">nº 17</a>).</li><li><strong>A escolha das classes muda o resultado</strong> em variáveis contínuas: poucas classes escondem desvios, muitas violam $E_i&gt;5$.</li><li><strong>Não rejeitar não prova a distribuição</strong>: só diz que os dados não a contrariam (com $n$ pequeno, quase nada é rejeitado).</li><li><strong>Observações independentes</strong> e cada uma em exatamente uma classe.</li><li>O teste é sempre <strong>unilateral à direita</strong>: χ² pequeno é concordância, nunca evidência contra $H_0$.</li></ul>
+<ul><li><strong>Aproximação χ²</strong>: vale com frequências esperadas grandes. Regra do curso: $E_i&gt;5$ em toda classe; se falhar, junte com a classe vizinha e recalcule $k$ (e os g.l.). A regra de agrupar não está no formulário (<a href="../provas/p2.html#f-17">nº 17</a>).</li><li><strong>A escolha das classes muda o resultado</strong> em variáveis contínuas: poucas classes escondem desvios, muitas violam $E_i&gt;5$.</li><li><strong>Não rejeitar não prova a distribuição</strong>: só diz que os dados não a contrariam (com $n$ pequeno, quase nada é rejeitado).</li><li><strong>Observações independentes</strong> e cada uma em exatamente uma classe.</li><li>O teste é sempre <strong>unilateral à direita</strong>: χ² pequeno é concordância, nunca evidência contra $H_0$.</li><li><strong>Kolmogorov-Smirnov</strong> (lista da professora, item 1.7) é outro teste de aderência, para variável contínua sem agrupar: $D=\max|F(x_i)-F_e(x_i)|$, comparado com a tabela de KS. Ele <strong>não está no formulário</strong> e a folha de tabelas da prova não traz a tabela de KS: conheça a ideia; a conta da P2 é a do χ².</li></ul>
 </section>
 
 <section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>

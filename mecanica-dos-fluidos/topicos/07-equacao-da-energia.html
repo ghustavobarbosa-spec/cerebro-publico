@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equação da energia · PME3230</title>
+<meta name="description" content="Site de estudo de PME3230 (Poli-USP): fichas por tópico com exercícios resolvidos e a trilha da P2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3230-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3230 · Tópico 7</div>
+  <div class="sb-sub">Mecânica dos Fluidos I</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t07-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t07-eq">A equação em carga</a></li>
+<li class="nav-ex"><a href="#t07-ponte">Ponte de notação</a></li>
+<li class="nav-ex"><a href="#t07-maq">Máquinas e rendimento</a></li>
+<li class="nav-ex"><a href="#t07-linhas">LE, LP e sentido</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t07-lim-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t07-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t07-matriz">Matriz de cobertura T5</a></li>
+<li class="nav-ex"><a href="#t07-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#ap5-51-h">Ap.05 5.1 · turbina<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap5-55-h">Ap.05 5.5 · sifão<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap5-52-h">Ap.05 5.2 · bomba e jato<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap5-53-h">Ap.05 5.3 · bomba ou turbina?<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap5-54-h">Ap.05 5.4 · barco<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t07-demais">Demais exercícios T5</a></li>
+<li class="nav-ex"><a href="#ap5-58-h">Ap.05 5.8 · perdas em V²/2g</a></li>
+<li class="nav-ex"><a href="#ap5-57-h">Ap.05 5.7 · vertedor</a></li>
+<li class="nav-ex"><a href="#t07-roteiro">Para treinar (roteiro)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t07-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Fluidos I</a> <span class="sep">›</span> <span>Equação da energia</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t07-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t07-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2>
+    <p class="section-desc"><span class="chip">T5</span> teoria (Prof. Mariani) · cai na P2 (27/10) · é a espinha das fichas 08 a 10</p></div>
+  <div class="callout concept"><span class="co-t">Pergunta de engenharia</span>
+    <p>Quanta potência uma bomba precisa dar ao fluido (ou uma turbina consegue tirar dele), e quanto a pressão cai ao longo de um sistema? A equação da energia em termos de <strong>carga</strong> responde às duas. Ao fim da ficha você deve saber <strong>escrever</strong> a carga de uma seção, <strong>decidir</strong> o sentido do escoamento e o tipo de máquina, <strong>calcular</strong> potência e rendimento, <strong>esboçar</strong> as linhas de energia (LE) e piezométrica (LP) e <strong>achar</strong> a pressão em qualquer ponto (cavitação).</p></div>
+</section>
+
+<section class="chapter" id="t07-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t07-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+  <ul>
+    <li><a href="06-volume-de-controle-e-continuidade.html">Ficha 06</a>: continuidade (velocidades a partir da vazão) e o coeficiente $\alpha$.</li>
+    <li><strong>Bernoulli (T3, P1):</strong> a equação da energia sem máquinas e sem perdas é Bernoulli entre seções.</li>
+    <li><strong>Manometria (L2, P1):</strong> o ex. 5.3 tira a pressão de um manômetro de mercúrio.</li>
+    <li><strong>1ª lei da Termodinâmica:</strong> energia interna, trabalho de eixo e calor; a “perda” é energia mecânica que vira térmica.</li>
+    <li><strong>Lançamento oblíquo:</strong> no ex. 5.2 a velocidade do jato sai da altura que ele atinge.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t07-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t07-ler-h" data-nav="3 · Onde ler">Onde ler</h2></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody>
+    <tr><td>Prof. Mariani (T5)</td><td>“T5 · Notas de aula” (10 p., 2024) e os exercícios 5.1, 5.2 + 5.5 e 5.4 (barco) resolvidos; lista recomendada: Ap. 05 ex. 5.1 a 5.5</td><td>notação da prova: $H$, $W_m$, $W_a$, $G$, PHR</td></tr>
+    <tr><td>Prof. Marcos Tadeu</td><td>“1ª Lei da Termo · Teoria” (20 p.) e pasta de 17 exercícios resolvidos</td><td>bombas, turbinas, sifão, hidropneumático</td></tr>
+    <tr><td>Apostila 05 (Coletânea)</td><td>Parte A (p. 3–6): formas da equação; ex. 5.1–5.13 (p. 7–28)</td><td>banco de exercícios resolvidos</td></tr>
+    <tr><td>Notas do Prof. Bruno, parte 1 §2 e parte 2 §1</td><td>“Considerações de energia no escoamento em tubos”</td><td>a mesma equação na forma do laboratório (com $h_{LT}$)</td></tr>
+    <tr><td>White, 6ª ed. (PT)</td><td>§3.6 (p. 184–194) e §3.7, energia × Bernoulli (p. 195–202)</td><td>exemplos 3.16–3.24</td></tr>
+    <tr><td>Munson, 7ª ed. (EN)</td><td>§5.3 (p. 236–253); comparação com Bernoulli em 5.3.3 (p. 243)</td><td>livro-texto do plano</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t07-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t07-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+  <h3 class="sub" id="t07-eq" data-nav="A equação em carga">Da 1ª lei à equação em carga</h3>
+  <p>O TTR aplicado à energia $E = m(u + v^2/2 + gz)$, com o trabalho das forças de pressão levado para dentro do fluxo, dá a 1ª lei para o VC. Em regime permanente e fluido incompressível, dividindo tudo pelo peso, o Mariani escreve:</p>
+  <div class="math-box">$$\int_{SC}\Big(\frac{v^2}{2g}+\frac{p}{\gamma}+z\Big)\gamma\,\vec v\cdot\vec n\,dS = W_m - W_a$$</div>
+  <p>$W_m$ é a potência que uma <strong>máquina</strong> entrega ao fluido (positiva para bomba, negativa para turbina) e $W_a$ é a potência das <strong>forças de atrito</strong>, sempre dissipada (energia mecânica que vira calor). Com seções planas, onde $p/\gamma + z$ é constante (escoamento retilíneo), a integral vira valores médios com o $\alpha$ da <a href="06-volume-de-controle-e-continuidade.html">ficha 06</a>:</p>
+  <div class="math-box">$$H = \alpha\frac{\bar V^2}{2g} + \frac{p}{\gamma} + z\ \ [\text{m}],\qquad \sum_{saídas} G\,H - \sum_{entradas} G\,H = W_m - W_a,\qquad G = \gamma Q$$</div>
+  <p>Com uma entrada (1) e uma saída (2), dividindo por $G$:</p>
+  <div class="math-box">$$H_1 + H_m = H_2 + H_{p_{1,2}},\qquad H_m = \frac{W_m}{\gamma Q},\quad H_{p_{1,2}} = \frac{W_a}{\gamma Q}\ (\text{perda de carga})$$</div>
+  <div class="callout concept"><span class="co-t">O que cada termo é</span>
+    <p>$H$ é energia por unidade de <strong>peso</strong>, por isso sai em metros: $\alpha V^2/2g$ é a carga cinética, $p/\gamma$ a de pressão e $z$ a de posição (sempre medida a partir do mesmo <strong>PHR</strong>, plano horizontal de referência). Uma bomba “levanta” a carga do fluido em $H_m$ metros; o atrito tira $H_p$ metros. Num reservatório de grandes dimensões aberto, $H$ = cota da superfície livre.</p></div>
+
+  <h3 class="sub" id="t07-ponte" data-nav="Ponte de notação">Ponte de notação: Mariani, Bruno e White</h3>
+  <p>Os dois professores escrevem a mesma equação com sinais diferentes. Na prova, use a notação de quem fez a questão (teoria = Mariani; laboratório = Bruno) e escreva a hipótese de sinal.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Grandeza</th><th>Mariani (T5)</th><th>Bruno (L3–L5)</th><th>White</th><th>O que muda</th></tr></thead><tbody>
+    <tr><td>Carga</td><td>$H = \alpha V^2/2g + p/\gamma + z$</td><td>$p/\gamma + \alpha\bar V^2/2g + z$</td><td>$p/\rho g + \alpha V^2/2g + z$</td><td>nada</td></tr>
+    <tr><td>Máquina</td><td>$W_m$ entregue ao fluido (bomba &gt; 0)</td><td>$h_s = \dot W_s/\gamma Q$, trabalho feito <em>pelo</em> fluido (turbina &gt; 0, bomba &lt; 0)</td><td>$h_b$ (bomba) e $h_t$ (turbina), ambos &gt; 0</td><td><strong>sinal</strong> do termo de máquina</td></tr>
+    <tr><td>Perdas</td><td>$W_a$ (potência) ou $H_p$ (carga)</td><td>$h_{LT} = h_L + h_m$</td><td>$h_f$ (distribuída) + $\sum h_m$</td><td>nome</td></tr>
+    <tr><td>Equação</td><td>$H_1 + H_m = H_2 + H_{p}$</td><td>$(H_1 - H_2) - h_s = h_{LT}$</td><td>$H_1 + h_b = H_2 + h_t + h_f$</td><td>só a arrumação</td></tr>
+    <tr><td>Vazão em peso</td><td>$G = \gamma Q$</td><td>$\gamma Q$</td><td>$\rho g Q$</td><td>—</td></tr>
+  </tbody></table></div>
+
+  <h3 class="sub" id="t07-maq" data-nav="Máquinas e rendimento">Potência e rendimento</h3>
+  <div class="math-box">$$W_m = \gamma Q H_m,\qquad \text{bomba: } \eta_b = \frac{W_m}{W_{eixo}}\Rightarrow W_{eixo} = \frac{W_m}{\eta_b},\qquad \text{turbina: } \eta_t = \frac{W_{eixo}}{|W_m|}\Rightarrow W_{eixo} = \eta_t|W_m|$$</div>
+  <p>O rendimento sempre “come” potência: a bomba pede mais do motor do que entrega ao fluido; a turbina entrega ao eixo menos do que tira do fluido. Conversões: 1 CV = 735,5 W (o Mariani arredonda para 736 W; 75 kgf·m/s); 1 HP = 745,7 W; 1 kgf/cm² = 98,07 kPa ≈ 10 m de coluna d'água.</p>
+
+  <h3 class="sub" id="t07-linhas" data-nav="LE, LP e sentido">Linhas de energia e piezométrica; sentido do escoamento</h3>
+  <ul>
+    <li><strong>LE</strong> (linha de energia) é o gráfico de $H$ ao longo do conduto; <strong>LP</strong> (piezométrica) é $p/\gamma + z$. A distância entre elas é $\alpha V^2/2g$: com diâmetro constante, são paralelas.</li>
+    <li>Sem máquina, a LE só <strong>desce</strong> no sentido do escoamento (perda) ou fica horizontal (sem perda). Uma bomba faz a LE subir em degrau ($H_m$); uma turbina, descer em degrau.</li>
+    <li><strong>Sentido do escoamento:</strong> num trecho sem máquina, o fluido vai da seção de maior $H$ para a de menor $H$. É assim que se descobre se uma máquina é bomba ou turbina (Pivô 4).</li>
+    <li>Onde a LP passa abaixo do tubo, a pressão efetiva é negativa. Se a pressão absoluta chegar à pressão de vapor, há <strong>cavitação</strong> (Pivô 2).</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t07-lim">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t07-lim-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+  <ul>
+    <li><strong>Regime permanente e incompressível.</strong> Para gás com grande variação de pressão, a forma em carga não vale (aparece a função de pressão, Ap. 05 §A.3).</li>
+    <li><strong>Seção plana com $p/\gamma + z$ uniforme:</strong> exige linhas de corrente retas e paralelas na seção. Não vale dentro de uma curva ou de um bocal convergente.</li>
+    <li><strong>$\alpha \approx 1$ no turbulento</strong> e <strong>$\alpha = 2$ no laminar</strong>. Num reservatório de grandes dimensões, $V \approx 0$.</li>
+    <li><strong>Sem troca de calor útil:</strong> calor e energia interna ficam dentro de $W_a$ (perda). Se o enunciado der calor trocado, use a forma completa com $u$ e $\dot Q$.</li>
+    <li><strong>Jato livre:</strong> pressão = atmosférica (efetiva nula) na seção de saída; resistência do ar desprezada no lançamento.</li>
+    <li><strong>“Desprezar perdas”</strong> torna as cargas iguais em todas as seções sem máquina: Bernoulli entre elas.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t07-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t07-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2>
+    <p class="section-desc">Os cinco pivôs são os ex. 5.1 a 5.5 da Apostila 05, que o Prof. Mariani lista como recomendados e resolve em aula (5.3 resolvido pelo Prof. Marcos). Contas em <code>calc/calc_T4_T5.py</code>.</p></div>
+
+  <h3 class="sub" id="t07-matriz" data-nav="Matriz de cobertura T5">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">E1</span> carga, LE e LP · <span class="chip">E2</span> potência e rendimento de máquina · <span class="chip">E3</span> sentido do escoamento / tipo de máquina · <span class="chip">E4</span> pressão ao longo do conduto e cavitação · <span class="chip">E5</span> várias entradas e saídas · <span class="chip">E6</span> perdas dadas (potência ou $K V^2/2g$)</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Exercício</th><th>E1</th><th>E2</th><th>E3</th><th>E4</th><th>E5</th><th>E6</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>Ap.05 5.1 turbina (aula)</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td></td><td>Pivô 1</td></tr>
+    <tr class="pv"><td>Ap.05 5.5 sifão (aula)</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td></td><td></td><td>Pivô 2</td></tr>
+    <tr class="pv"><td>Ap.05 5.2 bomba e jato (aula)</td><td class="x">◐</td><td class="x">●</td><td></td><td></td><td></td><td class="x">●</td><td>Pivô 3</td></tr>
+    <tr class="pv"><td>Ap.05 5.3 bomba ou turbina</td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td>Pivô 4</td></tr>
+    <tr class="pv"><td>Ap.05 5.4 barco (aula)</td><td></td><td class="x">●</td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>Pivô 5</td></tr>
+    <tr><td>Ap.05 5.8 perdas em $V^2/2g$</td><td class="x">●</td><td></td><td></td><td class="x">●</td><td></td><td class="x">●</td><td>ver Pivô 3</td></tr>
+    <tr><td>Ap.05 5.7 vertedor</td><td class="x">●</td><td></td><td></td><td></td><td></td><td class="x">●</td><td>ver Pivô 2</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que estes pivôs</span>
+    <p>A ordem vai do mais simples ao mais completo: o <strong>5.1</strong> monta a equação entre duas superfícies e traça LE/LP; o <strong>5.5</strong> usa a mesma igualdade de cargas para achar pressões (e cavitação); o <strong>5.2</strong> põe bomba, rendimento e perda dada; o <strong>5.3</strong> exige descobrir o sentido do escoamento antes de saber se a máquina é bomba ou turbina; o <strong>5.4</strong> tem duas entradas, onde a forma com $G$ é obrigatória.</p></div>
+
+  <h3 class="sub" id="t07-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+
+  <!-- PIVÔ 1 -->
+  <article class="ex pivo" id="ap5-51">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.1 · Pivô 1</div>
+      <h3 id="ap5-51-h" data-nav="Ap.05 5.1 · turbina" data-pivo>Turbina alimentada por reservatório; LE e LP</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">E2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 7; item b do Prof. Mariani)</span> A figura mostra uma tubulação ligada a um reservatório de grandes dimensões. Uma turbina é acoplada à tubulação cujo diâmetro de saída é 75 mm. Sendo 10 m/s a velocidade de saída da água, calcular (a) a potência desenvolvida na turbina, supondo os atritos desprezíveis; (b) esboçar as linhas piezométrica e de energia. Na figura: nível 30 m acima do eixo da tubulação, tubo de 6" e bocal de saída de 3".</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 05 §5 · ex. 1):</strong> ver o PDF oficial, Apostila 05, p. 7 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Equação da energia com máquina (turbina), sem perdas, regime permanente, incompressível. Como não há perdas, $H_1 = H_3$ e $H_4 = H_2$: dá para escrever a equação direto entre a superfície livre (1) e o jato (2).</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Cota da superfície livre (PHR no eixo)</td><td>$z_1$</td><td>30 m</td><td>figura</td></tr>
+        <tr><td>Velocidade na superfície livre</td><td>$V_1$</td><td>≈ 0 (grandes dimensões)</td><td>implícito</td></tr>
+        <tr><td>Pressões efetivas em 1 e 2</td><td>$p_1$, $p_2$</td><td>0 (atmosfera)</td><td>implícito</td></tr>
+        <tr><td>Velocidade e diâmetro do jato</td><td>$V_2$, $D_2$</td><td>10 m/s; 0,075 m</td><td>texto</td></tr>
+        <tr><td>Diâmetro do tubo</td><td>$D$</td><td>6" ≈ 0,15 m</td><td>figura</td></tr>
+        <tr><td>Peso específico</td><td>$\gamma$</td><td>9800 N/m³ (a apostila usa 10 000)</td><td>—</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$W_m$. Critério: deve sair negativo (turbina retira energia do fluido).</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$G\,(H_2 - H_1) = W_m - W_a,\quad W_a = 0,\quad H = \frac{V^2}{2g} + \frac{p}{\gamma} + z$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) Potência</div>
+      <div class="math-box">$$Q = V_2\frac{\pi D_2^2}{4} = 10\cdot\frac{\pi(0{,}075)^2}{4} = 0{,}0442\ \text{m}^3/\text{s},\quad H_1 = 0 + 0 + 30 = 30\ \text{m},\quad H_2 = \frac{10^2}{2(9{,}8)} + 0 + 0 = 5{,}10\ \text{m}$$
+      $$W_m = \gamma Q (H_2 - H_1) = 9800(0{,}0442)(5{,}10 - 30) = -10{,}8\ \text{kW} \approx -14{,}7\ \text{CV}$$</div>
+      <div class="step-part">(b) LE e LP</div>
+      <p>No tubo de 6": $V = Q/A = 0{,}0442/(\pi\,0{,}15^2/4) = 2{,}50$ m/s, $V^2/2g = 0{,}32$ m. Antes da turbina, LE = 30 m e LP = 29,68 m. A turbina derruba a LE em degrau até $H_2 = 5{,}10$ m; depois dela, LP = 5,10 − 0,32 = 4,78 m. No bocal a velocidade sobe até 10 m/s: a LE continua em 5,10 m e a LP cai até 0 (pressão atmosférica no eixo do jato).</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $W_m \approx -10{,}8$ kW (−14,7 CV); com $\gamma = 10\,000$ N/m³, como na apostila, −11,0 kW. (b) LE: 30 m → degrau na turbina → 5,10 m; LP 0,32 m abaixo da LE nos trechos de 6". <span class="badge badge-ok">bate com a apostila (−11 005,8 W) e com o Mariani (−11 000 W)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Esquecer que o jato sai com energia cinética: $H_2 \neq 0$. A turbina não aproveita os 30 m inteiros; 5,1 m vão embora no jato.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Sem perdas, a LE é horizontal em cada trecho; ela só desce em degrau na turbina.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 2 -->
+  <article class="ex pivo" id="ap5-55">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.5 · Pivô 2</div>
+      <h3 id="ap5-55-h" data-nav="Ap.05 5.5 · sifão" data-pivo>Sifão: velocidade, pressões e limite de altura</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">E4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 15)</span> A figura mostra um sifão ligado a um reservatório. Desprezando as perdas de carga, determinar a velocidade da água que sai pela seção C como um jato livre. Determinar também as pressões da água nas seções A e B da tubulação e analisar o aumento da distância BD. Na figura: B está 2 m acima do nível D; a saída C está 5 m abaixo do nível; A está dentro do tubo, na altura do nível.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 05 §5 · ex. 5):</strong> ver o PDF oficial, Apostila 05, p. 15 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Sem máquina e sem perdas: a carga é a mesma em todas as seções ($H_D = H_A = H_B = H_C$). O diâmetro é constante, então a velocidade também é.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>PHR</td><td>—</td><td>na saída C</td><td>figura</td></tr>
+        <tr><td>Cotas</td><td>$z_D$, $z_A$, $z_B$, $z_C$</td><td>5; 5; 7; 0 m</td><td>figura</td></tr>
+        <tr><td>Superfície livre e jato</td><td>$p_D$, $p_C$, $V_D$</td><td>0; 0; ≈ 0</td><td>implícito</td></tr>
+        <tr><td>$g$, $\gamma$</td><td>—</td><td>a apostila usa 10 m/s² e 10⁴ N/m³</td><td>apostila</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$V_C$, $p_A$, $p_B$; e até onde BD pode crescer. Critério: pressão absoluta em B acima da pressão de vapor.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$H_D = H_i\ \forall i:\quad 0 + 0 + 5 = \frac{V_i^2}{2g} + \frac{p_i}{\gamma} + z_i$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Pressão de vapor da água a 20 °C: $p_v \approx 2{,}34$ kPa (abs); $p_{atm} \approx 101{,}3$ kPa.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\text{C: } 5 = \frac{V_C^2}{2g} + 0 + 0 \Rightarrow V_C = \sqrt{2g\cdot5} = 10\ \text{m/s}\ (g = 10)\quad[9{,}90\ \text{m/s com } g = 9{,}8]$$
+      $$\text{A: } 5 = 5 + \frac{p_A}{\gamma} + 5 \Rightarrow \frac{p_A}{\gamma} = -5\ \text{m}\Rightarrow p_A = -50\ \text{kPa}\qquad \text{B: } 5 = 5 + \frac{p_B}{\gamma} + 7 \Rightarrow p_B = -70\ \text{kPa}$$</div>
+      <div class="callout concept"><span class="co-t">Por que a pressão em A já é negativa</span><p>A está na altura da superfície livre, mas a água ali já tem velocidade de 10 m/s: os 5 m de carga cinética saem da carga de pressão. A LP fica 5 m abaixo da LE em todo o tubo; o topo B está 2 m acima do nível, logo 7 m acima da LP.</p></div>
+      <div class="step-part">Aumento de BD</div>
+      <p>Mantida a saída, cada metro a mais em BD baixa $p_B$ em 1 m de coluna: $p_B/\gamma = -(5 + \overline{BD})$. Sem cavitação, $p_{atm} - \gamma(5 + \overline{BD}) \ge p_v$:</p>
+      <div class="math-box">$$\overline{BD}_{max} = \frac{p_{atm}-p_v}{\gamma} - 5 = \frac{101{,}3 - 2{,}34}{9{,}8} - 5 \approx 5{,}1\ \text{m}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $V_C = 10$ m/s; $p_A = -5\cdot10^4$ Pa; $p_B = -7\cdot10^4$ Pa (efetivas); aumentar BD reduz $p_B$ até a cavitação, por volta de BD ≈ 5 m para água a 20 °C. <span class="badge badge-ok">bate com a apostila e com o Mariani</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> A velocidade depende só do desnível entre o nível e a <strong>saída</strong>, não da altura de B.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Cavitação se testa com pressão <strong>absoluta</strong>: some $p_{atm}$ à efetiva antes de comparar com $p_v$.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 3 -->
+  <article class="ex pivo" id="ap5-52">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.2 · Pivô 3</div>
+      <h3 id="ap5-52-h" data-nav="Ap.05 5.2 · bomba e jato" data-pivo>Bomba alimentando um jato inclinado</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">E2</span><span class="chip">E6</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 8)</span> Água num tanque de grandes dimensões está sob a pressão relativa de 49 000 Pa na superfície livre e é bombeada através de um tubo e um bocal, como indica a figura. Sabendo-se que a perda total na tubulação é de 4780,75 W e que o rendimento da bomba é de 70%, qual a potência a ser fornecida à bomba pelo motor a ela acoplada? Despreze a resistência do ar. Na figura: superfície livre 2 m acima do eixo do tubo de 6"; bocal de 3" a 2 m de altura, inclinado a 45°; o jato sobe 6,4 m acima do bocal.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 05 §5 · ex. 2):</strong> ver o PDF oficial, Apostila 05, p. 8 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Energia com bomba, perda dada em potência e rendimento. A velocidade do jato não é dada: sai da altura que ele atinge (balística). Depois, $Q$ vem da continuidade.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Pressão do ar sobre a água</td><td>$p_1$</td><td>49 000 Pa (efetiva) = 0,5 kgf/cm²</td><td>texto</td></tr>
+        <tr><td>Cotas (PHR no eixo do tubo)</td><td>$z_1$, $z_2$</td><td>2 m; 2 m</td><td>figura</td></tr>
+        <tr><td>Altura do jato acima do bocal</td><td>$h$</td><td>6,4 m, ângulo de 45°</td><td>figura</td></tr>
+        <tr><td>Diâmetro do bocal</td><td>$D_2$</td><td>3" ≈ 0,075 m</td><td>figura</td></tr>
+        <tr><td>Perda total</td><td>$W_a$</td><td>4780,75 W</td><td>texto</td></tr>
+        <tr><td>Rendimento da bomba</td><td>$\eta_b$</td><td>0,70</td><td>texto</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$W_{eixo} = W_m/\eta_b$ (potência do motor). Critério: $W_{eixo} &gt; W_m &gt; W_a$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><div class="math-box">$$G(H_2 - H_1) = W_m - W_a,\qquad V_{2y}^2 = 2gh\ \text{ e }\ V_{2y} = V_2\,\mathrm{sen}\,45^\circ \Rightarrow \frac{V_2^2}{2g} = \frac{h}{\mathrm{sen}^2 45^\circ} = 2h$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$H_1 = 0 + \frac{49\,000}{9800} + 2 = 7{,}0\ \text{m},\qquad H_2 = 2(6{,}4) + 0 + 2 = 14{,}8\ \text{m}$$
+      $$V_2 = \sqrt{2(9{,}8)(12{,}8)} = 15{,}84\ \text{m/s},\qquad Q = V_2\frac{\pi(0{,}075)^2}{4} = 0{,}0700\ \text{m}^3/\text{s}$$
+      $$W_m = \gamma Q(H_2 - H_1) + W_a = 9800(0{,}0700)(7{,}8) + 4781 = 10{,}13\ \text{kW},\qquad W_{eixo} = \frac{10{,}13}{0{,}70} = 14{,}5\ \text{kW} \approx 19{,}7\ \text{CV}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $W_{eixo} \approx 14{,}5$ kW (≈ 20 CV). <span class="badge badge-ok">bate com a apostila (14 546 W) e com o Mariani (≈ 20 CV)</span> A diferença de 0,5% vem de $V_2$ arredondado para 16 m/s nas fontes.</div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> No topo da trajetória só a componente vertical zera. A velocidade no bocal vem de $V_{2y}$, não de $V_2^2 = 2gh$.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> A perda entra somando a $W_m$ (a bomba tem de vencê-la), e o rendimento divide no final.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 4 -->
+  <article class="ex pivo" id="ap5-53">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.3 · Pivô 4</div>
+      <h3 id="ap5-53-h" data-nav="Ap.05 5.3 · bomba ou turbina?" data-pivo>Bomba ou turbina? Decidir pelo sentido do escoamento</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Lista recomendada (Mariani); resolvido pelo Prof. Marcos</span></div></div>
+    <div class="ex-topics"><span class="chip">E1</span><span class="chip">E2</span><span class="chip">E3</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 11)</span> Dado o sistema da figura, determinar qual a potência da máquina hidráulica e o seu tipo (bomba ou turbina). Sabe-se que $p_2 = 3{,}8$ kgf/cm². O líquido que escoa é água e o líquido manométrico é mercúrio. Dados: $Q = 2$ L/s; $D = 2"$ (em toda linha, ignorar a escala). Na figura: o nível do reservatório (0) está 10 + 20 = 30 m acima da seção 1; a seção 2 está 1 m abaixo da 1; o manômetro de mercúrio liga 1 e 2, com desnível de 3 m de mercúrio.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 05 §5 · ex. 3):</strong> ver o PDF oficial, Apostila 05, p. 11 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>O tipo da máquina depende do sentido do escoamento, que não é dado. Estratégia: comparar as cargas de 0 e de 1, trecho <strong>sem máquina</strong>: o fluido vai da maior para a menor. Unidades técnicas (kgf, m), como a apostila.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Pressão em 2</td><td>$p_2$</td><td>3,8 kgf/cm² = 38 000 kgf/m²</td><td>texto</td></tr>
+        <tr><td>Vazão e diâmetro</td><td>$Q$, $D$</td><td>2 L/s; 0,05 m (2")</td><td>texto</td></tr>
+        <tr><td>Pesos específicos</td><td>$\gamma$, $\gamma_{Hg}$</td><td>1000 e 13 600 kgf/m³</td><td>implícito</td></tr>
+        <tr><td>Cotas (PHR na seção 1)</td><td>$z_0$, $z_1$, $z_2$</td><td>30; 0; −1 m</td><td>figura</td></tr>
+        <tr><td>Manômetro</td><td>—</td><td>3 m de Hg; 3 + 1 = 4 m de água no outro ramo</td><td>figura</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>Tipo da máquina e $|W_m|$. Critério: bomba se o fluido atravessa a máquina ganhando carga.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><div class="math-box">$$\text{manômetro: } p_2 + 3\gamma_{Hg} = (3+1)\gamma + p_1,\qquad H = \frac{V^2}{2g}+\frac{p}{\gamma}+z,\qquad W_m = \gamma Q\,(H_{saída} - H_{entrada})$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>$\gamma_{Hg} = 13\,600$ kgf/m³.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$p_1 = 3(13\,600) - 4(1000) + 38\,000 = 74\,800\ \text{kgf/m}^2,\qquad V_1 = \frac{4(0{,}002)}{\pi(0{,}05)^2} = 1{,}02\ \text{m/s}$$
+      $$H_0 = 30\ \text{m},\qquad H_1 = \frac{1{,}02^2}{2(9{,}8)} + 74{,}8 + 0 = 74{,}85\ \text{m}$$</div>
+      <p>$H_1 &gt; H_0$: no trecho 0–1 o fluido escoa de 1 para 0, <strong>subindo</strong> para o reservatório. Então ele atravessa a máquina de 2 para 1 e sai dela com mais carga: é uma <strong>bomba</strong>.</p>
+      <div class="math-box">$$H_1 - H_2 = \underbrace{\frac{V_1^2 - V_2^2}{2g}}_{0} + \frac{p_1 - p_2}{\gamma} + (z_1 - z_2) = \frac{3(13\,600) - 4(1000)}{1000} + 1 = 36{,}8 + 1 = 37{,}8\ \text{m}$$
+      $$W_m = \gamma Q (H_1 - H_2) = 1000(0{,}002)(37{,}8) = 75{,}6\ \text{kgf·m/s} \approx 1\ \text{CV}\ (741\ \text{W})$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> é uma <strong>bomba</strong>; $W_m = 75{,}6$ kgf·m/s ≈ 1 CV. <span class="badge badge-ok">bate com a apostila e com o Prof. Marcos</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Supor o sentido pelo desenho (“a água desce do morro”). O sentido sai da comparação de cargas.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> No manômetro, cada ramo tem a sua coluna de água: 3 m de um lado, 3 + 1 do outro (a seção 2 está 1 m abaixo).</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 5 -->
+  <article class="ex pivo" id="ap5-54">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.4 · Pivô 5</div>
+      <h3 id="ap5-54-h" data-nav="Ap.05 5.4 · barco" data-pivo>Propulsão de barco: duas entradas e uma saída</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">E2</span><span class="chip">E5</span><span class="chip">E6</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 14)</span> O sistema de propulsão de um barco consta de uma bomba hidráulica que recolhe água na proa através de 2 tubos de 2". Calcular em CV a potência transmitida pela bomba ao fluido. Sabe-se que a vazão veiculada é 50 L/s e que a potência das forças de atrito ao longo de todos os tubos é 0,5 CV.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 05 §5 · ex. 4):</strong> ver o PDF oficial, Apostila 05, p. 14 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Duas entradas (1, 2) e uma saída (3): a forma com $H_1 + H_m = H_2 + H_p$ não serve; use $\sum G H$. Os tubos são idênticos, logo as vazões de entrada são iguais.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Vazão na bomba (saída)</td><td>$Q_3$</td><td>0,050 m³/s</td><td>texto</td></tr>
+        <tr><td>Diâmetro dos tubos</td><td>$D$</td><td>2" ≈ 0,050 m (todos)</td><td>texto</td></tr>
+        <tr><td>Perda por atrito</td><td>$W_a$</td><td>0,5 CV = 368 W</td><td>texto</td></tr>
+        <tr><td>Cotas e pressões</td><td>$z_i$, $p_i$</td><td>≈ 0 (tubos no nível da água, PHR nos eixos)</td><td>hipótese do Mariani</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$W_m$ em CV. Critério: maior que $W_a$, porque a bomba também acelera a água.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$G_3H_3 - G_1H_1 - G_2H_2 = W_m - W_a,\qquad H_i = \frac{V_i^2}{2g}\ (p_i = 0,\ z_i = 0)$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>1 CV = 736 W (Mariani).</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$Q_1 = Q_2 = \frac{Q_3}{2} = 0{,}025\ \text{m}^3/\text{s},\quad V_1 = V_2 = \frac{4(0{,}025)}{\pi(0{,}05)^2} = 12{,}73\ \text{m/s},\quad V_3 = 2V_1 = 25{,}46\ \text{m/s}$$
+      $$W_m = \rho\frac{Q_3}{2}(V_3^2 - V_1^2) + W_a = 1000\cdot\frac{0{,}05}{2}(25{,}46^2 - 12{,}73^2) + 368 = 12\,154 + 368 = 12\,522\ \text{W} \approx 17\ \text{CV}$$</div>
+      <div class="callout concept"><span class="co-t">De onde sai o $Q_3/2$</span><p>$\gamma Q_3\frac{V_3^2}{2g} - 2\gamma\frac{Q_3}{2}\frac{V_1^2}{2g} = \rho\frac{Q_3}{2}(V_3^2 - V_1^2)$. As vazões em peso das entradas somam a da saída; por isso a forma com $G$ é a correta quando há bifurcação.</p></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $W_m \approx 12{,}5$ kW ≈ 17 CV. <span class="badge badge-ok">bate com a apostila e com o Mariani</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar a mesma velocidade na saída e nas entradas: a saída tem a mesma área e o dobro da vazão.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $H_1 + H_m = H_3 + H_p$ como se houvesse uma só entrada: dá $W_m$ errado.</li></ul></div>
+  </article>
+
+  <h3 class="sub" id="t07-demais" data-nav="Demais exercícios T5">Demais exercícios</h3>
+
+  <article class="ex" id="ap5-58">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.8 · ver Pivô 3</div>
+      <h3 id="ap5-58-h" data-nav="Ap.05 5.8 · perdas em V²/2g">Perdas proporcionais à carga cinética</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 18)</span> Na figura, as perdas de carga a montante da seção A-A são iguais a $1{,}68\,V_A^2/2g$ e as perdas de carga no bocal são $0{,}78\,V_B^2/2g$. Sabendo que $D_A = 0{,}71$ m e que $D_B = 0{,}50$ m, determinar a vazão $Q$ veiculada no sistema e a pressão em A-A quando a altura é $H = 5{,}5$ m. (Figura na Apostila 05, p. 18: reservatório com nível $H$ acima do eixo; A e B no eixo; B descarrega como jato livre.)</div>
+    <p><strong>Roteiro:</strong> energia do nível C (carga $H$) até o jato B: $H = \frac{V_B^2}{2g} + 1{,}68\frac{V_A^2}{2g} + 0{,}78\frac{V_B^2}{2g}$; continuidade $V_A = V_B(D_B/D_A)^2$, logo $V_A^2 = 0{,}246\,V_B^2$.</p>
+    <div class="math-box">$$5{,}5 = (1{,}78 + 1{,}68\cdot0{,}246)\frac{V_B^2}{2g}\Rightarrow V_B = 7{,}0\ \text{m/s},\ V_A = 3{,}5\ \text{m/s},\ Q = 1{,}38\ \text{m}^3/\text{s};\quad \frac{p_A}{\gamma} = 5{,}5 - 1{,}68\frac{V_A^2}{2g} - \frac{V_A^2}{2g} = 3{,}85\ \text{m}$$</div>
+    <div class="answer"><strong>Respostas:</strong> $Q \approx 1{,}38$ m³/s; $p_A \approx 3850$ kgf/m² (37,7 kPa). <span class="badge badge-ok">bate com a apostila (1,39 m³/s; 3826 kgf/m², que arredonda $V_B = 7$)</span></div>
+  </article>
+
+  <article class="ex" id="ap5-57">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 05 · Exercício 5.7 · ver Pivô 2</div>
+      <h3 id="ap5-57-h" data-nav="Ap.05 5.7 · vertedor">Vertedor: duas alturas possíveis a jusante</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 05, p. 17)</span> No vertedor mostrado na figura, a água escoa em regime permanente com uma perda de carga igual a 1 m entre as seções A-A e B-B. Supondo uma velocidade média igual a 8,86 m/s na seção A-A, quais serão as possíveis alturas da água na seção B-B? Dados: $a = 10$ m; $g = 9{,}81$ m/s²; $z_A = 2$ m (lâmina em A, cuja base está a $a$ acima do fundo em B).</div>
+    <p><strong>Roteiro:</strong> superfícies livres ($p = 0$), carga com cota da superfície: $\frac{V_A^2}{2g} + z_A + a = \frac{V_B^2}{2g} + z_B + 1$, ou $15 = V_B^2/2g + z_B$; continuidade por largura: $V_Az_A = V_Bz_B \Rightarrow V_B = 17{,}72/z_B$.</p>
+    <div class="math-box">$$15 = \frac{16}{z_B^2} + z_B\ \Rightarrow\ z_B^3 - 15z_B^2 + 16 = 0\ \Rightarrow\ z_B = 1{,}07\ \text{m ou } 14{,}93\ \text{m}$$</div>
+    <div class="answer"><strong>Respostas:</strong> 1,07 m (rasa e rápida) ou 14,93 m (funda e lenta); a terceira raiz, −1, não tem sentido físico. <span class="badge badge-ok">bate com a apostila</span></div>
+  </article>
+
+  <h3 class="sub" id="t07-roteiro" data-nav="Para treinar (roteiro)">Para treinar: exercícios já resolvidos nas fontes</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Exercício</th><th>O que treina</th><th>Onde está a solução</th></tr></thead><tbody>
+    <tr><td>Ap.05 5.9 e 5.10</td><td>bocal com perda singular; medidor de vazão</td><td>Apostila 05, p. 19–22</td></tr>
+    <tr><td>Ap.05 5.11</td><td>tubo em U oscilando (energia não permanente)</td><td>Apostila 05, p. 23–24</td></tr>
+    <tr><td>Ap.05 5.12 e 5.13</td><td>medir potência de turbina; perda com pressões e cotas</td><td>Apostila 05, p. 25–28</td></tr>
+    <tr><td>Marcos: bomba, bomba ou turbina, filtro e bomba, eficiência motor-bomba, turbina-bocal-potência</td><td>potência, rendimento, sentido do escoamento</td><td>pasta “T5 · Exercícios Prof. Marcos”</td></tr>
+    <tr><td>Marcos: sifão, funil com perda de carga, duto inclinado, tubulação que descarrega na atmosfera, reservatórios pressurizados, hidropneumático</td><td>pressões ao longo do conduto; perda como $K V^2/2g$</td><td>mesma pasta</td></tr>
+    <tr><td>Marcos: aspersor, hovercraft, ventilador, conexão em Y, enchimento de tanque</td><td>energia com várias saídas e ar</td><td>mesma pasta (conexão em Y também usa quantidade de movimento, P3)</td></tr>
+    <tr><td>White P3.126–P3.146</td><td>bombas, turbinas, oleodutos</td><td>roteiro da P2 (sem solução)</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t07-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t07-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+  <div class="resumo"><div class="r-grid">
+    <div class="r-item"><b>Equação.</b> <span class="path">$H=\alpha V^2/2g+p/\gamma+z$ · $\sum G_sH_s-\sum G_eH_e=W_m-W_a$ · 1 entrada e 1 saída: $H_1+H_m=H_2+H_p$</span>.</div>
+    <div class="r-item"><b>Máquinas.</b> <span class="path">$W_m=\gamma QH_m$ · bomba $W_{eixo}=W_m/\eta$ · turbina $W_{eixo}=\eta|W_m|$</span>. Bruno: $h_s$ com sinal oposto (turbina &gt; 0).</div>
+    <div class="r-item"><b>Sentido e tipo.</b> Sem máquina, o fluido vai do maior $H$ ao menor. Bomba: LE sobe em degrau; turbina: desce.</div>
+    <div class="r-item"><b>Pressões.</b> LP = LE − $V^2/2g$; abaixo do tubo ⇒ $p$ efetiva &lt; 0; cavitação se $p_{abs} \le p_v$. Jato livre: $p = 0$, e $V^2/2g$ é carga perdida para a máquina.</div>
+  </div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a href="06-volume-de-controle-e-continuidade.html"><small>← anterior</small>Volume de controle e continuidade</a><a class="prox" href="08-escoamento-laminar-em-condutos.html"><small>próximo →</small>Condutos: regimes e escoamento laminar</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3230 · Mecânica dos Fluidos I (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3230-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

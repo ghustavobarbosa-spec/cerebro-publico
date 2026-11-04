@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volume de controle e continuidade · PME3230</title>
+<meta name="description" content="Site de estudo de PME3230 (Poli-USP): fichas por tópico com exercícios resolvidos e a trilha da P2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+                   options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+                   chtml: { scale: 0.98 } };
+(function(){ try { var t = localStorage.getItem('pme3230-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch(e){} })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* Sistema visual dos materiais de estudo do cérebro.
+   Derivado de html_de_referencia_para_relatorios.html (tokens :root, Barlow + Poppins, acento #00B131,
+   cards/badges/chips, modo escuro). Sem dados nem marca de terceiros. Embutir inline no <style> do HTML final. */
+:root {
+  --font-display: 'Barlow', sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+  --bg: #F7F7F7; --surface: #FFFFFF; --surface-elevated: #FFFFFF; --surface-muted: #EEEEEE;
+  --text: #121212; --text-secondary: #4F4F4F; --text-muted: #8F8F8F; --text-inverse: #F7F7F7;
+  --accent: #00B131; --accent-dim: rgba(0,177,49,.12); --accent-hover: rgba(0,177,49,.7); --accent-text: #FFFFFF;
+  --accent-ink: #006E1B;
+  --success: #00B131; --success-bg: #E0FFCC; --warning: #EF6800; --warning-bg: #FFDBCB; --warning-ink: #9E4200;
+  --error: #FF5449; --error-bg: #FFDAD6; --error-ink: #A8140B; --info: #0063F7; --info-bg: #C2DAFF; --info-ink: #003FA8;
+  --border: #E0E0E0; --border-strong: #C4C4C4; --border-subtle: rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0px 1px 2px rgba(0,0,0,.1), 0px 10px 20px rgba(0,0,0,.05);
+  --shadow-lg: 0px 4px 8px rgba(0,0,0,.12), 0px 0px 32px rgba(0,0,0,.04);
+  --radius: 8px; --radius-sm: 4px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
+  --motion-instant: 120ms; --motion-fast: 240ms; --motion-base: 400ms; --ease-out-expo: cubic-bezier(.16,1,.3,1);
+  --sidebar-w: 290px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+    --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+    --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+    --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+    --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+    --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #272727; --surface-elevated: #4F4F4F; --surface-muted: #333333;
+  --text: #F7F7F7; --text-secondary: #C4C4C4; --text-muted: #8F8F8F; --text-inverse: #121212;
+  --accent: #1BD60B; --accent-dim: rgba(27,214,11,.18); --accent-ink: #A8F58C;
+  --success-bg: rgba(0,177,49,.18); --warning-bg: rgba(239,104,0,.18); --warning-ink: #FFB68A;
+  --error-bg: rgba(255,84,73,.15); --error-ink: #FFB4AE; --info-bg: rgba(0,99,247,.18); --info-ink: #8FBCFF;
+  --border: #4F4F4F; --border-strong: #616161; --border-subtle: rgba(255,255,255,.06);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 2px 4px rgba(0,0,0,.3), 0 10px 20px rgba(0,0,0,.2);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.4), 0 0 32px rgba(0,0,0,.15);
+  color-scheme: dark;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px;
+  transition: background var(--motion-fast), color var(--motion-fast); -webkit-text-size-adjust: 100%; }
+h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+p { margin: 0 0 10px; } ul, ol { padding-left: 22px; margin: 0 0 10px; } li { margin-bottom: 4px; }
+strong { font-weight: 600; }
+code, .mono { font-family: var(--font-mono); font-size: .9em; overflow-wrap: anywhere; }
+
+/* ===== Layout: sidebar fixa + conteúdo ===== */
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border); overflow-y: auto; z-index: 60; padding: 18px 14px 40px;
+  transition: transform var(--motion-base) var(--ease-out-expo); }
+.sb-brand { font-family: var(--font-display); font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; margin: 0 6px 4px; }
+.sb-brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.sb-sub { font-size: 11.5px; color: var(--text-muted); margin: 0 6px 14px; }
+.sb-tools { display: flex; gap: 6px; margin: 0 6px 14px; flex-wrap: wrap; }
+.btn-chip { font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px;
+  border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary); }
+.btn-chip:hover { border-color: var(--accent); color: var(--accent); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0; }
+.nav-ch > a { display: block; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--text);
+  padding: 7px 8px; border-radius: var(--radius-sm); }
+.nav-ch > a:hover, .nav-ch > a.active { background: var(--accent-dim); color: var(--accent); text-decoration: none; }
+.nav-sub { list-style: none; padding: 0 0 6px 10px; margin: 0; border-left: 2px solid var(--border); margin-left: 12px; }
+.nav-ex a { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12.5px;
+  color: var(--text-secondary); padding: 3px 8px; border-radius: var(--radius-sm); }
+.nav-ex a:hover, .nav-ex a.active { color: var(--accent); background: var(--accent-dim); text-decoration: none; }
+.nav-ex.pivo a { color: var(--text); font-weight: 600; }
+.nav-h4 a { padding-left: 16px; font-size: 12px; }
+.nav-pv { font-size: 9px; font-weight: 700; letter-spacing: .05em; padding: 1px 6px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--accent-text); flex-shrink: 0; }
+.main { margin-left: var(--sidebar-w); min-width: 0; overflow-x: clip; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container:not([display="true"]) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+/* fórmula inline: glifos com 2–5 px de sobra geravam barra de rolagem no Windows; rola no celular, mas sem barra */
+mjx-container:not([display="true"]) { scrollbar-width: none; }
+mjx-container:not([display="true"])::-webkit-scrollbar { display: none; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 28px 80px; }
+.nav-toggle { display: none; }
+.sb-backdrop { display: none; }
+@media (max-width: 1023px) {
+  .sidebar { transform: translateX(-102%); box-shadow: var(--shadow-lg); width: min(86vw, 320px); }
+  body.nav-open .sidebar { transform: none; }
+  .sb-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity var(--motion-fast); }
+  body.nav-open .sb-backdrop { opacity: 1; pointer-events: auto; }
+  .main { margin-left: 0; }
+  .container { padding: 0 16px 80px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; position: fixed; right: 14px; bottom: 16px; z-index: 50;
+    font-family: var(--font-body); font-weight: 600; font-size: 13px; padding: 11px 16px; border-radius: var(--radius-full);
+    border: none; background: var(--accent); color: var(--accent-text); box-shadow: var(--shadow-lg); cursor: pointer; }
+}
+
+/* ===== Hero ===== */
+.topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 14px 0 0; }
+/* trilha de navegação do site (Início › Disciplina › Página) e anterior/próximo das fichas */
+.trilha { margin-right: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
+.trilha a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+.trilha a:hover { color: var(--accent); }
+.trilha .voltar { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 600; }
+.trilha .sep { opacity: .5; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 0; flex-wrap: wrap; }
+.pager a { flex: 1 1 220px; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); background: var(--surface);
+  color: var(--text); text-decoration: none; }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 2px; }
+.pager .prox { text-align: right; }
+.theme-toggle { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-full); width: 38px; height: 38px;
+  font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.hero { margin: 10px 0 36px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 12.5px; color: var(--accent); display: block; margin-bottom: 10px; }
+.hero h1 { font-size: 2.15rem; letter-spacing: -.01em; margin-bottom: 8px; }
+.hero .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-family: var(--font-mono); }
+.intro { color: var(--text-secondary); font-size: 15px; max-width: 760px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0 8px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius-lg);
+  padding: 16px 18px; box-shadow: var(--shadow-sm); }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); }
+.kpi-value { font-family: var(--font-display); font-size: 30px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.kpi-value .unit { font-size: 16px; color: var(--text-secondary); font-weight: 700; }
+.kpi-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ===== Seções ===== */
+.chapter { margin: 0 0 56px; }
+.chapter-head { margin: 0 0 20px; padding-top: 12px; }
+.accent-bar { width: 36px; height: 4px; background: var(--accent); border-radius: var(--radius-full); margin-bottom: 14px; }
+.chapter-head .ch-num { font-family: var(--font-display); font-weight: 700; font-style: italic; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; color: var(--accent); }
+.chapter-head h2 { font-size: 1.6rem; margin: 2px 0 6px; }
+.section-desc { color: var(--text-secondary); font-size: 14px; max-width: 760px; }
+h3.sub { font-size: 1.2rem; margin: 30px 0 10px; }
+h4.subsub { font-size: 1.02rem; margin: 20px 0 8px; }
+.page-break-visual { border: none; border-top: 3px dashed var(--border-strong); margin: 64px 0 40px; position: relative; }
+.page-break-visual::after { content: 'nova página'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 12px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 600; }
+
+/* ===== Cards ===== */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+.card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px; }
+.card-grid .card { margin: 0; }
+.card.accent-left { border-left: 5px solid var(--accent); }
+
+/* ===== Badges e chips ===== */
+.badge { display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.badge-pivo { background: var(--accent); color: var(--accent-text); }
+.badge-aula { background: var(--info-bg); color: var(--info-ink); }
+.badge-roteiro { background: var(--surface-muted); color: var(--text-secondary); }
+.badge-warn { background: var(--warning-bg); color: var(--warning-ink); }
+.badge-ok { background: var(--success-bg); color: var(--accent-ink); }
+.chip { display: inline-flex; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-full);
+  background: var(--surface-muted); color: var(--text-secondary); margin: 2px 3px 2px 0; white-space: nowrap; }
+.tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: var(--radius-sm); margin: 2px 4px 2px 0; }
+.tag-form { background: var(--accent-dim); color: var(--accent-ink); border: 1px solid var(--accent); }
+.tag-tab { background: var(--info-bg); color: var(--info-ink); border: 1px solid var(--info); }
+.tag-mem { background: var(--warning-bg); color: var(--warning-ink); border: 1px solid var(--warning); }
+.tag-sh { background: var(--surface-muted); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+
+/* ===== Exercícios ===== */
+.ex { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 22px 24px; margin: 0 0 26px; }
+.ex.pivo { border-left: 6px solid var(--accent); }
+.ex-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px 14px; margin-bottom: 10px; }
+.ex-head h3 { font-size: 1.28rem; margin: 0; }
+.ex-head .ex-kicker { font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--accent); }
+.ex-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-topics { margin: 2px 0 14px; }
+.stmt { background: var(--surface-muted); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 14px; font-size: 14.2px; }
+.stmt .lbl { display: block; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+.stmt ol, .stmt ul { margin-top: 6px; }
+.figs { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0 16px; }
+.fig { flex: 1 1 280px; max-width: min(100%, 560px); margin: 0; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
+.fig figcaption { font-size: 11px; color: #4F4F4F; margin-top: 4px; text-align: center; }
+.form-fig { max-width: 720px; }
+.figref { display: flex; gap: 10px; align-items: flex-start; background: var(--info-bg); color: var(--text); border-radius: var(--radius); padding: 10px 14px; margin: 10px 0 14px; font-size: 13px; }
+.figref-ico { font-size: 18px; line-height: 1.2; }
+.step { position: relative; padding: 4px 0 6px 44px; margin: 14px 0 6px; }
+.step::before { content: attr(data-n); position: absolute; left: 0; top: 2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.step > h4 { font-size: 1rem; margin: 3px 0 8px; }
+.step-part { font-family: var(--font-display); font-weight: 800; font-size: 1.08rem; margin: 26px 0 4px; padding: 6px 12px; border-radius: var(--radius-sm);
+  background: var(--accent-dim); color: var(--accent-ink); display: inline-block; max-width: 100%; }
+.math-box { background: var(--surface-muted); border-radius: var(--radius); padding: 10px 14px; margin: 8px 0 12px; overflow-x: auto; }
+.answer { background: var(--success-bg); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+.answer strong:first-child { color: var(--accent-ink); }
+.callout { border-radius: var(--radius); padding: 12px 16px; margin: 12px 0; font-size: 14px; border-left: 4px solid var(--info); background: var(--info-bg); }
+.callout > h4, .callout > .co-t { font-size: .95rem; margin-bottom: 6px; font-family: var(--font-display); font-weight: 700; display: block; }
+.callout.warn { border-left-color: var(--warning); background: var(--warning-bg); }
+.callout.diverge { border-left-color: var(--error); background: var(--error-bg); }
+.callout.concept { border-left-color: var(--accent); background: var(--accent-dim); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+details.deep { border: 1px solid var(--border); border-radius: var(--radius); margin: 12px 0; background: var(--surface); }
+details.deep > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 13.5px; color: var(--text-secondary); list-style: none; }
+details.deep > summary::-webkit-details-marker { display: none; }
+details.deep > summary::before { content: '▸ '; color: var(--accent); }
+details.deep[open] > summary::before { content: '▾ '; }
+details.deep > .deep-body { padding: 4px 16px 14px; font-size: 14px; }
+
+/* ===== Tabelas ===== */
+.tbl-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); -webkit-overflow-scrolling: touch; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tbl th { text-align: left; font-family: var(--font-display); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--text-secondary); padding: 9px 11px; border-bottom: 2px solid var(--border); background: var(--surface-muted); white-space: nowrap; }
+.tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.c, .tbl th.c { text-align: center; }
+.tbl .hit { background: var(--accent-dim); font-weight: 700; color: var(--accent-ink); }
+.badge, .tag, .chip { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.ex-head .badge { white-space: nowrap; }
+.tbl .x { color: var(--accent); font-weight: 800; text-align: center; }
+.tbl .miss { color: var(--text-muted); text-align: center; }
+.tbl-cap { font-size: 12px; color: var(--text-muted); margin: -8px 0 16px; }
+table.matrix td, table.matrix th { text-align: center; padding: 6px 7px; }
+table.matrix td:first-child, table.matrix th:first-child { text-align: left; white-space: nowrap; }
+table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); }
+.bar { display: inline-block; height: 10px; border-radius: var(--radius-full); background: var(--accent); vertical-align: middle; margin-right: 6px; }
+
+/* ===== Checklist do método ===== */
+.method { counter-reset: m; list-style: none; padding: 0; }
+.method li { counter-increment: m; position: relative; padding: 12px 14px 12px 56px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; }
+.method li::before { content: counter(m); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent);
+  color: var(--accent-text); font-family: var(--font-display); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+/* ===== Resumo (cap. 9) ===== */
+.resumo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.resumo h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--accent-ink); }
+.resumo .r-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.resumo .r-item { font-size: 12.5px; line-height: 1.45; break-inside: avoid; }
+.resumo .r-item b { font-family: var(--font-display); font-size: 13px; }
+.resumo .path { font-family: var(--font-mono); font-size: 11.2px; color: var(--text-secondary); }
+@media (max-width: 720px) { .resumo .r-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.6rem; } .ex { padding: 16px 14px; } .step { padding-left: 38px; } }
+
+.footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 18px; font-size: 12px; color: var(--text-muted); }
+
+/* ===== Impressão ===== */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-muted: #f2f2f2; --text: #111; --text-secondary: #333; --border: #ccc; color-scheme: light; }
+  body { font-size: 11px; background: #fff; color: #111; }
+  .sidebar, .nav-toggle, .sb-backdrop, .topbar, .pager, .no-print { display: none !important; }
+  .main { margin: 0; } .container { max-width: none; padding: 0; }
+  .ex, .card { box-shadow: none; break-inside: auto; }
+  details.deep { display: none; }
+  #cap9, .cap-resumo { break-before: page; break-after: page; }
+  body.print-resumo .main .chapter:not(#cap9):not(.cap-resumo), body.print-resumo .hero, body.print-resumo .page-break-visual, body.print-resumo .footer { display: none !important; }
+  #cap9 .chapter-head, .cap-resumo .chapter-head { padding-top: 0; margin-bottom: 6px; } #cap9 .chapter-head h2, .cap-resumo .chapter-head h2 { font-size: 15px; }
+  #cap9 .section-desc, #cap9 .accent-bar, #cap9 .ch-num, .cap-resumo .section-desc, .cap-resumo .accent-bar, .cap-resumo .ch-num { display: none; }
+  .resumo { border: none; padding: 0; } .resumo .r-grid { grid-template-columns: 1fr 1fr; gap: 3px 14px; }
+  .resumo .r-item { font-size: 10.4px; line-height: 1.38; } .resumo .r-item b { font-size: 11px; } .resumo .path { font-size: 9.6px; }
+  .resumo h3 { font-size: 12.5px; margin: 8px 0 3px; }
+  a { color: inherit; }
+  mjx-container, .math-box, .tbl-wrap { overflow: visible !important; }
+}
+
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="Sumário">
+  <div class="sb-brand"><span class="dot"></span>PME3230 · Tópico 6</div>
+  <div class="sb-sub">Mecânica dos Fluidos I</div>
+  <div class="sb-tools">
+    <button class="btn-chip" id="btn-theme-sb" type="button">🌓 Tema</button>
+  </div>
+  <nav><ul class="nav-list">
+<li class="nav-ch"><a href="#t06-obj-h">1 · Objetivo do tópico</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t06-antes-h">2 · O que dominar antes</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t06-ler-h">3 · Onde ler</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t06-pontos-h">4 · Pontos-chave</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t06-ttr">TTR e continuidade</a></li>
+<li class="nav-ex"><a href="#t06-secao">Vazão, V̄, α e β</a></li>
+<li class="nav-ex"><a href="#t06-casos">Simplificações</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t06-lim-h">5 · Limitações e hipóteses</a><ul class="nav-sub">
+</ul></li>
+<li class="nav-ch"><a href="#t06-ex-h">6 · Exercícios resolvidos</a><ul class="nav-sub">
+<li class="nav-ex"><a href="#t06-matriz">Matriz de cobertura T4</a></li>
+<li class="nav-ex"><a href="#t06-pivos">Pivôs deste tópico</a></li>
+<li class="nav-ex pivo"><a href="#ap4-415-h">Ap.04 4.1.5 · perfil linear<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap4-4212-h">Ap.04 4.2.12 · filtro<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#ap4-429-h">Ap.04 4.2.9 · misturador<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#mrc4-caixa-h">Marcos · caixa de distribuição<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex pivo"><a href="#mrc4-alivio-h">Marcos · tanque de alívio<span class="nav-pv">PIVÔ</span></a></li>
+<li class="nav-ex"><a href="#t06-demais">Demais exercícios T4</a></li>
+<li class="nav-ex"><a href="#ap4-416-h">Ap.04 4.1.6–4.1.7 · α, β</a></li>
+<li class="nav-ex"><a href="#mrc4-lago-h">Marcos · lago drenado</a></li>
+<li class="nav-ex"><a href="#mrc4-esfera-h">Marcos · reservatório esférico</a></li>
+<li class="nav-ex"><a href="#t06-roteiro">Para treinar (roteiro)</a></li>
+</ul></li>
+<li class="nav-ch"><a href="#t06-resumo-h">7 · Resumo do tópico</a><ul class="nav-sub">
+</ul></li>
+</ul></nav>
+</aside>
+<div class="sb-backdrop" id="sb-backdrop"></div>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false">☰ Sumário</button>
+<div class="main"><div class="container">
+<div class="topbar"><nav class="trilha" aria-label="Navegação"><a class="voltar" href="../../index.html">← Disciplinas</a> <a href="../index.html">Mecânica dos Fluidos I</a> <span class="sep">›</span> <span>Volume de controle e continuidade</span></nav><span class="chip">Versão pública</span><button class="theme-toggle" id="btn-theme" type="button" aria-label="Alternar tema claro/escuro">🌓</button></div>
+
+<section class="chapter" id="t06-obj">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">1</span>
+    <h2 id="t06-obj-h" data-nav="1 · Objetivo do tópico">Objetivo do tópico</h2>
+    <p class="section-desc"><span class="chip">T4</span> teoria (Prof. Mariani) · cai na P2 (27/10)</p></div>
+  <div class="callout concept"><span class="co-t">Pergunta de engenharia</span>
+    <p>Quanto entra, quanto sai e quanto se acumula numa região do espaço? O balanço de massa num <strong>volume de controle</strong> (VC) é a primeira equação de qualquer problema da P2: ele dá as velocidades que a equação da energia (<a href="07-equacao-da-energia.html">ficha 07</a>) e a perda de carga (<a href="08-escoamento-laminar-em-condutos.html">fichas 08</a> a <a href="10-perdas-localizadas-e-dutos.html">10</a>) usam. Ao fim da ficha você deve saber <strong>escolher</strong> o VC e o sentido das normais, <strong>calcular</strong> vazão, velocidade média e os coeficientes $\alpha$ e $\beta$ a partir de um perfil de velocidades e <strong>resolver</strong> os casos com regime transitório, VC móvel ou deformável e massa específica variável.</p></div>
+</section>
+
+<section class="chapter" id="t06-antes">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">2</span>
+    <h2 id="t06-antes-h" data-nav="2 · O que dominar antes">O que dominar antes</h2></div>
+  <ul>
+    <li><strong>Integral de fluxo em coordenadas polares:</strong> numa seção circular, $dA = 2\pi r\,dr$; saber integrar $\int_0^R v(r)\,2\pi r\,dr$ para perfis parabólico, linear e potência $1/7$.</li>
+    <li><strong>Produto escalar com a normal externa:</strong> $\vec v\cdot\vec n$ é negativo onde o fluido entra no VC e positivo onde sai.</li>
+    <li><strong>Cinemática (T2, P1):</strong> campo de velocidades, descrição de Euler, regime permanente.</li>
+    <li><strong>Gás perfeito:</strong> $p = \rho R T$ (para os exercícios de reservatório de gás).</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t06-ler">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">3</span>
+    <h2 id="t06-ler-h" data-nav="3 · Onde ler">Onde ler</h2>
+    <p class="section-desc">Material do curso primeiro; os livros, para quem quer a dedução com mais calma.</p></div>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fonte</th><th>Onde</th><th>Para quê</th></tr></thead><tbody>
+    <tr><td>Prof. Mariani (T4)</td><td>“Equação da Continuidade · Resumo + Simplificações” (5 p.) e os exercícios 4.2.9 e 4.2.12 resolvidos em aula</td><td>notação da prova: $\forall$C, SC, $\vec n$ externo, PHR</td></tr>
+    <tr><td>Prof. Marcos Tadeu</td><td>“Continuidade e Teorema de Transporte de Reynolds” (24 p.) e a pasta de 13 exercícios resolvidos</td><td>VC fixo × deformável, reservatórios</td></tr>
+    <tr><td>Apostila 04 (Coletânea)</td><td>§4.1 elementos característicos na seção (ex. 4.1.1–4.1.10); §4.2 equação da continuidade (ex. 4.2.1–4.2.15)</td><td>banco de exercícios resolvidos</td></tr>
+    <tr><td>White, 6ª ed. (PT)</td><td>§3.2 (TTR) e §3.3 (conservação da massa), p. 153–165</td><td>dedução do TTR e exemplos 3.1–3.5</td></tr>
+    <tr><td>Munson, 7ª ed. (EN)</td><td>§4.3–4.4 (p. 175–188) e §5.1 (p. 200–213)</td><td>livro-texto do plano de ensino</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t06-pontos">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">4</span>
+    <h2 id="t06-pontos-h" data-nav="4 · Pontos-chave">Pontos-chave</h2></div>
+
+  <h3 class="sub" id="t06-ttr" data-nav="TTR e continuidade">Do sistema ao volume de controle</h3>
+  <p>Um <strong>sistema</strong> é uma porção fixa de matéria: por definição, sua massa não muda, $\left.\dfrac{dm}{dt}\right|_{sist} = 0$. Só que em Fluidos não acompanhamos partículas: olhamos uma região fixa (ou que se move de um jeito conhecido) por onde o fluido passa. O <strong>Teorema de Transporte de Reynolds</strong> traduz a taxa de variação de uma grandeza $N$ do sistema (com $\eta = N/m$) para essa região:</p>
+  <div class="math-box">$$\left.\frac{dN}{dt}\right|_{sist} = \underbrace{\frac{\partial}{\partial t}\int_{\forall C}\eta\,\rho\,d\forall}_{\text{acúmulo dentro do VC}} + \underbrace{\int_{SC}\eta\,\rho\,\vec v\cdot\vec n\,dS}_{\text{saldo que atravessa a SC}}$$</div>
+  <p>Com $N = m$ ($\eta = 1$) sai a <strong>equação da continuidade na forma integral</strong>, que o Prof. Mariani lê como “o que sai menos o que entra mais a variação dentro é zero”:</p>
+  <div class="math-box">$$\frac{\partial}{\partial t}\int_{\forall C}\rho\,d\forall + \int_{SC}\rho\,\vec v\cdot\vec n\,dS = 0$$</div>
+  <div class="callout concept"><span class="co-t">O sinal mora na normal</span>
+    <p>$\vec n$ aponta sempre <strong>para fora</strong> do VC. Numa entrada, $\vec v$ e $\vec n$ têm sentidos opostos e $\vec v\cdot\vec n &lt; 0$; numa saída, $&gt; 0$. Por isso as entradas aparecem com sinal “−” no balanço ($-\dot m_0 - \dot m_1 + \dot m_2 = 0$), sem que você precise decidir o sinal “de cabeça”.</p></div>
+
+  <h3 class="sub" id="t06-secao" data-nav="Vazão, V̄, α e β">Elementos característicos de uma seção</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Grandeza</th><th>Definição</th><th>Comentário</th></tr></thead><tbody>
+    <tr><td>Vazão em volume</td><td>$Q = \int_S \vec v\cdot\vec n\,dS$</td><td>m³/s</td></tr>
+    <tr><td>Vazão em massa</td><td>$\dot m = \int_S \rho\,\vec v\cdot\vec n\,dS = \rho Q$ (ρ uniforme)</td><td>kg/s</td></tr>
+    <tr><td>Vazão em peso</td><td>$G = \gamma Q$</td><td>N/s; o Mariani usa $G$ na equação da energia</td></tr>
+    <tr><td>Velocidade média</td><td>$\bar V = Q/A$</td><td>é a $V$ das fórmulas de condutos</td></tr>
+    <tr><td>Coef. de energia cinética</td><td>$\alpha = \dfrac{1}{A}\displaystyle\int_A\left(\frac{v}{\bar V}\right)^3 dA$</td><td>corrige $\bar V^2/2g$: fluxo de energia cinética $=\alpha\,\rho Q\,\bar V^2/2$</td></tr>
+    <tr><td>Coef. de quantidade de movimento</td><td>$\beta = \dfrac{1}{A}\displaystyle\int_A\left(\frac{v}{\bar V}\right)^2 dA$</td><td>usado em T6 (P3)</td></tr>
+  </tbody></table></div>
+  <p>Valores para memorizar: perfil uniforme $\alpha = \beta = 1$; laminar em tubo (parabólico) $\alpha = 2$, $\beta = 4/3$; turbulento $\alpha \approx 1{,}03$–$1{,}1$ (na prova, $\alpha \approx 1$). Como $\alpha \ge 1$ sempre, quanto mais desigual o perfil, mais energia cinética ele carrega para a mesma vazão.</p>
+
+  <h3 class="sub" id="t06-casos" data-nav="Simplificações">As simplificações que a prova usa</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Situação</th><th>A equação vira</th></tr></thead><tbody>
+    <tr><td>Regime permanente, seções com propriedades uniformes</td><td>$\sum \dot m_{saída} = \sum \dot m_{entrada}$ (“lei dos nós”)</td></tr>
+    <tr><td>Fluido incompressível e VC indeformável (mesmo em regime transitório)</td><td>$\sum Q_{saída} = \sum Q_{entrada}$ (“conservação do volume”)</td></tr>
+    <tr><td>Reservatório com superfície livre, incompressível</td><td>$A\,\dfrac{dh}{dt} = Q_{entra} - Q_{sai}$</td></tr>
+    <tr><td>Tanque rígido de gás, propriedades uniformes dentro</td><td>$\forall\,\dfrac{d\rho}{dt} = -\sum \dot m_{saída} + \sum\dot m_{entrada}$</td></tr>
+    <tr><td>VC deformável ou móvel</td><td>usar a velocidade <strong>relativa</strong> à SC: $\vec v_r = \vec v - \vec v_b$ ($\vec v_b$ = velocidade da fronteira)</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t06-lim">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span>
+    <h2 id="t06-lim-h" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
+  <ul>
+    <li><strong>$\dot m = \rho\bar V A$ exige ρ uniforme na seção</strong> e $\vec v$ normal à seção. Se a seção não é normal às linhas de corrente (vertedor da Ap. 04, ex. 4.1.4), use a componente normal $v\cos\theta$.</li>
+    <li><strong>“Conservação do volume” só vale para incompressível com VC rígido.</strong> Num tanque de gás que esvazia, a massa dentro muda; num reservatório que enche, o volume de líquido dentro do VC muda se a fronteira acompanha o nível.</li>
+    <li><strong>Mistura homogênea:</strong> no misturador, a massa específica da saída é a média ponderada pelas vazões, e só é única se a mistura for perfeita.</li>
+    <li><strong>VC fixo ou deformável dá o mesmo resultado</strong>, desde que cada um seja montado com coerência: no fixo, aparece fluxo pela fronteira que o fluido cruza; no deformável, o termo de acúmulo assume esse papel (pivôs 3 e 4).</li>
+    <li><strong>Propriedades uniformes no tanque</strong> (gás) é hipótese de mistura perfeita: o ar que sai tem as propriedades do ar dentro, ou as do bocal se o enunciado der outras.</li>
+  </ul>
+</section>
+
+<section class="chapter" id="t06-ex">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span>
+    <h2 id="t06-ex-h" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2>
+    <p class="section-desc">Pivôs da Apostila 04 (os dois resolvidos em aula pelo Prof. Mariani) e da pasta do Prof. Marcos. Contas em <code>04_resolucoes/_build/calc/calc_T4_T5.py</code>; todas batem com as respostas das fontes.</p></div>
+
+  <h3 class="sub" id="t06-matriz" data-nav="Matriz de cobertura T4">Matriz de cobertura e escolha dos pivôs</h3>
+  <p><span class="chip">C1</span> vazão, $\bar V$, $\alpha$ e $\beta$ por integração · <span class="chip">C2</span> balanço com várias seções · <span class="chip">C3</span> VC móvel ou deformável · <span class="chip">C4</span> regime transitório (nível ou massa variando) · <span class="chip">C5</span> massa específica variável</p>
+  <div class="tbl-wrap"><table class="tbl matrix"><thead><tr><th>Exercício</th><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>Papel</th></tr></thead><tbody>
+    <tr class="pv"><td>Ap.04 4.1.5 placas paralelas</td><td class="x">●</td><td></td><td></td><td></td><td></td><td>Pivô 1</td></tr>
+    <tr class="pv"><td>Ap.04 4.2.12 filtro (aula)</td><td class="x">●</td><td class="x">●</td><td></td><td></td><td></td><td>Pivô 2</td></tr>
+    <tr class="pv"><td>Ap.04 4.2.9 misturador (aula)</td><td></td><td class="x">●</td><td class="x">●</td><td></td><td class="x">◐</td><td>Pivô 3</td></tr>
+    <tr class="pv"><td>Marcos: caixa de distribuição</td><td></td><td class="x">●</td><td class="x">●</td><td class="x">●</td><td></td><td>Pivô 4</td></tr>
+    <tr class="pv"><td>Marcos: tanque de alívio</td><td></td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>Pivô 5</td></tr>
+    <tr><td>Ap.04 4.1.6 e 4.1.7</td><td class="x">●</td><td></td><td></td><td></td><td></td><td>ver Pivô 1</td></tr>
+    <tr><td>Marcos: lago drenado</td><td></td><td class="x">●</td><td class="x">◐</td><td class="x">●</td><td></td><td>ver Pivô 4</td></tr>
+    <tr><td>Marcos: reservatório esférico</td><td></td><td></td><td></td><td class="x">●</td><td class="x">●</td><td>ver Pivô 5</td></tr>
+  </tbody></table></div>
+  <div class="callout concept"><span class="co-t">Por que estes pivôs</span>
+    <p>O <strong>Pivô 1</strong> ensina a integrar um perfil e a calcular $\alpha$, que reaparece na equação da energia e no laminar ($\alpha = 2$). Os <strong>Pivôs 2 e 3</strong> são os que o Mariani resolveu em aula: o filtro junta integração de perfil com balanço de três seções; o misturador mostra o pistão móvel e a escolha entre VC fixo e deformável. O <strong>Pivô 4</strong> é o caso transitório com nível descendo, que é o formato mais comum em prova. O <strong>Pivô 5</strong> fecha com o gás, onde a massa específica muda no tempo.</p></div>
+
+  <h3 class="sub" id="t06-pivos" data-nav="Pivôs deste tópico">Pivôs deste tópico</h3>
+
+  <!-- PIVÔ 1 -->
+  <article class="ex pivo" id="ap4-415">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 04 · Exercício 4.1.5 · Pivô 1</div>
+      <h3 id="ap4-415-h" data-nav="Ap.04 4.1.5 · perfil linear" data-pivo>Placas paralelas: velocidade média, α e β</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">C1</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 04, p. 18)</span> Entre duas placas planas e paralelas está contido um fluido. A placa superior é móvel e a inferior é fixa, e o diagrama de velocidade na seção é o indicado na figura. Pede-se: <ol type="a"><li>A velocidade média na seção;</li><li>Os coeficientes $\alpha$ e $\beta$;</li><li>O fluxo da energia cinética e o fluxo da quantidade de movimento.</li></ol></div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 04 §4.1 · ex. 5):</strong> ver o PDF oficial, Apostila 04, p. 18 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Elementos característicos de uma seção (C1): o perfil é dado e a pergunta é integrar. Perfil linear (escoamento de Couette): $v(y) = v_0\,y/y_0$, de $v = 0$ na placa fixa a $v = v_0$ na móvel.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Velocidade da placa superior</td><td>$v_0$</td><td>literal</td><td>figura</td></tr>
+        <tr><td>Distância entre placas</td><td>$y_0$</td><td>literal</td><td>figura</td></tr>
+        <tr><td>Largura (perpendicular ao papel)</td><td>$b$</td><td>literal, implícita</td><td>resposta da apostila</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\bar V$, $\alpha$, $\beta$, $\Phi_K$ e $\vec\Phi_Q$. Como conferência: $\alpha \ge \beta \ge 1$ para qualquer perfil não uniforme.</p></div>
+    <div class="step" data-n="4"><h4>Fórmulas</h4><div class="math-box">$$\bar V=\frac{1}{A}\int_A v\,dA,\qquad \alpha=\frac{1}{A}\int_A\Big(\frac{v}{\bar V}\Big)^3dA,\qquad \beta=\frac{1}{A}\int_A\Big(\frac{v}{\bar V}\Big)^2dA,\qquad \Phi_K=\int_A\frac{\rho v^2}{2}v\,dA,\qquad \vec\Phi_Q=\int_A\rho\,v\,\vec v\,dA$$</div>
+      <p>Com $dA = b\,dy$ e $A = b\,y_0$, toda integral vira $\int_0^{y_0}(\dots)\,b\,dy$.</p></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) Velocidade média</div>
+      <div class="math-box">$$\bar V = \frac{1}{b y_0}\int_0^{y_0} v_0\frac{y}{y_0}\,b\,dy = \frac{v_0}{y_0^2}\cdot\frac{y_0^2}{2} = \frac{v_0}{2}$$</div>
+      <div class="step-part">(b) Coeficientes: com $v/\bar V = 2y/y_0$ e $s = y/y_0$</div>
+      <div class="math-box">$$\alpha = \int_0^1 (2s)^3\,ds = 8\cdot\tfrac14 = 2,\qquad \beta = \int_0^1 (2s)^2\,ds = 4\cdot\tfrac13 = \tfrac43$$</div>
+      <div class="step-part">(c) Fluxos</div>
+      <div class="math-box">$$\Phi_K = \alpha\,\rho\,Q\,\frac{\bar V^2}{2} = 2\,\rho\,\Big(b y_0\frac{v_0}{2}\Big)\frac{v_0^2}{8} = \frac{\rho\,b\,y_0\,v_0^3}{8},\qquad \vec\Phi_Q = \beta\,\rho\,Q\,\bar V\,\vec e_x = \frac43\,\rho\,b y_0\frac{v_0}{2}\cdot\frac{v_0}{2}\,\vec e_x = \frac{\rho\,b\,y_0\,v_0^2}{3}\,\vec e_x$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> $\bar V = v_0/2$; $\alpha = 2$; $\beta = 4/3$; $\Phi_K = \rho b y_0 v_0^3/8$; $\vec\Phi_Q = \rho b y_0 v_0^2/3\,\vec e_x$. <span class="badge badge-ok">bate com a resposta da apostila</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar $\bar V^2/2$ sem o $\alpha$: subestima a energia cinética pela metade neste perfil.</li>
+      <li><span class="tag tag-mem">⚠ memorizar</span> Os mesmos números $\alpha = 2$, $\beta = 4/3$ valem para o perfil parabólico do laminar em tubo; é por isso que o Bruno usa $\alpha = 2$ no laminar (<a href="08-escoamento-laminar-em-condutos.html">ficha 08</a>).</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 2 -->
+  <article class="ex pivo" id="ap4-4212">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 04 · Exercício 4.2.12 · Pivô 2</div>
+      <h3 id="ap4-4212-h" data-nav="Ap.04 4.2.12 · filtro" data-pivo>Filtro de admissão em tronco de cone</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">C1</span><span class="chip">C2</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 04, p. 43)</span> O filtro de admissão de combustível de uma certa máquina é formado por um elemento poroso com forma de tronco de cone. O combustível penetra no filtro com uma vazão de 10 L/s. A distribuição de velocidades na face superior é linear com $v_{max} = 0{,}3$ m/s. Qual a vazão de combustível que será filtrado?</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 04 §4.2 · ex. 12):</strong> ver o PDF oficial, Apostila 04, p. 43 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Continuidade em regime permanente, incompressível, com três superfícies de controle: entrada 1-1 (tubo de 5 cm), saída 2-2 (face superior, perfil linear) e saída SL (parede porosa lateral). A vazão filtrada é a que atravessa SL.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Vazão de entrada</td><td>$Q_1$</td><td>10 L/s</td><td>texto</td></tr>
+        <tr><td>Velocidade máxima na face superior</td><td>$v_{max}$</td><td>0,3 m/s</td><td>texto</td></tr>
+        <tr><td>Perfil na face superior</td><td>—</td><td>linear: $v_{max}$ no centro, zero na borda</td><td>texto + figura</td></tr>
+        <tr><td>Diâmetro do tubo de entrada</td><td>$d$</td><td>5 cm (raio 25 mm)</td><td>figura</td></tr>
+        <tr><td>Altura do tronco e semiângulo</td><td>$h$, $\theta$</td><td>10 cm, 20°</td><td>figura</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$Q_{SL}$. Critério: $0 &lt; Q_{SL} &lt; Q_1$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\int_{SC}\vec v\cdot\vec n\,dA = 0\ \Rightarrow\ -Q_1 + Q_2 + Q_{SL} = 0,\qquad Q_2 = \int_0^R v_{max}\Big(1-\frac{r}{R}\Big)2\pi r\,dr$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma; o raio da face superior sai da geometria.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">Raio da face superior</div>
+      <div class="math-box">$$R = 25 + 100\,\mathrm{tg}\,20^\circ = 25 + 36{,}4 = 61{,}4\ \text{mm}$$</div>
+      <div class="step-part">Vazão pela face superior</div>
+      <div class="math-box">$$Q_2 = 2\pi v_{max}\Big[\frac{r^2}{2}-\frac{r^3}{3R}\Big]_0^R = 2\pi v_{max}\frac{R^2}{6} = \frac{\pi R^2 v_{max}}{3} = \frac{\pi(0{,}0614)^2(0{,}3)}{3} = 1{,}18\ \text{L/s}$$</div>
+      <div class="callout concept"><span class="co-t">Leitura física do resultado</span><p>Perfil linear num círculo dá velocidade média $v_{max}/3$, e não $v_{max}/2$: a borda, onde $v$ é pequeno, tem mais área. No retângulo do Pivô 1 a média era $v_0/2$ porque ali toda faixa $dy$ tem a mesma área.</p></div>
+      <div class="step-part">Balanço</div>
+      <div class="math-box">$$Q_{SL} = Q_1 - Q_2 = 10 - 1{,}18 = 8{,}82\ \text{L/s}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $Q_{SL} = 8{,}8$ L/s de combustível filtrado. <span class="badge badge-ok">bate com a apostila (8,8 L/s) e com o Mariani (8,82 L/s)</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar o raio do tubo (25 mm) na face superior. O raio cresce com a altura do cone.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Esquecer o $2\pi r$ do elemento de área e integrar só $v(r)\,dr$.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 3 -->
+  <article class="ex pivo" id="ap4-429">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 04 · Exercício 4.2.9 · Pivô 3</div>
+      <h3 id="ap4-429-h" data-nav="Ap.04 4.2.9 · misturador" data-pivo>Misturador de água e óleo com pistão</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span><span class="badge badge-aula">Resolvido em aula (Mariani)</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C3</span><span class="chip">C5</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Apostila 04, p. 36)</span> Pelas seções 0-0 e 1-1 de um misturador entram, respectivamente, água com a vazão de $Q_0 = 0{,}3$ L/s e óleo com a vazão de $Q_1 = 0{,}06$ L/s. Determinar a velocidade média da mistura homogênea na seção 2-2 de diâmetro $D_2 = 30$ cm, para as condições seguintes: <ol type="a"><li>o pistão imóvel no cilindro;</li><li>o pistão se desloca para o interior do cilindro com a velocidade de 30 cm/s.</li></ol> Adotar o peso específico do óleo igual a 8000 N/m³ e o diâmetro do cilindro igual a 5 cm.</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Apostila 04 §4.2 · ex. 9):</strong> ver o PDF oficial, Apostila 04, p. 36 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Balanço de massa com quatro seções (C2): duas entradas (0, 1), uma saída (2) e o cilindro do pistão (3). No item (b) há uma fronteira móvel (C3). Como a água e o óleo são incompressíveis e a mistura também, vale a conservação do volume.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Vazão de água</td><td>$Q_0$</td><td>0,3 L/s</td><td>texto</td></tr>
+        <tr><td>Vazão de óleo</td><td>$Q_1$</td><td>0,06 L/s</td><td>texto</td></tr>
+        <tr><td>Diâmetro da saída</td><td>$D_2$</td><td>0,30 m</td><td>texto</td></tr>
+        <tr><td>Diâmetro do cilindro</td><td>$D_3$</td><td>0,05 m</td><td>texto</td></tr>
+        <tr><td>Velocidade do pistão (b)</td><td>$v_p$</td><td>0,30 m/s, para dentro</td><td>texto</td></tr>
+        <tr><td>Pesos específicos</td><td>$\gamma_1$, $\gamma_0$</td><td>8000 e 10 000 N/m³ ($g = 10$ m/s², como o Mariani)</td><td>texto / implícito</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$V_2$ nos dois casos; de quebra, $\rho_2$ da mistura. Critério: em (b), o pistão empurra fluido para fora do cilindro, então $V_2$ tem de aumentar.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{\partial}{\partial t}\int_{\forall C}\rho\,d\forall + \int_{SC}\rho\,\vec v\cdot\vec n\,dS = 0$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="step-part">(a) Pistão parado: VC fixo, regime permanente</div>
+      <div class="math-box">$$-\dot m_0 - \dot m_1 + \dot m_2 = 0 \Rightarrow \dot m_2 = \rho_0Q_0 + \rho_1Q_1 = 1000(0{,}3\cdot10^{-3}) + 800(0{,}06\cdot10^{-3}) = 0{,}348\ \text{kg/s}$$
+      $$-Q_0 - Q_1 + Q_2 = 0 \Rightarrow Q_2 = 0{,}36\ \text{L/s},\qquad V_2 = \frac{4Q_2}{\pi D_2^2} = \frac{4(0{,}36\cdot10^{-3})}{\pi(0{,}3)^2} = 0{,}51\ \text{cm/s},\qquad \rho_2 = \frac{\dot m_2}{Q_2} = 967\ \text{kg/m}^3$$</div>
+      <div class="step-part">(b) Pistão entrando: VC fixo (indeformável) cortando o cilindro na seção 3-3</div>
+      <p>Com o VC parado, o pistão “empurra” fluido através de 3-3 para dentro do VC com velocidade $v_p$: é uma entrada a mais.</p>
+      <div class="math-box">$$-Q_0 - Q_1 - Q_3 + Q_2 = 0,\quad Q_3 = v_p\frac{\pi D_3^2}{4} = 0{,}30\cdot\frac{\pi(0{,}05)^2}{4} = 0{,}589\ \text{L/s}$$
+      $$Q_2 = 0{,}36 + 0{,}589 = 0{,}949\ \text{L/s}\ \Rightarrow\ V_2 = 1{,}34\ \text{cm/s}$$</div>
+      <div class="callout concept"><span class="co-t">A mesma conta com VC deformável</span><p>Se a SC acompanha a face do pistão, nenhum fluido atravessa 3-3 ($\vec v_r = 0$ ali), mas o volume do VC diminui a uma taxa $v_pS_3$: o termo $\partial/\partial t\int\rho\,d\forall = -\rho_3 v_p S_3$ faz exatamente o papel do fluxo de entrada $Q_3$ do VC fixo. É a 2ª solução do Mariani; o resultado é o mesmo.</p></div>
+      <p>Como o cilindro contém a própria mistura ($\rho_3 = \rho_2$), a massa específica de saída não muda: $\rho_2 = 967$ kg/m³.</p></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Respostas:</strong> (a) $V_2 = 0{,}51$ cm/s; (b) $V_2 = 1{,}34$ cm/s; $\rho_2 = 967$ kg/m³ nos dois casos. <span class="badge badge-ok">bate com o Mariani</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Somar as vazões em massa e dividir por $\rho$ da água: a mistura tem $\rho_2$ próprio. Para incompressíveis, some as <strong>vazões em volume</strong>.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Usar VC deformável e também contar $Q_3$ como fluxo: conta o pistão duas vezes.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 4 -->
+  <article class="ex pivo" id="mrc4-caixa">
+    <div class="ex-head"><div><div class="ex-kicker">Prof. Marcos · T4 · Exercício 3 · Pivô 4</div>
+      <h3 id="mrc4-caixa-h" data-nav="Marcos · caixa de distribuição" data-pivo>Reservatório regulador com nível descendo</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">C2</span><span class="chip">C3</span><span class="chip">C4</span></div>
+    <div class="stmt"><span class="lbl">Enunciado completo (Prof. Marcos, “Caixa de distribuição com VC deformável”, p. 1)</span> O reservatório regulador mostrado na figura assemelha-se a uma chaminé de equilíbrio: possui tubulações de entrada e saída e é aberto para a atmosfera em sua extremidade superior. Essa construção pode possibilitar a absorção de transientes hidráulicos com a simples variação do nível de água, sem causar tensões adicionais na tubulação. Para as condições da figura, calcule a velocidade de entrada $V_3$ no instante considerado. Dados: $D_1 = 2$ m, $D_2 = 50$ mm, $D_3 = 50$ mm, velocidade de descida do nível do tanque $V_1 = 2$ mm/s, $h = 3$ m e $V_2 = \sqrt{2gh}$ (saída livre pelo fundo).</div>
+    <div class="figref"><span class="figref-ico">🖼</span><div><strong>Figura do enunciado (Prof. Marcos T4 · ex. 1):</strong> ver o PDF oficial, Prof. Marcos, T4 (caixa de distribuição), p. 1 (numeração do PDF). Não reproduzida nesta versão pública por ser material de terceiros.</div></div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Regime transitório (o nível desce), incompressível, uma entrada lateral (3), uma saída pelo fundo (2) e a superfície livre (1). Dá para resolver com VC fixo abaixo do nível ou com VC deformável que acompanha o nível.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Diâmetro do tanque</td><td>$D_1$</td><td>2 m</td><td>texto</td></tr>
+        <tr><td>Diâmetros da saída e da entrada</td><td>$D_2$, $D_3$</td><td>50 mm</td><td>texto</td></tr>
+        <tr><td>Velocidade de descida do nível</td><td>$V_1$</td><td>0,002 m/s</td><td>texto</td></tr>
+        <tr><td>Altura do nível sobre a saída</td><td>$h$</td><td>3 m</td><td>figura</td></tr>
+        <tr><td>Velocidade de saída</td><td>$V_2$</td><td>$\sqrt{2gh}$ (Torricelli), $g = 9{,}8$</td><td>figura</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$V_3$ (entrada). Critério: como o nível desce, sai mais do que entra, então $V_3A_3 &lt; V_2A_2$.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\text{VC fixo abaixo do nível: } \int_{SC}\rho\,\vec v\cdot\vec n\,dS = 0 \Rightarrow -\rho V_1A_1 + \rho V_2A_2 - \rho V_3A_3 = 0$$</div>
+      <p>Com o VC fixo, a superfície 1 é uma fronteira <em>atravessada</em> pelo fluido (o líquido desce através dela, entrando no VC): sinal “−”. O termo de acúmulo é nulo porque o VC está sempre cheio.</p></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$V_2 = \sqrt{2(9{,}8)(3)} = 7{,}67\ \text{m/s},\qquad V_1A_1 = 0{,}002\cdot\frac{\pi(2)^2}{4} = 6{,}28\cdot10^{-3}\ \text{m}^3/\text{s},\qquad V_2A_2 = 7{,}67\cdot\frac{\pi(0{,}05)^2}{4} = 15{,}06\cdot10^{-3}\ \text{m}^3/\text{s}$$
+      $$V_3 = \frac{V_2A_2 - V_1A_1}{A_3} = \frac{(15{,}06 - 6{,}28)\cdot10^{-3}}{1{,}963\cdot10^{-3}} = 4{,}47\ \text{m/s}$$</div>
+      <div class="callout concept"><span class="co-t">Com VC deformável</span><p>Se a SC sobe e desce com o nível, nada atravessa a superfície livre, mas o volume dentro varia: $\dfrac{d}{dt}(\rho A_1 h) = \rho A_1\dfrac{dh}{dt} = -\rho A_1V_1$. A equação fica $-\rho A_1V_1 + \rho V_2A_2 - \rho V_3A_3 = 0$, idêntica. Para tanque com superfície livre, use a forma que você lembrar: <strong>$A\,dh/dt = Q_{entra} - Q_{sai}$</strong>.</p></div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $V_3 = 4{,}47$ m/s. <span class="badge badge-ok">bate com o Prof. Marcos</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Tratar a superfície livre como parede (fluxo zero) num VC fixo: perde-se o termo $V_1A_1$.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> A velocidade do nível é pequena (2 mm/s), mas multiplica uma área enorme (3,14 m²): o produto é da mesma ordem das vazões dos tubos.</li></ul></div>
+  </article>
+
+  <!-- PIVÔ 5 -->
+  <article class="ex pivo" id="mrc4-alivio">
+    <div class="ex-head"><div><div class="ex-kicker">Prof. Marcos · T4 · Tanque de alívio (Fox, ex. 4.3) · Pivô 5</div>
+      <h3 id="mrc4-alivio-h" data-nav="Marcos · tanque de alívio" data-pivo>Massa específica variando num tanque de ar</h3></div>
+      <div class="ex-badges"><span class="badge badge-pivo">Pivô</span></div></div>
+    <div class="ex-topics"><span class="chip">C4</span><span class="chip">C5</span></div>
+    <div class="stmt"><span class="lbl">Enunciado (Prof. Marcos, “Tanque de alívio”, transcrito do manuscrito)</span> Um tanque de volume $\forall = 0{,}05$ m³ contém ar a 800 kPa (absoluta) e 15 °C. Em $t = 0$ abre-se uma válvula com área de passagem de 65 mm². O ar deixa o tanque com velocidade de 311 m/s e massa específica de 6,13 kg/m³. As propriedades no tanque podem ser consideradas uniformes a cada instante. Determine a taxa instantânea de variação da massa específica do ar no tanque em $t = 0$.</div>
+    <div class="step" data-n="1"><h4>Classificar</h4><p>Compressível e transitório (C4, C5): o volume do tanque é fixo, mas a massa dentro dele diminui, logo $\rho$ diminui. VC = o tanque, com uma saída.</p></div>
+    <div class="step" data-n="2"><h4>Roteiro de dados</h4>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dado</th><th>Símbolo</th><th>Valor</th><th>Onde</th></tr></thead><tbody>
+        <tr><td>Volume do tanque</td><td>$\forall$</td><td>0,05 m³</td><td>texto</td></tr>
+        <tr><td>Área da válvula</td><td>$A_1$</td><td>65 mm² = 65·10⁻⁶ m²</td><td>texto</td></tr>
+        <tr><td>Velocidade e massa específica na saída</td><td>$V_1$, $\rho_1$</td><td>311 m/s; 6,13 kg/m³</td><td>texto</td></tr>
+        <tr><td>p e T no tanque</td><td>—</td><td>800 kPa, 15 °C (não são necessários)</td><td>texto</td></tr>
+      </tbody></table></div></div>
+    <div class="step" data-n="3"><h4>Incógnita e critério</h4><p>$\partial\rho/\partial t$ em $t = 0$. Critério: negativa.</p></div>
+    <div class="step" data-n="4"><h4>Fórmula</h4><div class="math-box">$$\frac{\partial}{\partial t}\int_{\forall C}\rho\,d\forall + \int_{SC}\rho\,\vec v\cdot\vec n\,dA = 0\ \xrightarrow{\ \rho\text{ uniforme no tanque, }\forall\text{ fixo}\ }\ \forall\frac{\partial\rho}{\partial t} + \rho_1V_1A_1 = 0$$</div></div>
+    <div class="step" data-n="5"><h4>Tabelas</h4><p>Nenhuma.</p></div>
+    <div class="step" data-n="6"><h4>Cálculo</h4>
+      <div class="math-box">$$\frac{\partial\rho}{\partial t} = -\frac{\rho_1V_1A_1}{\forall} = -\frac{6{,}13\cdot311\cdot65\cdot10^{-6}}{0{,}05} = -2{,}48\ \frac{\text{kg}}{\text{m}^3\,\text{s}}$$</div></div>
+    <div class="step" data-n="7"><h4>Verificação e conclusão</h4>
+      <div class="answer"><strong>Resposta:</strong> $\partial\rho/\partial t = -2{,}48$ kg/(m³·s): a massa específica cai. <span class="badge badge-ok">bate com o Prof. Marcos</span></div>
+      <ul><li><span class="tag tag-mem">⚠ armadilha</span> Usar no fluxo de saída a massa específica do tanque ($p/RT = 9{,}7$ kg/m³) quando o enunciado dá a do jato. Use a da seção que o fluido atravessa.</li>
+      <li><span class="tag tag-mem">⚠ armadilha</span> Escrever $\rho\,d\forall/dt$: o volume é fixo; o que varia é $\rho$.</li></ul></div>
+  </article>
+
+  <h3 class="sub" id="t06-demais" data-nav="Demais exercícios T4">Demais exercícios</h3>
+
+  <article class="ex" id="ap4-416">
+    <div class="ex-head"><div><div class="ex-kicker">Apostila 04 · Exercícios 4.1.6 e 4.1.7 · ver Pivô 1</div>
+      <h3 id="ap4-416-h" data-nav="Ap.04 4.1.6–4.1.7 · α, β">Perfil em degrau: α e β</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciados (Apostila 04, p. 19)</span> 4.1.6: Quando a velocidade sobre metade de uma seção transversal é uniforme e vale 40% da velocidade uniforme sobre o resto da seção, qual é o valor de $\alpha$ e $\beta$? 4.1.7: Quando a velocidade sobre metade de uma seção vale −10% da velocidade uniforme sobre o resto da seção, qual o valor de $\alpha$ e $\beta$?</div>
+    <p><strong>Roteiro:</strong> duas metades de área $A/2$, com $v_0$ e $kv_0$. Então $\bar V = v_0(1+k)/2$, $\alpha = \dfrac{(1+k^3)/2}{[(1+k)/2]^3}$ e $\beta = \dfrac{(1+k^2)/2}{[(1+k)/2]^2}$.</p>
+    <div class="math-box">$$k = 0{,}4:\ \bar V = 0{,}70\,v_0,\ \alpha = 1{,}55,\ \beta = 1{,}18\qquad k = -0{,}1:\ \bar V = 0{,}45\,v_0,\ \alpha = 5{,}48,\ \beta = 2{,}49$$</div>
+    <div class="answer"><strong>Respostas:</strong> 4.1.6: $\alpha = 1{,}55$, $\beta = 1{,}18$; 4.1.7: $\alpha = 5{,}48$, $\beta = 2{,}49$. <span class="badge badge-ok">4.1.7 bate com a apostila</span> (4.1.6 não tem resposta impressa). Refluxo (k &lt; 0) faz $\alpha$ explodir.</div>
+  </article>
+
+  <article class="ex" id="mrc4-lago">
+    <div class="ex-head"><div><div class="ex-kicker">Prof. Marcos · T4 · Lago drenado · ver Pivô 4</div>
+      <h3 id="mrc4-lago-h" data-nav="Marcos · lago drenado">Área de um lago pela taxa de descida</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado (Prof. Marcos, “Lago drenado”)</span> Um lago é drenado com $Q_{dreno} = 56{,}63$ m³/s e é alimentado ao mesmo tempo por riachos com $Q_{riacho} = 8{,}21$ m³/s. O nível do lago desce com $\Delta h/\Delta t = 0{,}305$ m/h. Calcule a área superficial do lago.</div>
+    <p><strong>Roteiro:</strong> VC fixo abaixo do nível; a superfície livre é atravessada para dentro do VC com $dh/dt = 0{,}305/3600 = 8{,}47\cdot10^{-5}$ m/s.</p>
+    <div class="math-box">$$-A\frac{dh}{dt} + Q_{dreno} - Q_{riacho} = 0\ \Rightarrow\ A = \frac{56{,}63 - 8{,}21}{8{,}47\cdot10^{-5}} = 5{,}71\cdot10^5\ \text{m}^2$$</div>
+    <div class="answer"><strong>Resposta:</strong> $A \approx 5{,}7\cdot10^5$ m² (0,57 km²). <span class="badge badge-ok">bate com o Prof. Marcos</span> Atenção à conversão m/h → m/s.</div>
+  </article>
+
+  <article class="ex" id="mrc4-esfera">
+    <div class="ex-head"><div><div class="ex-kicker">Prof. Marcos · T4 · Reservatório esférico · ver Pivô 5</div>
+      <h3 id="mrc4-esfera-h" data-nav="Marcos · reservatório esférico">Tempo para a massa específica cair à metade</h3></div></div>
+    <div class="stmt"><span class="lbl">Enunciado (Prof. Marcos, “Reservatório esférico”)</span> Ar comprimido é exaurido de um reservatório esférico indeformável, que possui volume $\forall$, à vazão mássica $\dot m = \rho C$ em um instante $t_0$, após a abertura de uma válvula. $C$ é uma constante. Se $\rho_0$ é a massa específica neste instante, deduza uma fórmula para a mudança de massa específica $\rho(t)$ após a abertura da válvula. O reservatório tem diâmetro de 50 cm e, se as condições forem pressão inicial de 300 kPa (absoluta), temperatura de 100 °C e vazão mássica inicial de 0,01 kg/s, encontre o tempo necessário para a massa específica cair a 50%.</div>
+    <p><strong>Roteiro:</strong> $\forall\,d\rho/dt = -\rho C$ é uma EDO separável: $\rho(t) = \rho_0\,e^{-Ct/\forall}$. Com $\rho_0 = p_0/RT_0$, $C = \dot m_0/\rho_0$ e $\forall = \pi D^3/6$:</p>
+    <div class="math-box">$$\rho_0 = \frac{300\,000}{287\cdot373{,}15} = 2{,}80\ \text{kg/m}^3,\quad C = \frac{0{,}01}{2{,}80} = 3{,}57\cdot10^{-3}\ \text{m}^3/\text{s},\quad \forall = 0{,}0654\ \text{m}^3,\quad t_{50\%} = \frac{\forall}{C}\ln 2 = 12{,}7\ \text{s}$$</div>
+    <div class="answer"><strong>Resposta:</strong> $\rho = \rho_0 e^{-Ct/\forall}$; $t \approx 12{,}7$ s. <span class="badge badge-warn">conferido em Python; a resposta numérica não está legível no manuscrito</span></div>
+  </article>
+
+  <h3 class="sub" id="t06-roteiro" data-nav="Para treinar (roteiro)">Para treinar: exercícios já resolvidos nas fontes</h3>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Exercício</th><th>O que treina</th><th>Onde está a solução</th></tr></thead><tbody>
+    <tr><td>Ap.04 4.1.1 (itens a–f)</td><td>integrar perfis em placas, tubos e canais; $\alpha$, $\beta$, $\Phi_K$</td><td>Apostila 04, p. 7–13</td></tr>
+    <tr><td>Ap.04 4.1.8 e 4.1.9</td><td>Pitot + perfil de velocidades + $\alpha$</td><td>respostas na apostila (p. 20–21)</td></tr>
+    <tr><td>Ap.04 4.2.13</td><td>perfil parabólico e potência 1/7 em derivação</td><td>Apostila 04, p. 43–44</td></tr>
+    <tr><td>Ap.04 4.2.14</td><td>$V(x)$ num convergente</td><td>Apostila 04, p. 45–46</td></tr>
+    <tr><td>Ap.04 4.2.3 e 4.2.4</td><td>reservatório de gás e botijão (massa variável)</td><td>Apostila 04, p. 28–31</td></tr>
+    <tr><td>Marcos: seringa, funil, chaminé de equilíbrio, enchimento de reservatório, tubo perfurado, túnel de vento, tanque de ar e bomba de vácuo, cilindro de oxigênio</td><td>todas as variações de VC fixo/deformável e de nível</td><td>pasta “T4 · Exercícios Prof. Marcos” no e-disciplinas</td></tr>
+    <tr><td>White P3.12–P3.14, P3.23, P3.24</td><td>$dh/dt$ de tanques; VC deformável</td><td>roteiro da P2 (sem solução)</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="chapter" id="t06-resumo">
+  <div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span>
+    <h2 id="t06-resumo-h" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
+  <div class="resumo"><div class="r-grid">
+    <div class="r-item"><b>Equação.</b> <span class="path">$\partial_t\int_{\forall C}\rho\,d\forall + \int_{SC}\rho\,\vec v\cdot\vec n\,dS = 0$</span>; $\vec n$ externo: entrada negativa.</div>
+    <div class="r-item"><b>Seção.</b> <span class="path">$Q=\int v\,dA$, $\bar V=Q/A$, $\alpha=\frac1A\int(v/\bar V)^3dA$</span>. Laminar/linear: $\alpha=2$, $\beta=4/3$. Turbulento: $\alpha\approx1$. Círculo com perfil linear: $\bar V = v_{max}/3$.</div>
+    <div class="r-item"><b>Casos.</b> <span class="path">permanente: $\sum\dot m_s=\sum\dot m_e$ · incompressível: $\sum Q_s=\sum Q_e$ · tanque: $A\,dh/dt=Q_e-Q_s$ · gás: $\forall\,d\rho/dt=-\dot m_s$</span>.</div>
+    <div class="r-item"><b>Armadilhas.</b> VC fixo: a superfície livre é atravessada. VC deformável: o termo de acúmulo substitui esse fluxo; não contar os dois. Mistura: somar vazões em volume.</div>
+  </div></div>
+</section>
+
+<nav class="pager" aria-label="Tópicos"><a class="prox" href="07-equacao-da-energia.html"><small>próximo →</small>Equação da energia</a></nav>
+
+<div class="footer">
+  Material de estudo escrito por um aluno para PME3230 · Mecânica dos Fluidos I (2º sem. 2026). Não é material oficial da disciplina. Na prova valem o formulário e as tabelas oficiais; as contas deste guia foram refeitas em Python (scripts em <code>04_resolucoes/_build/</code>).
+</div>
+</div></div>
+<script>
+(function(){
+  var root = document.documentElement;
+  function toggleTheme(){
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var nx = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', nx);
+    try { localStorage.setItem('pme3230-theme', nx); } catch(e){}
+  }
+  ['btn-theme','btn-theme-sb'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click', toggleTheme); });
+  var body = document.body, tg = document.getElementById('nav-toggle'), bd = document.getElementById('sb-backdrop');
+  function setNav(o){ body.classList.toggle('nav-open', o); tg.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  tg.addEventListener('click', function(){ setNav(!body.classList.contains('nav-open')); });
+  bd.addEventListener('click', function(){ setNav(false); });
+  document.querySelectorAll('.sidebar a').forEach(function(a){ a.addEventListener('click', function(){ if (window.innerWidth < 1024) setNav(false); }); });
+  var pr = document.getElementById('btn-print-resumo');
+  if (pr) pr.addEventListener('click', function(){ body.classList.add('print-resumo'); window.print(); setTimeout(function(){ body.classList.remove('print-resumo'); }, 500); });
+  // destaca a seção atual no sumário
+  var links = {}; document.querySelectorAll('.sidebar a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(links).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) {
+        Object.values(links).forEach(function(a){ a.classList.remove('active'); });
+        var a = links[e.target.id]; if (a) { a.classList.add('active'); }
+      }});
+    }, { rootMargin: '0px 0px -75% 0px' });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+</html>

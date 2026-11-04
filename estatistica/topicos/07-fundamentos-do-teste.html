@@ -301,6 +301,7 @@ table.matrix tr.pv td:first-child { font-weight: 700; color: var(--accent-ink); 
 <li class="nav-ch"><a href="#pontos">4 · Pontos-chave</a><ul class="nav-sub">
 <li class="nav-ex"><a href="#hipoteses">H₀ e H₁</a></li>
 <li class="nav-ex"><a href="#erros">Erros tipo I e II</a></li>
+<li class="nav-ex"><a href="#beta-formula">β e n em fórmula</a></li>
 <li class="nav-ex"><a href="#valor-p">Valor-p</a></li>
 <li class="nav-ex"><a href="#arvore">Árvore: qual teste usar</a></li>
 <li class="nav-ex"><a href="#ic-teste">IC e teste</a></li>
@@ -390,6 +391,30 @@ $n$ aumenta e quando $\alpha$ aumenta.</li>
 dois ao mesmo tempo (curvas de poder para $n=16$ e $n=100$, Morettin Fig. 12.9).</li>
 </ul>
 
+<h3 class="sub" id="beta-formula" data-nav="β e n em fórmula">β e tamanho de amostra em fórmula (slides da aula 06)</h3>
+<p>As duas etapas acima, feitas de uma vez, viram uma fórmula. O passo (1) já está impresso: o formulário dá a região de decisão em
+unidades de $\bar X$ ("$\bar X_{obs}\in[\mu_0+z_\alpha\sigma/\sqrt n;\ \infty]$"). O passo (2) é padronizar essa fronteira com a média
+$\mu'$ do cenário alternativo. Nada disto está no formulário <span class="tag tag-mem">⚠ saber de cor ou deduzir</span>. Com $\Phi$ = área à esquerda
+(na tabela do curso, $\Phi(z)=0{,}5+$ valor lido para $z&gt;0$):</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>$H_1$</th><th>$\beta(\mu')$, média com σ conhecido</th><th>$\beta(p')$, proporção</th></tr></thead><tbody><tr><td>$\mu&gt;\mu_0$ / $p&gt;p_0$</td><td>$\Phi\!\left(z_\alpha+\dfrac{\mu_0-\mu'}{\sigma/\sqrt n}\right)$</td><td>$\Phi\!\left(\dfrac{p_0-p'+z_\alpha\sqrt{p_0q_0/n}}{\sqrt{p'q'/n}}\right)$</td></tr><tr><td>$\mu&lt;\mu_0$ / $p&lt;p_0$</td><td>$1-\Phi\!\left(-z_\alpha+\dfrac{\mu_0-\mu'}{\sigma/\sqrt n}\right)$</td><td>$1-\Phi\!\left(\dfrac{p_0-p'-z_\alpha\sqrt{p_0q_0/n}}{\sqrt{p'q'/n}}\right)$</td></tr><tr><td>bilateral</td><td>$\Phi(z_{\alpha/2}+\delta)-\Phi(-z_{\alpha/2}+\delta)$, $\delta=\dfrac{\mu_0-\mu'}{\sigma/\sqrt n}$</td><td>idem, com $z_{\alpha/2}$ nos dois termos</td></tr></tbody></table></div>
+<p><strong>Na proporção, o desvio muda de cenário:</strong> a fronteira usa $\sqrt{p_0q_0/n}$ (é construída sob $H_0$), e a padronização
+usa $\sqrt{p'q'/n}$ (a probabilidade é calculada sob $p'$). É o mesmo cuidado do Ex. 12.1 abaixo, onde cada país tem o seu σ.</p>
+<p><strong>Tamanho de amostra</strong> para ter nível α e, ao mesmo tempo, β fixado em $\mu'$ (arredonde sempre para cima):</p>
+<div class="math-box">$$n=\left[\frac{\sigma\,(z_\alpha+z_\beta)}{\mu_0-\mu'}\right]^2\ \text{(unilateral)},\qquad
+n=\left[\frac{\sigma\,(z_{\alpha/2}+z_\beta)}{\mu_0-\mu'}\right]^2\ \text{(bilateral)},\qquad
+n=\left[\frac{z_\alpha\sqrt{p_0q_0}+z_\beta\sqrt{p'q'}}{p'-p_0}\right]^2\ \text{(proporção)}$$</div>
+<ul>
+<li><strong>Pneus</strong> (slide 8): $H_0:\mu=30\,000$ × $H_1:\mu&gt;30\,000$, $\sigma=1\,500$, $n=16$, α = 1% ($z=2{,}33$).
+$\beta(31\,000)=\Phi(2{,}33-1\,000/375)=\Phi(-0{,}34)=0{,}5-0{,}133=0{,}367$ (<span class="tag tag-tab">📊 Tabela z · linha 0,3, coluna 0,04</span>).
+Para β = 10% ($z_\beta=1{,}28$): $n=[1\,500\,(2{,}33+1{,}28)/1\,000]^2=29{,}3\to30$.</li>
+<li><strong>Entregas</strong> (slide 40): $H_0:p=0{,}9$ × $H_1:p&lt;0{,}9$, $n=225$, α = 1%, $p'=0{,}8$.
+$\beta=1-\Phi\!\left(\frac{0{,}1-2{,}33\times0{,}02}{0{,}0267}\right)=1-\Phi(2{,}00)=0{,}023$: poder de 97,7%.</li>
+<li><strong>Teste t e teste χ²:</strong> β sai das <em>curvas características</em> do Montgomery (eixo $d=|\mu_0-\mu'|/\sigma$ ou
+$\lambda=\sigma'/\sigma_0$), que não vêm na folha de tabelas da prova. Saiba o conceito; conta de β na prova é com z.</li>
+</ul>
+<p class="tbl-cap">Contas conferidas em Python: β exato 0,368 (pneus) e 0,0226 (entregas). O slide 8 escreve "2,33 − 1,28" no
+meio da conta de $n$; a soma é que dá 29,32.</p>
+
 <h3 class="sub" id="valor-p" data-nav="Valor-p">Valor-p</h3>
 <p>É a probabilidade, <em>supondo $H_0$ verdadeira</em>, de obter uma estatística tão ou mais extrema que a observada, no sentido
 de $H_1$ (<a href="../provas/p2.html#f-16">nº 16</a>, não está no formulário). Regra: <strong>rejeite $H_0$ quando valor-p $<\alpha$</strong>.</p>
@@ -433,7 +458,7 @@ confiança $1-\alpha$ (ficha <a href="05-intervalos-de-confianca.html">05</a> e 
 </section>
 
 <section class="chapter" id="sec-limites"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">5</span><h2 id="limites" data-nav="5 · Limitações e hipóteses">Limitações e hipóteses</h2></div>
-<ul><li><strong>α é escolhido antes de olhar os dados.</strong> Trocar α depois de ver o valor-p, para chegar à conclusão desejada, invalida o teste.</li><li><strong>β exige um valor alternativo específico</strong> e, no curso, $\sigma$ conhecido (ou dado). Com $H_1:\mu\neq\mu_0$ há uma curva inteira de β, não um número.</li><li><strong>"Não rejeitar" não é "aceitar com certeza".</strong> Com $n$ pequeno, o poder é baixo e quase nada é rejeitado.</li><li><strong>Dobrar o valor-p só vale para distribuições simétricas</strong> (z, t). Em χ² e F, o teste usual é de uma cauda.</li><li><strong>Variáveis discretas</strong> (binomial, Poisson): a região crítica não dá α exato. O α real é a probabilidade da região escolhida (2019 T6 explora isso).</li><li><strong>Aproximação normal</strong> de $\bar X$ pelo TLC: se a população é muito assimétrica e $n$ é pequeno, α e β calculados são só aproximados.</li></ul>
+<ul><li><strong>α é escolhido antes de olhar os dados.</strong> Trocar α depois de ver o valor-p, para chegar à conclusão desejada, invalida o teste.</li><li><strong>β exige um valor alternativo específico</strong> e, no curso, $\sigma$ conhecido (ou dado). Com $H_1:\mu\neq\mu_0$ há uma curva inteira de β, não um número. Para t e χ², β só sai de curvas características, que não vêm com as tabelas da prova.</li><li><strong>"Não rejeitar" não é "aceitar com certeza".</strong> Com $n$ pequeno, o poder é baixo e quase nada é rejeitado.</li><li><strong>Dobrar o valor-p só vale para distribuições simétricas</strong> (z, t). Em χ² e F, o teste usual é de uma cauda.</li><li><strong>Variáveis discretas</strong> (binomial, Poisson): a região crítica não dá α exato. O α real é a probabilidade da região escolhida (2019 T6 explora isso).</li><li><strong>Aproximação normal</strong> de $\bar X$ pelo TLC: se a população é muito assimétrica e $n$ é pequeno, α e β calculados são só aproximados.</li></ul>
 </section>
 
 <section class="chapter" id="sec-exercicios"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">6</span><h2 id="exercicios" data-nav="6 · Exercícios resolvidos">Exercícios resolvidos</h2></div>
@@ -441,7 +466,7 @@ confiança $1-\alpha$ (ficha <a href="05-intervalos-de-confianca.html">05</a> e 
 </section>
 
 <section class="chapter" id="sec-resumo"><div class="chapter-head"><div class="accent-bar"></div><span class="ch-num">7</span><h2 id="resumo" data-nav="7 · Resumo do tópico">Resumo do tópico</h2></div>
-<div class="resumo" id="resumo-07"><h3>Fundamentos do teste</h3><div class="r-grid"><div class="r-item"><b>Primeiro passo, sempre.</b> Escrever $H_0$ (com =) e $H_1$ (da pergunta). Hábito pedido pela professora.</div><div class="r-item"><b>α.</b> <span class="path">tabela z: 0,5 − valor lido</span> P(rejeitar | $H_0$). Região crítica construída sob $H_0$.</div><div class="r-item"><b>β e poder.</b> <span class="path">nº 15 (não está no formulário)</span> Região de aceitação em $\bar x$ sob $H_0$; probabilidade dela sob $\mu_1$, com o σ de $\mu_1$.</div><div class="r-item"><b>Valor-p.</b> <span class="path">nº 16</span> Cauda além do observado (dobrada se bilateral). Rejeita se valor-p < α.</div><div class="r-item"><b>Troca.</b> n fixo: α↓ ⇒ β↑. Só n↑ reduz os dois.</div><div class="r-item"><b>Limites.</b> α fixado antes; β só com μ₁ específico; dobrar valor-p só em z e t; não rejeitar ≠ provar H₀.</div></div></div>
+<div class="resumo" id="resumo-07"><h3>Fundamentos do teste</h3><div class="r-grid"><div class="r-item"><b>Primeiro passo, sempre.</b> Escrever $H_0$ (com =) e $H_1$ (da pergunta). Hábito pedido pela professora.</div><div class="r-item"><b>α.</b> <span class="path">tabela z: 0,5 − valor lido</span> P(rejeitar | $H_0$). Região crítica construída sob $H_0$.</div><div class="r-item"><b>β e poder.</b> <span class="path">nº 15 (não está no formulário)</span> Região de aceitação em $\bar x$ sob $H_0$; probabilidade dela sob $\mu_1$, com o σ de $\mu_1$. Direto: $\beta=\Phi(z_\alpha+(\mu_0-\mu')/(\sigma/\sqrt n))$ para $H_1:\mu&gt;\mu_0$; $n=[\sigma(z_\alpha+z_\beta)/(\mu_0-\mu')]^2$.</div><div class="r-item"><b>Valor-p.</b> <span class="path">nº 16</span> Cauda além do observado (dobrada se bilateral). Rejeita se valor-p < α.</div><div class="r-item"><b>Troca.</b> n fixo: α↓ ⇒ β↑. Só n↑ reduz os dois.</div><div class="r-item"><b>Limites.</b> α fixado antes; β só com μ₁ específico; dobrar valor-p só em z e t; não rejeitar ≠ provar H₀.</div></div></div>
 </section>
 
 <nav class="pager" aria-label="Tópicos"><a href="06-ic-duas-amostras.html"><small>← anterior</small>06 · Intervalos de confiança (duas amostras)</a><a class="prox" href="08-testes-uma-amostra.html"><small>próximo →</small>08 · Testes com uma amostra</a></nav>
